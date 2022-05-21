@@ -1,0 +1,40 @@
+project:
+  type: book
+
+book:
+  title: "Acessibilidade urbana e avaliação de impacto"
+  author: "Rafael Pererira, ..."
+  date: "5/21/2022"
+  chapters:
+    - index.qmd
+    - 1_intro.qmd
+    - part: 2_dados_aop.qmd
+      chapters:
+        - 2a_populacao.qmd
+        - 2b_uso_solo.qmd
+        - 2c_acessibilidade.qmd
+    - 3_dados_gtfs.qmd
+    - 4_calculando_acesso.qmd
+    - 5_cenarios_transporte.qmd
+    - references.qmd
+  page-navigation: true
+  page-footer: 
+    border: false
+    background: light
+    left: "Copyright 2021, Norah Jones" 
+    right: 
+      - icon: github
+        href: https://github.com/
+      - icon: twitter 
+        href: https://twitter.com/ 
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+editor: visual
+
