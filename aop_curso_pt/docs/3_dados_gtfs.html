@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Acessibilidade urbana e avaliação de impacto - 5&nbsp; Introduction</title>
+<title>Acessibilidade urbana e avaliação de impacto - 6&nbsp; Dados de transporte público em formato GTFS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -15,88 +15,6 @@ span.underline{text-decoration: underline;}
 div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
 </style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -146,7 +64,7 @@ div.csl-indent {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Dados de transporte público em formato GTFS</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -160,6 +78,30 @@ div.csl-indent {
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Acessibilidade urbana e avaliação de impacto</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/ipeaGIT/aop_curso/tree/main/aop_curso_pt/" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+            <i class="bi bi-bi-twitter pe-1"></i>
+          Twitter
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+            <i class="bi bi-bi-facebook pe-1"></i>
+          Facebook
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+            <i class="bi bi-bi-linkedin pe-1"></i>
+          LinkedIn
+          </a>
+        </li>
+    </ul>
+</div>
     </div>
       </div>
       <div class="mt-2 flex-shrink-0 align-items-center">
@@ -171,17 +113,12 @@ div.csl-indent {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./1_intro.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução a acessibilidade urbana</span></a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Apresentação</a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
-        <a href="./2_dados_aop.html" class="sidebar-item-text sidebar-link">Analisando dados de acesso a oportunidades nas cidades Brasileiras</a>
+        <a href="./1_intro.html" class="sidebar-item-text sidebar-link">PARTE 1: Introdução a acessibilidade urbana</a>
       <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
@@ -189,54 +126,137 @@ div.csl-indent {
     <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2a_populacao.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Dados de população e socioeconômicos</span></a>
+  <a href="./1a_conceito.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">O que é acessibilidade?</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2b_uso_solo.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Dados de distribuição espacial de oportortunidades</span></a>
+  <a href="./1b_indicadores.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Indicadores de acessibilidade</span></a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a href="./2_dados_aop.html" class="sidebar-item-text sidebar-link">PARTE 2: Dados do Projeto AOP</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2a_populacao.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Dados de população e socioeconômicos</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2c_acessibilidade.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Estimativas e mapas de acessibilidade</span></a>
+  <a href="./2b_uso_solo.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Dados de distribuição espacial de oportunidades</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2c_acessibilidade.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Estimativas e mapas de acessibilidade</span></a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">PARTE 3: Dados de transporte público GTFS</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3_dados_gtfs.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Dados de transporte público em formato GTFS</span></a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">PARTE 4: Calculando acessibilidade</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4_calculando_acesso.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Calculando acessibilidade urbana com <code>r5r</code></span></a>
+  </div>
+</li>
+    </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">PARTE 5: Avaliação de impacto</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./5a_cenarios_transporte.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Comparando a acessibilidade entre dois cenários de transporte</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./5b_cenarios_uso_solo.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Comparando a acessibilidade entre dois cenários de uso do solo</span></a>
   </div>
 </li>
     </ul>
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3_dados_gtfs.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./4_calculando_acesso.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Calculando acessibilidade urbana com <code>r5r</code></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./5_cenarios_transporte.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
   </div>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+    <div class="sidebar-item-container"> 
+        <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">Appendices</a>
+      <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+        <i class="bi bi-chevron-right ms-2"></i>
+      </a>
+    </div>
+    <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./nocoes_r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Noções básicas de R</span></a>
+  </div>
+</li>
+    </ul>
+  </li>
     </ul>
     </div>
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#o-que-é-gtfs" id="toc-o-que-é-gtfs" class="nav-link active" data-scroll-target="#o-que-é-gtfs"> <span class="header-section-number">6.1</span> O que é GTFS</a></li>
+  <li><a href="#estrutura-dos-arquivos-de-gtfs" id="toc-estrutura-dos-arquivos-de-gtfs" class="nav-link" data-scroll-target="#estrutura-dos-arquivos-de-gtfs"> <span class="header-section-number">6.2</span> Estrutura dos arquivos de GTFS</a></li>
+  <li><a href="#onde-encontrar-gtfs-de-cidades-brasileiras" id="toc-onde-encontrar-gtfs-de-cidades-brasileiras" class="nav-link" data-scroll-target="#onde-encontrar-gtfs-de-cidades-brasileiras"> <span class="header-section-number">6.3</span> Onde encontrar GTFS de cidades brasileiras</a></li>
+  <li><a href="#como-extrair-análises-básicas-de-um-gtfs-pacote-gtfstools" id="toc-como-extrair-análises-básicas-de-um-gtfs-pacote-gtfstools" class="nav-link" data-scroll-target="#como-extrair-análises-básicas-de-um-gtfs-pacote-gtfstools"> <span class="header-section-number">6.4</span> Como extrair análises básicas de um GTFS (pacote gtfstools)</a></li>
+  <li><a href="#cálculo-de-velocidade-das-linhas" id="toc-cálculo-de-velocidade-das-linhas" class="nav-link" data-scroll-target="#cálculo-de-velocidade-das-linhas"> <span class="header-section-number">6.5</span> Cálculo de velocidade das linhas</a></li>
+  <li><a href="#cálculo-de-frequência-das-linhas" id="toc-cálculo-de-frequência-das-linhas" class="nav-link" data-scroll-target="#cálculo-de-frequência-das-linhas"> <span class="header-section-number">6.6</span> Cálculo de frequência das linhas</a></li>
+  <li><a href="#mapear-a-rede-de-transporte-público" id="toc-mapear-a-rede-de-transporte-público" class="nav-link" data-scroll-target="#mapear-a-rede-de-transporte-público"> <span class="header-section-number">6.7</span> Mapear a rede de transporte público</a></li>
+  <li><a href="#como-fazer-edições-na-rede-de-transporte-público-pacote-gtfstools" id="toc-como-fazer-edições-na-rede-de-transporte-público-pacote-gtfstools" class="nav-link" data-scroll-target="#como-fazer-edições-na-rede-de-transporte-público-pacote-gtfstools"> <span class="header-section-number">6.8</span> Como fazer edições na rede de transporte público (pacote gtfstools)</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/tree/main/aop_curso_pt/3_dados_gtfs.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction</span></h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Dados de transporte público em formato GTFS</span></h1>
 </div>
 
 
@@ -250,21 +270,33 @@ div.csl-indent {
 
 </header>
 
-<p>This is a book created from markdown and executable code.</p>
-<p>See <span class="citation" data-cites="knuth84">Knuth (<a href="references.html#ref-knuth84" role="doc-biblioref">1984</a>)</span> for additional discussion of literate programming.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
-</div>
-</div>
+<p><strong>Objetivo</strong>: apresentar uma visão geral sobre o que são dados GTFS; onde conseguir dados de GTFS no Brasil; mostrar como fazer algumas análises básicas e edições dos dados de GTFS usando o pacote gtfstools</p>
+<section id="o-que-é-gtfs" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="o-que-é-gtfs"><span class="header-section-number">6.1</span> O que é GTFS</h2>
+</section>
+<section id="estrutura-dos-arquivos-de-gtfs" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="estrutura-dos-arquivos-de-gtfs"><span class="header-section-number">6.2</span> Estrutura dos arquivos de GTFS</h2>
+</section>
+<section id="onde-encontrar-gtfs-de-cidades-brasileiras" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="onde-encontrar-gtfs-de-cidades-brasileiras"><span class="header-section-number">6.3</span> Onde encontrar GTFS de cidades brasileiras</h2>
+</section>
+<section id="como-extrair-análises-básicas-de-um-gtfs-pacote-gtfstools" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="como-extrair-análises-básicas-de-um-gtfs-pacote-gtfstools"><span class="header-section-number">6.4</span> Como extrair análises básicas de um GTFS (pacote gtfstools)</h2>
+</section>
+<section id="cálculo-de-velocidade-das-linhas" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="cálculo-de-velocidade-das-linhas"><span class="header-section-number">6.5</span> Cálculo de velocidade das linhas</h2>
+</section>
+<section id="cálculo-de-frequência-das-linhas" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="cálculo-de-frequência-das-linhas"><span class="header-section-number">6.6</span> Cálculo de frequência das linhas</h2>
+</section>
+<section id="mapear-a-rede-de-transporte-público" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="mapear-a-rede-de-transporte-público"><span class="header-section-number">6.7</span> Mapear a rede de transporte público</h2>
+</section>
+<section id="como-fazer-edições-na-rede-de-transporte-público-pacote-gtfstools" class="level2" data-number="6.8">
+<h2 data-number="6.8" class="anchored" data-anchor-id="como-fazer-edições-na-rede-de-transporte-público-pacote-gtfstools"><span class="header-section-number">6.8</span> Como fazer edições na rede de transporte público (pacote gtfstools)</h2>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
-<div id="ref-knuth84" class="csl-entry" role="doc-biblioentry">
-Knuth, Donald E. 1984. <span>“Literate Programming.”</span> <em>Comput. J.</em> 27 (2): 97–111. <a href="https://doi.org/10.1093/comjnl/27.2.97">https://doi.org/10.1093/comjnl/27.2.97</a>.
-</div>
-</div>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -349,12 +381,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./2c_acessibilidade.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Estimativas e mapas de acessibilidade</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Estimativas e mapas de acessibilidade</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./4_calculando_acesso.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Calculando acessibilidade urbana com <code>r5r</code></span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Calculando acessibilidade urbana com <code>r5r</code></span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

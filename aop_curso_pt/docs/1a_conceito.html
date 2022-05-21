@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Acessibilidade urbana e avaliação de impacto - PARTE 2: Dados do Projeto AOP</title>
+<title>Acessibilidade urbana e avaliação de impacto - 1&nbsp; O que é acessibilidade?</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,8 +24,8 @@ ul.task-list{list-style: none;}
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
-<link href="./2a_populacao.html" rel="next">
-<link href="./1b_indicadores.html" rel="prev">
+<link href="./1b_indicadores.html" rel="next">
+<link href="./1_intro.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -64,7 +64,7 @@ ul.task-list{list-style: none;}
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">PARTE 2: Dados do Projeto AOP</h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">O que é acessibilidade?</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -126,7 +126,7 @@ ul.task-list{list-style: none;}
     <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1a_conceito.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">O que é acessibilidade?</span></a>
+  <a href="./1a_conceito.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">O que é acessibilidade?</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -138,7 +138,7 @@ ul.task-list{list-style: none;}
   </li>
         <li class="sidebar-item sidebar-item-section">
     <div class="sidebar-item-container"> 
-        <a href="./2_dados_aop.html" class="sidebar-item-text sidebar-link active">PARTE 2: Dados do Projeto AOP</a>
+        <a href="./2_dados_aop.html" class="sidebar-item-text sidebar-link">PARTE 2: Dados do Projeto AOP</a>
       <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
         <i class="bi bi-chevron-right ms-2"></i>
       </a>
@@ -236,14 +236,22 @@ ul.task-list{list-style: none;}
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#definição-de-acessibilidade-urbana" id="toc-definição-de-acessibilidade-urbana" class="nav-link active" data-scroll-target="#definição-de-acessibilidade-urbana"> <span class="header-section-number">1.1</span> Definição de acessibilidade urbana</a></li>
+  <li><a href="#diferença-entre-micro-e-macro-acessibilidade" id="toc-diferença-entre-micro-e-macro-acessibilidade" class="nav-link" data-scroll-target="#diferença-entre-micro-e-macro-acessibilidade"> <span class="header-section-number">1.2</span> Diferença entre micro e macro acessibilidade</a></li>
+  <li><a href="#diferença-entre-acessibilidade-e-mobilidade-urbana" id="toc-diferença-entre-acessibilidade-e-mobilidade-urbana" class="nav-link" data-scroll-target="#diferença-entre-acessibilidade-e-mobilidade-urbana"> <span class="header-section-number">1.3</span> Diferença entre acessibilidade e mobilidade urbana</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/tree/main/aop_curso_pt/1a_conceito.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">PARTE 2: Dados do Projeto AOP</h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">O que é acessibilidade?</span></h1>
 </div>
 
 
@@ -257,11 +265,21 @@ ul.task-list{list-style: none;}
 
 </header>
 
-<p><strong>Objetivo</strong>: o objetivo deste capítulo é mostrar como você pode usar o <code>R</code> para fazer download dos dados do projeto Acesso a Oportunidades (AOP) utilizando o pacote <code>aopdata</code>.</p>
-<p>Esses dados permitem você analisar diversas estimativas de de acessibilidade a empregos e serviços públicos, como escolas, estabelecimentos de saúde e centros de referência para assistência social (CRAS). Essas estimativas são calculadas usando vários indicadores de acessibilidade, considerando diferentes modos de transporte (caminhada, bicicleta, transporte público e automóvel), diferentes horários do dia (pico e fora-pico) e diferentes grupos populacionais (segundo níveis de renda, rara, sexo e idade).</p>
-<p>Nesta versão, a base de dados traz essas informações para os anos de 2017, 2018 e 2019, se apoiando em uma única metodologia consistente para as 20 maiores cidades do Brasil. As metodologias utilizadas para gerar estes dados são apresentadas em detalhe em publicações separadas, para os dados populacionais e de uso do solo (ref), e para os dados de acessibilidade (ref).</p>
+<section id="definição-de-acessibilidade-urbana" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="definição-de-acessibilidade-urbana"><span class="header-section-number">1.1</span> Definição de acessibilidade urbana</h2>
+<p>tres componentes:</p>
+<p>- Infraestrutura</p>
+<p>- Uso do solo</p>
+<p>- Pessoas</p>
+</section>
+<section id="diferença-entre-micro-e-macro-acessibilidade" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="diferença-entre-micro-e-macro-acessibilidade"><span class="header-section-number">1.2</span> Diferença entre micro e macro acessibilidade</h2>
+</section>
+<section id="diferença-entre-acessibilidade-e-mobilidade-urbana" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="diferença-entre-acessibilidade-e-mobilidade-urbana"><span class="header-section-number">1.3</span> Diferença entre acessibilidade e mobilidade urbana</h2>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -345,13 +363,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./1b_indicadores.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Indicadores de acessibilidade</span></span>
+      <a href="./1_intro.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">PARTE 1: Introdução a acessibilidade urbana</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./2a_populacao.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Dados de população e socioeconômicos</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./1b_indicadores.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Indicadores de acessibilidade</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

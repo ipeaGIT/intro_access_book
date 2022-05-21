@@ -16,16 +16,29 @@ book:
 
   chapters:
     - index.qmd
-    - 1_intro.qmd
+    - part: 1_intro.qmd
+      chapters:
+        - 1a_conceito.qmd
+        - 1b_indicadores.qmd
     - part: 2_dados_aop.qmd
       chapters:
         - 2a_populacao.qmd
         - 2b_uso_solo.qmd
         - 2c_acessibilidade.qmd
-    - 3_dados_gtfs.qmd
-    - 4_calculando_acesso.qmd
-    - 5_cenarios_transporte.qmd
+    - part: "PARTE 3: Dados de transporte público GTFS"
+      chapters:
+        - 3_dados_gtfs.qmd
+    - part: "PARTE 4: Calculando acessibilidade"
+      chapters:
+        - 4_calculando_acesso.qmd
+    - part: "PARTE 5: Avaliação de impacto"
+      chapters:
+        - 5a_cenarios_transporte.qmd
+        - 5b_cenarios_uso_solo.qmd
     - references.qmd
+  appendices:
+    - nocoes_r.qmd
+
   page-navigation: true
   page-footer: 
     border: false

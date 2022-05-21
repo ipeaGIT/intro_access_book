@@ -140,6 +140,22 @@
 
 \KOMAoption{captions}{tableheading}
 \makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[many]{tcolorbox}}
+\@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
+\definecolor{quarto-callout-color}{HTML}{909090}
+\definecolor{quarto-callout-note-color}{HTML}{0758E5}
+\definecolor{quarto-callout-important-color}{HTML}{CC1914}
+\definecolor{quarto-callout-warning-color}{HTML}{EB9113}
+\definecolor{quarto-callout-tip-color}{HTML}{00A047}
+\definecolor{quarto-callout-caution-color}{HTML}{FC5300}
+\definecolor{quarto-callout-color-frame}{HTML}{acacac}
+\definecolor{quarto-callout-note-color-frame}{HTML}{4582ec}
+\definecolor{quarto-callout-important-color-frame}{HTML}{d9534f}
+\definecolor{quarto-callout-warning-color-frame}{HTML}{f0ad4e}
+\definecolor{quarto-callout-tip-color-frame}{HTML}{02b875}
+\definecolor{quarto-callout-caution-color-frame}{HTML}{fd7e14}
+\makeatother
+\makeatletter
 \makeatother
 \makeatletter
 \@ifpackageloaded{caption}{}{\usepackage{caption}}
@@ -210,7 +226,7 @@
 
 \begin{document}
 \maketitle
-\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, sharp corners, boxrule=0pt, breakable, borderline west={3pt}{0pt}{shadecolor}, enhanced, frame hidden]}{\end{tcolorbox}}\fi
+\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[interior hidden, borderline west={3pt}{0pt}{shadecolor}, enhanced, boxrule=0pt, breakable, sharp corners, frame hidden]}{\end{tcolorbox}}\fi
 
 \renewcommand*\contentsname{Table of contents}
 {
@@ -218,112 +234,139 @@
 \setcounter{tocdepth}{2}
 \tableofcontents
 }
-\hypertarget{preface}{%
-\chapter*{Preface}\label{preface}}
-\addcontentsline{toc}{chapter}{Preface}
+\hypertarget{apresentauxe7uxe3o}{%
+\section*{Apresentação}\label{apresentauxe7uxe3o}}
+\addcontentsline{toc}{section}{Apresentação}
 
-This is a Quarto book.
+Esse site /livro/ tem como objetivo curso equipar gestores públicos,
+analistas e pesquisadores de planejamento e transporte urbano com o
+conhecimento e as habilidades práticas para fazer estudos e avaliações
+de impacto sobre acessibilidade urbana. Além de uma visão geral sobre
+conceitos e indicadores de acessibilidade, o curso ensina como é
+possível analisar dados espaciais e de redes de transporte em \texttt{R}
+para calcular e visualizar o acesso a oportunidades nas cidades
+brasileiras. O curso tem caráter prático `mão na masssa', e é baseado em
+exemplos e exercícios reproduzíveis usando R.
 
-To learn more about Quarto books visit
-\url{https://quarto.org/docs/books}.
+O minicurso é elaborado pelo Ipea no âmbito da parceria entre Ipea e a
+Secretaria de Mobilidade e Desenvolvimento Regional e Urbano (SMDRU) do
+Ministério do Desenvolvimento Regional (MDR).
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\DecValTok{1} \SpecialCharTok{+} \DecValTok{1}
-\end{Highlighting}
-\end{Shaded}
+\begin{tcolorbox}[enhanced jigsaw, colframe=quarto-callout-note-color-frame, opacityback=0, toprule=.15mm, breakable, left=2mm, colback=white, arc=.35mm, rightrule=.15mm, bottomrule=.15mm, leftrule=.75mm]
+\begin{minipage}[t]{5.5mm}
+\textcolor{quarto-callout-note-color}{\faInfo}
+\end{minipage}%
+\begin{minipage}[t]{\textwidth - 5.5mm}
+Esse livro / site foi escrito usando
+\href{https://www.r-project.org/}{r} e
+\href{https://quarto.org}{Quarto}. O código utilizado para criar o curso
+pode ser encontrado
+\href{https://github.com/ipeaGIT/aop_curso/tree/main/aop_curso_pt}{neste
+repositório}.\end{minipage}%
+\end{tcolorbox}
 
-\begin{verbatim}
-[1] 2
-\end{verbatim}
+\hypertarget{licensa-de-uso}{%
+\section*{Licensa de uso}\label{licensa-de-uso}}
+\addcontentsline{toc}{section}{Licensa de uso}
 
-\hypertarget{introduuxe7uxe3o-a-acessibilidade-urbana}{%
-\chapter{Introdução a acessibilidade
-urbana}\label{introduuxe7uxe3o-a-acessibilidade-urbana}}
+definir licença
 
-s \textbf{Objetivo}: apresentar uma visão geral sobre o que é
-acessibilidade urbana, principais conceitos e indicadores.
+\part{PARTE 1: Introdução a acessibilidade urbana}
 
-1.1 Definição de acessibilidade urbana
+\textbf{Objetivo}: O objetivo desse cap�tulo � 1. Apresentar o que o
+conceito de acessibilidade urbana e esclarecer a diferen�a entre
+acessibilidade e mobilidade 2. Apresentar uma visão geral sobre os
+principais e indicadores para medir acessibilidade.
 
-1.1 Diferença entre micro e macro acessibilidade
+\hypertarget{o-que-uxe9-acessibilidade}{%
+\chapter{O que é acessibilidade?}\label{o-que-uxe9-acessibilidade}}
 
-1.2 Diferença entre acessibilidade e mobilidade urbana
+\hypertarget{definiuxe7uxe3o-de-acessibilidade-urbana}{%
+\section{Definição de acessibilidade
+urbana}\label{definiuxe7uxe3o-de-acessibilidade-urbana}}
 
-1.3 Indicadores de acessibilidade urbana
+tres componentes:
 
-1.3.1 Mínima distância ou tempo de viagem
+- Infraestrutura
 
-1.3.2 Medida cumulativa de oportunidades
+- Uso do solo
 
-1.3.3 Medidas gravitacionais
+- Pessoas
 
-1.3.4 Indicadores com competição: Floating catchment area
+\hypertarget{diferenuxe7a-entre-micro-e-macro-acessibilidade}{%
+\section{Diferença entre micro e macro
+acessibilidade}\label{diferenuxe7a-entre-micro-e-macro-acessibilidade}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\DecValTok{1} \SpecialCharTok{+} \DecValTok{1}
-\end{Highlighting}
-\end{Shaded}
+\hypertarget{diferenuxe7a-entre-acessibilidade-e-mobilidade-urbana}{%
+\section{Diferença entre acessibilidade e mobilidade
+urbana}\label{diferenuxe7a-entre-acessibilidade-e-mobilidade-urbana}}
 
-\begin{verbatim}
-[1] 2
-\end{verbatim}
+\hypertarget{indicadores-de-acessibilidade}{%
+\chapter{Indicadores de
+acessibilidade}\label{indicadores-de-acessibilidade}}
 
-\part{Analisando dados de acesso a oportunidades nas cidades
-Brasileiras}
+\hypertarget{medidas-baseadas-em-lugares}{%
+\section{Medidas baseadas em
+lugares}\label{medidas-baseadas-em-lugares}}
 
-**Objetivo**: indicar onde é possível fazer download de estimativas de
-acessibilidade no Brasil apresentando o pacote aopdata; e como analisar
-esses dados com mapas e gráficos.
+\hypertarget{muxednima-distuxe2ncia-ou-tempo-de-viagem}{%
+\subsection{1.3.1 Mínima distância ou tempo de
+viagem}\label{muxednima-distuxe2ncia-ou-tempo-de-viagem}}
 
-2.1 Dados de população e socioeconômicos
+\hypertarget{medida-cumulativa-de-oportunidades}{%
+\subsection{1.3.2 Medida cumulativa de
+oportunidades}\label{medida-cumulativa-de-oportunidades}}
 
-2.1.1 Mapas de população
+\hypertarget{medidas-gravitacionais}{%
+\subsection{1.3.3 Medidas gravitacionais}\label{medidas-gravitacionais}}
 
-2.2 Dados de distribuição espacial de empregos, escolas e serviços de
-saúde
+\hypertarget{indicadores-com-competiuxe7uxe3o-floating-catchment-area}{%
+\subsection{1.3.4 Indicadores com competição: Floating catchment
+area}\label{indicadores-com-competiuxe7uxe3o-floating-catchment-area}}
 
-2.2.1 Mapas de oportunidades
+\hypertarget{medidas-baseadas-em-pessoas}{%
+\section{Medidas baseadas em
+pessoas}\label{medidas-baseadas-em-pessoas}}
 
-2.3 Estimativas de acessibilidade
+\part{PARTE 2: Dados do Projeto AOP}
 
-2.2.1 Mapas de acessibilidade
+\textbf{Objetivo}: o objetivo deste capítulo é mostrar como você pode
+usar o \texttt{R} para fazer download dos dados do projeto Acesso a
+Oportunidades (AOP) utilizando o pacote \texttt{aopdata}.
 
-2.2.1 Gráficos de distribuição e desigualdade de acessibilidade
+Esses dados permitem você analisar diversas estimativas de de
+acessibilidade a empregos e serviços públicos, como escolas,
+estabelecimentos de saúde e centros de referência para assistência
+social (CRAS). Essas estimativas são calculadas usando vários
+indicadores de acessibilidade, considerando diferentes modos de
+transporte (caminhada, bicicleta, transporte público e automóvel),
+diferentes horários do dia (pico e fora-pico) e diferentes grupos
+populacionais (segundo níveis de renda, rara, sexo e idade).
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\DecValTok{1} \SpecialCharTok{+} \DecValTok{1}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-[1] 2
-\end{verbatim}
+Nesta versão, a base de dados traz essas informações para os anos de
+2017, 2018 e 2019, se apoiando em uma única metodologia consistente para
+as 20 maiores cidades do Brasil. As metodologias utilizadas para gerar
+estes dados são apresentadas em detalhe em publicações separadas, para
+os dados populacionais e de uso do solo (ref), e para os dados de
+acessibilidade (ref).
 
 \hypertarget{dados-de-populauxe7uxe3o-e-socioeconuxf4micos}{%
-\section{Dados de população e
+\chapter{Dados de população e
 socioeconômicos}\label{dados-de-populauxe7uxe3o-e-socioeconuxf4micos}}
 
-**Objetivo**: indicar onde é possível fazer download de estimativas de
-acessibilidade no Brasil apresentando o pacote aopdata; e como analisar
-esses dados com mapas e gráficos.
+\hypertarget{download-dos-dados}{%
+\section{Download dos dados}\label{download-dos-dados}}
 
-2.1 Dados de população e socioeconômicos
+\hypertarget{mapa-de-populauxe7uxe3o-total}{%
+\section{Mapa de população total}\label{mapa-de-populauxe7uxe3o-total}}
 
-2.1.1 Mapas de população
+\hypertarget{mapa-de-populauxe7uxe3o-por-renda}{%
+\section{Mapa de população por
+renda}\label{mapa-de-populauxe7uxe3o-por-renda}}
 
-2.2 Dados de distribuição espacial de empregos, escolas e serviços de
-saúde
-
-2.2.1 Mapas de oportunidades
-
-2.3 Estimativas de acessibilidade
-
-2.2.1 Mapas de acessibilidade
-
-2.2.1 Gráficos de distribuição e desigualdade de acessibilidade
+\hypertarget{mapa-de-populauxe7uxe3o-por-cor}{%
+\section{Mapa de população por
+cor}\label{mapa-de-populauxe7uxe3o-por-cor}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -335,28 +378,24 @@ saúde
 [1] 2
 \end{verbatim}
 
-\hypertarget{dados-de-distribuiuxe7uxe3o-espacial-de-oportortunidades}{%
-\section{Dados de distribuição espacial de
-oportortunidades}\label{dados-de-distribuiuxe7uxe3o-espacial-de-oportortunidades}}
+\hypertarget{dados-de-distribuiuxe7uxe3o-espacial-de-oportunidades}{%
+\chapter{Dados de distribuição espacial de
+oportunidades}\label{dados-de-distribuiuxe7uxe3o-espacial-de-oportunidades}}
 
-**Objetivo**: indicar onde é possível fazer download de estimativas de
-acessibilidade no Brasil apresentando o pacote aopdata; e como analisar
-esses dados com mapas e gráficos.
+\hypertarget{download-dos-dados-1}{%
+\section{Download dos dados}\label{download-dos-dados-1}}
 
-2.1 Dados de população e socioeconômicos
+\hypertarget{mapa-de-empregos}{%
+\section{Mapa de empregos}\label{mapa-de-empregos}}
 
-2.1.1 Mapas de população
+\hypertarget{mapa-de-escolas}{%
+\section{Mapa de escolas}\label{mapa-de-escolas}}
 
-2.2 Dados de distribuição espacial de empregos, escolas e serviços de
-saúde
+\hypertarget{mapa-de-servios-de-sade}{%
+\section{Mapa de servi�os de sa�de}\label{mapa-de-servios-de-sade}}
 
-2.2.1 Mapas de oportunidades
-
-2.3 Estimativas de acessibilidade
-
-2.2.1 Mapas de acessibilidade
-
-2.2.1 Gráficos de distribuição e desigualdade de acessibilidade
+\hypertarget{mapa-de-cras}{%
+\section{Mapa de CRAS}\label{mapa-de-cras}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -369,44 +408,37 @@ saúde
 \end{verbatim}
 
 \hypertarget{estimativas-e-mapas-de-acessibilidade}{%
-\section{Estimativas e mapas de
+\chapter{Estimativas e mapas de
 acessibilidade}\label{estimativas-e-mapas-de-acessibilidade}}
 
-**Objetivo**: indicar onde é possível fazer download de estimativas de
-acessibilidade no Brasil apresentando o pacote aopdata; e como analisar
-esses dados com mapas e gráficos.
+\hypertarget{download-dos-dados-2}{%
+\section{Download dos dados}\label{download-dos-dados-2}}
 
-2.1 Dados de população e socioeconômicos
+\hypertarget{estimativas-de-acessibilidade}{%
+\section{Estimativas de
+acessibilidade}\label{estimativas-de-acessibilidade}}
 
-2.1.1 Mapas de população
+ilustrar alguns indicadores para pegar a logica do dicionario de dados
 
-2.2 Dados de distribuição espacial de empregos, escolas e serviços de
-saúde
+\hypertarget{geografia-do-acesso-a-oportunidades}{%
+\section{Geografia do acesso a
+oportunidades}\label{geografia-do-acesso-a-oportunidades}}
 
-2.2.1 Mapas de oportunidades
+a
 
-2.3 Estimativas de acessibilidade
+\hypertarget{mapa-tmi-a-sade}{%
+\subsection{Mapa TMI a sa�de}\label{mapa-tmi-a-sade}}
 
-2.2.1 Mapas de acessibilidade
+a
 
-2.2.1 Gráficos de distribuição e desigualdade de acessibilidade
+\hypertarget{mapa-cma-empregos}{%
+\subsection{Mapa CMA empregos}\label{mapa-cma-empregos}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\DecValTok{1} \SpecialCharTok{+} \DecValTok{1}
-\end{Highlighting}
-\end{Shaded}
+a
 
-\begin{verbatim}
-[1] 2
-\end{verbatim}
-
-\hypertarget{introduction}{%
-\chapter{Introduction}\label{introduction}}
-
-This is a book created from markdown and executable code.
-
-See Knuth (1984) for additional discussion of literate programming.
+\hypertarget{desigualdades-de-acesso-a-oportunidades}{%
+\section{Desigualdades de acesso a
+oportunidades}\label{desigualdades-de-acesso-a-oportunidades}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -417,6 +449,49 @@ See Knuth (1984) for additional discussion of literate programming.
 \begin{verbatim}
 [1] 2
 \end{verbatim}
+
+\part{PARTE 3: Dados de transporte público GTFS}
+
+\hypertarget{dados-de-transporte-puxfablico-em-formato-gtfs}{%
+\chapter{Dados de transporte público em formato
+GTFS}\label{dados-de-transporte-puxfablico-em-formato-gtfs}}
+
+\textbf{Objetivo}: apresentar uma visão geral sobre o que são dados
+GTFS; onde conseguir dados de GTFS no Brasil; mostrar como fazer algumas
+análises básicas e edições dos dados de GTFS usando o pacote gtfstools
+
+\hypertarget{o-que-uxe9-gtfs}{%
+\section{O que é GTFS}\label{o-que-uxe9-gtfs}}
+
+\hypertarget{estrutura-dos-arquivos-de-gtfs}{%
+\section{Estrutura dos arquivos de
+GTFS}\label{estrutura-dos-arquivos-de-gtfs}}
+
+\hypertarget{onde-encontrar-gtfs-de-cidades-brasileiras}{%
+\section{Onde encontrar GTFS de cidades
+brasileiras}\label{onde-encontrar-gtfs-de-cidades-brasileiras}}
+
+\hypertarget{como-extrair-anuxe1lises-buxe1sicas-de-um-gtfs-pacote-gtfstools}{%
+\section{Como extrair análises básicas de um GTFS (pacote
+gtfstools)}\label{como-extrair-anuxe1lises-buxe1sicas-de-um-gtfs-pacote-gtfstools}}
+
+\hypertarget{cuxe1lculo-de-velocidade-das-linhas}{%
+\section{Cálculo de velocidade das
+linhas}\label{cuxe1lculo-de-velocidade-das-linhas}}
+
+\hypertarget{cuxe1lculo-de-frequuxeancia-das-linhas}{%
+\section{Cálculo de frequência das
+linhas}\label{cuxe1lculo-de-frequuxeancia-das-linhas}}
+
+\hypertarget{mapear-a-rede-de-transporte-puxfablico}{%
+\section{Mapear a rede de transporte
+público}\label{mapear-a-rede-de-transporte-puxfablico}}
+
+\hypertarget{como-fazer-ediuxe7uxf5es-na-rede-de-transporte-puxfablico-pacote-gtfstools}{%
+\section{Como fazer edições na rede de transporte público (pacote
+gtfstools)}\label{como-fazer-ediuxe7uxf5es-na-rede-de-transporte-puxfablico-pacote-gtfstools}}
+
+\part{PARTE 4: Calculando acessibilidade}
 
 \hypertarget{calculando-acessibilidade-urbana-com-r5r}{%
 \chapter{\texorpdfstring{Calculando acessibilidade urbana com
@@ -439,16 +514,77 @@ r5r
 [1] 2
 \end{verbatim}
 
-\hypertarget{introduction-1}{%
-\chapter{Introduction}\label{introduction-1}}
+\part{PARTE 5: Avaliação de impacto}
 
-This is a book created from markdown and executable code.
+\hypertarget{comparando-a-acessibilidade-entre-dois-cenuxe1rios-de-transporte}{%
+\chapter{Comparando a acessibilidade entre dois cenários de
+transporte}\label{comparando-a-acessibilidade-entre-dois-cenuxe1rios-de-transporte}}
 
-See Knuth (1984) for additional discussion of literate programming.
+\textbf{Objetivo}: mostrar como avaliar o impacto de acessibilidade de
+uma política que altera a frequência de algumas linhas de transporte
+
+\hypertarget{alterar-frequuxeancia-de-gtfs}{%
+\section{7.1 Alterar frequência de
+GTFS}\label{alterar-frequuxeancia-de-gtfs}}
+
+\hypertarget{calcular-acessibilidade-nos-cenuxe1rios-antes-e-depois}{%
+\section{7.2 Calcular acessibilidade nos cenários antes e
+depois}\label{calcular-acessibilidade-nos-cenuxe1rios-antes-e-depois}}
+
+\hypertarget{mapa-do-impacto-de-acessibilidade}{%
+\section{Mapa do impacto de
+acessibilidade}\label{mapa-do-impacto-de-acessibilidade}}
+
+\hypertarget{como-impacto-de-acessibilidade-se-distribui-entre-grupos-sociais}{%
+\section{Como impacto de acessibilidade se distribui entre grupos
+sociais}\label{como-impacto-de-acessibilidade-se-distribui-entre-grupos-sociais}}
+
+\hypertarget{comparando-a-acessibilidade-entre-dois-cenuxe1rios-de-uso-do-solo}{%
+\chapter{Comparando a acessibilidade entre dois cenários de uso do
+solo}\label{comparando-a-acessibilidade-entre-dois-cenuxe1rios-de-uso-do-solo}}
+
+\textbf{Objetivo}: mostrar como avaliar o impacto de acessibilidade de
+uma política que (a) constrói nova escola, ou (b) aumenta densidade de
+população em determinadas áreas da cidade
+
+\hypertarget{simulauxe7uxe3o-de-aumentando-de-densidade-populacional}{%
+\section{Simulação de aumentando de densidade
+populacional}\label{simulauxe7uxe3o-de-aumentando-de-densidade-populacional}}
+
+\hypertarget{calcular-acessibilidade-nos-cenuxe1rios-antes-e-depois-1}{%
+\section{Calcular acessibilidade nos cenários antes e
+depois}\label{calcular-acessibilidade-nos-cenuxe1rios-antes-e-depois-1}}
+
+\hypertarget{mapa-do-impacto-de-acessibilidade-1}{%
+\section{Mapa do impacto de
+acessibilidade}\label{mapa-do-impacto-de-acessibilidade-1}}
+
+\hypertarget{como-impacto-de-acessibilidade-se-distribui-entre-grupos-sociais-1}{%
+\section{Como impacto de acessibilidade se distribui entre grupos
+sociais}\label{como-impacto-de-acessibilidade-se-distribui-entre-grupos-sociais-1}}
+
+\hypertarget{references}{%
+\chapter*{References}\label{references}}
+\addcontentsline{toc}{chapter}{References}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{0}{0}
+\end{CSLReferences}
+
+\appendix
+\addcontentsline{toc}{part}{Appendices}
+
+\hypertarget{nouxe7uxf5es-buxe1sicas-de-r}{%
+\chapter{Noções básicas de R}\label{nouxe7uxf5es-buxe1sicas-de-r}}
+
+\hypertarget{objetos}{%
+\section{Objetos}\label{objetos}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\DecValTok{1} \SpecialCharTok{+} \DecValTok{1}
+\NormalTok{a }\OtherTok{\textless{}{-}} \DecValTok{1}
+
+\NormalTok{a }\SpecialCharTok{+} \DecValTok{1}
 \end{Highlighting}
 \end{Shaded}
 
@@ -456,17 +592,47 @@ See Knuth (1984) for additional discussion of literate programming.
 [1] 2
 \end{verbatim}
 
-\hypertarget{references}{%
-\chapter*{References}\label{references}}
-\addcontentsline{toc}{chapter}{References}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{)}
 
-\hypertarget{refs}{}
-\begin{CSLReferences}{1}{0}
-\leavevmode\vadjust pre{\hypertarget{ref-knuth84}{}}%
-Knuth, Donald E. 1984. {``Literate Programming.''} \emph{Comput. J.} 27
-(2): 97--111. \url{https://doi.org/10.1093/comjnl/27.2.97}.
+\NormalTok{a }\SpecialCharTok{+} \DecValTok{1}
+\end{Highlighting}
+\end{Shaded}
 
-\end{CSLReferences}
+\begin{verbatim}
+[1] 2 3 4
+\end{verbatim}
+
+Texto
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{a }\OtherTok{\textless{}{-}} \StringTok{"Bom dia"}
+
+\FunctionTok{paste}\NormalTok{(a, }\StringTok{\textquotesingle{}Joana\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] "Bom dia Joana"
+\end{verbatim}
+
+\hypertarget{data.frames}{%
+\section{Data.frames}\label{data.frames}}
+
+\hypertarget{como-importar-e-exportar-arquivos}{%
+\section{Como importar e exportar
+arquivos}\label{como-importar-e-exportar-arquivos}}
+
+\hypertarget{funuxe7uxf5es}{%
+\section{Funções}\label{funuxe7uxf5es}}
+
+\hypertarget{visualizauxe7uxe3o-de-dados-com-ggplot2}{%
+\section{\texorpdfstring{Visualização de dados com
+\texttt{ggplot2}}{Visualização de dados com ggplot2}}\label{visualizauxe7uxe3o-de-dados-com-ggplot2}}
+
+```
 
 
 
