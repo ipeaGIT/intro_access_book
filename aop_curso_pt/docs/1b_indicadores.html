@@ -15,6 +15,25 @@ span.underline{text-decoration: underline;}
 div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -242,10 +261,10 @@ ul.task-list{list-style: none;}
   <ul>
   <li><a href="#medidas-baseadas-em-lugares" id="toc-medidas-baseadas-em-lugares" class="nav-link active" data-scroll-target="#medidas-baseadas-em-lugares"> <span class="header-section-number">2.1</span> Medidas baseadas em lugares</a>
   <ul class="collapse">
-  <li><a href="#mínima-distância-ou-tempo-de-viagem" id="toc-mínima-distância-ou-tempo-de-viagem" class="nav-link" data-scroll-target="#mínima-distância-ou-tempo-de-viagem"> <span class="header-section-number">2.1.1</span> 1.3.1 Mínima distância ou tempo de viagem</a></li>
-  <li><a href="#medida-cumulativa-de-oportunidades" id="toc-medida-cumulativa-de-oportunidades" class="nav-link" data-scroll-target="#medida-cumulativa-de-oportunidades"> <span class="header-section-number">2.1.2</span> 1.3.2 Medida cumulativa de oportunidades</a></li>
-  <li><a href="#medidas-gravitacionais" id="toc-medidas-gravitacionais" class="nav-link" data-scroll-target="#medidas-gravitacionais"> <span class="header-section-number">2.1.3</span> 1.3.3 Medidas gravitacionais</a></li>
-  <li><a href="#indicadores-com-competição-floating-catchment-area" id="toc-indicadores-com-competição-floating-catchment-area" class="nav-link" data-scroll-target="#indicadores-com-competição-floating-catchment-area"> <span class="header-section-number">2.1.4</span> 1.3.4 Indicadores com competição: Floating catchment area</a></li>
+  <li><a href="#mínima-distância-ou-tempo-de-viagem" id="toc-mínima-distância-ou-tempo-de-viagem" class="nav-link" data-scroll-target="#mínima-distância-ou-tempo-de-viagem"> <span class="header-section-number">2.1.1</span> Mínima distância ou tempo de viagem</a></li>
+  <li><a href="#medida-cumulativa-de-oportunidades" id="toc-medida-cumulativa-de-oportunidades" class="nav-link" data-scroll-target="#medida-cumulativa-de-oportunidades"> <span class="header-section-number">2.1.2</span> Medida cumulativa de oportunidades</a></li>
+  <li><a href="#medidas-gravitacionais" id="toc-medidas-gravitacionais" class="nav-link" data-scroll-target="#medidas-gravitacionais"> <span class="header-section-number">2.1.3</span> Medidas gravitacionais</a></li>
+  <li><a href="#indicadores-com-competição-floating-catchment-area" id="toc-indicadores-com-competição-floating-catchment-area" class="nav-link" data-scroll-target="#indicadores-com-competição-floating-catchment-area"> <span class="header-section-number">2.1.4</span> Indicadores com competição: Floating catchment area</a></li>
   </ul></li>
   <li><a href="#medidas-baseadas-em-pessoas" id="toc-medidas-baseadas-em-pessoas" class="nav-link" data-scroll-target="#medidas-baseadas-em-pessoas"> <span class="header-section-number">2.2</span> Medidas baseadas em pessoas</a></li>
   </ul>
@@ -270,25 +289,36 @@ ul.task-list{list-style: none;}
 
 </header>
 
+<p>Existem diversos indicadores para se medir acessibilidade. Esses indicadores podem ser divididos em dois grandes grupos: indicadores baseados em lugar e indicadores baeados em pessoas <span class="citation" data-cites="dijst2002opportunities">(<a href="references.html#ref-dijst2002opportunities" role="doc-biblioref">Dijst, Jong, and Eck 2002</a>)</span>.</p>
 <section id="medidas-baseadas-em-lugares" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="medidas-baseadas-em-lugares"><span class="header-section-number">2.1</span> Medidas baseadas em lugares</h2>
+<p>Medidas baseadas em lugar medem a acessibilidade enquanto uma característica de um determinado local. Por simplificação, esses indicadores assumem que todas as pessoas que se encontram em um mesmo local tem as mesmas condições de acesso às atividades distribuídas pela cidade. Esses indicadores são sensíveis a fatores relacionados a distribuição espacial de atividades e a configuração e desempenho da rede de transporte, mas não levam em consideração as características individuais das pessoas.</p>
+<p>Os indicadores desse tipo os mais amplamente utilizados por agências de transporte e pesquisadores (ref). Isso porque esses indicadores exigem menor quantidade de dados e são consideravelmente mais fáceis de serem calculados.Por este motivo, todo o material desse curso irá se focar nesses indicadores de acessibilidade basedos em lugares.</p>
+<p>Nós apresentamos abaixo uma rápida descrição de alguns desses indicadores.</p>
 <section id="mínima-distância-ou-tempo-de-viagem" class="level3" data-number="2.1.1">
-<h3 data-number="2.1.1" class="anchored" data-anchor-id="mínima-distância-ou-tempo-de-viagem"><span class="header-section-number">2.1.1</span> 1.3.1 Mínima distância ou tempo de viagem</h3>
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="mínima-distância-ou-tempo-de-viagem"><span class="header-section-number">2.1.1</span> Mínima distância ou tempo de viagem</h3>
 </section>
 <section id="medida-cumulativa-de-oportunidades" class="level3" data-number="2.1.2">
-<h3 data-number="2.1.2" class="anchored" data-anchor-id="medida-cumulativa-de-oportunidades"><span class="header-section-number">2.1.2</span> 1.3.2 Medida cumulativa de oportunidades</h3>
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="medida-cumulativa-de-oportunidades"><span class="header-section-number">2.1.2</span> Medida cumulativa de oportunidades</h3>
 </section>
 <section id="medidas-gravitacionais" class="level3" data-number="2.1.3">
-<h3 data-number="2.1.3" class="anchored" data-anchor-id="medidas-gravitacionais"><span class="header-section-number">2.1.3</span> 1.3.3 Medidas gravitacionais</h3>
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="medidas-gravitacionais"><span class="header-section-number">2.1.3</span> Medidas gravitacionais</h3>
 </section>
 <section id="indicadores-com-competição-floating-catchment-area" class="level3" data-number="2.1.4">
-<h3 data-number="2.1.4" class="anchored" data-anchor-id="indicadores-com-competição-floating-catchment-area"><span class="header-section-number">2.1.4</span> 1.3.4 Indicadores com competição: Floating catchment area</h3>
+<h3 data-number="2.1.4" class="anchored" data-anchor-id="indicadores-com-competição-floating-catchment-area"><span class="header-section-number">2.1.4</span> Indicadores com competição: Floating catchment area</h3>
 </section>
 </section>
 <section id="medidas-baseadas-em-pessoas" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="medidas-baseadas-em-pessoas"><span class="header-section-number">2.2</span> Medidas baseadas em pessoas</h2>
+<p>Indicadores de acessibilidade baseadas em pessoas são sensíveis não apenas à distribuição espacial de atividades e a configuração e desempenho da rede de transporte. Esses indicadores mas também levam em consideração como características pessoais (como sexo, idade, deficiência física etc) e até questões como atividades e compromissos pessoais podem afetar a facidade de uma pessoa acessar determinadas atividades. Esse grupo de medidas inclui, por exemplo, indicadores de acessibilidade baseados em utilidade ou medidas de espaço-tempo.</p>
+<p>Os indicadores desse tipo costumam demanda grande quantidades de dados, incluindo registros de diários de viagem, pesquisas domiciliares tipo origem-destino etc. Além disso, o cálculo desses indicadores é computacionalmente mais intensivo e complexo, o que faz com que esses indicadores sejam menos utilizados, embora mais sofisticados (ref).</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-dijst2002opportunities" class="csl-entry" role="doc-biblioentry">
+Dijst, Martin, Tom de Jong, and Jan Ritsema van Eck. 2002. <span>“Opportunities for Transport Mode Change: An Exploration of a Disaggregated Approach.”</span> <em>Environment and Planning B: Planning and Design</em> 29 (3): 413–30. <a href="https://doi.org/10.1068/b12811">https://doi.org/10.1068/b12811</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
