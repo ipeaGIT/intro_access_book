@@ -40,5 +40,26 @@
     "title": "1  O que é acessibilidade?",
     "section": "1.3 Diferença entre acessibilidade e mobilidade urbana",
     "text": "1.3 Diferença entre acessibilidade e mobilidade urbana"
+  },
+  {
+    "objectID": "2_dados_aop.html",
+    "href": "2_dados_aop.html",
+    "title": "PARTE 2: Dados do Projeto AOP",
+    "section": "",
+    "text": "Objetivo: o objetivo deste capítulo é mostrar como fazer download e analisar os dados do projeto Acesso a Oportunidades (AOP) utilizando o pacote aopdata no R.\nO projeto Acesso a Oportunidades disponibiliza um extensa base de dados com informações sobre a distribuição da população, atividades econômicas e serviços públicos, além de várias estimativas de acessibilidade urbana para diversos tipos de atividades considerando diferentes modos de transporte (caminhada, bicicleta, transporte público e automóvel), diferentes horários do dia (pico e fora-pico) e diferentes grupos populacionais (segundo níveis de renda, rara, sexo e idade). Nesta versão, a base de dados traz essas informações para diversos anos, se apoiando em uma única metodologia consistente para as 20 maiores cidades do Brasil. Veja abaixo ?tbl-tabela_dados_pop e ?tbl-tabela_dados_access."
+  },
+  {
+    "objectID": "2_dados_aop.html#dados-de-população-empregos-e-serviços-públicos",
+    "href": "2_dados_aop.html#dados-de-população-empregos-e-serviços-públicos",
+    "title": "PARTE 2: Dados do Projeto AOP",
+    "section": "Dados de população, empregos e serviços públicos:",
+    "text": "Dados de população, empregos e serviços públicos:\nTabela x. Informações socioeconômicas da população e de distribuição espacial de atividades, segundo ano e fonte de dados.\n\n\n\n\n\n Dado \n    Informações \n    Anos \n    Fonte \n  \n\n\n Características sociodemográficas da população \n    Quantidade de pessoas segundo sexo, faixa de idade e cor/raça; média da renda domiciliar per capita \n    2010 \n    Censo Demográfico, IBGE \n  \n\n Estabelecimentos de educação \n    Quantidade de creches e escolas públicas segundo nível infantil, fundamental e médio \n    2017, 2018, 2019 \n    Censo Escolar, Inep \n  \n\n Estabelecimentos de saúde \n    Quantidade de estabelecimentos de saúde que atendem pelo SUS segundo nível de atenção baixa, média e alta complexidade \n    2017, 2018, 2019 \n    Cadastro Nacional de Estabelecimentos de Saúde (CNES), Ministério da Saúde \n  \n\n Atividade econômica \n    Quantidade de empregos formais conforme o nível de instrução dos trabalhadores baixa, média e alta escolaridade \n    2017, 2018, 2019 \n    Relação Anual de Informações Sociais (RAIS), Ministério da Economia \n  \n\n Estabelecimentos de assistência social \n    Quantidade de CRAS \n    2017, 2018, 2019 \n    Censo SUAS, Ministério da Cidadania \n  \n\n\n\n\n: Informações socioeconômicas da população e de distribuição espacial de atividades, segundo ano e fonte de dados {#tbl-tabela_dados_pop}"
+  },
+  {
+    "objectID": "2_dados_aop.html#dados-de-acessibilidade-urbana",
+    "href": "2_dados_aop.html#dados-de-acessibilidade-urbana",
+    "title": "PARTE 2: Dados do Projeto AOP",
+    "section": "Dados de acessibilidade urbana:",
+    "text": "Dados de acessibilidade urbana:\n\n\n\n\n\n Indicador (código) \n    Descrição \n    Tipo de oportunidades \n    Limites de tempo de viagem \n  \n\n\n Tempo mínimo de viagem (TMI) \n    Tempo até a oportunidade mais próxima \n    Saúde, Educação, CRAS \n    A pé (60 mins)\nBicicleta, Transporte público e carro (120 mins) \n  \n\n Medida cumulativa ativa (CMA) \n    Quantidade de oportunidades acessíveis em um determinado limite de tempo \n    Trabalho, Saúde, Educação, CRAS \n    A pé e bicicleta (15, 30, 45 e 60 mins)\nTransporte público e carro (15, 30, 60, 90 e 120 mins) \n  \n\n Medida cumulativa passiva (CMP) \n    Quantidade de pessoas que acessam a localidade em um determinado limite de tempo \n    - \n    A pé e bicicleta (15, 30, 45 e 60 mins)\nTransporte público e carro (15, 30, 60, 90 e 120 mins) \n  \n\n\n\n\n: Indicadores de acessibilidade calculados no Projeto Acesso a Oportunidades {#tbl-tabela_dados_access}"
   }
 ]
