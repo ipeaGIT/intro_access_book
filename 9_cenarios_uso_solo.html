@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Rafael H. M. Pereira, Daniel Herszenhut">
-<meta name="dcterms.date" content="2022-08-09">
 
-<title>Acessibilidade urbana e avaliação de impacto</title>
+<title>Acessibilidade urbana e avaliação de impacto - 9&nbsp; Comparando a acessibilidade entre dois cenários de uso do solo</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -27,7 +25,8 @@ ul.task-list{list-style: none;}
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./p1_intro.html" rel="next">
+<link href="./references.html" rel="next">
+<link href="./8_cenarios_transporte.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -66,7 +65,7 @@ ul.task-list{list-style: none;}
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Acessibilidade urbana e avaliação de impacto</h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Comparando a acessibilidade entre dois cenários de uso do solo</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -115,7 +114,7 @@ ul.task-list{list-style: none;}
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">Apresentação</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Apresentação</a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -208,7 +207,7 @@ ul.task-list{list-style: none;}
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./9_cenarios_uso_solo.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Comparando a acessibilidade entre dois cenários de uso do solo</span></a>
+  <a href="./9_cenarios_uso_solo.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Comparando a acessibilidade entre dois cenários de uso do solo</span></a>
   </div>
 </li>
       </ul>
@@ -242,65 +241,46 @@ ul.task-list{list-style: none;}
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#apresentação" id="toc-apresentação" class="nav-link active" data-scroll-target="#apresentação">Apresentação</a>
-  <ul class="collapse">
-  <li><a href="#licença-de-uso" id="toc-licença-de-uso" class="nav-link" data-scroll-target="#licença-de-uso">Licença de uso</a></li>
-  </ul></li>
+  <li><a href="#simulação-de-aumentando-de-densidade-populacional" id="toc-simulação-de-aumentando-de-densidade-populacional" class="nav-link active" data-scroll-target="#simulação-de-aumentando-de-densidade-populacional"> <span class="header-section-number">9.1</span> Simulação de aumentando de densidade populacional</a></li>
+  <li><a href="#calcular-acessibilidade-nos-cenários-antes-e-depois" id="toc-calcular-acessibilidade-nos-cenários-antes-e-depois" class="nav-link" data-scroll-target="#calcular-acessibilidade-nos-cenários-antes-e-depois"> <span class="header-section-number">9.2</span> Calcular acessibilidade nos cenários antes e depois</a></li>
+  <li><a href="#mapa-do-impacto-de-acessibilidade" id="toc-mapa-do-impacto-de-acessibilidade" class="nav-link" data-scroll-target="#mapa-do-impacto-de-acessibilidade"> <span class="header-section-number">9.3</span> Mapa do impacto de acessibilidade</a></li>
+  <li><a href="#como-impacto-de-acessibilidade-se-distribui-entre-grupos-sociais" id="toc-como-impacto-de-acessibilidade-se-distribui-entre-grupos-sociais" class="nav-link" data-scroll-target="#como-impacto-de-acessibilidade-se-distribui-entre-grupos-sociais"> <span class="header-section-number">9.4</span> Como impacto de acessibilidade se distribui entre grupos sociais</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/index.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/9_cenarios_uso_solo.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Acessibilidade urbana e avaliação de impacto</h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Comparando a acessibilidade entre dois cenários de uso do solo</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Rafael H. M. Pereira, Daniel Herszenhut </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">August 9, 2022</p>
-    </div>
-  </div>
     
   </div>
   
 
 </header>
 
-
-<section id="apresentação" class="level1 unnumbered">
-<p><img src="images/cover.png" title="Acessibilidade urbana e avaliação de impacto" class="quarto-cover-image img-fluid"></p><h1 class="unnumbered">Apresentação</h1>
-<p>Este site/livro tem como objetivo equipar gestores públicos, analistas e pesquisadores de planejamento e transporte urbano com o conhecimento e as habilidades práticas necessárias para a realização de estudos e avaliações de impacto de acessibilidade urbana. Além de uma visão geral sobre conceitos e indicadores de acessibilidade, o curso ensina a analisar dados espaciais e de redes de transporte utilizando a linguagem de programação R, focando especialmente no cálculo e criação de visualizações de acessibilidade nas cidades brasileiras. O curso tem caráter prático “mão na masssa”, e se apoia em exemplos reproduzíveis e exercícios em R.</p>
-<p>O minicurso é elaborado pelo Instituto de Pesquisa Econômica Aplicada (Ipea) no âmbito da parceria entre Ipea e a Secretaria de Mobilidade e Desenvolvimento Regional e Urbano (SMDRU) do Ministério do Desenvolvimento Regional (MDR).</p>
-<div class="callout-note callout callout-style-simple">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Esse livro/site foi escrito e publicado com o sistema de publicação <a href="https://quarto.org">Quarto</a>. Todo o código utilizado no preparo do curso e na publicação do livro pode ser encontrado <a href="https://github.com/ipeaGIT/aop_curso/tree/main/aop_curso_pt">neste repositório</a>.</p>
-</div>
-</div>
-</div>
-<section id="licença-de-uso" class="level2">
-<h2 class="anchored" data-anchor-id="licença-de-uso">Licença de uso</h2>
-<p>Definir licença. <img align="right" src="images/ipea_logo.png" width="240"></p>
-
-
+<p><strong>Objetivo</strong>: mostrar como avaliar o impacto de acessibilidade de uma política que (a) constrói nova escola, ou (b) aumenta densidade de população em determinadas áreas da cidade</p>
+<section id="simulação-de-aumentando-de-densidade-populacional" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="simulação-de-aumentando-de-densidade-populacional"><span class="header-section-number">9.1</span> Simulação de aumentando de densidade populacional</h2>
 </section>
+<section id="calcular-acessibilidade-nos-cenários-antes-e-depois" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="calcular-acessibilidade-nos-cenários-antes-e-depois"><span class="header-section-number">9.2</span> Calcular acessibilidade nos cenários antes e depois</h2>
+</section>
+<section id="mapa-do-impacto-de-acessibilidade" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="mapa-do-impacto-de-acessibilidade"><span class="header-section-number">9.3</span> Mapa do impacto de acessibilidade</h2>
+</section>
+<section id="como-impacto-de-acessibilidade-se-distribui-entre-grupos-sociais" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="como-impacto-de-acessibilidade-se-distribui-entre-grupos-sociais"><span class="header-section-number">9.4</span> Como impacto de acessibilidade se distribui entre grupos sociais</h2>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -403,10 +383,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./8_cenarios_transporte.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Comparando a acessibilidade entre dois cenários de transporte</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./p1_intro.html" class="pagination-link">
-        <span class="nav-page-text">PARTE 1: Introdução a acessibilidade urbana</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./references.html" class="pagination-link">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

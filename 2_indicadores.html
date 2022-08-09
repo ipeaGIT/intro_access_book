@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Rafael H. M. Pereira, Daniel Herszenhut">
-<meta name="dcterms.date" content="2022-08-09">
 
-<title>Acessibilidade urbana e avaliação de impacto</title>
+<title>Acessibilidade urbana e avaliação de impacto - 2&nbsp; Indicadores de acessibilidade</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,6 +15,25 @@ span.underline{text-decoration: underline;}
 div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 
@@ -27,7 +44,8 @@ ul.task-list{list-style: none;}
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./p1_intro.html" rel="next">
+<link href="./p2_dados_aop.html" rel="next">
+<link href="./1_conceito.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -66,7 +84,7 @@ ul.task-list{list-style: none;}
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Acessibilidade urbana e avaliação de impacto</h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Indicadores de acessibilidade</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -115,7 +133,7 @@ ul.task-list{list-style: none;}
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">Apresentação</a>
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Apresentação</a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -133,7 +151,7 @@ ul.task-list{list-style: none;}
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2_indicadores.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Indicadores de acessibilidade</span></a>
+  <a href="./2_indicadores.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Indicadores de acessibilidade</span></a>
   </div>
 </li>
       </ul>
@@ -242,65 +260,66 @@ ul.task-list{list-style: none;}
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#apresentação" id="toc-apresentação" class="nav-link active" data-scroll-target="#apresentação">Apresentação</a>
+  <li><a href="#medidas-baseadas-em-lugares" id="toc-medidas-baseadas-em-lugares" class="nav-link active" data-scroll-target="#medidas-baseadas-em-lugares"> <span class="header-section-number">2.1</span> Medidas baseadas em lugares</a>
   <ul class="collapse">
-  <li><a href="#licença-de-uso" id="toc-licença-de-uso" class="nav-link" data-scroll-target="#licença-de-uso">Licença de uso</a></li>
+  <li><a href="#mínima-distância-ou-tempo-de-viagem" id="toc-mínima-distância-ou-tempo-de-viagem" class="nav-link" data-scroll-target="#mínima-distância-ou-tempo-de-viagem"> <span class="header-section-number">2.1.1</span> Mínima distância ou tempo de viagem</a></li>
+  <li><a href="#medida-cumulativa-de-oportunidades" id="toc-medida-cumulativa-de-oportunidades" class="nav-link" data-scroll-target="#medida-cumulativa-de-oportunidades"> <span class="header-section-number">2.1.2</span> Medida cumulativa de oportunidades</a></li>
+  <li><a href="#medidas-gravitacionais" id="toc-medidas-gravitacionais" class="nav-link" data-scroll-target="#medidas-gravitacionais"> <span class="header-section-number">2.1.3</span> Medidas gravitacionais</a></li>
+  <li><a href="#indicadores-com-competição-floating-catchment-area" id="toc-indicadores-com-competição-floating-catchment-area" class="nav-link" data-scroll-target="#indicadores-com-competição-floating-catchment-area"> <span class="header-section-number">2.1.4</span> Indicadores com competição: Floating catchment area</a></li>
   </ul></li>
+  <li><a href="#medidas-baseadas-em-pessoas" id="toc-medidas-baseadas-em-pessoas" class="nav-link" data-scroll-target="#medidas-baseadas-em-pessoas"> <span class="header-section-number">2.2</span> Medidas baseadas em pessoas</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/index.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/2_indicadores.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Acessibilidade urbana e avaliação de impacto</h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Indicadores de acessibilidade</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Rafael H. M. Pereira, Daniel Herszenhut </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">August 9, 2022</p>
-    </div>
-  </div>
     
   </div>
   
 
 </header>
 
-
-<section id="apresentação" class="level1 unnumbered">
-<p><img src="images/cover.png" title="Acessibilidade urbana e avaliação de impacto" class="quarto-cover-image img-fluid"></p><h1 class="unnumbered">Apresentação</h1>
-<p>Este site/livro tem como objetivo equipar gestores públicos, analistas e pesquisadores de planejamento e transporte urbano com o conhecimento e as habilidades práticas necessárias para a realização de estudos e avaliações de impacto de acessibilidade urbana. Além de uma visão geral sobre conceitos e indicadores de acessibilidade, o curso ensina a analisar dados espaciais e de redes de transporte utilizando a linguagem de programação R, focando especialmente no cálculo e criação de visualizações de acessibilidade nas cidades brasileiras. O curso tem caráter prático “mão na masssa”, e se apoia em exemplos reproduzíveis e exercícios em R.</p>
-<p>O minicurso é elaborado pelo Instituto de Pesquisa Econômica Aplicada (Ipea) no âmbito da parceria entre Ipea e a Secretaria de Mobilidade e Desenvolvimento Regional e Urbano (SMDRU) do Ministério do Desenvolvimento Regional (MDR).</p>
-<div class="callout-note callout callout-style-simple">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Esse livro/site foi escrito e publicado com o sistema de publicação <a href="https://quarto.org">Quarto</a>. Todo o código utilizado no preparo do curso e na publicação do livro pode ser encontrado <a href="https://github.com/ipeaGIT/aop_curso/tree/main/aop_curso_pt">neste repositório</a>.</p>
-</div>
-</div>
-</div>
-<section id="licença-de-uso" class="level2">
-<h2 class="anchored" data-anchor-id="licença-de-uso">Licença de uso</h2>
-<p>Definir licença. <img align="right" src="images/ipea_logo.png" width="240"></p>
-
-
+<p>Existem diversos indicadores para se medir acessibilidade. Esses indicadores podem ser divididos em dois grandes grupos: indicadores baseados em lugar e indicadores baeados em pessoas <span class="citation" data-cites="dijst2002opportunities">(<a href="references.html#ref-dijst2002opportunities" role="doc-biblioref">Dijst, Jong, and Eck 2002</a>)</span>.</p>
+<section id="medidas-baseadas-em-lugares" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="medidas-baseadas-em-lugares"><span class="header-section-number">2.1</span> Medidas baseadas em lugares</h2>
+<p>Medidas baseadas em lugar medem a acessibilidade enquanto uma característica de um determinado local. Por simplificação, esses indicadores assumem que todas as pessoas que se encontram em um mesmo local tem as mesmas condições de acesso às atividades distribuídas pela cidade. Esses indicadores são sensíveis a fatores relacionados a distribuição espacial de atividades e a configuração e desempenho da rede de transporte, mas não levam em consideração as características individuais das pessoas.</p>
+<p>Os indicadores desse tipo os mais amplamente utilizados por agências de transporte e pesquisadores (ref). Isso porque esses indicadores exigem menor quantidade de dados e são consideravelmente mais fáceis de serem calculados.Por este motivo, todo o material desse curso irá se focar nesses indicadores de acessibilidade basedos em lugares.</p>
+<p>Nós apresentamos abaixo uma rápida descrição de alguns desses indicadores.</p>
+<section id="mínima-distância-ou-tempo-de-viagem" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="mínima-distância-ou-tempo-de-viagem"><span class="header-section-number">2.1.1</span> Mínima distância ou tempo de viagem</h3>
 </section>
+<section id="medida-cumulativa-de-oportunidades" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="medida-cumulativa-de-oportunidades"><span class="header-section-number">2.1.2</span> Medida cumulativa de oportunidades</h3>
+</section>
+<section id="medidas-gravitacionais" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="medidas-gravitacionais"><span class="header-section-number">2.1.3</span> Medidas gravitacionais</h3>
+</section>
+<section id="indicadores-com-competição-floating-catchment-area" class="level3" data-number="2.1.4">
+<h3 data-number="2.1.4" class="anchored" data-anchor-id="indicadores-com-competição-floating-catchment-area"><span class="header-section-number">2.1.4</span> Indicadores com competição: Floating catchment area</h3>
+</section>
+</section>
+<section id="medidas-baseadas-em-pessoas" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="medidas-baseadas-em-pessoas"><span class="header-section-number">2.2</span> Medidas baseadas em pessoas</h2>
+<p>Indicadores de acessibilidade baseadas em pessoas são sensíveis não apenas à distribuição espacial de atividades e a configuração e desempenho da rede de transporte. Esses indicadores mas também levam em consideração como características pessoais (como sexo, idade, deficiência física etc) e até questões como atividades e compromissos pessoais podem afetar a facidade de uma pessoa acessar determinadas atividades. Esse grupo de medidas inclui, por exemplo, indicadores de acessibilidade baseados em utilidade ou medidas de espaço-tempo.</p>
+<p>Os indicadores desse tipo costumam demanda grande quantidades de dados, incluindo registros de diários de viagem, pesquisas domiciliares tipo origem-destino etc. Além disso, o cálculo desses indicadores é computacionalmente mais intensivo e complexo, o que faz com que esses indicadores sejam menos utilizados, embora mais sofisticados (ref).</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-dijst2002opportunities" class="csl-entry" role="doc-biblioentry">
+Dijst, Martin, Tom de Jong, and Jan Ritsema van Eck. 2002. <span>“Opportunities for Transport Mode Change: An Exploration of a Disaggregated Approach.”</span> <em>Environment and Planning B: Planning and Design</em> 29 (3): 413–30. <a href="https://doi.org/10.1068/b12811">https://doi.org/10.1068/b12811</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -403,10 +422,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./1_conceito.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">O que é acessibilidade?</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./p1_intro.html" class="pagination-link">
-        <span class="nav-page-text">PARTE 1: Introdução a acessibilidade urbana</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./p2_dados_aop.html" class="pagination-link">
+        <span class="nav-page-text">PARTE 2: Dados do Projeto AOP</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
