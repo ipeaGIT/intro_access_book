@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Acessibilidade urbana e avaliação de impacto",
     "section": "",
-    "text": "Este site/livro tem como objetivo equipar gestores públicos, analistas e pesquisadores de planejamento e transporte urbano com o conhecimento e as habilidades práticas necessárias para a realização de estudos e avaliações de impacto de acessibilidade urbana. Além de uma visão geral sobre conceitos e indicadores de acessibilidade, o curso ensina a analisar dados espaciais e de redes de transporte utilizando a linguagem de programação R, focando especialmente no cálculo e criação de visualizações de acessibilidade nas cidades brasileiras. O curso tem caráter prático “mão na masssa”, e se apoia em exemplos reproduzíveis e exercícios em R.\nO minicurso é elaborado pelo Instituto de Pesquisa Econômica Aplicada (Ipea) no âmbito da parceria entre Ipea e a Secretaria de Mobilidade e Desenvolvimento Regional e Urbano (SMDRU) do Ministério do Desenvolvimento Regional (MDR).\n\n\n\n\n\n\nEsse livro/site foi escrito e publicado com o sistema de publicação Quarto. Todo o código utilizado no preparo do curso e na publicação do livro pode ser encontrado neste repositório.\n\n\n\n\n\nDefinir licença."
+    "text": "Este livro tem como objetivo equipar gestores públicos, analistas e pesquisadores de planejamento e transporte urbano com o conhecimento e as habilidades práticas necessárias para a realização de estudos e avaliações de impacto de acessibilidade urbana. Além de uma visão geral sobre conceitos e indicadores de acessibilidade, o livro ensina a analisar dados espaciais e de redes de transporte utilizando a linguagem de programação R, focando especialmente no cálculo e criação de visualizações de acessibilidade nas cidades brasileiras. O livro tem caráter prático “mão na masssa”, e se apoia em exemplos reproduzíveis e exercícios em R.\nO livro é elaborado pelo Instituto de Pesquisa Econômica Aplicada (Ipea) no âmbito da parceria entre Ipea e a Secretaria de Mobilidade e Desenvolvimento Regional e Urbano (SMDRU) do Ministério do Desenvolvimento Regional (MDR).\n\n\n\n\n\n\nEste livro foi escrito e publicado com o sistema de publicação Quarto. Todo o código utilizado em seu preparo e na sua publicação do pode ser encontrado neste repositório.\n\n\n\n\n\nDefinir licença."
   },
   {
     "objectID": "p1_intro.html",
@@ -152,6 +152,13 @@
     "title": "\n5  Estimativas e mapas de acessibilidade\n",
     "section": "\n5.4 Desigualdades de acesso a oportunidades",
     "text": "5.4 Desigualdades de acesso a oportunidades\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "p3_dados_tp.html",
+    "href": "p3_dados_tp.html",
+    "title": "PARTE 3: Dados de transporte público (GTFS)",
+    "section": "",
+    "text": "Tentando satisfazer esses critérios, cada vez mais agências de transporte público, tomadores de decisão e pesquisadores têm buscado utilizar dados estruturados conforme especificações abertas e colaborativas - ou seja, cujo formato seja decidido por uma comunidade de atores interessados, incluindo partes que produzem esses dados (agências de transporte público, por exemplo) e que os consomem (pesquisadores, desenvolvedores de ferramentas de planejamento, etc.), e não apenas por um único ator que dita, muitas vezes de forma pouco transparente, os padrões a serem utilizados. Embora uma especificação aberta não necessariamente resolva o problema da qualidade e da confiabilidade dos dados por ela descritos, quando esta é amplamente utilizada aumenta-se a confiabilidade da especificação em si. Além do mais, cresce também a capacidade de inspeção dos dados e de sua interpretação, visto que múltiplos atores detêm o conhecimento necessário para tal.\nA especificação de dados aberta e colaborativa mais amplamente utilizada no contexto do planejamento de transporte público é o formato GTFS, sigla para General Transit Feed Specification (Especificação Geral de Redes de Transporte Público, em tradução livre). Seus usos abrangem tanto o planejamento quanto a operação de sistemas de transporte público. Nesta seção nós iremos aprender o que são os dados GTFS, como eles são estruturados e como utilizá-los, produzi-los e modificá-los."
   },
   {
     "objectID": "6_dados_gtfs.html",
