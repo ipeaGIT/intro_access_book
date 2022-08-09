@@ -1,0 +1,28 @@
+# PARTE 3: Dados de transporte público (GTFS)
+
+Dados de transporte público são peças fundamentais no planejamento de
+transportes em geral, e em análises de acessibilidade em particular. Para serem
+usados de forma que se tenha segurança no resultado das análises, esses dados
+precisam ser confiáveis e de simples inspeção e interpretação.
+
+Tentando satisfazer esses critérios, cada vez mais agências de transporte
+público, tomadores de decisão e pesquisadores têm buscado utilizar dados
+estruturados conforme especificações abertas e colaborativas - ou seja, cujo
+formato seja decidido por uma comunidade de atores interessados, incluindo
+partes que produzem esses dados (agências de transporte público, por exemplo) e
+que os consomem (pesquisadores, desenvolvedores de ferramentas de planejamento,
+etc.), e não apenas por um único ator que dita, muitas vezes de forma pouco
+transparente, os padrões a serem utilizados. Embora uma especificação aberta
+não necessariamente resolva o problema da qualidade e da confiabilidade dos
+dados por ela descritos, quando esta é amplamente utilizada aumenta-se a
+confiabilidade da especificação em si. Além do mais, cresce também a capacidade
+de inspeção dos dados e de sua interpretação, visto que múltiplos atores detêm
+o conhecimento necessário para tal.
+
+A especificação de dados aberta e colaborativa mais amplamente utilizada no
+contexto do planejamento de transporte público é o formato GTFS, sigla para
+*General Transit Feed Specification* (Especificação Geral de Redes de
+Transporte Público, em tradução livre). Seus usos abrangem tanto o planejamento
+quanto a operação de sistemas de transporte público. Nesta seção nós iremos
+aprender o que são os dados GTFS, como eles são estruturados e como
+utilizá-los, produzi-los e modificá-los.
