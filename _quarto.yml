@@ -18,25 +18,25 @@ book:
 
   chapters:
     - index.qmd
-    - part: 1_intro.qmd
+    - part: p1_intro.qmd
       chapters:
-        - 1a_conceito.qmd
-        - 1b_indicadores.qmd
-    - part: 2_dados_aop.qmd
+        - 1_conceito.qmd
+        - 2_indicadores.qmd
+    - part: p2_dados_aop.qmd
       chapters:
-        - 2a_populacao.qmd
-        - 2b_uso_solo.qmd
-        - 2c_acessibilidade.qmd
+        - 3_populacao.qmd
+        - 4_uso_solo.qmd
+        - 5_acessibilidade.qmd
     - part: "PARTE 3: Dados de transporte público GTFS"
       chapters:
-        - 3_dados_gtfs.qmd
+        - 6_dados_gtfs.qmd
     - part: "PARTE 4: Calculando acessibilidade"
       chapters:
-        - 4_calculando_acesso.qmd
+        - 7_calculando_acesso.qmd
     - part: "PARTE 5: Avaliação de impacto"
       chapters:
-        - 5a_cenarios_transporte.qmd
-        - 5b_cenarios_uso_solo.qmd
+        - 8_cenarios_transporte.qmd
+        - 9_cenarios_uso_solo.qmd
     - references.qmd
   appendices:
     - nocoes_r.qmd
@@ -44,7 +44,6 @@ book:
   page-navigation: true
   page-footer: 
     border: false
-    background: light
     left: "Copyright 2022, IPEA (Institute for Applied Economic Research)" 
     right: 
       - icon: github
