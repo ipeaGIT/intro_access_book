@@ -1,8 +1,24 @@
-# Dados de transporte público em formato GTFS
+# Dados GTFS
 
-**Objetivo**: apresentar uma visão geral sobre o que são dados GTFS; onde conseguir dados de GTFS no Brasil; mostrar como fazer algumas análises básicas e edições dos dados de GTFS usando o pacote gtfstools
+O formato GTFS, como comentado na introdução desta seção, é uma especificação
+aberta e colaborativa que visa descrever os principais componentes de uma rede
+de transporte público. Atualmente, dados GTFS podem ser divididos em duas
+grandes categorias:
 
-## O que é GTFS
+- GTFS Schedule, ou GTFS Static, que contém o cronograma estático de linhas de
+  transporte público e informações espaciais sobre o itinerário de cada linha e
+  suas paradas;
+- GTFS Realtime, que contém informações de localização de veículos em tempo
+  real e alertas de possíveis atrasos, de mudanças de percurso e de eventos que
+  possam interferir no cronograma planejado.
+
+Ao longo desta seção, nós focaremos no **GTFS Schedule**. Clique
+[aqui](https://gtfs.org/realtime/) para mais informações sobre o GTFS Realtime.
+
+Por ser uma especificação aberta e colaborativa, o formato GTFS tenta abarcar
+em sua definição um grande número de usos distintos que agências de transporte
+e desenvolvedores de ferramentas possam dar a ele. No entanto, agências e *softwares* podem ainda assim depender de informações que não constem na especificação oficial. Surgem, dessa forma, [extensões](https://gtfs.org/extensions/) da especificação. Algumas dessas extensões podem eventualmente se tornar parte da especificação oficial, caso isto seja aceito pela comunidade de usuários do GTFS, enquanto a especificação de outras é continuamente desenvolvida paralelamente à oficial. Nesta seção nós focaremos em um subconjunto de informações presentes no formato GTFS Schedule "puro", e, portanto, não cobriremos suas extensões.
+
 ## Estrutura dos arquivos de GTFS
 ## Onde encontrar GTFS de cidades brasileiras
 ## Como extrair análises básicas de um GTFS (pacote gtfstools)
