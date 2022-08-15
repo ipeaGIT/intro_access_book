@@ -5,19 +5,19 @@ aberta e colaborativa que visa descrever os principais componentes de uma rede
 de transporte público. Atualmente, dados GTFS podem ser divididos em duas
 grandes categorias:
 
-- GTFS Schedule, ou GTFS Static, que contém o cronograma estático de linhas de
-  transporte público e informações espaciais sobre o itinerário de cada linha e
-  suas paradas;
-- GTFS Realtime, que contém informações de localização de veículos em tempo
-  real e alertas de possíveis atrasos, de mudanças de percurso e de eventos que
-  possam interferir no cronograma planejado.
+-   GTFS Schedule, ou GTFS Static, que contém o cronograma estático de linhas de
+    transporte público e informações espaciais sobre o itinerário de cada linha
+    e suas paradas;
+-   GTFS Realtime, que contém informações de localização de veículos em tempo
+    real e alertas de possíveis atrasos, de mudanças de percurso e de eventos
+    que possam interferir no cronograma planejado.
 
 Ao longo desta seção, nós focaremos no **GTFS Schedule**. Clique
 [aqui](https://gtfs.org/realtime/) para mais informações sobre o GTFS Realtime.
 
-Por ser uma especificação aberta e colaborativa, o formato GTFS tenta abarcar
-em sua definição um grande número de usos distintos que agências de transporte
-e desenvolvedores de ferramentas possam dar a ele. No entanto, agências e
+Por ser uma especificação aberta e colaborativa, o formato GTFS tenta abarcar em
+sua definição um grande número de usos distintos que agências de transporte e
+desenvolvedores de ferramentas possam dar a ele. No entanto, agências e
 *softwares* podem ainda assim depender de informações que não constem na
 especificação oficial. Surgem, dessa forma,
 [extensões](https://gtfs.org/extensions/) da especificação. Algumas dessas
@@ -108,8 +108,13 @@ knitr::kable(head(gtfs$frequencies))
 ```
 
 ## Onde encontrar GTFS de cidades brasileiras
+
 ## Como extrair análises básicas de um GTFS (pacote gtfstools)
+
 ## Cálculo de velocidade das linhas
+
 ## Cálculo de frequência das linhas
+
 ## Mapear a rede de transporte público
+
 ## Como fazer edições na rede de transporte público (pacote gtfstools)
