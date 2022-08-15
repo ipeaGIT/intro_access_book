@@ -163,57 +163,57 @@
   {
     "objectID": "6_dados_gtfs.html",
     "href": "6_dados_gtfs.html",
-    "title": "6  Dados GTFS",
+    "title": "\n6  Dados GTFS\n",
     "section": "",
     "text": "O formato GTFS, como comentado na introdução desta seção, é uma especificação aberta e colaborativa que visa descrever os principais componentes de uma rede de transporte público. Atualmente, dados GTFS podem ser divididos em duas grandes categorias:\nAo longo desta seção, nós focaremos no GTFS Schedule. Clique aqui para mais informações sobre o GTFS Realtime.\nPor ser uma especificação aberta e colaborativa, o formato GTFS tenta abarcar em sua definição um grande número de usos distintos que agências de transporte e desenvolvedores de ferramentas possam dar a ele. No entanto, agências e softwares podem ainda assim depender de informações que não constem na especificação oficial. Surgem, dessa forma, extensões da especificação. Algumas dessas extensões podem eventualmente se tornar parte da especificação oficial, caso isto seja aceito pela comunidade de usuários do GTFS, enquanto a especificação de outras é continuamente desenvolvida paralelamente à oficial. Nesta seção nós focaremos em um subconjunto de informações presentes no formato GTFS Schedule “puro”, e, portanto, não cobriremos suas extensões."
   },
   {
     "objectID": "6_dados_gtfs.html#estrutura-dos-arquivos-de-gtfs",
     "href": "6_dados_gtfs.html#estrutura-dos-arquivos-de-gtfs",
-    "title": "6  Dados GTFS",
-    "section": "6.1 Estrutura dos arquivos de GTFS",
-    "text": "6.1 Estrutura dos arquivos de GTFS"
+    "title": "\n6  Dados GTFS\n",
+    "section": "\n6.1 Estrutura dos arquivos de GTFS",
+    "text": "6.1 Estrutura dos arquivos de GTFS\n\n\n\n\n6.1.1 agency.txt\nA Table 6.1 …\n\n\nagency_id,agency_name,agency_url,agency_timezone,agency_lang\n1,SPTRANS,http://www.sptrans.com.br/?versao=011019,America/Sao_Paulo,pt \n\n\n\n\n\n\nTable 6.1: Exemplo de tabela agency\n\n\n\n\n\n\n\n\n\nagency_id\nagency_name\nagency_url\nagency_timezone\nagency_lang\n\n\n1\nSPTRANS\nhttp://www.sptrans.com.br/?versao=011019\nAmerica/Sao_Paulo\npt\n\n\n\n\n\n\n\n\n\nTable 6.2: Exemplo de tabela stops\n\n\n\n\n\n\n\n\n\nstop_id\nstop_name\nstop_desc\nstop_lat\nstop_lon\n\n\n\n706325\nParada 14 Bis B/C\nViad. Dr. Plínio De Queiroz, 901\n-23.55593\n-46.65011\n\n\n810602\nR. Sta. Rita, 56\nRef.: R. Bresser / R. João Boemer\n-23.53337\n-46.61229\n\n\n910776\nAv. Do Estado, 5854\nRef.: Rua Dona Ana Néri\n-23.55896\n-46.61520\n\n\n1010092\nParada Caetano Pinto\nAv. Rangel Pestana, 1249 Ref.: Rua Caetano Pinto/rua Prof. Batista De Andrade\n-23.54615\n-46.62218\n\n\n1010093\nParada Piratininga\nAv. Rangel Pestana, 1479 Ref.: Rua Monsenhor Andrade\n-23.54509\n-46.62006\n\n\n1010099\nR. Xavantes, 612\nRef.: Rua Joli\n-23.53545\n-46.61368\n\n\n\n\n\n\n\n\n\n\nTable 6.3: Exemplo de tabela routes\n\n\n\n\n\n\n\n\n\n\n\nroute_id\nagency_id\nroute_short_name\nroute_long_name\nroute_type\nroute_color\nroute_text_color\n\n\n\nCPTM L07\n1\nCPTM L07\nJUNDIAI - LUZ\n2\nCA016B\n\n\n\nCPTM L08\n1\nCPTM L08\nAMADOR BUENO - JULIO PRESTES\n2\n97A098\n\n\n\nCPTM L09\n1\nCPTM L09\nGRAJAU - OSASCO\n2\n01A9A7\n\n\n\nCPTM L10\n1\nCPTM L10\nRIO GRANDE DA SERRA - BRÁS\n2\n049FC3\n\n\n\nCPTM L11\n1\nCPTM L11\nESTUDANTES - LUZ\n2\nF68368\n\n\n\nCPTM L12\n1\nCPTM L12\nCALMON VIANA - BRAS\n2\n133C8D\nFFFFFF\n\n\n\n\n\n\n\n\n\n\nTable 6.4: Exemplo de tabela trips\n\n\n\n\n\n\n\n\n\n\nroute_id\nservice_id\ntrip_id\ntrip_headsign\ndirection_id\nshape_id\n\n\n\nCPTM L07\nUSD\nCPTM L07-0\nJUNDIAI\n0\n17846\n\n\nCPTM L07\nUSD\nCPTM L07-1\nLUZ\n1\n17847\n\n\nCPTM L08\nUSD\nCPTM L08-0\nAMADOR BUENO\n0\n17848\n\n\nCPTM L08\nUSD\nCPTM L08-1\nJULIO PRESTES\n1\n17849\n\n\nCPTM L09\nUSD\nCPTM L09-0\nGRAJAU\n0\n17850\n\n\nCPTM L09\nUSD\nCPTM L09-1\nOSASCO\n1\n17851\n\n\n\n\n\n\n\n\n\n\nTable 6.5: Exemplo de tabela calendar\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nservice_id\nmonday\ntuesday\nwednesday\nthursday\nfriday\nsaturday\nsunday\nstart_date\nend_date\n\n\n\nUSD\n1\n1\n1\n1\n1\n1\n1\n2008-01-01\n2020-05-01\n\n\nU__\n1\n1\n1\n1\n1\n0\n0\n2008-01-01\n2020-05-01\n\n\nUS_\n1\n1\n1\n1\n1\n1\n0\n2008-01-01\n2020-05-01\n\n\n_SD\n0\n0\n0\n0\n0\n1\n1\n2008-01-01\n2020-05-01\n\n\n__D\n0\n0\n0\n0\n0\n0\n1\n2008-01-01\n2020-05-01\n\n\nS\n0\n0\n0\n0\n0\n1\n0\n2008-01-01\n2020-05-01\n\n\n\n\n\n\n\n\n\n\nTable 6.6: Exemplo de tabela shapes\n\n\n\n\n\n\n\n\n\nshape_id\nshape_pt_lat\nshape_pt_lon\nshape_pt_sequence\nshape_dist_traveled\n\n\n\n17846\n-23.53517\n-46.63535\n1\n13.56768\n\n\n17846\n-23.53513\n-46.63548\n2\n95.99193\n\n\n17846\n-23.53494\n-46.63626\n3\n185.05103\n\n\n17846\n-23.53473\n-46.63710\n4\n211.43776\n\n\n17846\n-23.53466\n-46.63735\n5\n356.31088\n\n\n17846\n-23.53416\n-46.63866\n6\n483.96616\n\n\n\n\n\n\n\n\n\n\nTable 6.7: Exemplo de tabela stop_times\n\n\ntrip_id\narrival_time\ndeparture_time\nstop_id\nstop_sequence\n\n\n\nCPTM L07-0\n04:00:00\n04:00:00\n18940\n1\n\n\nCPTM L07-0\n04:08:00\n04:08:00\n18920\n2\n\n\nCPTM L07-0\n04:16:00\n04:16:00\n18919\n3\n\n\nCPTM L07-0\n04:24:00\n04:24:00\n18917\n4\n\n\nCPTM L07-0\n04:32:00\n04:32:00\n18916\n5\n\n\nCPTM L07-0\n04:40:00\n04:40:00\n18965\n6\n\n\n\n\n\n\n\n\n\n\nTable 6.8: Exemplo de tabela frequencies\n\n\ntrip_id\nstart_time\nend_time\nheadway_secs\n\n\n\nCPTM L07-0\n04:00:00\n04:59:00\n720\n\n\nCPTM L07-0\n05:00:00\n05:59:00\n360\n\n\nCPTM L07-0\n06:00:00\n06:59:00\n360\n\n\nCPTM L07-0\n07:00:00\n07:59:00\n360\n\n\nCPTM L07-0\n08:00:00\n08:59:00\n360\n\n\nCPTM L07-0\n09:00:00\n09:59:00\n480"
   },
   {
     "objectID": "6_dados_gtfs.html#onde-encontrar-gtfs-de-cidades-brasileiras",
     "href": "6_dados_gtfs.html#onde-encontrar-gtfs-de-cidades-brasileiras",
-    "title": "6  Dados GTFS",
-    "section": "6.2 Onde encontrar GTFS de cidades brasileiras",
+    "title": "\n6  Dados GTFS\n",
+    "section": "\n6.2 Onde encontrar GTFS de cidades brasileiras",
     "text": "6.2 Onde encontrar GTFS de cidades brasileiras"
   },
   {
     "objectID": "6_dados_gtfs.html#como-extrair-análises-básicas-de-um-gtfs-pacote-gtfstools",
     "href": "6_dados_gtfs.html#como-extrair-análises-básicas-de-um-gtfs-pacote-gtfstools",
-    "title": "6  Dados GTFS",
-    "section": "6.3 Como extrair análises básicas de um GTFS (pacote gtfstools)",
+    "title": "\n6  Dados GTFS\n",
+    "section": "\n6.3 Como extrair análises básicas de um GTFS (pacote gtfstools)",
     "text": "6.3 Como extrair análises básicas de um GTFS (pacote gtfstools)"
   },
   {
     "objectID": "6_dados_gtfs.html#cálculo-de-velocidade-das-linhas",
     "href": "6_dados_gtfs.html#cálculo-de-velocidade-das-linhas",
-    "title": "6  Dados GTFS",
-    "section": "6.4 Cálculo de velocidade das linhas",
+    "title": "\n6  Dados GTFS\n",
+    "section": "\n6.4 Cálculo de velocidade das linhas",
     "text": "6.4 Cálculo de velocidade das linhas"
   },
   {
     "objectID": "6_dados_gtfs.html#cálculo-de-frequência-das-linhas",
     "href": "6_dados_gtfs.html#cálculo-de-frequência-das-linhas",
-    "title": "6  Dados GTFS",
-    "section": "6.5 Cálculo de frequência das linhas",
+    "title": "\n6  Dados GTFS\n",
+    "section": "\n6.5 Cálculo de frequência das linhas",
     "text": "6.5 Cálculo de frequência das linhas"
   },
   {
     "objectID": "6_dados_gtfs.html#mapear-a-rede-de-transporte-público",
     "href": "6_dados_gtfs.html#mapear-a-rede-de-transporte-público",
-    "title": "6  Dados GTFS",
-    "section": "6.6 Mapear a rede de transporte público",
+    "title": "\n6  Dados GTFS\n",
+    "section": "\n6.6 Mapear a rede de transporte público",
     "text": "6.6 Mapear a rede de transporte público"
   },
   {
     "objectID": "6_dados_gtfs.html#como-fazer-edições-na-rede-de-transporte-público-pacote-gtfstools",
     "href": "6_dados_gtfs.html#como-fazer-edições-na-rede-de-transporte-público-pacote-gtfstools",
-    "title": "6  Dados GTFS",
-    "section": "6.7 Como fazer edições na rede de transporte público (pacote gtfstools)",
+    "title": "\n6  Dados GTFS\n",
+    "section": "\n6.7 Como fazer edições na rede de transporte público (pacote gtfstools)",
     "text": "6.7 Como fazer edições na rede de transporte público (pacote gtfstools)"
   },
   {
