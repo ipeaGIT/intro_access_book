@@ -17,9 +17,96 @@ Ao longo desta seção, nós focaremos no **GTFS Schedule**. Clique
 
 Por ser uma especificação aberta e colaborativa, o formato GTFS tenta abarcar
 em sua definição um grande número de usos distintos que agências de transporte
-e desenvolvedores de ferramentas possam dar a ele. No entanto, agências e *softwares* podem ainda assim depender de informações que não constem na especificação oficial. Surgem, dessa forma, [extensões](https://gtfs.org/extensions/) da especificação. Algumas dessas extensões podem eventualmente se tornar parte da especificação oficial, caso isto seja aceito pela comunidade de usuários do GTFS, enquanto a especificação de outras é continuamente desenvolvida paralelamente à oficial. Nesta seção nós focaremos em um subconjunto de informações presentes no formato GTFS Schedule "puro", e, portanto, não cobriremos suas extensões.
+e desenvolvedores de ferramentas possam dar a ele. No entanto, agências e
+*softwares* podem ainda assim depender de informações que não constem na
+especificação oficial. Surgem, dessa forma,
+[extensões](https://gtfs.org/extensions/) da especificação. Algumas dessas
+extensões podem eventualmente se tornar parte da especificação oficial, caso
+isto seja aceito pela comunidade de usuários do GTFS, enquanto a especificação
+de outras é continuamente desenvolvida paralelamente à oficial. Nesta seção nós
+focaremos em um subconjunto de informações presentes no formato GTFS Schedule
+"puro", e, portanto, não cobriremos suas extensões.
 
 ## Estrutura dos arquivos de GTFS
+
+```{r}
+#| echo: false
+path <- system.file("extdata/spo_gtfs.zip", package = "gtfstools")
+
+gtfs <- gtfstools::read_gtfs(path)
+gtfs <- gtfstools::remove_duplicates(gtfs)
+```
+
+### agency.txt
+
+A @tbl-agency ...
+
+```{r}
+#| echo: false
+tmpfile <- tempfile("agency", fileext = ".txt")
+
+data.table::fwrite(gtfs$agency, tmpfile)
+
+content <- readLines(tmpfile)
+cat(paste(content, collapse = "\n"), "\n")
+```
+
+```{r}
+#| echo: false
+#| label: tbl-agency
+#| tbl-cap: Exemplo de tabela *agency*
+knitr::kable(gtfs$agency)
+```
+
+```{r}
+#| echo: false
+#| label: tbl-stops
+#| tbl-cap: Exemplo de tabela *stops*
+knitr::kable(head(gtfs$stops))
+```
+
+```{r}
+#| echo: false
+#| label: tbl-routes
+#| tbl-cap: Exemplo de tabela *routes*
+knitr::kable(head(gtfs$routes))
+```
+
+```{r}
+#| echo: false
+#| label: tbl-trips
+#| tbl-cap: Exemplo de tabela *trips*
+knitr::kable(head(gtfs$trips))
+```
+
+```{r}
+#| echo: false
+#| label: tbl-calendar
+#| tbl-cap: Exemplo de tabela *calendar*
+knitr::kable(gtfs$calendar)
+```
+
+```{r}
+#| echo: false
+#| label: tbl-shapes
+#| tbl-cap: Exemplo de tabela *shapes*
+knitr::kable(head(gtfs$shapes))
+```
+
+```{r}
+#| echo: false
+#| label: tbl-stop_times
+#| tbl-cap: Exemplo de tabela *stop_times*
+knitr::kable(head(gtfs$stop_times))
+```
+
+```{r}
+#| echo: false
+#| label: tbl-frequencies
+#| tbl-cap: Exemplo de tabela *frequencies*
+knitr::kable(head(gtfs$frequencies))
+```
+
 ## Onde encontrar GTFS de cidades brasileiras
 ## Como extrair análises básicas de um GTFS (pacote gtfstools)
 ## Cálculo de velocidade das linhas
