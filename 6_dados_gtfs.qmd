@@ -62,7 +62,7 @@ knitr::kable(gtfs$agency)
 #| echo: false
 #| label: tbl-stops
 #| tbl-cap: Exemplo de tabela *stops*
-knitr::kable(head(gtfs$stops))
+knitr::kable(head(gtfs$stops[stop_desc != ""]))
 ```
 
 ```{r}
