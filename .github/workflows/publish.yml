@@ -1,7 +1,7 @@
 on:
   workflow_dispatch:
   push:
-    branches: main
+    branches: [main, actiontest]
 
 name: Quarto Publish
 
@@ -18,6 +18,11 @@ jobs:
         uses: quarto-dev/quarto-actions/setup@v2
         with:
           tinytex: true
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get -y update
+          sudo apt-get -y install libudunits2-dev libgdal-dev libgeos-dev libproj-dev
 
       - name: Install R
         uses: r-lib/actions/setup-r@v2
