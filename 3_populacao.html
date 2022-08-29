@@ -2,16 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.38">
+<meta name="generator" content="quarto-1.1.149">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Acessibilidade urbana e avaliação de impacto - 3&nbsp; Dados de população e socioeconômicos</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -50,7 +55,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -63,7 +68,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -286,13 +291,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </ul>
 </div>
 </nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#download-dos-dados" id="toc-download-dos-dados" class="nav-link active" data-scroll-target="#download-dos-dados"> <span class="header-section-number">3.1</span> Download dos dados</a></li>
-  <li><a href="#mapa-de-popula%C3%A7%C3%A3o-total" id="toc-mapa-de-população-total" class="nav-link" data-scroll-target="#mapa-de-popula%C3%A7%C3%A3o-total"> <span class="header-section-number">3.2</span> Mapa de população total</a></li>
-  <li><a href="#mapa-de-popula%C3%A7%C3%A3o-por-renda" id="toc-mapa-de-população-por-renda" class="nav-link" data-scroll-target="#mapa-de-popula%C3%A7%C3%A3o-por-renda"> <span class="header-section-number">3.3</span> Mapa de população por renda</a></li>
-  <li><a href="#mapa-de-popula%C3%A7%C3%A3o-por-cor" id="toc-mapa-de-população-por-cor" class="nav-link" data-scroll-target="#mapa-de-popula%C3%A7%C3%A3o-por-cor"> <span class="header-section-number">3.4</span> Mapa de população por cor</a></li>
+<li><a href="#download-dos-dados" id="toc-download-dos-dados" class="nav-link active" data-scroll-target="#download-dos-dados"><span class="toc-section-number">3.1</span>  Download dos dados</a></li>
+  <li><a href="#mapa-de-popula%C3%A7%C3%A3o-total" id="toc-mapa-de-população-total" class="nav-link" data-scroll-target="#mapa-de-popula%C3%A7%C3%A3o-total"><span class="toc-section-number">3.2</span>  Mapa de população total</a></li>
+  <li><a href="#mapa-de-popula%C3%A7%C3%A3o-por-cor" id="toc-mapa-de-população-por-cor" class="nav-link" data-scroll-target="#mapa-de-popula%C3%A7%C3%A3o-por-cor"><span class="toc-section-number">3.3</span>  Mapa de população por cor</a></li>
+  <li><a href="#mapa-de-popula%C3%A7%C3%A3o-por-renda" id="toc-mapa-de-população-por-renda" class="nav-link" data-scroll-target="#mapa-de-popula%C3%A7%C3%A3o-por-renda"><span class="toc-section-number">3.4</span>  Mapa de população por renda</a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/3_populacao.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
@@ -313,16 +318,121 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header><section id="download-dos-dados" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="download-dos-dados">
 <span class="header-section-number">3.1</span> Download dos dados</h2>
+<p>Para fazer o download dos dados do projeto AOP usando o pacote aopdata, você pode usar a função <code><a href="https://rdrr.io/pkg/aopdata/man/read_population.html">read_population()</a></code>. Essa função baixa estimativas do Censo Demográfico de 2010 (REF) sobre a distribuição espacial da população e suas características em termos de renda domiciliar per capita, cor, sexo e idade. Nesta função, o parâmetro <code>city</code> permite você indicar os dados de qual cidade serão baixados.</p>
+<p>Os dados estão agregados espacialmente em uma grade de <a href="https://h3geo.org/">hexágonos H3</a> na resolução 9, na qual cada hexágono tem uma área de 0.11 km2, o que equivale a aproximadamente o tamanho de um quarteirão. Para baixar os dados com as informações espaciais de geometria da grade espacial, você deve usar o parâmetro <code>geometry = TRUE</code>.</p>
+<p>Neste exemplo, abaixo, nós mostramos como baixar os dados de população do Censo de 2010 para Fortaleza.</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># load libraries</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ipeaGIT/aopdata">aopdata</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># download aop population data</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/aopdata/man/read_population.html">read_population</a></span><span class="op">(</span>city<span class="op">=</span><span class="st">'Fortaleza'</span>,</span>
+<span>                      year<span class="op">=</span><span class="fl">2010</span>,</span>
+<span>                      geometry <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                      showProgress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Downloading population data for the year 2010</code></pre>
+</div>
+</div>
+<p>Os dados da tabela tem essa aparência aqui:</p>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 6 features and 22 fields
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: -38.50828 ymin: -3.889301 xmax: -38.4983 ymax: -3.878958
+Geodetic CRS:  WGS 84
+  year          id_hex abbrev_muni name_muni code_muni P001 P002 P003 P004 P005
+1 2010 89801040323ffff         for Fortaleza   2304400   30    8   21    0    1
+2 2010 89801040327ffff         for Fortaleza   2304400  318   77  233    0    8
+3 2010 8980104032bffff         for Fortaleza   2304400    0    0    0    0    0
+4 2010 8980104032fffff         for Fortaleza   2304400  103   24   77    0    2
+5 2010 89801040333ffff         for Fortaleza   2304400   43   11   31    0    1
+6 2010 89801040337ffff         for Fortaleza   2304400  348   86  252    0   10
+  P006 P007 P010 P011 P012 P013 P014 P015 P016  R001 R002 R003
+1   17   13    3    4    2    3    8    9    1 168.6    1    1
+2  168  150   30   50   26   38   80   82   12 202.6    1    1
+3    0    0    0    0    0    0    0    0    0    NA   NA   NA
+4   53   50   10   16    8   13   25   27    4 245.6    1    1
+5   22   21    4    7    3    5   11   12    1 187.3    1    1
+6  175  173   34   54   27   41   89   89   14 168.6    1    1
+                        geometry
+1 POLYGON ((-38.50232 -3.8858...
+2 POLYGON ((-38.50527 -3.8840...
+3 POLYGON ((-38.49932 -3.8841...
+4 POLYGON ((-38.50227 -3.8824...
+5 POLYGON ((-38.50237 -3.8893...
+6 POLYGON ((-38.50532 -3.8875...</code></pre>
+</div>
+</div>
+<p>De imediato, se nota que os nomes das variáveis (colunas) da base de dados estão organizadas com códigos, como P001, P002…R001, R002 etc. A <a href="https://ipeagit.github.io/aopdata/articles/data_dic_pt.html">descrição completa do dicionário de variáveis está disponível aqui</a>. A descrição de algumas dessas colunas nas próximas seções, onde mostramos como fazer a visualização de alguns desses dados em mapas e gráficos.</p>
 </section><section id="mapa-de-população-total" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="mapa-de-população-total">
 <span class="header-section-number">3.2</span> Mapa de população total</h2>
-</section><section id="mapa-de-população-por-renda" class="level2" data-number="3.3"><h2 data-number="3.3" class="anchored" data-anchor-id="mapa-de-população-por-renda">
-<span class="header-section-number">3.3</span> Mapa de população por renda</h2>
-</section><section id="mapa-de-população-por-cor" class="level2" data-number="3.4"><h2 data-number="3.4" class="anchored" data-anchor-id="mapa-de-população-por-cor">
-<span class="header-section-number">3.4</span> Mapa de população por cor</h2>
+<p>Antes de visualizar os dados do <code>aopdata</code>, nós precisamos carregar algumas bibliotecas de visualização e manipulação de dados.</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">1</span> <span class="op">+</span> <span class="fl">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># load libraries</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://scales.r-lib.org">scales</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Linking to GEOS 3.8.0, GDAL 3.0.4, PROJ 6.3.1; sf_use_s2() is TRUE</code></pre>
+</div>
+</div>
+<p>Com um comando, é possível visualizar a distribuição espacial da população de Fortaleza. A figura mostra um mapa coroplético onde a cor de cada célula da grade espacial é preenchida com base na quantidade total de pessoas residentes (variável <code>P001</code>).</p>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">P001</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="va">P001</span><span class="op">)</span>, color<span class="op">=</span><span class="cn">NA</span>, alpha<span class="op">=</span><span class="fl">.8</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_distiller</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"YlOrRd"</span>, direction <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title<span class="op">=</span><span class="st">'Population distribution'</span>, fill<span class="op">=</span><span class="st">"Total population"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="3_populacao_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section><section id="mapa-de-população-por-cor" class="level2" data-number="3.3"><h2 data-number="3.3" class="anchored" data-anchor-id="mapa-de-população-por-cor">
+<span class="header-section-number">3.3</span> Mapa de população por cor</h2>
+<p>Além da informação sobre a população total em cada célula, o dados do <code>aopdata</code> também permitem saber a quantidade de pessoas de diferentes cores (variáveis <code>P002</code> a <code>P005</code>), sexo (variáveis <code>P006</code> e <code>P007</code>) e faixas etárias (variáveis <code>P010</code> à <code>P016</code>). O código abaixo ilustra como é simples calcular a proporção de pessoas negras e brancas em cada hexágono e visualizar esses dados num mapa.</p>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pop_b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>          <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">P001</span> <span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="va">P003</span> <span class="op">/</span> <span class="va">P001</span><span class="op">)</span>, color<span class="op">=</span><span class="cn">NA</span>, alpha<span class="op">=</span><span class="fl">.8</span><span class="op">)</span> <span class="op">+</span></span>
+<span>          <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_distiller</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"RdPu"</span>, direction <span class="op">=</span> <span class="fl">1</span>, labels <span class="op">=</span> <span class="va">percent</span><span class="op">)</span><span class="op">+</span></span>
+<span>          <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title<span class="op">=</span><span class="st">'Proportion of black population'</span>, fill<span class="op">=</span><span class="st">"Black pop."</span><span class="op">)</span> <span class="op">+</span></span>
+<span>          <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">pop_w</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">P001</span> <span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="va">P002</span> <span class="op">/</span> <span class="va">P001</span><span class="op">)</span>, color<span class="op">=</span><span class="cn">NA</span>, alpha<span class="op">=</span><span class="fl">.8</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_distiller</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"YlGnBu"</span>, direction <span class="op">=</span> <span class="fl">1</span>, labels <span class="op">=</span> <span class="va">percent</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title<span class="op">=</span><span class="st">'Proportion of white population'</span>, fill<span class="op">=</span><span class="st">"White pop."</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># plot figure</span></span>
+<span><span class="va">pop_b</span> <span class="op">+</span> <span class="va">pop_w</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="3_populacao_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section><section id="mapa-de-população-por-renda" class="level2" data-number="3.4"><h2 data-number="3.4" class="anchored" data-anchor-id="mapa-de-população-por-renda">
+<span class="header-section-number">3.4</span> Mapa de população por renda</h2>
+<p>Os dados trazem também informação sobre a renda domiciliar per capita média de cada hexágono (<code>R001</code>), e sua classificação em termos de quintil (<code>R002</code>) e decil de renda (<code>R003</code>). Com esses dados, é possível visualizar com o comando abaixo a distribuição espacial dos diferentes níveis de renda da cidade.R</p>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">renda_c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">P001</span> <span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="va">R001</span><span class="op">)</span>, color<span class="op">=</span><span class="cn">NA</span>, alpha<span class="op">=</span><span class="fl">.8</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_distiller</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"YlOrRd"</span>, direction <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title<span class="op">=</span><span class="st">'Renda domiciliar per capita média'</span>, fill<span class="op">=</span><span class="st">"Renda em R$"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">renda_d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">df</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">R002</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">R003</span><span class="op">)</span><span class="op">)</span>, color<span class="op">=</span><span class="cn">NA</span>, alpha<span class="op">=</span><span class="fl">.8</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"RdBu"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title<span class="op">=</span><span class="st">'Decils de renda domiciliar per capita'</span>, fill<span class="op">=</span><span class="st">"Decil de renda"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># plot figure</span></span>
+<span><span class="va">renda_c</span> <span class="op">+</span> <span class="va">renda_d</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="3_populacao_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 
@@ -396,7 +506,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);

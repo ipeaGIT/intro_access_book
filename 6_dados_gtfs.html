@@ -2,16 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.38">
+<meta name="generator" content="quarto-1.1.149">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Acessibilidade urbana e avaliação de impacto - 6&nbsp; Dados GTFS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 </style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -223,21 +228,21 @@ ul.task-list{list-style: none;}
     </ul>
 </div>
 </nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
 <li>
-<a href="#estrutura-dos-arquivos-de-gtfs" id="toc-estrutura-dos-arquivos-de-gtfs" class="nav-link active" data-scroll-target="#estrutura-dos-arquivos-de-gtfs"> <span class="header-section-number">6.1</span> Estrutura dos arquivos de GTFS</a>
+<a href="#estrutura-dos-arquivos-de-gtfs" id="toc-estrutura-dos-arquivos-de-gtfs" class="nav-link active" data-scroll-target="#estrutura-dos-arquivos-de-gtfs"><span class="toc-section-number">6.1</span>  Estrutura dos arquivos de GTFS</a>
   <ul class="collapse">
-<li><a href="#agency.txt" id="toc-agency.txt" class="nav-link" data-scroll-target="#agency.txt"> <span class="header-section-number">6.1.1</span> agency.txt</a></li>
+<li><a href="#agency.txt" id="toc-agency.txt" class="nav-link" data-scroll-target="#agency.txt"><span class="toc-section-number">6.1.1</span>  agency.txt</a></li>
   </ul>
 </li>
-  <li><a href="#onde-encontrar-gtfs-de-cidades-brasileiras" id="toc-onde-encontrar-gtfs-de-cidades-brasileiras" class="nav-link" data-scroll-target="#onde-encontrar-gtfs-de-cidades-brasileiras"> <span class="header-section-number">6.2</span> Onde encontrar GTFS de cidades brasileiras</a></li>
-  <li><a href="#como-extrair-an%C3%A1lises-b%C3%A1sicas-de-um-gtfs-pacote-gtfstools" id="toc-como-extrair-análises-básicas-de-um-gtfs-pacote-gtfstools" class="nav-link" data-scroll-target="#como-extrair-an%C3%A1lises-b%C3%A1sicas-de-um-gtfs-pacote-gtfstools"> <span class="header-section-number">6.3</span> Como extrair análises básicas de um GTFS (pacote gtfstools)</a></li>
-  <li><a href="#c%C3%A1lculo-de-velocidade-das-linhas" id="toc-cálculo-de-velocidade-das-linhas" class="nav-link" data-scroll-target="#c%C3%A1lculo-de-velocidade-das-linhas"> <span class="header-section-number">6.4</span> Cálculo de velocidade das linhas</a></li>
-  <li><a href="#c%C3%A1lculo-de-frequ%C3%AAncia-das-linhas" id="toc-cálculo-de-frequência-das-linhas" class="nav-link" data-scroll-target="#c%C3%A1lculo-de-frequ%C3%AAncia-das-linhas"> <span class="header-section-number">6.5</span> Cálculo de frequência das linhas</a></li>
-  <li><a href="#mapear-a-rede-de-transporte-p%C3%BAblico" id="toc-mapear-a-rede-de-transporte-público" class="nav-link" data-scroll-target="#mapear-a-rede-de-transporte-p%C3%BAblico"> <span class="header-section-number">6.6</span> Mapear a rede de transporte público</a></li>
-  <li><a href="#como-fazer-edi%C3%A7%C3%B5es-na-rede-de-transporte-p%C3%BAblico-pacote-gtfstools" id="toc-como-fazer-edições-na-rede-de-transporte-público-pacote-gtfstools" class="nav-link" data-scroll-target="#como-fazer-edi%C3%A7%C3%B5es-na-rede-de-transporte-p%C3%BAblico-pacote-gtfstools"> <span class="header-section-number">6.7</span> Como fazer edições na rede de transporte público (pacote gtfstools)</a></li>
+  <li><a href="#onde-encontrar-gtfs-de-cidades-brasileiras" id="toc-onde-encontrar-gtfs-de-cidades-brasileiras" class="nav-link" data-scroll-target="#onde-encontrar-gtfs-de-cidades-brasileiras"><span class="toc-section-number">6.2</span>  Onde encontrar GTFS de cidades brasileiras</a></li>
+  <li><a href="#como-extrair-an%C3%A1lises-b%C3%A1sicas-de-um-gtfs-pacote-gtfstools" id="toc-como-extrair-análises-básicas-de-um-gtfs-pacote-gtfstools" class="nav-link" data-scroll-target="#como-extrair-an%C3%A1lises-b%C3%A1sicas-de-um-gtfs-pacote-gtfstools"><span class="toc-section-number">6.3</span>  Como extrair análises básicas de um GTFS (pacote gtfstools)</a></li>
+  <li><a href="#c%C3%A1lculo-de-velocidade-das-linhas" id="toc-cálculo-de-velocidade-das-linhas" class="nav-link" data-scroll-target="#c%C3%A1lculo-de-velocidade-das-linhas"><span class="toc-section-number">6.4</span>  Cálculo de velocidade das linhas</a></li>
+  <li><a href="#c%C3%A1lculo-de-frequ%C3%AAncia-das-linhas" id="toc-cálculo-de-frequência-das-linhas" class="nav-link" data-scroll-target="#c%C3%A1lculo-de-frequ%C3%AAncia-das-linhas"><span class="toc-section-number">6.5</span>  Cálculo de frequência das linhas</a></li>
+  <li><a href="#mapear-a-rede-de-transporte-p%C3%BAblico" id="toc-mapear-a-rede-de-transporte-público" class="nav-link" data-scroll-target="#mapear-a-rede-de-transporte-p%C3%BAblico"><span class="toc-section-number">6.6</span>  Mapear a rede de transporte público</a></li>
+  <li><a href="#como-fazer-edi%C3%A7%C3%B5es-na-rede-de-transporte-p%C3%BAblico-pacote-gtfstools" id="toc-como-fazer-edições-na-rede-de-transporte-público-pacote-gtfstools" class="nav-link" data-scroll-target="#como-fazer-edi%C3%A7%C3%B5es-na-rede-de-transporte-p%C3%BAblico-pacote-gtfstools"><span class="toc-section-number">6.7</span>  Como fazer edições na rede de transporte público (pacote gtfstools)</a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/6_dados_gtfs.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
@@ -281,7 +286,7 @@ ul.task-list{list-style: none;}
 <div class="cell-output-display">
 <div id="tbl-agency" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table 6.1: Exemplo de tabela <em>agency</em>
+<caption>Table&nbsp;6.1: Exemplo de tabela <em>agency</em>
 </caption>
 <colgroup>
 <col style="width: 10%">
@@ -312,7 +317,7 @@ ul.task-list{list-style: none;}
 <div class="cell-output-display">
 <div id="tbl-stops" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table 6.2: Exemplo de tabela <em>stops</em>
+<caption>Table&nbsp;6.2: Exemplo de tabela <em>stops</em>
 </caption>
 <colgroup>
 <col style="width: 6%">
@@ -380,7 +385,7 @@ ul.task-list{list-style: none;}
 <div class="cell-output-display">
 <div id="tbl-routes" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table 6.3: Exemplo de tabela <em>routes</em>
+<caption>Table&nbsp;6.3: Exemplo de tabela <em>routes</em>
 </caption>
 <colgroup>
 <col style="width: 8%">
@@ -464,7 +469,7 @@ ul.task-list{list-style: none;}
 <div class="cell-output-display">
 <div id="tbl-trips" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table 6.4: Exemplo de tabela <em>trips</em>
+<caption>Table&nbsp;6.4: Exemplo de tabela <em>trips</em>
 </caption>
 <colgroup>
 <col style="width: 13%">
@@ -540,7 +545,7 @@ ul.task-list{list-style: none;}
 <div class="cell-output-display">
 <div id="tbl-calendar" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table 6.5: Exemplo de tabela <em>calendar</em>
+<caption>Table&nbsp;6.5: Exemplo de tabela <em>calendar</em>
 </caption>
 <colgroup>
 <col style="width: 12%">
@@ -648,7 +653,7 @@ ul.task-list{list-style: none;}
 <div class="cell-output-display">
 <div id="tbl-shapes" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table 6.6: Exemplo de tabela <em>shapes</em>
+<caption>Table&nbsp;6.6: Exemplo de tabela <em>shapes</em>
 </caption>
 <colgroup>
 <col style="width: 12%">
@@ -716,7 +721,7 @@ ul.task-list{list-style: none;}
 <div class="cell-output-display">
 <div id="tbl-stop_times" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table 6.7: Exemplo de tabela <em>stop_times</em>
+<caption>Table&nbsp;6.7: Exemplo de tabela <em>stop_times</em>
 </caption>
 <thead><tr class="header">
 <th style="text-align: left;">trip_id</th>
@@ -777,7 +782,7 @@ ul.task-list{list-style: none;}
 <div class="cell-output-display">
 <div id="tbl-frequencies" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table 6.8: Exemplo de tabela <em>frequencies</em>
+<caption>Table&nbsp;6.8: Exemplo de tabela <em>frequencies</em>
 </caption>
 <thead><tr class="header">
 <th style="text-align: left;">trip_id</th>
@@ -910,7 +915,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);

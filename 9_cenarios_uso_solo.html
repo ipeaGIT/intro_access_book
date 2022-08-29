@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.38">
+<meta name="generator" content="quarto-1.1.149">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,10 +11,15 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 </style>
 
 
@@ -237,14 +242,14 @@ ul.task-list{list-style: none;}
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#simulação-de-aumentando-de-densidade-populacional" id="toc-simulação-de-aumentando-de-densidade-populacional" class="nav-link active" data-scroll-target="#simulação-de-aumentando-de-densidade-populacional"> <span class="header-section-number">9.1</span> Simulação de aumentando de densidade populacional</a></li>
-  <li><a href="#calcular-acessibilidade-nos-cenários-antes-e-depois" id="toc-calcular-acessibilidade-nos-cenários-antes-e-depois" class="nav-link" data-scroll-target="#calcular-acessibilidade-nos-cenários-antes-e-depois"> <span class="header-section-number">9.2</span> Calcular acessibilidade nos cenários antes e depois</a></li>
-  <li><a href="#mapa-do-impacto-de-acessibilidade" id="toc-mapa-do-impacto-de-acessibilidade" class="nav-link" data-scroll-target="#mapa-do-impacto-de-acessibilidade"> <span class="header-section-number">9.3</span> Mapa do impacto de acessibilidade</a></li>
-  <li><a href="#como-impacto-de-acessibilidade-se-distribui-entre-grupos-sociais" id="toc-como-impacto-de-acessibilidade-se-distribui-entre-grupos-sociais" class="nav-link" data-scroll-target="#como-impacto-de-acessibilidade-se-distribui-entre-grupos-sociais"> <span class="header-section-number">9.4</span> Como impacto de acessibilidade se distribui entre grupos sociais</a></li>
+  <li><a href="#simulação-de-aumentando-de-densidade-populacional" id="toc-simulação-de-aumentando-de-densidade-populacional" class="nav-link active" data-scroll-target="#simulação-de-aumentando-de-densidade-populacional"><span class="toc-section-number">9.1</span>  Simulação de aumentando de densidade populacional</a></li>
+  <li><a href="#calcular-acessibilidade-nos-cenários-antes-e-depois" id="toc-calcular-acessibilidade-nos-cenários-antes-e-depois" class="nav-link" data-scroll-target="#calcular-acessibilidade-nos-cenários-antes-e-depois"><span class="toc-section-number">9.2</span>  Calcular acessibilidade nos cenários antes e depois</a></li>
+  <li><a href="#mapa-do-impacto-de-acessibilidade" id="toc-mapa-do-impacto-de-acessibilidade" class="nav-link" data-scroll-target="#mapa-do-impacto-de-acessibilidade"><span class="toc-section-number">9.3</span>  Mapa do impacto de acessibilidade</a></li>
+  <li><a href="#como-impacto-de-acessibilidade-se-distribui-entre-grupos-sociais" id="toc-como-impacto-de-acessibilidade-se-distribui-entre-grupos-sociais" class="nav-link" data-scroll-target="#como-impacto-de-acessibilidade-se-distribui-entre-grupos-sociais"><span class="toc-section-number">9.4</span>  Como impacto de acessibilidade se distribui entre grupos sociais</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/9_cenarios_uso_solo.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
@@ -353,7 +358,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
