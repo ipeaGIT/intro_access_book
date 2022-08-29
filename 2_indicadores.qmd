@@ -5,23 +5,42 @@ Existem diversos indicadores para se medir acessibilidade. Esses indicadores pod
 
 ## Medidas baseadas em lugares
 
- Medidas baseadas em lugar medem a acessibilidade enquanto uma característica de um determinado local. Por simplificação, esses indicadores assumem que todas as pessoas que se encontram em um mesmo local tem as mesmas condições de acesso às atividades distribuídas pela cidade. Esses indicadores são sensíveis a fatores relacionados a distribuição espacial de atividades e a configuração e desempenho da rede de transporte, mas não levam em consideração as características individuais das pessoas. 
+Medidas baseadas em lugar medem a acessibilidade enquanto uma característica de um determinado local. Por simplificação, esses indicadores assumem que todas as pessoas que se encontram em um mesmo local têm as mesmas condições de acesso às atividades distribuídas pela cidade. Esses indicadores são sensíveis a fatores relacionados à distribuição espacial de atividades e à configuração e desempenho da rede de transporte, mas não levam em consideração as características individuais das pessoas.
 
-Os indicadores desse tipo os mais amplamente utilizados por agências de transporte e pesquisadores (ref). Isso porque esses indicadores exigem menor quantidade de dados e são consideravelmente mais fáceis de serem calculados.Por este motivo, todo o material desse curso irá se focar nesses indicadores de acessibilidade basedos em lugares. 
+Os indicadores desse tipo são os mais amplamente utilizados por agências de transporte e pesquisadores (REF). Isso porque esses indicadores exigem menor quantidade de dados e são consideravelmente mais fáceis de serem calculados. Por este motivo, todo o material deste curso irá focar nesses indicadores de acessibilidade baseados em lugares.
 
-Nós apresentamos abaixo uma rápida descrição de alguns desses indicadores.
+Nós apresentamos abaixo uma rápida descrição de alguns desses indicadores. Note que, em geral, esses indicadores são medidos com base num custo de transporte calculado em termos de tempo de viagem. No entanto, o termo “custo” é utilizado aqui de maneira mais ampla, e pode se referir a outros tipos de custo como a distância de viagem ou seu custo monetário.
 
-### Mínima distância ou tempo de viagem
+
+### Mínimo custo de viagem
+
+O Indicador de mínimo custo de viagem aponta qual o menor custo (por exemplo, em termos de tempo ou distância) de viagem até a oportunidade mais próxima. Ele permite captar, por exemplo, qual o tempo de viagem até o posto de saúde mais próximo. Esse é um dos indicadores mais simples de acessibilidade.
+
+**Vantagens e desvantagens:** Este indicador tem as vantagens de ser fácil de se calcular com pouca exigência de dados, além de ser fácil de comunicar. Duas desvantagens, no entanto, é que ele não capta a quantidade de oportunidades acessíveis e nem aspectos de competição na demanda pela oportunidade. Por exemplo, uma pessoa pode morar muito perto de um hospital, mas essa proximidade pode não garantir um bom acesso aos serviços de saúde se esse for o único hospital da região que fica sobrecarregado com demanda de pacientes.
+
+
 
 ### Medida cumulativa de oportunidades
 
+O indicador de oportunidades cumulativas mede a quantidade de oportunidades que podem ser alcançadas dentro de um tempo máximo de viagem. Por exemplo, este indicador pode ser utilizado para medir a quantidade de empregos acessíveis por transporte público em até 60 minutos, ou a quantidade de escolas acessíveis em até 30 minutos de viagem a pé.
+
+
+**Vantagens Vs desvantagens:**  A medida cumulativa de oportunidades também também é fácil de se calcular com pouca exigência de dados, além de ser fácil de comunicar. Isso contribui para tornar este indicador um dos mais utilizados por agências de transporte e de financiamento para analisar acessibilidade (REF). Entre as suas desvantagens, no entanto, cabe destacar que este indicador não considera a influência da competição sobre oportunidades. Este indicador também exige a escolha de um único ponto de corte como tempo máximo de viagem. Além disso, esta medida assume todas as oportunidades são igualmente desejáveis pelas pessoas, esteja ela a uma distância de 10 ou 40 minutos de viagem, desde que esses tempos de viagem estejam dentro do limite pré-estabelecido.
+
 ### Medidas gravitacionais
 
-### Indicadores com competição: Floating catchment area
+Indicadores gravitacionais de acessibilidade também medem a quantidade de oportunidades acessíveis a partir de uma determinado local, mas a contagem de cada oportunidade é gradualmente descontada à medida que o custo da viagem aumenta. Assim, oportunidades mais próximas têm uma importância maior, e o peso de cada oportunidade diminui quanto mais distante ela estiver. 
+
+O ritmo de decaimento desse peso em função do custo da viagem é conhecido como função de impedância. Essa função pode ser definida seguindo diversas diferentes fórmulas funcionais. Por exemplo, é possível considerar um decaimento linear. Neste caso, o peso da oportunidade diminui de maneira contínua ao longo do espaço até certo ponto a partir da onde o peso passa a ser zero. Outra opção é considerar uma função negativa exponencial, onde o peso cai muito rapidamente em distâncias mais próximas mas passa a ter uma queda mais suave como pesos igualmente baixos para oportunidades muito distantes.
+
+
+**Vantagens Vs desvantagens:**  A principal vantagem de indicadores gravitacionais é que o desconto do peso das oportunidades pela sua distância reflete de alguma maneira o comportamento de como as pessoas costumam se comportar. Serviços e atividades que gostaríamos de acessar costumam ser mais atrativas quanto mais próximas elas estiverem, tudo mais constante. Este indicador tem ao menos duas desvantagens. A primeira delas é que os valores de acessibilidade estimados são de difícil interpretação pela forma como a contagem de oportunidades é descontada pela distância. Além disso, para que o indicador seja mais representativo do comportamento de viagem das pessoas, a forma funcional e o ritmo de decaimento da função de impedância precisam ser calibradas. Por isso, este indicador também requer a disponibilidade de dados de padrões de viagens disponíveis, por exemplo, a parti de pesquisas de origem destino.
+
+| ### Indicadores com competição: Floating catchment area
 
 
 ## Medidas baseadas em pessoas
 
-Indicadores de acessibilidade baseadas em pessoas são sensíveis não apenas à distribuição espacial de atividades e a configuração e desempenho da rede de transporte. Esses indicadores mas também levam em consideração como características pessoais (como sexo, idade, deficiência física etc) e até questões como atividades e compromissos pessoais podem afetar a facidade de uma pessoa acessar determinadas atividades. Esse grupo de medidas inclui, por exemplo, indicadores de acessibilidade baseados em utilidade ou medidas de espaço-tempo.
+Indicadores de acessibilidade baseadoas em pessoas são sensíveis não apenas à distribuição espacial de atividades e a configuração e desempenho da rede de transporte. Esses indicadores mas também levam em consideração como características pessoais (como sexo, idade, deficiência física etc) e até questões como atividades e compromissos pessoais podem afetar a facidade de uma pessoa acessar determinadas atividades. Esse grupo de medidas inclui, por exemplo, indicadores de acessibilidade baseados em utilidade (e.g. REF) ou medidas de espaço-tempo (e.g. REF).
 
-Os indicadores desse tipo costumam demanda grande quantidades de dados, incluindo registros de diários de viagem, pesquisas domiciliares tipo origem-destino etc. Além disso, o cálculo desses indicadores é computacionalmente mais intensivo e complexo, o que faz com que esses indicadores sejam menos utilizados, embora mais sofisticados (ref).
+Embora esses tipos de indicadores sejam mais sofisticados, eles costumam demandar grandes quantidades de dados, incluindo registros de diários de viagem, pesquisas domiciliares tipo origem-destino etc. Por isso, o cálculo desses indicadores é computacionalmente mais intensivo e complexo, o que faz com que esses indicadores sejam menos utilizados (REF).
