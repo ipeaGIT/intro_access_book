@@ -2,18 +2,106 @@
 
 ## Download dos dados
 
+O pacote `aopdata` também permite baixar, para todas cidades incluídas no projeto, dados anuais da distribuição espacial de empregos (de baixa, média e alta escolaridade), estabelecimentos de saúde (de baixa, média e alta complexidade), escolas pública (ensino infantil, fundamental e médio), e de centros de referência de assistência social (Cras).
+
+Todos esses dados podem ser baixados com a função `read_landuse()`, que funciona da mesma maneira que a função `read_population()`. Você só precisa indicar nos parâmetros da função qual cidade (`city`) e ano (`year`) devem ser baixados, além de apontar se deseja que os dados contenham as informações espaciais dos hexágonos  (`geometry = TRUE`).
+
+Neste exemplo, abaixo, nós mostramos como baixar os dados de uso do solo no ano de 2019 para Belo Horizonte. Note que essa função automaticamente já baixa também os dados de população, automaticamente.
+
+
+```{r download aop land use data}
+library(aopdata)
+
+# download aop land use data
+df <- read_landuse(city='Belo Horizonte',
+                      year=2019,
+                      geometry = TRUE,
+                      showProgress = FALSE)
+
+head(df)
+```
+
+
+Antes de visualizar os dados de uso do solo nas próxima seções, vamos carregar algumas bibliotecas de visualização e manipulação de dados.
+
+```{r load libraries, warning=FALSE, message=FALSE}
+# load libraries
+library(patchwork)
+library(ggplot2)
+library(scales)
+library(sf)
+```
+
 
 ## Mapa de empregos
+
+Como nos exemplos anteriores, é possível visualizar o mapa de distribuição espacial de empregos usando o pacote `ggplot2` com o código abaixo:
+
+```{r plot jobs}
+ggplot() +
+  geom_sf(data=df, aes(fill=T001), color=NA, alpha=.9) +
+  scale_fill_distiller(palette = "YlGnBu", direction = 1) +
+  labs(title='Distribuição espacial de empregos', 
+       subtitle = 'Belo Horizonte', fill="N. de empregos") +
+  theme_void()
+
+```
 
 
 ## Mapa de escolas
 
+As variáveis que indicam o número de escolas em cada célula são aquelas que começam com a letra `E__`. Neste exemplo abaixo, nós mapeamos a distribuição espacial de todas escolas de Belo Horizonte a partir da variável `E001`.
 
-## Mapa de servi�os de sa�de
+```{r plot schools}
+ggplot() +
+  geom_sf(data=df, aes(fill=as.factor(E001)), color=NA, alpha=.9) +
+   scale_fill_brewer(palette = "YlGnBu", direction = 1) +
+  labs(title='Distribuição espacial de escolas', 
+       subtitle = 'Belo Horizonte', fill="N. de escolas") +
+  theme_void()
+
+```
+
+
+## Mapa de estabelecimentos de saúde
+
+Para analisar a distribuição espacial de estabelecimentos de saúde, você deve analisar as variáveis que começam com a letra `S___`. O código abaixo nos permite comparar a distribuição espacial de estabelecimentos de saúde de baixa complexidade (`S002`) e alta complexidade (`S004`).
+
+
+
+```{r plot health facilities}
+
+sau_b <- ggplot() +
+          geom_sf(data=df, aes(fill=as.factor(S002)), color=NA, alpha=.9) +
+          scale_fill_brewer(palette = "YlGnBu", direction = 1, limits=factor(0:4)) +
+          labs(title='Estabelecimentos de saúde', subtitle = 'Baixa complexidade',
+               fill="N. de estabelecimentos") +
+          theme_void()
+
+sau_a <- ggplot() +
+          geom_sf(data=df, aes(fill=as.factor(S004)), color=NA, alpha=.9) +
+          scale_fill_brewer(palette = "YlGnBu", direction = 1, limits=factor(0:4)) +
+          labs(title='Estabelecimentos de saúde', subtitle = 'Alta complexidade',
+               fill="N. de estabelecimentos") +
+          theme_void()
+
+# plot maps
+sau_b  + sau_a  + plot_layout(guides = 'collect')
+
+```
 
 
 ## Mapa de CRAS
 
-```{r}
-1 + 1
+Por fim, a distribuição espacial dos Centros de Referência de Assistência Social (Cras) pode ser analisada com a variável `C001`.
+
+```{r plot cras}
+ggplot() +
+  geom_sf(data=df, aes(fill=as.factor(C001)), color=NA, alpha=.9) +
+   scale_fill_brewer(palette = "YlGnBu", direction = 1) +
+  labs(title='Centros de Referência de Assistência Social (Cras)', 
+       subtitle = 'Belo Horizonte', fill="N. de Cras") +
+  theme_void()
+
 ```
+

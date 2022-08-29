@@ -11,7 +11,7 @@ Neste exemplo, abaixo, nós mostramos como baixar os dados de população do Cen
 
 
 
-```{r}
+```{r download aop pop data, message=FALSE, warning=FALSE}
 # load libraries
 library(aopdata)
 
@@ -28,7 +28,7 @@ Os dados da tabela tem essa aparência aqui:
 head(df)
 ```
 
-De imediato, se nota que os nomes das variáveis (colunas) da base de dados estão organizadas com códigos, como P001, P002…R001, R002 etc. A [descrição completa do dicionário de variáveis está disponível aqui](https://ipeagit.github.io/aopdata/articles/data_dic_pt.html). A descrição de algumas dessas colunas nas próximas seções, onde mostramos como fazer a visualização de alguns desses dados em mapas e gráficos.
+De imediato, se nota que os nomes das variáveis (colunas) da base de dados estão organizadas com códigos, como P001, P002…R001, R002 etc. A [descrição completa do dicionário de variáveis está disponível aqui](https://ipeagit.github.io/aopdata/articles/data_dic_pt.html). A descrição de algumas dessas colunas é apresentada nas próximas seções, onde mostramos como fazer a visualização de alguns desses dados em mapas e gráficos.
 
 
 
@@ -36,7 +36,7 @@ De imediato, se nota que os nomes das variáveis (colunas) da base de dados est�
 
 Antes de visualizar os dados do `aopdata`, nós precisamos carregar algumas bibliotecas de visualização e manipulação de dados.
 
-```{r}
+```{r load libraries, warning=FALSE, message=FALSE}
 # load libraries
 library(patchwork)
 library(ggplot2)
@@ -46,11 +46,12 @@ library(sf)
 
 Com um comando, é possível visualizar a distribuição espacial da população de Fortaleza. A figura mostra um mapa coroplético onde a cor de cada célula da grade espacial é preenchida com base na quantidade total de pessoas residentes (variável `P001`).
 
-```{r}
+```{r plot population}
 ggplot() +
   geom_sf(data=subset(df, P001>0), aes(fill=P001), color=NA, alpha=.8) +
   scale_fill_distiller(palette = "YlOrRd", direction = 1)+
-  labs(title='Population distribution', fill="Total population") +
+  labs(title='Population distribution', 
+       subtitle = 'Fortaleza', fill="Total population") +
   theme_void()
 
 ```
@@ -62,18 +63,16 @@ Além da informação sobre a população total em cada célula, o dados do `aop
 
 
 
-
-
-```{r}
+```{r plot race}
 pop_b <- ggplot() +
-          geom_sf(data=subset(df, P001 >0), aes(fill=P003 / P001), color=NA, alpha=.8) +
-          scale_fill_distiller(palette = "RdPu", direction = 1, labels = percent)+
-          labs(title='Proportion of black population', fill="Black pop.") +
-          theme_void()
+  geom_sf(data=subset(df, P001 >0), aes(fill=P003 / P001), color=NA, alpha=.8) +
+  scale_fill_distiller(palette = "RdPu", direction = 1, labels = percent, limits=c(0, 1))+
+  labs(title='Proportion of black population', fill="Black pop.") +
+  theme_void()
 
 pop_w <- ggplot() +
   geom_sf(data=subset(df, P001 >0), aes(fill=P002 / P001), color=NA, alpha=.8) +
-  scale_fill_distiller(palette = "YlGnBu", direction = 1, labels = percent)+
+  scale_fill_distiller(palette = "YlGnBu", direction = 1, labels = percent, limits=c(0, 1))+
   labs(title='Proportion of white population', fill="White pop.") +
   theme_void()
 
@@ -88,7 +87,7 @@ pop_b + pop_w
 Os dados trazem também informação sobre a renda domiciliar per capita média de cada hexágono (`R001`), e sua classificação em termos de quintil (`R002`) e decil de renda (`R003`). Com esses dados, é possível visualizar com o comando abaixo a distribuição espacial dos diferentes níveis de renda da cidade.R
 
 
-```{r}
+```{r plot income}
 renda_c <- ggplot() +
   geom_sf(data=subset(df, P001 >0), aes(fill=R001), color=NA, alpha=.8) +
   scale_fill_distiller(palette = "YlOrRd", direction = 1)+
@@ -99,7 +98,8 @@ renda_d <- ggplot() +
   geom_sf(data=subset(df, !is.na(R002)), aes(fill=factor(R003)), color=NA, alpha=.8) +
   scale_fill_brewer(palette = "RdBu") +
   labs(title='Decils de renda domiciliar per capita', fill="Decil de renda") +
-  theme_void()
+  theme_void() +
+  theme(legend.key.size = unit(.3, 'cm'))
 
 # plot figure
 renda_c + renda_d
