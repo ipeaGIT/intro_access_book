@@ -2,16 +2,34 @@
 
 ## Download dos dados
 
+Finalmente, o pacote `aopdata` também permite baixar, para todas cidades incluídas no projeto, estimativas anuais de acesso a empregos, serviços saúde, educação e assistência social por modo de transporte
 
-## Estimativas de acessibilidade
+Todos esses dados podem ser baixados com a função `read_access()`, que funciona da mesma maneira que as funções `read_population()` e `read_landuse()` apresentadas nos capítulos anteriores. Aqui, no entanto, além de indicar a cidade (`city`) e o ano (`year`) de referência para baixar os dados, você também precisa informar qual o modo de transporte (`mode`) será baixado e se você quer estimativas de acessibilidade no horário de pico (`peak = TRUE`) ou fora-pico (`peak = TRUE`). Esses dados representam a acessibilidade mediana do período de pico (entre 6h e 8h) e fora-pico (entre 14h e 16h).
 
-ilustrar alguns indicadores para pegar a logica do dicionario de dados
+Neste exemplo, abaixo, nós mostramos como baixar os dados de uso de acessibilidade urbana no ano de 2018 para Curitiba no período de pico. Note que essa função automaticamente já baixa também os dados de população e de uso do solo, automaticamente.
+
+```{r download aop accessibility data}
+library(aopdata)
+
+# download aop accessibility data
+df <- read_access(
+          city='Curitiba',
+          mode='public_transport',
+          year=2019,
+          peak = TRUE,
+          geometry = TRUE,
+          showProgress = FALSE
+          )
+
+head(df)
+```
+
 
 
 ## Geografia do acesso a oportunidades
 a
 
-### Mapa TMI a sa�de
+### Mapa TMI a sa?de
 
 a
 
