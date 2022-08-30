@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.149">
+<meta name="generator" content="quarto-1.1.163">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Acessibilidade urbana e avaliação de impacto - 2&nbsp; Indicadores de acessibilidade</title>
+<title>Introdução à acessibilidade urbana - 2&nbsp; Indicadores de acessibilidade</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -102,7 +102,7 @@ div.csl-indent {
   <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Acessibilidade urbana e avaliação de impacto</a> 
+      <a href="./">Introdução à acessibilidade urbana</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/ipeaGIT/aop_curso" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
     <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
@@ -267,10 +267,9 @@ div.csl-indent {
   <ul>
   <li><a href="#medidas-baseadas-em-lugares" id="toc-medidas-baseadas-em-lugares" class="nav-link active" data-scroll-target="#medidas-baseadas-em-lugares"><span class="toc-section-number">2.1</span>  Medidas baseadas em lugares</a>
   <ul class="collapse">
-  <li><a href="#mínima-distância-ou-tempo-de-viagem" id="toc-mínima-distância-ou-tempo-de-viagem" class="nav-link" data-scroll-target="#mínima-distância-ou-tempo-de-viagem"><span class="toc-section-number">2.1.1</span>  Mínima distância ou tempo de viagem</a></li>
+  <li><a href="#mínimo-custo-de-viagem" id="toc-mínimo-custo-de-viagem" class="nav-link" data-scroll-target="#mínimo-custo-de-viagem"><span class="toc-section-number">2.1.1</span>  Mínimo custo de viagem</a></li>
   <li><a href="#medida-cumulativa-de-oportunidades" id="toc-medida-cumulativa-de-oportunidades" class="nav-link" data-scroll-target="#medida-cumulativa-de-oportunidades"><span class="toc-section-number">2.1.2</span>  Medida cumulativa de oportunidades</a></li>
   <li><a href="#medidas-gravitacionais" id="toc-medidas-gravitacionais" class="nav-link" data-scroll-target="#medidas-gravitacionais"><span class="toc-section-number">2.1.3</span>  Medidas gravitacionais</a></li>
-  <li><a href="#indicadores-com-competição-floating-catchment-area" id="toc-indicadores-com-competição-floating-catchment-area" class="nav-link" data-scroll-target="#indicadores-com-competição-floating-catchment-area"><span class="toc-section-number">2.1.4</span>  Indicadores com competição: Floating catchment area</a></li>
   </ul></li>
   <li><a href="#medidas-baseadas-em-pessoas" id="toc-medidas-baseadas-em-pessoas" class="nav-link" data-scroll-target="#medidas-baseadas-em-pessoas"><span class="toc-section-number">2.2</span>  Medidas baseadas em pessoas</a></li>
   </ul>
@@ -298,31 +297,60 @@ div.csl-indent {
 <p>Existem diversos indicadores para se medir acessibilidade. Esses indicadores podem ser divididos em dois grandes grupos: indicadores baseados em lugar e indicadores baeados em pessoas <span class="citation" data-cites="dijst2002opportunities">(<a href="references.html#ref-dijst2002opportunities" role="doc-biblioref">Dijst, Jong, and Eck 2002</a>)</span>.</p>
 <section id="medidas-baseadas-em-lugares" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="medidas-baseadas-em-lugares"><span class="header-section-number">2.1</span> Medidas baseadas em lugares</h2>
-<p>Medidas baseadas em lugar medem a acessibilidade enquanto uma característica de um determinado local. Por simplificação, esses indicadores assumem que todas as pessoas que se encontram em um mesmo local tem as mesmas condições de acesso às atividades distribuídas pela cidade. Esses indicadores são sensíveis a fatores relacionados a distribuição espacial de atividades e a configuração e desempenho da rede de transporte, mas não levam em consideração as características individuais das pessoas.</p>
-<p>Os indicadores desse tipo os mais amplamente utilizados por agências de transporte e pesquisadores (ref). Isso porque esses indicadores exigem menor quantidade de dados e são consideravelmente mais fáceis de serem calculados.Por este motivo, todo o material desse curso irá se focar nesses indicadores de acessibilidade basedos em lugares.</p>
-<p>Nós apresentamos abaixo uma rápida descrição de alguns desses indicadores.</p>
-<section id="mínima-distância-ou-tempo-de-viagem" class="level3" data-number="2.1.1">
-<h3 data-number="2.1.1" class="anchored" data-anchor-id="mínima-distância-ou-tempo-de-viagem"><span class="header-section-number">2.1.1</span> Mínima distância ou tempo de viagem</h3>
+<p>Medidas baseadas em lugar medem a acessibilidade enquanto uma característica de um determinado local. Por simplificação, esses indicadores assumem que todas as pessoas que se encontram em um mesmo local têm as mesmas condições de acesso às atividades distribuídas pela cidade. Esses indicadores são sensíveis a fatores relacionados à distribuição espacial de atividades e à configuração e desempenho da rede de transporte, mas não levam em consideração as características individuais das pessoas.</p>
+<p>Os indicadores desse tipo são os mais amplamente utilizados por agências de transporte e pesquisadores <span class="citation" data-cites="papa2015accessibility">Boisjoly and El-Geneidy (<a href="references.html#ref-boisjoly2017get" role="doc-biblioref">2017</a>)</span>. Isso porque esses indicadores exigem menor quantidade de dados e são consideravelmente mais fáceis de serem calculados. Por este motivo, todo o material deste curso irá focar nesses indicadores de acessibilidade baseados em lugares.</p>
+<p>Nós apresentamos abaixo uma rápida descrição de alguns desses indicadores. Note que, em geral, esses indicadores são medidos com base num custo de transporte calculado em termos de tempo de viagem. No entanto, o termo “custo” é utilizado aqui de maneira mais ampla, e pode se referir a outros tipos de custo como a distância de viagem ou seu custo monetário.</p>
+<section id="mínimo-custo-de-viagem" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="mínimo-custo-de-viagem"><span class="header-section-number">2.1.1</span> Mínimo custo de viagem</h3>
+<p>O Indicador de mínimo custo de viagem aponta qual o menor custo (por exemplo, em termos de tempo ou distância) de viagem até a oportunidade mais próxima. Ele permite captar, por exemplo, qual o tempo de viagem até o posto de saúde mais próximo. Esse é um dos indicadores mais simples de acessibilidade.</p>
+<p><strong>Vantagens e desvantagens:</strong> Este indicador tem as vantagens de ser fácil de se calcular com pouca exigência de dados, além de ser fácil de comunicar. Duas desvantagens, no entanto, é que ele não capta a quantidade de oportunidades acessíveis e nem aspectos de competição na demanda pela oportunidade. Por exemplo, uma pessoa pode morar muito perto de um hospital, mas essa proximidade pode não garantir um bom acesso aos serviços de saúde se esse for o único hospital da região que fica sobrecarregado com demanda de pacientes.</p>
 </section>
 <section id="medida-cumulativa-de-oportunidades" class="level3" data-number="2.1.2">
 <h3 data-number="2.1.2" class="anchored" data-anchor-id="medida-cumulativa-de-oportunidades"><span class="header-section-number">2.1.2</span> Medida cumulativa de oportunidades</h3>
+<p>O indicador de oportunidades cumulativas mede a quantidade de oportunidades que podem ser alcançadas dentro de um tempo máximo de viagem. Por exemplo, este indicador pode ser utilizado para medir a quantidade de empregos acessíveis por transporte público em até 60 minutos, ou a quantidade de escolas acessíveis em até 30 minutos de viagem a pé.</p>
+<p><strong>Vantagens Vs desvantagens:</strong> A medida cumulativa de oportunidades também também é fácil de se calcular com pouca exigência de dados, além de ser fácil de comunicar. Isso contribui para tornar este indicador um dos mais utilizados por agências de transporte e de financiamento para analisar acessibilidade <span class="citation" data-cites="papa2015accessibility">Boisjoly and El-Geneidy (<a href="references.html#ref-boisjoly2017get" role="doc-biblioref">2017</a>)</span>. Entre as suas desvantagens, no entanto, cabe destacar que este indicador não considera a influência da competição sobre oportunidades. Este indicador também exige a escolha de um único ponto de corte como tempo máximo de viagem. Além disso, esta medida assume todas as oportunidades são igualmente desejáveis pelas pessoas, esteja ela a uma distância de 10 ou 40 minutos de viagem, desde que esses tempos de viagem estejam dentro do limite pré-estabelecido.</p>
 </section>
 <section id="medidas-gravitacionais" class="level3" data-number="2.1.3">
 <h3 data-number="2.1.3" class="anchored" data-anchor-id="medidas-gravitacionais"><span class="header-section-number">2.1.3</span> Medidas gravitacionais</h3>
-</section>
-<section id="indicadores-com-competição-floating-catchment-area" class="level3" data-number="2.1.4">
-<h3 data-number="2.1.4" class="anchored" data-anchor-id="indicadores-com-competição-floating-catchment-area"><span class="header-section-number">2.1.4</span> Indicadores com competição: Floating catchment area</h3>
+<p>Indicadores gravitacionais de acessibilidade também medem a quantidade de oportunidades acessíveis a partir de uma determinado local, mas a contagem de cada oportunidade é gradualmente descontada à medida que o custo da viagem aumenta. Assim, oportunidades mais próximas têm uma importância maior, e o peso de cada oportunidade diminui quanto mais distante ela estiver.</p>
+<p>O ritmo de decaimento desse peso em função do custo da viagem é conhecido como função de impedância. Essa função pode ser definida seguindo diversas diferentes fórmulas funcionais. Por exemplo, é possível considerar um decaimento linear. Neste caso, o peso da oportunidade diminui de maneira contínua ao longo do espaço até certo ponto a partir da onde o peso passa a ser zero. Outra opção é considerar uma função negativa exponencial, onde o peso cai muito rapidamente em distâncias mais próximas mas passa a ter uma queda mais suave como pesos igualmente baixos para oportunidades muito distantes.</p>
+<p><strong>Vantagens Vs desvantagens:</strong> A principal vantagem de indicadores gravitacionais é que o desconto do peso das oportunidades pela sua distância reflete de alguma maneira o comportamento de como as pessoas costumam se comportar. Serviços e atividades que gostaríamos de acessar costumam ser mais atrativas quanto mais próximas elas estiverem, tudo mais constante. Este indicador tem ao menos duas desvantagens. A primeira delas é que os valores de acessibilidade estimados são de difícil interpretação pela forma como a contagem de oportunidades é descontada pela distância. Além disso, para que o indicador seja mais representativo do comportamento de viagem das pessoas, a forma funcional e o ritmo de decaimento da função de impedância precisam ser calibradas. Por isso, este indicador também requer a disponibilidade de dados de padrões de viagens disponíveis, por exemplo, a parti de pesquisas de origem destino.</p>
+<p>### Indicadores com competição: Floating catchment area</p>
 </section>
 </section>
 <section id="medidas-baseadas-em-pessoas" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="medidas-baseadas-em-pessoas"><span class="header-section-number">2.2</span> Medidas baseadas em pessoas</h2>
-<p>Indicadores de acessibilidade baseadas em pessoas são sensíveis não apenas à distribuição espacial de atividades e a configuração e desempenho da rede de transporte. Esses indicadores mas também levam em consideração como características pessoais (como sexo, idade, deficiência física etc) e até questões como atividades e compromissos pessoais podem afetar a facidade de uma pessoa acessar determinadas atividades. Esse grupo de medidas inclui, por exemplo, indicadores de acessibilidade baseados em utilidade ou medidas de espaço-tempo.</p>
-<p>Os indicadores desse tipo costumam demanda grande quantidades de dados, incluindo registros de diários de viagem, pesquisas domiciliares tipo origem-destino etc. Além disso, o cálculo desses indicadores é computacionalmente mais intensivo e complexo, o que faz com que esses indicadores sejam menos utilizados, embora mais sofisticados (ref).</p>
+<p>Indicadores de acessibilidade baseadoas em pessoas são sensíveis não apenas à distribuição espacial de atividades e a configuração e desempenho da rede de transporte. Esses indicadores mas também levam em consideração como características pessoais (como sexo, idade, deficiência física etc) e até questões como atividades e compromissos pessoais podem afetar a facidade de uma pessoa acessar determinadas atividades. Esse grupo de medidas inclui, por exemplo, indicadores de acessibilidade baseados em utilidade <span class="citation" data-cites="nassir2016utility">Miller (<a href="references.html#ref-miller2018accessibility" role="doc-biblioref">2018</a>)</span>, indicadores baseados em atividades <span class="citation" data-cites="dong2006moving">(<a href="references.html#ref-dong2006moving" role="doc-biblioref">Dong et al. 2006</a>)</span> ou medidas de espaço-tempo <span class="citation" data-cites="kim2003space">Neutens et al. (<a href="references.html#ref-neutens2012analysis" role="doc-biblioref">2012</a>)</span>.</p>
+<p>Embora esses tipos de indicadores sejam mais sofisticados, eles costumam demandar grandes quantidades de dados, incluindo registros de diários de viagem, pesquisas domiciliares tipo origem-destino etc. Por isso, o cálculo desses indicadores é computacionalmente mais intensivo e complexo, o que faz com que esses indicadores sejam menos utilizados <span class="citation" data-cites="neutens2010equity">Miller (<a href="references.html#ref-miller2018accessibility" role="doc-biblioref">2018</a>)</span>.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-boisjoly2017get" class="csl-entry" role="doc-biblioentry">
+Boisjoly, Geneviève, and Ahmed M El-Geneidy. 2017. <span>“How to Get There? A Critical Assessment of Accessibility Objectives and Indicators in Metropolitan Transportation Plans.”</span> <em>Transport Policy</em> 55: 38–50.
+</div>
 <div id="ref-dijst2002opportunities" class="csl-entry" role="doc-biblioentry">
 Dijst, Martin, Tom de Jong, and Jan Ritsema van Eck. 2002. <span>“Opportunities for Transport Mode Change: An Exploration of a Disaggregated Approach.”</span> <em>Environment and Planning B: Planning and Design</em> 29 (3): 413–30. <a href="https://doi.org/10.1068/b12811">https://doi.org/10.1068/b12811</a>.
+</div>
+<div id="ref-dong2006moving" class="csl-entry" role="doc-biblioentry">
+Dong, Xiaojing, Moshe E Ben-Akiva, John L Bowman, and Joan L Walker. 2006. <span>“Moving from Trip-Based to Activity-Based Measures of Accessibility.”</span> <em>Transportation Research Part A: Policy and Practice</em> 40 (2): 163–80.
+</div>
+<div id="ref-kim2003space" class="csl-entry" role="doc-biblioentry">
+Kim, Hyun-Mi, and Mei-Po Kwan. 2003. <span>“Space-Time Accessibility Measures: A Geocomputational Algorithm with a Focus on the Feasible Opportunity Set and Possible Activity Duration.”</span> <em>Journal of Geographical Systems</em> 5 (1): 71–91.
+</div>
+<div id="ref-miller2018accessibility" class="csl-entry" role="doc-biblioentry">
+Miller, Eric J. 2018. <span>“Accessibility: Measurement and Application in Transportation Planning.”</span> <em>Transport Reviews</em> 38 (5): 551–55.
+</div>
+<div id="ref-nassir2016utility" class="csl-entry" role="doc-biblioentry">
+Nassir, Neema, Mark Hickman, Ali Malekzadeh, and Elnaz Irannezhad. 2016. <span>“A Utility-Based Travel Impedance Measure for Public Transit Network Accessibility.”</span> <em>Transportation Research Part A: Policy and Practice</em> 88: 26–39.
+</div>
+<div id="ref-neutens2012analysis" class="csl-entry" role="doc-biblioentry">
+Neutens, Tijs, Matthias Delafontaine, Darren M Scott, and Philippe De Maeyer. 2012. <span>“An Analysis of Day-to-Day Variations in Individual Space–Time Accessibility.”</span> <em>Journal of Transport Geography</em> 23: 81–91.
+</div>
+<div id="ref-neutens2010equity" class="csl-entry" role="doc-biblioentry">
+Neutens, Tijs, Tim Schwanen, Frank Witlox, and Philippe De Maeyer. 2010. <span>“Equity of Urban Service Delivery: A Comparison of Different Accessibility Measures.”</span> <em>Environment and Planning A</em> 42 (7): 1613–35.
+</div>
+<div id="ref-papa2015accessibility" class="csl-entry" role="doc-biblioentry">
+Papa, Enrica, and Luca Bertolini. 2015. <span>“Accessibility and Transit-Oriented Development in European Metropolitan Areas.”</span> <em>Journal of Transport Geography</em> 47: 70–83.
 </div>
 </div>
 </section>
