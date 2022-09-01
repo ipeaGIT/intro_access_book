@@ -83,6 +83,7 @@ A seguir, nós mostramos alguns exemplos de como visualizar essas estimativas de
 
 ## Mapa do tempo para acessar o hospital mais próximo
 
+
 Neste exemplo, nós vamos comparar o nível de acessibilidade até hospitais entre modos automóvel *vs* transporte público. Para analisar qual o tempo mínimo de viagem (`TMI`) até um hospital de alta complexidade (`SA`), nós precisamos analisar a variável `TMISA`. Com o código abaixo, nós carregamos as bibliotecas para manipulação e visualização de dados, e visualizamos a distribuição espacial dos valores de `TMISA` para ambos modos de transporte.
 
 Note, no entanto, que os tempos de viagem por transporte público costumam ser muito mais longos do que por automóvel. Então para facilitar a visualização dos resultados, nós truncamos  a distribuição dos valores de `TMISA` em 60 minutos ou mais.
@@ -94,6 +95,7 @@ library(data.table)
 library(patchwork)
 library(scales)
 library(sf)
+
 
 # truncate max values to 60 min.
 df$TMISA <- ifelse(df$TMISA > 60, 60, df$TMISA) 
@@ -112,13 +114,9 @@ ggplot() +
 ```
 
 
-
 ## Mapa da quantidade de oportunidades acessíveis
 
-
-
-
-
+Uma vez que os dados já foram baixados do `aopdata`, é muito simples comparar por exemplo a quantidade de oportunidades acessíveis em diferentes tempos de viagem. O código abaixo ilustra como visualizar num mapa o número de empregos acessíveis em até 60 e 90 minutos de viagem por transporte público, e como colocar esses mapas lado a lado para comparação.
 
 ```{r map CMATT60 vs CMATT90, warning=FALSE, message=FALSE}
 
@@ -147,9 +145,10 @@ fig60 + fig90 +
 ```
 
 
+
 ## Desigualdades de acesso a oportunidades
 
-Existem diversas maneiras de se analisar quão desiguais são as condições de acesso a oportunidades a partir dos dados do `aopdata`. Nós apresentamos nesta subseção dois exemplos de como esse tipo de análise pode ser realizada.
+Existem diversas maneiras de se analisar quão desiguais são as condições de acesso a oportunidades a partir dos dados do `aopdata`. Nós apresentamos nesta subseção três exemplos de como esse tipo de análise pode ser realizada.
 
 **Desigualdade no tempo de acesso `TMI`**
 
@@ -158,7 +157,7 @@ Neste primeiro exemplo, nós vamos comparar qual o tempo médio de viagem até o
 Antes disso, cabe observar que alguns hexágonos da cidade não conseguem acessar nenhum hospital em até 2h de viagem. Em casos como esse, o valor das variáveis `TMI__` é infinito (`Inf`). Para lidar com esses casos, nós substituímos abaixo todos valores `Inf` por 120 minutos.
 
 
-```{r inequality TMISA, warning=FALSE, message=FALSE}
+```{r inequality TMISA}
 # copy data to new data.table
 dt <- copy(df_pt)
 setDT(dt)
@@ -166,7 +165,7 @@ setDT(dt)
 # replace Inf travel time with 120
 dt[, TMISA := fifelse(TMISA==Inf, 120, TMISA)]
 
-# calculate avarage travel time by income
+# calculate average travel time by income
 temp <- dt[, .(average = weighted.mean(x=TMISA, w=P001, na.rm=T)), by=R003]
 temp <- na.omit(temp)
 
@@ -180,15 +179,16 @@ ggplot() +
 ```
 
 
-**Desigualdade do número de oportunidades acessíveis `CAMA`**
+
+
+
+**Desigualdade do número de oportunidades acessíveis `CMA`**
 
 Outra maneira de examinar a desigualdade de acesso a oportunidades é comparar a quantidade de oportunidades acessíveis por diferentes grupos populacionais considerando-se um mesmo modo de transporte e tempo de viagem. Nesse caso, nós analisamos o Indicador de acessibilidade cumulativo ativo (`CMA`).
 
 Neste exemplo abaixo, nós utilizamos *box plots* para comparar a quantidade de empregos acessíveis por transporte público em até 30 minutos de viagem.
 
-
-
-```{r fig inequality CMATT30, warning=FALSE, message=FALSE}
+```{r fig inequality CMATT30 by income}
 ggplot() +
   geom_boxplot(data=subset(dt, !is.na(R003)),
                aes(x = factor(R003), y=CMATT60/1000, color=factor(R003))) +
@@ -198,6 +198,44 @@ ggplot() +
        x='Decil de renda', y="N. de empregos acessíveis\n(em milhares)") +
   scale_x_discrete(labels=c("D1\n+Pobres", paste0('D', 2:9), "D10\n+Ricos")) +
   theme_minimal()
+
+```
+
+Também é possível comparar como diferentes modos de transporte possibilitam diferentes níveis de acessibilidade, e como essa diferença pode variar muito entre cidades. Nesse exemplo, abaixo, nós vamos comparar a quantidade de empregos acessíveis em até 30 minutos de viagem a pé e de carro. O primeiro passo é baixar os dados de acessibilidade a pé e por automóvel para todas as cidades.
+
+```{r download all access data, message=FALSE}
+# download data
+df_car <- read_access(city = 'all', mode='car', year = 2019, showProgress = FALSE)
+df_walk <- read_access(city = 'all', mode='walk', year = 2019, showProgress = FALSE)
+
+```
+
+O próximo passo é calcular para cada cidade a média ponderada do número de empregos acessíveis em até 30 minutos (`CMATT30`) para cada um dos modos de transporte. Com esses resultados prontos para cada modo, nós juntamos essas estimativas num único `data.frame` e calculamos a razão da acessibilidade por carro dividida pela acessibilidade à pé.
+
+```{r avg CMATT30 by mode}
+# calculate the average number of jobs accessible in 30min
+df_car2 <- df_car[, .(access_car = weighted.mean(CMATT30, w = P001, na.rm=T)), by=name_muni]
+df_walk2 <- df_walk[, .(access_walk = weighted.mean(CMATT30, w = P001, na.rm=T)), by=name_muni]
+
+# merge and get the ratio between walking and driving access
+df <- merge(df_car2, df_walk2)
+df[, ratio := access_car/access_walk]
+
+head(df)
+```
+
+Pronto, agora é só visualizar os resultados. Como esperado, a figura abaixo mostra que é possível acessar muito mais empregos em 30 min. por automóvel do que em caminhada. No entanto, essa diferença varia muito entre cidades. Em São Paulo e em Brasília, 30 minutos de viagem por automóvel permite acessar, em média, um número de empregos 54 vezes maior do que a pé. Em Belém, onde observamos a menor diferença, o automóvel ainda permite acessar 17 vezes mais empregos do que a caminhada.
+
+
+```{r fig inequality CMATT30 by mode}
+# plot
+ggplot(data=df, aes(x=ratio, y=reorder(name_muni, ratio))) +
+  geom_bar(stat='identity') +
+  geom_text(aes(x=ratio+6 , label=paste0(round(ratio),'x'))) +
+  labs(title = 'Diferença da quantidade de empregos acessiveis por\nautomóvel vs a pé',
+       subtitle= 'em até 30 min. de viagem',
+       y='', x='Número de vezes') +
+  theme_classic() 
 
 ```
 
