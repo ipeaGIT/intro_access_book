@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.163">
+<meta name="generator" content="quarto-1.1.168">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Introdução à acessibilidade urbana - 5&nbsp; Estimativas e mapas de acessibilidade</title>
 <style>
@@ -603,6 +603,7 @@ Geodetic CRS:  WGS 84
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://scales.r-lib.org">scales</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
 <span></span>
+<span></span>
 <span><span class="co"># truncate max values to 60 min.</span></span>
 <span><span class="va">df</span><span class="op">$</span><span class="va">TMISA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">TMISA</span> <span class="op">&gt;</span> <span class="fl">60</span>, <span class="fl">60</span>, <span class="va">df</span><span class="op">$</span><span class="va">TMISA</span><span class="op">)</span> </span>
 <span></span>
@@ -622,6 +623,7 @@ Geodetic CRS:  WGS 84
 </div>
 </section><section id="mapa-da-quantidade-de-oportunidades-acessíveis" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="mapa-da-quantidade-de-oportunidades-acessíveis">
 <span class="header-section-number">5.3</span> Mapa da quantidade de oportunidades acessíveis</h2>
+<p>Uma vez que os dados já foram baixados do <code>aopdata</code>, é muito simples comparar por exemplo a quantidade de oportunidades acessíveis em diferentes tempos de viagem. O código abaixo ilustra como visualizar num mapa o número de empregos acessíveis em até 60 e 90 minutos de viagem por transporte público, e como colocar esses mapas lado a lado para comparação.</p>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># limits for legend scale</span></span>
 <span><span class="va">value_limits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">df_pt</span><span class="op">$</span><span class="va">CMATT90</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">/</span><span class="fl">1000</span><span class="op">)</span></span>
@@ -650,7 +652,7 @@ Geodetic CRS:  WGS 84
 </div>
 </section><section id="desigualdades-de-acesso-a-oportunidades" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="desigualdades-de-acesso-a-oportunidades">
 <span class="header-section-number">5.4</span> Desigualdades de acesso a oportunidades</h2>
-<p>Existem diversas maneiras de se analisar quão desiguais são as condições de acesso a oportunidades a partir dos dados do <code>aopdata</code>. Nós apresentamos nesta subseção dois exemplos de como esse tipo de análise pode ser realizada.</p>
+<p>Existem diversas maneiras de se analisar quão desiguais são as condições de acesso a oportunidades a partir dos dados do <code>aopdata</code>. Nós apresentamos nesta subseção três exemplos de como esse tipo de análise pode ser realizada.</p>
 <p><strong>Desigualdade no tempo de acesso <code>TMI</code></strong></p>
 <p>Neste primeiro exemplo, nós vamos comparar qual o tempo médio de viagem até o hospital mais próximo para pessoas de diferentes níveis de renda. Para isso, o código abaixo calcula o valor médio de <code>TMISA</code> ponderada pela população em cada hexágono. Essa ponderação é necessária porque o número de hexágonos pode variar muito entre hexágonos.</p>
 <p>Antes disso, cabe observar que alguns hexágonos da cidade não conseguem acessar nenhum hospital em até 2h de viagem. Em casos como esse, o valor das variáveis <code>TMI__</code> é infinito (<code>Inf</code>). Para lidar com esses casos, nós substituímos abaixo todos valores <code>Inf</code> por 120 minutos.</p>
@@ -662,7 +664,7 @@ Geodetic CRS:  WGS 84
 <span><span class="co"># replace Inf travel time with 120</span></span>
 <span><span class="va">dt</span><span class="op">[</span>, <span class="va">TMISA</span> <span class="op">:=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html">fifelse</a></span><span class="op">(</span><span class="va">TMISA</span><span class="op">==</span><span class="cn">Inf</span>, <span class="fl">120</span>, <span class="va">TMISA</span><span class="op">)</span><span class="op">]</span></span>
 <span></span>
-<span><span class="co"># calculate avarage travel time by income</span></span>
+<span><span class="co"># calculate average travel time by income</span></span>
 <span><span class="va">temp</span> <span class="op">&lt;-</span> <span class="va">dt</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span>average <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">TMISA</span>, w<span class="op">=</span><span class="va">P001</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span>, by<span class="op">=</span><span class="va">R003</span><span class="op">]</span></span>
 <span><span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span></span>
 <span></span>
@@ -677,7 +679,7 @@ Geodetic CRS:  WGS 84
 <p><img src="5_acessibilidade_files/figure-html/inequality%20TMISA-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p><strong>Desigualdade do número de oportunidades acessíveis <code>CAMA</code></strong></p>
+<p><strong>Desigualdade do número de oportunidades acessíveis <code>CMA</code></strong></p>
 <p>Outra maneira de examinar a desigualdade de acesso a oportunidades é comparar a quantidade de oportunidades acessíveis por diferentes grupos populacionais considerando-se um mesmo modo de transporte e tempo de viagem. Nesse caso, nós analisamos o Indicador de acessibilidade cumulativo ativo (<code>CMA</code>).</p>
 <p>Neste exemplo abaixo, nós utilizamos <em>box plots</em> para comparar a quantidade de empregos acessíveis por transporte público em até 30 minutos de viagem.</p>
 <div class="cell">
@@ -691,7 +693,48 @@ Geodetic CRS:  WGS 84
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete</a></span><span class="op">(</span>labels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"D1\n+Pobres"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'D'</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span>, <span class="st">"D10\n+Ricos"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="5_acessibilidade_files/figure-html/fig%20inequality%20CMATT30-1.png" class="img-fluid" width="672"></p>
+<p><img src="5_acessibilidade_files/figure-html/fig%20inequality%20CMATT30%20by%20income-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Também é possível comparar como diferentes modos de transporte possibilitam diferentes níveis de acessibilidade, e como essa diferença pode variar muito entre cidades. Nesse exemplo, abaixo, nós vamos comparar a quantidade de empregos acessíveis em até 30 minutos de viagem a pé e de carro. O primeiro passo é baixar os dados de acessibilidade a pé e por automóvel para todas as cidades.</p>
+<div class="cell">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># download data</span></span>
+<span><span class="va">df_car</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/aopdata/man/read_access.html">read_access</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">'all'</span>, mode<span class="op">=</span><span class="st">'car'</span>, year <span class="op">=</span> <span class="fl">2019</span>, showProgress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">df_walk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/aopdata/man/read_access.html">read_access</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">'all'</span>, mode<span class="op">=</span><span class="st">'walk'</span>, year <span class="op">=</span> <span class="fl">2019</span>, showProgress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>O próximo passo é calcular para cada cidade a média ponderada do número de empregos acessíveis em até 30 minutos (<code>CMATT30</code>) para cada um dos modos de transporte. Com esses resultados prontos para cada modo, nós juntamos essas estimativas num único <code>data.frame</code> e calculamos a razão da acessibilidade por carro dividida pela acessibilidade à pé.</p>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># calculate the average number of jobs accessible in 30min</span></span>
+<span><span class="va">df_car2</span> <span class="op">&lt;-</span> <span class="va">df_car</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span>access_car <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span><span class="op">(</span><span class="va">CMATT30</span>, w <span class="op">=</span> <span class="va">P001</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span>, by<span class="op">=</span><span class="va">name_muni</span><span class="op">]</span></span>
+<span><span class="va">df_walk2</span> <span class="op">&lt;-</span> <span class="va">df_walk</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span>access_walk <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span><span class="op">(</span><span class="va">CMATT30</span>, w <span class="op">=</span> <span class="va">P001</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span>, by<span class="op">=</span><span class="va">name_muni</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co"># merge and get the ratio between walking and driving access</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span><span class="va">df_car2</span>, <span class="va">df_walk2</span><span class="op">)</span></span>
+<span><span class="va">df</span><span class="op">[</span>, <span class="va">ratio</span> <span class="op">:=</span> <span class="va">access_car</span><span class="op">/</span><span class="va">access_walk</span><span class="op">]</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        name_muni access_car access_walk    ratio
+1:          Belem   155270.4    9392.235 16.53179
+2: Belo Horizonte   529890.0   12464.233 42.51284
+3:       Brasilia   220575.9    4110.703 53.65892
+4:       Campinas   256333.1    6748.923 37.98133
+5:   Campo Grande   172680.5    4181.209 41.29919
+6:       Curitiba   494376.9   10471.135 47.21331</code></pre>
+</div>
+</div>
+<p>Pronto, agora é só visualizar os resultados. Como esperado, a figura abaixo mostra que é possível acessar muito mais empregos em 30 min. por automóvel do que em caminhada. No entanto, essa diferença varia muito entre cidades. Em São Paulo e em Brasília, 30 minutos de viagem por automóvel permite acessar, em média, um número de empregos 54 vezes maior do que a pé. Em Belém, onde observamos a menor diferença, o automóvel ainda permite acessar 17 vezes mais empregos do que a caminhada.</p>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># plot</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">ratio</span>, y<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">name_muni</span>, <span class="va">ratio</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat<span class="op">=</span><span class="st">'identity'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">ratio</span><span class="op">+</span><span class="fl">6</span> , label<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">ratio</span><span class="op">)</span>,<span class="st">'x'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">'Diferença da quantidade de empregos acessiveis por\nautomóvel vs a pé'</span>,</span>
+<span>       subtitle<span class="op">=</span> <span class="st">'em até 30 min. de viagem'</span>,</span>
+<span>       y<span class="op">=</span><span class="st">''</span>, x<span class="op">=</span><span class="st">'Número de vezes'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="5_acessibilidade_files/figure-html/fig%20inequality%20CMATT30%20by%20mode-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 
