@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.1.179">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Introdução à acessibilidade urbana - Appendix A — Noções básicas de R</title>
+<title>Introdução à acessibilidade urbana - Seção 5: Dados do Projeto AOP</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,69 +17,25 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
 }
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -89,7 +45,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="prev">
+<link href="./7_aopdata_populacao.html" rel="next">
+<link href="./6_cenarios_transporte.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -122,7 +79,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Appendix A — Noções básicas de R</h1>
+      <h1 class="quarto-secondary-nav-title">Seção 5: Dados do Projeto AOP</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -242,7 +199,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./p5_dados_aop.html" class="sidebar-item-text sidebar-link">Seção 5: Dados do Projeto AOP</a>
+            <a href="./p5_dados_aop.html" class="sidebar-item-text sidebar-link active">Seção 5: Dados do Projeto AOP</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -280,7 +237,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./nocoes_r.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Noções básicas de R</span></a>
+  <a href="./nocoes_r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Noções básicas de R</span></a>
   </div>
 </li>
       </ul>
@@ -291,16 +248,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#objetos" id="toc-objetos" class="nav-link active" data-scroll-target="#objetos"><span class="toc-section-number">A.1</span>  Objetos</a></li>
-  <li><a href="#data.frames" id="toc-data.frames" class="nav-link" data-scroll-target="#data.frames"><span class="toc-section-number">A.2</span>  Data.frames</a></li>
-  <li><a href="#como-importar-e-exportar-arquivos" id="toc-como-importar-e-exportar-arquivos" class="nav-link" data-scroll-target="#como-importar-e-exportar-arquivos"><span class="toc-section-number">A.3</span>  Como importar e exportar arquivos</a></li>
-  <li><a href="#fun%C3%A7%C3%B5es" id="toc-funções" class="nav-link" data-scroll-target="#fun%C3%A7%C3%B5es"><span class="toc-section-number">A.4</span>  Funções</a></li>
-  <li><a href="#visualiza%C3%A7%C3%A3o-de-dados-com-ggplot2" id="toc-visualização-de-dados-com-ggplot2" class="nav-link" data-scroll-target="#visualiza%C3%A7%C3%A3o-de-dados-com-ggplot2"><span class="toc-section-number">A.5</span>  Visualização de dados com <code>ggplot2</code></a></li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/nocoes_r.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
+<li>
+<a href="#quais-dados-est%C3%A3o-dispon%C3%ADveis" id="toc-quais-dados-estão-disponíveis" class="nav-link active" data-scroll-target="#quais-dados-est%C3%A3o-dispon%C3%ADveis">Quais dados estão disponíveis?</a>
+  <ul class="collapse">
+<li><a href="#escopo-dos-dados" id="toc-escopo-dos-dados" class="nav-link" data-scroll-target="#escopo-dos-dados">Escopo dos dados:</a></li>
+  <li><a href="#dados-de-popula%C3%A7%C3%A3o-empregos-e-servi%C3%A7os-p%C3%BAblicos" id="toc-dados-de-população-empregos-e-serviços-públicos" class="nav-link" data-scroll-target="#dados-de-popula%C3%A7%C3%A3o-empregos-e-servi%C3%A7os-p%C3%BAblicos">Dados de população, empregos e serviços públicos:</a></li>
+  <li><a href="#dados-de-acessibilidade-urbana" id="toc-dados-de-acessibilidade-urbana" class="nav-link" data-scroll-target="#dados-de-acessibilidade-urbana">Dados de acessibilidade urbana:</a></li>
+  </ul>
+</li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/p5_dados_aop.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title d-none d-lg-block">Appendix A — Noções básicas de R</h1>
+<h1 class="title"><span id="sec-dados_aop" class="quarto-section-identifier d-none d-lg-block">Seção 5: Dados do Projeto AOP</span></h1>
 </div>
 
 
@@ -312,46 +272,121 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
-</header><section id="objetos" class="level2" data-number="A.1"><h2 data-number="A.1" class="anchored" data-anchor-id="objetos">
-<span class="header-section-number">A.1</span> Objetos</h2>
+</header><p><strong>Objetivo</strong>: o objetivo deste capítulo é mostrar como fazer download e analisar os dados do projeto Acesso a Oportunidades (AOP) utilizando o pacote <code>aopdata</code> no <code>R</code>.</p>
+<p>Nos capítulos anteriores, você aprendeu como calcular indicadores de acessibilidade. No entanto, em muitos casos, você não tem disponibilidade para calcular esses indicadores por conta própria e tudo o que você quer é analisar os resultados que já foram calculados por alguém.</p>
+<p>O projeto <a href="https://www.ipea.gov.br/acessooportunidades/">Acesso a Oportunidades</a> disponibiliza uma extensa base de dados com informações sobre a distribuição da população, atividades econômicas e serviços públicos, além de várias estimativas de acessibilidade urbana para diversos tipos de atividades. Essas estimativas de acessibilidade estão disponíveis para diferentes modos de transporte (caminhada, bicicleta, transporte público e automóvel), horários do dia (pico e fora-pico), grupos populacionais (segundo níveis de renda, cor, sexo e idade) e para diferentes atividades (empregos, escolas, serviços de saúde e centros de assistência social). Nesta versão, a base de dados traz essas informações para diversos anos (2017, 2018 e 2019), se apoiando em uma única metodologia consistente para as 20 maiores cidades do Brasil. Veja abaixo <span class="quarto-unresolved-ref">?tbl-tabela_dados_pop</span> e <span class="quarto-unresolved-ref">?tbl-tabela_dados_access</span>.</p>
+<div class="callout-note callout callout-style-simple">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>As metodologias utilizadas para gerar estes dados são apresentadas em detalhe em publicações separadas, para os dados populacionais e de uso do solo <span class="citation" data-cites="pereira2022usosolo">(<a href="references.html#ref-pereira2022usosolo" role="doc-biblioref">Pereira, Herszenhut, et al. 2022</a>)</span>, e para os dados de acessibilidade <span class="citation" data-cites="pereira2022acessibilidade">(<a href="references.html#ref-pereira2022acessibilidade" role="doc-biblioref">Pereira, Braga, et al. 2022</a>)</span>.</p>
+</div>
+</div>
+</div>
+<section id="quais-dados-estão-disponíveis" class="level1"><h1>Quais dados estão disponíveis?</h1>
+<section id="escopo-dos-dados" class="level3"><h3 class="anchored" data-anchor-id="escopo-dos-dados">Escopo dos dados:</h3>
+<p><img src="./images/aop_data_scope.png" alt="logo" align="center" width="650"></p>
+<p><img src="./images/aop_geographical_scope.png" alt="logo" align="center" width="650"></p>
+</section><section id="dados-de-população-empregos-e-serviços-públicos" class="level2"><h2 class="anchored" data-anchor-id="dados-de-população-empregos-e-serviços-públicos">Dados de população, empregos e serviços públicos:</h2>
+<p>Tabela x. Informações socioeconômicas da população e de distribuição espacial de atividades, segundo ano e fonte de dados.</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
-<span></span>
-<span><span class="va">a</span> <span class="op">+</span> <span class="fl">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<div class="cell-output-display">
+
+<table>
+<thead><tr>
+<th style="text-align:left;"> Dado </th>
+   <th style="text-align:left;"> Informações </th>
+   <th style="text-align:left;"> Anos </th>
+   <th style="text-align:left;"> Fonte </th>
+  </tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;"> Características sociodemográficas da população </td>
+   <td style="text-align:left;"> Quantidade de pessoas segundo sexo, faixa de idade e cor/raça; média da renda domiciliar per capita </td>
+   <td style="text-align:left;"> 2010 </td>
+   <td style="text-align:left;"> Censo Demográfico, IBGE </td>
+  </tr>
+<tr>
+<td style="text-align:left;"> Estabelecimentos de educação </td>
+   <td style="text-align:left;"> Quantidade de creches e escolas públicas segundo nível infantil, fundamental e médio </td>
+   <td style="text-align:left;"> 2017, 2018, 2019 </td>
+   <td style="text-align:left;"> Censo Escolar, Inep </td>
+  </tr>
+<tr>
+<td style="text-align:left;"> Estabelecimentos de saúde </td>
+   <td style="text-align:left;"> Quantidade de estabelecimentos de saúde que atendem pelo SUS segundo nível de atenção baixa, média e alta complexidade </td>
+   <td style="text-align:left;"> 2017, 2018, 2019 </td>
+   <td style="text-align:left;"> Cadastro Nacional de Estabelecimentos de Saúde (CNES), Ministério da Saúde </td>
+  </tr>
+<tr>
+<td style="text-align:left;"> Atividade econômica </td>
+   <td style="text-align:left;"> Quantidade de empregos formais conforme o nível de instrução dos trabalhadores baixa, média e alta escolaridade </td>
+   <td style="text-align:left;"> 2017, 2018, 2019 </td>
+   <td style="text-align:left;"> Relação Anual de Informações Sociais (RAIS), Ministério da Economia </td>
+  </tr>
+<tr>
+<td style="text-align:left;"> Estabelecimentos de assistência social </td>
+   <td style="text-align:left;"> Quantidade de CRAS </td>
+   <td style="text-align:left;"> 2017, 2018, 2019 </td>
+   <td style="text-align:left;"> Censo SUAS, Ministério da Cidadania </td>
+  </tr>
+</tbody>
+</table>
 </div>
 </div>
+<p>: Informações socioeconômicas da população e de distribuição espacial de atividades, segundo ano e fonte de dados {#tbl-tabela_dados_pop}</p>
+</section><section id="dados-de-acessibilidade-urbana" class="level2"><h2 class="anchored" data-anchor-id="dados-de-acessibilidade-urbana">Dados de acessibilidade urbana:</h2>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">a</span> <span class="op">+</span> <span class="fl">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2 3 4</code></pre>
+<div class="cell-output-display">
+
+<table>
+<thead><tr>
+<th style="text-align:left;"> Indicador (código) </th>
+   <th style="text-align:left;"> Descrição </th>
+   <th style="text-align:left;"> Tipo de oportunidades </th>
+   <th style="text-align:left;"> Limites de tempo de viagem </th>
+  </tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;"> Tempo mínimo de viagem (TMI) </td>
+   <td style="text-align:left;"> Tempo até a oportunidade mais próxima </td>
+   <td style="text-align:left;"> Saúde, Educação, CRAS </td>
+   <td style="text-align:left;"> A pé (60 mins)
+Bicicleta, Transporte público e carro (120 mins) </td>
+  </tr>
+<tr>
+<td style="text-align:left;"> Medida cumulativa ativa (CMA) </td>
+   <td style="text-align:left;"> Quantidade de oportunidades acessíveis em um determinado limite de tempo </td>
+   <td style="text-align:left;"> Trabalho, Saúde, Educação, CRAS </td>
+   <td style="text-align:left;"> A pé e bicicleta (15, 30, 45 e 60 mins)
+Transporte público e carro (15, 30, 60, 90 e 120 mins) </td>
+  </tr>
+<tr>
+<td style="text-align:left;"> Medida cumulativa passiva (CMP) </td>
+   <td style="text-align:left;"> Quantidade de pessoas que acessam a localidade em um determinado limite de tempo </td>
+   <td style="text-align:left;"> - </td>
+   <td style="text-align:left;"> A pé e bicicleta (15, 30, 45 e 60 mins)
+Transporte público e carro (15, 30, 60, 90 e 120 mins) </td>
+  </tr>
+</tbody>
+</table>
 </div>
 </div>
-<p>Texto</p>
-<div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="st">"Bom dia"</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">a</span>, <span class="st">'Joana'</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Bom dia Joana"</code></pre>
-</div>
-</div>
-</section><section id="data.frames" class="level2" data-number="A.2"><h2 data-number="A.2" class="anchored" data-anchor-id="data.frames">
-<span class="header-section-number">A.2</span> Data.frames</h2>
-</section><section id="como-importar-e-exportar-arquivos" class="level2" data-number="A.3"><h2 data-number="A.3" class="anchored" data-anchor-id="como-importar-e-exportar-arquivos">
-<span class="header-section-number">A.3</span> Como importar e exportar arquivos</h2>
-</section><section id="funções" class="level2" data-number="A.4"><h2 data-number="A.4" class="anchored" data-anchor-id="funções">
-<span class="header-section-number">A.4</span> Funções</h2>
-</section><section id="visualização-de-dados-com-ggplot2" class="level2" data-number="A.5"><h2 data-number="A.5" class="anchored" data-anchor-id="visualização-de-dados-com-ggplot2">
-<span class="header-section-number">A.5</span> Visualização de dados com <code>ggplot2</code>
-</h2>
-<p>```</p>
+<p>: Indicadores de acessibilidade calculados no Projeto Acesso a Oportunidades {#tbl-tabela_dados_access}</p>
+<p>Todas as bases de dados criadas pelo Projeto Acesso a Oportunidades (AOP) estão disponíveis para download no <a href="https://www.ipea.gov.br/acessooportunidades/dados/">site do projeto</a> ou pelo pacote de R aopdata. Nas próximas seções são apresentados exemplos de como baixar e visualizar esses dados em <code>R</code>.</p>
 
 
-</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-pereira2022acessibilidade" class="csl-entry" role="doc-biblioentry">
+Pereira, Rafael H. M., Carlos Kauê Vieira Braga, Daniel Herszenhut, Marcus Saraiva, and Diego Bogado Tomasiello. 2022. <span>“Estimativas de Acessibilidade a Empregos e Serviços Públicos via Transporte Ativo, Público e Privado Nas 20 Maiores Cidades Do Brasil Em 2017, 2018, 2019.”</span> <em>Texto Para Discuss<span>ã</span>o IPEA</em> preliminar. <a href="https://www.ipea.gov.br/portal/publicacao-item?id=11058/11345">https://www.ipea.gov.br/portal/publicacao-item?id=11058/11345</a>.
+</div>
+<div id="ref-pereira2022usosolo" class="csl-entry" role="doc-biblioentry">
+Pereira, Rafael H. M., Daniel Herszenhut, Carlos Kauê Vieira Braga, João Bazzo, João Lucas Albuquerque Oliveira, João Parga, Marcus Saraiva, Luiz Pedro Silva, Diego Bogado Tomasiello, and Lucas Warwar. 2022. <span>“Distribuição Espacial de Características Sociodemográficas e Localização de Empregos e Serviços Públicos Das Vinte Maiores Cidades Do Brasil.”</span> <em>Texto Para Discuss<span>ã</span>o IPEA</em> 2772. <a href="http://repositorio.ipea.gov.br/handle/11058/11225">http://repositorio.ipea.gov.br/handle/11058/11225</a>.
+</div>
+</div>
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -449,11 +484,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./references.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Referências bibliográficas</span>
+      <a href="./6_cenarios_transporte.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Comparando a acessibilidade entre dois cenários de transporte</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./7_aopdata_populacao.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Dados de população e socioeconômicos</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introdução à acessibilidade urbana - Seção 1: Introdução a acessibilidade urbana</title>
+<title>Introdução à acessibilidade urbana - 5&nbsp; Manipulação e visualização de dados GTFS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./1_conceito.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./6_cenarios_transporte.html" rel="next">
+<link href="./4_dados_gtfs.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -70,7 +70,7 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Seção 1: Introdução a acessibilidade urbana</h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Manipulação e visualização de dados GTFS</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -124,7 +124,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./p1_intro.html" class="sidebar-item-text sidebar-link active">Seção 1: Introdução a acessibilidade urbana</a>
+            <a href="./p1_intro.html" class="sidebar-item-text sidebar-link">Seção 1: Introdução a acessibilidade urbana</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -172,7 +172,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./5_gtfstools.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Manipulação e visualização de dados GTFS</span></a>
+  <a href="./5_gtfstools.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Manipulação e visualização de dados GTFS</span></a>
   </div>
 </li>
       </ul>
@@ -242,14 +242,24 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#como-extrair-análises-básicas-de-um-gtfs-pacote-gtfstools" id="toc-como-extrair-análises-básicas-de-um-gtfs-pacote-gtfstools" class="nav-link active" data-scroll-target="#como-extrair-análises-básicas-de-um-gtfs-pacote-gtfstools"><span class="toc-section-number">5.1</span>  Como extrair análises básicas de um GTFS (pacote gtfstools)</a></li>
+  <li><a href="#cálculo-de-velocidade-das-linhas" id="toc-cálculo-de-velocidade-das-linhas" class="nav-link" data-scroll-target="#cálculo-de-velocidade-das-linhas"><span class="toc-section-number">5.2</span>  Cálculo de velocidade das linhas</a></li>
+  <li><a href="#cálculo-de-frequência-das-linhas" id="toc-cálculo-de-frequência-das-linhas" class="nav-link" data-scroll-target="#cálculo-de-frequência-das-linhas"><span class="toc-section-number">5.3</span>  Cálculo de frequência das linhas</a></li>
+  <li><a href="#mapear-a-rede-de-transporte-público" id="toc-mapear-a-rede-de-transporte-público" class="nav-link" data-scroll-target="#mapear-a-rede-de-transporte-público"><span class="toc-section-number">5.4</span>  Mapear a rede de transporte público</a></li>
+  <li><a href="#como-fazer-edições-na-rede-de-transporte-público-pacote-gtfstools" id="toc-como-fazer-edições-na-rede-de-transporte-público-pacote-gtfstools" class="nav-link" data-scroll-target="#como-fazer-edições-na-rede-de-transporte-público-pacote-gtfstools"><span class="toc-section-number">5.5</span>  Como fazer edições na rede de transporte público (pacote gtfstools)</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/5_gtfstools.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Seção 1: Introdução a acessibilidade urbana</h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Manipulação e visualização de dados GTFS</span></h1>
 </div>
 
 
@@ -263,12 +273,23 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<div style="text-align: justify">
-<p><strong>Objetivo</strong>: O objetivo desse capítulo é (1) apresentar o que o conceito de acessibilidade urbana e esclarecer a diferença entre acessibilidade e mobilidade; e (2) apresentar uma visão geral sobre os principais indicadores para se medir acessibilidade.</p>
-<p>Quantos postos de trabalho se consegue acessar em menos de uma hora usando transporte público? Quanto tempo se leva para chegar até o posto de saúde ou escola mais próxima da sua casa? As respostas a essas perguntas dependem diretamente das políticas de transporte e de desenvolvimento urbano das cidades. Essas políticas determinam em larga medida a acessibilidade urbana, isto é, a facilidade com a qual pessoas de diferentes grupos sociais e níveis de renda distintos conseguem acessar oportunidades de emprego, serviços de saúde e educação, atividades culturais e de lazer. Assim, essas políticas têm papel-chave para o funcionamento da economia, para a construção de cidades mais sustentáveis e inclusivas e para a redução da desigualdade de acesso a oportunidades</p>
-</div>
+<section id="como-extrair-análises-básicas-de-um-gtfs-pacote-gtfstools" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="como-extrair-análises-básicas-de-um-gtfs-pacote-gtfstools"><span class="header-section-number">5.1</span> Como extrair análises básicas de um GTFS (pacote gtfstools)</h2>
+</section>
+<section id="cálculo-de-velocidade-das-linhas" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="cálculo-de-velocidade-das-linhas"><span class="header-section-number">5.2</span> Cálculo de velocidade das linhas</h2>
+</section>
+<section id="cálculo-de-frequência-das-linhas" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="cálculo-de-frequência-das-linhas"><span class="header-section-number">5.3</span> Cálculo de frequência das linhas</h2>
+</section>
+<section id="mapear-a-rede-de-transporte-público" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="mapear-a-rede-de-transporte-público"><span class="header-section-number">5.4</span> Mapear a rede de transporte público</h2>
+</section>
+<section id="como-fazer-edições-na-rede-de-transporte-público-pacote-gtfstools" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="como-fazer-edições-na-rede-de-transporte-público-pacote-gtfstools"><span class="header-section-number">5.5</span> Como fazer edições na rede de transporte público (pacote gtfstools)</h2>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -371,13 +392,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Apresentação</span>
+      <a href="./4_dados_gtfs.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Dados GTFS</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./1_conceito.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">O que é acessibilidade?</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./6_cenarios_transporte.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Comparando a acessibilidade entre dois cenários de transporte</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

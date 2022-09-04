@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introdução à acessibilidade urbana - Seção 1: Introdução a acessibilidade urbana</title>
+<title>Introdução à acessibilidade urbana - 6&nbsp; Comparando a acessibilidade entre dois cenários de transporte</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./1_conceito.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./p5_dados_aop.html" rel="next">
+<link href="./5_gtfstools.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -70,7 +70,7 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Seção 1: Introdução a acessibilidade urbana</h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Comparando a acessibilidade entre dois cenários de transporte</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -124,7 +124,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./p1_intro.html" class="sidebar-item-text sidebar-link active">Seção 1: Introdução a acessibilidade urbana</a>
+            <a href="./p1_intro.html" class="sidebar-item-text sidebar-link">Seção 1: Introdução a acessibilidade urbana</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -187,7 +187,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./6_cenarios_transporte.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Comparando a acessibilidade entre dois cenários de transporte</span></a>
+  <a href="./6_cenarios_transporte.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Comparando a acessibilidade entre dois cenários de transporte</span></a>
   </div>
 </li>
       </ul>
@@ -242,14 +242,23 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#alterar-frequência-de-gtfs" id="toc-alterar-frequência-de-gtfs" class="nav-link active" data-scroll-target="#alterar-frequência-de-gtfs"><span class="toc-section-number">6.1</span>  7.1 Alterar frequência de GTFS</a></li>
+  <li><a href="#calcular-acessibilidade-nos-cenários-antes-e-depois" id="toc-calcular-acessibilidade-nos-cenários-antes-e-depois" class="nav-link" data-scroll-target="#calcular-acessibilidade-nos-cenários-antes-e-depois"><span class="toc-section-number">6.2</span>  7.2 Calcular acessibilidade nos cenários antes e depois</a></li>
+  <li><a href="#mapa-do-impacto-de-acessibilidade" id="toc-mapa-do-impacto-de-acessibilidade" class="nav-link" data-scroll-target="#mapa-do-impacto-de-acessibilidade"><span class="toc-section-number">6.3</span>  Mapa do impacto de acessibilidade</a></li>
+  <li><a href="#como-impacto-de-acessibilidade-se-distribui-entre-grupos-sociais" id="toc-como-impacto-de-acessibilidade-se-distribui-entre-grupos-sociais" class="nav-link" data-scroll-target="#como-impacto-de-acessibilidade-se-distribui-entre-grupos-sociais"><span class="toc-section-number">6.4</span>  Como impacto de acessibilidade se distribui entre grupos sociais</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/6_cenarios_transporte.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Seção 1: Introdução a acessibilidade urbana</h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Comparando a acessibilidade entre dois cenários de transporte</span></h1>
 </div>
 
 
@@ -263,12 +272,21 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<div style="text-align: justify">
-<p><strong>Objetivo</strong>: O objetivo desse capítulo é (1) apresentar o que o conceito de acessibilidade urbana e esclarecer a diferença entre acessibilidade e mobilidade; e (2) apresentar uma visão geral sobre os principais indicadores para se medir acessibilidade.</p>
-<p>Quantos postos de trabalho se consegue acessar em menos de uma hora usando transporte público? Quanto tempo se leva para chegar até o posto de saúde ou escola mais próxima da sua casa? As respostas a essas perguntas dependem diretamente das políticas de transporte e de desenvolvimento urbano das cidades. Essas políticas determinam em larga medida a acessibilidade urbana, isto é, a facilidade com a qual pessoas de diferentes grupos sociais e níveis de renda distintos conseguem acessar oportunidades de emprego, serviços de saúde e educação, atividades culturais e de lazer. Assim, essas políticas têm papel-chave para o funcionamento da economia, para a construção de cidades mais sustentáveis e inclusivas e para a redução da desigualdade de acesso a oportunidades</p>
-</div>
+<p><strong>Objetivo</strong>: mostrar como avaliar o impacto de acessibilidade de uma política que altera a frequência de algumas linhas de transporte</p>
+<section id="alterar-frequência-de-gtfs" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="alterar-frequência-de-gtfs"><span class="header-section-number">6.1</span> 7.1 Alterar frequência de GTFS</h2>
+</section>
+<section id="calcular-acessibilidade-nos-cenários-antes-e-depois" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="calcular-acessibilidade-nos-cenários-antes-e-depois"><span class="header-section-number">6.2</span> 7.2 Calcular acessibilidade nos cenários antes e depois</h2>
+</section>
+<section id="mapa-do-impacto-de-acessibilidade" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="mapa-do-impacto-de-acessibilidade"><span class="header-section-number">6.3</span> Mapa do impacto de acessibilidade</h2>
+</section>
+<section id="como-impacto-de-acessibilidade-se-distribui-entre-grupos-sociais" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="como-impacto-de-acessibilidade-se-distribui-entre-grupos-sociais"><span class="header-section-number">6.4</span> Como impacto de acessibilidade se distribui entre grupos sociais</h2>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -371,13 +389,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Apresentação</span>
+      <a href="./5_gtfstools.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Manipulação e visualização de dados GTFS</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./1_conceito.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">O que é acessibilidade?</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./p5_dados_aop.html" class="pagination-link">
+        <span class="nav-page-text">Seção 5: Dados do Projeto AOP</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
