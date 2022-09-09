@@ -1,7 +1,6 @@
 # Indicadores de acessibilidade
 
-Existem diversos indicadores para se medir acessibilidade. Esses indicadores podem ser divididos em dois grandes grupos: indicadores baseados em lugar e indicadores baeados em pessoas
-[@dijst2002opportunities].
+Existem diversos indicadores para se medir acessibilidade. Esses indicadores podem ser divididos em dois grandes grupos: indicadores baseados em lugar e indicadores baeados em pessoas [@dijst2002opportunities].
 
 ## Medidas baseadas em lugares
 
@@ -11,19 +10,19 @@ Os indicadores desse tipo são os mais amplamente utilizados por agências de tr
 
 Nós apresentamos abaixo uma rápida descrição de alguns desses indicadores. Note que, em geral, esses indicadores são medidos com base num custo de transporte calculado em termos de tempo de viagem. No entanto, o termo “custo” é utilizado aqui de maneira mais ampla, e pode se referir a outros tipos de custo como a distância de viagem ou seu custo monetário.
 
-
 ### Mínimo custo de viagem
 
 O Indicador de mínimo custo de viagem aponta qual o menor custo (por exemplo, em termos de tempo ou distância) de viagem até a oportunidade mais próxima. Ele permite captar, por exemplo, qual o tempo de viagem até o posto de saúde mais próximo. Esse é um dos indicadores mais simples de acessibilidade.
 
+$$A_i = min(C_{i1}, C_{i2}, \dots, C_{ij}, \dots, C_{i(n-1)}, C_{in}) \iff O_j \geq 1$$
+
+em que $A_i$ é a acessibilidade na origem $i$, $C_{ij}$ é o custo de deslocamento entre a origem $i$ e o destino $j$, $n$ é o número total de destinos na área de estudo e $O_j$ é o número de oportunidades no destino $j$.
+
 **Vantagens e desvantagens:** Este indicador tem as vantagens de ser fácil de se calcular com pouca exigência de dados, além de ser fácil de comunicar. Duas desvantagens, no entanto, é que ele não capta a quantidade de oportunidades acessíveis e nem aspectos de competição na demanda pela oportunidade. Por exemplo, uma pessoa pode morar muito perto de um hospital, mas essa proximidade pode não garantir um bom acesso aos serviços de saúde se esse for o único hospital da região que fica sobrecarregado com demanda de pacientes.
-
-
 
 ### Medida cumulativa de oportunidades
 
 O indicador de oportunidades cumulativas mede a quantidade de oportunidades que podem ser alcançadas dentro de um tempo máximo de viagem. Por exemplo, este indicador pode ser utilizado para medir a quantidade de empregos acessíveis por transporte público em até 60 minutos, ou a quantidade de escolas acessíveis em até 30 minutos de viagem a pé.
-
 
 **Vantagens Vs desvantagens:**  A medida cumulativa de oportunidades também também é fácil de se calcular com pouca exigência de dados, além de ser fácil de comunicar. Isso contribui para tornar este indicador um dos mais utilizados por agências de transporte e de financiamento para analisar acessibilidade [@papa2015accessibility, @boisjoly2017get]. Entre as suas desvantagens, no entanto, cabe destacar que este indicador não considera a influência da competição sobre oportunidades. Este indicador também exige a escolha de um único ponto de corte como tempo máximo de viagem. Além disso, esta medida assume todas as oportunidades são igualmente desejáveis pelas pessoas, esteja ela a uma distância de 10 ou 40 minutos de viagem, desde que esses tempos de viagem estejam dentro do limite pré-estabelecido.
 
