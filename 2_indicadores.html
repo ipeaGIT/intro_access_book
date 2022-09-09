@@ -80,6 +80,7 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -304,6 +305,8 @@ div.csl-indent {
 <section id="mínimo-custo-de-viagem" class="level3" data-number="2.1.1">
 <h3 data-number="2.1.1" class="anchored" data-anchor-id="mínimo-custo-de-viagem"><span class="header-section-number">2.1.1</span> Mínimo custo de viagem</h3>
 <p>O Indicador de mínimo custo de viagem aponta qual o menor custo (por exemplo, em termos de tempo ou distância) de viagem até a oportunidade mais próxima. Ele permite captar, por exemplo, qual o tempo de viagem até o posto de saúde mais próximo. Esse é um dos indicadores mais simples de acessibilidade.</p>
+<p><span class="math display">\[A_i = min(C_{i1}, C_{i2}, \dots, C_{ij}, \dots, C_{i(n-1)}, C_{in}) \iff O_j \geq 1\]</span></p>
+<p>em que <span class="math inline">\(A_i\)</span> é a acessibilidade na origem <span class="math inline">\(i\)</span>, <span class="math inline">\(C_{ij}\)</span> é o custo de deslocamento entre a origem <span class="math inline">\(i\)</span> e o destino <span class="math inline">\(j\)</span>, <span class="math inline">\(n\)</span> é o número total de destinos na área de estudo e <span class="math inline">\(O_j\)</span> é o número de oportunidades no destino <span class="math inline">\(j\)</span>.</p>
 <p><strong>Vantagens e desvantagens:</strong> Este indicador tem as vantagens de ser fácil de se calcular com pouca exigência de dados, além de ser fácil de comunicar. Duas desvantagens, no entanto, é que ele não capta a quantidade de oportunidades acessíveis e nem aspectos de competição na demanda pela oportunidade. Por exemplo, uma pessoa pode morar muito perto de um hospital, mas essa proximidade pode não garantir um bom acesso aos serviços de saúde se esse for o único hospital da região que fica sobrecarregado com demanda de pacientes.</p>
 </section>
 <section id="medida-cumulativa-de-oportunidades" class="level3" data-number="2.1.2">
