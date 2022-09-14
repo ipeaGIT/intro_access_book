@@ -14,15 +14,25 @@ Nós apresentamos abaixo uma rápida descrição de alguns desses indicadores. N
 
 O Indicador de mínimo custo de viagem aponta qual o menor custo (por exemplo, em termos de tempo ou distância) de viagem até a oportunidade mais próxima. Ele permite captar, por exemplo, qual o tempo de viagem até o posto de saúde mais próximo. Esse é um dos indicadores mais simples de acessibilidade.
 
-$$A_i = min(C_{i1}, C_{i2}, \dots, C_{ij}, \dots, C_{i(n-1)}, C_{in}) \iff O_j \geq 1$$
+$$A_i = min(c_{i1}, c_{i2}, \dots, c_{ij}, \dots, c_{i(n-1)}, c_{in}) \iff O_j \geq 1$$
 
-em que $A_i$ é a acessibilidade na origem $i$, $C_{ij}$ é o custo de deslocamento entre a origem $i$ e o destino $j$, $n$ é o número total de destinos na área de estudo e $O_j$ é o número de oportunidades no destino $j$.
+em que $A_i$ é a acessibilidade na origem $i$, $c_{ij}$ é o custo de deslocamento entre a origem $i$ e o destino $j$, $n$ é o número total de destinos na área de estudo e $O_j$ é o número de oportunidades no destino $j$.
 
 **Vantagens e desvantagens:** Este indicador tem as vantagens de ser fácil de se calcular com pouca exigência de dados, além de ser fácil de comunicar. Duas desvantagens, no entanto, é que ele não capta a quantidade de oportunidades acessíveis e nem aspectos de competição na demanda pela oportunidade. Por exemplo, uma pessoa pode morar muito perto de um hospital, mas essa proximidade pode não garantir um bom acesso aos serviços de saúde se esse for o único hospital da região que fica sobrecarregado com demanda de pacientes.
 
 ### Medida cumulativa de oportunidades
 
 O indicador de oportunidades cumulativas mede a quantidade de oportunidades que podem ser alcançadas dentro de um tempo máximo de viagem. Por exemplo, este indicador pode ser utilizado para medir a quantidade de empregos acessíveis por transporte público em até 60 minutos, ou a quantidade de escolas acessíveis em até 30 minutos de viagem a pé.
+
+$$A_i = \sum_{j=1}^{n}{O_j \times f(c_{ij})}$$
+
+$$f(c_{ij}) =
+  \begin{cases}
+    1 & \text{se } c_{ij} \leq C\\
+    0 & \text{caso contrário}
+  \end{cases}$$
+
+em que $A_i$ é a acessibilidade na origem $i$, $O_j$ é o número de oportunidades no destino $j$, $n$ é o número total de destinos na área de estudo, $f(c_{ij})$ é um função binária que assume os valores 0 ou 1, a depender do custo de deslocamento $c_{ij}$ entre a origem $i$ e o destino $j$, e $C$ é o limite de custo de deslocamento estabelecido.
 
 **Vantagens Vs desvantagens:**  A medida cumulativa de oportunidades também também é fácil de se calcular com pouca exigência de dados, além de ser fácil de comunicar. Isso contribui para tornar este indicador um dos mais utilizados por agências de transporte e de financiamento para analisar acessibilidade [@papa2015accessibility, @boisjoly2017get]. Entre as suas desvantagens, no entanto, cabe destacar que este indicador não considera a influência da competição sobre oportunidades. Este indicador também exige a escolha de um único ponto de corte como tempo máximo de viagem. Além disso, esta medida assume todas as oportunidades são igualmente desejáveis pelas pessoas, esteja ela a uma distância de 10 ou 40 minutos de viagem, desde que esses tempos de viagem estejam dentro do limite pré-estabelecido.
 
@@ -31,6 +41,18 @@ O indicador de oportunidades cumulativas mede a quantidade de oportunidades que 
 Indicadores gravitacionais de acessibilidade também medem a quantidade de oportunidades acessíveis a partir de uma determinado local, mas a contagem de cada oportunidade é gradualmente descontada à medida que o custo da viagem aumenta. Assim, oportunidades mais próximas têm uma importância maior, e o peso de cada oportunidade diminui quanto mais distante ela estiver. 
 
 O ritmo de decaimento desse peso em função do custo da viagem é conhecido como função de impedância. Essa função pode ser definida seguindo diversas diferentes fórmulas funcionais. Por exemplo, é possível considerar um decaimento linear. Neste caso, o peso da oportunidade diminui de maneira contínua ao longo do espaço até certo ponto a partir da onde o peso passa a ser zero. Outra opção é considerar uma função negativa exponencial, onde o peso cai muito rapidamente em distâncias mais próximas mas passa a ter uma queda mais suave como pesos igualmente baixos para oportunidades muito distantes.
+
+$$A_i = \sum_{j=1}^{n}{O_j \times f(c_{ij})}$$
+
+$$f_{lin}(c_{ij}) =
+  \begin{cases}
+    1 - c_{ij}/C & \text{se } c_{ij} \leq C\\
+    0 & \text{caso contrário}
+  \end{cases}$$
+
+$$f_{exp}(c_{ij}) = e^{-\beta c_{ij}}$$
+
+em que $A_i$ é a acessibilidade na origem $i$, $O_j$ é o número de oportunidades no destino $j$, $n$ é o número total de destinos na área de estudo, $f(c_{ij})$ é uma função de decaimento cujo resultado varia com o custo de deslocamento $c_{ij}$ entre a origem $i$ e o destino $j$, $f_{lin}(c_{ij})$ é a função de decaimento linear, $C$ é o limite de custo de deslocamento estabelecido, $f_{exp}(c_{ij})$ é a função de decaimento exponencial negativa e $\beta$ é um parâmetro que dita a velocidade de decaimento.
 
 **Vantagens Vs desvantagens:**  A principal vantagem de indicadores gravitacionais é que o desconto do peso das oportunidades pela sua distância reflete de alguma maneira o comportamento de como as pessoas costumam se comportar. Serviços e atividades que gostaríamos de acessar costumam ser mais atrativas quanto mais próximas elas estiverem, tudo mais constante. Este indicador tem ao menos duas desvantagens. A primeira delas é que os valores de acessibilidade estimados são de difícil interpretação pela forma como a contagem de oportunidades é descontada pela distância. Além disso, para que o indicador seja mais representativo do comportamento de viagem das pessoas, a forma funcional e o ritmo de decaimento da função de impedância precisam ser calibradas. Por isso, este indicador também requer a disponibilidade de dados de padrões de viagens disponíveis, por exemplo, a partir de pesquisas de origem destino.
 
