@@ -1,11 +1,63 @@
-# Calculando acessibilidade urbana com `r5r`
+# Calculando acessibilidade urbana em R
 
-Objetivo: mostrar como calcular acessibilidade urbana usando o pacote r5r
+## Cálculo da matriz de tempo de viagem
 
-6.1 Função \`accessibility{r5r}\`, diferentes indicadores
+Como comentado anteriormente, a primeira etapa necessária para calcular os níveis de acessibilidade de uma área urbana é calcular a matriz de custo de viagem entre as diversas origens e destinos que a compõem. Na literatura científica e na prática do planejamento de sistemas de transporte público, esse custo é mais frequentemente representado pelo tempo de viagem que separa dois pontos [@el-geneidy2016cost; @venter2016assessing], embora trabalhos recentes tenham considerado também outros fatores, como o dinheiro necessário para realizar uma viagem e o nível de conforto da viagem entre um ponto e outro [@arbex2020estimating; @herszenhut2022impact]. Pela prevalência deste tipo de matriz na literatura e na prática, porém, iremos nos focar em matrizes de tempo de viagem.
 
-6.2 Mapa de acessibilidade
+Atualmente, a forma mais fácil e rápida de gerar uma matriz de tempo de viagem em R é utilizando o pacote r5r [@pereira2021r5r], desenvolvido pela equipe do Projeto Acesso a Oportunidades, do Ipea. O pacote utiliza, por trás dos panos, o *software* de roteamento multimodal de transporte público R5, desenvolvido pela Conveyal[^1].
+
+[^1]: Disponível em <https://github.com/conveyal/r5>.
+
+### Instalação do r5r
+
+A instalação do `r5r` funciona como a instalação de qualquer pacote no R.
+
+```{r, eval = FALSE}
+install.packages("r5r")
+```
+
+Além do R, o pacote `r5r` requer também a instalação do Java 11[^2]. Se você não sabe qual versão do Java você tem instalada em seu computador, você pode checar essa informação rodando este código no console do R.
+
+[^2]: O Java 11 pode ser baixado em <https://www.oracle.com/java/technologies/downloads/#java11> ou em <https://jdk.java.net/java-se-ri/11>.
 
 ```{r}
-1 + 1
+library(rJava)
+rJava::.jinit()
+rJava::.jcall("java.lang.System", "S", "getProperty", "java.version")
 ```
+
+### Dados necessários
+
+O uso do pacote `r5r` requer os seguintes dados:
+
+- **Rede viária** (obrigatório): um arquivo com a rede viária e de infraestrutura de pedestres do *OpenStreetMap*, em formato `.pbf`;
+- **Rede de transporte público** (opcional): um arquivo GTFS descrevendo a rede de transporte público da área de estudo;
+- **Topografia** (opcional): um arquivo de dados em *raster* com o modelo digital de elevação em formato `.tif`, caso deseje-se levar em consideração os efeitos da topografia do local sobre os tempos de caminhada.
+
+Aqui estão alguns lugares de onde você pode baixar estes dados:
+
+- OpenStreetMap
+  - [osmextract](https://docs.ropensci.org/osmextract/), pacote de R
+  - [geofabrik](https://download.geofabrik.de/), website
+  - [hot export tool](https://export.hotosm.org/), website
+  - [BBBike.org](https://extract.bbbike.org/), website
+
+- GTFS
+  - [tidytransit](http://tidytransit.r-transit.org/), pacote de R
+  - [transitland](https://www.transit.land/), website
+  - No capítulo X desde livro (tabela xx) nós indicamos também onde baixar os dados de GTFS de algumas cidades brasileiras que compartilham seus dados publicamente.
+
+- Topografia
+  - [elevatr](https://github.com/jhollist/elevatr), pacote de R
+  - [Nasa's SRTMGL1](https://lpdaac.usgs.gov/products/srtmgl1v003/), website 
+
+Os arquivos destes dados devem ser salvos em uma mesma pasta que, preferencialmente, não contenha nenhum outro arquivo. Como se verá adiante, o `r5r` combina todos os dados salvos nesta pasta para criar uma rede de transporte multimodal que será utilizada para simulações de roteamento e cálculo das matrizes de viagem. Note que é possível ter mais de um arquivo GTFS na mesma pasta, nesse caso o `r5r` irá considerar as redes de transporte públicos de todos *feeds*. No entanto, a pasta deve conter um único arquivo de rede viária `.pbf`. Assumindo que os scripts de R estarão em uma pasta chamada R, a organização dos arquivos deverá seguir o esquema abaixo:
+
+<imagem/código mostrando o esquema>
+
+Para ilustrar as funcionalidades do `r5r`, nós vamos usar uma pequena amostra de dados para a cidade de Porto Alegre (Brasil). Esses dados estão disponíveis dentro do próprio pacote `r5r` na pasta `system.file("extdata/poa", package = "r5r")`. Esta pasta possui quatro arquivos que vamos usar agora:
+
+- A rede viária do OpenStreetMap: `poa_osm.pbf`
+- Dois feeds de GTFS das redes de ônibus e de trens: `poa_eptc.zip` e `poa_trensurb.zip`
+- O dado de topografia: `poa_elevation.tif`
+- Um arquivo `poa_hexgrid.csv` com coordenadas geográficas dos centróides de uma grade hexagonal regular cobrindo toda a área da amostra e com informações sobre o tamanho da população residente e o número de oportunidades (empregos, escolas e hospitais) em cada hexágono. Esses pontos serão utilizados como os pontos de origem e destino no cálculo da matriz de tempo de viagem. 
