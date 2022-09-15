@@ -26,11 +26,13 @@ O indicador de oportunidades cumulativas mede a quantidade de oportunidades que 
 
 $$A_i = \sum_{j=1}^{n}{O_j \times f(c_{ij})}$$
 
-$$f(c_{ij}) =
+$$
+f(c_{ij}) =
   \begin{cases}
     1 & \text{se } c_{ij} \leq C\\
     0 & \text{caso contrário}
-  \end{cases}$$
+  \end{cases}
+$$
 
 em que $A_i$ é a acessibilidade na origem $i$, $O_j$ é o número de oportunidades no destino $j$, $n$ é o número total de destinos na área de estudo, $f(c_{ij})$ é um função binária que assume os valores 0 ou 1, a depender do custo de deslocamento $c_{ij}$ entre a origem $i$ e o destino $j$, e $C$ é o limite de custo de deslocamento estabelecido.
 
@@ -44,11 +46,13 @@ O ritmo de decaimento desse peso em função do custo da viagem é conhecido com
 
 $$A_i = \sum_{j=1}^{n}{O_j \times f(c_{ij})}$$
 
-$$f_{lin}(c_{ij}) =
+$$
+f_{lin}(c_{ij}) =
   \begin{cases}
     1 - c_{ij}/C & \text{se } c_{ij} \leq C\\
     0 & \text{caso contrário}
-  \end{cases}$$
+  \end{cases}
+$$
 
 $$f_{exp}(c_{ij}) = e^{-\beta c_{ij}}$$
 
