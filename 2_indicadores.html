@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.242">
+<meta name="generator" content="quarto-1.1.245">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -313,11 +313,13 @@ div.csl-indent {
 <h3 data-number="2.1.2" class="anchored" data-anchor-id="medida-cumulativa-de-oportunidades"><span class="header-section-number">2.1.2</span> Medida cumulativa de oportunidades</h3>
 <p>O indicador de oportunidades cumulativas mede a quantidade de oportunidades que podem ser alcançadas dentro de um tempo máximo de viagem. Por exemplo, este indicador pode ser utilizado para medir a quantidade de empregos acessíveis por transporte público em até 60 minutos, ou a quantidade de escolas acessíveis em até 30 minutos de viagem a pé.</p>
 <p><span class="math display">\[A_i = \sum_{j=1}^{n}{O_j \times f(c_{ij})}\]</span></p>
-<p><span class="math display">\[f(c_{ij}) =
+<p><span class="math display">\[
+f(c_{ij}) =
   \begin{cases}
     1 &amp; \text{se } c_{ij} \leq C\\
     0 &amp; \text{caso contrário}
-  \end{cases}\]</span></p>
+  \end{cases}
+\]</span></p>
 <p>em que <span class="math inline">\(A_i\)</span> é a acessibilidade na origem <span class="math inline">\(i\)</span>, <span class="math inline">\(O_j\)</span> é o número de oportunidades no destino <span class="math inline">\(j\)</span>, <span class="math inline">\(n\)</span> é o número total de destinos na área de estudo, <span class="math inline">\(f(c_{ij})\)</span> é um função binária que assume os valores 0 ou 1, a depender do custo de deslocamento <span class="math inline">\(c_{ij}\)</span> entre a origem <span class="math inline">\(i\)</span> e o destino <span class="math inline">\(j\)</span>, e <span class="math inline">\(C\)</span> é o limite de custo de deslocamento estabelecido.</p>
 <p><strong>Vantagens Vs desvantagens:</strong> A medida cumulativa de oportunidades também também é fácil de se calcular com pouca exigência de dados, além de ser fácil de comunicar. Isso contribui para tornar este indicador um dos mais utilizados por agências de transporte e de financiamento para analisar acessibilidade <span class="citation" data-cites="papa2015accessibility">(<a href="references.html#ref-boisjoly2017get" role="doc-biblioref"><strong>boisjoly2017get?</strong></a>)</span>. Entre as suas desvantagens, no entanto, cabe destacar que este indicador não considera a influência da competição sobre oportunidades. Este indicador também exige a escolha de um único ponto de corte como tempo máximo de viagem. Além disso, esta medida assume todas as oportunidades são igualmente desejáveis pelas pessoas, esteja ela a uma distância de 10 ou 40 minutos de viagem, desde que esses tempos de viagem estejam dentro do limite pré-estabelecido.</p>
 </section>
@@ -326,11 +328,13 @@ div.csl-indent {
 <p>Indicadores gravitacionais de acessibilidade também medem a quantidade de oportunidades acessíveis a partir de uma determinado local, mas a contagem de cada oportunidade é gradualmente descontada à medida que o custo da viagem aumenta. Assim, oportunidades mais próximas têm uma importância maior, e o peso de cada oportunidade diminui quanto mais distante ela estiver.</p>
 <p>O ritmo de decaimento desse peso em função do custo da viagem é conhecido como função de impedância. Essa função pode ser definida seguindo diversas diferentes fórmulas funcionais. Por exemplo, é possível considerar um decaimento linear. Neste caso, o peso da oportunidade diminui de maneira contínua ao longo do espaço até certo ponto a partir da onde o peso passa a ser zero. Outra opção é considerar uma função negativa exponencial, onde o peso cai muito rapidamente em distâncias mais próximas mas passa a ter uma queda mais suave como pesos igualmente baixos para oportunidades muito distantes.</p>
 <p><span class="math display">\[A_i = \sum_{j=1}^{n}{O_j \times f(c_{ij})}\]</span></p>
-<p><span class="math display">\[f_{lin}(c_{ij}) =
+<p><span class="math display">\[
+f_{lin}(c_{ij}) =
   \begin{cases}
     1 - c_{ij}/C &amp; \text{se } c_{ij} \leq C\\
     0 &amp; \text{caso contrário}
-  \end{cases}\]</span></p>
+  \end{cases}
+\]</span></p>
 <p><span class="math display">\[f_{exp}(c_{ij}) = e^{-\beta c_{ij}}\]</span></p>
 <p>em que <span class="math inline">\(A_i\)</span> é a acessibilidade na origem <span class="math inline">\(i\)</span>, <span class="math inline">\(O_j\)</span> é o número de oportunidades no destino <span class="math inline">\(j\)</span>, <span class="math inline">\(n\)</span> é o número total de destinos na área de estudo, <span class="math inline">\(f(c_{ij})\)</span> é uma função de decaimento cujo resultado varia com o custo de deslocamento <span class="math inline">\(c_{ij}\)</span> entre a origem <span class="math inline">\(i\)</span> e o destino <span class="math inline">\(j\)</span>, <span class="math inline">\(f_{lin}(c_{ij})\)</span> é a função de decaimento linear, <span class="math inline">\(C\)</span> é o limite de custo de deslocamento estabelecido, <span class="math inline">\(f_{exp}(c_{ij})\)</span> é a função de decaimento exponencial negativa e <span class="math inline">\(\beta\)</span> é um parâmetro que dita a velocidade de decaimento.</p>
 <p><strong>Vantagens Vs desvantagens:</strong> A principal vantagem de indicadores gravitacionais é que o desconto do peso das oportunidades pela sua distância reflete de alguma maneira o comportamento de como as pessoas costumam se comportar. Serviços e atividades que gostaríamos de acessar costumam ser mais atrativas quanto mais próximas elas estiverem, tudo mais constante. Este indicador tem ao menos duas desvantagens. A primeira delas é que os valores de acessibilidade estimados são de difícil interpretação pela forma como a contagem de oportunidades é descontada pela distância. Além disso, para que o indicador seja mais representativo do comportamento de viagem das pessoas, a forma funcional e o ritmo de decaimento da função de impedância precisam ser calibradas. Por isso, este indicador também requer a disponibilidade de dados de padrões de viagens disponíveis, por exemplo, a partir de pesquisas de origem destino.</p>
