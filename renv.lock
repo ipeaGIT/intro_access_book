@@ -67,6 +67,28 @@
       "Hash": "e9c08b94391e9f3f97355841229124f2",
       "Requirements": []
     },
+    "Rdpack": {
+      "Package": "Rdpack",
+      "Version": "2.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "0ddbe51591ab1d3e7362e0da3727c837",
+      "Requirements": [
+        "rbibutils"
+      ]
+    },
+    "accessibility": {
+      "Package": "accessibility",
+      "Version": "1.0.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "bad08a6d50e853c5e85091242fc7061e",
+      "Requirements": [
+        "Rdpack",
+        "checkmate",
+        "data.table"
+      ]
+    },
     "aopdata": {
       "Package": "aopdata",
       "Version": "1.0.0",
@@ -605,6 +627,23 @@
       "Hash": "e0ef355c12942cf7a6b91a6cfaea8b3e",
       "Requirements": []
     },
+    "r5r": {
+      "Package": "r5r",
+      "Version": "0.7.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "61db001154cd833466a25c4eb195c9b0",
+      "Requirements": [
+        "checkmate",
+        "curl",
+        "data.table",
+        "httr",
+        "rJava",
+        "raster",
+        "sf",
+        "sfheaders"
+      ]
+    },
     "rJava": {
       "Package": "rJava",
       "Version": "1.0-6",
@@ -619,6 +658,26 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "5e3c5dc0b071b21fa128676560dbe94d",
+      "Requirements": []
+    },
+    "raster": {
+      "Package": "raster",
+      "Version": "3.5-29",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "8d673c59e4140ee8631e61216dbe5887",
+      "Requirements": [
+        "Rcpp",
+        "sp",
+        "terra"
+      ]
+    },
+    "rbibutils": {
+      "Package": "rbibutils",
+      "Version": "2.2.9",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "4325b80df05dea1f87a5b56562a510d7",
       "Requirements": []
     },
     "renv": {
@@ -744,6 +803,16 @@
         "geometries"
       ]
     },
+    "sp": {
+      "Package": "sp",
+      "Version": "1.5-0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "2a118bdd2db0a301711e0a9e3e3206d5",
+      "Requirements": [
+        "lattice"
+      ]
+    },
     "stringi": {
       "Package": "stringi",
       "Version": "1.7.8",
@@ -777,6 +846,16 @@
       "Repository": "CRAN",
       "Hash": "b227d13e29222b4574486cfcbde077fa",
       "Requirements": []
+    },
+    "terra": {
+      "Package": "terra",
+      "Version": "1.6-17",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "3e264754dde87261bc7ccdb30d29d3b4",
+      "Requirements": [
+        "Rcpp"
+      ]
     },
     "tibble": {
       "Package": "tibble",
