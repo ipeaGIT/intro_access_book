@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.189">
+<meta name="generator" content="quarto-1.1.242">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Introdução à acessibilidade urbana - 3&nbsp; Calculando acessibilidade urbana com r5r</title>
+<title>Introdução à acessibilidade urbana - 3&nbsp; Calculando acessibilidade urbana em R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -80,6 +80,25 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -90,7 +109,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./p3_dados_tp.html" rel="next">
-<link href="./2_indicadores.html" rel="prev">
+<link href="./s2_calculo.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -124,7 +143,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
       <h1 class="quarto-secondary-nav-title">
-<span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculando acessibilidade urbana com <code>r5r</code></span>
+<span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculando acessibilidade urbana em R</span>
 </h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
@@ -195,7 +214,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Seção 2: Calculando acessibilidade</a>
+            <a href="./s2_calculo.html" class="sidebar-item-text sidebar-link">SEÇÃO 2: Calculando acessibilidade</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -203,7 +222,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3_calculando_acesso.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculando acessibilidade urbana com <code>r5r</code></span></a>
+  <a href="./3_calculando_acesso.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculando acessibilidade urbana em R</span></a>
   </div>
 </li>
       </ul>
@@ -291,12 +310,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </ul>
 </div>
 </nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li>
+<a href="#c%C3%A1lculo-da-matriz-de-tempo-de-viagem" id="toc-cálculo-da-matriz-de-tempo-de-viagem" class="nav-link active" data-scroll-target="#c%C3%A1lculo-da-matriz-de-tempo-de-viagem"><span class="toc-section-number">3.1</span>  Cálculo da matriz de tempo de viagem</a>
+  <ul class="collapse">
+<li><a href="#instala%C3%A7%C3%A3o-do-r5r" id="toc-instalação-do-r5r" class="nav-link" data-scroll-target="#instala%C3%A7%C3%A3o-do-r5r"><span class="toc-section-number">3.1.1</span>  Instalação do r5r</a></li>
+  <li><a href="#dados-necess%C3%A1rios" id="toc-dados-necessários" class="nav-link" data-scroll-target="#dados-necess%C3%A1rios"><span class="toc-section-number">3.1.2</span>  Dados necessários</a></li>
+  </ul>
+</li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/3_calculando_acesso.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title d-none d-lg-block">
-<span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculando acessibilidade urbana com <code>r5r</code></span>
+<span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculando acessibilidade urbana em R</span>
 </h1>
 </div>
 
@@ -309,19 +338,101 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
-</header><p>Objetivo: mostrar como calcular acessibilidade urbana usando o pacote r5r</p>
-<p>6.1 Função `accessibility{r5r}`, diferentes indicadores</p>
-<p>6.2 Mapa de acessibilidade</p>
+</header><section id="cálculo-da-matriz-de-tempo-de-viagem" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="cálculo-da-matriz-de-tempo-de-viagem">
+<span class="header-section-number">3.1</span> Cálculo da matriz de tempo de viagem</h2>
+<p>Como comentado anteriormente, a primeira etapa necessária para calcular os níveis de acessibilidade de uma área urbana é calcular a matriz de custo de viagem entre as diversas origens e destinos que a compõem. Na literatura científica e na prática do planejamento de sistemas de transporte público, esse custo é mais frequentemente representado pelo tempo de viagem que separa dois pontos <span class="citation" data-cites="el-geneidy2016cost venter2016assessing">(<a href="references.html#ref-el-geneidy2016cost" role="doc-biblioref">El-Geneidy et al. 2016</a>; <a href="references.html#ref-venter2016assessing" role="doc-biblioref">Venter 2016</a>)</span>, embora trabalhos recentes tenham considerado também outros fatores, como o dinheiro necessário para realizar uma viagem e o nível de conforto da viagem entre um ponto e outro <span class="citation" data-cites="arbex2020estimating herszenhut2022impact">(<a href="references.html#ref-arbex2020estimating" role="doc-biblioref">Arbex and Cunha 2020</a>; <a href="references.html#ref-herszenhut2022impact" role="doc-biblioref">Herszenhut et al. 2022</a>)</span>. Pela prevalência deste tipo de matriz na literatura e na prática, porém, iremos nos focar em matrizes de tempo de viagem.</p>
+<p>Atualmente, a forma mais fácil e rápida de gerar uma matriz de tempo de viagem em R é utilizando o pacote r5r <span class="citation" data-cites="pereira2021r5r">(<a href="references.html#ref-pereira2021r5r" role="doc-biblioref"><strong>pereira2021r5r?</strong></a>)</span>, desenvolvido pela equipe do Projeto Acesso a Oportunidades, do Ipea. O pacote utiliza, por trás dos panos, o <em>software</em> de roteamento multimodal de transporte público R5, desenvolvido pela Conveyal<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<section id="instalação-do-r5r" class="level3" data-number="3.1.1"><h3 data-number="3.1.1" class="anchored" data-anchor-id="instalação-do-r5r">
+<span class="header-section-number">3.1.1</span> Instalação do r5r</h3>
+<p>A instalação do <code>r5r</code> funciona como a instalação de qualquer pacote no R.</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">1</span> <span class="op">+</span> <span class="fl">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"r5r"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Além do R, o pacote <code>r5r</code> requer também a instalação do Java 11<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Se você não sabe qual versão do Java você tem instalada em seu computador, você pode checar essa informação rodando este código no console do R.</p>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.rforge.net/rJava/">rJava</a></span><span class="op">)</span></span>
+<span><span class="fu">rJava</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rJava/man/jinit.html">.jinit</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">rJava</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rJava/man/jcall.html">.jcall</a></span><span class="op">(</span><span class="st">"java.lang.System"</span>, <span class="st">"S"</span>, <span class="st">"getProperty"</span>, <span class="st">"java.version"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<pre><code>[1] "11.0.16"</code></pre>
 </div>
 </div>
+</section><section id="dados-necessários" class="level3" data-number="3.1.2"><h3 data-number="3.1.2" class="anchored" data-anchor-id="dados-necessários">
+<span class="header-section-number">3.1.2</span> Dados necessários</h3>
+<p>O uso do pacote <code>r5r</code> requer os seguintes dados:</p>
+<ul>
+<li>
+<strong>Rede viária</strong> (obrigatório): um arquivo com a rede viária e de infraestrutura de pedestres do <em>OpenStreetMap</em>, em formato <code>.pbf</code>;</li>
+<li>
+<strong>Rede de transporte público</strong> (opcional): um arquivo GTFS descrevendo a rede de transporte público da área de estudo;</li>
+<li>
+<strong>Topografia</strong> (opcional): um arquivo de dados em <em>raster</em> com o modelo digital de elevação em formato <code>.tif</code>, caso deseje-se levar em consideração os efeitos da topografia do local sobre os tempos de caminhada.</li>
+</ul>
+<p>Aqui estão alguns lugares de onde você pode baixar estes dados:</p>
+<ul>
+<li>OpenStreetMap
+<ul>
+<li>
+<a href="https://docs.ropensci.org/osmextract/">osmextract</a>, pacote de R</li>
+<li>
+<a href="https://download.geofabrik.de/">geofabrik</a>, website</li>
+<li>
+<a href="https://export.hotosm.org/">hot export tool</a>, website</li>
+<li>
+<a href="https://extract.bbbike.org/">BBBike.org</a>, website</li>
+</ul>
+</li>
+<li>GTFS
+<ul>
+<li>
+<a href="http://tidytransit.r-transit.org/">tidytransit</a>, pacote de R</li>
+<li>
+<a href="https://www.transit.land/">transitland</a>, website</li>
+<li>No capítulo X desde livro (tabela xx) nós indicamos também onde baixar os dados de GTFS de algumas cidades brasileiras que compartilham seus dados publicamente.</li>
+</ul>
+</li>
+<li>Topografia
+<ul>
+<li>
+<a href="https://github.com/jhollist/elevatr">elevatr</a>, pacote de R</li>
+<li>
+<a href="https://lpdaac.usgs.gov/products/srtmgl1v003/">Nasa’s SRTMGL1</a>, website</li>
+</ul>
+</li>
+</ul>
+<p>Os arquivos destes dados devem ser salvos em uma mesma pasta que, preferencialmente, não contenha nenhum outro arquivo. Como se verá adiante, o <code>r5r</code> combina todos os dados salvos nesta pasta para criar uma rede de transporte multimodal que será utilizada para simulações de roteamento e cálculo das matrizes de viagem. Note que é possível ter mais de um arquivo GTFS na mesma pasta, nesse caso o <code>r5r</code> irá considerar as redes de transporte públicos de todos <em>feeds</em>. No entanto, a pasta deve conter um único arquivo de rede viária <code>.pbf</code>. Assumindo que os scripts de R estarão em uma pasta chamada R, a organização dos arquivos deverá seguir o esquema abaixo:</p>
+<p><imagem mostrando="" o="" esquema=""></imagem></p>
+<p>Para ilustrar as funcionalidades do <code>r5r</code>, nós vamos usar uma pequena amostra de dados para a cidade de Porto Alegre (Brasil). Esses dados estão disponíveis dentro do próprio pacote <code>r5r</code> na pasta <code>system.file("extdata/poa", package = "r5r")</code>. Esta pasta possui quatro arquivos que vamos usar agora:</p>
+<ul>
+<li>A rede viária do OpenStreetMap: <code>poa_osm.pbf</code>
+</li>
+<li>Dois feeds de GTFS das redes de ônibus e de trens: <code>poa_eptc.zip</code> e <code>poa_trensurb.zip</code>
+</li>
+<li>O dado de topografia: <code>poa_elevation.tif</code>
+</li>
+<li>Um arquivo <code>poa_hexgrid.csv</code> com coordenadas geográficas dos centróides de uma grade hexagonal regular cobrindo toda a área da amostra e com informações sobre o tamanho da população residente e o número de oportunidades (empregos, escolas e hospitais) em cada hexágono. Esses pontos serão utilizados como os pontos de origem e destino no cálculo da matriz de tempo de viagem.</li>
+</ul>
 
 
-
-</main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-arbex2020estimating" class="csl-entry" role="doc-biblioentry">
+Arbex, Renato, and Claudio B. Cunha. 2020. <span>“Estimating the Influence of Crowding and Travel Time Variability on Accessibility to Jobs in a Large Public Transport Network Using Smart Card Big Data.”</span> <em>Journal of Transport Geography</em> 85 (May): 102671. <a href="https://doi.org/10.1016/j.jtrangeo.2020.102671">https://doi.org/10.1016/j.jtrangeo.2020.102671</a>.
+</div>
+<div id="ref-el-geneidy2016cost" class="csl-entry" role="doc-biblioentry">
+El-Geneidy, Ahmed, David Levinson, Ehab Diab, Genevieve Boisjoly, David Verbich, and Charis Loong. 2016. <span>“The Cost of Equity: <span>Assessing</span> Transit Accessibility and Social Disparity Using Total Travel Cost.”</span> <em>Transportation Research Part A: Policy and Practice</em> 91 (September): 302–16. <a href="https://doi.org/10.1016/j.tra.2016.07.003">https://doi.org/10.1016/j.tra.2016.07.003</a>.
+</div>
+<div id="ref-herszenhut2022impact" class="csl-entry" role="doc-biblioentry">
+Herszenhut, Daniel, Rafael H. M. Pereira, Licinio da Silva Portugal, and Matheus Henrique de Sousa Oliveira. 2022. <span>“The Impact of Transit Monetary Costs on Transport Inequality.”</span> <em>Journal of Transport Geography</em> 99 (February): 103309. <a href="https://doi.org/10.1016/j.jtrangeo.2022.103309">https://doi.org/10.1016/j.jtrangeo.2022.103309</a>.
+</div>
+<div id="ref-venter2016assessing" class="csl-entry" role="doc-biblioentry">
+Venter, Christoffel. 2016. <span>“Assessing the Potential of Bus Rapid Transit-Led Network Restructuring for Enhancing Affordable Access to Employment <span>The</span> Case of <span>Johannesburg</span>’s <span>Corridors</span> of <span>Freedom</span>.”</span> <em>Research in Transportation Economics</em> 59 (November): 441–49. <a href="https://doi.org/10.1016/j.retrec.2016.05.006">https://doi.org/10.1016/j.retrec.2016.05.006</a>.
+</div>
+</div>
+</section></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1"><p>Disponível em <a href="https://github.com/conveyal/r5" class="uri">https://github.com/conveyal/r5</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>O Java 11 pode ser baixado em <a href="https://www.oracle.com/java/technologies/downloads/#java11" class="uri">https://www.oracle.com/java/technologies/downloads/#java11</a> ou em <a href="https://jdk.java.net/java-se-ri/11" class="uri">https://jdk.java.net/java-se-ri/11</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -419,8 +530,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./2_indicadores.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Indicadores de acessibilidade</span></span>
+      <a href="./s2_calculo.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">SEÇÃO 2: Calculando acessibilidade</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

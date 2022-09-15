@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.189">
+<meta name="generator" content="quarto-1.1.242">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -49,7 +49,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./3_calculando_acesso.html" rel="next">
+<link href="./s2_calculo.html" rel="next">
 <link href="./1_conceito.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -164,7 +164,7 @@ div.csl-indent {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Seção 2: Calculando acessibilidade</a>
+            <a href="./s2_calculo.html" class="sidebar-item-text sidebar-link">SEÇÃO 2: Calculando acessibilidade</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -172,7 +172,7 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3_calculando_acesso.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculando acessibilidade urbana com <code>r5r</code></span></a>
+  <a href="./3_calculando_acesso.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculando acessibilidade urbana em R</span></a>
   </div>
 </li>
       </ul>
@@ -305,38 +305,59 @@ div.csl-indent {
 <section id="mínimo-custo-de-viagem" class="level3" data-number="2.1.1">
 <h3 data-number="2.1.1" class="anchored" data-anchor-id="mínimo-custo-de-viagem"><span class="header-section-number">2.1.1</span> Mínimo custo de viagem</h3>
 <p>O Indicador de mínimo custo de viagem aponta qual o menor custo (por exemplo, em termos de tempo ou distância) de viagem até a oportunidade mais próxima. Ele permite captar, por exemplo, qual o tempo de viagem até o posto de saúde mais próximo. Esse é um dos indicadores mais simples de acessibilidade.</p>
-<p><span class="math display">\[A_i = min(C_{i1}, C_{i2}, \dots, C_{ij}, \dots, C_{i(n-1)}, C_{in}) \iff O_j \geq 1\]</span></p>
-<p>em que <span class="math inline">\(A_i\)</span> é a acessibilidade na origem <span class="math inline">\(i\)</span>, <span class="math inline">\(C_{ij}\)</span> é o custo de deslocamento entre a origem <span class="math inline">\(i\)</span> e o destino <span class="math inline">\(j\)</span>, <span class="math inline">\(n\)</span> é o número total de destinos na área de estudo e <span class="math inline">\(O_j\)</span> é o número de oportunidades no destino <span class="math inline">\(j\)</span>.</p>
+<p><span class="math display">\[A_i = min(c_{i1}, c_{i2}, \dots, c_{ij}, \dots, c_{i(n-1)}, c_{in}) \iff O_j \geq 1\]</span></p>
+<p>em que <span class="math inline">\(A_i\)</span> é a acessibilidade na origem <span class="math inline">\(i\)</span>, <span class="math inline">\(c_{ij}\)</span> é o custo de deslocamento entre a origem <span class="math inline">\(i\)</span> e o destino <span class="math inline">\(j\)</span>, <span class="math inline">\(n\)</span> é o número total de destinos na área de estudo e <span class="math inline">\(O_j\)</span> é o número de oportunidades no destino <span class="math inline">\(j\)</span>.</p>
 <p><strong>Vantagens e desvantagens:</strong> Este indicador tem as vantagens de ser fácil de se calcular com pouca exigência de dados, além de ser fácil de comunicar. Duas desvantagens, no entanto, é que ele não capta a quantidade de oportunidades acessíveis e nem aspectos de competição na demanda pela oportunidade. Por exemplo, uma pessoa pode morar muito perto de um hospital, mas essa proximidade pode não garantir um bom acesso aos serviços de saúde se esse for o único hospital da região que fica sobrecarregado com demanda de pacientes.</p>
 </section>
 <section id="medida-cumulativa-de-oportunidades" class="level3" data-number="2.1.2">
 <h3 data-number="2.1.2" class="anchored" data-anchor-id="medida-cumulativa-de-oportunidades"><span class="header-section-number">2.1.2</span> Medida cumulativa de oportunidades</h3>
 <p>O indicador de oportunidades cumulativas mede a quantidade de oportunidades que podem ser alcançadas dentro de um tempo máximo de viagem. Por exemplo, este indicador pode ser utilizado para medir a quantidade de empregos acessíveis por transporte público em até 60 minutos, ou a quantidade de escolas acessíveis em até 30 minutos de viagem a pé.</p>
+<p><span class="math display">\[A_i = \sum_{j=1}^{n}{O_j \times f(c_{ij})}\]</span></p>
+<p><span class="math display">\[f(c_{ij}) =
+  \begin{cases}
+    1 &amp; \text{se } c_{ij} \leq C\\
+    0 &amp; \text{caso contrário}
+  \end{cases}\]</span></p>
+<p>em que <span class="math inline">\(A_i\)</span> é a acessibilidade na origem <span class="math inline">\(i\)</span>, <span class="math inline">\(O_j\)</span> é o número de oportunidades no destino <span class="math inline">\(j\)</span>, <span class="math inline">\(n\)</span> é o número total de destinos na área de estudo, <span class="math inline">\(f(c_{ij})\)</span> é um função binária que assume os valores 0 ou 1, a depender do custo de deslocamento <span class="math inline">\(c_{ij}\)</span> entre a origem <span class="math inline">\(i\)</span> e o destino <span class="math inline">\(j\)</span>, e <span class="math inline">\(C\)</span> é o limite de custo de deslocamento estabelecido.</p>
 <p><strong>Vantagens Vs desvantagens:</strong> A medida cumulativa de oportunidades também também é fácil de se calcular com pouca exigência de dados, além de ser fácil de comunicar. Isso contribui para tornar este indicador um dos mais utilizados por agências de transporte e de financiamento para analisar acessibilidade <span class="citation" data-cites="papa2015accessibility">(<a href="references.html#ref-boisjoly2017get" role="doc-biblioref"><strong>boisjoly2017get?</strong></a>)</span>. Entre as suas desvantagens, no entanto, cabe destacar que este indicador não considera a influência da competição sobre oportunidades. Este indicador também exige a escolha de um único ponto de corte como tempo máximo de viagem. Além disso, esta medida assume todas as oportunidades são igualmente desejáveis pelas pessoas, esteja ela a uma distância de 10 ou 40 minutos de viagem, desde que esses tempos de viagem estejam dentro do limite pré-estabelecido.</p>
 </section>
 <section id="medidas-gravitacionais" class="level3" data-number="2.1.3">
 <h3 data-number="2.1.3" class="anchored" data-anchor-id="medidas-gravitacionais"><span class="header-section-number">2.1.3</span> Medidas gravitacionais</h3>
 <p>Indicadores gravitacionais de acessibilidade também medem a quantidade de oportunidades acessíveis a partir de uma determinado local, mas a contagem de cada oportunidade é gradualmente descontada à medida que o custo da viagem aumenta. Assim, oportunidades mais próximas têm uma importância maior, e o peso de cada oportunidade diminui quanto mais distante ela estiver.</p>
 <p>O ritmo de decaimento desse peso em função do custo da viagem é conhecido como função de impedância. Essa função pode ser definida seguindo diversas diferentes fórmulas funcionais. Por exemplo, é possível considerar um decaimento linear. Neste caso, o peso da oportunidade diminui de maneira contínua ao longo do espaço até certo ponto a partir da onde o peso passa a ser zero. Outra opção é considerar uma função negativa exponencial, onde o peso cai muito rapidamente em distâncias mais próximas mas passa a ter uma queda mais suave como pesos igualmente baixos para oportunidades muito distantes.</p>
+<p><span class="math display">\[A_i = \sum_{j=1}^{n}{O_j \times f(c_{ij})}\]</span></p>
+<p><span class="math display">\[f_{lin}(c_{ij}) =
+  \begin{cases}
+    1 - c_{ij}/C &amp; \text{se } c_{ij} \leq C\\
+    0 &amp; \text{caso contrário}
+  \end{cases}\]</span></p>
+<p><span class="math display">\[f_{exp}(c_{ij}) = e^{-\beta c_{ij}}\]</span></p>
+<p>em que <span class="math inline">\(A_i\)</span> é a acessibilidade na origem <span class="math inline">\(i\)</span>, <span class="math inline">\(O_j\)</span> é o número de oportunidades no destino <span class="math inline">\(j\)</span>, <span class="math inline">\(n\)</span> é o número total de destinos na área de estudo, <span class="math inline">\(f(c_{ij})\)</span> é uma função de decaimento cujo resultado varia com o custo de deslocamento <span class="math inline">\(c_{ij}\)</span> entre a origem <span class="math inline">\(i\)</span> e o destino <span class="math inline">\(j\)</span>, <span class="math inline">\(f_{lin}(c_{ij})\)</span> é a função de decaimento linear, <span class="math inline">\(C\)</span> é o limite de custo de deslocamento estabelecido, <span class="math inline">\(f_{exp}(c_{ij})\)</span> é a função de decaimento exponencial negativa e <span class="math inline">\(\beta\)</span> é um parâmetro que dita a velocidade de decaimento.</p>
 <p><strong>Vantagens Vs desvantagens:</strong> A principal vantagem de indicadores gravitacionais é que o desconto do peso das oportunidades pela sua distância reflete de alguma maneira o comportamento de como as pessoas costumam se comportar. Serviços e atividades que gostaríamos de acessar costumam ser mais atrativas quanto mais próximas elas estiverem, tudo mais constante. Este indicador tem ao menos duas desvantagens. A primeira delas é que os valores de acessibilidade estimados são de difícil interpretação pela forma como a contagem de oportunidades é descontada pela distância. Além disso, para que o indicador seja mais representativo do comportamento de viagem das pessoas, a forma funcional e o ritmo de decaimento da função de impedância precisam ser calibradas. Por isso, este indicador também requer a disponibilidade de dados de padrões de viagens disponíveis, por exemplo, a partir de pesquisas de origem destino.</p>
 </section>
 <section id="indicadores-de-acessibilidade-com-competição-floating-catchment-area" class="level3" data-number="2.1.4">
 <h3 data-number="2.1.4" class="anchored" data-anchor-id="indicadores-de-acessibilidade-com-competição-floating-catchment-area"><span class="header-section-number">2.1.4</span> Indicadores de acessibilidade com competição: <em>floating catchment area</em></h3>
 <p>Em muitos casos, o acesso a oportunidades é afetado não apenas por questões de proximidade e custos de transporte, mas também pela possível competição de muitas pessoas que querem acessar a mesma oportunidade ao mesmo tempo. Isso é muito comum, por exemplo, em casos de acesso a serviços de saúde, escolas e empregos. Uma vaga de emprego só pode ser ocupada por uma pessoa de cada vez, o mesmo vale por exemplo para um leito de UTI ou vaga em uma escola.</p>
 <p>Existe uma gama de indicadores de acessibilidade que buscam levar em consideração essa possível competição pelas oportunidades acessíveis. Vários desses indicadores são do tipo <em>floating catchment area</em> (áreas de influência flutuantes, em tradução livre). A título de exemplo, esses indicadores tentam levar em consideração como uma mesma pessoa pode potencialmente acessar vários leitos de UTI e, simultaneamente, como cada leito de UTI pode ser acessado por diversas pessoas. Assim, o acesso de uma pessoa ao serviço de leito de UTI é influenciado não apenas por questões de custos de transporte mas também pela disponibilidade de leitos de UTI por pessoas que potencialmente poderiam acessar os mesmos leitos.</p>
-<p>Dentro dessa família de indicadores tipo <em>floating catchment area</em> (FCA). O indicador mais comumente utilizado é o <em>2-Step Floating Catchment Area</em> (2SFCA), proposto originalmente por Luo and Wang <span class="citation" data-cites="luo2003measures">(<a href="references.html#ref-luo2003measures" role="doc-biblioref"><strong>luo2003measures?</strong></a>)</span>. Uma limitação do 2SFCA é qu ele ele contabiliza que uma mesma pessoa pode potencialmente demandar várias oportunidades ao mesmo tempo, e que um mesmo serviço pode ser potencialmente utilizado por várias pessoas ao mesmo tempo. Isso é conhecido como problema de inflação de demanda e de oferta, respectivamente, e pode gerar estimativas enviesadas de acessibilidade <span class="citation" data-cites="paez2019demand">(<a href="references.html#ref-paez2019demand" role="doc-biblioref"><strong>paez2019demand?</strong></a>)</span>. Para lidar com esse problema, Paez et al <span class="citation" data-cites="paez2019demand">(<a href="references.html#ref-paez2019demand" role="doc-biblioref"><strong>paez2019demand?</strong></a>)</span> propuseram o indicador <em>Balanced Floating Catchment Area</em> (“BFCA”), uma das medidas mais novas na família de indicadores tipo <em>floating catchment area</em>.</p>
+<p>Dentro dessa família de indicadores tipo <em>floating catchment area</em> (FCA). O indicador mais comumente utilizado é o <em>2-Step Floating Catchment Area</em> (2SFCA), proposto originalmente por Luo and Wang <span class="citation" data-cites="luo2003measures">(<a href="references.html#ref-luo2003measures" role="doc-biblioref">2003</a>)</span>. Uma limitação do 2SFCA é qu ele ele contabiliza que uma mesma pessoa pode potencialmente demandar várias oportunidades ao mesmo tempo, e que um mesmo serviço pode ser potencialmente utilizado por várias pessoas ao mesmo tempo. Isso é conhecido como problema de inflação de demanda e de oferta, respectivamente, e pode gerar estimativas enviesadas de acessibilidade <span class="citation" data-cites="paez2019demand">(<a href="references.html#ref-paez2019demand" role="doc-biblioref">Paez, Higgins, and Vivona 2019</a>)</span>. Para lidar com esse problema, Paez et al <span class="citation" data-cites="paez2019demand">(<a href="references.html#ref-paez2019demand" role="doc-biblioref">2019</a>)</span> propuseram o indicador <em>Balanced Floating Catchment Area</em> (“BFCA”), uma das medidas mais novas na família de indicadores tipo <em>floating catchment area</em>.</p>
 <p><strong>Vantagens Vs desvantagens:</strong> Diferentes indicadores desse tipo vão ter pequenas variações em duas vantagens e desvantagens. No entanto, de uma maneira geral, a principal vantagem de indicadores tipo <em>floating catchment area</em> é a sua capacidade de incorporar aspectos de competição em medidas de acessibilidade. Uma das desvantagens destes tipos de indicadores é a difícil interpretação e comunicação dos seus resultados.</p>
 </section>
 </section>
 <section id="medidas-baseadas-em-pessoas" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="medidas-baseadas-em-pessoas"><span class="header-section-number">2.2</span> Medidas baseadas em pessoas</h2>
-<p>Indicadores de acessibilidade baseadoas em pessoas são sensíveis não apenas à distribuição espacial de atividades e a configuração e desempenho da rede de transporte. Esses indicadores mas também levam em consideração como características pessoais (como sexo, idade, deficiência física etc) e até questões como atividades e compromissos pessoais podem afetar a facidade de uma pessoa acessar determinadas atividades. Esse grupo de medidas inclui, por exemplo, indicadores de acessibilidade baseados em utilidade <span class="citation" data-cites="nassir2016utility">Miller (<a href="references.html#ref-miller2018accessibility" role="doc-biblioref">2018</a>)</span>, indicadores baseados em atividades <span class="citation" data-cites="dong2006moving">(<a href="references.html#ref-dong2006moving" role="doc-biblioref"><strong>dong2006moving?</strong></a>)</span> ou medidas de espaço-tempo <span class="citation" data-cites="kim2003space">Neutens et al. (<a href="references.html#ref-neutens2012analysis" role="doc-biblioref">2012</a>)</span>.</p>
+<p>Indicadores de acessibilidade baseadoas em pessoas são sensíveis não apenas à distribuição espacial de atividades e a configuração e desempenho da rede de transporte. Esses indicadores mas também levam em consideração como características pessoais (como sexo, idade, deficiência física etc) e até questões como atividades e compromissos pessoais podem afetar a facidade de uma pessoa acessar determinadas atividades. Esse grupo de medidas inclui, por exemplo, indicadores de acessibilidade baseados em utilidade <span class="citation" data-cites="nassir2016utility">Miller (<a href="references.html#ref-miller2018accessibility" role="doc-biblioref">2018</a>)</span>, indicadores baseados em atividades <span class="citation" data-cites="dong2006moving">(<a href="references.html#ref-dong2006moving" role="doc-biblioref">Dong et al. 2006</a>)</span> ou medidas de espaço-tempo <span class="citation" data-cites="kim2003space">Neutens et al. (<a href="references.html#ref-neutens2012analysis" role="doc-biblioref">2012</a>)</span>.</p>
 <p>Embora esses tipos de indicadores sejam mais sofisticados, eles costumam demandar grandes quantidades de dados, incluindo registros de diários de viagem, pesquisas domiciliares tipo origem-destino etc. Por isso, o cálculo desses indicadores é computacionalmente mais intensivo e complexo, o que faz com que esses indicadores sejam menos utilizados <span class="citation" data-cites="neutens2010equity">Miller (<a href="references.html#ref-miller2018accessibility" role="doc-biblioref">2018</a>)</span>.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
 <div id="ref-dijst2002opportunities" class="csl-entry" role="doc-biblioentry">
 Dijst, Martin, Tom de Jong, and Jan Ritsema van Eck. 2002. <span>“Opportunities for <span>Transport Mode Change</span>: <span>An Exploration</span> of a <span>Disaggregated Approach</span>.”</span> <em>Environment and Planning B: Planning and Design</em> 29 (3): 413–30. <a href="https://doi.org/10.1068/b12811">https://doi.org/10.1068/b12811</a>.
+</div>
+<div id="ref-dong2006moving" class="csl-entry" role="doc-biblioentry">
+Dong, Xiaojing, Moshe E. Ben-Akiva, John L. Bowman, and Joan L. Walker. 2006. <span>“Moving from Trip-Based to Activity-Based Measures of Accessibility.”</span> <em>Transportation Research Part A: Policy and Practice</em> 40 (2): 163–80. <a href="https://doi.org/10.1016/j.tra.2005.05.002">https://doi.org/10.1016/j.tra.2005.05.002</a>.
+</div>
+<div id="ref-luo2003measures" class="csl-entry" role="doc-biblioentry">
+Luo, Wei, and Fahui Wang. 2003. <span>“Measures of <span>Spatial Accessibility</span> to <span>Health Care</span> in a <span>GIS Environment</span>: <span>Synthesis</span> and a <span>Case Study</span> in the <span>Chicago Region</span>.”</span> <em>Environment and Planning B: Planning and Design</em> 30 (6): 865–84. <a href="https://doi.org/10.1068/b29120">https://doi.org/10.1068/b29120</a>.
 </div>
 <div id="ref-miller2018accessibility" class="csl-entry" role="doc-biblioentry">
 Miller, Eric J. 2018. <span>“Accessibility: Measurement and Application in Transportation Planning.”</span> <em>Transport Reviews</em> 38 (5): 551–55. <a href="https://doi.org/10.1080/01441647.2018.1492778">https://doi.org/10.1080/01441647.2018.1492778</a>.
@@ -346,6 +367,12 @@ Neutens, Tijs, Matthias Delafontaine, Darren M. Scott, and Philippe De Maeyer. 2
 </div>
 <div id="ref-neutens2010equity" class="csl-entry" role="doc-biblioentry">
 Neutens, Tijs, Tim Schwanen, Frank Witlox, and Philippe De Maeyer. 2010. <span>“Equity of <span>Urban Service Delivery</span>: <span>A Comparison</span> of <span>Different Accessibility Measures</span>.”</span> <em>Environment and Planning A: Economy and Space</em> 42 (7): 1613–35. <a href="https://doi.org/10.1068/a4230">https://doi.org/10.1068/a4230</a>.
+</div>
+<div id="ref-paez2019demand" class="csl-entry" role="doc-biblioentry">
+Paez, Antonio, Christopher D. Higgins, and Salvatore F. Vivona. 2019. <span>“Demand and Level of Service Inflation in <span>Floating Catchment Area</span> (<span>FCA</span>) Methods.”</span> Edited by Tayyab Ikram Shah. <em>PLOS ONE</em> 14 (6): e0218773. <a href="https://doi.org/10.1371/journal.pone.0218773">https://doi.org/10.1371/journal.pone.0218773</a>.
+</div>
+<div id="ref-papa2015accessibility" class="csl-entry" role="doc-biblioentry">
+Papa, Enrica, Cecilia Silva, Marco Te Brömmelstroet, and Angela Hull. 2015. <span>“Accessibility Instruments for Planning Practice: A Review of <span>European</span> Experiences.”</span> <em>Journal of Transport and Land Use</em>, June. <a href="https://doi.org/10.5198/jtlu.2015.585">https://doi.org/10.5198/jtlu.2015.585</a>.
 </div>
 </div>
 </section>
@@ -456,8 +483,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./3_calculando_acesso.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculando acessibilidade urbana com <code>r5r</code></span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./s2_calculo.html" class="pagination-link">
+        <span class="nav-page-text">SEÇÃO 2: Calculando acessibilidade</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
