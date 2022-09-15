@@ -1,7 +1,7 @@
 on:
   workflow_dispatch:
   push:
-    branches: [main, actiontest]
+    branches: [main, action-test]
 
 name: Quarto Publish
 
@@ -32,6 +32,9 @@ jobs:
         with:
           java-version: '11'
           java-package: jdk
+
+      - name: Java reconf
+        run: sudo R CMD javareconf
 
       - name: Install R Dependencies
         uses: r-lib/actions/setup-renv@v2
