@@ -133,7 +133,9 @@ ttm <- travel_time_matrix(
     format = "%d-%m-%Y %H:%M:%S"
   ),
   max_walk_dist = 800,
-  max_trip_duration = 120 
+  max_trip_duration = 120,
+  verbose = FALSE,
+  progress = FALSE
 )
 
 ttm
@@ -157,25 +159,68 @@ Como *input* básico, todas as funções requerem uma matriz de custo pré-calcu
 
 O exemplo abaixo mostra uma simples aplicação da função `cumulative_cutoff()`, utilizada para calcular o número de oportunidades que pode ser alcançado em um determinado limite de custo de viagem. No exemplo abaixo, nós calculamos o número de postos de trabalho que podem ser alcançados em até 30 minutos de viagem a partir de cada origem presente em nossa matriz de tempo de viagem.
 
-<código>
+```{r}
+setnames(ttm, c("fromId", "toId"), c("from_id", "to_id"))
+
+cumulative_access <- cumulative_cutoff(
+  ttm,
+  points,
+  opportunity = "schools",
+  travel_cost = "travel_time",
+  cutoff = 30
+)
+
+cumulative_access
+```
 
 **Mínimo custo de viagem**
 
 A função `cost_to_closest()`, por sua vez, calcula o mínimo custo de viagem necessário para alcançar um determinado número de oportunidades. O código abaixo, por exemplo, calcula o tempo de viagem mínimo para alcançar o hospital mais próximo a partir de cada origem.
 
-<código>
+```{r}
+min_cost <- cost_to_closest(
+  ttm,
+  points,
+  opportunity = "schools",
+  travel_cost = "travel_time"
+)
+
+min_cost
+```
 
 **Medidas gravitacionais de acessibilidade**
 
 A função `gravity()` calcula medidas gravitacionais de acessibilidade - ou seja, aquelas nas quais o peso de cada oportunidade diminui gradualmente com o aumento do custo de viagem. Existem, no entanto, uma gama de diferentes tipos de funções de decaimento que podem ser utilizadas, como funções de decaimento exponenciais negativas, de potências inversas, entre outras. Por isso, esta função recebe um *input* adicional: a função de decaimento a ser utilizada no cálculo. O exemplo abaixo apresenta o cálculo de acessibilidade a estabelecimentos de educação usando uma medida gravitacional exponencial negativa com parâmetro de decaimento igual a `0.2`.
 
-<código>
+```{r}
+negative_exp_access <- gravity(
+  ttm,
+  points,
+  opportunity = "schools",
+  travel_cost = "travel_time",
+  decay_function = decay_exponential(0.2)
+)
+
+negative_exp_access
+```
 
 **Indicadores de acessibilidade com competição**
 
 Por fim, a função `floating_catchment_area()` calcula níveis de acessibilidade levando em consideração a competição por oportunidades usando diferentes indicadores do tipo *floating catchment area*. Como diversos métodos de FCA podem ser utilizados, a função requer que o método desejado seja explicitamente assinalado. E, assim como a função de acessibilidade gravitacional, a função de decaimento utilizada também deve ser definida pelo usuário. O código a seguir mostra um exemplo de cálculo de acessibilidade a oportunidades de emprego usando o método BFCA [@paez2019demand], levando em consideração os efeitos de competição entre a população como um todo e uma função de decaimento exponencial com parâmetro de decaimento igual a 2.
 
-<código>
+```{r}
+bfca_access <- floating_catchment_area(
+  ttm,
+  points,
+  opportunity = "schools",
+  travel_cost = "travel_time",
+  demand = "population",
+  method = "bfca",
+  decay_function = decay_exponential(0.05)
+)
+
+bfca_access
+```
 
 As funções apresentadas nesta seção podem receber também outros *inputs* não explicitamente mencionados aqui. Para mais informações sobre cada um dos parâmetros, por favor consulte a documentação do pacote `accessibility` no seu [site](https://ipeagit.github.io/accessibility/).
 
@@ -185,7 +230,27 @@ Ao longo das duas seções anteriores, nós mostramos como calcular níveis de a
 
 No entanto, o `r5r` inclui também uma função chamada `accessibility()` que faz todo esse processamento com uma única chamada. De forma parecida com a função de cálculo de matriz de tempo de viagem, a função de acessibilidade também recebe como *inputs* uma conexão com o R5, as origens, os destinos, os modos de transporte, o tempo de partida, entre outros. Adicionalmente, devem ser listadas também quais oportunidades devem ser consideradas e a função de decaimento que deve ser utilizada (bem como o valor do limite de custo e de parâmetro de decaimento). O exemplo abaixo mostra uma aplicação desta função.
 
-<código>
+```{r}
+r5r_access <- accessibility(
+  r5r_core,
+  origins = points,
+  destinations = points,
+  opportunities_colname = "schools",
+  decay_function = "step",
+  cutoffs = 30,
+  mode = c("WALK", "TRANSIT"),
+  departure_datetime = as.POSIXct(
+    "13-05-2019 14:00:00",
+    format = "%d-%m-%Y %H:%M:%S"
+  ),
+  max_walk_dist = 800,
+  max_trip_duration = 120,
+  verbose = FALSE,
+  progress = FALSE
+)
+
+r5r_access
+```
 
 Como podemos observar, o resultado desta função são os níveis de acessibilidade já calculados. A informação “intermediária” de tempo de viagem entre origens e destinos, consequentemente, não fica disponível ao usuário com o uso da função. Ainda assim, este fluxo de trabalho pode ser uma boa alternativa para pessoas que estejam interessados puramente nos níveis de acessibilidade e não dependam do tempo de viagem em suas análises.
 
