@@ -12,7 +12,8 @@ Atualmente, a forma mais fácil e rápida de gerar uma matriz de tempo de viagem
 
 A instalação do `r5r` funciona como a instalação de qualquer pacote no R.
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 install.packages("r5r")
 ```
 
@@ -21,9 +22,7 @@ Além do R, o pacote `r5r` requer também a instalação do Java 11[^2]. Se voc�
 [^2]: O Java 11 pode ser baixado em <https://www.oracle.com/java/technologies/downloads/#java11> ou em <https://jdk.java.net/java-se-ri/11>.
 
 ```{r}
-library(rJava)
-rJava::.jinit()
-rJava::.jcall("java.lang.System", "S", "getProperty", "java.version")
+cat(processx::run("java", args = "--version")$stdout)
 ```
 
 ### Dados necessários
@@ -53,9 +52,35 @@ Aqui estão alguns lugares de onde você pode baixar estes dados:
 
 Os arquivos destes dados devem ser salvos em uma mesma pasta que, preferencialmente, não contenha nenhum outro arquivo. Como se verá adiante, o `r5r` combina todos os dados salvos nesta pasta para criar uma rede de transporte multimodal que será utilizada para simulações de roteamento e cálculo das matrizes de viagem. Note que é possível ter mais de um arquivo GTFS na mesma pasta, nesse caso o `r5r` irá considerar as redes de transporte públicos de todos *feeds*. No entanto, a pasta deve conter um único arquivo de rede viária `.pbf`. Assumindo que os scripts de R estarão em uma pasta chamada R, a organização dos arquivos deverá seguir o esquema abaixo:
 
-<imagem/código mostrando o esquema>
+```{r}
+#| echo: false
+invisible({
+  tmp <- file.path(tempdir(), "projeto_acessibilidade")
+  dir.create(tmp)
+  
+  dir.create(file.path(tmp, "R"))
+  file.create(file.path(tmp, "R", "script1.R"))
+  file.create(file.path(tmp, "R", "script2.R"))
+  
+  dir.create(file.path(tmp, "r5"))
+  file.create(file.path(tmp, "r5", "rede_viaria.osm.pbf"))
+  file.create(file.path(tmp, "r5", "rede_transporte_publico.zip"))
+  file.create(file.path(tmp, "r5", "topografia.tif"))
+})
 
-Para ilustrar as funcionalidades do `r5r`, nós vamos usar uma pequena amostra de dados para a cidade de Porto Alegre (Brasil). Esses dados estão disponíveis dentro do próprio pacote `r5r` na pasta `system.file("extdata/poa", package = "r5r")`. Esta pasta possui quatro arquivos que vamos usar agora:
+fs::dir_tree(tmp)
+```
+
+Para ilustrar as funcionalidades do `r5r`, nós vamos usar uma pequena amostra de dados para a cidade de Porto Alegre (Brasil). Esses dados estão disponíveis dentro do próprio pacote `r5r` na pasta `system.file("extdata/poa", package = "r5r")`:
+
+```{r}
+#| echo: false
+path <- system.file("extdata/poa", package = "r5r")
+
+fs::dir_tree(path, regexp = "\\.zip$|\\.csv$|\\.pbf$|\\.tif$")
+```
+
+Esta pasta possui quatro arquivos que vamos usar agora:
 
 - A rede viária do OpenStreetMap: `poa_osm.pbf`
 - Dois feeds de GTFS das redes de ônibus e de trens: `poa_eptc.zip` e `poa_trensurb.zip`
