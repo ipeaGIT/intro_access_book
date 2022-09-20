@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.1.245">
+<meta name="generator" content="quarto-1.1.251">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Introdução à acessibilidade urbana - 3&nbsp; Calculando acessibilidade urbana em R</title>
 <style>
@@ -354,11 +354,11 @@ div.csl-indent {
 </div>
 <p>Além do R, o pacote <code>r5r</code> requer também a instalação do Java 11<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Se você não sabe qual versão do Java você tem instalada em seu computador, você pode checar essa informação rodando este código no console do R.</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.rforge.net/rJava/">rJava</a></span><span class="op">)</span></span>
-<span><span class="fu">rJava</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rJava/man/jinit.html">.jinit</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu">rJava</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rJava/man/jcall.html">.jcall</a></span><span class="op">(</span><span class="st">"java.lang.System"</span>, <span class="st">"S"</span>, <span class="st">"getProperty"</span>, <span class="st">"java.version"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu">processx</span><span class="fu">::</span><span class="fu"><a href="http://processx.r-lib.org/reference/run.html">run</a></span><span class="op">(</span><span class="st">"java"</span>, args <span class="op">=</span> <span class="st">"--version"</span><span class="op">)</span><span class="op">$</span><span class="va">stdout</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "11.0.16"</code></pre>
+<pre><code>openjdk 11.0.16 2022-07-19 LTS
+OpenJDK Runtime Environment Zulu11.58+15-CA (build 11.0.16+8-LTS)
+OpenJDK 64-Bit Server VM Zulu11.58+15-CA (build 11.0.16+8-LTS, mixed mode)</code></pre>
 </div>
 </div>
 </section><section id="dados-necessários" class="level3" data-number="3.1.2"><h3 data-number="3.1.2" class="anchored" data-anchor-id="dados-necessários">
@@ -405,8 +405,30 @@ div.csl-indent {
 </li>
 </ul>
 <p>Os arquivos destes dados devem ser salvos em uma mesma pasta que, preferencialmente, não contenha nenhum outro arquivo. Como se verá adiante, o <code>r5r</code> combina todos os dados salvos nesta pasta para criar uma rede de transporte multimodal que será utilizada para simulações de roteamento e cálculo das matrizes de viagem. Note que é possível ter mais de um arquivo GTFS na mesma pasta, nesse caso o <code>r5r</code> irá considerar as redes de transporte públicos de todos <em>feeds</em>. No entanto, a pasta deve conter um único arquivo de rede viária <code>.pbf</code>. Assumindo que os scripts de R estarão em uma pasta chamada R, a organização dos arquivos deverá seguir o esquema abaixo:</p>
-<p><imagem mostrando="" o="" esquema=""></imagem></p>
-<p>Para ilustrar as funcionalidades do <code>r5r</code>, nós vamos usar uma pequena amostra de dados para a cidade de Porto Alegre (Brasil). Esses dados estão disponíveis dentro do próprio pacote <code>r5r</code> na pasta <code>system.file("extdata/poa", package = "r5r")</code>. Esta pasta possui quatro arquivos que vamos usar agora:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>/tmp/Rtmpen3S35/projeto_acessibilidade
+├── R
+│   ├── script1.R
+│   └── script2.R
+└── r5
+    ├── rede_transporte_publico.zip
+    ├── rede_viaria.osm.pbf
+    └── topografia.tif</code></pre>
+</div>
+</div>
+<p>Para ilustrar as funcionalidades do <code>r5r</code>, nós vamos usar uma pequena amostra de dados para a cidade de Porto Alegre (Brasil). Esses dados estão disponíveis dentro do próprio pacote <code>r5r</code> na pasta <code>system.file("extdata/poa", package = "r5r")</code>:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>/home/runner/work/intro_access_book/intro_access_book/renv/library/R-4.2/x86_64-pc-linux-gnu/r5r/extdata/poa
+├── poa.zip
+├── poa_elevation.tif
+├── poa_hexgrid.csv
+├── poa_osm.pbf
+└── poa_points_of_interest.csv</code></pre>
+</div>
+</div>
+<p>Esta pasta possui quatro arquivos que vamos usar agora:</p>
 <ul>
 <li>A rede viária do OpenStreetMap: <code>poa_osm.pbf</code>
 </li>
@@ -419,18 +441,22 @@ div.csl-indent {
 <span class="header-section-number">3.1.3</span> Calculando a matriz de tempo de viagens</h3>
 <p>Antes de calcular a matriz de tempo de viagem, precisamos aumentar a memória disponível para o Java. Isto é necessário porque, por padrão, o R aloca apenas 512MB de memória para processos Java, o que não é suficiente para grandes consultas usando <code>r5r</code>. Para aumentar a memória disponível para 2GB, por exemplo, precisamos definir um valor para o parâmetro <code>java.parameters</code> no início do script antes de carregar as bibliotecas do R:</p>
 <div class="cell">
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>java.parameters <span class="op">=</span> <span class="st">"-Xmx2G"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>java.parameters <span class="op">=</span> <span class="st">"-Xmx2G"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Pronto, agora vamos carregar as bibliotecas que vamos utilizar neste capítulo.</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ipeaGIT/r5r">r5r</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ipeaGIT/r5r">r5r</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ipeaGIT/accessibility">accessibility</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com">data.table</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Feito isso, o cálculo de uma matriz de tempo de viagens da sua área de estudo pode ser feito em dois passos. O primeiro passo é gerar a rede de transporte multimodal que será utilizada no roteamento. Para isso, nós utilizamos a função <code><a href="https://rdrr.io/pkg/r5r/man/setup_r5.html">setup_r5()</a></code>. Esta função baixa o <em>software</em> de roteamento R5 e o utiliza para criar a rede. A função <code><a href="https://rdrr.io/pkg/r5r/man/setup_r5.html">setup_r5()</a></code> recebe como <em>input</em> o caminho da pasta onde você armazenou seus dados. Além da função salvar na pasta alguns arquivos necessários para o roteamento, ela também retorna uma conexão com o R5, que neste exemplo nós chamamos de <code>r5r_core</code>, e que será utilizada no cálculo da matriz de tempo de viagem.</p>
-<p><c para="" criar="" a="" rede="" e="" mostrar="" nova="" estrutura="" de="" arquivos=""></c></p>
+<div class="cell">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/poa"</span>, package <span class="op">=</span> <span class="st">"r5r"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">r5r_core</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/r5r/man/setup_r5.html">setup_r5</a></span><span class="op">(</span><span class="va">path</span>, use_elevation <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>O passo final é usar a função para o cálculo da matriz de tempo de viagem, apropriadamente chamada de <code><a href="https://rdrr.io/pkg/r5r/man/travel_time_matrix.html">travel_time_matrix()</a></code>. Como <em>inputs</em> básicos, a função recebe a conexão com o R5 criada acima, pontos de origem e destino em formato de <code>data.frame</code> com as colunas <code>id</code>, <code>lon</code> e <code>lat</code>, o modo de transporte a ser utilizado, o horário de partida, o tempo máximo de caminhada permitido da origem até o embarque no transporte público e do desembarque até o destino, e o tempo máximo de viagem a ser considerado.</p>
 <p><c para="" calcular="" a="" matriz="" de="" tempo="" viagem=""></c></p>
 <p>Diversos outros <em>inputs</em> podem ser passados para o cálculo da matriz, como a velocidade de caminhada e o número máximo de pernas de transporte público permitido, entre outros. Para mais informações sobre cada um dos parâmetros, por favor consulte a documentação da função disponível no pacote ou no site do <code>r5r</code> <a href="https://ipeagit.github.io/r5r/reference/travel_time_matrix.html">aqui</a>.</p>
