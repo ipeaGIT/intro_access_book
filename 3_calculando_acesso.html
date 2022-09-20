@@ -407,7 +407,7 @@ OpenJDK 64-Bit Server VM Zulu11.58+15-CA (build 11.0.16+8-LTS, mixed mode)</code
 <p>Os arquivos destes dados devem ser salvos em uma mesma pasta que, preferencialmente, não contenha nenhum outro arquivo. Como se verá adiante, o <code>r5r</code> combina todos os dados salvos nesta pasta para criar uma rede de transporte multimodal que será utilizada para simulações de roteamento e cálculo das matrizes de viagem. Note que é possível ter mais de um arquivo GTFS na mesma pasta, nesse caso o <code>r5r</code> irá considerar as redes de transporte públicos de todos <em>feeds</em>. No entanto, a pasta deve conter um único arquivo de rede viária <code>.pbf</code>. Assumindo que os scripts de R estarão em uma pasta chamada R, a organização dos arquivos deverá seguir o esquema abaixo:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>/tmp/Rtmpen3S35/projeto_acessibilidade
+<pre><code>/tmp/RtmpxPsKVc/projeto_acessibilidade
 ├── R
 │   ├── script1.R
 │   └── script2.R
@@ -455,10 +455,56 @@ OpenJDK 64-Bit Server VM Zulu11.58+15-CA (build 11.0.16+8-LTS, mixed mode)</code
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/poa"</span>, package <span class="op">=</span> <span class="st">"r5r"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">r5r_core</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/r5r/man/setup_r5.html">setup_r5</a></span><span class="op">(</span><span class="va">path</span>, use_elevation <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">r5r_core</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/r5r/man/setup_r5.html">setup_r5</a></span><span class="op">(</span><span class="va">path</span>, use_elevation <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_tree.html">dir_tree</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/home/runner/work/_temp/renv/cache/v5/R-4.2/x86_64-pc-linux-gnu/r5r/0.7.1/61db001154cd833466a25c4eb195c9b0/r5r/extdata/poa
+├── network.dat
+├── poa.zip
+├── poa_elevation.tif
+├── poa_hexgrid.csv
+├── poa_osm.pbf
+├── poa_osm.pbf.mapdb
+├── poa_osm.pbf.mapdb.p
+└── poa_points_of_interest.csv</code></pre>
+</div>
 </div>
 <p>O passo final é usar a função para o cálculo da matriz de tempo de viagem, apropriadamente chamada de <code><a href="https://rdrr.io/pkg/r5r/man/travel_time_matrix.html">travel_time_matrix()</a></code>. Como <em>inputs</em> básicos, a função recebe a conexão com o R5 criada acima, pontos de origem e destino em formato de <code>data.frame</code> com as colunas <code>id</code>, <code>lon</code> e <code>lat</code>, o modo de transporte a ser utilizado, o horário de partida, o tempo máximo de caminhada permitido da origem até o embarque no transporte público e do desembarque até o destino, e o tempo máximo de viagem a ser considerado.</p>
-<p><c para="" calcular="" a="" matriz="" de="" tempo="" viagem=""></c></p>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">points</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">fread</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"poa_hexgrid.csv"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ttm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/r5r/man/travel_time_matrix.html">travel_time_matrix</a></span><span class="op">(</span></span>
+<span>  <span class="va">r5r_core</span>,</span>
+<span>  origins <span class="op">=</span> <span class="va">points</span>,</span>
+<span>  destinations <span class="op">=</span> <span class="va">points</span>,</span>
+<span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"WALK"</span>, <span class="st">"TRANSIT"</span><span class="op">)</span>,</span>
+<span>  departure_datetime <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html">as.POSIXct</a></span><span class="op">(</span></span>
+<span>    <span class="st">"13-05-2019 14:00:00"</span>,</span>
+<span>    format <span class="op">=</span> <span class="st">"%d-%m-%Y %H:%M:%S"</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  max_walk_dist <span class="op">=</span> <span class="fl">800</span>,</span>
+<span>  max_trip_duration <span class="op">=</span> <span class="fl">120</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  progress <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ttm</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  fromId            toId travel_time
+      1: 89a901291abffff 89a901291abffff           1
+      2: 89a901291abffff 89a901295b7ffff          41
+      3: 89a901291abffff 89a9012809bffff          43
+      4: 89a901291abffff 89a901285cfffff          35
+      5: 89a901291abffff 89a90e934d7ffff          71
+     ---                                            
+1169147: 89a90166da7ffff 89a90129133ffff          58
+1169148: 89a90166da7ffff 89a9012ac43ffff          93
+1169149: 89a90166da7ffff 89a90129a47ffff          19
+1169150: 89a90166da7ffff 89a90128883ffff          65
+1169151: 89a90166da7ffff 89a90166da7ffff           0</code></pre>
+</div>
+</div>
 <p>Diversos outros <em>inputs</em> podem ser passados para o cálculo da matriz, como a velocidade de caminhada e o número máximo de pernas de transporte público permitido, entre outros. Para mais informações sobre cada um dos parâmetros, por favor consulte a documentação da função disponível no pacote ou no site do <code>r5r</code> <a href="https://ipeagit.github.io/r5r/reference/travel_time_matrix.html">aqui</a>.</p>
 <p>Na prática, o que a função <code><a href="https://rdrr.io/pkg/r5r/man/travel_time_matrix.html">travel_time_matrix()</a></code> faz é encontrar qual a rota de viagem mais rápida partindo de cada ponto de origem para todos os possíveis pontos de destino considerando o modo de viagem, horário de partida e demais parâmetros passados pelo usuário. Para isso, o <code>r5r</code> considera tempos de viagem de porta-a-porta. No caso de uma viagem por transporte público, por exemplo, o tempo total de viagem inclui a) o tempo de caminhada até a parada de transporte público; b) o tempo de espera pelo veículo na parada; c) o tempo de deslocamento dentro do veículo; e d) o tempo de viagem a pé da parada de desembarque até o destino. Em casos em que mais de uma rota de transporte público é utilizada, o <code>r5r</code> também contabiliza o tempo gasto nas conexões, considerando a caminhada entre paradas e o tempo de espera pelo próximo veículo.</p>
 <div class="callout-note callout callout-style-simple">
@@ -477,22 +523,159 @@ OpenJDK 64-Bit Server VM Zulu11.58+15-CA (build 11.0.16+8-LTS, mixed mode)</code
 <p>Como <em>input</em> básico, todas as funções requerem uma matriz de custo pré-calculada (no nosso caso, a matriz de tempo de viagem calculada na seção anterior) e dados de uso do solo, como o número de determinados tipos de oportunidades em cada ponto da área de estudo, por exemplo.</p>
 <p><strong>Medida cumulativa de acesso a oportunidades</strong></p>
 <p>O exemplo abaixo mostra uma simples aplicação da função <code><a href="https://rdrr.io/pkg/accessibility/man/cumulative_cutoff.html">cumulative_cutoff()</a></code>, utilizada para calcular o número de oportunidades que pode ser alcançado em um determinado limite de custo de viagem. No exemplo abaixo, nós calculamos o número de postos de trabalho que podem ser alcançados em até 30 minutos de viagem a partir de cada origem presente em nossa matriz de tempo de viagem.</p>
-<p><c></c></p>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setattr.html">setnames</a></span><span class="op">(</span><span class="va">ttm</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"fromId"</span>, <span class="st">"toId"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"from_id"</span>, <span class="st">"to_id"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">cumulative_access</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/accessibility/man/cumulative_cutoff.html">cumulative_cutoff</a></span><span class="op">(</span></span>
+<span>  <span class="va">ttm</span>,</span>
+<span>  <span class="va">points</span>,</span>
+<span>  opportunity <span class="op">=</span> <span class="st">"schools"</span>,</span>
+<span>  travel_cost <span class="op">=</span> <span class="st">"travel_time"</span>,</span>
+<span>  cutoff <span class="op">=</span> <span class="fl">30</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">cumulative_access</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   id schools
+   1: 89a901291abffff      19
+   2: 89a9012a3cfffff       0
+   3: 89a901295b7ffff      15
+   4: 89a901284a3ffff       0
+   5: 89a9012809bffff      20
+  ---                        
+1223: 89a90129133ffff       4
+1224: 89a9012ac43ffff       9
+1225: 89a90129a47ffff      12
+1226: 89a90128883ffff      31
+1227: 89a90166da7ffff      15</code></pre>
+</div>
+</div>
 <p><strong>Mínimo custo de viagem</strong></p>
 <p>A função <code><a href="https://rdrr.io/pkg/accessibility/man/cost_to_closest.html">cost_to_closest()</a></code>, por sua vez, calcula o mínimo custo de viagem necessário para alcançar um determinado número de oportunidades. O código abaixo, por exemplo, calcula o tempo de viagem mínimo para alcançar o hospital mais próximo a partir de cada origem.</p>
-<p><c></c></p>
+<div class="cell">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">min_cost</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/accessibility/man/cost_to_closest.html">cost_to_closest</a></span><span class="op">(</span></span>
+<span>  <span class="va">ttm</span>,</span>
+<span>  <span class="va">points</span>,</span>
+<span>  opportunity <span class="op">=</span> <span class="st">"schools"</span>,</span>
+<span>  travel_cost <span class="op">=</span> <span class="st">"travel_time"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in `[.data.table`(filled_access_df, is.na(get(access_col)),
+`:=`(eval(access_col, : inf (type 'double') at RHS position 1 truncated
+(precision lost) when assigning to type 'integer' (column 2 named 'min_cost')</code></pre>
+</div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">min_cost</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   id travel_time
+   1: 89a9012124fffff           0
+   2: 89a9012126bffff          16
+   3: 89a9012127bffff          11
+   4: 89a90128003ffff           7
+   5: 89a90128007ffff          20
+  ---                            
+1223: 89a90e934cbffff          13
+1224: 89a90e934cfffff           9
+1225: 89a90e934d3ffff           7
+1226: 89a90e934d7ffff           0
+1227: 89a90e934dbffff          23</code></pre>
+</div>
+</div>
 <p><strong>Medidas gravitacionais de acessibilidade</strong></p>
 <p>A função <code><a href="https://rdrr.io/pkg/accessibility/man/gravity.html">gravity()</a></code> calcula medidas gravitacionais de acessibilidade - ou seja, aquelas nas quais o peso de cada oportunidade diminui gradualmente com o aumento do custo de viagem. Existem, no entanto, uma gama de diferentes tipos de funções de decaimento que podem ser utilizadas, como funções de decaimento exponenciais negativas, de potências inversas, entre outras. Por isso, esta função recebe um <em>input</em> adicional: a função de decaimento a ser utilizada no cálculo. O exemplo abaixo apresenta o cálculo de acessibilidade a estabelecimentos de educação usando uma medida gravitacional exponencial negativa com parâmetro de decaimento igual a <code>0.2</code>.</p>
-<p><c></c></p>
+<div class="cell">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">negative_exp_access</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/accessibility/man/gravity.html">gravity</a></span><span class="op">(</span></span>
+<span>  <span class="va">ttm</span>,</span>
+<span>  <span class="va">points</span>,</span>
+<span>  opportunity <span class="op">=</span> <span class="st">"schools"</span>,</span>
+<span>  travel_cost <span class="op">=</span> <span class="st">"travel_time"</span>,</span>
+<span>  decay_function <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/accessibility/man/decay_exponential.html">decay_exponential</a></span><span class="op">(</span><span class="fl">0.2</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">negative_exp_access</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   id    schools
+   1: 89a901291abffff 0.35892873
+   2: 89a9012a3cfffff 0.00000000
+   3: 89a901295b7ffff 0.52061269
+   4: 89a901284a3ffff 0.00000000
+   5: 89a9012809bffff 0.44769080
+  ---                           
+1223: 89a90129133ffff 0.02885676
+1224: 89a9012ac43ffff 0.09138463
+1225: 89a90129a47ffff 0.35857154
+1226: 89a90128883ffff 1.86366449
+1227: 89a90166da7ffff 0.40513107</code></pre>
+</div>
+</div>
 <p><strong>Indicadores de acessibilidade com competição</strong></p>
 <p>Por fim, a função <code><a href="https://rdrr.io/pkg/accessibility/man/floating_catchment_area.html">floating_catchment_area()</a></code> calcula níveis de acessibilidade levando em consideração a competição por oportunidades usando diferentes indicadores do tipo <em>floating catchment area</em>. Como diversos métodos de FCA podem ser utilizados, a função requer que o método desejado seja explicitamente assinalado. E, assim como a função de acessibilidade gravitacional, a função de decaimento utilizada também deve ser definida pelo usuário. O código a seguir mostra um exemplo de cálculo de acessibilidade a oportunidades de emprego usando o método BFCA <span class="citation" data-cites="paez2019demand">(<a href="references.html#ref-paez2019demand" role="doc-biblioref">Paez, Higgins, and Vivona 2019</a>)</span>, levando em consideração os efeitos de competição entre a população como um todo e uma função de decaimento exponencial com parâmetro de decaimento igual a 2.</p>
-<p><c></c></p>
+<div class="cell">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">bfca_access</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/accessibility/man/floating_catchment_area.html">floating_catchment_area</a></span><span class="op">(</span></span>
+<span>  <span class="va">ttm</span>,</span>
+<span>  <span class="va">points</span>,</span>
+<span>  opportunity <span class="op">=</span> <span class="st">"schools"</span>,</span>
+<span>  travel_cost <span class="op">=</span> <span class="st">"travel_time"</span>,</span>
+<span>  demand <span class="op">=</span> <span class="st">"population"</span>,</span>
+<span>  method <span class="op">=</span> <span class="st">"bfca"</span>,</span>
+<span>  decay_function <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/accessibility/man/decay_exponential.html">decay_exponential</a></span><span class="op">(</span><span class="fl">0.05</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">bfca_access</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   id      schools
+   1: 89a901291abffff 0.0002574442
+   2: 89a9012a3cfffff 0.0000000000
+   3: 89a901295b7ffff 0.0002091911
+   4: 89a901284a3ffff 0.0000000000
+   5: 89a9012809bffff 0.0002276971
+  ---                             
+1223: 89a90129133ffff 0.0001352617
+1224: 89a9012ac43ffff 0.0001416331
+1225: 89a90129a47ffff 0.0001777023
+1226: 89a90128883ffff 0.0002372291
+1227: 89a90166da7ffff 0.0001957669</code></pre>
+</div>
+</div>
 <p>As funções apresentadas nesta seção podem receber também outros <em>inputs</em> não explicitamente mencionados aqui. Para mais informações sobre cada um dos parâmetros, por favor consulte a documentação do pacote <code>accessibility</code> no seu <a href="https://ipeagit.github.io/accessibility/">site</a>.</p>
 </section><section id="cálculo-de-acessibilidade-com-o-r5r" class="level2" data-number="3.3"><h2 data-number="3.3" class="anchored" data-anchor-id="cálculo-de-acessibilidade-com-o-r5r">
 <span class="header-section-number">3.3</span> Cálculo de acessibilidade com o r5r</h2>
 <p>Ao longo das duas seções anteriores, nós mostramos como calcular níveis de acessibilidade passo-a-passo. Para fins didáticos, é importante entender que o cálculo de estimativas de acessibilidade tem como primeiro passo a geração de uma matriz de custos de viagens a partir de simulações de roteamento, que posteriormente é utilizada para estimar níveis de acessibilidade.</p>
 <p>No entanto, o <code>r5r</code> inclui também uma função chamada <code><a href="https://rdrr.io/pkg/r5r/man/accessibility.html">accessibility()</a></code> que faz todo esse processamento com uma única chamada. De forma parecida com a função de cálculo de matriz de tempo de viagem, a função de acessibilidade também recebe como <em>inputs</em> uma conexão com o R5, as origens, os destinos, os modos de transporte, o tempo de partida, entre outros. Adicionalmente, devem ser listadas também quais oportunidades devem ser consideradas e a função de decaimento que deve ser utilizada (bem como o valor do limite de custo e de parâmetro de decaimento). O exemplo abaixo mostra uma aplicação desta função.</p>
-<p><c></c></p>
+<div class="cell">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">r5r_access</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/r5r/man/accessibility.html">accessibility</a></span><span class="op">(</span></span>
+<span>  <span class="va">r5r_core</span>,</span>
+<span>  origins <span class="op">=</span> <span class="va">points</span>,</span>
+<span>  destinations <span class="op">=</span> <span class="va">points</span>,</span>
+<span>  opportunities_colname <span class="op">=</span> <span class="st">"schools"</span>,</span>
+<span>  decay_function <span class="op">=</span> <span class="st">"step"</span>,</span>
+<span>  cutoffs <span class="op">=</span> <span class="fl">30</span>,</span>
+<span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"WALK"</span>, <span class="st">"TRANSIT"</span><span class="op">)</span>,</span>
+<span>  departure_datetime <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html">as.POSIXct</a></span><span class="op">(</span></span>
+<span>    <span class="st">"13-05-2019 14:00:00"</span>,</span>
+<span>    format <span class="op">=</span> <span class="st">"%d-%m-%Y %H:%M:%S"</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  max_walk_dist <span class="op">=</span> <span class="fl">800</span>,</span>
+<span>  max_trip_duration <span class="op">=</span> <span class="fl">120</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  progress <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">r5r_access</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              from_id percentile cutoff accessibility
+   1: 89a901291abffff         50     30            17
+   2: 89a9012a3cfffff         50     30             0
+   3: 89a901295b7ffff         50     30            13
+   4: 89a901284a3ffff         50     30             0
+   5: 89a9012809bffff         50     30            17
+  ---                                                
+1223: 89a90129133ffff         50     30             1
+1224: 89a9012ac43ffff         50     30             8
+1225: 89a90129a47ffff         50     30            10
+1226: 89a90128883ffff         50     30            30
+1227: 89a90166da7ffff         50     30            14</code></pre>
+</div>
+</div>
 <p>Como podemos observar, o resultado desta função são os níveis de acessibilidade já calculados. A informação “intermediária” de tempo de viagem entre origens e destinos, consequentemente, não fica disponível ao usuário com o uso da função. Ainda assim, este fluxo de trabalho pode ser uma boa alternativa para pessoas que estejam interessados puramente nos níveis de acessibilidade e não dependam do tempo de viagem em suas análises.</p>
 </section><section id="análises-de-acessibilidade" class="level2" data-number="3.4"><h2 data-number="3.4" class="anchored" data-anchor-id="análises-de-acessibilidade">
 <span class="header-section-number">3.4</span> Análises de acessibilidade</h2>
