@@ -97,7 +97,9 @@ options(java.parameters = "-Xmx2G")
 
 Pronto, agora vamos carregar as bibliotecas que vamos utilizar neste capítulo.
 
-```{r, warning = FALSE, message = FALSE}
+```{r}
+#| warning: false
+#| message: false
 library(r5r)
 library(accessibility)
 library(sf)
@@ -112,11 +114,30 @@ Feito isso, o cálculo de uma matriz de tempo de viagens da sua área de estudo 
 path <- system.file("extdata/poa", package = "r5r")
 
 r5r_core <- setup_r5(path, use_elevation = TRUE, verbose = FALSE)
+
+fs::dir_tree(path)
 ```
 
 O passo final é usar a função para o cálculo da matriz de tempo de viagem, apropriadamente chamada de `travel_time_matrix()`. Como *inputs* básicos, a função recebe a conexão com o R5 criada acima, pontos de origem e destino em formato de `data.frame` com as colunas `id`, `lon` e `lat`, o modo de transporte a ser utilizado, o horário de partida, o tempo máximo de caminhada permitido da origem até o embarque no transporte público e do desembarque até o destino, e o tempo máximo de viagem a ser considerado.
 
-<código para calcular a matriz de tempo de viagem>
+```{r}
+points <- fread(file.path(path, "poa_hexgrid.csv"))
+
+ttm <- travel_time_matrix(
+  r5r_core,
+  origins = points,
+  destinations = points,
+  mode = c("WALK", "TRANSIT"),
+  departure_datetime = as.POSIXct(
+    "13-05-2019 14:00:00",
+    format = "%d-%m-%Y %H:%M:%S"
+  ),
+  max_walk_dist = 800,
+  max_trip_duration = 120 
+)
+
+ttm
+```
 
 Diversos outros *inputs* podem ser passados para o cálculo da matriz, como a velocidade de caminhada e o número máximo de pernas de transporte público permitido, entre outros. Para mais informações sobre cada um dos parâmetros, por favor consulte a documentação da função disponível no pacote ou no site do `r5r` [aqui](https://ipeagit.github.io/r5r/reference/travel_time_matrix.html).
 
