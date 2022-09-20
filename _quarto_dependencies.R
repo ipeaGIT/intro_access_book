@@ -1,2 +1,5 @@
 library(xml2)
 library(downlit)
+library(testthat)
+library(rgdal)
+library(codetools)
