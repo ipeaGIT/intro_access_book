@@ -105,6 +105,7 @@ library(accessibility)
 library(sf)
 library(data.table)
 library(ggplot2)
+library(aopdata)
 ```
 
 Feito isso, o cálculo de uma matriz de tempo de viagens da sua área de estudo pode ser feito em dois passos. O primeiro passo é gerar a rede de transporte multimodal que será utilizada no roteamento. Para isso, nós utilizamos a função `setup_r5()`. Esta função baixa o *software* de roteamento R5 e o utiliza para criar a rede. A função `setup_r5()` recebe como *input* o caminho da pasta onde você armazenou seus dados. Além da função salvar na pasta alguns arquivos necessários para o roteamento, ela também retorna uma conexão com o R5, que neste exemplo nós chamamos de `r5r_core`, e que será utilizada no cálculo da matriz de tempo de viagem.
@@ -262,13 +263,27 @@ Calculados os níveis de acessibilidade, procedemos então para sua análise. Ex
 
 Para compreendermos a distribuição espacial da acessibilidade urbana de uma determinada cidade ou região, primeiro precisamos obter as informações espaciais dos pontos que foram utilizados como origens e destinos no cálculo da matriz. Os pontos que nós usamos nos exemplos anteriores, por exemplo, correspondem a células de uma grade hexagonal baseadas no índice H3, desenvolvido pela Uber [@brodsky2018h3]. O código e o mapa a seguir mostram a distribuição desses hexágonos na nossa área de estudo.
 
-<código>
-<mapa>
+```{r}
+#| message: false
+poa_grid <- read_grid("Porto Alegre")
+
+poa_grid <- poa_grid[poa_grid$id_hex %in% points$id, ]
+
+ggplot(poa_grid) + geom_sf()
+```
 
 Para visualizarmos os nossos dados de acessibilidade espacialmente, portanto, nós precisamos unir a nossa tabela com estimativas de acessibilidade com a tabela que contém os dados espaciais da grade usando a coluna de `id` dos hexágonos como nossa coluna-chave. Os comandos usados para isso, bem como o resultado da operação em formato de imagem, podem ser vistos no código e no mapa a seguir.
 
-<código>
-<mapa>
+```{r}
+setDT(poa_grid)
+poa_grid[cumulative_access, on = c(id_hex = "id"), schools_access := i.schools]
+
+poa_grid_sf <- st_sf(poa_grid)
+
+ggplot(poa_grid_sf) +
+  geom_sf(aes(fill = schools_access), color = NA) +
+  scale_fill_viridis_c(option = "inferno")
+```
 
 Como podemos ver, os níveis de acessibilidade tendem a se concentrar de forma mais acentuada no centro da cidade, onde existe maior concentração de empregos, e próximos aos grandes corredores de transportes da cidade. Pessoas que moram mais perto desses corredores tendem a gastar menos tempo no acesso a suas estações e conseguem acessar locais distantes relativamente rápido, por terem fácil acesso a modos de alta capacidade e velocidade. Pessoas que moram mais longe desses corredores, por sua vez, dependem de modos de menor velocidade operacional (como os ônibus municipais, por exemplo) e precisam gastar mais tempo para alcançar os corredores de média e alta capacidade. Como consequência, seus níveis de acessibilidade tendem a ser menores.
 
@@ -278,11 +293,36 @@ O mapa acima, embora revelador quanto aos locais em que estão dispostas as maio
 
 Os dados com as características socioeconômicas e perfil de renda que utilizamos no exemplo vêm do censo demográfico brasileiro de 2010, e foram agregados na grade espacial de dos hexágonos por @pereira2022usosolo. Aqui, nós acessamos os dados diretamente de dentro do R usando o pacote `aopdata`, que será apresentado em mais detalhes no capítulo Xx.
 
-<código>
+```{r}
+#| message: false
+poa_population <- read_population("Porto Alegre", showProgress = FALSE)
+
+poa_grid[
+  poa_population,
+  on = "id_hex",
+  `:=`(
+    pop_count = i.P001,
+    income_decile = i.R003
+  )
+]
+
+poa_grid[, .(id_hex, schools_access, pop_count, income_decile)]
+```
 
 Como vocês podem perceber, nós também trouxemos a informação de contagem populacional em cada origem. Isto se dá porque nós iremos calcular a distribuição da acessibilidade de cada um dos decis de renda. Para isso, portanto, nós precisamos ponderar o nível de acessibilidade de cada origem pela quantidade de pessoas que residem ali. Desta forma, nós teremos a distribuição da acessibilidade das pessoas localizadas em origens de um determinado decil de renda. Caso optássemos por não ponderar, no entanto, nós teríamos a distribuição de acessibilidade não das pessoas localizadas em cada hexágono, mas dos hexágonos em si. Como em nossa análise nós nos importamos com as pessoas, e não com as células espaciais, precisamos fazer a ponderação. Nós podemos visualizar a distribuição de acessibilidade de cada decil usando um boxplot, como feito a seguir.
 
-<código>
-<gráfico>
+```{r}
+poa_grid[, income_decile := as.factor(income_decile)]
+
+ggplot(poa_grid[!is.na(income_decile)]) +
+  geom_boxplot(
+    aes(
+      x = income_decile,
+      y = schools_access,
+      color = income_decile,
+      weight = pop_count
+    )
+  )
+```
 
 O gráfico é muito claro em seu conteúdo: pessoas de mais baixa renda tendem a ter níveis de acessibilidade muito menores do que as de alta renda. Isso é um padrão comum em praticamente todas as cidades brasileiras e em diversas cidades do mundo [@pereira2019desigualdades]. Isto ocorre, em larga medida, devido à localização espacial das comunidades de baixa e alta renda no território: os mais ricos costumam morar em áreas mais valorizadas, próximas das grandes concentração de empregos (e oportunidades de educação, saúde, lazer, etc., também) e com maior oferta de transporte público de média e alta capacidade. Os mais pobres, por sua vez, tendem a morar em locais mais afastados, onde o valor da terra é menor. Consequentemente, tendem também a se afastar das grandes concentrações de oportunidades. Junta-se a isso o fato de, na maior parte dos casos, a oferta de serviços de transporte público de média e alta capacidade ser menor em locais com maior concentração de pessoas de baixa renda. Como consequência, seus níveis de acessibilidade são, em média, muito menores do que os dos mais ricos, como o gráfico deixa claro.
