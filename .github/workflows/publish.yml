@@ -39,6 +39,13 @@ jobs:
       - name: Install R Dependencies
         uses: r-lib/actions/setup-renv@v2
 
+      - name: Restore _freeze
+        uses: actions/cache@v3
+        with:
+          path: _freeze
+          key: freeze-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: freeze-${{ runner.os }}-
+
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
         with:
