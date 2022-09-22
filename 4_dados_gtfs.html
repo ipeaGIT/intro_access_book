@@ -27,7 +27,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./5_gtfstools.html" rel="next">
-<link href="./p3_dados_tp.html" rel="prev">
+<link href="./s3_dados_tp.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -147,7 +147,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./p3_dados_tp.html" class="sidebar-item-text sidebar-link">Seção 3: Dados de transporte público</a>
+            <a href="./s3_dados_tp.html" class="sidebar-item-text sidebar-link">SEÇÃO 3: Dados de transporte público</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -235,6 +235,13 @@ ul.task-list li input[type="checkbox"] {
 <a href="#estrutura-dos-arquivos-de-gtfs" id="toc-estrutura-dos-arquivos-de-gtfs" class="nav-link active" data-scroll-target="#estrutura-dos-arquivos-de-gtfs"><span class="toc-section-number">4.1</span>  Estrutura dos arquivos de GTFS</a>
   <ul class="collapse">
 <li><a href="#agency.txt" id="toc-agency.txt" class="nav-link" data-scroll-target="#agency.txt"><span class="toc-section-number">4.1.1</span>  agency.txt</a></li>
+  <li><a href="#stops.txt" id="toc-stops.txt" class="nav-link" data-scroll-target="#stops.txt"><span class="toc-section-number">4.1.2</span>  stops.txt</a></li>
+  <li><a href="#routes.txt" id="toc-routes.txt" class="nav-link" data-scroll-target="#routes.txt"><span class="toc-section-number">4.1.3</span>  routes.txt</a></li>
+  <li><a href="#trips.txt" id="toc-trips.txt" class="nav-link" data-scroll-target="#trips.txt"><span class="toc-section-number">4.1.4</span>  trips.txt</a></li>
+  <li><a href="#calendar.txt" id="toc-calendar.txt" class="nav-link" data-scroll-target="#calendar.txt"><span class="toc-section-number">4.1.5</span>  calendar.txt</a></li>
+  <li><a href="#shapes.txt" id="toc-shapes.txt" class="nav-link" data-scroll-target="#shapes.txt"><span class="toc-section-number">4.1.6</span>  shapes.txt</a></li>
+  <li><a href="#stop_times.txt" id="toc-stop_times.txt" class="nav-link" data-scroll-target="#stop_times.txt"><span class="toc-section-number">4.1.7</span>  stop_times.txt</a></li>
+  <li><a href="#frequencies.txt" id="toc-frequencies.txt" class="nav-link" data-scroll-target="#frequencies.txt"><span class="toc-section-number">4.1.8</span>  frequencies.txt</a></li>
   </ul>
 </li>
   <li><a href="#onde-encontrar-gtfs-de-cidades-brasileiras" id="toc-onde-encontrar-gtfs-de-cidades-brasileiras" class="nav-link" data-scroll-target="#onde-encontrar-gtfs-de-cidades-brasileiras"><span class="toc-section-number">4.2</span>  Onde encontrar GTFS de cidades brasileiras</a></li>
@@ -261,33 +268,49 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
-</header><p>O formato GTFS, como comentado na introdução desta seção, é uma especificação aberta e colaborativa que visa descrever os principais componentes de uma rede de transporte público. Atualmente, dados GTFS podem ser divididos em duas grandes categorias:</p>
+</header><p>O formato GTFS é uma especificação aberta e colaborativa que visa descrever os principais componentes de uma rede de transporte público. Atualmente, dados GTFS podem ser divididos em duas grandes categorias:</p>
 <ul>
-<li>GTFS Schedule, ou GTFS Static, que contém o cronograma estático de linhas de transporte público e informações espaciais sobre o itinerário de cada linha e suas paradas;</li>
-<li>GTFS Realtime, que contém informações de localização de veículos em tempo real e alertas de possíveis atrasos, de mudanças de percurso e de eventos que possam interferir no cronograma planejado.</li>
+<li>
+<em>GTFS Schedule</em>, ou <em>GTFS Static</em>, que contém o cronograma estático de linhas de transporte público e informações espaciais sobre o itinerário de cada linha e suas paradas;</li>
+<li>
+<em>GTFS Realtime</em>, que contém informações de localização de veículos em tempo real e alertas de possíveis atrasos, de mudanças de percurso e de eventos que possam interferir no cronograma planejado.</li>
 </ul>
 <p>Ao longo desta seção, nós focaremos no <strong>GTFS Schedule</strong>. Clique <a href="https://gtfs.org/realtime/">aqui</a> para mais informações sobre o GTFS Realtime.</p>
-<p>Por ser uma especificação aberta e colaborativa, o formato GTFS tenta abarcar em sua definição um grande número de usos distintos que agências de transporte e desenvolvedores de ferramentas possam dar a ele. No entanto, agências e <em>softwares</em> podem ainda assim depender de informações que não constem na especificação oficial. Surgem, dessa forma, <a href="https://gtfs.org/extensions/">extensões</a> da especificação. Algumas dessas extensões podem eventualmente se tornar parte da especificação oficial, caso isto seja aceito pela comunidade de usuários do GTFS, enquanto a especificação de outras é continuamente desenvolvida paralelamente à oficial. Nesta seção nós focaremos em um subconjunto de informações presentes no formato GTFS Schedule “puro”, e, portanto, não cobriremos suas extensões.</p>
+<p>Por ser uma especificação aberta e colaborativa, o formato GTFS tenta abarcar em sua definição um grande número de usos distintos que agências de transporte e desenvolvedores de ferramentas possam dar a ele. No entanto, agências e <em>softwares</em> podem ainda assim depender de informações que não constem na especificação oficial. Surgem, dessa forma, <a href="https://gtfs.org/extensions/">extensões</a> da especificação. Algumas dessas extensões podem eventualmente se tornar parte da especificação oficial, caso isto seja aceito pela comunidade de usuários do GTFS. Nesta seção nós focaremos em um subconjunto de informações presentes no formato GTFS Schedule “puro”, e, portanto, não cobriremos suas extensões.</p>
 <section id="estrutura-dos-arquivos-de-gtfs" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="estrutura-dos-arquivos-de-gtfs">
 <span class="header-section-number">4.1</span> Estrutura dos arquivos de GTFS</h2>
+<p>Usualmente, refere-se a um arquivo no formato GTFS Schedule (daqui em diante chamado apenas de GTFS) como <em>feed</em>. Neste livro, nós utilizaremos os termos <em>feed</em> e arquivo GTFS como sinônimos.</p>
+<p>Um <em>feed</em> é nada mais do que um arquivo comprimido em formato <code>.zip</code> que contém um conjunto de tabelas salvas em formato <code>.txt</code> com algumas informações sobre a rede de transporte público (e.g.&nbsp;localização das paradas, frequências das viagens, traçado das rotas etc). Como em uma base de dados relacional, as tabelas de um <em>feed</em> têm algumas colunas-chave que permitem vincular os dados rotas, viagens, tabelas de horários etc. O esquema geral do GTFS é mostrado na <a href="#fig-scheme">Figure&nbsp;<span>4.1</span></a>, mostrando apenas algumas das principais tabelas e com as colunas-chave destacadas como os pontos finais das setas.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-scheme" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="images/gtfs_scheme.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4.1: Esquema do formato GTFS</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Ao todo, 22 tabelas compõem o formato GTFS<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Nem todas, no entanto, são obrigatórias para que um feed seja considerado válido - sendo consideradas, portanto, opcionais. A especificação classifica cada tabela conforme sua obrigatoriedade em três possíveis categorias: obrigatórias, opcionais e condicionalmente obrigatórias (quando a obrigatoriedade de uma tabela depende da existência de uma determinada tabela, coluna ou valor). Para fins de simplicidade, neste livro nós consideraremos apenas as duas primeiras categorias e faremos comentários quanto à obrigatoriedade de cada tabela quando apropriado. Desta forma, ficam assim classificadas as tabelas:</p>
+<ul>
+<li>Obrigatórias: agency.txt, stops.txt, routes.txt, trips.txt, stop_times.txt, calendar.txt</li>
+<li>Opcionais: calendar_dates.txt, fare_attributes.txt, fare_rules.txt, fare_products.txt, fare_leg_rules.txt, fare_transfer_rules.txt, areas.txt, stop_areas.txt, shapes.txt, frequencies.txt, transfers.txt, pathways.txt, levels.txt, translations.txt, feed_info.txt, attributions.txt</li>
+</ul>
+<p>Ao longo desta seção, nós aprenderemos a estrutura básica de um arquivo GTFS e das tabelas que o compõem. Portanto, vamos olhar apenas para as tabelas obrigatórias e para as tabelas opcionais mais frequentemente utilizadas por produtores e consumidores desses arquivos. Para mais informações sobre as tabelas e as colunas não abordadas nesta seção, por favor verifique a <a href="https://gtfs.org/schedule/reference/">especificação oficial</a>.</p>
+<p>Nesta demonstração, nós utilizaremos um subconjunto de dados provenientes do <em>feed</em> da cidade de São Paulo criado pela SPTrans<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> e baixado em outubro de 2019. O <em>feed</em> contém as seis tabelas obrigatórias e mais duas tabelas opcionais bastante utilizadas, <code>shapes.txt</code> e <code>frequencies.txt</code>, o que permite uma boa visão geral sobre o formato GTFS.</p>
 <div class="cell">
 
 </div>
 <section id="agency.txt" class="level3" data-number="4.1.1"><h3 data-number="4.1.1" class="anchored" data-anchor-id="agency.txt">
 <span class="header-section-number">4.1.1</span> agency.txt</h3>
-<p>A <a href="#tbl-agency">Table&nbsp;<span>4.1</span></a> …</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>agency_id,agency_name,agency_url,agency_timezone,agency_lang
-1,SPTRANS,http://www.sptrans.com.br/?versao=011019,America/Sao_Paulo,pt </code></pre>
-</div>
-</div>
+<p>Arquivo utilizado para descrever as operadoras de transporte que atuam no sistema descrito no arquivo GTFS. Embora o termo <em>agency</em> (agência) seja usado em lugar de <em>operators</em> (operadoras), por exemplo, fica a cargo do produtor do <em>feed</em> definir quais instituições serão listadas na tabela.</p>
+<p>Por exemplo: múltiplas concessionárias de ônibus atuam em um determinado local, mas todo o planejamento de cronograma e de tarifa é realizado por uma instituição, em geral uma secretaria de transporte ou empresa pública específica. Esta instituição é também entendida pelos usuários do sistema como a operadora, de fato. Neste caso, devemos listar a instituição responsável pelo planejamento na tabela.</p>
+<p>Agora, imagine um sistema em que a agência de transporte público local transfere a responsabilidade da operação de um sistema multimodal a diversas empresas, por meio de concessões. Cada uma dessas empresas é responsável pelo planejamento de cronogramas e tarifas dos modos que operam, desde que sejam seguidos determinados parâmetros pré-estabelecidos em contrato. Neste caso, devemos listar as operadoras (concessionárias) na tabela, e não a agência de transporte público em si.</p>
+<p>A <a href="#tbl-agency">Table&nbsp;<span>4.1</span></a> mostra o arquivo <code>agency.txt</code> do <em>feed</em> da SPTrans. Como vocês podem ver, os responsáveis pelo <em>feed</em> optaram por listar a própria empresa no arquivo, e não as concessionárias que operam os ônibus e o metrô da cidade.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-agency" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;4.1: Exemplo de tabela <em>agency</em>
-</caption>
+<caption>Table&nbsp;4.1: Exemplo de arquivo agency.txt</caption>
 <colgroup>
 <col style="width: 10%">
 <col style="width: 12%">
@@ -313,12 +336,21 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+<p>É necessário notar que, embora estejamos apresentando o <code>agency.txt</code> em formato de tabela, o arquivo deve ser formatado como se fosse salvo em formato <code>.csv</code>. Ou seja, os valores de cada célula da tabela devem ser separados por vírgulas, e cada linha da tabela deve constar em uma linha no arquivo. A tabela acima, por exemplo, é definida da seguinte forma:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>agency_id,agency_name,agency_url,agency_timezone,agency_lang
+1,SPTRANS,http://www.sptrans.com.br/?versao=011019,America/Sao_Paulo,pt </code></pre>
+</div>
+</div>
+<p>Por uma questão de comunicação e interpretação dos dados, ao longo desta seção sempre apresentaremos os exemplos em formato de tabela. É importante ter em mente, porém, que essas tabelas são internamente estruturadas como mostrado acima.</p>
+</section><section id="stops.txt" class="level3" data-number="4.1.2"><h3 data-number="4.1.2" class="anchored" data-anchor-id="stops.txt">
+<span class="header-section-number">4.1.2</span> stops.txt</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-stops" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;4.2: Exemplo de tabela <em>stops</em>
-</caption>
+<caption>Table&nbsp;4.2: Exemplo de arquivo stops.txt</caption>
 <colgroup>
 <col style="width: 6%">
 <col style="width: 16%">
@@ -381,12 +413,13 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+</section><section id="routes.txt" class="level3" data-number="4.1.3"><h3 data-number="4.1.3" class="anchored" data-anchor-id="routes.txt">
+<span class="header-section-number">4.1.3</span> routes.txt</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-routes" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;4.3: Exemplo de tabela <em>routes</em>
-</caption>
+<caption>Table&nbsp;4.3: Exemplo de arquivo routes.txt</caption>
 <colgroup>
 <col style="width: 8%">
 <col style="width: 9%">
@@ -465,12 +498,13 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+</section><section id="trips.txt" class="level3" data-number="4.1.4"><h3 data-number="4.1.4" class="anchored" data-anchor-id="trips.txt">
+<span class="header-section-number">4.1.4</span> trips.txt</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-trips" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;4.4: Exemplo de tabela <em>trips</em>
-</caption>
+<caption>Table&nbsp;4.4: Exemplo de arquivo trips.txt</caption>
 <colgroup>
 <col style="width: 13%">
 <col style="width: 16%">
@@ -541,12 +575,13 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+</section><section id="calendar.txt" class="level3" data-number="4.1.5"><h3 data-number="4.1.5" class="anchored" data-anchor-id="calendar.txt">
+<span class="header-section-number">4.1.5</span> calendar.txt</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-calendar" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;4.5: Exemplo de tabela <em>calendar</em>
-</caption>
+<caption>Table&nbsp;4.5: Exemplo de arquivo calendar.txt</caption>
 <colgroup>
 <col style="width: 12%">
 <col style="width: 7%">
@@ -649,12 +684,13 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+</section><section id="shapes.txt" class="level3" data-number="4.1.6"><h3 data-number="4.1.6" class="anchored" data-anchor-id="shapes.txt">
+<span class="header-section-number">4.1.6</span> shapes.txt</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-shapes" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;4.6: Exemplo de tabela <em>shapes</em>
-</caption>
+<caption>Table&nbsp;4.6: Exemplo de arquivo shapes.txt</caption>
 <colgroup>
 <col style="width: 12%">
 <col style="width: 17%">
@@ -717,12 +753,13 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+</section><section id="stop_times.txt" class="level3" data-number="4.1.7"><h3 data-number="4.1.7" class="anchored" data-anchor-id="stop_times.txt">
+<span class="header-section-number">4.1.7</span> stop_times.txt</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-stop_times" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;4.7: Exemplo de tabela <em>stop_times</em>
-</caption>
+<caption>Table&nbsp;4.7: Exemplo de arquivo stop_times.txt</caption>
 <thead><tr class="header">
 <th style="text-align: left;">trip_id</th>
 <th style="text-align: left;">arrival_time</th>
@@ -778,12 +815,13 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+</section><section id="frequencies.txt" class="level3" data-number="4.1.8"><h3 data-number="4.1.8" class="anchored" data-anchor-id="frequencies.txt">
+<span class="header-section-number">4.1.8</span> frequencies.txt</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-frequencies" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;4.8: Exemplo de tabela <em>frequencies</em>
-</caption>
+<caption>Table&nbsp;4.8: Exemplo de arquivo frequencies.txt</caption>
 <thead><tr class="header">
 <th style="text-align: left;">trip_id</th>
 <th style="text-align: left;">start_time</th>
@@ -846,7 +884,11 @@ ul.task-list li input[type="checkbox"] {
 <span class="header-section-number">4.7</span> Como fazer edições na rede de transporte público (pacote gtfstools)</h2>
 
 
-</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1"><p>Conforme a <a href="https://gtfs.org/schedule/reference/">especificação oficial</a>, versão da revisão 9 de maio de 2022.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Disponível em <a href="https://www.sptrans.com.br/desenvolvedores/" class="uri">https://www.sptrans.com.br/desenvolvedores/</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -944,8 +986,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./p3_dados_tp.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Seção 3: Dados de transporte público</span>
+      <a href="./s3_dados_tp.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">SEÇÃO 3: Dados de transporte público</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
