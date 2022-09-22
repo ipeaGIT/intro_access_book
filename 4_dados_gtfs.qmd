@@ -1,33 +1,40 @@
 # Dados GTFS
 
-O formato GTFS, como comentado na introdução desta seção, é uma especificação
-aberta e colaborativa que visa descrever os principais componentes de uma rede
-de transporte público. Atualmente, dados GTFS podem ser divididos em duas
-grandes categorias:
+O formato GTFS é uma especificação aberta e colaborativa que visa descrever os principais componentes de uma rede de transporte público. Atualmente, dados GTFS podem ser divididos em duas grandes categorias:
 
--   GTFS Schedule, ou GTFS Static, que contém o cronograma estático de linhas de
-    transporte público e informações espaciais sobre o itinerário de cada linha
-    e suas paradas;
--   GTFS Realtime, que contém informações de localização de veículos em tempo
-    real e alertas de possíveis atrasos, de mudanças de percurso e de eventos
-    que possam interferir no cronograma planejado.
+-   *GTFS Schedule*, ou *GTFS Static*, que contém o cronograma estático de linhas de transporte público e informações espaciais sobre o itinerário de cada linha e suas paradas;
+-   *GTFS Realtime*, que contém informações de localização de veículos em tempo real e alertas de possíveis atrasos, de mudanças de percurso e de eventos que possam interferir no cronograma planejado.
 
-Ao longo desta seção, nós focaremos no **GTFS Schedule**. Clique
-[aqui](https://gtfs.org/realtime/) para mais informações sobre o GTFS Realtime.
+Ao longo desta seção, nós focaremos no **GTFS Schedule**. Clique [aqui](https://gtfs.org/realtime/) para mais informações sobre o GTFS Realtime.
 
-Por ser uma especificação aberta e colaborativa, o formato GTFS tenta abarcar em
-sua definição um grande número de usos distintos que agências de transporte e
-desenvolvedores de ferramentas possam dar a ele. No entanto, agências e
-*softwares* podem ainda assim depender de informações que não constem na
-especificação oficial. Surgem, dessa forma,
-[extensões](https://gtfs.org/extensions/) da especificação. Algumas dessas
-extensões podem eventualmente se tornar parte da especificação oficial, caso
-isto seja aceito pela comunidade de usuários do GTFS, enquanto a especificação
-de outras é continuamente desenvolvida paralelamente à oficial. Nesta seção nós
-focaremos em um subconjunto de informações presentes no formato GTFS Schedule
-"puro", e, portanto, não cobriremos suas extensões.
+Por ser uma especificação aberta e colaborativa, o formato GTFS tenta abarcar em sua definição um grande número de usos distintos que agências de transporte e desenvolvedores de ferramentas possam dar a ele. No entanto, agências e *softwares* podem ainda assim depender de informações que não constem na especificação oficial. Surgem, dessa forma, [extensões](https://gtfs.org/extensions/) da especificação. Algumas dessas extensões podem eventualmente se tornar parte da especificação oficial, caso isto seja aceito pela comunidade de usuários do GTFS. Nesta seção nós focaremos em um subconjunto de informações presentes no formato GTFS Schedule "puro", e, portanto, não cobriremos suas extensões.
 
 ## Estrutura dos arquivos de GTFS
+
+Usualmente, refere-se a um arquivo no formato GTFS Schedule (daqui em diante chamado apenas de GTFS) como *feed*. Neste livro, nós utilizaremos os termos *feed* e arquivo GTFS como sinônimos.
+
+Um *feed* é nada mais do que um arquivo comprimido em formato `.zip` que contém um conjunto de tabelas salvas em formato `.txt` com algumas informações sobre a rede de transporte público (e.g. localização das paradas, frequências das viagens, traçado das rotas etc). Como em uma base de dados relacional, as tabelas de um *feed* têm algumas colunas-chave que permitem vincular os dados rotas, viagens, tabelas de horários etc. O esquema geral do GTFS é mostrado na @fig-scheme, mostrando apenas algumas das principais tabelas e com as colunas-chave destacadas como os pontos finais das setas.
+
+```{r}
+#| echo: false
+#| label: fig-scheme
+#| fig-cap: Esquema do formato GTFS
+
+knitr::include_graphics("images/gtfs_scheme.png")
+```
+
+Ao todo, 22 tabelas compõem o formato GTFS[^1]. Nem todas, no entanto, são obrigatórias para que um feed seja considerado válido - sendo consideradas, portanto, opcionais. A especificação classifica cada tabela conforme sua obrigatoriedade em três possíveis categorias: obrigatórias, opcionais e condicionalmente obrigatórias (quando a obrigatoriedade de uma tabela depende da existência de uma determinada tabela, coluna ou valor). Para fins de simplicidade, neste livro nós consideraremos apenas as duas primeiras categorias e faremos comentários quanto à obrigatoriedade de cada tabela quando apropriado. Desta forma, ficam assim classificadas as tabelas:
+
+[^1]: Conforme a [especificação oficial](https://gtfs.org/schedule/reference/), versão da revisão 9 de maio de 2022.
+
+- Obrigatórias: agency.txt, stops.txt, routes.txt, trips.txt, stop_times.txt, calendar.txt
+- Opcionais: calendar_dates.txt, fare_attributes.txt, fare_rules.txt, fare_products.txt, fare_leg_rules.txt, fare_transfer_rules.txt, areas.txt, stop_areas.txt, shapes.txt, frequencies.txt, transfers.txt, pathways.txt, levels.txt, translations.txt, feed_info.txt, attributions.txt
+
+Ao longo desta seção, nós aprenderemos a estrutura básica de um arquivo GTFS e das tabelas que o compõem. Portanto, vamos olhar apenas para as tabelas obrigatórias e para as tabelas opcionais mais frequentemente utilizadas por produtores e consumidores desses arquivos. Para mais informações sobre as tabelas e as colunas não abordadas nesta seção, por favor verifique a [especificação oficial](https://gtfs.org/schedule/reference/).
+
+Nesta demonstração, nós utilizaremos um subconjunto de dados provenientes do *feed* da cidade de São Paulo criado pela SPTrans[^2] e baixado em outubro de 2019. O *feed* contém as seis tabelas obrigatórias e mais duas tabelas opcionais bastante utilizadas, `shapes.txt` e `frequencies.txt`, o que permite uma boa visão geral sobre o formato GTFS.
+
+[^2]: Disponível em <https://www.sptrans.com.br/desenvolvedores/>.
 
 ```{r}
 #| echo: false
@@ -39,7 +46,22 @@ gtfs <- gtfstools::remove_duplicates(gtfs)
 
 ### agency.txt
 
-A @tbl-agency ...
+Arquivo utilizado para descrever as operadoras de transporte que atuam no sistema descrito no arquivo GTFS. Embora o termo *agency* (agência) seja usado em lugar de *operators* (operadoras), por exemplo, fica a cargo do produtor do *feed* definir quais instituições serão listadas na tabela.
+
+Por exemplo: múltiplas concessionárias de ônibus atuam em um determinado local, mas todo o planejamento de cronograma e de tarifa é realizado por uma instituição, em geral uma secretaria de transporte ou empresa pública específica. Esta instituição é também entendida pelos usuários do sistema como a operadora, de fato. Neste caso, devemos listar a instituição responsável pelo planejamento na tabela.
+
+Agora, imagine um sistema em que a agência de transporte público local transfere a responsabilidade da operação de um sistema multimodal a diversas empresas, por meio de concessões. Cada uma dessas empresas é responsável pelo planejamento de cronogramas e tarifas dos modos que operam, desde que sejam seguidos determinados parâmetros pré-estabelecidos em contrato. Neste caso, devemos listar as operadoras (concessionárias) na tabela, e não a agência de transporte público em si.
+
+A @tbl-agency mostra o arquivo `agency.txt` do *feed* da SPTrans. Como vocês podem ver, os responsáveis pelo *feed* optaram por listar a própria empresa no arquivo, e não as concessionárias que operam os ônibus e o metrô da cidade.
+
+```{r}
+#| echo: false
+#| label: tbl-agency
+#| tbl-cap: Exemplo de arquivo agency.txt
+knitr::kable(gtfs$agency)
+```
+
+É necessário notar que, embora estejamos apresentando o `agency.txt` em formato de tabela, o arquivo deve ser formatado como se fosse salvo em formato `.csv`. Ou seja, os valores de cada célula da tabela devem ser separados por vírgulas, e cada linha da tabela deve constar em uma linha no arquivo. A tabela acima, por exemplo, é definida da seguinte forma:
 
 ```{r}
 #| echo: false
@@ -51,59 +73,68 @@ content <- readLines(tmpfile)
 cat(paste(content, collapse = "\n"), "\n")
 ```
 
-```{r}
-#| echo: false
-#| label: tbl-agency
-#| tbl-cap: Exemplo de tabela *agency*
-knitr::kable(gtfs$agency)
-```
+Por uma questão de comunicação e interpretação dos dados, ao longo desta seção sempre apresentaremos os exemplos em formato de tabela. É importante ter em mente, porém, que essas tabelas são internamente estruturadas como mostrado acima.
+
+### stops.txt
 
 ```{r}
 #| echo: false
 #| label: tbl-stops
-#| tbl-cap: Exemplo de tabela *stops*
+#| tbl-cap: Exemplo de arquivo stops.txt
 knitr::kable(head(gtfs$stops[stop_desc != ""]))
 ```
+
+### routes.txt
 
 ```{r}
 #| echo: false
 #| label: tbl-routes
-#| tbl-cap: Exemplo de tabela *routes*
+#| tbl-cap: Exemplo de arquivo routes.txt
 knitr::kable(head(gtfs$routes))
 ```
+
+### trips.txt
 
 ```{r}
 #| echo: false
 #| label: tbl-trips
-#| tbl-cap: Exemplo de tabela *trips*
+#| tbl-cap: Exemplo de arquivo trips.txt
 knitr::kable(head(gtfs$trips))
 ```
+
+### calendar.txt
 
 ```{r}
 #| echo: false
 #| label: tbl-calendar
-#| tbl-cap: Exemplo de tabela *calendar*
+#| tbl-cap: Exemplo de arquivo calendar.txt
 knitr::kable(gtfs$calendar)
 ```
+
+### shapes.txt
 
 ```{r}
 #| echo: false
 #| label: tbl-shapes
-#| tbl-cap: Exemplo de tabela *shapes*
+#| tbl-cap: Exemplo de arquivo shapes.txt
 knitr::kable(head(gtfs$shapes))
 ```
+
+### stop_times.txt
 
 ```{r}
 #| echo: false
 #| label: tbl-stop_times
-#| tbl-cap: Exemplo de tabela *stop_times*
+#| tbl-cap: Exemplo de arquivo stop_times.txt
 knitr::kable(head(gtfs$stop_times))
 ```
+
+### frequencies.txt
 
 ```{r}
 #| echo: false
 #| label: tbl-frequencies
-#| tbl-cap: Exemplo de tabela *frequencies*
+#| tbl-cap: Exemplo de arquivo frequencies.txt
 knitr::kable(head(gtfs$frequencies))
 ```
 
