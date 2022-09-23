@@ -245,11 +245,6 @@ ul.task-list li input[type="checkbox"] {
   </ul>
 </li>
   <li><a href="#onde-encontrar-gtfs-de-cidades-brasileiras" id="toc-onde-encontrar-gtfs-de-cidades-brasileiras" class="nav-link" data-scroll-target="#onde-encontrar-gtfs-de-cidades-brasileiras"><span class="toc-section-number">4.2</span>  Onde encontrar GTFS de cidades brasileiras</a></li>
-  <li><a href="#como-extrair-an%C3%A1lises-b%C3%A1sicas-de-um-gtfs-pacote-gtfstools" id="toc-como-extrair-análises-básicas-de-um-gtfs-pacote-gtfstools" class="nav-link" data-scroll-target="#como-extrair-an%C3%A1lises-b%C3%A1sicas-de-um-gtfs-pacote-gtfstools"><span class="toc-section-number">4.3</span>  Como extrair análises básicas de um GTFS (pacote gtfstools)</a></li>
-  <li><a href="#c%C3%A1lculo-de-velocidade-das-linhas" id="toc-cálculo-de-velocidade-das-linhas" class="nav-link" data-scroll-target="#c%C3%A1lculo-de-velocidade-das-linhas"><span class="toc-section-number">4.4</span>  Cálculo de velocidade das linhas</a></li>
-  <li><a href="#c%C3%A1lculo-de-frequ%C3%AAncia-das-linhas" id="toc-cálculo-de-frequência-das-linhas" class="nav-link" data-scroll-target="#c%C3%A1lculo-de-frequ%C3%AAncia-das-linhas"><span class="toc-section-number">4.5</span>  Cálculo de frequência das linhas</a></li>
-  <li><a href="#mapear-a-rede-de-transporte-p%C3%BAblico" id="toc-mapear-a-rede-de-transporte-público" class="nav-link" data-scroll-target="#mapear-a-rede-de-transporte-p%C3%BAblico"><span class="toc-section-number">4.6</span>  Mapear a rede de transporte público</a></li>
-  <li><a href="#como-fazer-edi%C3%A7%C3%B5es-na-rede-de-transporte-p%C3%BAblico-pacote-gtfstools" id="toc-como-fazer-edições-na-rede-de-transporte-público-pacote-gtfstools" class="nav-link" data-scroll-target="#como-fazer-edi%C3%A7%C3%B5es-na-rede-de-transporte-p%C3%BAblico-pacote-gtfstools"><span class="toc-section-number">4.7</span>  Como fazer edições na rede de transporte público (pacote gtfstools)</a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/4_dados_gtfs.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
@@ -292,8 +287,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p>Ao todo, 22 tabelas compõem o formato GTFS<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Nem todas, no entanto, são obrigatórias para que um feed seja considerado válido - sendo consideradas, portanto, opcionais. A especificação classifica cada tabela conforme sua obrigatoriedade em três possíveis categorias: obrigatórias, opcionais e condicionalmente obrigatórias (quando a obrigatoriedade de uma tabela depende da existência de uma determinada tabela, coluna ou valor). Para fins de simplicidade, neste livro nós consideraremos apenas as duas primeiras categorias e faremos comentários quanto à obrigatoriedade de cada tabela quando apropriado. Desta forma, ficam assim classificadas as tabelas:</p>
 <ul>
-<li>Obrigatórias: agency.txt, stops.txt, routes.txt, trips.txt, stop_times.txt, calendar.txt</li>
-<li>Opcionais: calendar_dates.txt, fare_attributes.txt, fare_rules.txt, fare_products.txt, fare_leg_rules.txt, fare_transfer_rules.txt, areas.txt, stop_areas.txt, shapes.txt, frequencies.txt, transfers.txt, pathways.txt, levels.txt, translations.txt, feed_info.txt, attributions.txt</li>
+<li>Obrigatórias: <code>agency.txt</code>, <code>stops.txt</code>, <code>routes.txt</code>, <code>trips.txt</code>, <code>stop_times.txt</code>, <code>calendar.txt</code>.</li>
+<li>Opcionais: <code>calendar_dates.txt</code>, <code>fare_attributes.txt</code>, <code>fare_rules.txt</code>, <code>fare_products.txt</code>, <code>fare_leg_rules.txt</code>, <code>fare_transfer_rules.txt</code>, <code>areas.txt</code>, <code>stop_areas.txt</code>, <code>shapes.txt</code>, <code>frequencies.txt</code>, <code>transfers.txt</code>, <code>pathways.txt</code>, <code>levels.txt</code>, <code>translations.txt</code>, <code>feed_info.txt</code>, <code>attributions.txt</code>.</li>
 </ul>
 <p>Ao longo desta seção, nós aprenderemos a estrutura básica de um arquivo GTFS e das tabelas que o compõem. Portanto, vamos olhar apenas para as tabelas obrigatórias e para as tabelas opcionais mais frequentemente utilizadas por produtores e consumidores desses arquivos. Para mais informações sobre as tabelas e as colunas não abordadas nesta seção, por favor verifique a <a href="https://gtfs.org/schedule/reference/">especificação oficial</a>.</p>
 <p>Nesta demonstração, nós utilizaremos um subconjunto de dados provenientes do <em>feed</em> da cidade de São Paulo criado pela SPTrans<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> e baixado em outubro de 2019. O <em>feed</em> contém as seis tabelas obrigatórias e mais duas tabelas opcionais bastante utilizadas, <code>shapes.txt</code> e <code>frequencies.txt</code>, o que permite uma boa visão geral sobre o formato GTFS.</p>
@@ -310,7 +305,8 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell-output-display">
 <div id="tbl-agency" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;4.1: Exemplo de arquivo agency.txt</caption>
+<caption>Table&nbsp;4.1: Exemplo de arquivo <code>agency.txt</code>
+</caption>
 <colgroup>
 <col style="width: 10%">
 <col style="width: 12%">
@@ -346,11 +342,13 @@ ul.task-list li input[type="checkbox"] {
 <p>Por uma questão de comunicação e interpretação dos dados, ao longo desta seção sempre apresentaremos os exemplos em formato de tabela. É importante ter em mente, porém, que essas tabelas são internamente estruturadas como mostrado acima.</p>
 </section><section id="stops.txt" class="level3" data-number="4.1.2"><h3 data-number="4.1.2" class="anchored" data-anchor-id="stops.txt">
 <span class="header-section-number">4.1.2</span> stops.txt</h3>
+<p>Arquivo usado para descrever as paradas de transporte público que compõem o sistema. Os pontos listados neste arquivo podem fazer menção a paradas mais simples (como pontos de ônibus), estações, plataformas, entradas e saídas de estações, etc. A <a href="#tbl-stops">Table&nbsp;<span>4.2</span></a> mostra o <code>stops.txt</code> do <em>feed</em> da SPTrans.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-stops" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;4.2: Exemplo de arquivo stops.txt</caption>
+<caption>Table&nbsp;4.2: Exemplo de arquivo <code>stops.txt</code>
+</caption>
 <colgroup>
 <col style="width: 6%">
 <col style="width: 16%">
@@ -413,21 +411,24 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+<p>As colunas <code>stop_id</code> e <code>stop_name</code> servem como identificadores de cada parada, porém cumprem papéis distintos. O principal propósito da <code>stop_id</code> é identificar relações entre esta tabela e outras que compõem a especificação (como veremos mais à frente no arquivo <code>stop_times.txt</code>). Já a coluna <code>stop_name</code> serve como um identificador que seja facilmente reconhecido pelo usuário do sistema. Seus valores, portanto, costumam ser nomes de estações, nomes de pontos de interesse da cidade ou endereços (como no caso do <em>feed</em> da SPTrans).</p>
+<p>A coluna <code>stop_desc</code>, presente no <em>feed</em> da SPTrans, é opcional e permite à agência de transporte adicionar alguma descrição de cada parada e do seu entorno para facilitar a sua identificação. As colunas <code>stop_lat</code> e <code>stop_lon</code>, por fim, são as responsáveis por associar cada parada a uma posição espacial, através de suas coordenadas geográficas de latitude e longitude.</p>
+<p>Entre as colunas opcionais não presentes neste feed estão a <code>location_type</code> e a <code>parent_station</code>. A <code>location_type</code> é utilizada para denotar o tipo de localização a que cada ponto se refere. Quando ausente, todos os pontos são interpretados como paradas de transporte público, mas valores distintos podem ser usados para distinguir uma parada (<code>location_type = 0</code>) de uma estação (<code>location_type = 1</code>) ou uma área de embarque (<code>location_type = 2</code>), por exemplo. A coluna <code>parent_station</code> é utilizada para descrever relações de hierarquia entre dois pontos. Por exemplo, uma área de desembarque deve dizer a qual parada/plataforma ela pertence e uma parada/plataforma pode também, opcionalmente, listar a qual estação ela pertence.</p>
 </section><section id="routes.txt" class="level3" data-number="4.1.3"><h3 data-number="4.1.3" class="anchored" data-anchor-id="routes.txt">
 <span class="header-section-number">4.1.3</span> routes.txt</h3>
+<p>Arquivo usado para descrever as linhas de transporte público que rodam no sistema descrito pelo arquivo GTFS, incluindo os modos de transporte utilizados em cada uma. A <a href="#tbl-routes">Table&nbsp;<span>4.3</span></a> mostra o <code>routes.txt</code> do <em>feed</em> da SPTrans.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-routes" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;4.3: Exemplo de arquivo routes.txt</caption>
+<caption>Table&nbsp;4.3: Exemplo de arquivo <code>routes.txt</code>
+</caption>
 <colgroup>
-<col style="width: 8%">
-<col style="width: 9%">
-<col style="width: 16%">
-<col style="width: 27%">
-<col style="width: 10%">
 <col style="width: 11%">
-<col style="width: 16%">
+<col style="width: 13%">
+<col style="width: 22%">
+<col style="width: 38%">
+<col style="width: 14%">
 </colgroup>
 <thead><tr class="header">
 <th style="text-align: left;">route_id</th>
@@ -435,8 +436,6 @@ ul.task-list li input[type="checkbox"] {
 <th style="text-align: left;">route_short_name</th>
 <th style="text-align: left;">route_long_name</th>
 <th style="text-align: right;">route_type</th>
-<th style="text-align: left;">route_color</th>
-<th style="text-align: left;">route_text_color</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -445,8 +444,6 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">CPTM L07</td>
 <td style="text-align: left;">JUNDIAI - LUZ</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: left;">CA016B</td>
-<td style="text-align: left;"></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">CPTM L08</td>
@@ -454,8 +451,6 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">CPTM L08</td>
 <td style="text-align: left;">AMADOR BUENO - JULIO PRESTES</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: left;">97A098</td>
-<td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">CPTM L09</td>
@@ -463,8 +458,6 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">CPTM L09</td>
 <td style="text-align: left;">GRAJAU - OSASCO</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: left;">01A9A7</td>
-<td style="text-align: left;"></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">CPTM L10</td>
@@ -472,8 +465,6 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">CPTM L10</td>
 <td style="text-align: left;">RIO GRANDE DA SERRA - BRÁS</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: left;">049FC3</td>
-<td style="text-align: left;"></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">CPTM L11</td>
@@ -481,8 +472,6 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">CPTM L11</td>
 <td style="text-align: left;">ESTUDANTES - LUZ</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: left;">F68368</td>
-<td style="text-align: left;"></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">CPTM L12</td>
@@ -490,82 +479,85 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">CPTM L12</td>
 <td style="text-align: left;">CALMON VIANA - BRAS</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: left;">133C8D</td>
-<td style="text-align: left;">FFFFFF</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </div>
+<p>Assim como no caso do arquivo <code>stops.txt</code>, a tabela do <code>routes.txt</code> também possui diferentes colunas que apontam o identificador de cada linha (<code>route_id</code>) e o seu nome. Neste caso, no entanto, existem duas colunas de nome, a <code>route_short_name</code> e a <code>route_long_name</code>. A primeira diz respeito ao nome da linha, usualmente utilizado por passageiros no dia-a-dia, enquanto o segundo tende a ser um nome mais descritivo. A SPTrans, por exemplo, optou por destacar os pontos finais de cada linha nesta coluna. Podemos notar também que os mesmos valores se repetem nas colunas <code>route_id</code> e <code>route_short_name</code>, o que não é obrigatório e nem proibido - neste caso, o produtor do <em>feed</em> julgou que os nomes das linhas poderiam funcionar satisfatoriamente como identificadores por serem razoavelmente curtos e não se repetirem.</p>
+<p>A coluna <code>agency_id</code> é a chave que permite relacionar a tabela das rotas com a tabela descrita no <code>agency.txt</code>. Ela faz menção a uma agência descrita naquele arquivo, no caso a agência de id 1 (a própria SPTrans). Esta coluna é opcional no caso de <em>feeds</em> em que existe apenas uma agência, porém é obrigatória no caso em que existem mais de uma. Imaginemos, por exemplo, um feed que descreve um sistema multimodal que conta com um corredor de metrô e diversas linhas de ônibus: uma configuração possível de routes.txt descreveria as linhas de metrô como de responsabilidade da operadora do metrô, e as de ônibus como de responsabilidade da empresa responsável pelo planejamento das linhas de ônibus, por exemplo.</p>
+<p>A coluna <code>route_type</code> é utilizada para descrever o modo de transporte utilizado em cada linha. Esta coluna aceita diferentes números, cada um representando um determinado modo. Este exemplo descreve linhas de trem, cujo valor numérico correspondente é 2. Os valores válidos para esta coluna são listados na <a href="https://gtfs.org/schedule/reference/#routestxt">especificação</a>.</p>
 </section><section id="trips.txt" class="level3" data-number="4.1.4"><h3 data-number="4.1.4" class="anchored" data-anchor-id="trips.txt">
 <span class="header-section-number">4.1.4</span> trips.txt</h3>
+<p>Arquivo usado para descrever as viagens realizadas pelo sistema de transporte público descrito pelo <em>feed</em>. A viagem é a unidade básica de movimento do formato GTFS: ela associa diferentes partidas de cada linha de transporte público a um serviço que opera em determinados dias da semana (como veremos mais à frente no arquivo <code>calendar.txt</code>) e uma trajetória de viagem (como veremos mais à frente no arquivo <code>shapes.txt</code>). A <a href="#tbl-trips">Table&nbsp;<span>4.4</span></a> mostra o <code>trips.txt</code> do <em>feed</em> da SPTrans.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-trips" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;4.4: Exemplo de arquivo trips.txt</caption>
+<caption>Table&nbsp;4.4: Exemplo de arquivo <code>trips.txt</code>
+</caption>
 <colgroup>
-<col style="width: 13%">
 <col style="width: 16%">
+<col style="width: 13%">
 <col style="width: 16%">
 <col style="width: 20%">
 <col style="width: 19%">
 <col style="width: 13%">
 </colgroup>
 <thead><tr class="header">
+<th style="text-align: left;">trip_id</th>
 <th style="text-align: left;">route_id</th>
 <th style="text-align: left;">service_id</th>
-<th style="text-align: left;">trip_id</th>
 <th style="text-align: left;">trip_headsign</th>
 <th style="text-align: right;">direction_id</th>
 <th style="text-align: left;">shape_id</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
+<td style="text-align: left;">CPTM L07-0</td>
 <td style="text-align: left;">CPTM L07</td>
 <td style="text-align: left;">USD</td>
-<td style="text-align: left;">CPTM L07-0</td>
 <td style="text-align: left;">JUNDIAI</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: left;">17846</td>
 </tr>
 <tr class="even">
+<td style="text-align: left;">CPTM L07-1</td>
 <td style="text-align: left;">CPTM L07</td>
 <td style="text-align: left;">USD</td>
-<td style="text-align: left;">CPTM L07-1</td>
 <td style="text-align: left;">LUZ</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">17847</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">CPTM L08-0</td>
 <td style="text-align: left;">CPTM L08</td>
 <td style="text-align: left;">USD</td>
-<td style="text-align: left;">CPTM L08-0</td>
 <td style="text-align: left;">AMADOR BUENO</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: left;">17848</td>
 </tr>
 <tr class="even">
+<td style="text-align: left;">CPTM L08-1</td>
 <td style="text-align: left;">CPTM L08</td>
 <td style="text-align: left;">USD</td>
-<td style="text-align: left;">CPTM L08-1</td>
 <td style="text-align: left;">JULIO PRESTES</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">17849</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">CPTM L09-0</td>
 <td style="text-align: left;">CPTM L09</td>
 <td style="text-align: left;">USD</td>
-<td style="text-align: left;">CPTM L09-0</td>
 <td style="text-align: left;">GRAJAU</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: left;">17850</td>
 </tr>
 <tr class="even">
+<td style="text-align: left;">CPTM L09-1</td>
 <td style="text-align: left;">CPTM L09</td>
 <td style="text-align: left;">USD</td>
-<td style="text-align: left;">CPTM L09-1</td>
 <td style="text-align: left;">OSASCO</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">17851</td>
@@ -575,24 +567,28 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+<p>A coluna <code>trip_id</code> identifica cada uma das viagens descritas na tabela. A <code>route_id</code> faz referência a uma linha de transporte público identificada no arquivo <code>routes.txt</code>. A coluna <code>service_id</code> identifica serviços que determinam os dias da semana em que cada uma das viagens opera (dias úteis, finais de semana, uma mistura dos dois, etc.), descritos detalhadamente no arquivo <code>calendar.txt</code>. A última coluna à direita na tabela acima é a <code>shape_id</code>, que identifica a trajetória espacial de cada uma das viagens, descrita em detalhes no arquivo <code>shapes.txt</code>.</p>
+<p>As duas colunas restantes, <code>trip_headsign</code> e <code>direction_id</code>, são opcionais e devem ser utilizadas para descrever o sentido/destino da viagem. A primeira, <code>trip_headsign</code>, é utilizada para ditar o texto que aparece no letreiro de veículos (no caso de um ônibus, por exemplo) ou em painéis informativos (como em metrôs e trens) destacando o destino da viagem. Já a coluna <code>direction_id</code> é frequentemente utilizada em conjunto com a primeira para dar uma conotação de ida ou volta para cada viagem, onde <code>0</code> representa ida e <code>1</code> volta, ou vice-versa (assim como ida e volta são conceitos que mudam conforme o referencial, os valores <code>0</code> e <code>1</code> podem ser usados como desejado, desde que um represente um sentido e o outro o contrário). No caso do nosso exemplo, as duas primeiras linhas são viagens que fazem menção à mesma rota de transporte público (<code>CPTM L07</code>), porém em sentidos opostos: uma corre em direção a Jundiaí, e a outra à Luz.</p>
 </section><section id="calendar.txt" class="level3" data-number="4.1.5"><h3 data-number="4.1.5" class="anchored" data-anchor-id="calendar.txt">
 <span class="header-section-number">4.1.5</span> calendar.txt</h3>
+<p>Arquivo usado para descrever os diferentes tipos de serviço existentes no sistema de transporte público descrito pelo <em>feed</em>. Um serviço, neste contexto, denota um conjunto de dias da semana em que viagens são realizadas. Cada serviço também é definido pela data em que começa a valer e pela data a partir do qual ele não é mais válido. A <a href="#tbl-calendar">Table&nbsp;<span>4.5</span></a> mostra o <code>calendar.txt</code> do <em>feed</em> da SPTrans.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-calendar" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;4.5: Exemplo de arquivo calendar.txt</caption>
+<caption>Table&nbsp;4.5: Exemplo de arquivo <code>calendar.txt</code>
+</caption>
 <colgroup>
 <col style="width: 12%">
 <col style="width: 7%">
-<col style="width: 8%">
+<col style="width: 9%">
 <col style="width: 11%">
 <col style="width: 10%">
 <col style="width: 7%">
 <col style="width: 10%">
 <col style="width: 7%">
 <col style="width: 12%">
-<col style="width: 12%">
+<col style="width: 10%">
 </colgroup>
 <thead><tr class="header">
 <th style="text-align: left;">service_id</th>
@@ -603,8 +599,8 @@ ul.task-list li input[type="checkbox"] {
 <th style="text-align: right;">friday</th>
 <th style="text-align: right;">saturday</th>
 <th style="text-align: right;">sunday</th>
-<th style="text-align: left;">start_date</th>
-<th style="text-align: left;">end_date</th>
+<th style="text-align: right;">start_date</th>
+<th style="text-align: right;">end_date</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -616,8 +612,8 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: left;">2008-01-01</td>
-<td style="text-align: left;">2020-05-01</td>
+<td style="text-align: right;">20080101</td>
+<td style="text-align: right;">20200501</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">U__</td>
@@ -628,8 +624,8 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: left;">2008-01-01</td>
-<td style="text-align: left;">2020-05-01</td>
+<td style="text-align: right;">20080101</td>
+<td style="text-align: right;">20200501</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">US_</td>
@@ -640,8 +636,8 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: left;">2008-01-01</td>
-<td style="text-align: left;">2020-05-01</td>
+<td style="text-align: right;">20080101</td>
+<td style="text-align: right;">20200501</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">_SD</td>
@@ -652,8 +648,8 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: left;">2008-01-01</td>
-<td style="text-align: left;">2020-05-01</td>
+<td style="text-align: right;">20080101</td>
+<td style="text-align: right;">20200501</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">__D</td>
@@ -664,8 +660,8 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: left;">2008-01-01</td>
-<td style="text-align: left;">2020-05-01</td>
+<td style="text-align: right;">20080101</td>
+<td style="text-align: right;">20200501</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><em>S</em></td>
@@ -676,34 +672,31 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: left;">2008-01-01</td>
-<td style="text-align: left;">2020-05-01</td>
+<td style="text-align: right;">20080101</td>
+<td style="text-align: right;">20200501</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </div>
+<p>A coluna <code>service_id</code> identifica cada um dos serviços descritos na tabela. Como mostrado anteriormente, este identificador é usado também no arquivo <code>trips.txt</code>, e é o responsável por associar cada viagem a um determinado serviço.</p>
+<p>As colunas <code>monday</code>, <code>tuesday</code>, <code>wednesday</code>, <code>thursday</code>, <code>friday</code>, <code>saturday</code> e <code>sunday</code> (segunda-feira a domingo, em inglês) são utilizadas para delimitar os dias em que cada serviço funciona. Um valor de <code>1</code> significa que o serviço opera em um determinado dia, enquanto um valor de <code>0</code> significa que ele não opera. Como podemos ver no exemplo acima, o serviço <code>USD</code> opera em todos os dias da semana. Já o serviço <code>U__</code> opera apenas em dias úteis.</p>
+<p>Por fim, as colunas <code>start_date</code> e <code>end_date</code> delimitam o intervalo em que cada serviço é válido. As datas do formato GTFS são sempre formatadas segundo a regra <code>YYYYMMDD</code> - ou seja, os primeiros quatro números definem o ano, os dois subsequentes definem o mês e os últimos dois, o dia. O valor <code>20220428</code>, por exemplo, representa o dia 28 de abril de 2022.</p>
 </section><section id="shapes.txt" class="level3" data-number="4.1.6"><h3 data-number="4.1.6" class="anchored" data-anchor-id="shapes.txt">
 <span class="header-section-number">4.1.6</span> shapes.txt</h3>
+<p>Arquivo usado para descrever a trajetória espacial de cada viagem listada no <em>feed</em>. Este arquivo é opcional, mas fortemente recomendado que agências de transporte o incluam em seus arquivos de GTFS. A <a href="#tbl-shapes">Table&nbsp;<span>4.6</span></a> mostra o <code>shapes.txt</code> do <em>feed</em> da SPTrans.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-shapes" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;4.6: Exemplo de arquivo shapes.txt</caption>
-<colgroup>
-<col style="width: 12%">
-<col style="width: 17%">
-<col style="width: 17%">
-<col style="width: 24%">
-<col style="width: 27%">
-</colgroup>
+<caption>Table&nbsp;4.6: Exemplo de arquivo <code>shapes.txt</code>
+</caption>
 <thead><tr class="header">
 <th style="text-align: left;">shape_id</th>
 <th style="text-align: right;">shape_pt_lat</th>
 <th style="text-align: right;">shape_pt_lon</th>
 <th style="text-align: right;">shape_pt_sequence</th>
-<th style="text-align: right;">shape_dist_traveled</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -711,55 +704,52 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: right;">-23.53517</td>
 <td style="text-align: right;">-46.63535</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">13.56768</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">17846</td>
 <td style="text-align: right;">-23.53513</td>
 <td style="text-align: right;">-46.63548</td>
 <td style="text-align: right;">2</td>
-<td style="text-align: right;">95.99193</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">17846</td>
 <td style="text-align: right;">-23.53494</td>
 <td style="text-align: right;">-46.63626</td>
 <td style="text-align: right;">3</td>
-<td style="text-align: right;">185.05103</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">17846</td>
 <td style="text-align: right;">-23.53473</td>
 <td style="text-align: right;">-46.63710</td>
 <td style="text-align: right;">4</td>
-<td style="text-align: right;">211.43776</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">17846</td>
 <td style="text-align: right;">-23.53466</td>
 <td style="text-align: right;">-46.63735</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">356.31088</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">17846</td>
 <td style="text-align: right;">-23.53416</td>
 <td style="text-align: right;">-46.63866</td>
 <td style="text-align: right;">6</td>
-<td style="text-align: right;">483.96616</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </div>
+<p>A coluna <code>shape_id</code> identifica cada uma das trajetórias descritas na tabela. Como mostrado anteriormente, este identificador é usado também no arquivo <code>trips.txt</code>, e é o responsável por associar cada viagem à sua trajetória espacial. Diferentemente de todos os outros identificadores que vimos até então, no entanto, o identificador <code>shape_id</code> se repete em diversas observações da tabela. Isso porque o arquivo apresenta para cada <code>shape_id</code> uma série de pontos espaciais, cujas coordenadas geográficas são apresentadas nas colunas <code>shape_pt_lat</code> e <code>shape_pt_lon</code>. Por sua vez, a coluna <code>shape_pt_sequence</code> lista a sequência na qual cada ponto se conecta para formar a trajetória de cada <code>shape_id</code>. Os valores listados nesta coluna devem ser ordenados de forma crescente.</p>
 </section><section id="stop_times.txt" class="level3" data-number="4.1.7"><h3 data-number="4.1.7" class="anchored" data-anchor-id="stop_times.txt">
 <span class="header-section-number">4.1.7</span> stop_times.txt</h3>
+<p>Arquivo usado para descrever o cronograma com tabela de horários de cada viagem, incluindo o horário de chegada e partida em cada uma das paradas. A formatação deste arquivo depende da existência ou não de um arquivo <code>frequencies.txt</code>, o qual cobriremos a seguir. Por enquanto olharemos para o <code>stop_times.txt</code> do <em>feed</em> da SPTrans, que também conta com um <code>frequencies.txt</code>, na <a href="#tbl-stop_times">Table&nbsp;<span>4.7</span></a>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-stop_times" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;4.7: Exemplo de arquivo stop_times.txt</caption>
+<caption>Table&nbsp;4.7: Exemplo de arquivo <code>stop_times.txt</code>
+</caption>
 <thead><tr class="header">
 <th style="text-align: left;">trip_id</th>
 <th style="text-align: left;">arrival_time</th>
@@ -815,13 +805,18 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+<p>A viagem cujo cronograma está sendo descrito é identificada pela coluna <code>trip_id</code>. De forma análoga ao que acontece na tabela de trajetórias, um mesmo <code>trip_id</code> se repete em muitas observações da tabela porque, assim como uma trajetória é composta por uma sequências de pontos espaciais, um cronograma é composto por uma sequência de diversos horários de partida/chegada e paradas de transporte público.</p>
+<p>As colunas seguintes, <code>arrival_time</code>, <code>departure_time</code> e <code>stop_id</code>, são as responsáveis por descrever o cronograma em si, associando um horário de chegada e um horário de partida para cada uma das paradas visitadas na viagem. As colunas de horário são formatadas segundo a regra <code>HH:MM:SS</code> - ou seja, os dois primeiros números definem a hora, os dois subsequentes os minutos e os últimos dois, os segundos. É importante ainda comentar que esta formatação aceita valores de hora maiores do que <code>24</code>. Isto quer dizer que uma viagem cuja última parada seja visitada às 1h da manhã do dia seguinte ao que começou a rodar (digamos que ela tenha partido do ponto inicial às 23h) deve ter como horário de chegada <code>25:00:00</code>, e não <code>01:00:00</code>. A coluna <code>stop_id</code>, por sua vez, associa a parada visitada à uma descrição feita no arquivo <code>stops.txt</code>. Por fim, a coluna <code>stop_sequence</code> lista a sequência na qual cada parada se conecta às demais para formar o cronograma da viagem. Seus valores devem ser sempre ordenados de forma crescente.</p>
+<p>Vale destacar aqui a diferença entre os arquivos <code>shapes.txt</code> e <code>stop_times.txt</code>. Embora os dois descrevam uma viagem espacialmente, eles o fazem de forma diferente. O <code>stop_times.txt</code> descreve a sequência de paradas e horários que compõem um cronograma, mas nada diz sobre o trajeto percorrido pelo veículo entre cada uma das paradas. Já o <code>shapes.txt</code> traz a trajetória da viagem como um todo, mas não descreve em que ponto do espaço estão as paradas da viagem. Quando usamos os dois arquivos em conjunto, portanto, sabemos não apenas o cronograma de cada viagem, mas também a trajetória da viagem entre paradas.</p>
 </section><section id="frequencies.txt" class="level3" data-number="4.1.8"><h3 data-number="4.1.8" class="anchored" data-anchor-id="frequencies.txt">
 <span class="header-section-number">4.1.8</span> frequencies.txt</h3>
+<p>Arquivo opcional usado para descrever a frequência de cada viagem dentro de um determinado período do dia. A <a href="#tbl-frequencies">Table&nbsp;<span>4.8</span></a> mostra o <code>frequencies.txt</code> do <em>feed</em> da SPTrans.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-frequencies" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;4.8: Exemplo de arquivo frequencies.txt</caption>
+<caption>Table&nbsp;4.8: Exemplo de arquivo <code>frequencies.txt</code>
+</caption>
 <thead><tr class="header">
 <th style="text-align: left;">trip_id</th>
 <th style="text-align: left;">start_time</th>
@@ -870,18 +865,71 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+<p>A viagem cuja frequência está sendo descrita é identificada pela coluna <code>trip_id</code>. Novamente, um mesmo id pode aparecer em várias observações da tabela. Isso porque a especificação GTFS prevê que uma mesma viagem pode ter frequências diferentes ao longo do dia (como em horários de pico e fora-pico, por exemplo). Assim, cada linha da tabela descreve um período do dia que se inicia no horário descrito na coluna <code>start_time</code> e termina no horário assinalado na <code>end_time</code>.</p>
+<p>Dentro do período especificado por essas duas colunas a viagem possui um <em>headway</em> detalhado na coluna <code>headway_secs</code>. O <em>headway</em> é o tempo que separa a passagem de dois veículos que operam a mesma linha de transporte público. No caso desta tabela, esse tempo deve ser especificado em segundos. Um valor de <code>720</code> entre 04:00h e 05:00h, portanto, significa que dentro deste período a viagem <code>CPTM L07-0</code> ocorre de 12 em 12 minutos.</p>
+<p>É importante entender, agora, como a presença da tabela <code>frequencies.txt</code> altera a especificação da tabela <code>stop_times.txt</code>. Como podemos ver no nosso exemplo, o horário de partida definido no <code>stop_times.txt</code> para a viagem <code>CPTM L07-0</code> é 04:00h, e ela chega na segunda parada às 04:08h. O cronograma de chegada e saída de uma mesma parada de uma viagem, no entanto, não pode ser definido mais de uma vez na tabela. Como então definir o cronograma das viagens que partem às 04:12h, 04:24h, 04:36h, etc. (lembrem-se que o <em>headway</em> desta viagem é de 12 minutos)?</p>
+<p>No caso em que a frequência de uma viagem é especificada no <code>frequencies.txt</code>, o cronograma (a tabela de horários) de uma viagem definido no <code>stop_times.txt</code> deve ser entendido como uma referência que descreve o tempo entre paradas. Isto é, os horários ali definidos não devem ser interpretados à risca. Por exemplo, o cronograma listado estabelece que o tempo de viagem entre a primeira e a segunda parada é de 8 minutos, e o tempo entre a segunda e a terceira também. Ou seja, a viagem que parte da primeira parada às 04:00h chega na segunda às 04:08h, e na terceira às 04:16h. A próxima viagem, que parte da primeira parada às 04:12h, por sua vez, chega na segunda parada às 04:20h, e na terceira às 04:28h.</p>
+<p>Assumindo partidas de 12 em 12 minutos a partir das 04:00h, por exemplo, poderíamos descrever as mesmas viagens no <code>stop_times.txt</code> sem fazer uso do arquivo <code>frequencies.txt</code>. Para isso poderíamos adicionar um sufixo que identificasse cada uma das viagens referentes à linha (<code>route_id</code>) com identificador <code>CPTM L07</code> ao longo do dia. A viagem (<code>trip_id</code>) com identificador <code>CPTM L07-0_1</code>, por exemplo, seria a primeira viagem do dia e partiria da primeira parada às 04:00h e chegaria na segunda parada às 04:08h. A viagem <code>CPTM L07-0_2</code>, por sua vez, seria a segunda viagem e partiria da primeira parada às 04:12h e chegaria na segunda às 04:20h, e daí em diante. Cada uma dessas viagens deveria ser também adicionada ao arquivo <code>trips.txt</code> e a quaisquer outros que possuam a coluna <code>trip_id</code> como identificador.</p>
+<p>Outra variável que afeta a forma na qual o <code>frequencies.txt</code> afeta as tabelas de horários na tabela <code>stop_times.txt</code> é a coluna opcional <code>exact_times</code>. Um valor de <code>0</code> nesta coluna (ou quando ela está ausente do <em>feed</em>, como no caso do arquivo GTFS da SPTrans) indica que a viagem não necessariamente segue um cronograma fixo ao longo do período. Ao invés disso, operadores tentam se ater a um determinado <em>headway</em> durante o período. Naquele exemplo de uma viagem cujo <em>headway</em> é de 12 minutos entre as 04:00h e 05:00h, isto significaria que não necessariamente a primeira partida sairá exatamente às 04:00h, a segunda às 04:12h, e por aí em diante. A primeira pode, por exemplo, sair às 04:02h. A segunda, às 04:14h ou 04:13h, etc. Caso desejemos definir um cronograma que é seguido à risca, obtendo o mesmo resultado de definir diversas viagens semelhantes partindo em diferentes horários no <code>stop_times.txt</code> (como mostrado anteriormente), devemos utilizar o valor <code>1</code> na coluna <code>exact_times</code>.</p>
 </section></section><section id="onde-encontrar-gtfs-de-cidades-brasileiras" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="onde-encontrar-gtfs-de-cidades-brasileiras">
 <span class="header-section-number">4.2</span> Onde encontrar GTFS de cidades brasileiras</h2>
-</section><section id="como-extrair-análises-básicas-de-um-gtfs-pacote-gtfstools" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="como-extrair-análises-básicas-de-um-gtfs-pacote-gtfstools">
-<span class="header-section-number">4.3</span> Como extrair análises básicas de um GTFS (pacote gtfstools)</h2>
-</section><section id="cálculo-de-velocidade-das-linhas" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="cálculo-de-velocidade-das-linhas">
-<span class="header-section-number">4.4</span> Cálculo de velocidade das linhas</h2>
-</section><section id="cálculo-de-frequência-das-linhas" class="level2" data-number="4.5"><h2 data-number="4.5" class="anchored" data-anchor-id="cálculo-de-frequência-das-linhas">
-<span class="header-section-number">4.5</span> Cálculo de frequência das linhas</h2>
-</section><section id="mapear-a-rede-de-transporte-público" class="level2" data-number="4.6"><h2 data-number="4.6" class="anchored" data-anchor-id="mapear-a-rede-de-transporte-público">
-<span class="header-section-number">4.6</span> Mapear a rede de transporte público</h2>
-</section><section id="como-fazer-edições-na-rede-de-transporte-público-pacote-gtfstools" class="level2" data-number="4.7"><h2 data-number="4.7" class="anchored" data-anchor-id="como-fazer-edições-na-rede-de-transporte-público-pacote-gtfstools">
-<span class="header-section-number">4.7</span> Como fazer edições na rede de transporte público (pacote gtfstools)</h2>
+<p>No Brasil, existem dados de GTFS para diversas cidades. Em muitos casos, no entanto, esses dados são de propriedade de empresas operadoras e concessionárias de transporte, e não do poder público. Infelizmente, esses arquivos raramente são disponibilizados aberta e publicamente, contrariando boas práticas de gestão e compartilhamento de dados de interesse público. A <a href="#tbl-gtfs_brasil">Table&nbsp;<span>4.9</span></a> mostra as fontes dos dados GTFS de algumas das poucas cidades do Brasil que disponibilizavam seus feeds abertamente no momento desta publicação.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-gtfs_brasil" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Table&nbsp;4.9: Fontes de dados GTFS publicamente disponíveis no Brasil</caption>
+<thead><tr class="header">
+<th style="text-align: left;">Cidade</th>
+<th style="text-align: left;">Fonte</th>
+<th style="text-align: left;">Informações</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Belo Horizonte</td>
+<td style="text-align: left;">BHTrans</td>
+<td style="text-align: left;">Dado aberto: <a href="https://dados.pbh.gov.br/dataset/gtfs-estatico-do-sistema-convencional">transporte convencional</a>; <a href="https://dados.pbh.gov.br/dataset/feed-gtfs-estatico-do-sistema-suplementar">transporte suplementar</a>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fortaleza</td>
+<td style="text-align: left;">ETUFOR</td>
+<td style="text-align: left;">
+<a href="https://dados.fortaleza.ce.gov.br/dataset/gtfs">Dado aberto</a>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fortaleza</td>
+<td style="text-align: left;">Metrofor</td>
+<td style="text-align: left;">
+<a href="https://www.metrofor.ce.gov.br/gtfs/">Dado aberto</a>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Porto Alegre</td>
+<td style="text-align: left;">EPTC</td>
+<td style="text-align: left;">
+<a href="https://dados.portoalegre.rs.gov.br/dataset/gtfs">Dado aberto</a>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Rio de Janeiro</td>
+<td style="text-align: left;">SMTR</td>
+<td style="text-align: left;">
+<a href="https://www.data.rio/datasets/gtfs-do-rio-de-janeiro/about">Dado aberto</a>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">São Paulo</td>
+<td style="text-align: left;">EMTU</td>
+<td style="text-align: left;">Download <a href="https://www.emtu.sp.gov.br/emtu/dados-abertos/dados-abertos-principal/gtfs.fss">neste link</a>. Necessário cadastro.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">São Paulo</td>
+<td style="text-align: left;">SPTrans</td>
+<td style="text-align: left;">Download <a href="https://www.sptrans.com.br/desenvolvedores/">neste link</a>. Necessário cadastro.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Obs. Os dados de GTFS disponibilizados para Rio de Janeiro e Porto Alegre não necessariamente cobrem todos os modos de transporte público disponíveis nessas cidades.</p>
 
 
 </section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
