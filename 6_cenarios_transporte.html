@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./p5_dados_aop.html" rel="next">
-<link href="./5_gtfstools.html" rel="prev">
+<link href="./s5_dados_aop.html" rel="next">
+<link href="./s4_avaliacao_impacto.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -179,7 +179,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">Seção 4: Avaliação de impacto</a>
+            <a href="./s4_avaliacao_impacto.html" class="sidebar-item-text sidebar-link">SEÇÃO 4: Avaliação de impacto</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -194,7 +194,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./p5_dados_aop.html" class="sidebar-item-text sidebar-link">Seção 5: Dados do Projeto AOP</a>
+            <a href="./s5_dados_aop.html" class="sidebar-item-text sidebar-link">SEÇÃO: 5: Dados do Projeto AOP</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -222,21 +222,6 @@ ul.task-list li input[type="checkbox"] {
   <a href="./references.html" class="sidebar-item-text sidebar-link">Referências bibliográficas</a>
   </div>
 </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">Appendices</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./nocoes_r.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Noções básicas de R</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
     </ul>
     </div>
 </nav>
@@ -246,10 +231,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#alterar-frequência-de-gtfs" id="toc-alterar-frequência-de-gtfs" class="nav-link active" data-scroll-target="#alterar-frequência-de-gtfs"><span class="toc-section-number">6.1</span>  7.1 Alterar frequência de GTFS</a></li>
-  <li><a href="#calcular-acessibilidade-nos-cenários-antes-e-depois" id="toc-calcular-acessibilidade-nos-cenários-antes-e-depois" class="nav-link" data-scroll-target="#calcular-acessibilidade-nos-cenários-antes-e-depois"><span class="toc-section-number">6.2</span>  7.2 Calcular acessibilidade nos cenários antes e depois</a></li>
-  <li><a href="#mapa-do-impacto-de-acessibilidade" id="toc-mapa-do-impacto-de-acessibilidade" class="nav-link" data-scroll-target="#mapa-do-impacto-de-acessibilidade"><span class="toc-section-number">6.3</span>  Mapa do impacto de acessibilidade</a></li>
-  <li><a href="#como-impacto-de-acessibilidade-se-distribui-entre-grupos-sociais" id="toc-como-impacto-de-acessibilidade-se-distribui-entre-grupos-sociais" class="nav-link" data-scroll-target="#como-impacto-de-acessibilidade-se-distribui-entre-grupos-sociais"><span class="toc-section-number">6.4</span>  Como impacto de acessibilidade se distribui entre grupos sociais</a></li>
+  <li><a href="#modificação-do-arquivo-gtfs" id="toc-modificação-do-arquivo-gtfs" class="nav-link active" data-scroll-target="#modificação-do-arquivo-gtfs"><span class="toc-section-number">6.1</span>  Modificação do arquivo GTFS</a></li>
+  <li><a href="#cálculo-da-acessibilidade-nos-cenários-antes-e-depois" id="toc-cálculo-da-acessibilidade-nos-cenários-antes-e-depois" class="nav-link" data-scroll-target="#cálculo-da-acessibilidade-nos-cenários-antes-e-depois"><span class="toc-section-number">6.2</span>  Cálculo da acessibilidade nos cenários antes e depois</a></li>
+  <li><a href="#visualização-dos-níveis-e-da-diferença-de-acessibilidade" id="toc-visualização-dos-níveis-e-da-diferença-de-acessibilidade" class="nav-link" data-scroll-target="#visualização-dos-níveis-e-da-diferença-de-acessibilidade"><span class="toc-section-number">6.3</span>  Visualização dos níveis e da diferença de acessibilidade</a></li>
+  <li><a href="#distribuição-da-acessibilidade-entre-grupos-sociais" id="toc-distribuição-da-acessibilidade-entre-grupos-sociais" class="nav-link" data-scroll-target="#distribuição-da-acessibilidade-entre-grupos-sociais"><span class="toc-section-number">6.4</span>  Distribuição da acessibilidade entre grupos sociais</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/6_cenarios_transporte.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
@@ -272,18 +257,23 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p><strong>Objetivo</strong>: mostrar como avaliar o impacto de acessibilidade de uma política que altera a frequência de algumas linhas de transporte</p>
-<section id="alterar-frequência-de-gtfs" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="alterar-frequência-de-gtfs"><span class="header-section-number">6.1</span> 7.1 Alterar frequência de GTFS</h2>
+<p>Neste capítulo nós avaliaremos o impacto de uma política relativamente simples, mas que pode trazer significativos benefícios em termos de acessibilidade à população: o aumento da frequência das linhas de transporte público.</p>
+<p>Para isso, nós precisaremos comparar os níveis de acessibilidade antes e depois da suposta implementação desta política. Precisamos, portanto, modificar o GTFS original da área de estudo para atualizar as frequências das rotas nele descritas, calcular duas matrizes de tempo de viagem distintas (uma antes e outra depois da política), calcular dois conjuntos de níveis de acessibilidade distintos e comparar esse conjunto. Neste capítulo, vamos cobrir este passo-a-passo em detalhes, começando primeiro pela edição do GTFS original.</p>
+<section id="modificação-do-arquivo-gtfs" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="modificação-do-arquivo-gtfs"><span class="header-section-number">6.1</span> Modificação do arquivo GTFS</h2>
+<p>fdsafsda</p>
 </section>
-<section id="calcular-acessibilidade-nos-cenários-antes-e-depois" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="calcular-acessibilidade-nos-cenários-antes-e-depois"><span class="header-section-number">6.2</span> 7.2 Calcular acessibilidade nos cenários antes e depois</h2>
+<section id="cálculo-da-acessibilidade-nos-cenários-antes-e-depois" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="cálculo-da-acessibilidade-nos-cenários-antes-e-depois"><span class="header-section-number">6.2</span> Cálculo da acessibilidade nos cenários antes e depois</h2>
+<p>FDSAFSAD</p>
 </section>
-<section id="mapa-do-impacto-de-acessibilidade" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="mapa-do-impacto-de-acessibilidade"><span class="header-section-number">6.3</span> Mapa do impacto de acessibilidade</h2>
+<section id="visualização-dos-níveis-e-da-diferença-de-acessibilidade" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="visualização-dos-níveis-e-da-diferença-de-acessibilidade"><span class="header-section-number">6.3</span> Visualização dos níveis e da diferença de acessibilidade</h2>
+<p>FSADFSD</p>
 </section>
-<section id="como-impacto-de-acessibilidade-se-distribui-entre-grupos-sociais" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="como-impacto-de-acessibilidade-se-distribui-entre-grupos-sociais"><span class="header-section-number">6.4</span> Como impacto de acessibilidade se distribui entre grupos sociais</h2>
+<section id="distribuição-da-acessibilidade-entre-grupos-sociais" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="distribuição-da-acessibilidade-entre-grupos-sociais"><span class="header-section-number">6.4</span> Distribuição da acessibilidade entre grupos sociais</h2>
+<p>FASDFSDA</p>
 
 
 </section>
@@ -389,13 +379,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./5_gtfstools.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Manipulação e visualização de dados GTFS</span></span>
+      <a href="./s4_avaliacao_impacto.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">SEÇÃO 4: Avaliação de impacto</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./p5_dados_aop.html" class="pagination-link">
-        <span class="nav-page-text">Seção 5: Dados do Projeto AOP</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./s5_dados_aop.html" class="pagination-link">
+        <span class="nav-page-text">SEÇÃO: 5: Dados do Projeto AOP</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
