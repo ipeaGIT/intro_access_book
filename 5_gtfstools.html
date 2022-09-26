@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.1.251">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>Introdução à acessibilidade urbana - 5&nbsp; Manipulação e visualização de dados GTFS</title>
 <style>
 code{white-space: pre-wrap;}
@@ -20,8 +17,70 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
-
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -40,8 +99,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -60,48 +118,41 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit"
   }
 }</script>
-
-
 </head>
-
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Manipulação e visualização de dados GTFS</span></h1>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">
+<span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Manipulação e visualização de dados GTFS</span>
+</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Introdução à acessibilidade urbana</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/ipeaGIT/aop_curso" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
     <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
     <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+<li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
             <i class="bi bi-bi-twitter pe-1"></i>
           Twitter
           </a>
         </li>
         <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
             <i class="bi bi-bi-facebook pe-1"></i>
           Facebook
           </a>
         </li>
         <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
             <i class="bi bi-bi-linkedin pe-1"></i>
           LinkedIn
           </a>
@@ -117,7 +168,7 @@ ul.task-list li input[type="checkbox"] {
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">Apresentação</a>
   </div>
@@ -129,8 +180,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./1_conceito.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">O que é acessibilidade?</span></a>
   </div>
@@ -141,7 +192,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./s2_calculo.html" class="sidebar-item-text sidebar-link">SEÇÃO 2: Calculando acessibilidade</a>
@@ -149,14 +200,14 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./3_calculando_acesso.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculando acessibilidade urbana em R</span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./s3_dados_tp.html" class="sidebar-item-text sidebar-link">SEÇÃO 3: Dados de transporte público</a>
@@ -164,8 +215,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./4_dados_gtfs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Dados GTFS</span></a>
   </div>
@@ -176,7 +227,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./s4_avaliacao_impacto.html" class="sidebar-item-text sidebar-link">SEÇÃO 4: Avaliação de impacto</a>
@@ -184,14 +235,14 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./6_cenarios_transporte.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Comparando a acessibilidade entre dois cenários de transporte</span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./s5_dados_aop.html" class="sidebar-item-text sidebar-link">SEÇÃO: 5: Dados do Projeto AOP</a>
@@ -199,8 +250,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./7_aopdata_populacao.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Dados de população e socioeconômicos</span></a>
   </div>
@@ -216,35 +267,30 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">Referências bibliográficas</a>
   </div>
 </li>
     </ul>
-    </div>
-</nav>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#como-extrair-análises-básicas-de-um-gtfs-pacote-gtfstools" id="toc-como-extrair-análises-básicas-de-um-gtfs-pacote-gtfstools" class="nav-link active" data-scroll-target="#como-extrair-análises-básicas-de-um-gtfs-pacote-gtfstools"><span class="toc-section-number">5.1</span>  Como extrair análises básicas de um GTFS (pacote gtfstools)</a></li>
-  <li><a href="#cálculo-de-velocidade-das-linhas" id="toc-cálculo-de-velocidade-das-linhas" class="nav-link" data-scroll-target="#cálculo-de-velocidade-das-linhas"><span class="toc-section-number">5.2</span>  Cálculo de velocidade das linhas</a></li>
-  <li><a href="#cálculo-de-frequência-das-linhas" id="toc-cálculo-de-frequência-das-linhas" class="nav-link" data-scroll-target="#cálculo-de-frequência-das-linhas"><span class="toc-section-number">5.3</span>  Cálculo de frequência das linhas</a></li>
-  <li><a href="#mapear-a-rede-de-transporte-público" id="toc-mapear-a-rede-de-transporte-público" class="nav-link" data-scroll-target="#mapear-a-rede-de-transporte-público"><span class="toc-section-number">5.4</span>  Mapear a rede de transporte público</a></li>
-  <li><a href="#como-fazer-edições-na-rede-de-transporte-público-pacote-gtfstools" id="toc-como-fazer-edições-na-rede-de-transporte-público-pacote-gtfstools" class="nav-link" data-scroll-target="#como-fazer-edições-na-rede-de-transporte-público-pacote-gtfstools"><span class="toc-section-number">5.5</span>  Como fazer edições na rede de transporte público (pacote gtfstools)</a></li>
-  </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/5_gtfstools.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
+<li><a href="#leitura-e-manipula%C3%A7%C3%A3o-b%C3%A1sica-de-arquivos-gtfs" id="toc-leitura-e-manipulação-básica-de-arquivos-gtfs" class="nav-link active" data-scroll-target="#leitura-e-manipula%C3%A7%C3%A3o-b%C3%A1sica-de-arquivos-gtfs"><span class="toc-section-number">5.1</span>  Leitura e manipulação básica de arquivos GTFS</a></li>
+  <li><a href="#c%C3%A1lculo-de-velocidade-das-linhas" id="toc-cálculo-de-velocidade-das-linhas" class="nav-link" data-scroll-target="#c%C3%A1lculo-de-velocidade-das-linhas"><span class="toc-section-number">5.2</span>  Cálculo de velocidade das linhas</a></li>
+  <li><a href="#c%C3%A1lculo-de-frequ%C3%AAncia-das-linhas" id="toc-cálculo-de-frequência-das-linhas" class="nav-link" data-scroll-target="#c%C3%A1lculo-de-frequ%C3%AAncia-das-linhas"><span class="toc-section-number">5.3</span>  Cálculo de frequência das linhas</a></li>
+  <li><a href="#mapear-a-rede-de-transporte-p%C3%BAblico" id="toc-mapear-a-rede-de-transporte-público" class="nav-link" data-scroll-target="#mapear-a-rede-de-transporte-p%C3%BAblico"><span class="toc-section-number">5.4</span>  Mapear a rede de transporte público</a></li>
+  <li><a href="#como-fazer-edi%C3%A7%C3%B5es-na-rede-de-transporte-p%C3%BAblico-pacote-gtfstools" id="toc-como-fazer-edições-na-rede-de-transporte-público-pacote-gtfstools" class="nav-link" data-scroll-target="#como-fazer-edi%C3%A7%C3%B5es-na-rede-de-transporte-p%C3%BAblico-pacote-gtfstools"><span class="toc-section-number">5.5</span>  Como fazer edições na rede de transporte público (pacote gtfstools)</a></li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/5_gtfstools.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Manipulação e visualização de dados GTFS</span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block">
+<span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Manipulação e visualização de dados GTFS</span>
+</h1>
 </div>
 
 
@@ -256,36 +302,110 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
-</header>
-
-<section id="como-extrair-análises-básicas-de-um-gtfs-pacote-gtfstools" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="como-extrair-análises-básicas-de-um-gtfs-pacote-gtfstools"><span class="header-section-number">5.1</span> Como extrair análises básicas de um GTFS (pacote gtfstools)</h2>
-<p>Usualmente, arquivos GTFS oriundos de bases oficiais são utilizados para desenvolver análises e pesquisas que possuem diversos elementos comuns. Visando facilitar a leitura, o processamento e a análise desses dados, portanto, a equipe do Projeto Acesso a Oportunidades vêm desenvolvendo o pacote de R gtfstools<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, que oferece diversas funções que facilitam a manipulação e a exploração de feeds. Nesta seção, nós iremos passar por algumas das funcionalidades mais frequentemente utilizadas do pacote.</p>
-</section>
-<section id="cálculo-de-velocidade-das-linhas" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="cálculo-de-velocidade-das-linhas"><span class="header-section-number">5.2</span> Cálculo de velocidade das linhas</h2>
-</section>
-<section id="cálculo-de-frequência-das-linhas" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="cálculo-de-frequência-das-linhas"><span class="header-section-number">5.3</span> Cálculo de frequência das linhas</h2>
+</header><p>Usualmente, arquivos GTFS oriundos de bases oficiais são utilizados para desenvolver análises e pesquisas que possuem diversos elementos comuns. Visando facilitar a leitura, o processamento e a análise desses dados, a equipe do Projeto Acesso a Oportunidades vêm desenvolvendo o pacote de R <code>gtfstools</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, que oferece diversas funções que facilitam a manipulação e a exploração de feeds.</p>
+<p>Neste capítulo, nós iremos passar por algumas das funcionalidades mais frequentemente utilizadas do pacote. Para isso, vamos utilizar uma amostra do <em>feed</em> da SPTrans apresentado no capítulo anterior, disponível dentro do <code>gtfstools</code>.</p>
+<section id="leitura-e-manipulação-básica-de-arquivos-gtfs" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="leitura-e-manipulação-básica-de-arquivos-gtfs">
+<span class="header-section-number">5.1</span> Leitura e manipulação básica de arquivos GTFS</h2>
+<p>A leitura de arquivos GTFS com o <code>gtfstools</code> é feita com a função <code><a href="https://ipeagit.github.io/gtfstools/reference/read_gtfs.html">read_gtfs()</a></code>, que recebe uma <em>string</em> com o caminho do arquivo. Um <em>feed</em> é representado como uma lista de <code>data.table</code>s, uma versão de alta performance da classe <code>data.frame</code>. Ao longo deste capítulo, nós vamos nos referir a esta lista de tabelas como um <strong>objeto GTFS</strong>. Por padrão, a função lê todas as tabelas <code>.txt</code> do <em>feed</em>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ipeagit.github.io/gtfstools/">gtfstools</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/spo_gtfs.zip"</span>, package <span class="op">=</span> <span class="st">"gtfstools"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">gtfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/read_gtfs.html">read_gtfs</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">gtfs</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "agency"      "calendar"    "frequencies" "routes"      "shapes"     
+[6] "stop_times"  "stops"       "trips"      </code></pre>
+</div>
+</div>
+<p>Como podemos ver, cada <code>data.table</code> dentro do objeto GTFS é nomeado de acordo com a tabela que ele representa, porém sem a extensão <code>.txt</code>. Isso nos permite selecionar e manipular cada uma das tabelas separadamente. O código abaixo, por exemplo, mostra os 6 primeiros registros da tabela <em>trips</em>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gtfs</span><span class="op">$</span><span class="va">trips</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   route_id service_id    trip_id trip_headsign direction_id shape_id
+1: CPTM L07        USD CPTM L07-0       JUNDIAI            0    17846
+2: CPTM L07        USD CPTM L07-1           LUZ            1    17847
+3: CPTM L08        USD CPTM L08-0  AMADOR BUENO            0    17848
+4: CPTM L08        USD CPTM L08-1 JULIO PRESTES            1    17849
+5: CPTM L09        USD CPTM L09-0        GRAJAU            0    17850
+6: CPTM L09        USD CPTM L09-1        OSASCO            1    17851</code></pre>
+</div>
+</div>
+<p>As tabelas dentro de um objeto GTFS podem ser facilmente manipuladas usando a sintaxe de tabelas <code>data.table</code>. O pacote <a href="https://r-datatable.com/">data.table</a> oferece diversas funcionalidades úteis, como a edição de colunas por referência, filtros de linhas muito rápidos e agregação de dados eficiente<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Para adicionar 100 segundos a todos os <em>headways</em> listados na tabela <em>frequencies</em> e reverter essa mudança em seguida, por exemplo, nós podemos usar o código abaixo:</p>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># original</span></span>
+<span><span class="va">original_headway</span> <span class="op">&lt;-</span> <span class="va">gtfs</span><span class="op">$</span><span class="va">frequencies</span><span class="op">$</span><span class="va">headway_secs</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gtfs</span><span class="op">$</span><span class="va">frequencies</span>, <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      trip_id start_time end_time headway_secs
+1: CPTM L07-0   04:00:00 04:59:00          720
+2: CPTM L07-0   05:00:00 05:59:00          360
+3: CPTM L07-0   06:00:00 06:59:00          360</code></pre>
+</div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># modified</span></span>
+<span><span class="va">gtfs</span><span class="op">$</span><span class="va">frequencies</span><span class="op">[</span>, <span class="va">headway_secs</span> <span class="op">:=</span> <span class="va">headway_secs</span> <span class="op">+</span> <span class="fl">100</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gtfs</span><span class="op">$</span><span class="va">frequencies</span>, <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      trip_id start_time end_time headway_secs
+1: CPTM L07-0   04:00:00 04:59:00          820
+2: CPTM L07-0   05:00:00 05:59:00          460
+3: CPTM L07-0   06:00:00 06:59:00          460</code></pre>
+</div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># back to original</span></span>
+<span><span class="va">gtfs</span><span class="op">$</span><span class="va">frequencies</span><span class="op">[</span>, <span class="va">headway_secs</span> <span class="op">:=</span> <span class="va">original_headway</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gtfs</span><span class="op">$</span><span class="va">frequencies</span>, <span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      trip_id start_time end_time headway_secs
+1: CPTM L07-0   04:00:00 04:59:00          720
+2: CPTM L07-0   05:00:00 05:59:00          360
+3: CPTM L07-0   06:00:00 06:59:00          360</code></pre>
+</div>
+</div>
+<p>Ao final de edições de um objeto GTFS no R, frequentemente vamos querer usar o GTFS manipulado para fazer análises de diferentes tipos. Para isso, é comum que precisemos do arquivo GTFS em formato <code>.zip</code> novamente, e não da lista de tabelas dentro do R. O pacote disponibiliza a função <code><a href="https://ipeagit.github.io/gtfstools/reference/write_gtfs.html">write_gtfs()</a></code> exatamente com a finalidade de transformar objetos GTFS que existem apenas dentro do R em arquivos GTFS salvos na memória de seu computador. Para usá-la, é necessário apenas listar o objeto e o endereço no qual ele deve ser salvo:</p>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dest_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="st">"new_gtfs"</span>, fileext <span class="op">=</span> <span class="st">".zip"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files.html">file.exists</a></span><span class="op">(</span><span class="va">dest_path</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/write_gtfs.html">write_gtfs</a></span><span class="op">(</span><span class="va">gtfs</span>, <span class="va">dest_path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files.html">file.exists</a></span><span class="op">(</span><span class="va">dest_path</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">zip</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/zip/man/zip_list.html">zip_list</a></span><span class="op">(</span><span class="va">dest_path</span><span class="op">)</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"filename"</span>, <span class="st">"compressed_size"</span>, <span class="st">"timestamp"</span><span class="op">)</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         filename compressed_size           timestamp
+1      agency.txt             112 2022-09-26 18:29:42
+2    calendar.txt             129 2022-09-26 18:29:42
+3 frequencies.txt            2381 2022-09-26 18:29:42
+4      routes.txt             659 2022-09-26 18:29:42
+5      shapes.txt          160470 2022-09-26 18:29:42
+6  stop_times.txt            7907 2022-09-26 18:29:42
+7       stops.txt           18797 2022-09-26 18:29:42
+8       trips.txt             717 2022-09-26 18:29:42</code></pre>
+</div>
+</div>
+</section><section id="cálculo-de-velocidade-das-linhas" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="cálculo-de-velocidade-das-linhas">
+<span class="header-section-number">5.2</span> Cálculo de velocidade das linhas</h2>
+</section><section id="cálculo-de-frequência-das-linhas" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="cálculo-de-frequência-das-linhas">
+<span class="header-section-number">5.3</span> Cálculo de frequência das linhas</h2>
 <p>Fazer mapa da rede colorindo rotas pela freq. Ver esse tweet https://twitter.com/UrbanDemog/status/1565002114203533313/photo/3</p>
-</section>
-<section id="mapear-a-rede-de-transporte-público" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="mapear-a-rede-de-transporte-público"><span class="header-section-number">5.4</span> Mapear a rede de transporte público</h2>
-</section>
-<section id="como-fazer-edições-na-rede-de-transporte-público-pacote-gtfstools" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="como-fazer-edições-na-rede-de-transporte-público-pacote-gtfstools"><span class="header-section-number">5.5</span> Como fazer edições na rede de transporte público (pacote gtfstools)</h2>
+</section><section id="mapear-a-rede-de-transporte-público" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="mapear-a-rede-de-transporte-público">
+<span class="header-section-number">5.4</span> Mapear a rede de transporte público</h2>
+</section><section id="como-fazer-edições-na-rede-de-transporte-público-pacote-gtfstools" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="como-fazer-edições-na-rede-de-transporte-público-pacote-gtfstools">
+<span class="header-section-number">5.5</span> Como fazer edições na rede de transporte público (pacote gtfstools)</h2>
 
 
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
+</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1"><p>Disponível em <a href="https://github.com/ipeaGIT/gtfstools" class="uri">https://github.com/ipeaGIT/gtfstools</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+<li id="fn2"><p>Mais detalhes sobre o uso e a sintaxe do <code>data.table</code> podem ser lidos em <a href="https://rdatatable.gitlab.io/data.table/index.html" class="uri">https://rdatatable.gitlab.io/data.table/index.html</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -382,9 +502,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     });
   }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./4_dados_gtfs.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Dados GTFS</span></span>
       </a>          
@@ -396,22 +514,20 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Ipea (Institute for Applied Economic Research)</div>   
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
-    <li class="nav-item compact">
+<li class="nav-item compact">
     <a class="nav-link active" href="https://github.com/ipeaGIT/aop_curso" aria-current="page">
       <i class="bi bi-github" role="img">
 </i> 
     </a>
   </li>  
 </ul>
-    </div>
+</div>
   </div>
 </footer>
-
 
 
 </body></html>
