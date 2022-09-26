@@ -1,10 +1,62 @@
 # Manipulação e visualização de dados GTFS
 
-## Como extrair análises básicas de um GTFS (pacote gtfstools)
-
-Usualmente, arquivos GTFS oriundos de bases oficiais são utilizados para desenvolver análises e pesquisas que possuem diversos elementos comuns. Visando facilitar a leitura, o processamento e a análise desses dados, portanto, a equipe do Projeto Acesso a Oportunidades vêm desenvolvendo o pacote de R gtfstools[^1], que oferece diversas funções que facilitam a manipulação e a exploração de feeds. Nesta seção, nós iremos passar por algumas das funcionalidades mais frequentemente utilizadas do pacote.
+Usualmente, arquivos GTFS oriundos de bases oficiais são utilizados para desenvolver análises e pesquisas que possuem diversos elementos comuns. Visando facilitar a leitura, o processamento e a análise desses dados, a equipe do Projeto Acesso a Oportunidades vêm desenvolvendo o pacote de R `gtfstools`[^1], que oferece diversas funções que facilitam a manipulação e a exploração de feeds.
 
 [^1]: Disponível em <https://github.com/ipeaGIT/gtfstools>.
+
+Neste capítulo, nós iremos passar por algumas das funcionalidades mais frequentemente utilizadas do pacote. Para isso, vamos utilizar uma amostra do *feed* da SPTrans apresentado no capítulo anterior, disponível dentro do `gtfstools`.
+
+## Leitura e manipulação básica de arquivos GTFS
+
+A leitura de arquivos GTFS com o `gtfstools` é feita com a função `read_gtfs()`, que recebe uma *string* com o caminho do arquivo. Um *feed* é representado como uma lista de `data.table`s, uma versão de alta performance da classe `data.frame`. Ao longo deste capítulo, nós vamos nos referir a esta lista de tabelas como um **objeto GTFS**. Por padrão, a função lê todas as tabelas `.txt` do *feed*:
+
+```{r}
+library(gtfstools)
+
+path <- system.file("extdata/spo_gtfs.zip", package = "gtfstools")
+
+gtfs <- read_gtfs(path)
+
+names(gtfs)
+```
+
+Como podemos ver, cada `data.table` dentro do objeto GTFS é nomeado de acordo com a tabela que ele representa, porém sem a extensão `.txt`. Isso nos permite selecionar e manipular cada uma das tabelas separadamente. O código abaixo, por exemplo, mostra os 6 primeiros registros da tabela *trips*:
+
+```{r}
+head(gtfs$trips)
+```
+
+As tabelas dentro de um objeto GTFS podem ser facilmente manipuladas usando a sintaxe de tabelas  `data.table`. O pacote [data.table](https://r-datatable.com/) oferece diversas funcionalidades úteis, como a edição de colunas por referência, filtros de linhas muito rápidos e agregação de dados eficiente[^2]. Para adicionar 100 segundos a todos os *headways* listados na tabela *frequencies* e reverter essa mudança em seguida, por exemplo, nós podemos usar o código abaixo:
+
+[^2]: Mais detalhes sobre o uso e a sintaxe do `data.table` podem ser lidos em <https://rdatatable.gitlab.io/data.table/index.html>.
+
+```{r}
+# original
+original_headway <- gtfs$frequencies$headway_secs
+head(gtfs$frequencies, 3)
+
+# modified
+gtfs$frequencies[, headway_secs := headway_secs + 100]
+head(gtfs$frequencies, 3)
+
+# back to original
+gtfs$frequencies[, headway_secs := original_headway]
+head(gtfs$frequencies, 3)
+```
+
+Ao final de edições de um objeto GTFS no R, frequentemente vamos querer usar o GTFS manipulado para fazer análises de diferentes tipos. Para isso, é comum que precisemos do arquivo GTFS em formato `.zip` novamente, e não da lista de tabelas dentro do R. O pacote disponibiliza a função `write_gtfs()` exatamente com a finalidade de transformar objetos GTFS que existem apenas dentro do R em arquivos GTFS salvos na memória de seu computador. Para usá-la, é necessário apenas listar o objeto e o endereço no qual ele deve ser salvo:
+
+```{r}
+dest_path <- tempfile("new_gtfs", fileext = ".zip")
+
+file.exists(dest_path)
+
+write_gtfs(gtfs, dest_path)
+
+file.exists(dest_path)
+
+zip::zip_list(dest_path)[, c("filename", "compressed_size", "timestamp")]
+```
 
 ## Cálculo de velocidade das linhas
 
