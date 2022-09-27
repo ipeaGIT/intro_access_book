@@ -3,7 +3,7 @@ FROM rocker/binder:4.2.1
 ARG NB_USER
 ARG NB_UID
 
-COPY --chown=${NB_USER} ~/.local/share/renv ${HOME}/share/renv
+COPY --chown=${NB_USER} /home/runner/work/_temp/renv ${HOME}/share/renv
 
 COPY --chown=${NB_USER} . ${HOME}
 
