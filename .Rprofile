@@ -1,3 +1,3 @@
 source("renv/activate.R")
 
-if (file.exists("~/.Rprofile")) source("~/.Rprofile")
+if (Sys.getenv("RUSER") == "DHERSZ") source("~/.Rprofile")
