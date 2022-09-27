@@ -3,7 +3,9 @@ FROM rocker/binder:4.2.1
 ARG NB_USER
 ARG NB_UID
 
-COPY --chown=${NB_USER} ${RENV_PATHS_ROOT} ${HOME}/.cache/R/renv
+ENV RENV_PATHS_CACHE=${HOME}/.cache/R/renv/cache
+
+COPY --chown=${NB_USER} ${RENV_PATHS_ROOT}/cache ${RENV_PATHS_CACHE}
 
 COPY --chown=${NB_USER} . ${HOME}
 
