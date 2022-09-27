@@ -1,16 +1,36 @@
 # Apresentação {.unnumbered}
 
-Este livro tem como objetivo dar uma introdução sobre os conceitos e habilidades práticas necessárias para a realização de estudos e avaliações de impacto de acessibilidade urbana. Além de uma visão geral sobre indicadores de acessibilidade, o livro ensina a analisar dados espaciais e de redes de transporte utilizando a linguagem de programação R. O conteúdo do livro apresenta exemplos reproduzíveis que ilustram como calcular estimativas de acessibilidade por diferentes meios de transporte, como visualizar esses resultados em mapas e gráficos, e como usar esse tipo de metodologia para avaliar o impacto de projetos de transporte sobre acessibilidade urbana. 
+O objetivo deste livro é apresentar uma introdução sobre os conceitos e habilidades práticas necessárias para fazer estudos e avaliações de impacto sobre acessibilidade urbana. O livro começa dando uma visão geral sobre o conceito e indicadores de acessibilidade. Em seguida, ensina como analisar dados espaciais e de redes de transporte para se calcular estimativas de acessibilidade por diferentes modos de transporte e como visualizar esses resultados em mapas e gráficos. O livro também busca familiarizar o leitor com dados de redes de transporte público em formato GTFS e ensina como manipular e visualizar esse tipo de dado. Num dos seus principais capítulos, o livro ensina ainda como os dados e metodologia apresentados nos capítulos anteriores podem ser utilizados para avaliar o impacto de projetos de transporte sobre as condições de acesso a oportunidades da população. Por fim, o livro ensina como baixar, analisar e visualizar estimativas de acessibilidade já calculadas para cidades brasileiras e disponibilizadas pela equipe do Projeto Acesso a Oportunidades (AOP) do Ipea.
 
-O conteúdo do livro foi pensado para as necessidades de trabalho de gestores públicos, além de analistas e pesquisadores de planejamento e transporte urbano. Por isso, o livro tem caráter prático “mão na masssa”, e se apoia em exemplos reproduzíveis em R com dados para o Brasil. 
+O conteúdo do livro foi pensado para as necessidades de trabalho de gestores públicos, além de analistas, alunos e pesquisadores de planejamento e transporte urbano. Por isso, o livro tem caráter prático. Todo material do livro é apresentado com exemplos reproduzíveis e dados abertos utilizando-se programação em R.
 
-O livro é elaborado por uma equipe do Instituto de Pesquisa Econômica Aplicada (Ipea) no âmbito da parceria entre Ipea e a Secretaria de Mobilidade e Desenvolvimento Regional e Urbano (SMDRU) do Ministério do Desenvolvimento Regional (MDR). 
+## Organização do livro
 
-::: {.callout-note appearance="simple"}
-Este livro foi escrito e publicado com o sistema de publicação [Quarto](https://quarto.org). Todo o código utilizado em seu preparo e na sua publicação do pode ser encontrado [neste repositório](https://github.com/ipeaGIT/aop_curso/tree/main/aop_curso_pt).
-:::
+Este livro está dividido em 5 seções:
+
+1. Seção 1: A primeira seção apresenta o conceito de acessibilidade urbana, esclarece a diferença entre acessibilidade e mobilidade urbana, e apresenta os principais indicadores usados para medir a acessibilidade urbana.
+2. Seção 2:  A segunda seção ensina como calcular estimativas de acessibilidade urbana em R usando os pacotes `r5r` e `accessibility` a partir de dados públicos abertos.
+3. Seção 3: A terceira seção apresenta o que é a especificação GTFS de dados de transporte público, e mostra como trabalhar e analisar dados de GTFS usando R.
+4. Seção 4: A quarta seção mostra como o conhecimento dos capítulos anteriores pode ser utilizado para se avaliar o impacto de políticas urbanas sobre condições de acessibilidade urbana usando R.
+5. Seção 5: Por fim, a quinta seção mostra como fazer download e analisar os dados do projeto Acesso a Oportunidades (AOP) para analisar a distribuição espacial e socioeconômica das condições de acesso a oportunidades nas cidades brasileiras.
+
 
 ## Licença de uso
 
 <img align="right" src="images/ipea_logo.png" width="240">
-Licença Padrão Ipea: é permitida a reprodução e a exibição para uso educacional ou informativo, desde que respeitado o crédito ao autor original e citada a fonte (<http://www.ipea.gov.br>). Permitida a inclusão da obra em Repositórios ou Portais de Acesso Aberto, desde que fique claro para os usuários os termos de uso da obra e quem é o detentor dos direitos autorais, o Instituto de Pesquisa Econômica Aplicada (Ipea). Proibido o uso comercial ou com finalidades lucrativas em qualquer hipótese. Proibida a criação de obras derivadas. Proibida a tradução, inclusão de legendas ou voz humana. Para imagens estáticas e em movimento (vídeos e audiovisuais), ATENÇÃO: os direitos de imagem foram cedidos apenas para a obra original, formato de distribuição e repositório. Esta licença está baseada em estudos sobre a Lei Brasileira de Direitos Autorais (Lei 9.610/1998).
+É permitida a reprodução e a exibição para uso educacional ou informativo, desde que respeitado o crédito ao autor original e citada a fonte. Permitida a inclusão da obra em Repositórios ou Portais de Acesso Aberto, desde que fique claro para os usuários os termos de uso da obra e quem é o detentor dos direitos autorais, o Instituto de Pesquisa Econômica Aplicada (Ipea). Proibido o uso comercial ou com finalidades lucrativas em qualquer hipótese. Proibida a criação de obras derivadas. Para imagens estáticas e em movimento (vídeos e audiovisuais), ATENÇÃO: os direitos de imagem foram cedidos apenas para a obra original, formato de distribuição e repositório. Esta licença está baseada em estudos sobre a Lei Brasileira de Direitos Autorais (Lei 9.610/1998).
+
+## Como citar o livro
+
+Caso você use o material deste livro, pedimos por gentileza que você cite o livro utilizando a seguinte referência:
+
+- Pereira, Rafael H. M. & Herszenhut, Daniel. (2022) Introdução à acessibilidade urbana um guia prático em R. Instituto de Pesquisa Econômica Aplicada.
+
+
+## Agradecimentos
+Este livro foi elaborado pelo Instituto de Pesquisa Econômica Aplicada (Ipea) no âmbito da parceria entre Ipea e a Secretaria de Mobilidade e Desenvolvimento Regional e Urbano (SMDRU) do Ministério do Desenvolvimento Regional (MDR). 
+
+
+::: {.callout-note appearance="simple"}
+Este livro foi escrito e publicado com o sistema de publicação [Quarto](https://quarto.org). Todo o código utilizado em seu preparo e na sua publicação do pode ser encontrado [neste repositório](https://github.com/ipeaGIT/aop_curso/tree/main/aop_curso_pt).
+:::
