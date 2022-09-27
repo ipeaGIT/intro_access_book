@@ -37,7 +37,7 @@ jobs:
       - name: Move dependencies to Docker context
         run: |
           mkdir -p renv/cache
-          cp ${RENV_PATHS_ROOT}/cache renv/cache
+          cp -r ${RENV_PATHS_ROOT}/cache renv/cache
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
