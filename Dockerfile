@@ -5,10 +5,10 @@ ARG NB_UID
 
 COPY --chown=${NB_USER} . ${HOME}
 
-ENV RENV_PATHS_CACHE=/renv/cache
-RUN mkdir -p /renv/cache
+ENV RENV_PATHS_CACHE=/tmp/renv/cache
+RUN mkdir -p /tmp/renv/cache
 
 RUN Rscript --vanilla -e "install.packages(\"renv\", repos = \"https://cloud.r-project.org/\")"
 RUN Rscript -e "renv::restore()"
 
-RUN --mount=type=bind,source=/renv/cache,target=/renv/cache Rscript -e "renv::restore()"
+RUN --mount=type=bind,source=/tmp/renv/cache,target=/tmp/renv/cache Rscript -e "renv::restore()"

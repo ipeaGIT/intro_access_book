@@ -6,7 +6,7 @@ on:
 name: build_binder
 
 jobs:
-  build_binderdeploy:
+  build_binder:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -16,7 +16,7 @@ jobs:
 
       - name: Create dependencies dir
         run: |
-          mkdir -p renv/cache
+          mkdir -p /tmp/renv/cache
 
       - name: Restore renv cache
         uses: actions/cache@v3
