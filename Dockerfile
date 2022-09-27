@@ -5,7 +5,7 @@ ARG NB_UID
 
 ENV RENV_PATHS_CACHE=${HOME}/.cache/R/renv/cache
 
-COPY --chown=${NB_USER} ${RENV_PATHS_ROOT}/cache ${RENV_PATHS_CACHE}
+COPY --chown=${NB_USER} /home/runner/work/_temp/renv/cache ${RENV_PATHS_CACHE}
 
 COPY --chown=${NB_USER} . ${HOME}
 
