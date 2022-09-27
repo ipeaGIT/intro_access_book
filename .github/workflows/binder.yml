@@ -7,15 +7,14 @@ name: build_binder
 jobs:
   build_binder:
     runs-on: ubuntu-latest
-
     steps:
-    - name: checkout files in repo
-      uses: actions/checkout@master
+      - name: Check out repository
+        uses: actions/checkout@v2
 
-    - name: update jupyter dependencies with repo2docker
-      uses: jupyterhub/repo2docker-action
-      with:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        IMAGE_NAME: ipea/intro_access_book
-        BINDER_CACHE: true
+      - name: update jupyter dependencies with repo2docker
+        uses: jupyterhub/repo2docker-action
+        with:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          IMAGE_NAME: ipea/intro_access_book
+          BINDER_CACHE: true
