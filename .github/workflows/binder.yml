@@ -31,5 +31,8 @@ jobs:
       - name: Java reconf
         run: sudo R CMD javareconf
 
+      - name: Install R Dependencies
+        uses: r-lib/actions/setup-renv@v2
+
       - name: ls
         run: ls /home/runner/work/_temp/renv
