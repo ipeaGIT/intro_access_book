@@ -5,5 +5,6 @@ ARG NB_UID
 
 COPY --chown=${NB_USER} . ${HOME}
 
+RUN Rscript --vanilla -e "options(repos = list(CRAN = \"https://cloud.r-project.org/\"))"
 RUN Rscript --vanilla -e "install.packages(\"renv\")"
 RUN Rscript --vanilla -e "renv::restore()"
