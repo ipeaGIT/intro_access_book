@@ -3,9 +3,9 @@ FROM rocker/binder:4.2.1
 ARG NB_USER
 ARG NB_UID
 
-ENV RENV_PATHS_CACHE=${HOME}/.cache/R/renv/cache
+ENV RENV_PATHS_CACHE=renv/cache
 
-COPY --chown=${NB_USER} /home/runner/work/_temp/renv/cache ${RENV_PATHS_CACHE}
+COPY --chown=${NB_USER} renv/cache ${RENV_PATHS_CACHE}
 
 COPY --chown=${NB_USER} . ${HOME}
 
