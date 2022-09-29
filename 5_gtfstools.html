@@ -282,9 +282,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="#leitura-e-manipula%C3%A7%C3%A3o-b%C3%A1sica-de-arquivos-gtfs" id="toc-leitura-e-manipulação-básica-de-arquivos-gtfs" class="nav-link active" data-scroll-target="#leitura-e-manipula%C3%A7%C3%A3o-b%C3%A1sica-de-arquivos-gtfs"><span class="toc-section-number">5.1</span>  Leitura e manipulação básica de arquivos GTFS</a></li>
   <li><a href="#c%C3%A1lculo-de-velocidade-das-linhas" id="toc-cálculo-de-velocidade-das-linhas" class="nav-link" data-scroll-target="#c%C3%A1lculo-de-velocidade-das-linhas"><span class="toc-section-number">5.2</span>  Cálculo de velocidade das linhas</a></li>
   <li><a href="#combina%C3%A7%C3%A3o-e-filtragem-de-feeds" id="toc-combinação-e-filtragem-de-feeds" class="nav-link" data-scroll-target="#combina%C3%A7%C3%A3o-e-filtragem-de-feeds"><span class="toc-section-number">5.3</span>  Combinação e filtragem de <em>feeds</em></a></li>
-  <li><a href="#c%C3%A1lculo-de-frequ%C3%AAncia-das-linhas" id="toc-cálculo-de-frequência-das-linhas" class="nav-link" data-scroll-target="#c%C3%A1lculo-de-frequ%C3%AAncia-das-linhas"><span class="toc-section-number">5.4</span>  Cálculo de frequência das linhas</a></li>
-  <li><a href="#mapear-a-rede-de-transporte-p%C3%BAblico" id="toc-mapear-a-rede-de-transporte-público" class="nav-link" data-scroll-target="#mapear-a-rede-de-transporte-p%C3%BAblico"><span class="toc-section-number">5.5</span>  Mapear a rede de transporte público</a></li>
-  <li><a href="#como-fazer-edi%C3%A7%C3%B5es-na-rede-de-transporte-p%C3%BAblico-pacote-gtfstools" id="toc-como-fazer-edições-na-rede-de-transporte-público-pacote-gtfstools" class="nav-link" data-scroll-target="#como-fazer-edi%C3%A7%C3%B5es-na-rede-de-transporte-p%C3%BAblico-pacote-gtfstools"><span class="toc-section-number">5.6</span>  Como fazer edições na rede de transporte público (pacote gtfstools)</a></li>
+  <li><a href="#mapeamento-do-headway-das-linhas" id="toc-mapeamento-do-headway-das-linhas" class="nav-link" data-scroll-target="#mapeamento-do-headway-das-linhas"><span class="toc-section-number">5.4</span>  Mapeamento do <em>headway</em> das linhas</a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/5_gtfstools.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
@@ -381,14 +379,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">zip</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/zip/man/zip_list.html">zip_list</a></span><span class="op">(</span><span class="va">dest_path</span><span class="op">)</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"filename"</span>, <span class="st">"compressed_size"</span>, <span class="st">"timestamp"</span><span class="op">)</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         filename compressed_size           timestamp
-1      agency.txt             112 2022-09-29 14:55:30
-2    calendar.txt             129 2022-09-29 14:55:30
-3 frequencies.txt            2381 2022-09-29 14:55:30
-4      routes.txt             659 2022-09-29 14:55:30
-5      shapes.txt          160470 2022-09-29 14:55:30
-6  stop_times.txt            7907 2022-09-29 14:55:30
-7       stops.txt           18797 2022-09-29 14:55:30
-8       trips.txt             717 2022-09-29 14:55:30</code></pre>
+1      agency.txt             112 2022-09-29 20:34:08
+2    calendar.txt             129 2022-09-29 20:34:08
+3 frequencies.txt            2381 2022-09-29 20:34:08
+4      routes.txt             659 2022-09-29 20:34:08
+5      shapes.txt          160470 2022-09-29 20:34:08
+6  stop_times.txt            7907 2022-09-29 20:34:08
+7       stops.txt           18797 2022-09-29 20:34:08
+8       trips.txt             717 2022-09-29 20:34:08</code></pre>
 </div>
 </div>
 </section><section id="cálculo-de-velocidade-das-linhas" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="cálculo-de-velocidade-das-linhas">
@@ -823,13 +821,113 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="5_gtfstools_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-</section><section id="cálculo-de-frequência-das-linhas" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="cálculo-de-frequência-das-linhas">
-<span class="header-section-number">5.4</span> Cálculo de frequência das linhas</h2>
-<p>Fazer mapa da rede colorindo rotas pela freq. Ver esse tweet https://twitter.com/UrbanDemog/status/1565002114203533313/photo/3</p>
-</section><section id="mapear-a-rede-de-transporte-público" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="mapear-a-rede-de-transporte-público">
-<span class="header-section-number">5.5</span> Mapear a rede de transporte público</h2>
-</section><section id="como-fazer-edições-na-rede-de-transporte-público-pacote-gtfstools" class="level2" data-number="5.6"><h2 data-number="5.6" class="anchored" data-anchor-id="como-fazer-edições-na-rede-de-transporte-público-pacote-gtfstools">
-<span class="header-section-number">5.6</span> Como fazer edições na rede de transporte público (pacote gtfstools)</h2>
+</section><section id="mapeamento-do-headway-das-linhas" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="mapeamento-do-headway-das-linhas">
+<span class="header-section-number">5.4</span> Mapeamento do <em>headway</em> das linhas</h2>
+<p>Como mostrado nas seções anteriores, o <code>gtfstools</code> disponibiliza uma grande caixa de ferramentas que podem ser usadas no processamento e na análise de arquivos GTFS. O pacote, no entanto, oferece diversas outras funções que não puderam ser apresentadas neste livro, por questões de espaço. A lista completa de funções disponíveis no pacote pode ser conferida no <a href="https://ipeagit.github.io/gtfstools/reference/index.html">site do <code>gtfstools</code></a>.</p>
+<p>A apresentação das funções feitas até aqui tem um importante caráter demonstrativo, porém não mostra como elas podem ser usadas de forma conjunta no desenvolvimento de uma análise de um arquivo GTFS. Esta seção preenche esta lacuna, mostrando como o pacote pode ser usado em uma análise simples, que visa responder a seguinte pergunta: como se distribuem espacialmente os tempos entre veículos de uma mesma linha (ou seja, o <em>headway</em>) no GTFS da SPTrans?</p>
+<p>A primeira etapa é definir o escopo da nossa análise. A fim de exemplo, vamos considerar o <em>headway</em> no pico da manhã, entre 7h e 9h, em uma típica terça-feira de operação. Para isso, precisamos filtrar o nosso <em>feed</em>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">gtfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/read_gtfs.html">read_gtfs</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">filtered_gtfs</span> <span class="op">&lt;-</span> <span class="va">gtfs</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/remove_duplicates.html">remove_duplicates</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_weekday.html">filter_by_weekday</a></span><span class="op">(</span><span class="st">"tuesday"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_time_of_day.html">filter_by_time_of_day</a></span><span class="op">(</span>from <span class="op">=</span> <span class="st">"07:00:00"</span>, to <span class="op">=</span> <span class="st">"09:00:00"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">filtered_gtfs</span><span class="op">$</span><span class="va">frequencies</span><span class="op">[</span><span class="va">trip_id</span> <span class="op">==</span> <span class="st">"2105-10-0"</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     trip_id start_time end_time headway_secs
+1: 2105-10-0   07:00:00 07:59:00          900
+2: 2105-10-0   08:00:00 08:59:00         1200</code></pre>
+</div>
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">filtered_gtfs</span><span class="op">$</span><span class="va">calendar</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   service_id monday tuesday wednesday thursday friday saturday sunday
+1:        USD      1       1         1        1      1        1      1
+2:        U__      1       1         1        1      1        0      0
+   start_date   end_date
+1: 2008-01-01 2020-05-01
+2: 2008-01-01 2020-05-01</code></pre>
+</div>
+</div>
+<p>Em seguida, precisamos calcular o <em>headway</em> dentro do período estabelecido. Essa informação pode ser encontrada na tabela <em>frequencies</em>, porém há um elemento complicador: cada viagem está associada a mais de um <em>headway, como podemos ver acima. Para resolver esta questão, portanto, vamos calcular o </em>headway médio* neste período.</p>
+<p>Os primeiros registros da tabela <em>frequencies</em> do GTFS da SPTrans parecem sugerir que os períodos do dia estão listados sempre de uma em uma hora, porém isto não é uma regra estabelecida na especificação GTFS e nem é a prática adotada em outros GTFS. Por isso, nós vamos calcular a <em>média ponderada</em> do <em>headway</em> no período especificado. Para isso, nós precisamos multiplicar cada <em>headway</em> pelo intervalo de tempo em que ele é válido, e dividir o total desta soma pelo intervalo de tempo total (duas horas). Para calcular o intervalo de tempo em que cada <em>headway</em> é válido, nós usamos a função <code><a href="https://ipeagit.github.io/gtfstools/reference/convert_time_to_seconds.html">convert_time_to_seconds()</a></code> para calcular o começo e o fim do intervalo em segundos e subtraímos o valor do fim pelo do começo, como abaixo:</p>
+<div class="cell">
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">filtered_gtfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/convert_time_to_seconds.html">convert_time_to_seconds</a></span><span class="op">(</span><span class="va">filtered_gtfs</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">filtered_gtfs</span><span class="op">$</span><span class="va">frequencies</span><span class="op">[</span><span class="va">trip_id</span> <span class="op">==</span> <span class="st">"2105-10-0"</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     trip_id start_time end_time headway_secs start_time_secs end_time_secs
+1: 2105-10-0   07:00:00 07:59:00          900           25200         28740
+2: 2105-10-0   08:00:00 08:59:00         1200           28800         32340</code></pre>
+</div>
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">filtered_gtfs</span><span class="op">$</span><span class="va">frequencies</span><span class="op">[</span>, <span class="va">time_interval</span> <span class="op">:=</span> <span class="va">end_time_secs</span> <span class="op">-</span> <span class="va">start_time_secs</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Em seguida, nós calculamos o <em>headway</em> médio:</p>
+<div class="cell">
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">avg_headway</span> <span class="op">&lt;-</span> <span class="va">filtered_gtfs</span><span class="op">$</span><span class="va">frequencies</span><span class="op">[</span></span>
+<span>  ,</span>
+<span>  <span class="fu">.</span><span class="op">(</span>avg_headway <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span><span class="op">(</span><span class="va">headway_secs</span>, w <span class="op">=</span> <span class="va">time_interval</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  by <span class="op">=</span> <span class="va">trip_id</span></span>
+<span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">avg_headway</span><span class="op">[</span><span class="va">trip_id</span> <span class="op">==</span> <span class="st">"2105-10-0"</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     trip_id avg_headway
+1: 2105-10-0        1050</code></pre>
+</div>
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">avg_headway</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      trip_id avg_headway
+1: CPTM L07-0         360
+2: CPTM L07-1         360
+3: CPTM L08-0         300
+4: CPTM L08-1         300
+5: CPTM L09-0         240
+6: CPTM L09-1         240</code></pre>
+</div>
+</div>
+<p>Nós precisamos agora gerar a trajetória espacial de cada viagem e juntar esta informação à do <em>headway</em> médio. Para isso, nós vamos utilizar a função <code><a href="https://ipeagit.github.io/gtfstools/reference/get_trip_geometry.html">get_trip_geometry()</a></code>, que, dado um objeto GTFS, retorna a trajetória espacial de suas viagens. Esta função nos permite especificar de quais viagens nós queremos as trajetórias, logo nós vamos calcular apenas as daquelas que estão presentes na tabela de <em>headways</em> médios:</p>
+<div class="cell">
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">selected_trips</span> <span class="op">&lt;-</span> <span class="va">avg_headway</span><span class="op">$</span><span class="va">trip_id</span></span>
+<span></span>
+<span><span class="va">geoms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/get_trip_geometry.html">get_trip_geometry</a></span><span class="op">(</span></span>
+<span>  <span class="va">filtered_gtfs</span>,</span>
+<span>  trip_id <span class="op">=</span> <span class="va">selected_trips</span>,</span>
+<span>  file <span class="op">=</span> <span class="st">"shapes"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">geoms</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 6 features and 2 fields
+Geometry type: LINESTRING
+Dimension:     XY
+Bounding box:  xmin: -46.98404 ymin: -23.73644 xmax: -46.63535 ymax: -23.19474
+Geodetic CRS:  WGS 84
+     trip_id origin_file                       geometry
+1 CPTM L07-0      shapes LINESTRING (-46.63535 -23.5...
+2 CPTM L07-1      shapes LINESTRING (-46.87255 -23.1...
+3 CPTM L08-0      shapes LINESTRING (-46.64073 -23.5...
+4 CPTM L08-1      shapes LINESTRING (-46.98404 -23.5...
+5 CPTM L09-0      shapes LINESTRING (-46.77604 -23.5...
+6 CPTM L09-1      shapes LINESTRING (-46.69711 -23.7...</code></pre>
+</div>
+</div>
+<p>O objeto <code>geoms</code> está no formato <code>sf</code>, e não no <code>data.table</code>, que precisamos que ele esteja para juntarmos à tabela de <em>headways</em>. Depois de convertê-lo para o formato desejado adequado e juntá-lo à tabela de <em>headways</em>, nós precisamos apenas configurar o nosso mapa como desejado. No exemplo abaixo, nós usamos cores e espessuras de linhas que variam de acordo com o <em>headway</em> de cada viagem:</p>
+<div class="cell">
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com">data.table</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setDT.html">setDT</a></span><span class="op">(</span><span class="va">geoms</span><span class="op">)</span></span>
+<span><span class="va">avg_headway</span><span class="op">[</span><span class="va">geoms</span>, on <span class="op">=</span> <span class="st">"trip_id"</span>, <span class="va">geometry</span> <span class="op">:=</span> <span class="va">i.geometry</span><span class="op">]</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/sf.html">st_sf</a></span><span class="op">(</span><span class="va">avg_headway</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">avg_headway</span>, size <span class="op">=</span> <span class="va">avg_headway</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="5_gtfstools_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Como podemos ver, o pacote <code>gtfstools</code> torna o desenvolvimento de análises de <em>feeds</em> de transporte público algo fácil e que requer apenas o conhecimento básico de pacotes de manipulação de tabela (como o <code>data.table</code>) para grande parte das etapas que as compõem. O exemplo apresentado nesta seção mostra como muitas de suas funções podem ser usadas conjuntamente para revelar aspectos importantes de sistemas de transporte público descritos no formato GTFS.</p>
 
 
 </section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
