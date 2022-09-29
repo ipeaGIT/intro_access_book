@@ -381,14 +381,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">zip</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/zip/man/zip_list.html">zip_list</a></span><span class="op">(</span><span class="va">dest_path</span><span class="op">)</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"filename"</span>, <span class="st">"compressed_size"</span>, <span class="st">"timestamp"</span><span class="op">)</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         filename compressed_size           timestamp
-1      agency.txt             112 2022-09-28 21:06:34
-2    calendar.txt             129 2022-09-28 21:06:34
-3 frequencies.txt            2381 2022-09-28 21:06:34
-4      routes.txt             659 2022-09-28 21:06:34
-5      shapes.txt          160470 2022-09-28 21:06:34
-6  stop_times.txt            7907 2022-09-28 21:06:34
-7       stops.txt           18797 2022-09-28 21:06:34
-8       trips.txt             717 2022-09-28 21:06:34</code></pre>
+1      agency.txt             112 2022-09-29 14:55:30
+2    calendar.txt             129 2022-09-29 14:55:30
+3 frequencies.txt            2381 2022-09-29 14:55:30
+4      routes.txt             659 2022-09-29 14:55:30
+5      shapes.txt          160470 2022-09-29 14:55:30
+6  stop_times.txt            7907 2022-09-29 14:55:30
+7       stops.txt           18797 2022-09-29 14:55:30
+8       trips.txt             717 2022-09-29 14:55:30</code></pre>
 </div>
 </div>
 </section><section id="cálculo-de-velocidade-das-linhas" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="cálculo-de-velocidade-das-linhas">
@@ -768,6 +768,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 4: CPTM L07-0       05:28:00     05:28:00            12
 5: CPTM L07-0       05:36:00     05:36:00            13
 6: CPTM L07-0       05:44:00     05:44:00            14</code></pre>
+</div>
+</div>
+<p>Por fim, o pacote também disponibiliza uma função que permite filtrar o objeto GTFS usando um polígono espacial. A <code><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_sf.html">filter_by_sf()</a></code> recebe um objeto do tipo <code>sf</code>/<code>sfc</code> (representação espacial estabelecida pelo pacote <a href="https://r-spatial.github.io/sf/"><code>sf</code></a>), ou sua <em>bounding box</em>, e mantém os registros cujas viagens são selecionadas por uma operação espacial especificada pelo usuário. Embora aparentemente complicado, este processo de filtragem é muito facilmente compreendido quando apresentado visualmente. Para isso, vamos criar uma função auxiliar:</p>
+<div class="cell">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">plotter</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">gtfs</span>,</span>
+<span>                    <span class="va">geom</span>,</span>
+<span>                    <span class="va">spatial_operation</span> <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="va"><a href="https://r-spatial.github.io/sf/reference/geos_binary_pred.html">st_intersects</a></span>,</span>
+<span>                    <span class="va">keep</span> <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                    <span class="va">do_filter</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">do_filter</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">gtfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_sf.html">filter_by_sf</a></span><span class="op">(</span><span class="va">gtfs</span>, <span class="va">geom</span>, <span class="va">spatial_operation</span>, <span class="va">keep</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span> </span>
+<span>  <span class="va">shapes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/convert_shapes_to_sf.html">convert_shapes_to_sf</a></span><span class="op">(</span><span class="va">gtfs</span><span class="op">)</span></span>
+<span>  <span class="va">trips</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/get_trip_geometry.html">get_trip_geometry</a></span><span class="op">(</span><span class="va">gtfs</span>, file <span class="op">=</span> <span class="st">"stop_times"</span><span class="op">)</span></span>
+<span>  <span class="va">geom</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sfc.html">st_as_sfc</a></span><span class="op">(</span><span class="va">geom</span><span class="op">)</span></span>
+<span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">trips</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">shapes</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">geom</span>, fill <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Esta função:</p>
+<ul>
+<li>Possui os mesmos parâmetros da <code><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_sf.html">filter_by_sf()</a></code>, com a exceção do parâmetro <code>do_filter</code>, usado para mostrar os dados não filtrados;</li>
+<li>Condicionalmente filtra um objeto GTFS usando uma <em>bounding box</em> chamada <code>geom</code>;</li>
+<li>Gera a geometria das viagens usando as funções <code><a href="https://ipeagit.github.io/gtfstools/reference/convert_shapes_to_sf.html">convert_shapes_to_sf()</a></code> e <code><a href="https://ipeagit.github.io/gtfstools/reference/get_trip_geometry.html">get_trip_geometry()</a></code>;</li>
+<li>Cria um polígono a partir da <em>bounding box</em>;</li>
+</ul>
+<p>Vamos usar como exemplo a filtragem usando a <em>bounding box</em> da trajetória de <em>id</em> <code>68962</code>. O código abaixo apresenta a distribuição espacial dos dados não filtrados:</p>
+<div class="cell">
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">bbox</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_bbox.html">st_bbox</a></span><span class="op">(</span><span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/convert_shapes_to_sf.html">convert_shapes_to_sf</a></span><span class="op">(</span><span class="va">gtfs</span>, shape_id <span class="op">=</span> <span class="st">"68962"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">plotter</span><span class="op">(</span><span class="va">gtfs</span>, <span class="va">bbox</span>, do_filter <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="5_gtfstools_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Notem aqui que nós usamos a função <code><a href="https://ipeagit.github.io/gtfstools/reference/convert_shapes_to_sf.html">convert_shapes_to_sf()</a></code>, que converte uma determinada trajetória descrita no GTFS em um objeto espacial do tipo <code>sf</code>, para obter a <em>bounding box</em> da trajetória. Por padrão, a <code><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_sf.html">filter_by_sf()</a></code> (e a <code>plotter()</code>, consequentemente) mantém os dados relacionados aos registros de viagens cujas trajetórias possuem alguma interseção com o polígono espacial selecionado:</p>
+<div class="cell">
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plotter</span><span class="op">(</span><span class="va">gtfs</span>, <span class="va">bbox</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="5_gtfstools_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Nós podemos, no entanto, controlar a operação espacial usada no processo de filtragem. Por exemplo, o código abaixo mostra como nós podemos manter os dados relacionados a viagens que estão <em>contidas</em> dentro do polígono espacial:</p>
+<div class="cell">
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plotter</span><span class="op">(</span><span class="va">gtfs</span>, <span class="va">bbox</span>, spatial_operation <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="va"><a href="https://r-spatial.github.io/sf/reference/geos_binary_pred.html">st_contains</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="5_gtfstools_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section><section id="cálculo-de-frequência-das-linhas" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="cálculo-de-frequência-das-linhas">
