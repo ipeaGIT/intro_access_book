@@ -257,6 +257,57 @@ head(
 )
 ```
 
+Por fim, o pacote também disponibiliza uma função que permite filtrar o objeto GTFS usando um polígono espacial. A `filter_by_sf()` recebe um objeto do tipo `sf`/`sfc` (representação espacial estabelecida pelo pacote [`sf`](https://r-spatial.github.io/sf/)), ou sua *bounding box*, e mantém os registros cujas viagens são selecionadas por uma operação espacial especificada pelo usuário. Embora aparentemente complicado, este processo de filtragem é muito facilmente compreendido quando apresentado visualmente. Para isso, vamos criar uma função auxiliar:
+
+```{r}
+library(ggplot2)
+
+plotter <- function(gtfs,
+                    geom,
+                    spatial_operation = sf::st_intersects,
+                    keep = TRUE,
+                    do_filter = TRUE) {
+  if (do_filter) {
+    gtfs <- filter_by_sf(gtfs, geom, spatial_operation, keep)
+  }
+ 
+  shapes <- convert_shapes_to_sf(gtfs)
+  trips <- get_trip_geometry(gtfs, file = "stop_times")
+  geom <- sf::st_as_sfc(geom)
+ 
+  ggplot() +
+    geom_sf(data = trips) +
+    geom_sf(data = shapes) +
+    geom_sf(data = geom, fill = NA)
+}
+```
+
+Esta função:
+
+- Possui os mesmos parâmetros da `filter_by_sf()`, com a exceção do parâmetro `do_filter`, usado para mostrar os dados não filtrados;
+- Condicionalmente filtra um objeto GTFS usando uma *bounding box* chamada `geom`;
+- Gera a geometria das viagens usando as funções `convert_shapes_to_sf()` e `get_trip_geometry()`;
+- Cria um polígono a partir da *bounding box*;
+
+Vamos usar como exemplo a filtragem usando a *bounding box* da trajetória de *id* `68962`. O código abaixo apresenta a distribuição espacial dos dados não filtrados:
+
+```{r}
+bbox <- sf::st_bbox(convert_shapes_to_sf(gtfs, shape_id = "68962"))
+
+plotter(gtfs, bbox, do_filter = FALSE)
+```
+
+Notem aqui que nós usamos a função `convert_shapes_to_sf()`, que converte uma determinada trajetória descrita no GTFS em um objeto espacial do tipo `sf`, para obter a *bounding box* da trajetória. Por padrão, a `filter_by_sf()` (e a `plotter()`, consequentemente) mantém os dados relacionados aos registros de viagens cujas trajetórias possuem alguma interseção com o polígono espacial selecionado:
+
+```{r}
+plotter(gtfs, bbox)
+```
+
+Nós podemos, no entanto, controlar a operação espacial usada no processo de filtragem. Por exemplo, o código abaixo mostra como nós podemos manter os dados relacionados a viagens que estão *contidas* dentro do polígono espacial:
+
+```{r}
+plotter(gtfs, bbox, spatial_operation = sf::st_contains)
+```
 
 ## Cálculo de frequência das linhas
 
