@@ -309,11 +309,79 @@ Nós podemos, no entanto, controlar a operação espacial usada no processo de f
 plotter(gtfs, bbox, spatial_operation = sf::st_contains)
 ```
 
-## Cálculo de frequência das linhas
+## Mapeamento do *headway* das linhas
 
-Fazer mapa da rede colorindo rotas pela freq. Ver esse tweet
-https://twitter.com/UrbanDemog/status/1565002114203533313/photo/3
+Como mostrado nas seções anteriores, o `gtfstools` disponibiliza uma grande caixa de ferramentas que podem ser usadas no processamento e na análise de arquivos GTFS. O pacote, no entanto, oferece diversas outras funções que não puderam ser apresentadas neste livro, por questões de espaço. A lista completa de funções disponíveis no pacote pode ser conferida no [site do `gtfstools`](https://ipeagit.github.io/gtfstools/reference/index.html).
 
-## Mapear a rede de transporte público
+A apresentação das funções feitas até aqui tem um importante caráter demonstrativo, porém não mostra como elas podem ser usadas de forma conjunta no desenvolvimento de uma análise de um arquivo GTFS. Esta seção preenche esta lacuna, mostrando como o pacote pode ser usado em uma análise simples, que visa responder a seguinte pergunta: como se distribuem espacialmente os tempos entre veículos de uma mesma linha (ou seja, o *headway*) no GTFS da SPTrans?
 
-## Como fazer edições na rede de transporte público (pacote gtfstools)
+A primeira etapa é definir o escopo da nossa análise. A fim de exemplo, vamos considerar o *headway* no pico da manhã, entre 7h e 9h, em uma típica terça-feira de operação. Para isso, precisamos filtrar o nosso *feed*:
+
+```{r}
+gtfs <- read_gtfs(path)
+
+filtered_gtfs <- gtfs |>
+  remove_duplicates() |>
+  filter_by_weekday("tuesday") |>
+  filter_by_time_of_day(from = "07:00:00", to = "09:00:00")
+
+filtered_gtfs$frequencies[trip_id == "2105-10-0"]
+
+filtered_gtfs$calendar
+```
+
+Em seguida, precisamos calcular o *headway* dentro do período estabelecido. Essa informação pode ser encontrada na tabela *frequencies*, porém há um elemento complicador: cada viagem está associada a mais de um *headway, como podemos ver acima. Para resolver esta questão, portanto, vamos calcular o *headway médio* neste período.
+
+Os primeiros registros da tabela *frequencies* do GTFS da SPTrans parecem sugerir que os períodos do dia estão listados sempre de uma em uma hora, porém isto não é uma regra estabelecida na especificação GTFS e nem é a prática adotada em outros GTFS. Por isso, nós vamos calcular a *média ponderada* do *headway* no período especificado. Para isso, nós precisamos multiplicar cada *headway* pelo intervalo de tempo em que ele é válido, e dividir o total desta soma pelo intervalo de tempo total (duas horas). Para calcular o intervalo de tempo em que cada *headway* é válido, nós usamos a função `convert_time_to_seconds()` para calcular o começo e o fim do intervalo em segundos e subtraímos o valor do fim pelo do começo, como abaixo:
+
+```{r}
+filtered_gtfs <- convert_time_to_seconds(filtered_gtfs)
+
+filtered_gtfs$frequencies[trip_id == "2105-10-0"]
+
+filtered_gtfs$frequencies[, time_interval := end_time_secs - start_time_secs]
+```
+
+Em seguida, nós calculamos o *headway* médio:
+
+```{r}
+avg_headway <- filtered_gtfs$frequencies[
+  ,
+  .(avg_headway = weighted.mean(headway_secs, w = time_interval)),
+  by = trip_id
+]
+
+avg_headway[trip_id == "2105-10-0"]
+
+head(avg_headway)
+```
+
+Nós precisamos agora gerar a trajetória espacial de cada viagem e juntar esta informação à do *headway* médio. Para isso, nós vamos utilizar a função `get_trip_geometry()`, que, dado um objeto GTFS, retorna a trajetória espacial de suas viagens. Esta função nos permite especificar de quais viagens nós queremos as trajetórias, logo nós vamos calcular apenas as daquelas que estão presentes na tabela de *headways* médios:
+
+```{r}
+selected_trips <- avg_headway$trip_id
+
+geoms <- get_trip_geometry(
+  filtered_gtfs,
+  trip_id = selected_trips,
+  file = "shapes"
+)
+
+head(geoms)
+```
+
+O objeto `geoms` está no formato `sf`, e não no `data.table`, que precisamos que ele esteja para juntarmos à tabela de *headways*. Depois de convertê-lo para o formato desejado adequado e juntá-lo à tabela de *headways*, nós precisamos apenas configurar o nosso mapa como desejado. No exemplo abaixo, nós usamos cores e espessuras de linhas que variam de acordo com o *headway* de cada viagem:
+
+```{r}
+#| message: false
+library(data.table)
+library(sf)
+
+setDT(geoms)
+avg_headway[geoms, on = "trip_id", geometry := i.geometry]
+
+ggplot(st_sf(avg_headway)) +
+  geom_sf(aes(color = avg_headway, size = avg_headway))
+```
+
+Como podemos ver, o pacote `gtfstools` torna o desenvolvimento de análises de *feeds* de transporte público algo fácil e que requer apenas o conhecimento básico de pacotes de manipulação de tabela (como o `data.table`) para grande parte das etapas que as compõem. O exemplo apresentado nesta seção mostra como muitas de suas funções podem ser usadas conjuntamente para revelar aspectos importantes de sistemas de transporte público descritos no formato GTFS.
