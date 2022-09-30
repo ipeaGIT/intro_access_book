@@ -6,7 +6,53 @@ Para isso, nós precisaremos comparar os níveis de acessibilidade antes e depoi
 
 ## Modificação do arquivo GTFS
 
-fdsafsda
+Nesta análise, nós usaremos novamente a amostra do GTFS da SPTrans, disponível nos pacotes `r5r` e `gtfstools`. Para simularmos um aumento na frequência das viagens de transporte público, nós precisamos diminuir o *headway* de cada viagem. Como este *feed* possui uma tabela `frequencies`, esta edição é particularmente simples: nós precisamos apenas modificar a coluna `headway_secs`. Assumindo uma diminuição de 25% no tempo entre viagens de uma mesma linha, esta manipulação se resume a apenas uma linha de código:
+
+```{r}
+library(gtfstools)
+
+path <- system.file("extdata/spo/spo.zip", package = "r5r")
+
+before_gtfs <- read_gtfs(path)
+after_gtfs <- read_gtfs(path)
+
+after_gtfs$frequencies[, headway_secs := headway_secs * 0.75]
+
+head(after_gtfs$frequencies)
+
+head(before_gtfs$frequencies)
+```
+
+Pronto, isso é tudo que precisamos editar no GTFS para simular o impacto de um possível aumento na frequência das viagens de transporte público. É claro que na vida real uma proposta do tipo deve ser acompanhada de estudos de viabilidade financeira, por exemplo, para atestar sua robustez. Para fins puramente demonstrativos, no entanto, esta pequena edição já satisfaz as nossas necessidades.
+
+## Cálculo das matrizes de tempo de viagem
+
+Tendo feito a modificação necessária no nosso GTFS, nós precisamos agora utilizá-lo para calcular a matriz de tempo de viagem, que por sua vez vamos usar para estimar os níveis de acessibilidade. Como apresentado na @sec-matrix, para isso nós vamos utilizar a função `travel_time_matrix()`, do pacote `r5r`.
+
+Antes de calcular as matrizes de fato, nós precisamos organizar os nossos arquivos na estrutura que o `r5r` requer. Cada um dos nossos cenários (antes e depois) deve ser representado por uma pasta contendo os arquivos necessários para o roteamento. Vamos criar uma pasta temporária dentro da qual vamos botar as pastas do roteamento:
+
+```{r}
+tmpdir <- tempfile("impact_analysis")
+
+dir.create(tmpdir)
+
+fs::dir_tree(tmpdir)
+```
+
+Dentro dessa pasta, vamos criar as nossas pastas de roteamento. Dentro de cada uma elas, por sua vez, vamos salvar os respectivos arquivos GTFS:
+
+```{r}
+before_dir <- file.path(tmpdir, "before")
+after_dir <- file.path(tmpdir, "after")
+
+dir.create(before_dir)
+dir.create(after_dir)
+
+write_gtfs(before_gtfs, path = file.path(before_dir, "before_gtfs.zip"))
+write_gtfs(after_gtfs, path = file.path(after_dir, "after_gtfs.zip"))
+
+fs::dir_tree(tmpdir)
+```
 
 ## Cálculo da acessibilidade nos cenários antes e depois
 
