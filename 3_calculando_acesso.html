@@ -299,7 +299,7 @@ div.csl-indent {
    
   <ul>
 <li>
-<a href="#c%C3%A1lculo-da-matriz-de-tempo-de-viagem" id="toc-cálculo-da-matriz-de-tempo-de-viagem" class="nav-link active" data-scroll-target="#c%C3%A1lculo-da-matriz-de-tempo-de-viagem"><span class="toc-section-number">3.1</span>  Cálculo da matriz de tempo de viagem</a>
+<a href="#sec-matrix" id="toc-sec-matrix" class="nav-link active" data-scroll-target="#sec-matrix"><span class="toc-section-number">3.1</span>  Cálculo da matriz de tempo de viagem</a>
   <ul class="collapse">
 <li><a href="#instala%C3%A7%C3%A3o-do-r5r" id="toc-instalação-do-r5r" class="nav-link" data-scroll-target="#instala%C3%A7%C3%A3o-do-r5r"><span class="toc-section-number">3.1.1</span>  Instalação do r5r</a></li>
   <li><a href="#dados-necess%C3%A1rios" id="toc-dados-necessários" class="nav-link" data-scroll-target="#dados-necess%C3%A1rios"><span class="toc-section-number">3.1.2</span>  Dados necessários</a></li>
@@ -327,7 +327,7 @@ div.csl-indent {
   </div>
   
 
-</header><section id="cálculo-da-matriz-de-tempo-de-viagem" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="cálculo-da-matriz-de-tempo-de-viagem">
+</header><section id="sec-matrix" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="sec-matrix">
 <span class="header-section-number">3.1</span> Cálculo da matriz de tempo de viagem</h2>
 <p>Como comentado anteriormente, a primeira etapa necessária para calcular os níveis de acessibilidade de uma área urbana é calcular a matriz de custo de viagem entre as diversas origens e destinos que a compõem. Na literatura científica e na prática do planejamento de sistemas de transporte público, esse custo é mais frequentemente representado pelo tempo de viagem que separa dois pontos <span class="citation" data-cites="el-geneidy2016cost venter2016assessing">(<a href="references.html#ref-el-geneidy2016cost" role="doc-biblioref">El-Geneidy et al. 2016</a>; <a href="references.html#ref-venter2016assessing" role="doc-biblioref">Venter 2016</a>)</span>, embora trabalhos recentes tenham considerado também outros fatores, como o dinheiro necessário para realizar uma viagem e o nível de conforto da viagem entre um ponto e outro <span class="citation" data-cites="arbex2020estimating herszenhut2022impact">(<a href="references.html#ref-arbex2020estimating" role="doc-biblioref">Arbex and Cunha 2020</a>; <a href="references.html#ref-herszenhut2022impact" role="doc-biblioref">Herszenhut et al. 2022</a>)</span>. Pela prevalência deste tipo de matriz na literatura e na prática, porém, iremos nos focar em matrizes de tempo de viagem.</p>
 <p>Atualmente, a forma mais fácil e rápida de gerar uma matriz de tempo de viagem em R é utilizando o pacote r5r <span class="citation" data-cites="pereira2021r5r">(<a href="references.html#ref-pereira2021r5r" role="doc-biblioref">Pereira et al. 2021</a>)</span>, desenvolvido pela equipe do Projeto Acesso a Oportunidades, do Ipea. O pacote utiliza, por trás dos panos, o <em>software</em> de roteamento multimodal de transporte público R5, desenvolvido pela Conveyal<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
@@ -392,7 +392,7 @@ OpenJDK 64-Bit Server VM Zulu11.58+15-CA (build 11.0.16+8-LTS, mixed mode)</code
 <p>Os arquivos destes dados devem ser salvos em uma mesma pasta que, preferencialmente, não contenha nenhum outro arquivo. Como se verá adiante, o <code>r5r</code> combina todos os dados salvos nesta pasta para criar uma rede de transporte multimodal que será utilizada para simulações de roteamento e cálculo das matrizes de viagem. Note que é possível ter mais de um arquivo GTFS na mesma pasta, nesse caso o <code>r5r</code> irá considerar as redes de transporte públicos de todos <em>feeds</em>. No entanto, a pasta deve conter um único arquivo de rede viária <code>.pbf</code>. Assumindo que os scripts de R estarão em uma pasta chamada R, a organização dos arquivos deverá seguir o esquema abaixo:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>/tmp/RtmpHAmSxx/projeto_acessibilidade
+<pre><code>/tmp/RtmpL2PVGQ/projeto_acessibilidade
 ├── R
 │   ├── script1.R
 │   └── script2.R
