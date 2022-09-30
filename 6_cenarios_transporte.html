@@ -341,7 +341,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Pronto, isso é tudo que precisamos editar no GTFS para simular o impacto de um possível aumento na frequência das viagens de transporte público. É claro que na vida real uma proposta do tipo deve ser acompanhada de estudos de viabilidade financeira, por exemplo, para atestar sua robustez. Para fins puramente demonstrativos, no entanto, esta pequena edição já satisfaz as nossas necessidades.</p>
 </section><section id="cálculo-das-matrizes-de-tempo-de-viagem" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="cálculo-das-matrizes-de-tempo-de-viagem">
 <span class="header-section-number">6.2</span> Cálculo das matrizes de tempo de viagem</h2>
-<p>Tendo feito a modificação necessária no nosso GTFS, nós precisamos agora utilizá-lo para calcular a matriz de tempo de viagem, que por sua vez vamos usar para estimar os níveis de acessibilidade. Como apresentado na <a href="3_calculando_acesso.html#sec-matrix"><span>Section&nbsp;3.1</span></a>, para isso nós vamos utilizar a função <code>travel_time_matrix()</code>, do pacote <code>r5r</code>.</p>
+<p>Tendo feito a modificação necessária no nosso GTFS, nós precisamos agora utilizá-lo para calcular a matriz de tempo de viagem, que por sua vez vamos usar para estimar os níveis de acessibilidade. Como apresentado na <a href="3_calculando_acesso.html#sec-matrix"><span>Section&nbsp;3.1</span></a>, para isso nós vamos utilizar a função <code><a href="https://rdrr.io/pkg/r5r/man/travel_time_matrix.html">travel_time_matrix()</a></code>, do pacote <code>r5r</code>.</p>
 <p>Antes de calcular as matrizes de fato, nós precisamos organizar os nossos arquivos na estrutura que o <code>r5r</code> requer. Cada um dos nossos cenários (antes e depois) deve ser representado por uma pasta contendo os arquivos necessários para o roteamento. Vamos criar uma pasta temporária dentro da qual vamos botar as pastas do roteamento:</p>
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">tmpdir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="st">"impact_analysis"</span><span class="op">)</span></span>
@@ -350,10 +350,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span></span>
 <span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_tree.html">dir_tree</a></span><span class="op">(</span><span class="va">tmpdir</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>/tmp/Rtmpr5X8ua/impact_analysis2f5f5a0147a</code></pre>
+<pre><code>/tmp/RtmpO78xu9/impact_analysis2eda4916095c</code></pre>
 </div>
 </div>
-<p>Dentro dessa pasta, vamos criar as nossas pastas de roteamento. Dentro de cada uma elas, por sua vez, vamos salvar os respectivos arquivos GTFS:</p>
+<p>Dentro desta pasta, vamos criar as nossas pastas de roteamento. Dentro de cada uma elas, por sua vez, vamos salvar os respectivos arquivos GTFS:</p>
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">before_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">tmpdir</span>, <span class="st">"before"</span><span class="op">)</span></span>
 <span><span class="va">after_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">tmpdir</span>, <span class="st">"after"</span><span class="op">)</span></span>
@@ -366,13 +366,117 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span></span>
 <span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_tree.html">dir_tree</a></span><span class="op">(</span><span class="va">tmpdir</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>/tmp/Rtmpr5X8ua/impact_analysis2f5f5a0147a
+<pre><code>/tmp/RtmpO78xu9/impact_analysis2eda4916095c
 ├── after
 │   └── after_gtfs.zip
 └── before
     └── before_gtfs.zip</code></pre>
 </div>
 </div>
+<p>Para estimarmos o tempo de viagem na nossa área de estudo, precisamos ainda de um arquivo representando a rede viária do local, em formato <code>.pbf</code>. Este arquivo também é disponibilizado pelo <code>r5r</code>. Partindo do pressuposto que uma maior oferta de transporte público não afetaria o traçado das ruas e calçadas na região, e que, portantom a rede viária permaneceria inalterada entre os dois cenários, podemos usar o mesmo arquivo nas duas matrizes de tempo de viagem:</p>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">pbf_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/spo/spo_osm.pbf"</span>, package <span class="op">=</span> <span class="st">"r5r"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files.html">file.copy</a></span><span class="op">(</span>from <span class="op">=</span> <span class="va">pbf_path</span>, to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">before_dir</span>, <span class="st">"spo_osm.pbf"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/files.html">file.copy</a></span><span class="op">(</span>from <span class="op">=</span> <span class="va">pbf_path</span>, to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">after_dir</span>, <span class="st">"spo_osm.pbf"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_tree.html">dir_tree</a></span><span class="op">(</span><span class="va">tmpdir</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/tmp/RtmpO78xu9/impact_analysis2eda4916095c
+├── after
+│   ├── after_gtfs.zip
+│   └── spo_osm.pbf
+└── before
+    ├── before_gtfs.zip
+    └── spo_osm.pbf</code></pre>
+</div>
+</div>
+<p>Finalmente, podemos começar o cálculo das matrizes. A primeira etapa é construir a rede de transporte multimodal usada pelo <code>r5r</code> no roteamento e criar uma conexão com o <code>R5</code>, o que é feito com o comando <code><a href="https://rdrr.io/pkg/r5r/man/setup_r5.html">setup_r5()</a></code>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>java.parameters <span class="op">=</span> <span class="st">"-Xmx2G"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ipeaGIT/r5r">r5r</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">my_setup_r5</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">path</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/r5r/man/setup_r5.html">setup_r5</a></span><span class="op">(</span><span class="va">path</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">before_r5r_core</span> <span class="op">&lt;-</span> <span class="fu">my_setup_r5</span><span class="op">(</span><span class="va">before_dir</span><span class="op">)</span></span>
+<span><span class="va">after_r5r_core</span> <span class="op">&lt;-</span> <span class="fu">my_setup_r5</span><span class="op">(</span><span class="va">after_dir</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Tendo sido criada a conexão com o <code>R5</code> para os dois cenários, prosseguimos agora para o cálculo da matriz, de fato. De forma a avaliar a hipotética política adequadamente, nós precisamos usar os mesmos parâmetros em ambos os cenários. Vamos considerar viagens a pé ou por transporte público, permitir até 800 metros nas pernas de acesso e egresso a paradas e limitar o tempo máximo de viagem em até 120 minutos. Vamos considerar o horário de partida de 14:00 em uma típica segunda-feira de operação. Como origens e destinos, vamos usar os centróides da grade disponibilizada no <code>r5r</code>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com">data.table</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">points</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">fread</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/spo/spo_hexgrid.csv"</span>, package <span class="op">=</span> <span class="st">"r5r"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">before_ttm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/r5r/man/travel_time_matrix.html">travel_time_matrix</a></span><span class="op">(</span></span>
+<span>  <span class="va">before_r5r_core</span>,</span>
+<span>  origins <span class="op">=</span> <span class="va">points</span>,</span>
+<span>  destinations <span class="op">=</span> <span class="va">points</span>,</span>
+<span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"WALK"</span>, <span class="st">"TRANSIT"</span><span class="op">)</span>,</span>
+<span>  departure_datetime <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html">as.POSIXct</a></span><span class="op">(</span></span>
+<span>    <span class="st">"13-05-2019 14:00:00"</span>,</span>
+<span>    format <span class="op">=</span> <span class="st">"%d-%m-%Y %H:%M:%S"</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  max_walk_dist <span class="op">=</span> <span class="fl">800</span>,</span>
+<span>  max_trip_duration <span class="op">=</span> <span class="fl">120</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  progress <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">after_ttm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/r5r/man/travel_time_matrix.html">travel_time_matrix</a></span><span class="op">(</span></span>
+<span>  <span class="va">after_r5r_core</span>,</span>
+<span>  origins <span class="op">=</span> <span class="va">points</span>,</span>
+<span>  destinations <span class="op">=</span> <span class="va">points</span>,</span>
+<span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"WALK"</span>, <span class="st">"TRANSIT"</span><span class="op">)</span>,</span>
+<span>  departure_datetime <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html">as.POSIXct</a></span><span class="op">(</span></span>
+<span>    <span class="st">"13-05-2019 14:00:00"</span>,</span>
+<span>    format <span class="op">=</span> <span class="st">"%d-%m-%Y %H:%M:%S"</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  max_walk_dist <span class="op">=</span> <span class="fl">800</span>,</span>
+<span>  max_trip_duration <span class="op">=</span> <span class="fl">120</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  progress <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">before_ttm</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                fromId            toId travel_time
+    1: 89a8100c603ffff 89a8100c603ffff           0
+    2: 89a8100c603ffff 89a8100c617ffff          26
+    3: 89a8100c603ffff 89a8100c60fffff           6
+    4: 89a8100c603ffff 89a8100c607ffff          11
+    5: 89a8100c603ffff 89a8100c6abffff          35
+   ---                                            
+48166: 89a8100c8dbffff 89a8100c8cbffff           6
+48167: 89a8100c8cbffff 89a8100ceafffff          14
+48168: 89a8100c8cbffff 89a8100ce37ffff           9
+48169: 89a8100c8cbffff 89a8100c8dbffff           6
+48170: 89a8100c8cbffff 89a8100c8cbffff           0</code></pre>
+</div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">after_ttm</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                fromId            toId travel_time
+    1: 89a8100c603ffff 89a8100c603ffff           0
+    2: 89a8100c603ffff 89a8100c617ffff          22
+    3: 89a8100c603ffff 89a8100c60fffff           6
+    4: 89a8100c603ffff 89a8100c607ffff          11
+    5: 89a8100c603ffff 89a8100c6abffff          30
+   ---                                            
+48166: 89a8100c8dbffff 89a8100c8cbffff           6
+48167: 89a8100c8cbffff 89a8100ceafffff          14
+48168: 89a8100c8cbffff 89a8100ce37ffff           9
+48169: 89a8100c8cbffff 89a8100c8dbffff           6
+48170: 89a8100c8cbffff 89a8100c8cbffff           0</code></pre>
+</div>
+</div>
+<p>Como podemos ver, alguns tempos de viagem do cenário pós aumento das frequências são menores do que antes da mudança. Maior frequência de transporte público leva a menores tempos de espera nas paradas de embarque e em eventuais transferências, o que leva a menores tempos de viagem. Muitos tempos, no entanto, são iguais nos dois cenários. Isto é uma provável evidência de que as viagens, nesses casos, são feitas a pé, e consequentemente não são afetadas por mudanças no transporte público.</p>
 </section><section id="cálculo-da-acessibilidade-nos-cenários-antes-e-depois" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="cálculo-da-acessibilidade-nos-cenários-antes-e-depois">
 <span class="header-section-number">6.3</span> Cálculo da acessibilidade nos cenários antes e depois</h2>
 <p>FDSAFSAD</p>
