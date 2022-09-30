@@ -39,7 +39,7 @@ dir.create(tmpdir)
 fs::dir_tree(tmpdir)
 ```
 
-Dentro dessa pasta, vamos criar as nossas pastas de roteamento. Dentro de cada uma elas, por sua vez, vamos salvar os respectivos arquivos GTFS:
+Dentro desta pasta, vamos criar as nossas pastas de roteamento. Dentro de cada uma elas, por sua vez, vamos salvar os respectivos arquivos GTFS:
 
 ```{r}
 before_dir <- file.path(tmpdir, "before")
@@ -53,6 +53,77 @@ write_gtfs(after_gtfs, path = file.path(after_dir, "after_gtfs.zip"))
 
 fs::dir_tree(tmpdir)
 ```
+
+Para estimarmos o tempo de viagem na nossa área de estudo, precisamos ainda de um arquivo representando a rede viária do local, em formato `.pbf`. Este arquivo também é disponibilizado pelo `r5r`. Partindo do pressuposto que uma maior oferta de transporte público não afetaria o traçado das ruas e calçadas na região, e que, portantom a rede viária permaneceria inalterada entre os dois cenários, podemos usar o mesmo arquivo nas duas matrizes de tempo de viagem:
+
+```{r}
+pbf_path <- system.file("extdata/spo/spo_osm.pbf", package = "r5r")
+
+file.copy(from = pbf_path, to = file.path(before_dir, "spo_osm.pbf"))
+file.copy(from = pbf_path, to = file.path(after_dir, "spo_osm.pbf"))
+
+fs::dir_tree(tmpdir)
+```
+
+Finalmente, podemos começar o cálculo das matrizes. A primeira etapa é construir a rede de transporte multimodal usada pelo `r5r` no roteamento e criar uma conexão com o `R5`, o que é feito com o comando `setup_r5()`:
+
+```{r}
+#| message: false
+options(java.parameters = "-Xmx2G")
+
+library(r5r)
+
+my_setup_r5 <- function(path) {
+  setup_r5(path, verbose = FALSE)
+}
+
+before_r5r_core <- my_setup_r5(before_dir)
+after_r5r_core <- my_setup_r5(after_dir)
+```
+
+Tendo sido criada a conexão com o `R5` para os dois cenários, prosseguimos agora para o cálculo da matriz, de fato. De forma a avaliar a hipotética política adequadamente, nós precisamos usar os mesmos parâmetros em ambos os cenários. Vamos considerar viagens a pé ou por transporte público, permitir até 800 metros nas pernas de acesso e egresso a paradas e limitar o tempo máximo de viagem em até 120 minutos. Vamos considerar o horário de partida de 14:00 em uma típica segunda-feira de operação. Como origens e destinos, vamos usar os centróides da grade disponibilizada no `r5r`:
+
+```{r}
+library(data.table)
+
+points <- fread(system.file("extdata/spo/spo_hexgrid.csv", package = "r5r"))
+
+before_ttm <- travel_time_matrix(
+  before_r5r_core,
+  origins = points,
+  destinations = points,
+  mode = c("WALK", "TRANSIT"),
+  departure_datetime = as.POSIXct(
+    "13-05-2019 14:00:00",
+    format = "%d-%m-%Y %H:%M:%S"
+  ),
+  max_walk_dist = 800,
+  max_trip_duration = 120,
+  verbose = FALSE,
+  progress = FALSE
+)
+
+after_ttm <- travel_time_matrix(
+  after_r5r_core,
+  origins = points,
+  destinations = points,
+  mode = c("WALK", "TRANSIT"),
+  departure_datetime = as.POSIXct(
+    "13-05-2019 14:00:00",
+    format = "%d-%m-%Y %H:%M:%S"
+  ),
+  max_walk_dist = 800,
+  max_trip_duration = 120,
+  verbose = FALSE,
+  progress = FALSE
+)
+
+before_ttm
+
+after_ttm
+```
+
+Como podemos ver, alguns tempos de viagem do cenário pós aumento das frequências são menores do que antes da mudança. Maior frequência de transporte público leva a menores tempos de espera nas paradas de embarque e em eventuais transferências, o que leva a menores tempos de viagem. Muitos tempos, no entanto, são iguais nos dois cenários. Isto é uma provável evidência de que as viagens, nesses casos, são feitas a pé, e consequentemente não são afetadas por mudanças no transporte público.
 
 ## Cálculo da acessibilidade nos cenários antes e depois
 
