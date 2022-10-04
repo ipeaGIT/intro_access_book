@@ -322,7 +322,11 @@ ggplot(poa_grid[!is.na(income_decile)]) +
       color = income_decile,
       weight = pop_count
     )
-  )
+  ) +
+  labs(color="Decil de\nrenda", x="Decil de Renda", y="Número de escolas") +
+  scale_color_brewer(palette = 'RdBu') +
+  scale_x_discrete(labels=c("D1 Pobres", paste0('D', 2:9), "D10 Ricos"))
+
 ```
 
 O gráfico é muito claro em seu conteúdo: pessoas de mais baixa renda tendem a ter níveis de acessibilidade muito menores do que as de alta renda. Isso é um padrão comum em praticamente todas as cidades brasileiras e em diversas cidades do mundo [@pereira2019desigualdades]. Isto ocorre, em larga medida, devido à localização espacial das comunidades de baixa e alta renda no território: os mais ricos costumam morar em áreas mais valorizadas, próximas das grandes concentração de empregos (e oportunidades de educação, saúde, lazer, etc., também) e com maior oferta de transporte público de média e alta capacidade. Os mais pobres, por sua vez, tendem a morar em locais mais afastados, onde o valor da terra é menor. Consequentemente, tendem também a se afastar das grandes concentrações de oportunidades. Junta-se a isso o fato de, na maior parte dos casos, a oferta de serviços de transporte público de média e alta capacidade ser menor em locais com maior concentração de pessoas de baixa renda. Como consequência, seus níveis de acessibilidade são, em média, muito menores do que os dos mais ricos, como o gráfico deixa claro.
