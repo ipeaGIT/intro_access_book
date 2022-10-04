@@ -9,11 +9,23 @@ O conteúdo do livro foi pensado para as necessidades de trabalho de gestores p�
 Este livro está dividido em 5 seções:
 
 1. Seção 1: A primeira seção apresenta o conceito de acessibilidade urbana, esclarece a diferença entre acessibilidade e mobilidade urbana, e apresenta os principais indicadores usados para medir a acessibilidade urbana.
-2. Seção 2:  A segunda seção ensina como calcular estimativas de acessibilidade urbana em R usando os pacotes `r5r` e `accessibility` a partir de dados públicos abertos.
-3. Seção 3: A terceira seção apresenta o que é a especificação GTFS de dados de transporte público, e mostra como trabalhar e analisar dados de GTFS usando R.
+2. Seção 2: A segunda seção ensina como calcular estimativas de acessibilidade urbana em R usando os pacotes `{r5r}` e `{accessibility}` a partir de dados públicos abertos.
+3. Seção 3: A terceira seção apresenta o que é a especificação GTFS de dados de transporte público, e mostra como trabalhar e analisar dados de GTFS usando o pacote `{gtfstools}`.
 4. Seção 4: A quarta seção mostra como o conhecimento dos capítulos anteriores pode ser utilizado para se avaliar o impacto de políticas urbanas sobre condições de acessibilidade urbana usando R.
 5. Seção 5: Por fim, a quinta seção mostra como fazer download e analisar os dados do projeto Acesso a Oportunidades (AOP) para analisar a distribuição espacial e socioeconômica das condições de acesso a oportunidades nas cidades brasileiras.
 
+## Código reproduzível
+
+Este livro traz diversos exemplos reproduzíveis de análise de dados em R. A maneira mais fácil de você rodar todo o código do livro no seu navegador (**web browser**) é utilizando o [Binder](https://mybinder.org/). Clicando no ícone abaixo, você será direcionado para uma sessão do RStudio dentro do seu navegador onde você poderá abrir e rodar os scripts de todos os capítulos do livro.
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ipeaGIT/intro_access_book/HEAD?urlpath=rstudio)
+
+::: {.callout-note appearance="simple"}
+Este livro foi escrito e publicado com o sistema de publicação [Quarto](https://quarto.org). Todo o código utilizado em seu preparo e na sua publicação do pode ser encontrado [neste repositório](https://github.com/ipeaGIT/aop_curso/tree/main/aop_curso_pt). :::
+
+Se você quiser rodar o conteúdo do livro localmente na sua máquina, você pode clonar o repositório do livro e ter o RStudio instalado. Após abrir o projeto `intro_access_book.Rproj`, basta rodar a função:
+
+`quarto::quarto_preview()`.
 
 ## Licença de uso
 
@@ -30,7 +42,3 @@ Caso você use o material deste livro, pedimos por gentileza que você cite o li
 ## Agradecimentos
 Este livro foi elaborado pelo Instituto de Pesquisa Econômica Aplicada (Ipea) no âmbito da parceria entre Ipea e a Secretaria de Mobilidade e Desenvolvimento Regional e Urbano (SMDRU) do Ministério do Desenvolvimento Regional (MDR). 
 
-
-::: {.callout-note appearance="simple"}
-Este livro foi escrito e publicado com o sistema de publicação [Quarto](https://quarto.org). Todo o código utilizado em seu preparo e na sua publicação do pode ser encontrado [neste repositório](https://github.com/ipeaGIT/aop_curso/tree/main/aop_curso_pt).
-:::
