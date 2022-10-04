@@ -1,6 +1,6 @@
 # Calculando acessibilidade urbana em R
 
-## Cálculo da matriz de tempo de viagem
+## Cálculo da matriz de tempo de viagem {#sec-matrix}
 
 Como comentado anteriormente, a primeira etapa necessária para calcular os níveis de acessibilidade de uma área urbana é calcular a matriz de custo de viagem entre as diversas origens e destinos que a compõem. Na literatura científica e na prática do planejamento de sistemas de transporte público, esse custo é mais frequentemente representado pelo tempo de viagem que separa dois pontos [@el-geneidy2016cost; @venter2016assessing], embora trabalhos recentes tenham considerado também outros fatores, como o dinheiro necessário para realizar uma viagem e o nível de conforto da viagem entre um ponto e outro [@arbex2020estimating; @herszenhut2022impact]. Pela prevalência deste tipo de matriz na literatura e na prática, porém, iremos nos focar em matrizes de tempo de viagem.
 
