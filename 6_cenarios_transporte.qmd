@@ -123,11 +123,46 @@ before_ttm
 after_ttm
 ```
 
-Como podemos ver, alguns tempos de viagem do cenário pós aumento das frequências são menores do que antes da mudança. Maior frequência de transporte público leva a menores tempos de espera nas paradas de embarque e em eventuais transferências, o que leva a menores tempos de viagem. Muitos tempos, no entanto, são iguais nos dois cenários. Isto é uma provável evidência de que as viagens, nesses casos, são feitas a pé, e consequentemente não são afetadas por mudanças no transporte público.
+Como podemos ver, alguns tempos de viagem do cenário pós aumento das frequências são menores do que antes da mudança. Maior frequência de transporte público leva a menores tempos de espera nas paradas de embarque e em eventuais transferências, o que leva a menores tempos de viagem. Muitos tempos, no entanto, são iguais nos dois cenários. Isto é uma provável evidência de que as viagens nesses casos são feitas a pé, e, consequentemente, não são afetadas por mudanças no transporte público.
 
 ## Cálculo da acessibilidade nos cenários antes e depois
 
-FDSAFSAD
+O cálculo da acessibilidade é muito simples, requerendo apenas um processamento básico dos nossos dados e a aplicação de uma das funções de acessibilidade do pacote `{accessibility}`. Como tratamento dos dados, vamos juntar as matrizes dos dois cenários em uma única tabela, identificando cada cenário com a coluna `scenario`:
+
+```{r}
+ttm <- rbind(before_ttm, after_ttm, idcol = "scenario")
+ttm[, scenario := ifelse(scenario == 1, "before", "after")]
+
+ttm
+```
+
+Para o cálculo da acessibilidade, vamos precisar de uma tabela com os dados de uso do solo da cidade de São Paulo. Para isso, nós usamos a função `read_landuse()` do pacote `{aopdata}` (mais detalhes sobre o pacote são apresentados na [Seção 5](s5_dados_aop.qmd)):
+
+```{r}
+#| message: false
+library(aopdata)
+
+sp_data <- read_landuse("spo", showProgress = FALSE)
+```
+
+Para fins de demonstração, vamos calcular a acessibilidade a postos de trabalho e a escolas públicas na nossa área de estudo. Os dados do total de empregos e escolas em cada hexágono estão listados nas colunas `T001` e `E001`, respectivamente. Vamos renomeá-las para facilitar sua identificação e manter apenas as colunas necessárias na tabela de dados de uso do solo:
+
+```{r}
+cols_to_keep <- c("id", "jobs", "schools")
+
+setnames(sp_data, old = c("id_hex", "T001", "E001"), new = cols_to_keep)
+sp_data[, setdiff(names(sp_data), cols_to_keep) := NULL]
+
+sp_data
+```
+
+A parte mais difícil do processo do cálculo de acessibilidade é a definição da medida a ser utilizada. É extremamente importante pesar as vantagens e desvantagens de cada uma e compreender quais medidas se adequam às oportunidades para quais se deseja calcular os níveis de acessibilidade. Neste exemplo, utilizaremos duas medidas distintas:
+
+- No cálculo da acessibilidade a empregos, vamos usar a medida de oportunidades cumulativas. Esta métrica nos permite entender quantos empregos são acessíveis dentro de um determinado custo de viagem, representando, desta forma, a oferta de empregos aos habitantes de cada uma das células de nossa grade. Embora essa medida não leve em consideração a competição por empregos, sua principal vantagem é que ela é de muito simples comunicação e interpretação. Em nosso exemplo, vamos tomar como limite de custo um tempo de viagem de 30 minutos.
+
+- No cálculo da acessibilidade a escolas públicas, vamos usar a medida de custo mínimo de viagem. Esta métrica é especialmente útil para avaliar a cobertura de serviços públicos essenciais, como educação e saúde básica, pois é desejado que a maior parte da população de uma cidade esteja a uma distância considerada razoável desses serviços.
+
+Como mostrado anteriormente, na @sec-accessibility, o cálculo dessas medidas pode ser feito com as funções `cumulative_cutoff()` e `cost_to_closest()`, respectivamente, do pacote `{accessibility}`:
 
 ## Visualização dos níveis e da diferença de acessibilidade
 
