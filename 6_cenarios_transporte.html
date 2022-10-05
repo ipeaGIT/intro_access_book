@@ -245,7 +245,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./s5_dados_aop.html" class="sidebar-item-text sidebar-link">SEÇÃO: 5: Dados do Projeto AOP</a>
+            <a href="./s5_dados_aop.html" class="sidebar-item-text sidebar-link">SEÇÃO 5: Dados do Projeto AOP</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -350,7 +350,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span></span>
 <span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_tree.html">dir_tree</a></span><span class="op">(</span><span class="va">tmpdir</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>/tmp/RtmpO78xu9/impact_analysis2eda4916095c</code></pre>
+<pre><code>/tmp/RtmpltFKfw/impact_analysis30c8626beb10</code></pre>
 </div>
 </div>
 <p>Dentro desta pasta, vamos criar as nossas pastas de roteamento. Dentro de cada uma elas, por sua vez, vamos salvar os respectivos arquivos GTFS:</p>
@@ -366,7 +366,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span></span>
 <span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_tree.html">dir_tree</a></span><span class="op">(</span><span class="va">tmpdir</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>/tmp/RtmpO78xu9/impact_analysis2eda4916095c
+<pre><code>/tmp/RtmpltFKfw/impact_analysis30c8626beb10
 ├── after
 │   └── after_gtfs.zip
 └── before
@@ -387,7 +387,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_tree.html">dir_tree</a></span><span class="op">(</span><span class="va">tmpdir</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>/tmp/RtmpO78xu9/impact_analysis2eda4916095c
+<pre><code>/tmp/RtmpltFKfw/impact_analysis30c8626beb10
 ├── after
 │   ├── after_gtfs.zip
 │   └── spo_osm.pbf
@@ -449,10 +449,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output cell-output-stdout">
 <pre><code>                fromId            toId travel_time
     1: 89a8100c603ffff 89a8100c603ffff           0
-    2: 89a8100c603ffff 89a8100c617ffff          26
+    2: 89a8100c603ffff 89a8100c617ffff          20
     3: 89a8100c603ffff 89a8100c60fffff           6
     4: 89a8100c603ffff 89a8100c607ffff          11
-    5: 89a8100c603ffff 89a8100c6abffff          35
+    5: 89a8100c603ffff 89a8100c6abffff          28
    ---                                            
 48166: 89a8100c8dbffff 89a8100c8cbffff           6
 48167: 89a8100c8cbffff 89a8100ceafffff          14
@@ -464,10 +464,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output cell-output-stdout">
 <pre><code>                fromId            toId travel_time
     1: 89a8100c603ffff 89a8100c603ffff           0
-    2: 89a8100c603ffff 89a8100c617ffff          22
+    2: 89a8100c603ffff 89a8100c617ffff          19
     3: 89a8100c603ffff 89a8100c60fffff           6
     4: 89a8100c603ffff 89a8100c607ffff          11
-    5: 89a8100c603ffff 89a8100c6abffff          30
+    5: 89a8100c603ffff 89a8100c6abffff          27
    ---                                            
 48166: 89a8100c8dbffff 89a8100c8cbffff           6
 48167: 89a8100c8cbffff 89a8100ceafffff          14
@@ -476,10 +476,65 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 48170: 89a8100c8cbffff 89a8100c8cbffff           0</code></pre>
 </div>
 </div>
-<p>Como podemos ver, alguns tempos de viagem do cenário pós aumento das frequências são menores do que antes da mudança. Maior frequência de transporte público leva a menores tempos de espera nas paradas de embarque e em eventuais transferências, o que leva a menores tempos de viagem. Muitos tempos, no entanto, são iguais nos dois cenários. Isto é uma provável evidência de que as viagens, nesses casos, são feitas a pé, e consequentemente não são afetadas por mudanças no transporte público.</p>
+<p>Como podemos ver, alguns tempos de viagem do cenário pós aumento das frequências são menores do que antes da mudança. Maior frequência de transporte público leva a menores tempos de espera nas paradas de embarque e em eventuais transferências, o que leva a menores tempos de viagem. Muitos tempos, no entanto, são iguais nos dois cenários. Isto é uma provável evidência de que as viagens nesses casos são feitas a pé, e, consequentemente, não são afetadas por mudanças no transporte público.</p>
 </section><section id="cálculo-da-acessibilidade-nos-cenários-antes-e-depois" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="cálculo-da-acessibilidade-nos-cenários-antes-e-depois">
 <span class="header-section-number">6.3</span> Cálculo da acessibilidade nos cenários antes e depois</h2>
-<p>FDSAFSAD</p>
+<p>O cálculo da acessibilidade é muito simples, requerendo apenas um processamento básico dos nossos dados e a aplicação de uma das funções de acessibilidade do pacote <a href="https://github.com/ipeaGIT/accessibility">accessibility</a>. Como tratamento dos dados, vamos juntar as matrizes dos dois cenários em uma única tabela, identificando cada cenário com a coluna <code>scenario</code>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ttm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">before_ttm</span>, <span class="va">after_ttm</span>, idcol <span class="op">=</span> <span class="st">"scenario"</span><span class="op">)</span></span>
+<span><span class="va">ttm</span><span class="op">[</span>, <span class="va">scenario</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">scenario</span> <span class="op">==</span> <span class="fl">1</span>, <span class="st">"before"</span>, <span class="st">"after"</span><span class="op">)</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">ttm</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       scenario          fromId            toId travel_time
+    1:   before 89a8100c603ffff 89a8100c603ffff           0
+    2:   before 89a8100c603ffff 89a8100c617ffff          20
+    3:   before 89a8100c603ffff 89a8100c60fffff           6
+    4:   before 89a8100c603ffff 89a8100c607ffff          11
+    5:   before 89a8100c603ffff 89a8100c6abffff          28
+   ---                                                     
+96336:    after 89a8100c8dbffff 89a8100c8cbffff           6
+96337:    after 89a8100c8cbffff 89a8100ceafffff          14
+96338:    after 89a8100c8cbffff 89a8100ce37ffff           9
+96339:    after 89a8100c8cbffff 89a8100c8dbffff           6
+96340:    after 89a8100c8cbffff 89a8100c8cbffff           0</code></pre>
+</div>
+</div>
+<p>Para o cálculo da acessibilidade, vamos precisar de uma tabela com os dados de uso do solo da cidade de São Paulo. Para isso, nós usamos a função <code><a href="https://rdrr.io/pkg/aopdata/man/read_landuse.html">read_landuse()</a></code> do pacote <a href="https://github.com/ipeaGIT/aopdata">aopdata</a> (mais detalhes sobre o pacote são apresentados na <a href="./s5_dados_aop.html">Seção 5</a>):</p>
+<div class="cell">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ipeaGIT/aopdata">aopdata</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">sp_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/aopdata/man/read_landuse.html">read_landuse</a></span><span class="op">(</span><span class="st">"spo"</span>, showProgress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Para fins de demonstração, vamos calcular a acessibilidade a postos de trabalho e a escolas públicas na nossa área de estudo. Os dados do total de empregos e escolas em cada hexágono estão listados nas colunas <code>T001</code> e <code>E001</code>, respectivamente. Vamos renomeá-las para facilitar sua identificação e manter apenas as colunas necessárias na tabela de dados de uso do solo:</p>
+<div class="cell">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cols_to_keep</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"id"</span>, <span class="st">"jobs"</span>, <span class="st">"schools"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setattr.html">setnames</a></span><span class="op">(</span><span class="va">sp_data</span>, old <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"id_hex"</span>, <span class="st">"T001"</span>, <span class="st">"E001"</span><span class="op">)</span>, new <span class="op">=</span> <span class="va">cols_to_keep</span><span class="op">)</span></span>
+<span><span class="va">sp_data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/sets.html">setdiff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">sp_data</span><span class="op">)</span>, <span class="va">cols_to_keep</span><span class="op">)</span> <span class="op">:=</span> <span class="cn">NULL</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">sp_data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                    id jobs schools
+    1: 89a81000003ffff   72       0
+    2: 89a81000007ffff    0       0
+    3: 89a8100000bffff   52       0
+    4: 89a8100000fffff    0       0
+    5: 89a81000013ffff    0       0
+   ---                             
+15055: 89a8108f6cbffff    0       0
+15056: 89a8108f6cfffff    0       0
+15057: 89a8108f6d3ffff    0       0
+15058: 89a8108f6d7ffff    0       0
+15059: 89a8108f6dbffff    0       0</code></pre>
+</div>
+</div>
+<p>A parte mais difícil do processo do cálculo de acessibilidade é a definição da medida a ser utilizada. É extremamente importante pesar as vantagens e desvantagens de cada uma e compreender quais medidas se adequam às oportunidades para quais se deseja calcular os níveis de acessibilidade. Neste exemplo, utilizaremos duas medidas distintas:</p>
+<ul>
+<li><p>No cálculo da acessibilidade a empregos, vamos usar a medida de oportunidades cumulativas. Esta métrica nos permite entender quantos empregos são acessíveis dentro de um determinado custo de viagem, representando, desta forma, a oferta de empregos aos habitantes de cada uma das células de nossa grade. Embora essa medida não leve em consideração a competição por empregos, sua principal vantagem é que ela é de muito simples comunicação e interpretação. Em nosso exemplo, vamos tomar como limite de custo um tempo de viagem de 30 minutos.</p></li>
+<li><p>No cálculo da acessibilidade a escolas públicas, vamos usar a medida de custo mínimo de viagem. Esta métrica é especialmente útil para avaliar a cobertura de serviços públicos essenciais, como educação e saúde básica, pois é desejado que a maior parte da população de uma cidade esteja a uma distância considerada razoável desses serviços.</p></li>
+</ul>
+<p>Como mostrado anteriormente, na <a href="3_calculando_acesso.html#sec-accessibility"><span>Section&nbsp;3.2</span></a>, o cálculo dessas medidas pode ser feito com as funções <code>cumulative_cutoff()</code> e <code>cost_to_closest()</code>, respectivamente, do pacote <a href="https://github.com/ipeaGIT/accessibility">accessibility</a>:</p>
 </section><section id="visualização-dos-níveis-e-da-diferença-de-acessibilidade" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="visualização-dos-níveis-e-da-diferença-de-acessibilidade">
 <span class="header-section-number">6.4</span> Visualização dos níveis e da diferença de acessibilidade</h2>
 <p>FSADFSD</p>
@@ -592,7 +647,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./s5_dados_aop.html" class="pagination-link">
-        <span class="nav-page-text">SEÇÃO: 5: Dados do Projeto AOP</span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text">SEÇÃO 5: Dados do Projeto AOP</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
