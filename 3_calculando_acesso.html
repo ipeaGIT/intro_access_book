@@ -392,7 +392,7 @@ OpenJDK 64-Bit Server VM Zulu11.58+15-CA (build 11.0.16+8-LTS, mixed mode)</code
 <p>Os arquivos destes dados devem ser salvos em uma mesma pasta que, preferencialmente, não contenha nenhum outro arquivo. Como se verá adiante, o <code>r5r</code> combina todos os dados salvos nesta pasta para criar uma rede de transporte multimodal que será utilizada para simulações de roteamento e cálculo das matrizes de viagem. Note que é possível ter mais de um arquivo GTFS na mesma pasta, nesse caso o <code>r5r</code> irá considerar as redes de transporte públicos de todos <em>feeds</em>. No entanto, a pasta deve conter um único arquivo de rede viária <code>.pbf</code>. Assumindo que os scripts de R estarão em uma pasta chamada R, a organização dos arquivos deverá seguir o esquema abaixo:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>/tmp/RtmpL2PVGQ/projeto_acessibilidade
+<pre><code>/tmp/RtmpPcL0sY/projeto_acessibilidade
 ├── R
 │   ├── script1.R
 │   └── script2.R
@@ -695,7 +695,7 @@ OpenJDK 64-Bit Server VM Zulu11.58+15-CA (build 11.0.16+8-LTS, mixed mode)</code
 <p>Como podemos ver, os níveis de acessibilidade tendem a se concentrar de forma mais acentuada no centro da cidade, onde existe maior concentração de empregos, e próximos aos grandes corredores de transportes da cidade. Pessoas que moram mais perto desses corredores tendem a gastar menos tempo no acesso a suas estações e conseguem acessar locais distantes relativamente rápido, por terem fácil acesso a modos de alta capacidade e velocidade. Pessoas que moram mais longe desses corredores, por sua vez, dependem de modos de menor velocidade operacional (como os ônibus municipais, por exemplo) e precisam gastar mais tempo para alcançar os corredores de média e alta capacidade. Como consequência, seus níveis de acessibilidade tendem a ser menores.</p>
 <p><strong>Distribuição socioeconômica de acessibilidade urbana</strong></p>
 <p>O mapa acima, embora revelador quanto aos locais em que estão dispostas as maiores concentrações de acessibilidade, nada diz sobre quais são os grupos socioeconômicos que possuem os maiores potenciais de acesso a oportunidades na região. Para isso, nós precisamos cruzar informações demográficas e econômicas de cada um dos nossos pontos de origem com os dados de acessibilidade previamente calculados. No exemplo abaixo, nós juntamos aos dados de acessibilidade a informação do decil de renda de cada uma das origens. Assim, nós conseguimos identificar se um hexágono é de baixa, média ou alta renda.</p>
-<p>Os dados com as características socioeconômicas e perfil de renda que utilizamos no exemplo vêm do censo demográfico brasileiro de 2010, e foram agregados na grade espacial de dos hexágonos por <span class="citation" data-cites="pereira2022usosolo">(<a href="references.html#ref-pereira2022usosolo" role="doc-biblioref"><strong>pereira2022usosolo?</strong></a>)</span>. Aqui, nós acessamos os dados diretamente de dentro do R usando o pacote <code>aopdata</code>, que será apresentado em mais detalhes no capítulo Xx.</p>
+<p>Os dados com as características socioeconômicas e perfil de renda que utilizamos no exemplo vêm do censo demográfico brasileiro de 2010, e foram agregados na grade espacial de dos hexágonos por <span class="citation" data-cites="pereira2022usosolo">Pereira et al. (<a href="references.html#ref-pereira2022usosolo" role="doc-biblioref">2022</a>)</span>. Aqui, nós acessamos os dados diretamente de dentro do R usando o pacote <code>aopdata</code>, que será apresentado em mais detalhes no capítulo Xx.</p>
 <div class="cell">
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">poa_population</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/aopdata/man/read_population.html">read_population</a></span><span class="op">(</span><span class="st">"Porto Alegre"</span>, showProgress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
@@ -736,7 +736,10 @@ OpenJDK 64-Bit Server VM Zulu11.58+15-CA (build 11.0.16+8-LTS, mixed mode)</code
 <span>      color <span class="op">=</span> <span class="va">income_decile</span>,</span>
 <span>      weight <span class="op">=</span> <span class="va">pop_count</span></span>
 <span>    <span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>color<span class="op">=</span><span class="st">"Decil de\nrenda"</span>, x<span class="op">=</span><span class="st">"Decil de Renda"</span>, y<span class="op">=</span><span class="st">"Número de escolas"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_color_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">'RdBu'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete</a></span><span class="op">(</span>labels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"D1 Pobres"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'D'</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span>, <span class="st">"D10 Ricos"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="3_calculando_acesso_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -765,6 +768,9 @@ Higgins, Christopher, Matthew Palm, Amber DeJohn, Luna Xi, James Vaughan, Steven
 </div>
 <div id="ref-paez2019demand" class="csl-entry" role="doc-biblioentry">
 Paez, Antonio, Christopher D. Higgins, and Salvatore F. Vivona. 2019. <span>“Demand and Level of Service Inflation in <span>Floating Catchment Area</span> (<span>FCA</span>) Methods.”</span> Edited by Tayyab Ikram Shah. <em>PLOS ONE</em> 14 (6): e0218773. <a href="https://doi.org/10.1371/journal.pone.0218773">https://doi.org/10.1371/journal.pone.0218773</a>.
+</div>
+<div id="ref-pereira2022usosolo" class="csl-entry" role="doc-biblioentry">
+Pereira, Rafael H. M., Daniel Herszenhut, Carlos Kauê Vieira Braga, João Bazzo, João Lucas Albuquerque Oliveira, João Parga, Marcus Saraiva, Luiz Pedro Silva, Diego Bogado Tomasiello, and Lucas Warwar. 2022. <span>“Distribuição Espacial de Características Sociodemográficas e Localização de Empregos e Serviços Públicos Das Vinte Maiores Cidades Do Brasil.”</span> <em>Texto Para Discuss<span>ã</span>o IPEA</em> 2772. <a href="http://repositorio.ipea.gov.br/handle/11058/11225">http://repositorio.ipea.gov.br/handle/11058/11225</a>.
 </div>
 <div id="ref-pereira2021r5r" class="csl-entry" role="doc-biblioentry">
 Pereira, Rafael H. M., Marcus Saraiva, Daniel Herszenhut, Carlos Kaue Vieira Braga, and Matthew Wigginton Conway. 2021. <span>“R5r: <span>Rapid Realistic Routing</span> on <span>Multimodal Transport Networks</span> with <span>R</span><span><sup>5</sup></span> in <span>R</span>.”</span> <em>Transport Findings</em>, March, 21262. <a href="https://doi.org/10.32866/001c.21262">https://doi.org/10.32866/001c.21262</a>.

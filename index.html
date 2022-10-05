@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Rafael H. M. Pereira, Daniel Herszenhut">
-<meta name="dcterms.date" content="2022-10-04">
+<meta name="dcterms.date" content="2022-10-05">
 
 <title>Introdução à acessibilidade urbana</title>
 <style>
@@ -21,6 +21,25 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
+}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
 }
 </style>
 
@@ -235,6 +254,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#apresentação" id="toc-apresentação" class="nav-link active" data-scroll-target="#apresentação">Apresentação</a>
   <ul class="collapse">
   <li><a href="#organização-do-livro" id="toc-organização-do-livro" class="nav-link" data-scroll-target="#organização-do-livro">Organização do livro</a></li>
+  <li><a href="#código-reproduzível" id="toc-código-reproduzível" class="nav-link" data-scroll-target="#código-reproduzível">Código reproduzível</a></li>
   <li><a href="#licença-de-uso" id="toc-licença-de-uso" class="nav-link" data-scroll-target="#licença-de-uso">Licença de uso</a></li>
   <li><a href="#como-citar-o-livro" id="toc-como-citar-o-livro" class="nav-link" data-scroll-target="#como-citar-o-livro">Como citar o livro</a></li>
   <li><a href="#agradecimentos" id="toc-agradecimentos" class="nav-link" data-scroll-target="#agradecimentos">Agradecimentos</a></li>
@@ -265,7 +285,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 4, 2022</p>
+      <p class="date">October 5, 2022</p>
     </div>
   </div>
     
@@ -278,17 +298,25 @@ ul.task-list li input[type="checkbox"] {
 <section id="apresentação" class="level1 unnumbered">
 <p><img src="images/cover.png" title="Introdução à acessibilidade urbana" class="quarto-cover-image img-fluid"></p><h1 class="unnumbered">Apresentação</h1>
 <p>O objetivo deste livro é apresentar uma introdução sobre os conceitos e habilidades práticas necessárias para fazer estudos e avaliações de impacto sobre acessibilidade urbana. O livro começa dando uma visão geral sobre o conceito e indicadores de acessibilidade. Em seguida, ensina como analisar dados espaciais e de redes de transporte para se calcular estimativas de acessibilidade por diferentes modos de transporte e como visualizar esses resultados em mapas e gráficos. O livro também busca familiarizar o leitor com dados de redes de transporte público em formato GTFS e ensina como manipular e visualizar esse tipo de dado. Num dos seus principais capítulos, o livro ensina ainda como os dados e metodologia apresentados nos capítulos anteriores podem ser utilizados para avaliar o impacto de projetos de transporte sobre as condições de acesso a oportunidades da população. Por fim, o livro ensina como baixar, analisar e visualizar estimativas de acessibilidade já calculadas para cidades brasileiras e disponibilizadas pela equipe do Projeto Acesso a Oportunidades (AOP) do Ipea.</p>
-<p>O conteúdo do livro foi pensado para as necessidades de trabalho de gestores públicos, além de analistas, alunos e pesquisadores de planejamento e transporte urbano. Por isso, o livro tem caráter prático. Todo material do livro é apresentado com exemplos reproduzíveis e dados abertos utilizando-se programação em R.</p>
+<p>O tema da acessibilidade tem recebido cada vez mais atenção de agências de transporte, instituições de financiamento, tomadores de decisão e pesquisadores na área de planejamento urbano e de transportes <span class="citation" data-cites="papa2015accessibility">Boisjoly and El-Geneidy (<a href="references.html#ref-boisjoly2017how" role="doc-biblioref">2017</a>)</span>. Com isso, existe um crescente número de artigos científicos <span class="citation" data-cites="miller2018accessibility">Wee (<a href="references.html#ref-van2021transport" role="doc-biblioref">2021</a>)</span> e livros <span class="citation" data-cites="levine2019mobility">Levinson and King (<a href="references.html#ref-levinson2020transport" role="doc-biblioref">2020</a>)</span> que trazem rico material para discussão e aprofundamento sobre questões relacionadas à acessibilidade urbana. No entanto, não existem na literatura livros ou artigos que sirvam simultaneamente de material didático introdutório sobre o tema e de manual prático de metodologia e análise de dados. A ausência desse tipo de material explica, ao menos em parte, porque diversas agências de transporte e analistas ainda enfrentam desafios em incorporar questões e indicadores de acessibilidade no seu dia-a-dia de planejamento e pesquisa <span class="citation" data-cites="silva2017accessibility">Büttner (<a href="references.html#ref-buttner2021accessibility" role="doc-biblioref">2021</a>)</span>.</p>
+<p>Este livro foi escrito pensando nas necessidades de trabalho de gestores públicos, analistas, alunos e pesquisadores de planejamento e transporte urbano. Por isso, o livro tem caráter prático. Todo material do livro é apresentado com exemplos reproduzíveis e dados abertos utilizando-se programação em R. O objetivo é equipar seus leitores com os conceitos fundamentais e as ferramentas de análise e processamento de dados necessárias para realizar análises de acessibilidade urbana e conduzir avaliações do impacto de projetos e políticas de transporte a partir de dados e programas de código abertos.</p>
 <section id="organização-do-livro" class="level2">
 <h2 class="anchored" data-anchor-id="organização-do-livro">Organização do livro</h2>
 <p>Este livro está dividido em 5 seções:</p>
 <ol type="1">
 <li>Seção 1: A primeira seção apresenta o conceito de acessibilidade urbana, esclarece a diferença entre acessibilidade e mobilidade urbana, e apresenta os principais indicadores usados para medir a acessibilidade urbana.</li>
-<li>Seção 2: A segunda seção ensina como calcular estimativas de acessibilidade urbana em R usando os pacotes <code>r5r</code> e <code>accessibility</code> a partir de dados públicos abertos.</li>
-<li>Seção 3: A terceira seção apresenta o que é a especificação GTFS de dados de transporte público, e mostra como trabalhar e analisar dados de GTFS usando R.</li>
+<li>Seção 2: A segunda seção ensina como calcular estimativas de acessibilidade urbana em R usando os pacotes <code>{r5r}</code> e <code>{accessibility}</code> a partir de dados públicos abertos.</li>
+<li>Seção 3: A terceira seção apresenta o que é a especificação GTFS de dados de transporte público, e mostra como trabalhar e analisar dados de GTFS usando o pacote <code>{gtfstools}</code>.</li>
 <li>Seção 4: A quarta seção mostra como o conhecimento dos capítulos anteriores pode ser utilizado para se avaliar o impacto de políticas urbanas sobre condições de acessibilidade urbana usando R.</li>
 <li>Seção 5: Por fim, a quinta seção mostra como fazer download e analisar os dados do projeto Acesso a Oportunidades (AOP) para analisar a distribuição espacial e socioeconômica das condições de acesso a oportunidades nas cidades brasileiras.</li>
 </ol>
+</section>
+<section id="código-reproduzível" class="level2">
+<h2 class="anchored" data-anchor-id="código-reproduzível">Código reproduzível</h2>
+<p>Este livro traz diversos exemplos reproduzíveis de análise de dados em R. A maneira mais fácil de você rodar todo o código do livro no seu navegador (<strong>web browser</strong>) é utilizando o <a href="https://mybinder.org/v2/gh/ipeaGIT/intro_access_book/HEAD?urlpath=rstudio">Binder</a>. Clicando neste link, você será direcionado para uma sessão do RStudio dentro do seu navegador onde você poderá abrir e rodar os scripts de todos os capítulos do livro.</p>
+<p>::: {.callout-note appearance=“simple”} Este livro foi escrito e publicado com o sistema de publicação <a href="https://quarto.org">Quarto</a>. Todo o código utilizado em seu preparo e na sua publicação do pode ser encontrado <a href="https://github.com/ipeaGIT/aop_curso/tree/main/aop_curso_pt">neste repositório</a>. :::</p>
+<p>Se você quiser rodar o conteúdo do livro localmente na sua máquina, você pode clonar o repositório do livro e ter o RStudio instalado. Após abrir o projeto <code>intro_access_book.Rproj</code>, basta rodar a função:</p>
+<p><code>quarto::quarto_preview()</code>.</p>
 </section>
 <section id="licença-de-uso" class="level2">
 <h2 class="anchored" data-anchor-id="licença-de-uso">Licença de uso</h2>
@@ -304,18 +332,34 @@ ul.task-list li input[type="checkbox"] {
 <section id="agradecimentos" class="level2">
 <h2 class="anchored" data-anchor-id="agradecimentos">Agradecimentos</h2>
 <p>Este livro foi elaborado pelo Instituto de Pesquisa Econômica Aplicada (Ipea) no âmbito da parceria entre Ipea e a Secretaria de Mobilidade e Desenvolvimento Regional e Urbano (SMDRU) do Ministério do Desenvolvimento Regional (MDR).</p>
-<div class="callout-note callout callout-style-simple">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>Este livro foi escrito e publicado com o sistema de publicação <a href="https://quarto.org">Quarto</a>. Todo o código utilizado em seu preparo e na sua publicação do pode ser encontrado <a href="https://github.com/ipeaGIT/aop_curso/tree/main/aop_curso_pt">neste repositório</a>.</p>
-</div>
-</div>
-</div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-boisjoly2017how" class="csl-entry" role="doc-biblioentry">
+Boisjoly, Geneviève, and Ahmed M. El-Geneidy. 2017. <span>“How to Get There? <span>A</span> Critical Assessment of Accessibility Objectives and Indicators in Metropolitan Transportation Plans.”</span> <em>Transport Policy</em> 55 (April): 38–50. <a href="https://doi.org/10.1016/j.tranpol.2016.12.011">https://doi.org/10.1016/j.tranpol.2016.12.011</a>.
+</div>
+<div id="ref-buttner2021accessibility" class="csl-entry" role="doc-biblioentry">
+Büttner, Benjamin. 2021. <span>“Accessibility Tools for Transport Policy and Planning.”</span> <em>International Encyclopedia of Transportation</em> 6 (1).
+</div>
+<div id="ref-levine2019mobility" class="csl-entry" role="doc-biblioentry">
+Levine, Jonathan, Joe Grengs, and Louis A Merlin. 2019. <em>From Mobility to Accessibility: Transforming Urban Transportation and Land-Use Planning</em>. Cornell University Press.
+</div>
+<div id="ref-levinson2020transport" class="csl-entry" role="doc-biblioentry">
+Levinson, David, and David King. 2020. <em>Transport Access Manual: <span>A</span> Guide for Measuring Connection Between People and Places</em>. <span>Committee of the Transport Access Manual, University of Sydney</span>.
+</div>
+<div id="ref-miller2018accessibility" class="csl-entry" role="doc-biblioentry">
+Miller, Eric J. 2018. <span>“Accessibility: Measurement and Application in Transportation Planning.”</span> <em>Transport Reviews</em> 38 (5): 551–55. <a href="https://doi.org/10.1080/01441647.2018.1492778">https://doi.org/10.1080/01441647.2018.1492778</a>.
+</div>
+<div id="ref-papa2015accessibility" class="csl-entry" role="doc-biblioentry">
+Papa, Enrica, Cecilia Silva, Marco Te Brömmelstroet, and Angela Hull. 2015. <span>“Accessibility Instruments for Planning Practice: A Review of <span>European</span> Experiences.”</span> <em>Journal of Transport and Land Use</em>, June. <a href="https://doi.org/10.5198/jtlu.2015.585">https://doi.org/10.5198/jtlu.2015.585</a>.
+</div>
+<div id="ref-silva2017accessibility" class="csl-entry" role="doc-biblioentry">
+Silva, Cecı́lia, Luca Bertolini, Marco te Brömmelstroet, Dimitris Milakis, and Enrica Papa. 2017. <span>“Accessibility Instruments in Planning Practice: Bridging the Implementation Gap.”</span> <em>Transport Policy</em> 53: 135–45.
+</div>
+<div id="ref-van2021transport" class="csl-entry" role="doc-biblioentry">
+Wee, GP van. 2021. <span>“Transport Modes and Accessibility.”</span> <em>International Encyclopedia of Transportation</em> 5 (1).
+</div>
+</div>
 </section>
 </section>
 
