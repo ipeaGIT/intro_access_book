@@ -325,7 +325,8 @@ ggplot(poa_grid[!is.na(income_decile)]) +
   ) +
   labs(color="Decil de\nrenda", x="Decil de Renda", y="Número de escolas") +
   scale_color_brewer(palette = 'RdBu') +
-  scale_x_discrete(labels=c("D1 Pobres", paste0('D', 2:9), "D10 Ricos"))
+  scale_x_discrete(labels=c("D1\n+Pobres", paste0('D', 2:9), "D10\n+Ricos")) +
+  theme_minimal()
 
 ```
 
