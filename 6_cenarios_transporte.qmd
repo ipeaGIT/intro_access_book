@@ -131,7 +131,7 @@ O cálculo da acessibilidade é muito simples, requerendo apenas um processament
 
 ```{r}
 ttm <- rbind(before_ttm, after_ttm, idcol = "scenario")
-ttm[, scenario := ifelse(scenario == 1, "before", "after")]
+ttm[, scenario := factor(scenario, labels = c("before", "after"))]
 
 ttm
 ```
@@ -145,12 +145,16 @@ library(aopdata)
 sp_data <- read_landuse("spo", showProgress = FALSE)
 ```
 
-Para fins de demonstração, vamos calcular a acessibilidade a postos de trabalho e a escolas públicas na nossa área de estudo. Os dados do total de empregos e escolas em cada hexágono estão listados nas colunas `T001` e `E001`, respectivamente. Vamos renomeá-las para facilitar sua identificação e manter apenas as colunas necessárias na tabela de dados de uso do solo:
+Para fins de demonstração, vamos calcular a acessibilidade a postos de trabalho e a escolas públicas na nossa área de estudo. Os dados do total de empregos e escolas em cada hexágono estão listados nas colunas `T001` e `E001`, respectivamente. Vamos renomeá-las para facilitar sua identificação e manter apenas as colunas necessárias na tabela de dados de uso do solo (vamos manter também as colunas `P001`, de população total em cada hexágono, e `R003`, do decil de renda em que cada hexágono se encontra, que serão úteis mais à frente):
 
 ```{r}
-cols_to_keep <- c("id", "jobs", "schools")
+cols_to_keep <- c("id", "jobs", "schools", "population", "decile")
 
-setnames(sp_data, old = c("id_hex", "T001", "E001"), new = cols_to_keep)
+setnames(
+  sp_data,
+  old = c("id_hex", "T001", "E001", "P001", "R003"),
+  new = cols_to_keep
+)
 sp_data[, setdiff(names(sp_data), cols_to_keep) := NULL]
 
 sp_data
@@ -164,10 +168,112 @@ A parte mais difícil do processo do cálculo de acessibilidade é a definição
 
 Como mostrado anteriormente, na @sec-accessibility, o cálculo dessas medidas pode ser feito com as funções `cumulative_cutoff()` e `cost_to_closest()`, respectivamente, do pacote `{accessibility}`:
 
-## Visualização dos níveis e da diferença de acessibilidade
+```{r}
+library(accessibility)
 
-FSADFSD
+setnames(ttm, old = c("fromId", "toId"), new = c("from_id", "to_id"))
 
-## Distribuição da acessibilidade entre grupos sociais
+access_to_jobs <- cumulative_cutoff(
+  travel_matrix = ttm,
+  land_use_data = sp_data,
+  opportunity = "jobs",
+  travel_cost = "travel_time",
+  cutoff = 30,
+  group_by = "scenario"
+)
+access_to_jobs
 
-FASDFSDA
+time_to_schools <- cost_to_closest(
+  travel_matrix = ttm,
+  land_use_data = sp_data,
+  opportunity = "schools",
+  travel_cost = "travel_time",
+  group_by = "scenario"
+)
+time_to_schools
+```
+
+Como podemos ver, o resultado da função de custo mínimo de viagem inclui alguns valores `Inf`. As origens listadas com este valor não conseguem alcançar dentro de 120 minutos (limite de tempo de viagem imposto no cálculo da matriz) nenhum destino em que está localizada ao menos uma escola pública. O valor `Inf`, portanto, é utilizado para sinalizar esta condição.
+
+## Análise dos níveis de acessibilidade antes e depois
+
+Agora que calculamos os níveis de acessibilidade em cada cenário, precisamos compreender como as mudanças na frequência das linhas de transporte público afetaram as condições de acessibilidade em nossa área de estudo. Uma boa forma de entender isso é olhando para a distribuição espacial dos níveis de acessibilidade. Vamos usar o pacote `{aopdata}` para baixar as informações espaciais da nossa área de estudo e juntá-las às nossas tabelas de acessibilidade: 
+
+```{r}
+sp_grid <- read_grid("spo")
+setDT(sp_grid)
+
+access_to_jobs[sp_grid, on = c(id = "id_hex"), geom := i.geom]
+time_to_schools[sp_grid, on = c(id = "id_hex"), geom := i.geom]
+```
+
+Feito isso, apresentamos os resultados em formato de mapa:
+
+```{r}
+#| message: false
+library(ggplot2)
+library(sf)
+
+access_to_jobs_sf <- st_sf(access_to_jobs)
+
+ggplot(access_to_jobs_sf) +
+  geom_sf(aes(fill = jobs)) +
+  facet_wrap(~ scenario, nrow = 1) +
+  scale_fill_viridis_c(
+    option = "inferno",
+    label = scales::label_number(scale = 1/1000, suffix = "k")
+  )
+
+time_to_schools_sf <- st_sf(time_to_schools)
+
+ggplot(time_to_schools_sf) +
+  geom_sf(aes(fill = travel_time)) +
+  facet_wrap(~ scenario, nrow = 1) +
+  scale_fill_viridis_c(option = "cividis", direction = -1)
+```
+
+Como podemos ver, o aumento da frequência das linhas levou a um aumento significativo da acessibilidade em grande parte da nossa área de estudo. No entanto, embora os mapas acima sejam bons para mostrar os impactos espaciais da nossa política hipotética, eles não comunicam efetivamente o impacto médio da política à população. Para facilitar a comunicação dos nossos resultados, portanto, vamos calcular o nível médio da acessibilidade em cada um dos cenários:
+
+```{r}
+access_to_jobs[sp_data, on = "id", population := i.population]
+avg_access_to_jobs <- access_to_jobs[
+  ,
+  .(avg_access = weighted.mean(jobs, w = population)),
+  by = scenario
+]
+
+ggplot(avg_access_to_jobs) + geom_col(aes(scenario, avg_access))
+
+time_to_schools[sp_data, on = "id", population := i.population]
+time_to_schools[
+  ,
+  treated_travel_time := ifelse(is.infinite(travel_time), 120, travel_time)
+]
+avg_time_to_schools <- time_to_schools[
+  ,
+  .(avg_time = weighted.mean(treated_travel_time, w = population)),
+  by = scenario
+]
+
+ggplot(avg_time_to_schools) + geom_col(aes(scenario, avg_time))
+```
+
+Como é de se esperar, o aumento da frequência de linhas de metrô e trem resulta no aumento da acessibilidade média da população de São Paulo. Essas linhas, entretanto, não estão igualmente distribuídas no território: algumas pessoas têm acesso mais fácil às suas estações do que outras. Assim, a facilidade de acesso a elas, e consequentemente do acesso a oportunidades de emprego e educação, depende de onde cada pessoa reside - o que, por sua vez, está muito relacionado a características socioeconômicas como classe e raça. O gráfico abaixo explora a distribuição de empregos acessíveis e de tempo até a escola mais próxima por decil de renda:
+
+```{r}
+sp_data[, decile := factor(decile)]
+access_to_jobs[sp_data, on = "id", decile := i.decile]
+
+ggplot(access_to_jobs[!is.na(decile)]) +
+  geom_boxplot(aes(decile, jobs, weight = population, group = decile)) +
+  facet_wrap(~ scenario, nrow = 1)
+
+time_to_schools[sp_data, on = "id", decile := i.decile]
+
+ggplot(time_to_schools[!is.na(decile)]) +
+  geom_boxplot(
+    aes(decile, treated_travel_time, weight = population, group = decile)
+  ) +
+  facet_wrap(~ scenario, nrow = 1)
+```
+
