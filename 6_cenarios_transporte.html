@@ -282,8 +282,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="#modifica%C3%A7%C3%A3o-do-arquivo-gtfs" id="toc-modificação-do-arquivo-gtfs" class="nav-link active" data-scroll-target="#modifica%C3%A7%C3%A3o-do-arquivo-gtfs"><span class="toc-section-number">6.1</span>  Modificação do arquivo GTFS</a></li>
   <li><a href="#c%C3%A1lculo-das-matrizes-de-tempo-de-viagem" id="toc-cálculo-das-matrizes-de-tempo-de-viagem" class="nav-link" data-scroll-target="#c%C3%A1lculo-das-matrizes-de-tempo-de-viagem"><span class="toc-section-number">6.2</span>  Cálculo das matrizes de tempo de viagem</a></li>
   <li><a href="#c%C3%A1lculo-da-acessibilidade-nos-cen%C3%A1rios-antes-e-depois" id="toc-cálculo-da-acessibilidade-nos-cenários-antes-e-depois" class="nav-link" data-scroll-target="#c%C3%A1lculo-da-acessibilidade-nos-cen%C3%A1rios-antes-e-depois"><span class="toc-section-number">6.3</span>  Cálculo da acessibilidade nos cenários antes e depois</a></li>
-  <li><a href="#visualiza%C3%A7%C3%A3o-dos-n%C3%ADveis-e-da-diferen%C3%A7a-de-acessibilidade" id="toc-visualização-dos-níveis-e-da-diferença-de-acessibilidade" class="nav-link" data-scroll-target="#visualiza%C3%A7%C3%A3o-dos-n%C3%ADveis-e-da-diferen%C3%A7a-de-acessibilidade"><span class="toc-section-number">6.4</span>  Visualização dos níveis e da diferença de acessibilidade</a></li>
-  <li><a href="#distribui%C3%A7%C3%A3o-da-acessibilidade-entre-grupos-sociais" id="toc-distribuição-da-acessibilidade-entre-grupos-sociais" class="nav-link" data-scroll-target="#distribui%C3%A7%C3%A3o-da-acessibilidade-entre-grupos-sociais"><span class="toc-section-number">6.5</span>  Distribuição da acessibilidade entre grupos sociais</a></li>
+  <li><a href="#an%C3%A1lise-dos-n%C3%ADveis-de-acessibilidade-antes-e-depois" id="toc-análise-dos-níveis-de-acessibilidade-antes-e-depois" class="nav-link" data-scroll-target="#an%C3%A1lise-dos-n%C3%ADveis-de-acessibilidade-antes-e-depois"><span class="toc-section-number">6.4</span>  Análise dos níveis de acessibilidade antes e depois</a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/6_cenarios_transporte.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
@@ -350,7 +349,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span></span>
 <span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_tree.html">dir_tree</a></span><span class="op">(</span><span class="va">tmpdir</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>/tmp/RtmpltFKfw/impact_analysis30c8626beb10</code></pre>
+<pre><code>/tmp/Rtmp8MXhqC/impact_analysis2f4aa372e75</code></pre>
 </div>
 </div>
 <p>Dentro desta pasta, vamos criar as nossas pastas de roteamento. Dentro de cada uma elas, por sua vez, vamos salvar os respectivos arquivos GTFS:</p>
@@ -366,7 +365,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span></span>
 <span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_tree.html">dir_tree</a></span><span class="op">(</span><span class="va">tmpdir</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>/tmp/RtmpltFKfw/impact_analysis30c8626beb10
+<pre><code>/tmp/Rtmp8MXhqC/impact_analysis2f4aa372e75
 ├── after
 │   └── after_gtfs.zip
 └── before
@@ -387,7 +386,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_tree.html">dir_tree</a></span><span class="op">(</span><span class="va">tmpdir</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>/tmp/RtmpltFKfw/impact_analysis30c8626beb10
+<pre><code>/tmp/Rtmp8MXhqC/impact_analysis2f4aa372e75
 ├── after
 │   ├── after_gtfs.zip
 │   └── spo_osm.pbf
@@ -449,10 +448,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output cell-output-stdout">
 <pre><code>                fromId            toId travel_time
     1: 89a8100c603ffff 89a8100c603ffff           0
-    2: 89a8100c603ffff 89a8100c617ffff          20
+    2: 89a8100c603ffff 89a8100c617ffff          26
     3: 89a8100c603ffff 89a8100c60fffff           6
     4: 89a8100c603ffff 89a8100c607ffff          11
-    5: 89a8100c603ffff 89a8100c6abffff          28
+    5: 89a8100c603ffff 89a8100c6abffff          33
    ---                                            
 48166: 89a8100c8dbffff 89a8100c8cbffff           6
 48167: 89a8100c8cbffff 89a8100ceafffff          14
@@ -464,10 +463,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output cell-output-stdout">
 <pre><code>                fromId            toId travel_time
     1: 89a8100c603ffff 89a8100c603ffff           0
-    2: 89a8100c603ffff 89a8100c617ffff          19
+    2: 89a8100c603ffff 89a8100c617ffff          21
     3: 89a8100c603ffff 89a8100c60fffff           6
     4: 89a8100c603ffff 89a8100c607ffff          11
-    5: 89a8100c603ffff 89a8100c6abffff          27
+    5: 89a8100c603ffff 89a8100c6abffff          28
    ---                                            
 48166: 89a8100c8dbffff 89a8100c8cbffff           6
 48167: 89a8100c8cbffff 89a8100ceafffff          14
@@ -482,16 +481,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>O cálculo da acessibilidade é muito simples, requerendo apenas um processamento básico dos nossos dados e a aplicação de uma das funções de acessibilidade do pacote <a href="https://github.com/ipeaGIT/accessibility">accessibility</a>. Como tratamento dos dados, vamos juntar as matrizes dos dois cenários em uma única tabela, identificando cada cenário com a coluna <code>scenario</code>:</p>
 <div class="cell">
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ttm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">before_ttm</span>, <span class="va">after_ttm</span>, idcol <span class="op">=</span> <span class="st">"scenario"</span><span class="op">)</span></span>
-<span><span class="va">ttm</span><span class="op">[</span>, <span class="va">scenario</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">scenario</span> <span class="op">==</span> <span class="fl">1</span>, <span class="st">"before"</span>, <span class="st">"after"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">ttm</span><span class="op">[</span>, <span class="va">scenario</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">scenario</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"before"</span>, <span class="st">"after"</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
 <span></span>
 <span><span class="va">ttm</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       scenario          fromId            toId travel_time
     1:   before 89a8100c603ffff 89a8100c603ffff           0
-    2:   before 89a8100c603ffff 89a8100c617ffff          20
+    2:   before 89a8100c603ffff 89a8100c617ffff          26
     3:   before 89a8100c603ffff 89a8100c60fffff           6
     4:   before 89a8100c603ffff 89a8100c607ffff          11
-    5:   before 89a8100c603ffff 89a8100c6abffff          28
+    5:   before 89a8100c603ffff 89a8100c6abffff          33
    ---                                                     
 96336:    after 89a8100c8dbffff 89a8100c8cbffff           6
 96337:    after 89a8100c8cbffff 89a8100ceafffff          14
@@ -506,27 +505,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span></span>
 <span><span class="va">sp_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/aopdata/man/read_landuse.html">read_landuse</a></span><span class="op">(</span><span class="st">"spo"</span>, showProgress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Para fins de demonstração, vamos calcular a acessibilidade a postos de trabalho e a escolas públicas na nossa área de estudo. Os dados do total de empregos e escolas em cada hexágono estão listados nas colunas <code>T001</code> e <code>E001</code>, respectivamente. Vamos renomeá-las para facilitar sua identificação e manter apenas as colunas necessárias na tabela de dados de uso do solo:</p>
+<p>Para fins de demonstração, vamos calcular a acessibilidade a postos de trabalho e a escolas públicas na nossa área de estudo. Os dados do total de empregos e escolas em cada hexágono estão listados nas colunas <code>T001</code> e <code>E001</code>, respectivamente. Vamos renomeá-las para facilitar sua identificação e manter apenas as colunas necessárias na tabela de dados de uso do solo (vamos manter também as colunas <code>P001</code>, de população total em cada hexágono, e <code>R003</code>, do decil de renda em que cada hexágono se encontra, que serão úteis mais à frente):</p>
 <div class="cell">
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cols_to_keep</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"id"</span>, <span class="st">"jobs"</span>, <span class="st">"schools"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cols_to_keep</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"id"</span>, <span class="st">"jobs"</span>, <span class="st">"schools"</span>, <span class="st">"population"</span>, <span class="st">"decile"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setattr.html">setnames</a></span><span class="op">(</span><span class="va">sp_data</span>, old <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"id_hex"</span>, <span class="st">"T001"</span>, <span class="st">"E001"</span><span class="op">)</span>, new <span class="op">=</span> <span class="va">cols_to_keep</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setattr.html">setnames</a></span><span class="op">(</span></span>
+<span>  <span class="va">sp_data</span>,</span>
+<span>  old <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"id_hex"</span>, <span class="st">"T001"</span>, <span class="st">"E001"</span>, <span class="st">"P001"</span>, <span class="st">"R003"</span><span class="op">)</span>,</span>
+<span>  new <span class="op">=</span> <span class="va">cols_to_keep</span></span>
+<span><span class="op">)</span></span>
 <span><span class="va">sp_data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/sets.html">setdiff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">sp_data</span><span class="op">)</span>, <span class="va">cols_to_keep</span><span class="op">)</span> <span class="op">:=</span> <span class="cn">NULL</span><span class="op">]</span></span>
 <span></span>
 <span><span class="va">sp_data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                    id jobs schools
-    1: 89a81000003ffff   72       0
-    2: 89a81000007ffff    0       0
-    3: 89a8100000bffff   52       0
-    4: 89a8100000fffff    0       0
-    5: 89a81000013ffff    0       0
-   ---                             
-15055: 89a8108f6cbffff    0       0
-15056: 89a8108f6cfffff    0       0
-15057: 89a8108f6d3ffff    0       0
-15058: 89a8108f6d7ffff    0       0
-15059: 89a8108f6dbffff    0       0</code></pre>
+<pre><code>                    id population decile jobs schools
+    1: 89a81000003ffff        322      3   72       0
+    2: 89a81000007ffff         16      1    0       0
+    3: 89a8100000bffff       2386      1   52       0
+    4: 89a8100000fffff        885      1    0       0
+    5: 89a81000013ffff        725      3    0       0
+   ---                                               
+15055: 89a8108f6cbffff          0     NA    0       0
+15056: 89a8108f6cfffff          0     NA    0       0
+15057: 89a8108f6d3ffff          0     NA    0       0
+15058: 89a8108f6d7ffff          0     NA    0       0
+15059: 89a8108f6dbffff          0     NA    0       0</code></pre>
 </div>
 </div>
 <p>A parte mais difícil do processo do cálculo de acessibilidade é a definição da medida a ser utilizada. É extremamente importante pesar as vantagens e desvantagens de cada uma e compreender quais medidas se adequam às oportunidades para quais se deseja calcular os níveis de acessibilidade. Neste exemplo, utilizaremos duas medidas distintas:</p>
@@ -534,13 +537,147 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>No cálculo da acessibilidade a empregos, vamos usar a medida de oportunidades cumulativas. Esta métrica nos permite entender quantos empregos são acessíveis dentro de um determinado custo de viagem, representando, desta forma, a oferta de empregos aos habitantes de cada uma das células de nossa grade. Embora essa medida não leve em consideração a competição por empregos, sua principal vantagem é que ela é de muito simples comunicação e interpretação. Em nosso exemplo, vamos tomar como limite de custo um tempo de viagem de 30 minutos.</p></li>
 <li><p>No cálculo da acessibilidade a escolas públicas, vamos usar a medida de custo mínimo de viagem. Esta métrica é especialmente útil para avaliar a cobertura de serviços públicos essenciais, como educação e saúde básica, pois é desejado que a maior parte da população de uma cidade esteja a uma distância considerada razoável desses serviços.</p></li>
 </ul>
-<p>Como mostrado anteriormente, na <a href="3_calculando_acesso.html#sec-accessibility"><span>Section&nbsp;3.2</span></a>, o cálculo dessas medidas pode ser feito com as funções <code>cumulative_cutoff()</code> e <code>cost_to_closest()</code>, respectivamente, do pacote <a href="https://github.com/ipeaGIT/accessibility">accessibility</a>:</p>
-</section><section id="visualização-dos-níveis-e-da-diferença-de-acessibilidade" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="visualização-dos-níveis-e-da-diferença-de-acessibilidade">
-<span class="header-section-number">6.4</span> Visualização dos níveis e da diferença de acessibilidade</h2>
-<p>FSADFSD</p>
-</section><section id="distribuição-da-acessibilidade-entre-grupos-sociais" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="distribuição-da-acessibilidade-entre-grupos-sociais">
-<span class="header-section-number">6.5</span> Distribuição da acessibilidade entre grupos sociais</h2>
-<p>FASDFSDA</p>
+<p>Como mostrado anteriormente, na <a href="3_calculando_acesso.html#sec-accessibility"><span>Section&nbsp;3.2</span></a>, o cálculo dessas medidas pode ser feito com as funções <code><a href="https://rdrr.io/pkg/accessibility/man/cumulative_cutoff.html">cumulative_cutoff()</a></code> e <code><a href="https://rdrr.io/pkg/accessibility/man/cost_to_closest.html">cost_to_closest()</a></code>, respectivamente, do pacote <a href="https://github.com/ipeaGIT/accessibility">accessibility</a>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ipeaGIT/accessibility">accessibility</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setattr.html">setnames</a></span><span class="op">(</span><span class="va">ttm</span>, old <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"fromId"</span>, <span class="st">"toId"</span><span class="op">)</span>, new <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"from_id"</span>, <span class="st">"to_id"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">access_to_jobs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/accessibility/man/cumulative_cutoff.html">cumulative_cutoff</a></span><span class="op">(</span></span>
+<span>  travel_matrix <span class="op">=</span> <span class="va">ttm</span>,</span>
+<span>  land_use_data <span class="op">=</span> <span class="va">sp_data</span>,</span>
+<span>  opportunity <span class="op">=</span> <span class="st">"jobs"</span>,</span>
+<span>  travel_cost <span class="op">=</span> <span class="st">"travel_time"</span>,</span>
+<span>  cutoff <span class="op">=</span> <span class="fl">30</span>,</span>
+<span>  group_by <span class="op">=</span> <span class="st">"scenario"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">access_to_jobs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  id scenario  jobs
+  1: 89a8100c603ffff   before  4516
+  2: 89a8100c617ffff   before 10088
+  3: 89a8100c60fffff   before  5897
+  4: 89a8100c607ffff   before 10088
+  5: 89a8100c6abffff   before  2185
+ ---                               
+642: 89a8100cea7ffff    after  3649
+643: 89a8100ce23ffff    after  6960
+644: 89a8100ce37ffff    after 10318
+645: 89a8100c8dbffff    after  8000
+646: 89a8100c8cbffff    after  2541</code></pre>
+</div>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">time_to_schools</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/accessibility/man/cost_to_closest.html">cost_to_closest</a></span><span class="op">(</span></span>
+<span>  travel_matrix <span class="op">=</span> <span class="va">ttm</span>,</span>
+<span>  land_use_data <span class="op">=</span> <span class="va">sp_data</span>,</span>
+<span>  opportunity <span class="op">=</span> <span class="st">"schools"</span>,</span>
+<span>  travel_cost <span class="op">=</span> <span class="st">"travel_time"</span>,</span>
+<span>  group_by <span class="op">=</span> <span class="st">"scenario"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">time_to_schools</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  id scenario travel_time
+  1: 89a8100c003ffff   before           6
+  2: 89a8100c003ffff    after           6
+  3: 89a8100c007ffff   before          11
+  4: 89a8100c007ffff    after          11
+  5: 89a8100c00bffff   before           0
+ ---                                     
+642: 89a8100ea5bffff    after          15
+643: 89a8100eacbffff   before          28
+644: 89a8100eacbffff    after          28
+645: 89a8100eadbffff   before         Inf
+646: 89a8100eadbffff    after         Inf</code></pre>
+</div>
+</div>
+<p>Como podemos ver, o resultado da função de custo mínimo de viagem inclui alguns valores <code>Inf</code>. As origens listadas com este valor não conseguem alcançar dentro de 120 minutos (limite de tempo de viagem imposto no cálculo da matriz) nenhum destino em que está localizada ao menos uma escola pública. O valor <code>Inf</code>, portanto, é utilizado para sinalizar esta condição.</p>
+</section><section id="análise-dos-níveis-de-acessibilidade-antes-e-depois" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="análise-dos-níveis-de-acessibilidade-antes-e-depois">
+<span class="header-section-number">6.4</span> Análise dos níveis de acessibilidade antes e depois</h2>
+<p>Agora que calculamos os níveis de acessibilidade em cada cenário, precisamos compreender como as mudanças na frequência das linhas de transporte público afetaram as condições de acessibilidade em nossa área de estudo. Uma boa forma de entender isso é olhando para a distribuição espacial dos níveis de acessibilidade. Vamos usar o pacote <a href="https://github.com/ipeaGIT/aopdata">aopdata</a> para baixar as informações espaciais da nossa área de estudo e juntá-las às nossas tabelas de acessibilidade:</p>
+<div class="cell">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sp_grid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/aopdata/man/read_grid.html">read_grid</a></span><span class="op">(</span><span class="st">"spo"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setDT.html">setDT</a></span><span class="op">(</span><span class="va">sp_grid</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">access_to_jobs</span><span class="op">[</span><span class="va">sp_grid</span>, on <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"id_hex"</span><span class="op">)</span>, <span class="va">geom</span> <span class="op">:=</span> <span class="va">i.geom</span><span class="op">]</span></span>
+<span><span class="va">time_to_schools</span><span class="op">[</span><span class="va">sp_grid</span>, on <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"id_hex"</span><span class="op">)</span>, <span class="va">geom</span> <span class="op">:=</span> <span class="va">i.geom</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Feito isso, apresentamos os resultados em formato de mapa:</p>
+<div class="cell">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">access_to_jobs_sf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sf.html">st_sf</a></span><span class="op">(</span><span class="va">access_to_jobs</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">access_to_jobs_sf</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">jobs</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">scenario</span>, nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span></span>
+<span>    option <span class="op">=</span> <span class="st">"inferno"</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_number.html">label_number</a></span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">1000</span>, suffix <span class="op">=</span> <span class="st">"k"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">time_to_schools_sf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sf.html">st_sf</a></span><span class="op">(</span><span class="va">time_to_schools</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">time_to_schools_sf</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">travel_time</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">scenario</span>, nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span>option <span class="op">=</span> <span class="st">"cividis"</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Como podemos ver, o aumento da frequência das linhas levou a um aumento significativo da acessibilidade em grande parte da nossa área de estudo. No entanto, embora os mapas acima sejam bons para mostrar os impactos espaciais da nossa política hipotética, eles não comunicam efetivamente o impacto médio da política à população. Para facilitar a comunicação dos nossos resultados, portanto, vamos calcular o nível médio da acessibilidade em cada um dos cenários:</p>
+<div class="cell">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">access_to_jobs</span><span class="op">[</span><span class="va">sp_data</span>, on <span class="op">=</span> <span class="st">"id"</span>, <span class="va">population</span> <span class="op">:=</span> <span class="va">i.population</span><span class="op">]</span></span>
+<span><span class="va">avg_access_to_jobs</span> <span class="op">&lt;-</span> <span class="va">access_to_jobs</span><span class="op">[</span></span>
+<span>  ,</span>
+<span>  <span class="fu">.</span><span class="op">(</span>avg_access <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span><span class="op">(</span><span class="va">jobs</span>, w <span class="op">=</span> <span class="va">population</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  by <span class="op">=</span> <span class="va">scenario</span></span>
+<span><span class="op">]</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">avg_access_to_jobs</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">scenario</span>, <span class="va">avg_access</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">time_to_schools</span><span class="op">[</span><span class="va">sp_data</span>, on <span class="op">=</span> <span class="st">"id"</span>, <span class="va">population</span> <span class="op">:=</span> <span class="va">i.population</span><span class="op">]</span></span>
+<span><span class="va">time_to_schools</span><span class="op">[</span></span>
+<span>  ,</span>
+<span>  <span class="va">treated_travel_time</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/is.finite.html">is.infinite</a></span><span class="op">(</span><span class="va">travel_time</span><span class="op">)</span>, <span class="fl">120</span>, <span class="va">travel_time</span><span class="op">)</span></span>
+<span><span class="op">]</span></span>
+<span><span class="va">avg_time_to_schools</span> <span class="op">&lt;-</span> <span class="va">time_to_schools</span><span class="op">[</span></span>
+<span>  ,</span>
+<span>  <span class="fu">.</span><span class="op">(</span>avg_time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span><span class="op">(</span><span class="va">treated_travel_time</span>, w <span class="op">=</span> <span class="va">population</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  by <span class="op">=</span> <span class="va">scenario</span></span>
+<span><span class="op">]</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">avg_time_to_schools</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">scenario</span>, <span class="va">avg_time</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Como é de se esperar, o aumento da frequência de linhas de metrô e trem resulta no aumento da acessibilidade média da população de São Paulo. Essas linhas, entretanto, não estão igualmente distribuídas no território: algumas pessoas têm acesso mais fácil às suas estações do que outras. Assim, a facilidade de acesso a elas, e consequentemente do acesso a oportunidades de emprego e educação, depende de onde cada pessoa reside - o que, por sua vez, está muito relacionado a características socioeconômicas como classe e raça. O gráfico abaixo explora a distribuição de empregos acessíveis e de tempo até a escola mais próxima por decil de renda:</p>
+<div class="cell">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sp_data</span><span class="op">[</span>, <span class="va">decile</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">decile</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">access_to_jobs</span><span class="op">[</span><span class="va">sp_data</span>, on <span class="op">=</span> <span class="st">"id"</span>, <span class="va">decile</span> <span class="op">:=</span> <span class="va">i.decile</span><span class="op">]</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">access_to_jobs</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">decile</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">decile</span>, <span class="va">jobs</span>, weight <span class="op">=</span> <span class="va">population</span>, group <span class="op">=</span> <span class="va">decile</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">scenario</span>, nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">time_to_schools</span><span class="op">[</span><span class="va">sp_data</span>, on <span class="op">=</span> <span class="st">"id"</span>, <span class="va">decile</span> <span class="op">:=</span> <span class="va">i.decile</span><span class="op">]</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">time_to_schools</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">decile</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">decile</span>, <span class="va">treated_travel_time</span>, weight <span class="op">=</span> <span class="va">population</span>, group <span class="op">=</span> <span class="va">decile</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">scenario</span>, nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-14-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
