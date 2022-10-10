@@ -1,99 +1,123 @@
 #  Comparando a acessibilidade entre dois cenários de transporte
 
-Neste capítulo nós avaliaremos o impacto de uma política relativamente simples, mas que pode trazer significativos benefícios de acessibilidade à população: o aumento da frequência de linhas de transporte público de metrô e trem.
+Neste capítulo, avaliaremos o impacto de um cenário simplificado de um investimento de infraestrutura de transporte real: a implementação da Linha Leste do metrô de Fortaleza. O traçado da Linha Leste possui 7.3 km de extensão e liga o Centro de Fortaleza ao bairro Papicu, permitindo a integração das linhas de metrô Sul e Oeste com corredores de VLT e o terminal de ônibus no Papicu. É importante notar que a implementação deste investimento implica também em mudanças nas frequências das linhas de metrô Sul e Oeste e também no racionamento do sistema de ônibus municipais, conforme o Plano de Acessibilidade Sustentável de Fortaleza (Pasfor)[^1]. Essas mudanças adicionais no sistema de transporte público não foram incorporados aos nossos cenários. Para uma avaliação mais completa do impacto de acessibilidade da implementação da Linha Leste e das mudanças previstas no Pasfor, por favor veja @ref.
 
-Para isso, nós precisaremos comparar os níveis de acessibilidade antes e depois da suposta implementação desta política. Precisamos, portanto, modificar o GTFS original da área de estudo para atualizar as frequências das linhas de metrÔ e trem nele descritas, calcular duas matrizes de tempo de viagem distintas (uma antes e outra depois da política), calcular dois conjuntos de níveis de acessibilidade distintos e comparar esses conjuntos. Neste capítulo, vamos cobrir este passo-a-passo em detalhes, começando primeiro pela edição do GTFS original.
+[^1]: Disponível em <https://www.pasfor.com.br/>.
 
-## Modificação do arquivo GTFS
+Para isso, precisaremos comparar os níveis de acessibilidade antes e depois da implementação do novo corredor. Precisamos, portanto, utilizar diferentes arquivos GTFS para representar os cenários antes e depois, calcular duas matrizes de tempo de viagem distintas (uma antes e outra depois do investimento), calcular dois conjuntos de níveis de acessibilidade distintos e comparar esses conjuntos. Neste capítulo, vamos cobrir este passo-a-passo em detalhes, começando primeiro pelo detalhamento dos GTFS que vamos usar.
 
-Nesta análise, nós usaremos os arquivos GTFS da SPTrans e da EMTU, que descrevem o sistema de transporte público operante na cidade de São Paulo. Como esses são arquivos grandes, somando mais de 60 MB no total, eles não estão disponíveis dentro dos pacotes, como até então era o caso das amostras de *feeds* que usamos nos exemplos. Precisamos, portanto, baixá-los para o nosso projeto:
+## Arquivos GTFS usados na análise
+
+Nesta análise, usaremos os arquivos GTFS da METROFOR e da ETUFOR, que descrevem o sistema de transporte público operante na cidade de Fortaleza. Como esses são arquivos grandes, somando quase 20 MB no total, eles não estão disponíveis dentro dos pacotes `{r5r}` e `{gtfstools}`, como até então era o caso das amostras de *feeds* que usamos nos exemplos. Precisamos, portanto, baixá-los para o nosso projeto:
 
 ```{r}
 #| results: false
-emtu_path <- tempfile("emtu", fileext = ".zip")
-sptrans_path <- tempfile("sptrans", fileext = ".zip")
+metrofor_path <- tempfile("metrofor", fileext = ".zip")
+etufor_path <- tempfile("etufor", fileext = ".zip")
 
 httr::GET(
-  "https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/gtfs_spo_emtu_2019-10.zip",
-  httr::write_disk(emtu_path)
+  "https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/gtfs_for_metrofor_2021-01.zip",
+  httr::write_disk(metrofor_path)
 )
 
 httr::GET(
-  "https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/gtfs_spo_sptrans_2019-10_fixed_subway_freqs.zip",
-  httr::write_disk(sptrans_path)
+  "https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/gtfs_for_etufor_2019-10.zip",
+  httr::write_disk(etufor_path)
 )
 ```
 
-Para simularmos um aumento na frequência do metrô e do trem, nós precisamos diminuir o *headway* de cada viagem realizada com esses modos. O GTFS responsável por descrever essas viagens é o da SPTrans, que contém, ao todo, 13 diferentes linhas de trem e metrô. Como esse *feed* possui uma tabela `frequencies`, a edição do *headway* de suas viagens é particularmente simples: nós precisamos apenas modificar a coluna `headway_secs`. Assumindo uma diminuição de 25% no tempo entre viagens de uma mesma linha, esta manipulação é feita com o código abaixo:
+Para simularmos a operação da nova Linha Leste do metrô, precisamos também de um *feed* que descreva o funcionamento deste corredor. Este GTFS foi criado para o estudo de @ref, que avalia o impacto de acessibilidade da implementação da Linha Leste, e será reutilizado neste exemplo. Assim como os *feeds* da ETUFOR e da METROFOR, este arquivo GTFS está disponível para *download* no repositório do livro no GitHub:
 
 ```{r}
-#| warning: false
-library(gtfstools)
+#| results: false
+linha_leste_path <- tempfile("linha_leste", fileext = ".zip")
 
-sptrans_gtfs_before <- read_gtfs(sptrans_path, encoding = "UTF-8")
-sptrans_gtfs_after <- read_gtfs(sptrans_path, encoding = "UTF-8")
-
-rail_subway_routes <- sptrans_gtfs_after$routes[route_type %in% c(1, 2)]
-rail_subway_routes <- rail_subway_routes$route_id
-
-rail_subway_trips <- sptrans_gtfs_after$trips[route_id %in% rail_subway_routes]
-rail_subway_trips <- rail_subway_trips$trip_id
-
-sptrans_gtfs_after$frequencies[
-  trip_id %in% rail_subway_trips,
-  headway_secs := as.integer(headway_secs * 0.75)
-]
-
-head(sptrans_gtfs_after$frequencies)
-
-head(sptrans_gtfs_before$frequencies)
+httr::GET(
+  "https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/gtfs_linha_leste.zip",
+  httr::write_disk(linha_leste_path)
+)
 ```
 
-Pronto, isso é tudo que precisamos editar no nosso GTFS para simular o impacto de um possível aumento na frequência das viagens de metrô e trem. É claro que na vida real uma proposta do tipo deve ser acompanhada de estudos de viabilidade financeira, por exemplo, para atestar sua robustez. Para fins puramente demonstrativos, no entanto, esta pequena edição já satisfaz as nossas necessidades.
+Esses três arquivos GTFS serão usados em conjunto para calcular a acessibilidade dos cenários antes e depois. No primeiro, apenas os *feeds* da METROFOR e da ETUFOR serão usados no roteamento de transporte público, representando a típica operação de transporte público antes da implementação do novo corredor. No cenário pós-implementação, incluiremos também o GTFS da Linha Leste, incorporando à análise a operação planejada desta linha após sua finalização.
 
 ## Cálculo das matrizes de tempo de viagem
 
-Tendo feito a modificação necessária no GTFS da SPTrans, nós precisamos agora utilizá-lo para calcular a matriz de tempo de viagem, que por sua vez vamos usar para estimar os níveis de acessibilidade. Como apresentado na @sec-matrix, para isso nós vamos utilizar a função `travel_time_matrix()`, do pacote `{r5r}`.
+Tendo definido quais arquivos GTFS vamos usar em cada um dos cenários analisados, precisamos agora utilizá-los para calcular as matrizez de tempo de viagem, que por sua vez vamos usar para estimar os níveis de acessibilidade. Como apresentado na @sec-matrix, para isso vamos utilizar a função `travel_time_matrix()`, do pacote `{r5r}`.
 
-Antes de calcular as matrizes de fato, nós precisamos organizar os nossos arquivos na estrutura que o `{r5r}` requer. Cada um dos nossos cenários (antes e depois) deve ser representado por uma pasta contendo os arquivos necessários para o roteamento. Vamos criar uma pasta temporária dentro da qual vamos botar as pastas do roteamento:
+Antes de calcular as matrizes de fato, nós precisamos organizar os nossos arquivos na estrutura que o `{r5r}` requer. Cada um dos nossos cenários (antes e depois) deve ser representado por uma pasta contendo os arquivos necessários para o roteamento. Vamos criar uma pasta dentro da qual vamos botar as pastas do roteamento:
 
 ```{r}
-tmpdir <- tempfile("impact_analysis")
+#| warning: false
+analysis_dir <- "impact_analysis"
 
-dir.create(tmpdir)
-
-fs::dir_tree(tmpdir)
+dir.create(analysis_dir)
 ```
 
-Dentro desta pasta, vamos criar as pastas de roteamento dos cenários antes e depois. Dentro de cada uma elas, por sua vez, vamos salvar os arquivos GTFS da EMTU e da SPTrans. É importante notar, aqui, que cada cenário está associado a um GTFS da SPTrans distinto:
+Dentro desta pasta, vamos criar as pastas de roteamento dos cenários antes e depois, contendo seus respectivos *feeds*:
 
 ```{r}
 #| results: false
 #| warning: false
-dir_before <- file.path(tmpdir, "before")
-dir_after <- file.path(tmpdir, "after")
+dir_before <- file.path(analysis_dir, "before")
+dir_after <- file.path(analysis_dir, "after")
 
 dir.create(dir_before)
 dir.create(dir_after)
 
-write_gtfs(
-  sptrans_gtfs_before,
-  path = file.path(dir_before, "sptrans_before.zip")
-)
-write_gtfs(
-  sptrans_gtfs_after,
-  path = file.path(dir_after, "sptrans_after.zip")
-)
+file.copy(from = metrofor_path, to = file.path(dir_before, "metrofor.zip"))
+file.copy(from = metrofor_path, to = file.path(dir_after, "metrofor.zip"))
 
-file.copy(from = emtu_path, to = file.path(dir_before, "emtu.zip"))
-file.copy(from = emtu_path, to = file.path(dir_after, "emtu.zip"))
+file.copy(from = etufor_path, to = file.path(dir_before, "etufor.zip"))
+file.copy(from = etufor_path, to = file.path(dir_after, "etufor.zip"))
+
+file.copy(from = linha_leste_path, to = file.path(dir_after, "linha_leste.zip"))
+
+fs::dir_tree(analysis_dir)
 ```
 
 ```{r}
-fs::dir_tree(tmpdir)
+#| echo: false
+#| results: false
+#| warning: false
+
+# this line below should be enough, but it's not due to a {fs} bug:
+#  https://github.com/r-lib/fs/issues/398
+fs::dir_tree(analysis_dir, glob = "*.zip")
+
+# so instead we're always moving the files that should not appear in the file
+# listing below to a tempdir and then moving them back to their original dir
+files_to_move <- c(
+  "network.dat",
+  "for_2020.osm.pbf.mapdb",
+  "for_2020.osm.pbf.mapdb.p",
+  "street_network.osm.pbf",
+  "topography.tif"
+)
+
+before_tmp <- tempfile("before")
+dir.create(before_tmp)
+file.rename(paste0("before/", files_to_move), paste0(before_tmp, files_to_move))
+
+after_tmp <- tempfile("after")
+dir.create(after_tmp)
+file.rename(paste0("after/", files_to_move), paste0(after_tmp, files_to_move))
 ```
 
-Para estimarmos o tempo de viagem na nossa área de estudo, precisamos ainda de um arquivo representando a rede viária do local, em formato `.pbf`, e opcionalmente iremos utilizar um arquivo representando a topografia local, em formato `.tif`. Esses arquivos, asssim como os GTFS, estão disponíveis para *download* no repositório do livro. Partindo do pressuposto que a nossa política hipotética não afetaria o traçado das ruas e calçadas na região, bem como a topografia local, podemos usar os mesmos arquivos nas duas matrizes de tempo de viagem:
+```{r}
+#| echo: false
+fs::dir_tree(analysis_dir)
+```
+
+```{r}
+#| echo: false
+#| results: false
+#| warning: false
+file.rename(paste0(before_tmp, files_to_move), paste0("before/", files_to_move))
+
+file.rename(paste0(after_tmp, files_to_move), paste0("after/", files_to_move))
+```
+
+Para estimarmos o tempo de viagem na nossa área de estudo, precisamos ainda de um arquivo representando a rede viária do local, em formato `.pbf`, e opcionalmente iremos utilizar um arquivo representando a topografia local, em formato `.tif`. Esses arquivos, asssim como os GTFS, estão disponíveis para *download* no repositório do livro. Partindo do pressuposto que a implementação da Linha Leste não afetaria o traçado das ruas e calçadas na região, bem como a topografia local, podemos usar os mesmos arquivos nas duas matrizes de tempo de viagem:
 
 ```{r}
 #| results: false
@@ -116,22 +140,22 @@ file.copy(from = tif_path, to = file.path(dir_before, "topography.tif"))
 file.copy(from = tif_path, to = file.path(dir_after, "topography.tif"))
 ```
 
-```{r}
-fs::dir_tree(tmpdir)
-```
+<!-- ```{r} -->
+<!-- fs::dir_tree(tmpdir) -->
+<!-- ``` -->
 
-Finalmente, podemos começar o cálculo das matrizes. A primeira etapa é construir a rede de transporte multimodal usada pelo `{r5r}` no roteamento e criar uma conexão com o `R5`, o que é feito com o comando `setup_r5()`:
+<!-- Finalmente, podemos começar o cálculo das matrizes. A primeira etapa é construir a rede de transporte multimodal usada pelo `{r5r}` no roteamento e criar uma conexão com o `R5`, o que é feito com o comando `setup_r5()`: -->
 
-```{r}
-#| message: false
-#| warning: false
-options(java.parameters = "-Xmx20G")
+<!-- ```{r} -->
+<!-- #| message: false -->
+<!-- #| warning: false -->
+<!-- options(java.parameters = "-Xmx4G") -->
 
-library(r5r)
+<!-- library(r5r) -->
 
-before_r5r_core <- setup_r5(dir_before, verbose = FALSE)
-after_r5r_core <- setup_r5(dir_after, verbose = FALSE)
-```
+<!-- before_r5r_core <- setup_r5(dir_before, verbose = FALSE) -->
+<!-- after_r5r_core <- setup_r5(dir_after, verbose = FALSE) -->
+<!-- ``` -->
 
 <!-- Tendo sido criada a conexão com o `R5` para os dois cenários, prosseguimos agora para o cálculo da matriz, de fato. De forma a avaliar a hipotética política adequadamente, nós precisamos usar os mesmos parâmetros em ambos os cenários. Vamos considerar viagens a pé ou por transporte público, permitir até 800 metros nas pernas de acesso e egresso a paradas e limitar o tempo máximo de viagem em até 60 minutos. Vamos considerar o horário de partida de 14:00 em uma típica segunda-feira de operação. Como origens e destinos, vamos usar os centróides da grade disponibilizada no `r5r`: -->
 
