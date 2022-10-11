@@ -16,6 +16,11 @@ book:
   repo-branch: main
   repo-actions: [edit]
   sharing: [twitter, facebook, linkedin]
+  twitter-card: true
+  open-graph: true
+  google-analytics:
+    tracking-id: "G-YVERJQF9PJ"
+    anonymize-ip: true
 
   chapters:
     - index.qmd
@@ -67,9 +72,3 @@ theme:
   light: flatly
   dark: darkly
   
-website:
-  twitter-card: true
-  open-graph: true
-  google-analytics:
-    tracking-id: "G-THLNTZJ9HG"
-    anonymize-ip: true
