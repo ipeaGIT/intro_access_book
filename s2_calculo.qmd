@@ -1,5 +1,5 @@
 # SEÇÃO 2: Calculando acessibilidade
 
-**Objetivo**: O objetivo desta seção é mostrar como calcular estimativas de acessibilidade urbana em R usando os pacotes `r5r` e `accessibility`.
+**Objetivo**: O objetivo desta seção é mostrar como calcular estimativas de acessibilidade urbana em R usando os pacotes `{r5r}` e `{accessibility}`.
 
 O cálculo dos níveis de acessibilidade em um determinado local compreende duas etapas principais: primeiro, nós precisamos calcular uma matriz de custo, geralmente o tempo de viagem, entre as origens e os destinos de uma determinada cidade ou região considerando um modo de transporte; feito isso, calculamos a acessibilidade em cada ponto de origem considerando os custos de transporte entre cada origem e o número de oportunidades em cada destino. Nesta seção nós aprenderemos mais sobre essas duas etapas usando R, quais dados são necessários para executá-las e quais as vantagens e desvantagens dos diferentes métodos que podem ser usados para isso.
