@@ -281,6 +281,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
 <li><a href="#arquivos-gtfs-usados-na-an%C3%A1lise" id="toc-arquivos-gtfs-usados-na-análise" class="nav-link active" data-scroll-target="#arquivos-gtfs-usados-na-an%C3%A1lise"><span class="toc-section-number">6.1</span>  Arquivos GTFS usados na análise</a></li>
   <li><a href="#c%C3%A1lculo-das-matrizes-de-tempo-de-viagem" id="toc-cálculo-das-matrizes-de-tempo-de-viagem" class="nav-link" data-scroll-target="#c%C3%A1lculo-das-matrizes-de-tempo-de-viagem"><span class="toc-section-number">6.2</span>  Cálculo das matrizes de tempo de viagem</a></li>
+  <li><a href="#c%C3%A1lculo-da-acessibilidade-nos-cen%C3%A1rios-antes-e-depois" id="toc-cálculo-da-acessibilidade-nos-cenários-antes-e-depois" class="nav-link" data-scroll-target="#c%C3%A1lculo-da-acessibilidade-nos-cen%C3%A1rios-antes-e-depois"><span class="toc-section-number">6.3</span>  Cálculo da acessibilidade nos cenários antes e depois</a></li>
+  <li><a href="#an%C3%A1lise-dos-n%C3%ADveis-de-acessibilidade-antes-e-depois" id="toc-análise-dos-níveis-de-acessibilidade-antes-e-depois" class="nav-link" data-scroll-target="#an%C3%A1lise-dos-n%C3%ADveis-de-acessibilidade-antes-e-depois"><span class="toc-section-number">6.4</span>  Análise dos níveis de acessibilidade antes e depois</a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/6_cenarios_transporte.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
@@ -420,123 +422,259 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ipeaGIT/r5r">r5r</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">r5r_core_before</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/r5r/man/setup_r5.html">setup_r5</a></span><span class="op">(</span><span class="va">dir_before</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="va">r5r_core_after</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/r5r/man/setup_r5.html">setup_r5</a></span><span class="op">(</span><span class="va">dir_after</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">r5r_core_before</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/r5r/man/setup_r5.html">setup_r5</a></span><span class="op">(</span><span class="va">dir_before</span>, use_elevation <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">r5r_core_after</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/r5r/man/setup_r5.html">setup_r5</a></span><span class="op">(</span><span class="va">dir_after</span>, use_elevation <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<!-- Tendo sido criada a conexão com o `R5` para os dois cenários, prosseguimos agora para o cálculo da matriz, de fato. De forma a avaliar a hipotética política adequadamente, nós precisamos usar os mesmos parâmetros em ambos os cenários. Vamos considerar viagens a pé ou por transporte público, permitir até 800 metros nas pernas de acesso e egresso a paradas e limitar o tempo máximo de viagem em até 60 minutos. Vamos considerar o horário de partida de 14:00 em uma típica segunda-feira de operação. Como origens e destinos, vamos usar os centróides da grade disponibilizada no `r5r`: -->
-<!-- ```{r} -->
+<p>Tendo sido criada a conexão com o <code>R5</code> para os dois cenários, prosseguimos agora para o cálculo da matriz, de fato. De forma a avaliar a expansão do metrô adequadamente, nós precisamos usar os mesmos parâmetros em ambos os cenários. Vamos considerar viagens a pé ou por transporte público, permitir até 800 metros nas pernas de acesso e egresso a paradas e limitar o tempo máximo de viagem em até 60 minutos. Vamos considerar o horário de partida de 07:00 em uma típica segunda-feira de operação. Como origens e destinos, vamos usar os centróides da grade de Fortaleza disponibilizada pelo pacote <a href="https://github.com/ipeaGIT/aopdata">aopdata</a> (mais detalhes sobre o pacote são apresentados na <a href="./s5_dados_aop.html">Seção 5</a>):</p>
+<div class="cell">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com">data.table</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ipeaGIT/aopdata">aopdata</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">for_grid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/aopdata/man/read_grid.html">read_grid</a></span><span class="op">(</span><span class="st">"for"</span><span class="op">)</span></span>
+<span><span class="va">points</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_centroid</a></span><span class="op">(</span><span class="va">for_grid</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setDT.html">setDT</a></span><span class="op">(</span><span class="va">points</span><span class="op">)</span></span>
+<span><span class="va">points</span> <span class="op">&lt;-</span> <span class="va">points</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span>id <span class="op">=</span> <span class="va">id_hex</span>, <span class="va">geom</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">points</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/sets.html">setdiff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">points</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"id"</span>, <span class="st">"geom"</span><span class="op">)</span><span class="op">)</span> <span class="op">:=</span> <span class="cn">NULL</span><span class="op">]</span></span>
+<span><span class="va">points</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sf.html">st_sf</a></span><span class="op">(</span><span class="va">points</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ttm_before</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/r5r/man/travel_time_matrix.html">travel_time_matrix</a></span><span class="op">(</span></span>
+<span>  <span class="va">r5r_core_before</span>,</span>
+<span>  origins <span class="op">=</span> <span class="va">points</span>,</span>
+<span>  destinations <span class="op">=</span> <span class="va">points</span>,</span>
+<span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"WALK"</span>, <span class="st">"TRANSIT"</span><span class="op">)</span>,</span>
+<span>  departure_datetime <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html">as.POSIXct</a></span><span class="op">(</span></span>
+<span>    <span class="st">"02-03-2020 07:00:00"</span>,</span>
+<span>    format <span class="op">=</span> <span class="st">"%d-%m-%Y %H:%M:%S"</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  max_walk_dist <span class="op">=</span> <span class="fl">800</span>,</span>
+<span>  max_trip_duration <span class="op">=</span> <span class="fl">60</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  progress <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ttm_after</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/r5r/man/travel_time_matrix.html">travel_time_matrix</a></span><span class="op">(</span></span>
+<span>  <span class="va">r5r_core_after</span>,</span>
+<span>  origins <span class="op">=</span> <span class="va">points</span>,</span>
+<span>  destinations <span class="op">=</span> <span class="va">points</span>,</span>
+<span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"WALK"</span>, <span class="st">"TRANSIT"</span><span class="op">)</span>,</span>
+<span>  departure_datetime <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html">as.POSIXct</a></span><span class="op">(</span></span>
+<span>    <span class="st">"02-03-2020 07:00:00"</span>,</span>
+<span>    format <span class="op">=</span> <span class="st">"%d-%m-%Y %H:%M:%S"</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  max_walk_dist <span class="op">=</span> <span class="fl">800</span>,</span>
+<span>  max_trip_duration <span class="op">=</span> <span class="fl">60</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  progress <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ttm_before</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  fromId            toId travel_time
+      1: 89801040323ffff 89801040323ffff           2
+      2: 89801040323ffff 89801040327ffff          22
+      3: 89801040323ffff 8980104032fffff          14
+      4: 89801040323ffff 89801040333ffff           9
+      5: 89801040323ffff 89801040337ffff          30
+     ---                                            
+1665468: 8980107b6dbffff 8980107b6cbffff           8
+1665469: 8980107b6dbffff 8980107b6cfffff          14
+1665470: 8980107b6dbffff 8980107b6d3ffff           9
+1665471: 8980107b6dbffff 8980107b6d7ffff          15
+1665472: 8980107b6dbffff 8980107b6dbffff           0</code></pre>
+</div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ttm_after</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                  fromId            toId travel_time
+      1: 89801040323ffff 89801040323ffff           2
+      2: 89801040323ffff 89801040327ffff          22
+      3: 89801040323ffff 8980104032fffff          14
+      4: 89801040323ffff 89801040333ffff           9
+      5: 89801040323ffff 89801040337ffff          30
+     ---                                            
+1671492: 8980107b6dbffff 8980107b6cbffff           8
+1671493: 8980107b6dbffff 8980107b6cfffff          14
+1671494: 8980107b6dbffff 8980107b6d3ffff           9
+1671495: 8980107b6dbffff 8980107b6d7ffff          15
+1671496: 8980107b6dbffff 8980107b6dbffff           0</code></pre>
+</div>
+</div>
+<div class="cell">
 
-<!-- library(data.table) -->
-<!-- points <- fread(system.file("extdata/spo/spo_hexgrid.csv", package = "r5r")) -->
-<!-- before_ttm <- travel_time_matrix( -->
-<!--   r5r_core_before, -->
-<!--   origins = points, -->
-<!--   destinations = points, -->
-<!--   mode = c("WALK", "TRANSIT"), -->
-<!--   departure_datetime = as.POSIXct( -->
-<!--     "13-05-2019 14:00:00", -->
-<!--     format = "%d-%m-%Y %H:%M:%S" -->
-<!--   ), -->
-<!--   max_walk_dist = 800, -->
-<!--   max_trip_duration = 120, -->
-<!--   verbose = FALSE, -->
-<!--   progress = FALSE -->
-<!-- ) -->
-<!-- after_ttm <- travel_time_matrix( -->
-<!--   r5r_core_after, -->
-<!--   origins = points, -->
-<!--   destinations = points, -->
-<!--   mode = c("WALK", "TRANSIT"), -->
-<!--   departure_datetime = as.POSIXct( -->
-<!--     "13-05-2019 14:00:00", -->
-<!--     format = "%d-%m-%Y %H:%M:%S" -->
-<!--   ), -->
-<!--   max_walk_dist = 800, -->
-<!--   max_trip_duration = 120, -->
-<!--   verbose = FALSE, -->
-<!--   progress = FALSE -->
-<!-- ) -->
-<!-- before_ttm -->
-<!-- after_ttm -->
-<!-- ``` -->
-<!-- Como podemos ver, alguns tempos de viagem do cenário pós aumento das frequências são menores do que antes da mudança. Maior frequência de transporte público leva a menores tempos de espera nas paradas de embarque e em eventuais transferências, o que leva a menores tempos de viagem. Muitos tempos, no entanto, são iguais nos dois cenários. Isto é uma provável evidência de que as viagens nesses casos são feitas a pé, e, consequentemente, não são afetadas por mudanças no transporte público. -->
-<!-- ## Cálculo da acessibilidade nos cenários antes e depois -->
-<!-- O cálculo da acessibilidade é muito simples, requerendo apenas um processamento básico dos nossos dados e a aplicação de uma das funções de acessibilidade do pacote `{accessibility}`. Como tratamento dos dados, vamos juntar as matrizes dos dois cenários em uma única tabela, identificando cada cenário com a coluna `scenario`: -->
-<!-- ```{r} -->
-<!-- ttm <- rbind(before_ttm, after_ttm, idcol = "scenario") -->
-<!-- ttm[, scenario := factor(scenario, labels = c("before", "after"))] -->
-<!-- ttm -->
-<!-- ``` -->
-<!-- Para o cálculo da acessibilidade, vamos precisar de uma tabela com os dados de uso do solo da cidade de São Paulo. Para isso, nós usamos a função `read_landuse()` do pacote `{aopdata}` (mais detalhes sobre o pacote são apresentados na [Seção 5](s5_dados_aop.qmd)): -->
-<!-- ```{r} -->
-<!-- #| message: false -->
-<!-- library(aopdata) -->
-<!-- sp_data <- read_landuse("spo", showProgress = FALSE) -->
-<!-- ``` -->
-<!-- Para fins de demonstração, vamos calcular a acessibilidade a postos de trabalho e a escolas públicas na nossa área de estudo. Os dados do total de empregos e escolas em cada hexágono estão listados nas colunas `T001` e `E001`, respectivamente. Vamos renomeá-las para facilitar sua identificação e manter apenas as colunas necessárias na tabela de dados de uso do solo (vamos manter também as colunas `P001`, de população total em cada hexágono, e `R003`, do decil de renda em que cada hexágono se encontra, que serão úteis mais à frente): -->
-<!-- ```{r} -->
-<!-- cols_to_keep <- c("id", "jobs", "schools", "population", "decile") -->
-<!-- setnames( -->
-<!--   sp_data, -->
-<!--   old = c("id_hex", "T001", "E001", "P001", "R003"), -->
-<!--   new = cols_to_keep -->
-<!-- ) -->
-<!-- sp_data[, setdiff(names(sp_data), cols_to_keep) := NULL] -->
-<!-- sp_data -->
-<!-- ``` -->
-<!-- A parte mais difícil do processo do cálculo de acessibilidade é a definição da medida a ser utilizada. É extremamente importante pesar as vantagens e desvantagens de cada uma e compreender quais medidas se adequam às oportunidades para quais se deseja calcular os níveis de acessibilidade. Neste exemplo, utilizaremos duas medidas distintas: -->
-<!-- - No cálculo da acessibilidade a empregos, vamos usar a medida de oportunidades cumulativas. Esta métrica nos permite entender quantos empregos são acessíveis dentro de um determinado custo de viagem, representando, desta forma, a oferta de empregos aos habitantes de cada uma das células de nossa grade. Embora essa medida não leve em consideração a competição por empregos, sua principal vantagem é que ela é de muito simples comunicação e interpretação. Em nosso exemplo, vamos tomar como limite de custo um tempo de viagem de 30 minutos. -->
-<!-- - No cálculo da acessibilidade a escolas públicas, vamos usar a medida de custo mínimo de viagem. Esta métrica é especialmente útil para avaliar a cobertura de serviços públicos essenciais, como educação e saúde básica, pois é desejado que a maior parte da população de uma cidade esteja a uma distância considerada razoável desses serviços. -->
-<!-- Como mostrado anteriormente, na @sec-accessibility, o cálculo dessas medidas pode ser feito com as funções `cumulative_cutoff()` e `cost_to_closest()`, respectivamente, do pacote `{accessibility}`: -->
-<!-- ```{r} -->
-<!-- library(accessibility) -->
-<!-- setnames(ttm, old = c("fromId", "toId"), new = c("from_id", "to_id")) -->
-<!-- access_to_jobs <- cumulative_cutoff( -->
-<!--   travel_matrix = ttm, -->
-<!--   land_use_data = sp_data, -->
-<!--   opportunity = "jobs", -->
-<!--   travel_cost = "travel_time", -->
-<!--   cutoff = 30, -->
-<!--   group_by = "scenario" -->
-<!-- ) -->
-<!-- access_to_jobs -->
-<!-- time_to_schools <- cost_to_closest( -->
-<!--   travel_matrix = ttm, -->
-<!--   land_use_data = sp_data, -->
-<!--   opportunity = "schools", -->
-<!--   travel_cost = "travel_time", -->
-<!--   group_by = "scenario" -->
-<!-- ) -->
-<!-- time_to_schools -->
-<!-- ``` -->
-<!-- Como podemos ver, o resultado da função de custo mínimo de viagem inclui alguns valores `Inf`. As origens listadas com este valor não conseguem alcançar dentro de 120 minutos (limite de tempo de viagem imposto no cálculo da matriz) nenhum destino em que está localizada ao menos uma escola pública. O valor `Inf`, portanto, é utilizado para sinalizar esta condição. -->
-<!-- ## Análise dos níveis de acessibilidade antes e depois -->
-<!-- Agora que calculamos os níveis de acessibilidade em cada cenário, precisamos compreender como as mudanças na frequência das linhas de transporte público afetaram as condições de acessibilidade em nossa área de estudo. Uma boa forma de entender isso é olhando para a distribuição espacial dos níveis de acessibilidade. Vamos usar o pacote `{aopdata}` para baixar as informações espaciais da nossa área de estudo e juntá-las às nossas tabelas de acessibilidade:  -->
-<!-- ```{r} -->
-<!-- sp_grid <- read_grid("spo") -->
-<!-- setDT(sp_grid) -->
-<!-- access_to_jobs[sp_grid, on = c(id = "id_hex"), geom := i.geom] -->
-<!-- time_to_schools[sp_grid, on = c(id = "id_hex"), geom := i.geom] -->
-<!-- ``` -->
-<!-- Feito isso, apresentamos os resultados em formato de mapa: -->
-<!-- ```{r} -->
-<!-- #| message: false -->
-<!-- library(ggplot2) -->
-<!-- library(sf) -->
-<!-- access_to_jobs_sf <- st_sf(access_to_jobs) -->
-<!-- ggplot(access_to_jobs_sf) + -->
-<!--   geom_sf(aes(fill = jobs)) + -->
-<!--   facet_wrap(~ scenario, nrow = 1) + -->
-<!--   scale_fill_viridis_c( -->
-<!--     option = "inferno", -->
-<!--     label = scales::label_number(scale = 1/1000, suffix = "k") -->
-<!--   ) -->
-<!-- time_to_schools_sf <- st_sf(time_to_schools) -->
-<!-- ggplot(time_to_schools_sf) + -->
-<!--   geom_sf(aes(fill = travel_time)) + -->
-<!--   facet_wrap(~ scenario, nrow = 1) + -->
-<!--   scale_fill_viridis_c(option = "cividis", direction = -1) -->
-<!-- ``` -->
+</div>
+<p>À primeira vista, nossas matrizes parecem iguais: todos os tempos de viagem na amostra de pares mostrados acima são idênticos. Isto ocorre porque muitos deslocamentos entre regiões da cidade de fato não são afetados pela implementação da nova linha de metrô, por serem realizados por outros modos de transporte público ou a pé. Se compararmos par a par, no entanto, veremos que vários dos tempos de viagens entre eles são impactados pela Linha Leste:</p>
+<div class="cell">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">comparison</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span></span>
+<span>  <span class="va">ttm_before</span>,</span>
+<span>  <span class="va">ttm_after</span>,</span>
+<span>  by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"fromId"</span>, <span class="st">"toId"</span><span class="op">)</span>,</span>
+<span>  suffixes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"_before"</span>, <span class="st">"_after"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">comparison</span><span class="op">[</span><span class="va">travel_time_after</span> <span class="op">&lt;</span> <span class="va">travel_time_before</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               fromId            toId travel_time_before travel_time_after
+   1: 89801041b2fffff 8980104c14bffff                 55                54
+   2: 89801041b2fffff 8980104c15bffff                 55                53
+   3: 89801041b2fffff 8980104c397ffff                 52                48
+   4: 8980104532bffff 8980104c13bffff                 57                53
+   5: 89801045363ffff 8980104c13bffff                 57                53
+  ---                                                                     
+8283: 8980107b6dbffff 8980104c02fffff                 58                52
+8284: 8980107b6dbffff 8980104c13bffff                 48                42
+8285: 8980107b6dbffff 8980104c14bffff                 57                54
+8286: 8980107b6dbffff 8980104c15bffff                 58                53
+8287: 8980107b6dbffff 8980104c397ffff                 58                48</code></pre>
+</div>
+</div>
+</section><section id="cálculo-da-acessibilidade-nos-cenários-antes-e-depois" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="cálculo-da-acessibilidade-nos-cenários-antes-e-depois">
+<span class="header-section-number">6.3</span> Cálculo da acessibilidade nos cenários antes e depois</h2>
+<p>O cálculo da acessibilidade é muito simples, requerendo apenas um processamento básico dos nossos dados e a aplicação de uma das funções de acessibilidade do pacote <a href="https://github.com/ipeaGIT/accessibility">accessibility</a>. Como tratamento dos dados, vamos juntar as matrizes dos dois cenários em uma única tabela, identificando cada cenário com a coluna <code>scenario</code>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ttm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">ttm_before</span>, <span class="va">ttm_after</span>, idcol <span class="op">=</span> <span class="st">"scenario"</span><span class="op">)</span></span>
+<span><span class="va">ttm</span><span class="op">[</span>, <span class="va">scenario</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">scenario</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"before"</span>, <span class="st">"after"</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">ttm</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         scenario          fromId            toId travel_time
+      1:   before 89801040323ffff 89801040323ffff           2
+      2:   before 89801040323ffff 89801040327ffff          22
+      3:   before 89801040323ffff 8980104032fffff          14
+      4:   before 89801040323ffff 89801040333ffff           9
+      5:   before 89801040323ffff 89801040337ffff          30
+     ---                                                     
+3336964:    after 8980107b6dbffff 8980107b6cbffff           8
+3336965:    after 8980107b6dbffff 8980107b6cfffff          14
+3336966:    after 8980107b6dbffff 8980107b6d3ffff           9
+3336967:    after 8980107b6dbffff 8980107b6d7ffff          15
+3336968:    after 8980107b6dbffff 8980107b6dbffff           0</code></pre>
+</div>
+</div>
+<p>Para o cálculo da acessibilidade, vamos precisar de uma tabela com os dados de uso do solo da cidade de Fortaleza. Para isso, nós usamos a função <code><a href="https://rdrr.io/pkg/aopdata/man/read_landuse.html">read_landuse()</a></code> do pacote <a href="https://github.com/ipeaGIT/aopdata">aopdata</a>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">for_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/aopdata/man/read_landuse.html">read_landuse</a></span><span class="op">(</span><span class="st">"for"</span>, showProgress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Para fins de demonstração, vamos calcular a acessibilidade a postos de trabalho e a escolas públicas na nossa área de estudo. Os dados do total de empregos e escolas em cada hexágono estão listados nas colunas <code>T001</code> e <code>E001</code>, respectivamente. Vamos renomeá-las para facilitar sua identificação e manter apenas as colunas necessárias na tabela de dados de uso do solo (vamos manter também as colunas <code>P001</code>, de população total em cada hexágono, e <code>R003</code>, do decil de renda em que cada hexágono se encontra, que serão úteis mais à frente):</p>
+<div class="cell">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cols_to_keep</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"id"</span>, <span class="st">"jobs"</span>, <span class="st">"schools"</span>, <span class="st">"population"</span>, <span class="st">"decile"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setattr.html">setnames</a></span><span class="op">(</span></span>
+<span>  <span class="va">for_data</span>,</span>
+<span>  old <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"id_hex"</span>, <span class="st">"T001"</span>, <span class="st">"E001"</span>, <span class="st">"P001"</span>, <span class="st">"R003"</span><span class="op">)</span>,</span>
+<span>  new <span class="op">=</span> <span class="va">cols_to_keep</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">for_data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/sets.html">setdiff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">for_data</span><span class="op">)</span>, <span class="va">cols_to_keep</span><span class="op">)</span> <span class="op">:=</span> <span class="cn">NULL</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">for_data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   id population decile jobs schools
+   1: 89801040323ffff         30      1    0       0
+   2: 89801040327ffff        318      1    7       0
+   3: 8980104032bffff          0     NA    0       0
+   4: 8980104032fffff        103      1   98       0
+   5: 89801040333ffff         43      1    0       0
+  ---                                               
+2558: 8980107b6cbffff       2575      4  124       0
+2559: 8980107b6cfffff       2997      3    4       0
+2560: 8980107b6d3ffff       1751      8   14       0
+2561: 8980107b6d7ffff       2032      4  134       0
+2562: 8980107b6dbffff       1896      9  193       1</code></pre>
+</div>
+</div>
+<p>A parte mais difícil do processo do cálculo de acessibilidade é a definição da medida a ser utilizada. É extremamente importante pesar as vantagens e desvantagens de cada uma e compreender quais medidas se adequam às oportunidades para quais se deseja calcular os níveis de acessibilidade. Neste exemplo, utilizaremos duas medidas distintas:</p>
+<ul>
+<li><p>No cálculo da acessibilidade a empregos, vamos usar a medida de oportunidades cumulativas. Esta métrica nos permite entender quantos empregos são acessíveis dentro de um determinado custo de viagem, representando, desta forma, a oferta de empregos aos habitantes de cada uma das células de nossa grade. Embora essa medida não leve em consideração a competição por empregos, sua principal vantagem é que ela é de muito simples comunicação e interpretação. Em nosso exemplo, vamos tomar como limite de custo um tempo de viagem de 30 minutos.</p></li>
+<li><p>No cálculo da acessibilidade a escolas públicas, vamos usar a medida de custo mínimo de viagem. Esta métrica é especialmente útil para avaliar a cobertura de serviços públicos essenciais, como educação e saúde básica, pois é desejado que a maior parte da população de uma cidade esteja a uma distância considerada razoável desses serviços.</p></li>
+</ul>
+<p>Como mostrado anteriormente, na <a href="3_calculando_acesso.html#sec-accessibility"><span>Section&nbsp;3.2</span></a>, o cálculo dessas medidas pode ser feito com as funções <code><a href="https://rdrr.io/pkg/accessibility/man/cumulative_cutoff.html">cumulative_cutoff()</a></code> e <code><a href="https://rdrr.io/pkg/accessibility/man/cost_to_closest.html">cost_to_closest()</a></code>, respectivamente, do pacote <a href="https://github.com/ipeaGIT/accessibility">accessibility</a>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ipeaGIT/accessibility">accessibility</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setattr.html">setnames</a></span><span class="op">(</span><span class="va">ttm</span>, old <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"fromId"</span>, <span class="st">"toId"</span><span class="op">)</span>, new <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"from_id"</span>, <span class="st">"to_id"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">access_to_jobs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/accessibility/man/cumulative_cutoff.html">cumulative_cutoff</a></span><span class="op">(</span></span>
+<span>  travel_matrix <span class="op">=</span> <span class="va">ttm</span>,</span>
+<span>  land_use_data <span class="op">=</span> <span class="va">for_data</span>,</span>
+<span>  opportunity <span class="op">=</span> <span class="st">"jobs"</span>,</span>
+<span>  travel_cost <span class="op">=</span> <span class="st">"travel_time"</span>,</span>
+<span>  cutoff <span class="op">=</span> <span class="fl">60</span>,</span>
+<span>  group_by <span class="op">=</span> <span class="st">"scenario"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">access_to_jobs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   id scenario   jobs
+   1: 89801040323ffff   before  46159
+   2: 89801040327ffff   before  25499
+   3: 8980104032bffff   before    118
+   4: 8980104032fffff   before  66513
+   5: 89801040333ffff   before  46159
+  ---                                
+5120: 8980107b6cbffff    after 366197
+5121: 8980107b6cfffff    after 256888
+5122: 8980107b6d3ffff    after 324981
+5123: 8980107b6d7ffff    after 338965
+5124: 8980107b6dbffff    after 361967</code></pre>
+</div>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">time_to_schools</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/accessibility/man/cost_to_closest.html">cost_to_closest</a></span><span class="op">(</span></span>
+<span>  travel_matrix <span class="op">=</span> <span class="va">ttm</span>,</span>
+<span>  land_use_data <span class="op">=</span> <span class="va">for_data</span>,</span>
+<span>  opportunity <span class="op">=</span> <span class="st">"schools"</span>,</span>
+<span>  travel_cost <span class="op">=</span> <span class="st">"travel_time"</span>,</span>
+<span>  group_by <span class="op">=</span> <span class="st">"scenario"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">time_to_schools</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   id scenario travel_time
+   1: 89801040323ffff   before          25
+   2: 89801040323ffff    after          25
+   3: 89801040327ffff   before          35
+   4: 89801040327ffff    after          35
+   5: 8980104032bffff   before         Inf
+  ---                                     
+5120: 8980107b6d3ffff    after           9
+5121: 8980107b6d7ffff   before          13
+5122: 8980107b6d7ffff    after          13
+5123: 8980107b6dbffff   before           0
+5124: 8980107b6dbffff    after           0</code></pre>
+</div>
+</div>
+<p>Como podemos ver, o resultado da função de custo mínimo de viagem inclui alguns valores <code>Inf</code>. As origens listadas com este valor não conseguem alcançar dentro de 120 minutos (limite de tempo de viagem imposto no cálculo da matriz) nenhum destino em que está localizada ao menos uma escola pública. O valor <code>Inf</code>, portanto, é utilizado para sinalizar esta condição.</p>
+</section><section id="análise-dos-níveis-de-acessibilidade-antes-e-depois" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="análise-dos-níveis-de-acessibilidade-antes-e-depois">
+<span class="header-section-number">6.4</span> Análise dos níveis de acessibilidade antes e depois</h2>
+<p>Agora que calculamos os níveis de acessibilidade em cada cenário, precisamos compreender como as mudanças na frequência das linhas de transporte público afetaram as condições de acessibilidade em nossa área de estudo. Uma boa forma de entender isso é olhando para a distribuição espacial dos níveis de acessibilidade. Vamos juntar usar as informações espaciais da nossa área de estudo, disponíveis no objeto <code>for_grid</code>, baixado do pacote <a href="https://github.com/ipeaGIT/aopdata">aopdata</a> anteriormente, às nossas tabelas de acessibilidade:</p>
+<div class="cell">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setDT.html">setDT</a></span><span class="op">(</span><span class="va">for_grid</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">access_to_jobs</span><span class="op">[</span><span class="va">for_grid</span>, on <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"id_hex"</span><span class="op">)</span>, <span class="va">geom</span> <span class="op">:=</span> <span class="va">i.geom</span><span class="op">]</span></span>
+<span><span class="va">time_to_schools</span><span class="op">[</span><span class="va">for_grid</span>, on <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"id_hex"</span><span class="op">)</span>, <span class="va">geom</span> <span class="op">:=</span> <span class="va">i.geom</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Feito isso, apresentamos os resultados em formato de mapa:</p>
+<div class="cell">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">access_to_jobs_sf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sf.html">st_sf</a></span><span class="op">(</span><span class="va">access_to_jobs</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">access_to_jobs_sf</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">jobs</span><span class="op">)</span>, color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">scenario</span>, nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span></span>
+<span>    option <span class="op">=</span> <span class="st">"inferno"</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_number.html">label_number</a></span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">1000</span>, suffix <span class="op">=</span> <span class="st">"k"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">time_to_schools_sf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sf.html">st_sf</a></span><span class="op">(</span><span class="va">time_to_schools</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">time_to_schools_sf</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">travel_time</span><span class="op">)</span>, color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">scenario</span>, nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span>option <span class="op">=</span> <span class="st">"cividis"</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-21-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 <!-- Como podemos ver, o aumento da frequência das linhas levou a um aumento significativo da acessibilidade em grande parte da nossa área de estudo. No entanto, embora os mapas acima sejam bons para mostrar os impactos espaciais da nossa política hipotética, eles não comunicam efetivamente o impacto médio da política à população. Para facilitar a comunicação dos nossos resultados, portanto, vamos calcular o nível médio da acessibilidade em cada um dos cenários: -->
 <!-- ```{r} -->
 <!-- access_to_jobs[sp_data, on = "id", population := i.population] -->
