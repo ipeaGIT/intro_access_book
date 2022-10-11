@@ -421,7 +421,7 @@ setDT(geoms)
 avg_headway[geoms, on = "trip_id", geometry := i.geometry]
 
 # converte objeto de volta para sf para poder fazer o mapa
-Avg_headway <- st_sf(avg_headway)
+avg_headway <- st_sf(avg_headway)
 
 # plotar figura
 ggplot(avg_headway) +
