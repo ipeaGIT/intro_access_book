@@ -265,14 +265,18 @@ Calculados os níveis de acessibilidade, procedemos então para sua análise. Ex
 
 **Distribuição espacial de acessibilidade urbana**
 
-Para compreendermos a distribuição espacial da acessibilidade urbana de uma determinada cidade ou região, primeiro precisamos obter as informações espaciais dos pontos que foram utilizados como origens e destinos no cálculo da matriz. Os pontos que nós usamos nos exemplos anteriores, por exemplo, correspondem a células de uma grade hexagonal baseadas no índice H3, desenvolvido pela Uber [@brodsky2018h3]. O código e o mapa a seguir mostram a distribuição desses hexágonos na nossa área de estudo.
+Para compreendermos a distribuição espacial da acessibilidade urbana de uma determinada cidade ou região, primeiro precisamos obter as informações espaciais dos pontos que foram utilizados como origens e destinos no cálculo da matriz. Os pontos que nós usamos nos exemplos anteriores, por exemplo, correspondem a células de uma grade hexagonal baseadas no índice H3, desenvolvido pela Uber [@brodsky2018h3]. O código e o mapa a seguir mostram a distribuição desses hexágonos na nossa área de estudo. Aqui, a gente faz o download da grade espacial disponível no pacote `{aopdata}`, que será apresentado com mais detalhes na seção @sec-s5_dados_aop;
 
 ```{r}
 #| message: false
-poa_grid <- read_grid("Porto Alegre")
+library(aopdata)
+
+# download grade espacial
+poa_grid <- read_grid(city="Porto Alegre")
 
 poa_grid <- poa_grid[poa_grid$id_hex %in% points$id, ]
 
+# cria mapa
 ggplot(poa_grid) + geom_sf()
 ```
 
