@@ -325,7 +325,7 @@ Vamos usar como exemplo a filtragem usando a *bounding box* da trajetória de *i
 # converte para objeto espacial sf o traçado de um shape_id 
 # pega o bounding box desse traçado
 bbox <- convert_shapes_to_sf(gtfs, shape_id = "68962") |>
-        sf::st_bbox())
+        sf::st_bbox()
 
 
 # plota toda rede de transporte público e o bounding box construído acima
