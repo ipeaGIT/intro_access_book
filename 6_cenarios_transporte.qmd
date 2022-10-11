@@ -88,8 +88,8 @@ fs::dir_tree(analysis_dir, glob = "*.zip")
 # listing below to a tempdir and then moving them back to their original dir
 files_to_move <- c(
   "network.dat",
-  "for_2020.osm.pbf.mapdb",
-  "for_2020.osm.pbf.mapdb.p",
+  "street_network.osm.pbf.mapdb",
+  "street_network.osm.pbf.mapdb.p",
   "street_network.osm.pbf",
   "topography.tif"
 )
@@ -118,15 +118,11 @@ fs::dir_tree(analysis_dir)
 #| echo: false
 #| results: false
 #| warning: false
-before_tmp <- tempfile("before")
-dir.create(before_tmp)
 file.rename(
   file.path(before_tmp, files_to_move),
   file.path(dir_before, files_to_move)
 )
 
-after_tmp <- tempfile("after")
-dir.create(after_tmp)
 file.rename(
   file.path(after_tmp, files_to_move),
   file.path(dir_after, files_to_move)
@@ -162,19 +158,15 @@ file.copy(from = tif_path, to = file.path(dir_after, "topography.tif"))
 #| warning: false
 files_to_move <- c(
   "network.dat",
-  "for_2020.osm.pbf.mapdb",
-  "for_2020.osm.pbf.mapdb.p"
+  "street_network.osm.pbf.mapdb",
+  "street_network.osm.pbf.mapdb.p"
 )
 
-before_tmp <- tempfile("before")
-dir.create(before_tmp)
 file.rename(
   file.path(dir_before, files_to_move),
   file.path(before_tmp, files_to_move)
 )
 
-after_tmp <- tempfile("after")
-dir.create(after_tmp)
 file.rename(
   file.path(dir_after, files_to_move),
   file.path(after_tmp, files_to_move)
@@ -189,15 +181,11 @@ fs::dir_tree(analysis_dir)
 #| echo: false
 #| results: false
 #| warning: false
-before_tmp <- tempfile("before")
-dir.create(before_tmp)
 file.rename(
   file.path(before_tmp, files_to_move),
   file.path(dir_before, files_to_move)
 )
 
-after_tmp <- tempfile("after")
-dir.create(after_tmp)
 file.rename(
   file.path(after_tmp, files_to_move),
   file.path(dir_after, files_to_move)
