@@ -22,7 +22,7 @@ Além do R, o pacote `r5r` requer também a instalação do Java 11[^2]. Se voc�
 [^2]: O Java 11 pode ser baixado em <https://www.oracle.com/java/technologies/downloads/#java11> ou em <https://jdk.java.net/java-se-ri/11>.
 
 ```{r}
-cat(processx::run("java", args = "--version")$stdout)
+cat(processx::run("java", args = "-version")$stdout)
 ```
 
 ### Dados necessários
@@ -150,7 +150,7 @@ Na prática, o que a função `travel_time_matrix()` faz é encontrar qual a rot
 A função `travel_time_matrix()` utiliza uma extensão do algoritmo de roteamento RAPTOR [@conway2017evidencebased], o que torna o R5 extremamente rápido. A depender da quantidade de pares de origem-destino, o `r5r` pode ser entre 6 e 200 vezes mais rápido do que *softwares* alternativos para calcular uma matriz de tempo de viagem [@higgins2022calculating].
 :::
 
-## Cálculo de acessibilidade
+## Cálculo de acessibilidade {#sec-accessibility}
 
 Após calculada a matriz de tempo de viagem entre as origens e os destinos da área de estudo, nós precisamos utilizá-la para calcular os níveis de acessibilidade do local. Para isso, nós utilizaremos o pacote `accessibility`, também desenvolvido pela equipe do Projeto Acesso a Oportunidades, que contém diversas funções para vários indicadores de acessibilidade.
 
