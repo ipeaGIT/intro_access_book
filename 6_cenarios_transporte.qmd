@@ -201,160 +201,184 @@ options(java.parameters = "-Xmx4G")
 
 library(r5r)
 
-r5r_core_before <- setup_r5(dir_before, verbose = FALSE)
-r5r_core_after <- setup_r5(dir_after, verbose = FALSE)
+r5r_core_before <- setup_r5(dir_before, use_elevation = TRUE, verbose = FALSE)
+r5r_core_after <- setup_r5(dir_after, use_elevation = TRUE, verbose = FALSE)
 ```
 
-<!-- Tendo sido criada a conexão com o `R5` para os dois cenários, prosseguimos agora para o cálculo da matriz, de fato. De forma a avaliar a hipotética política adequadamente, nós precisamos usar os mesmos parâmetros em ambos os cenários. Vamos considerar viagens a pé ou por transporte público, permitir até 800 metros nas pernas de acesso e egresso a paradas e limitar o tempo máximo de viagem em até 60 minutos. Vamos considerar o horário de partida de 14:00 em uma típica segunda-feira de operação. Como origens e destinos, vamos usar os centróides da grade disponibilizada no `r5r`: -->
+Tendo sido criada a conexão com o `R5` para os dois cenários, prosseguimos agora para o cálculo da matriz, de fato. De forma a avaliar a expansão do metrô adequadamente, nós precisamos usar os mesmos parâmetros em ambos os cenários. Vamos considerar viagens a pé ou por transporte público, permitir até 800 metros nas pernas de acesso e egresso a paradas e limitar o tempo máximo de viagem em até 60 minutos. Vamos considerar o horário de partida de 07:00 em uma típica segunda-feira de operação. Como origens e destinos, vamos usar os centróides da grade de Fortaleza disponibilizada pelo pacote `{aopdata}` (mais detalhes sobre o pacote são apresentados na [Seção 5](s5_dados_aop.qmd)):
 
-<!-- ```{r} -->
-<!-- library(data.table) -->
+```{r}
+#| message: false
+#| warning: false
+library(data.table)
+library(aopdata)
+library(sf)
 
-<!-- points <- fread(system.file("extdata/spo/spo_hexgrid.csv", package = "r5r")) -->
+for_grid <- read_grid("for")
+points <- st_centroid(for_grid)
 
-<!-- before_ttm <- travel_time_matrix( -->
-<!--   r5r_core_before, -->
-<!--   origins = points, -->
-<!--   destinations = points, -->
-<!--   mode = c("WALK", "TRANSIT"), -->
-<!--   departure_datetime = as.POSIXct( -->
-<!--     "13-05-2019 14:00:00", -->
-<!--     format = "%d-%m-%Y %H:%M:%S" -->
-<!--   ), -->
-<!--   max_walk_dist = 800, -->
-<!--   max_trip_duration = 120, -->
-<!--   verbose = FALSE, -->
-<!--   progress = FALSE -->
-<!-- ) -->
+setDT(points)
+points <- points[, .(id = id_hex, geom)]
+points[, setdiff(names(points), c("id", "geom")) := NULL]
+points <- st_sf(points)
 
-<!-- after_ttm <- travel_time_matrix( -->
-<!--   r5r_core_after, -->
-<!--   origins = points, -->
-<!--   destinations = points, -->
-<!--   mode = c("WALK", "TRANSIT"), -->
-<!--   departure_datetime = as.POSIXct( -->
-<!--     "13-05-2019 14:00:00", -->
-<!--     format = "%d-%m-%Y %H:%M:%S" -->
-<!--   ), -->
-<!--   max_walk_dist = 800, -->
-<!--   max_trip_duration = 120, -->
-<!--   verbose = FALSE, -->
-<!--   progress = FALSE -->
-<!-- ) -->
+ttm_before <- travel_time_matrix(
+  r5r_core_before,
+  origins = points,
+  destinations = points,
+  mode = c("WALK", "TRANSIT"),
+  departure_datetime = as.POSIXct(
+    "02-03-2020 07:00:00",
+    format = "%d-%m-%Y %H:%M:%S"
+  ),
+  max_walk_dist = 800,
+  max_trip_duration = 60,
+  verbose = FALSE,
+  progress = FALSE
+)
 
-<!-- before_ttm -->
+ttm_after <- travel_time_matrix(
+  r5r_core_after,
+  origins = points,
+  destinations = points,
+  mode = c("WALK", "TRANSIT"),
+  departure_datetime = as.POSIXct(
+    "02-03-2020 07:00:00",
+    format = "%d-%m-%Y %H:%M:%S"
+  ),
+  max_walk_dist = 800,
+  max_trip_duration = 60,
+  verbose = FALSE,
+  progress = FALSE
+)
 
-<!-- after_ttm -->
-<!-- ``` -->
+ttm_before
 
-<!-- Como podemos ver, alguns tempos de viagem do cenário pós aumento das frequências são menores do que antes da mudança. Maior frequência de transporte público leva a menores tempos de espera nas paradas de embarque e em eventuais transferências, o que leva a menores tempos de viagem. Muitos tempos, no entanto, são iguais nos dois cenários. Isto é uma provável evidência de que as viagens nesses casos são feitas a pé, e, consequentemente, não são afetadas por mudanças no transporte público. -->
+ttm_after
+```
 
-<!-- ## Cálculo da acessibilidade nos cenários antes e depois -->
+```{r}
+#| results: false
+#| message: false
+#| echo: false
+stop_r5()
+```
 
-<!-- O cálculo da acessibilidade é muito simples, requerendo apenas um processamento básico dos nossos dados e a aplicação de uma das funções de acessibilidade do pacote `{accessibility}`. Como tratamento dos dados, vamos juntar as matrizes dos dois cenários em uma única tabela, identificando cada cenário com a coluna `scenario`: -->
+À primeira vista, nossas matrizes parecem iguais: todos os tempos de viagem na amostra de pares mostrados acima são idênticos. Isto ocorre porque muitos deslocamentos entre regiões da cidade de fato não são afetados pela implementação da nova linha de metrô, por serem realizados por outros modos de transporte público ou a pé. Se compararmos par a par, no entanto, veremos que vários dos tempos de viagens entre eles são impactados pela Linha Leste:
 
-<!-- ```{r} -->
-<!-- ttm <- rbind(before_ttm, after_ttm, idcol = "scenario") -->
-<!-- ttm[, scenario := factor(scenario, labels = c("before", "after"))] -->
+```{r}
+comparison <- merge(
+  ttm_before,
+  ttm_after,
+  by = c("fromId", "toId"),
+  suffixes = c("_before", "_after")
+)
 
-<!-- ttm -->
-<!-- ``` -->
+comparison[travel_time_after < travel_time_before]
+```
 
-<!-- Para o cálculo da acessibilidade, vamos precisar de uma tabela com os dados de uso do solo da cidade de São Paulo. Para isso, nós usamos a função `read_landuse()` do pacote `{aopdata}` (mais detalhes sobre o pacote são apresentados na [Seção 5](s5_dados_aop.qmd)): -->
+## Cálculo da acessibilidade nos cenários antes e depois
 
-<!-- ```{r} -->
-<!-- #| message: false -->
-<!-- library(aopdata) -->
+O cálculo da acessibilidade é muito simples, requerendo apenas um processamento básico dos nossos dados e a aplicação de uma das funções de acessibilidade do pacote `{accessibility}`. Como tratamento dos dados, vamos juntar as matrizes dos dois cenários em uma única tabela, identificando cada cenário com a coluna `scenario`:
 
-<!-- sp_data <- read_landuse("spo", showProgress = FALSE) -->
-<!-- ``` -->
+```{r}
+ttm <- rbind(ttm_before, ttm_after, idcol = "scenario")
+ttm[, scenario := factor(scenario, labels = c("before", "after"))]
 
-<!-- Para fins de demonstração, vamos calcular a acessibilidade a postos de trabalho e a escolas públicas na nossa área de estudo. Os dados do total de empregos e escolas em cada hexágono estão listados nas colunas `T001` e `E001`, respectivamente. Vamos renomeá-las para facilitar sua identificação e manter apenas as colunas necessárias na tabela de dados de uso do solo (vamos manter também as colunas `P001`, de população total em cada hexágono, e `R003`, do decil de renda em que cada hexágono se encontra, que serão úteis mais à frente): -->
+ttm
+```
 
-<!-- ```{r} -->
-<!-- cols_to_keep <- c("id", "jobs", "schools", "population", "decile") -->
+Para o cálculo da acessibilidade, vamos precisar de uma tabela com os dados de uso do solo da cidade de Fortaleza. Para isso, nós usamos a função `read_landuse()` do pacote `{aopdata}`:
 
-<!-- setnames( -->
-<!--   sp_data, -->
-<!--   old = c("id_hex", "T001", "E001", "P001", "R003"), -->
-<!--   new = cols_to_keep -->
-<!-- ) -->
-<!-- sp_data[, setdiff(names(sp_data), cols_to_keep) := NULL] -->
+```{r}
+#| message: false
+for_data <- read_landuse("for", showProgress = FALSE)
+```
 
-<!-- sp_data -->
-<!-- ``` -->
+Para fins de demonstração, vamos calcular a acessibilidade a postos de trabalho e a escolas públicas na nossa área de estudo. Os dados do total de empregos e escolas em cada hexágono estão listados nas colunas `T001` e `E001`, respectivamente. Vamos renomeá-las para facilitar sua identificação e manter apenas as colunas necessárias na tabela de dados de uso do solo (vamos manter também as colunas `P001`, de população total em cada hexágono, e `R003`, do decil de renda em que cada hexágono se encontra, que serão úteis mais à frente):
 
-<!-- A parte mais difícil do processo do cálculo de acessibilidade é a definição da medida a ser utilizada. É extremamente importante pesar as vantagens e desvantagens de cada uma e compreender quais medidas se adequam às oportunidades para quais se deseja calcular os níveis de acessibilidade. Neste exemplo, utilizaremos duas medidas distintas: -->
+```{r}
+cols_to_keep <- c("id", "jobs", "schools", "population", "decile")
 
-<!-- - No cálculo da acessibilidade a empregos, vamos usar a medida de oportunidades cumulativas. Esta métrica nos permite entender quantos empregos são acessíveis dentro de um determinado custo de viagem, representando, desta forma, a oferta de empregos aos habitantes de cada uma das células de nossa grade. Embora essa medida não leve em consideração a competição por empregos, sua principal vantagem é que ela é de muito simples comunicação e interpretação. Em nosso exemplo, vamos tomar como limite de custo um tempo de viagem de 30 minutos. -->
+setnames(
+  for_data,
+  old = c("id_hex", "T001", "E001", "P001", "R003"),
+  new = cols_to_keep
+)
+for_data[, setdiff(names(for_data), cols_to_keep) := NULL]
 
-<!-- - No cálculo da acessibilidade a escolas públicas, vamos usar a medida de custo mínimo de viagem. Esta métrica é especialmente útil para avaliar a cobertura de serviços públicos essenciais, como educação e saúde básica, pois é desejado que a maior parte da população de uma cidade esteja a uma distância considerada razoável desses serviços. -->
+for_data
+```
 
-<!-- Como mostrado anteriormente, na @sec-accessibility, o cálculo dessas medidas pode ser feito com as funções `cumulative_cutoff()` e `cost_to_closest()`, respectivamente, do pacote `{accessibility}`: -->
+A parte mais difícil do processo do cálculo de acessibilidade é a definição da medida a ser utilizada. É extremamente importante pesar as vantagens e desvantagens de cada uma e compreender quais medidas se adequam às oportunidades para quais se deseja calcular os níveis de acessibilidade. Neste exemplo, utilizaremos duas medidas distintas:
 
-<!-- ```{r} -->
-<!-- library(accessibility) -->
+- No cálculo da acessibilidade a empregos, vamos usar a medida de oportunidades cumulativas. Esta métrica nos permite entender quantos empregos são acessíveis dentro de um determinado custo de viagem, representando, desta forma, a oferta de empregos aos habitantes de cada uma das células de nossa grade. Embora essa medida não leve em consideração a competição por empregos, sua principal vantagem é que ela é de muito simples comunicação e interpretação. Em nosso exemplo, vamos tomar como limite de custo um tempo de viagem de 30 minutos.
 
-<!-- setnames(ttm, old = c("fromId", "toId"), new = c("from_id", "to_id")) -->
+- No cálculo da acessibilidade a escolas públicas, vamos usar a medida de custo mínimo de viagem. Esta métrica é especialmente útil para avaliar a cobertura de serviços públicos essenciais, como educação e saúde básica, pois é desejado que a maior parte da população de uma cidade esteja a uma distância considerada razoável desses serviços.
 
-<!-- access_to_jobs <- cumulative_cutoff( -->
-<!--   travel_matrix = ttm, -->
-<!--   land_use_data = sp_data, -->
-<!--   opportunity = "jobs", -->
-<!--   travel_cost = "travel_time", -->
-<!--   cutoff = 30, -->
-<!--   group_by = "scenario" -->
-<!-- ) -->
-<!-- access_to_jobs -->
+Como mostrado anteriormente, na @sec-accessibility, o cálculo dessas medidas pode ser feito com as funções `cumulative_cutoff()` e `cost_to_closest()`, respectivamente, do pacote `{accessibility}`:
 
-<!-- time_to_schools <- cost_to_closest( -->
-<!--   travel_matrix = ttm, -->
-<!--   land_use_data = sp_data, -->
-<!--   opportunity = "schools", -->
-<!--   travel_cost = "travel_time", -->
-<!--   group_by = "scenario" -->
-<!-- ) -->
-<!-- time_to_schools -->
-<!-- ``` -->
+```{r}
+library(accessibility)
 
-<!-- Como podemos ver, o resultado da função de custo mínimo de viagem inclui alguns valores `Inf`. As origens listadas com este valor não conseguem alcançar dentro de 120 minutos (limite de tempo de viagem imposto no cálculo da matriz) nenhum destino em que está localizada ao menos uma escola pública. O valor `Inf`, portanto, é utilizado para sinalizar esta condição. -->
+setnames(ttm, old = c("fromId", "toId"), new = c("from_id", "to_id"))
 
-<!-- ## Análise dos níveis de acessibilidade antes e depois -->
+access_to_jobs <- cumulative_cutoff(
+  travel_matrix = ttm,
+  land_use_data = for_data,
+  opportunity = "jobs",
+  travel_cost = "travel_time",
+  cutoff = 60,
+  group_by = "scenario"
+)
+access_to_jobs
 
-<!-- Agora que calculamos os níveis de acessibilidade em cada cenário, precisamos compreender como as mudanças na frequência das linhas de transporte público afetaram as condições de acessibilidade em nossa área de estudo. Uma boa forma de entender isso é olhando para a distribuição espacial dos níveis de acessibilidade. Vamos usar o pacote `{aopdata}` para baixar as informações espaciais da nossa área de estudo e juntá-las às nossas tabelas de acessibilidade:  -->
+time_to_schools <- cost_to_closest(
+  travel_matrix = ttm,
+  land_use_data = for_data,
+  opportunity = "schools",
+  travel_cost = "travel_time",
+  group_by = "scenario"
+)
+time_to_schools
+```
 
-<!-- ```{r} -->
-<!-- sp_grid <- read_grid("spo") -->
-<!-- setDT(sp_grid) -->
+Como podemos ver, o resultado da função de custo mínimo de viagem inclui alguns valores `Inf`. As origens listadas com este valor não conseguem alcançar dentro de 120 minutos (limite de tempo de viagem imposto no cálculo da matriz) nenhum destino em que está localizada ao menos uma escola pública. O valor `Inf`, portanto, é utilizado para sinalizar esta condição.
 
-<!-- access_to_jobs[sp_grid, on = c(id = "id_hex"), geom := i.geom] -->
-<!-- time_to_schools[sp_grid, on = c(id = "id_hex"), geom := i.geom] -->
-<!-- ``` -->
+## Análise dos níveis de acessibilidade antes e depois
 
-<!-- Feito isso, apresentamos os resultados em formato de mapa: -->
+Agora que calculamos os níveis de acessibilidade em cada cenário, precisamos compreender como as mudanças na frequência das linhas de transporte público afetaram as condições de acessibilidade em nossa área de estudo. Uma boa forma de entender isso é olhando para a distribuição espacial dos níveis de acessibilidade. Vamos juntar usar as informações espaciais da nossa área de estudo, disponíveis no objeto `for_grid`, baixado do pacote `{aopdata}` anteriormente, às nossas tabelas de acessibilidade:
 
-<!-- ```{r} -->
-<!-- #| message: false -->
-<!-- library(ggplot2) -->
-<!-- library(sf) -->
+```{r}
+setDT(for_grid)
 
-<!-- access_to_jobs_sf <- st_sf(access_to_jobs) -->
+access_to_jobs[for_grid, on = c(id = "id_hex"), geom := i.geom]
+time_to_schools[for_grid, on = c(id = "id_hex"), geom := i.geom]
+```
 
-<!-- ggplot(access_to_jobs_sf) + -->
-<!--   geom_sf(aes(fill = jobs)) + -->
-<!--   facet_wrap(~ scenario, nrow = 1) + -->
-<!--   scale_fill_viridis_c( -->
-<!--     option = "inferno", -->
-<!--     label = scales::label_number(scale = 1/1000, suffix = "k") -->
-<!--   ) -->
+Feito isso, apresentamos os resultados em formato de mapa:
 
-<!-- time_to_schools_sf <- st_sf(time_to_schools) -->
+```{r}
+#| message: false
+library(ggplot2)
 
-<!-- ggplot(time_to_schools_sf) + -->
-<!--   geom_sf(aes(fill = travel_time)) + -->
-<!--   facet_wrap(~ scenario, nrow = 1) + -->
-<!--   scale_fill_viridis_c(option = "cividis", direction = -1) -->
-<!-- ``` -->
+access_to_jobs_sf <- st_sf(access_to_jobs)
+
+ggplot(access_to_jobs_sf) +
+  geom_sf(aes(fill = jobs), color = NA) +
+  facet_wrap(~ scenario, nrow = 1) +
+  scale_fill_viridis_c(
+    option = "inferno",
+    label = scales::label_number(scale = 1/1000, suffix = "k")
+  )
+
+time_to_schools_sf <- st_sf(time_to_schools)
+
+ggplot(time_to_schools_sf) +
+  geom_sf(aes(fill = travel_time), color = NA) +
+  facet_wrap(~ scenario, nrow = 1) +
+  scale_fill_viridis_c(option = "cividis", direction = -1)
+```
 
 <!-- Como podemos ver, o aumento da frequência das linhas levou a um aumento significativo da acessibilidade em grande parte da nossa área de estudo. No entanto, embora os mapas acima sejam bons para mostrar os impactos espaciais da nossa política hipotética, eles não comunicam efetivamente o impacto médio da política à população. Para facilitar a comunicação dos nossos resultados, portanto, vamos calcular o nível médio da acessibilidade em cada um dos cenários: -->
 
