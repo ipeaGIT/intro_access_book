@@ -96,11 +96,17 @@ files_to_move <- c(
 
 before_tmp <- tempfile("before")
 dir.create(before_tmp)
-file.rename(paste0("before/", files_to_move), paste0(before_tmp, files_to_move))
+file.rename(
+  file.path(dir_before, files_to_move),
+  file.path(before_tmp, files_to_move)
+)
 
 after_tmp <- tempfile("after")
 dir.create(after_tmp)
-file.rename(paste0("after/", files_to_move), paste0(after_tmp, files_to_move))
+file.rename(
+  file.path(dir_after, files_to_move),
+  file.path(after_tmp, files_to_move)
+)
 ```
 
 ```{r}
@@ -112,9 +118,19 @@ fs::dir_tree(analysis_dir)
 #| echo: false
 #| results: false
 #| warning: false
-file.rename(paste0(before_tmp, files_to_move), paste0("before/", files_to_move))
+before_tmp <- tempfile("before")
+dir.create(before_tmp)
+file.rename(
+  file.path(before_tmp, files_to_move),
+  file.path(dir_before, files_to_move)
+)
 
-file.rename(paste0(after_tmp, files_to_move), paste0("after/", files_to_move))
+after_tmp <- tempfile("after")
+dir.create(after_tmp)
+file.rename(
+  file.path(after_tmp, files_to_move),
+  file.path(dir_after, files_to_move)
+)
 ```
 
 Para estimarmos o tempo de viagem na nossa área de estudo, precisamos ainda de um arquivo representando a rede viária do local, em formato `.pbf`, e opcionalmente iremos utilizar um arquivo representando a topografia local, em formato `.tif`. Esses arquivos, asssim como os GTFS, estão disponíveis para *download* no repositório do livro. Partindo do pressuposto que a implementação da Linha Leste não afetaria o traçado das ruas e calçadas na região, bem como a topografia local, podemos usar os mesmos arquivos nas duas matrizes de tempo de viagem:
@@ -125,11 +141,11 @@ pbf_path <- tempfile("street_network", fileext = ".osm.pbf")
 tif_path <- tempfile("topography", fileext = ".tif")
 
 httr::GET(
-  "https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/spo_2020.osm.pbf",
+  "https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/for_2020.osm.pbf",
   httr::write_disk(pbf_path)
 )
 httr::GET(
-  "https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/topografia3_spo.tif",
+  "https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/topografia3_for.tif",
   httr::write_disk(tif_path)
 )
 
@@ -140,22 +156,66 @@ file.copy(from = tif_path, to = file.path(dir_before, "topography.tif"))
 file.copy(from = tif_path, to = file.path(dir_after, "topography.tif"))
 ```
 
-<!-- ```{r} -->
-<!-- fs::dir_tree(tmpdir) -->
-<!-- ``` -->
+```{r}
+#| echo: false
+#| results: false
+#| warning: false
+files_to_move <- c(
+  "network.dat",
+  "for_2020.osm.pbf.mapdb",
+  "for_2020.osm.pbf.mapdb.p"
+)
 
-<!-- Finalmente, podemos começar o cálculo das matrizes. A primeira etapa é construir a rede de transporte multimodal usada pelo `{r5r}` no roteamento e criar uma conexão com o `R5`, o que é feito com o comando `setup_r5()`: -->
+before_tmp <- tempfile("before")
+dir.create(before_tmp)
+file.rename(
+  file.path(dir_before, files_to_move),
+  file.path(before_tmp, files_to_move)
+)
 
-<!-- ```{r} -->
-<!-- #| message: false -->
-<!-- #| warning: false -->
-<!-- options(java.parameters = "-Xmx4G") -->
+after_tmp <- tempfile("after")
+dir.create(after_tmp)
+file.rename(
+  file.path(dir_after, files_to_move),
+  file.path(after_tmp, files_to_move)
+)
+```
 
-<!-- library(r5r) -->
+```{r}
+fs::dir_tree(analysis_dir)
+```
 
-<!-- before_r5r_core <- setup_r5(dir_before, verbose = FALSE) -->
-<!-- after_r5r_core <- setup_r5(dir_after, verbose = FALSE) -->
-<!-- ``` -->
+```{r}
+#| echo: false
+#| results: false
+#| warning: false
+before_tmp <- tempfile("before")
+dir.create(before_tmp)
+file.rename(
+  file.path(before_tmp, files_to_move),
+  file.path(dir_before, files_to_move)
+)
+
+after_tmp <- tempfile("after")
+dir.create(after_tmp)
+file.rename(
+  file.path(after_tmp, files_to_move),
+  file.path(dir_after, files_to_move)
+)
+```
+
+Finalmente, podemos começar o cálculo das matrizes. A primeira etapa é construir a rede de transporte multimodal usada pelo `{r5r}` no roteamento e criar uma conexão com o `R5`, o que é feito com o comando `setup_r5()`:
+
+```{r}
+#| message: false
+#| warning: false
+options(java.parameters = "-Xmx4G")
+
+library(r5r)
+
+r5r_core_before <- setup_r5(dir_before, verbose = FALSE)
+r5r_core_after <- setup_r5(dir_after, verbose = FALSE)
+```
 
 <!-- Tendo sido criada a conexão com o `R5` para os dois cenários, prosseguimos agora para o cálculo da matriz, de fato. De forma a avaliar a hipotética política adequadamente, nós precisamos usar os mesmos parâmetros em ambos os cenários. Vamos considerar viagens a pé ou por transporte público, permitir até 800 metros nas pernas de acesso e egresso a paradas e limitar o tempo máximo de viagem em até 60 minutos. Vamos considerar o horário de partida de 14:00 em uma típica segunda-feira de operação. Como origens e destinos, vamos usar os centróides da grade disponibilizada no `r5r`: -->
 
@@ -165,7 +225,7 @@ file.copy(from = tif_path, to = file.path(dir_after, "topography.tif"))
 <!-- points <- fread(system.file("extdata/spo/spo_hexgrid.csv", package = "r5r")) -->
 
 <!-- before_ttm <- travel_time_matrix( -->
-<!--   before_r5r_core, -->
+<!--   r5r_core_before, -->
 <!--   origins = points, -->
 <!--   destinations = points, -->
 <!--   mode = c("WALK", "TRANSIT"), -->
@@ -180,7 +240,7 @@ file.copy(from = tif_path, to = file.path(dir_after, "topography.tif"))
 <!-- ) -->
 
 <!-- after_ttm <- travel_time_matrix( -->
-<!--   after_r5r_core, -->
+<!--   r5r_core_after, -->
 <!--   origins = points, -->
 <!--   destinations = points, -->
 <!--   mode = c("WALK", "TRANSIT"), -->
