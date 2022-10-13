@@ -123,7 +123,7 @@ window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
-</script>
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 <meta property="og:title" content="Introdução à acessibilidade urbana - 6&nbsp; Comparando a acessibilidade entre dois cenários de transporte">
 <meta property="og:description" content="Neste capítulo, avaliaremos o impacto de um cenário simplificado de um investimento de infraestrutura de transporte real: a implementação da Linha Leste do metrô de Fortaleza.">
 <meta property="og:site-name" content="Introdução à acessibilidade urbana">
@@ -295,6 +295,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   <li><a href="#c%C3%A1lculo-das-matrizes-de-tempo-de-viagem" id="toc-cálculo-das-matrizes-de-tempo-de-viagem" class="nav-link" data-scroll-target="#c%C3%A1lculo-das-matrizes-de-tempo-de-viagem"><span class="toc-section-number">6.2</span>  Cálculo das matrizes de tempo de viagem</a></li>
   <li><a href="#c%C3%A1lculo-da-acessibilidade-nos-cen%C3%A1rios-antes-e-depois" id="toc-cálculo-da-acessibilidade-nos-cenários-antes-e-depois" class="nav-link" data-scroll-target="#c%C3%A1lculo-da-acessibilidade-nos-cen%C3%A1rios-antes-e-depois"><span class="toc-section-number">6.3</span>  Cálculo da acessibilidade nos cenários antes e depois</a></li>
   <li><a href="#an%C3%A1lise-dos-n%C3%ADveis-de-acessibilidade-antes-e-depois" id="toc-análise-dos-níveis-de-acessibilidade-antes-e-depois" class="nav-link" data-scroll-target="#an%C3%A1lise-dos-n%C3%ADveis-de-acessibilidade-antes-e-depois"><span class="toc-section-number">6.4</span>  Análise dos níveis de acessibilidade antes e depois</a></li>
+  <li><a href="#desigualdade-de-acessibilidade" id="toc-desigualdade-de-acessibilidade" class="nav-link" data-scroll-target="#desigualdade-de-acessibilidade"><span class="toc-section-number">6.5</span>  Desigualdade de acessibilidade</a></li>
   </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/6_cenarios_transporte.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
@@ -748,20 +749,73 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 <p>Os ganhos de acessibilidade ao emprego se concentram principalmente próximos às estações do novo corredor e dos corredores já existentes que se ligam a ele. Isto mostra como a implantação de uma infraestrutura de transporte pode impactar não apenas suas imediações, mas também locais mais afastados, graças à conectividade da rede.</p>
 <p>Por sua vez, o mapa de diferença no tempo de acesso a escolas apresenta um cenário diferente: nenhuma região da cidade apresenta melhorias no tempo de acesso. Diferentemente da distribuição de empregos, que tende a seguir critérios econômicos e mercadológicos, a distribuição de equipamentos públicos, entre eles escolas públicas, tende a ser planejada usando critérios de justiça social e equidade, sendo, portanto, mais equilibrada no território. Dessa forma, a construção da Linha Leste na parte central da cidade em nada afeta o tempo de acesso das pessoas que moram em locais afastados desse corredor. Não apenas isso, mas mesmo para as pessoas que moram perto do novo corredor a sua implementação não muda os níveis de acesso a escolas. Isto é um sinal que esta área possui uma boa oferta de escolas e já é bem servida de transporte público, mesmo antes da finalização da Linha Leste.</p>
-<!-- Como é de se esperar, o aumento da frequência de linhas de metrô e trem resulta no aumento da acessibilidade média da população de São Paulo. Essas linhas, entretanto, não estão igualmente distribuídas no território: algumas pessoas têm acesso mais fácil às suas estações do que outras. Assim, a facilidade de acesso a elas, e consequentemente do acesso a oportunidades de emprego e educação, depende de onde cada pessoa reside - o que, por sua vez, está muito relacionado a características socioeconômicas como classe e raça. O gráfico abaixo explora a distribuição de empregos acessíveis e de tempo até a escola mais próxima por decil de renda: -->
-<!-- ```{r} -->
-<!-- sp_data[, decile := factor(decile)] -->
-<!-- access_to_jobs[sp_data, on = "id", decile := i.decile] -->
-<!-- ggplot(access_to_jobs[!is.na(decile)]) + -->
-<!--   geom_boxplot(aes(decile, jobs, weight = population, group = decile)) + -->
-<!--   facet_wrap(~ scenario, nrow = 1) -->
-<!-- time_to_schools[sp_data, on = "id", decile := i.decile] -->
-<!-- ggplot(time_to_schools[!is.na(decile)]) + -->
-<!--   geom_boxplot( -->
-<!--     aes(decile, treated_travel_time, weight = population, group = decile) -->
-<!--   ) + -->
-<!--   facet_wrap(~ scenario, nrow = 1) -->
-<!-- ``` -->
+</section><section id="desigualdade-de-acessibilidade" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="desigualdade-de-acessibilidade">
+<span class="header-section-number">6.5</span> Desigualdade de acessibilidade</h2>
+<p>Políticas que resultam em maiores ganhos de acessibilidade para determinados grupos populacionais em detrimento de outros, como é o caso observado nos níveis de acesso a empregos em Fortaleza, alteram também a distribuição da acessibilidade entre grupos socioeconômicos na cidade. Em outras palavras, políticas que trazem mais benefícios para certas pessoas do que para outras mudam a configuração da desigualdade de acessibilidade.</p>
+<p>Nós podemos entender como é a distribuição de níveis de acessibilidade entre grupos socioeconômicos usando um gráfico <em>box plot</em> e agrupando a nossa população por decis de renda. Separando a nossa visualização nos cenários antes e depois, compreendemos como a Linha Leste afeta os níveis de acessibilidade de decil de renda:</p>
+<div class="cell">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">for_data</span><span class="op">[</span>, <span class="va">decile</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">decile</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">access_to_jobs</span><span class="op">[</span><span class="va">for_data</span>, on <span class="op">=</span> <span class="st">"id"</span>, <span class="va">decile</span> <span class="op">:=</span> <span class="va">i.decile</span><span class="op">]</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">access_to_jobs</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">decile</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">decile</span>, <span class="va">jobs</span>, weight <span class="op">=</span> <span class="va">population</span>, group <span class="op">=</span> <span class="va">decile</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">scenario</span>, nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Os dois paineis mostram claramente que em Fortaleza as pessoas mais ricas detêm os maiores níveis de acessibilidade ao emprego. Em Fortaleza, assim como na maior parte das grandes cidades brasileiras, os mais ricos tendem a morar próximos às grandes concentrações de emprego da cidade, enquanto os mais pobres tendem a ocupar regiões periféricas. Consequentemente, os níveis de acessibilidade dos mais ricos costuma ser maiores do que os dos mais pobres - não apenas porque moram mais perto dos empregos, mas porque também, geralmente, regiões centrais costumam ser mais bem servidas de transporte público do que as periferias.</p>
+<p>Assim como no caso da distribuição espacial da acessibilidade, é muito difícil enxergar diferenças consideráveis nos níveis de acesso entre os cenários antes e depois. Lançando mão do mesmo recurso que fizemos anteriormente, podemos enxergar essas diferenças mais claramente visualizando a distribuição da diferença de acessibilidade entre cada cenário por decil de renda:</p>
+<div class="cell">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">access_to_jobs_diff</span><span class="op">[</span></span>
+<span>  <span class="va">for_data</span>,</span>
+<span>  on <span class="op">=</span> <span class="st">"id"</span>,</span>
+<span>  <span class="fu">`:=`</span><span class="op">(</span></span>
+<span>    decile <span class="op">=</span> <span class="va">i.decile</span>,</span>
+<span>    population <span class="op">=</span> <span class="va">i.population</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">]</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">access_to_jobs_diff</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">decile</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">decile</span>, <span class="va">difference</span>, weight <span class="op">=</span> <span class="va">population</span>, group <span class="op">=</span> <span class="va">decile</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Como podemos ver, os ganhos de acessibilidade se concentram principalmente entre as camadas médias da população, em especial os decis 5, 6 e 7. No entanto, o hexágono que mostrou maior aumento de acessibilidade aparece como <em>outlier</em> do 10º decil, apresentando um ganho de mais de 60000 empregos em relação ao cenário pré-implementação.</p>
+<p>Uma forma frequentemente empregada de resumir o panorama da desigualdade de uma determinado local é com o uso de uma medida de desigualdade. Esse tipo de medida busca resumir a distribuição dos níveis de acessibilidade entre grupos populacionais (aqui, decis de renda) em um único indicador que facilite a comunicação dos resultados e que possa ser usado, por exemplo, na elaboração de planos e metas. As medidas de desigualdade mais frequentemente utilizadas na literatura de acessibilidade são a Razão de Palma e o Índice de Gini.</p>
+<p>Neste exemplo, vamos calcular a Razão de Palma dos cenários antes e depois. Esta medida é o resultado da divisão da acessibilidade média dos 10% mais ricos pela acessibilidade média dos 40% mais pobres:</p>
+<p><span class="math display">\[P = \frac{\overline{A_{tp10}}}{\overline{A_{bt40}}}\]</span></p>
+<p>em que <span class="math inline">\(P\)</span> é a Razão de Palma, <span class="math inline">\(\overline{A_{tp10}}\)</span> é a acessibilidade média dos 10% mais ricos e <span class="math inline">\(\overline{A_{bt40}}\)</span> é a acessibilidade média dos 40% mais pobres.</p>
+<p>A principal vantagem da Razao de Palma frente ao Índice de Gini é a sua facilidade de comunicação e interpretação. Valores maiores do que 1 indicam um cenário em que os ricos possuem níveis médios do que os pobres, e valores menores do que 1 a situação inversa. Outra vantagem da Razão de Palma é que ela reflete claramente como a desigualdade varia entre dois grupos de especial interesse para nós: os mais privilegiados e os mais vulneráveis de uma população. O Índice de Gini, por sua vez, estima o quanto uma distribuição desvia de uma distribuição hipotética em que todos possuem o mesmo nível de acesso, mas nada diz sobre as condições socioeconômicos daqueles que detêm os maiores e menores níveis de acessibilidade. Se uma determinada política aumenta os níveis de acessibilidades de pessoas de alta renda que moram em locais de baixa acessibilidade, por exemplo, o Índice de Gini indicaria que houve uma diminuição da desigualdade, mesmo que nenhuma população vulnerável se beneficie dessa política. Esta dificilmente é, entretanto, uma política equitativa. Neste mesmo caso, a Razão de Palma indicaria um aumento da desigualdade, resultado mais alinhado às expectativas.</p>
+<p>Analisar a Razão de Palma nos cenários antes e depois, dessa forma, nos permite entender qual o impacto da Linha Leste na desigualdade de acesso a empregos em Fortaleza:</p>
+<div class="cell">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">richest_access</span> <span class="op">&lt;-</span> <span class="va">access_to_jobs</span><span class="op">[</span></span>
+<span>  <span class="va">decile</span> <span class="op">==</span> <span class="fl">10</span>,</span>
+<span>  <span class="fu">.</span><span class="op">(</span>access <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span><span class="op">(</span><span class="va">jobs</span>, w <span class="op">=</span> <span class="va">population</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  by <span class="op">=</span> <span class="va">scenario</span></span>
+<span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">poorest_access</span> <span class="op">&lt;-</span> <span class="va">access_to_jobs</span><span class="op">[</span></span>
+<span>  <span class="va">decile</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>,</span>
+<span>  <span class="fu">.</span><span class="op">(</span>access <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span><span class="op">(</span><span class="va">jobs</span>, w <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">population</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  by <span class="op">=</span> <span class="va">scenario</span></span>
+<span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">palma_ratio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span></span>
+<span>  <span class="va">richest_access</span>,</span>
+<span>  <span class="va">poorest_access</span>,</span>
+<span>  by <span class="op">=</span> <span class="st">"scenario"</span>,</span>
+<span>  suffixes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"_richest"</span>, <span class="st">"_poorest"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">palma_ratio</span><span class="op">[</span>, <span class="va">palma</span> <span class="op">:=</span> <span class="va">access_richest</span> <span class="op">/</span> <span class="va">access_poorest</span><span class="op">]</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">palma_ratio</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">scenario</span>, <span class="va">palma</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Como podemos ver, a Razão de Palma sofreu uma ligeira queda entre os cenários pré e pós implementação da Linha Leste. Consequentemente, podemos concluir que a expansão do metrô de Fortaleza seria uma política progressiva neste nosso cenário simplificado, que leva em consideração apenas a construção do novo corredor e ignora ajustes nas frequências de outros corredores e mudanças nas linhas de ônibus da cidade.</p>
 
 
 </section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
