@@ -80,25 +80,6 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
 </style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -332,7 +313,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </div>
   
 
-</header><p>Usualmente, arquivos GTFS provenientes de fontes oficiais são utilizados para desenvolver análises e pesquisas que possuem diversos elementos comuns. Visando facilitar a leitura, o processamento e a análise desses dados, a equipe do Projeto Acesso a Oportunidades vêm desenvolvendo o pacote de R <a href="https://ipeagit.github.io/gtfstools/">gtfstools</a> [<span class="citation" data-cites="Herszenhut2022gtfstools">Herszenhut et al. (<a href="references.html#ref-Herszenhut2022gtfstools" role="doc-biblioref">2022</a>)</span>]<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, que oferece diversas funções que facilitam a manipulação e a exploração de feeds.</p>
+</header><p>Usualmente, arquivos GTFS provenientes de fontes oficiais são utilizados para desenvolver análises e pesquisas que possuem diversos elementos comuns. Visando facilitar a leitura, o processamento e a análise desses dados, a equipe do Projeto Acesso a Oportunidades vêm desenvolvendo o pacote de R <a href="https://ipeagit.github.io/gtfstools/">gtfstools</a> [<span class="citation" data-cites="Herszenhut2022gtfstools">(<a href="references.html#ref-Herszenhut2022gtfstools" role="doc-biblioref"><strong>Herszenhut2022gtfstools?</strong></a>)</span>]<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, que oferece diversas funções que facilitam a manipulação e a exploração de feeds.</p>
 <p>Neste capítulo, nós iremos passar por algumas das funcionalidades mais frequentemente utilizadas do pacote. Para isso, vamos utilizar uma amostra do <em>feed</em> da SPTrans apresentado no capítulo anterior, disponível dentro do <a href="https://ipeagit.github.io/gtfstools/">gtfstools</a>.</p>
 <section id="leitura-e-manipulação-básica-de-arquivos-gtfs" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="leitura-e-manipulação-básica-de-arquivos-gtfs">
 <span class="header-section-number">5.1</span> Leitura e manipulação básica de arquivos GTFS</h2>
@@ -997,11 +978,6 @@ Geodetic CRS:  WGS 84
 <p>Como podemos ver, o pacote <a href="https://ipeagit.github.io/gtfstools/">gtfstools</a> torna o desenvolvimento de análises de <em>feeds</em> de transporte público algo fácil e que requer apenas o conhecimento básico de pacotes de manipulação de tabela (como o <code>data.table</code> ou <code>dplyr</code>) para grande parte das etapas que as compõem. O exemplo apresentado nesta seção mostra como muitas de suas funções podem ser usadas conjuntamente para revelar aspectos importantes de sistemas de transporte público descritos no formato GTFS.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
-<div id="ref-Herszenhut2022gtfstools" class="csl-entry" role="doc-biblioentry">
-Herszenhut, Daniel, Rafael H. M. Pereira, Pedro R. Andrade, and Joao Bazzo. 2022. <em>Gtfstools: General Transit Feed Specification (GTFS) Editing and Analysing Tools</em> (version v1.1.0). Zenodo. <a href="https://doi.org/10.5281/zenodo.6577028">https://doi.org/10.5281/zenodo.6577028</a>.
-</div>
-</div>
 </section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1"><p>Disponível em <a href="https://github.com/ipeaGIT/gtfstools" class="uri">https://github.com/ipeaGIT/gtfstools</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
