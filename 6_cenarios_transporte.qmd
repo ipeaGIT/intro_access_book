@@ -438,22 +438,75 @@ Os ganhos de acessibilidade ao emprego se concentram principalmente próximos à
 
 Por sua vez, o mapa de diferença no tempo de acesso a escolas apresenta um cenário diferente: nenhuma região da cidade apresenta melhorias no tempo de acesso. Diferentemente da distribuição de empregos, que tende a seguir critérios econômicos e mercadológicos, a distribuição de equipamentos públicos, entre eles escolas públicas, tende a ser planejada usando critérios de justiça social e equidade, sendo, portanto, mais equilibrada no território. Dessa forma, a construção da Linha Leste na parte central da cidade em nada afeta o tempo de acesso das pessoas que moram em locais afastados desse corredor. Não apenas isso, mas mesmo para as pessoas que moram perto do novo corredor a sua implementação não muda os níveis de acesso a escolas. Isto é um sinal que esta área possui uma boa oferta de escolas e já é bem servida de transporte público, mesmo antes da finalização da Linha Leste.
 
-<!-- Como é de se esperar, o aumento da frequência de linhas de metrô e trem resulta no aumento da acessibilidade média da população de São Paulo. Essas linhas, entretanto, não estão igualmente distribuídas no território: algumas pessoas têm acesso mais fácil às suas estações do que outras. Assim, a facilidade de acesso a elas, e consequentemente do acesso a oportunidades de emprego e educação, depende de onde cada pessoa reside - o que, por sua vez, está muito relacionado a características socioeconômicas como classe e raça. O gráfico abaixo explora a distribuição de empregos acessíveis e de tempo até a escola mais próxima por decil de renda: -->
+## Desigualdade de acessibilidade
 
-<!-- ```{r} -->
-<!-- sp_data[, decile := factor(decile)] -->
-<!-- access_to_jobs[sp_data, on = "id", decile := i.decile] -->
+Políticas que resultam em maiores ganhos de acessibilidade para determinados grupos populacionais em detrimento de outros, como é o caso observado nos níveis de acesso a empregos em Fortaleza, alteram também a distribuição da acessibilidade entre grupos socioeconômicos na cidade. Em outras palavras, políticas que trazem mais benefícios para certas pessoas do que para outras mudam a configuração da desigualdade de acessibilidade.
 
-<!-- ggplot(access_to_jobs[!is.na(decile)]) + -->
-<!--   geom_boxplot(aes(decile, jobs, weight = population, group = decile)) + -->
-<!--   facet_wrap(~ scenario, nrow = 1) -->
+Nós podemos entender como é a distribuição de níveis de acessibilidade entre grupos socioeconômicos usando um gráfico *box plot* e agrupando a nossa população por decis de renda. Separando a nossa visualização nos cenários antes e depois, compreendemos como a Linha Leste afeta os níveis de acessibilidade de decil de renda:
 
-<!-- time_to_schools[sp_data, on = "id", decile := i.decile] -->
+```{r}
+for_data[, decile := factor(decile)]
+access_to_jobs[for_data, on = "id", decile := i.decile]
 
-<!-- ggplot(time_to_schools[!is.na(decile)]) + -->
-<!--   geom_boxplot( -->
-<!--     aes(decile, treated_travel_time, weight = population, group = decile) -->
-<!--   ) + -->
-<!--   facet_wrap(~ scenario, nrow = 1) -->
-<!-- ``` -->
+ggplot(access_to_jobs[!is.na(decile)]) +
+  geom_boxplot(aes(decile, jobs, weight = population, group = decile)) +
+  facet_wrap(~ scenario, nrow = 1)
+```
 
+Os dois paineis mostram claramente que em Fortaleza as pessoas mais ricas detêm os maiores níveis de acessibilidade ao emprego. Em Fortaleza, assim como na maior parte das grandes cidades brasileiras, os mais ricos tendem a morar próximos às grandes concentrações de emprego da cidade, enquanto os mais pobres tendem a ocupar regiões periféricas. Consequentemente, os níveis de acessibilidade dos mais ricos costuma ser maiores do que os dos mais pobres - não apenas porque moram mais perto dos empregos, mas porque também, geralmente, regiões centrais costumam ser mais bem servidas de transporte público do que as periferias.
+
+Assim como no caso da distribuição espacial da acessibilidade, é muito difícil enxergar diferenças consideráveis nos níveis de acesso entre os cenários antes e depois. Lançando mão do mesmo recurso que fizemos anteriormente, podemos enxergar essas diferenças mais claramente visualizando a distribuição da diferença de acessibilidade entre cada cenário por decil de renda:
+
+```{r}
+access_to_jobs_diff[
+  for_data,
+  on = "id",
+  `:=`(
+    decile = i.decile,
+    population = i.population
+  )
+]
+
+ggplot(access_to_jobs_diff[!is.na(decile)]) +
+  geom_boxplot(aes(decile, difference, weight = population, group = decile))
+```
+
+Como podemos ver, os ganhos de acessibilidade se concentram principalmente entre as camadas médias da população, em especial os decis 5, 6 e 7. No entanto, o hexágono que mostrou maior aumento de acessibilidade aparece como *outlier* do 10º decil, apresentando um ganho de mais de 60000 empregos em relação ao cenário pré-implementação.
+
+Uma forma frequentemente empregada de resumir o panorama da desigualdade de uma determinado local é com o uso de uma medida de desigualdade. Esse tipo de medida busca resumir a distribuição dos níveis de acessibilidade entre grupos populacionais (aqui, decis de renda) em um único indicador que facilite a comunicação dos resultados e que possa ser usado, por exemplo, na elaboração de planos e metas. As medidas de desigualdade mais frequentemente utilizadas na literatura de acessibilidade são a Razão de Palma e o Índice de Gini.
+
+Neste exemplo, vamos calcular a Razão de Palma dos cenários antes e depois. Esta medida é o resultado da divisão da acessibilidade média dos 10% mais ricos pela acessibilidade média dos 40% mais pobres:
+
+$$P = \frac{\overline{A_{tp10}}}{\overline{A_{bt40}}}$$
+
+em que $P$ é a Razão de Palma, $\overline{A_{tp10}}$ é a acessibilidade média dos 10% mais ricos e $\overline{A_{bt40}}$ é a acessibilidade média dos 40% mais pobres.
+
+A principal vantagem da Razao de Palma frente ao Índice de Gini é a sua facilidade de comunicação e interpretação. Valores maiores do que 1 indicam um cenário em que os ricos possuem níveis médios do que os pobres, e valores menores do que 1 a situação inversa. Outra vantagem da Razão de Palma é que ela reflete claramente como a desigualdade varia entre dois grupos de especial interesse para nós: os mais privilegiados e os mais vulneráveis de uma população. O Índice de Gini, por sua vez, estima o quanto uma distribuição desvia de uma distribuição hipotética em que todos possuem o mesmo nível de acesso, mas nada diz sobre as condições socioeconômicos daqueles que detêm os maiores e menores níveis de acessibilidade. Se uma determinada política aumenta os níveis de acessibilidades de pessoas de alta renda que moram em locais de baixa acessibilidade, por exemplo, o Índice de Gini indicaria que houve uma diminuição da desigualdade, mesmo que nenhuma população vulnerável se beneficie dessa política. Esta dificilmente é, entretanto, uma política equitativa. Neste mesmo caso, a Razão de Palma indicaria um aumento da desigualdade, resultado mais alinhado às expectativas.
+
+Analisar a Razão de Palma nos cenários antes e depois, dessa forma, nos permite entender qual o impacto da Linha Leste na desigualdade de acesso a empregos em Fortaleza:
+
+```{r}
+richest_access <- access_to_jobs[
+  decile == 10,
+  .(access = weighted.mean(jobs, w = population)),
+  by = scenario
+]
+
+poorest_access <- access_to_jobs[
+  decile %in% 1:4,
+  .(access = weighted.mean(jobs, w = as.numeric(population))),
+  by = scenario
+]
+
+palma_ratio <- merge(
+  richest_access,
+  poorest_access,
+  by = "scenario",
+  suffixes = c("_richest", "_poorest")
+)
+palma_ratio[, palma := access_richest / access_poorest]
+
+ggplot(palma_ratio) + geom_col(aes(scenario, palma))
+```
+
+Como podemos ver, a Razão de Palma sofreu uma ligeira queda entre os cenários pré e pós implementação da Linha Leste. Consequentemente, podemos concluir que a expansão do metrô de Fortaleza seria uma política progressiva neste nosso cenário simplificado, que leva em consideração apenas a construção do novo corredor e ignora ajustes nas frequências de outros corredores e mudanças nas linhas de ônibus da cidade.
