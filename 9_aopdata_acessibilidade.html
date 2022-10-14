@@ -315,26 +315,26 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 
 </header><section id="download-dos-dados" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="download-dos-dados">
 <span class="header-section-number">9.1</span> Download dos dados</h2>
-<p>Finalmente, o pacote <code>aopdata</code> também permite baixar, para todas cidades incluídas no projeto, estimativas anuais de acesso a empregos, serviços saúde, educação e assistência social por modo de transporte</p>
-<p>Todos esses dados podem ser baixados com a função <code><a href="https://rdrr.io/pkg/aopdata/man/read_access.html">read_access()</a></code>, que funciona da mesma maneira que as funções <code><a href="https://rdrr.io/pkg/aopdata/man/read_population.html">read_population()</a></code> e <code><a href="https://rdrr.io/pkg/aopdata/man/read_landuse.html">read_landuse()</a></code> apresentadas nos capítulos anteriores. Aqui, no entanto, além de indicar a cidade (<code>city</code>) e o ano (<code>year</code>) de referência para baixar os dados, você também precisa informar qual o modo de transporte (<code>mode</code>) será baixado e se você quer estimativas de acessibilidade no horário de pico (<code>peak = TRUE</code>) ou fora-pico (<code>peak = TRUE</code>). Esses dados representam a acessibilidade mediana do período de pico (entre 6h e 8h) e fora-pico (entre 14h e 16h).</p>
-<p>Neste exemplo, abaixo, nós mostramos como baixar os dados de uso de acessibilidade urbana no ano de 2019 para São Paulo no período de pico. Nesse exemplo, nós baixamos tanto as estimativas de acessibilidade por automóvel quanto por transporte público, e empilhamos os dados num único <code>data.frame</code>. Note que essa função automaticamente já baixa também os dados de população e de uso do solo, automaticamente.</p>
+<p>Finalmente, o pacote <a href="https://github.com/ipeaGIT/aopdata">aopdata</a> também permite baixar, para todas cidades incluídas no projeto, estimativas anuais de acesso a empregos, serviços saúde, educação e assistência social por modo de transporte</p>
+<p>Todos esses dados podem ser baixados com a função <code><a href="https://rdrr.io/pkg/aopdata/man/read_access.html">read_access()</a></code>, que funciona da mesma maneira que as funções <code><a href="https://rdrr.io/pkg/aopdata/man/read_population.html">read_population()</a></code> e <code><a href="https://rdrr.io/pkg/aopdata/man/read_landuse.html">read_landuse()</a></code> apresentadas nos capítulos anteriores. Aqui, no entanto, além de indicar a cidade (<code>city</code>) e o ano (<code>year</code>) de referência para baixar os dados, você também precisa informar qual o modo de transporte (<code>mode</code>) será baixado e se você quer estimativas de acessibilidade no horário de pico (<code>peak = TRUE</code>) ou fora-pico (<code>peak = FALSE</code>). Esses dados representam a acessibilidade mediana entre 6h e 8h e entre 14h e 16h, respectivamente.</p>
+<p>Neste exemplo, abaixo, nós mostramos como baixar os dados de acessibilidade urbana no ano de 2019 para São Paulo no período de pico. Nesse exemplo, nós baixamos tanto as estimativas de acessibilidade por automóvel quanto por transporte público, e empilhamos os dados num único <code>data.frame</code>. Note que essa função também baixa os dados de população e de uso do solo automaticamente.</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ipeaGIT/aopdata">aopdata</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># download aop accessibility data</span></span>
 <span><span class="va">df_pt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/aopdata/man/read_access.html">read_access</a></span><span class="op">(</span></span>
-<span>  city<span class="op">=</span><span class="st">'São Paulo'</span>,</span>
-<span>  mode<span class="op">=</span><span class="st">'public_transport'</span>,</span>
-<span>  year<span class="op">=</span><span class="fl">2019</span>,</span>
+<span>  city <span class="op">=</span> <span class="st">"São Paulo"</span>,</span>
+<span>  mode <span class="op">=</span> <span class="st">"public_transport"</span>,</span>
+<span>  year <span class="op">=</span> <span class="fl">2019</span>,</span>
 <span>  peak <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  geometry <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  showProgress <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">df_car</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/aopdata/man/read_access.html">read_access</a></span><span class="op">(</span></span>
-<span>  city<span class="op">=</span><span class="st">'São Paulo'</span>,</span>
-<span>  mode<span class="op">=</span><span class="st">'car'</span>,</span>
-<span>  year<span class="op">=</span><span class="fl">2019</span>,</span>
+<span>  city <span class="op">=</span> <span class="st">"São Paulo"</span>,</span>
+<span>  mode <span class="op">=</span> <span class="st">"car"</span>,</span>
+<span>  year <span class="op">=</span> <span class="fl">2019</span>,</span>
 <span>  peak <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  geometry <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  showProgress <span class="op">=</span> <span class="cn">FALSE</span></span>
@@ -519,62 +519,61 @@ Geodetic CRS:  WGS 84
 6 POLYGON ((-46.63561 -23.712...</code></pre>
 </div>
 </div>
-<p>Os nomes das variáveis (colunas) com estimativas de acessibilidade também estão organizadas com códigos, como <code>CMAEF30</code>, <code>TMISB</code> ou <code>CMPPM60</code>. O nome das colunas com estimativas de acessibilidade são a junção de três componentes: 1) Tipo de indicador de acessibilidade 2) Tipo de oportunidade / pessoas 3) Tempo limite</p>
+<p>Os nomes das variáveis (colunas) com estimativas de acessibilidade também estão organizadas com códigos, como <code>CMAEF30</code>, <code>TMISB</code> ou <code>CMPPM60</code>. O nome das colunas com estimativas de acessibilidade são a junção de três componentes: o tipo de indicador de acessibilidade; o tipo de oportunidade / pessoas; e o tempo limite.</p>
 <ol type="1">
-<li>O <strong>tipo de indicador</strong> de acessibilidade é indicado pelas primeiras 3 letras. O projeto AOP atualmente inclui três tipos de indicadores:</li>
-</ol>
+<li>
+<p>O <strong>tipo de indicador</strong> de acessibilidade é indicado pelas primeiras 3 letras. O projeto AOP atualmente inclui três tipos de indicadores:</p>
 <ul>
 <li>
-<code>CMA</code> Indicador de acessibilidade cumulativo ativo</li>
+<code>CMA</code> - Indicador de acessibilidade cumulativo ativo</li>
 <li>
-<code>CMP</code> Indicador de acessibilidade cumulativo passivo<br>
+<code>CMP</code> - Indicador de acessibilidade cumulativo passivo</li>
+<li>
+<code>TMI</code> - Indicador de tempo mínimo até oportunidade mais próxima</li>
+</ul>
 </li>
 <li>
-<code>TMI</code> Indicador de tempo mínimo até oportunidade mais próxima</li>
-</ul>
-<ol start="2" type="1">
-<li>O <strong>tipo de atividade</strong> é indicado pelas letras seguintes, no meio do nome da variável. O projeto AOP atualmente inclui diversos tipos de atividades:</li>
-</ol>
+<p>O <strong>tipo de atividade</strong> é indicado pelas letras seguintes, no meio do nome da variável. O projeto AOP atualmente inclui diversos tipos de atividades:</p>
 <ul>
 <li>
-<code>TT</code> Todos empregos</li>
+<code>TT</code> - Todos empregos</li>
 <li>
-<code>TB</code> Empregos de baixa escolaridade</li>
+<code>TB</code> - Empregos de baixa escolaridade</li>
 <li>
-<code>TM</code> Empregos de média escolaridade</li>
+<code>TM</code> - Empregos de média escolaridade</li>
 <li>
-<code>TA</code> Empregos de alta escolaridade</li>
+<code>TA</code> - Empregos de alta escolaridade</li>
 <li>
-<code>ST</code> Todos estabelecimentos de saúde</li>
+<code>ST</code> - Todos estabelecimentos de saúde</li>
 <li>
-<code>SB</code> Estabelecimentos de saúde de baixa complexidade</li>
+<code>SB</code> - Estabelecimentos de saúde de baixa complexidade</li>
 <li>
-<code>SM</code> Estabelecimentos de saúde de média complexidade</li>
+<code>SM</code> - Estabelecimentos de saúde de média complexidade</li>
 <li>
-<code>SA</code> Estabelecimentos de saúde de alta complexidade</li>
+<code>SA</code> - Estabelecimentos de saúde de alta complexidade</li>
 <li>… e assim por diante.</li>
 </ul>
 <p>No caso do indicador de acessibilidade passiva (<code>CMP</code>), as letras do meio do nome da variável indicam qual o grupo populacional de referência.</p>
 <ul>
 <li>
-<code>PT</code> População total</li>
+<code>PT</code> - População total</li>
 <li>
-<code>PH</code> População de homens</li>
+<code>PH</code> - População de homens</li>
 <li>
-<code>PM</code> População de mulheres</li>
+<code>PM</code> - População de mulheres</li>
 <li>
-<code>PB</code> População branca</li>
+<code>PB</code> - População branca</li>
 <li>
-<code>PN</code> População negra</li>
+<code>PN</code> - População negra</li>
 <li>
-<code>P1924I</code> População de 19 a 24 anos de idade</li>
+<code>P1924I</code> - População de 19 a 24 anos de idade</li>
 <li>
-<code>P2539I</code> População de 25 a 39 anos de idade</li>
+<code>P2539I</code> - População de 25 a 39 anos de idade</li>
 </ul>
-<ol start="3" type="1">
-<li>O <strong>tempo limite de viagem</strong> é indicado pelos números no final do nome da variável. Esses números somente se aplicam para os indicadores de acessibildade cumulativa ativa (<code>CMA</code>) e passiva (<code>CMP</code>).</li>
+</li>
+<li><p>O <strong>tempo limite de viagem</strong> é indicado pelos números no final do nome da variável. Esses números somente se aplicam para os indicadores de acessibildade cumulativa ativa (<code>CMA</code>) e passiva (<code>CMP</code>).</p></li>
 </ol>
-<strong>Exemplos:</strong>
+<p><strong>Exemplos:</strong></p>
 <ul>
 <li>
 <span style="color: red;">CMA</span><span style="color: black;">EF</span><span style="color: blue;">30</span>: Número de escolas de ensino fundamental acessíveis em até 30 minutos
@@ -586,70 +585,75 @@ Geodetic CRS:  WGS 84
 <span style="color: red;">CMP</span><span style="color: black;">PM</span><span style="color: blue;">60</span>: Quantidade de mulheres que conseguem acessar determinado hexágono em até 60 minutos
 </li>
 </ul>
-<p>Lembre-se, a <a href="https://ipeagit.github.io/aopdata/articles/data_dic_pt.html">descrição completa do dicionário de variáveis está disponível no site to pacote aopdata</a>.</p>
+<p>Lembre-se, a descrição completa do dicionário de variáveis está disponível no <a href="https://ipeagit.github.io/aopdata/articles/data_dic_pt.html">site to pacote <code>aopdata</code></a>.</p>
 <p>A seguir, nós mostramos alguns exemplos de como visualizar essas estimativas de acessibilidade.</p>
 </section><section id="mapa-do-tempo-para-acessar-o-hospital-mais-próximo" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="mapa-do-tempo-para-acessar-o-hospital-mais-próximo">
 <span class="header-section-number">9.2</span> Mapa do tempo para acessar o hospital mais próximo</h2>
 <p>Neste exemplo, nós vamos comparar o nível de acessibilidade até hospitais entre modos automóvel <em>vs</em> transporte público. Para analisar qual o tempo mínimo de viagem (<code>TMI</code>) até um hospital de alta complexidade (<code>SA</code>), nós precisamos analisar a variável <code>TMISA</code>. Com o código abaixo, nós carregamos as bibliotecas para manipulação e visualização de dados, e visualizamos a distribuição espacial dos valores de <code>TMISA</code> para ambos modos de transporte.</p>
 <p>Note, no entanto, que os tempos de viagem por transporte público costumam ser muito mais longos do que por automóvel. Então para facilitar a visualização dos resultados, nós truncamos a distribuição dos valores de <code>TMISA</code> em 60 minutos ou mais.</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># load libraries</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com">data.table</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://scales.r-lib.org">scales</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
 <span></span>
-<span></span>
 <span><span class="co"># truncate max values to 60 min.</span></span>
 <span><span class="va">df</span><span class="op">$</span><span class="va">TMISA</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">TMISA</span> <span class="op">&gt;</span> <span class="fl">60</span>, <span class="fl">60</span>, <span class="va">df</span><span class="op">$</span><span class="va">TMISA</span><span class="op">)</span> </span>
 <span></span>
-<span><span class="co"># plot</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">df</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">mode</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="va">TMISA</span><span class="op">)</span>, color<span class="op">=</span><span class="cn">NA</span>, alpha<span class="op">=</span><span class="fl">.9</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span>option <span class="op">=</span> <span class="st">'cividis'</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>,</span>
-<span>                       breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">60</span>,<span class="fl">10</span><span class="op">)</span>,</span>
-<span>                       labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">50</span>,<span class="fl">10</span><span class="op">)</span>, <span class="st">"60+"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title<span class="op">=</span><span class="st">'Tempo de viagem até hospital de alta complex. mais próximo'</span>, </span>
-<span>       subtitle <span class="op">=</span> <span class="st">'São Paulo'</span>, fill<span class="op">=</span><span class="st">"Tempo em\nminutos"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span><span class="op">(</span><span class="va">.</span><span class="op">~</span><span class="va">mode</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">df</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">mode</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">TMISA</span><span class="op">)</span>, color <span class="op">=</span> <span class="cn">NA</span>, alpha <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span></span>
+<span>    option <span class="op">=</span> <span class="st">"cividis"</span>,</span>
+<span>    direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>,</span>
+<span>    breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">60</span>, <span class="fl">10</span><span class="op">)</span>,</span>
+<span>    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">50</span>, <span class="fl">10</span><span class="op">)</span>, <span class="st">"60+"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Tempo de viagem até hospital de alta complex. mais próximo"</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="st">"São Paulo"</span>,</span>
+<span>    fill <span class="op">=</span> <span class="st">"Tempo em\nminutos"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span><span class="op">(</span><span class="va">.</span> <span class="op">~</span> <span class="va">mode</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="9_aopdata_acessibilidade_files/figure-html/plot%20TMISA%20by%20car%20and%20pt-1.png" class="img-fluid" width="672"></p>
+<p><img src="9_aopdata_acessibilidade_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section><section id="mapa-da-quantidade-de-oportunidades-acessíveis" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="mapa-da-quantidade-de-oportunidades-acessíveis">
 <span class="header-section-number">9.3</span> Mapa da quantidade de oportunidades acessíveis</h2>
-<p>Uma vez que os dados já foram baixados do <code>aopdata</code>, é muito simples comparar por exemplo a quantidade de oportunidades acessíveis em diferentes tempos de viagem. O código abaixo ilustra como visualizar num mapa o número de empregos acessíveis em até 60 e 90 minutos de viagem por transporte público, e como colocar esses mapas lado a lado para comparação.</p>
+<p>Uma vez que os dados já foram baixados do <a href="https://github.com/ipeaGIT/aopdata">aopdata</a>, é muito simples comparar por exemplo a quantidade de oportunidades acessíveis em diferentes tempos de viagem. O código abaixo ilustra como visualizar num mapa o número de empregos acessíveis em até 60 e 90 minutos de viagem por transporte público, e como colocar esses mapas lado a lado para comparação.</p>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># limits for legend scale</span></span>
-<span><span class="va">value_limits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">df_pt</span><span class="op">$</span><span class="va">CMATT90</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">/</span><span class="fl">1000</span><span class="op">)</span></span>
+<span><span class="va">value_limits</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">df_pt</span><span class="op">$</span><span class="va">CMATT90</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span> <span class="op">/</span> <span class="fl">1000</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># create maps</span></span>
-<span><span class="va">fig60</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>          <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">df_pt</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">mode</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="va">CMATT60</span><span class="op">/</span><span class="fl">1000</span><span class="op">)</span>, color<span class="op">=</span><span class="cn">NA</span>, alpha<span class="op">=</span><span class="fl">.9</span><span class="op">)</span> <span class="op">+</span></span>
-<span>          <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span>option <span class="op">=</span> <span class="st">'inferno'</span>, limits <span class="op">=</span> <span class="va">value_limits</span><span class="op">)</span> <span class="op">+</span></span>
-<span>          <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>subtitle <span class="op">=</span> <span class="st">'em até 60 min.'</span>, fill<span class="op">=</span><span class="st">"Empregos"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>          <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">fig60</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">df_pt</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">mode</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">CMATT60</span> <span class="op">/</span> <span class="fl">1000</span><span class="op">)</span>, color <span class="op">=</span> <span class="cn">NA</span>, alpha <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span>option <span class="op">=</span> <span class="st">"inferno"</span>, limits <span class="op">=</span> <span class="va">value_limits</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>subtitle <span class="op">=</span> <span class="st">"em até 60 min."</span>, fill <span class="op">=</span> <span class="st">"Empregos"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">fig90</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>          <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">df_pt</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">mode</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill<span class="op">=</span><span class="va">CMATT90</span><span class="op">/</span><span class="fl">1000</span><span class="op">)</span>, color<span class="op">=</span><span class="cn">NA</span>, alpha<span class="op">=</span><span class="fl">.9</span><span class="op">)</span> <span class="op">+</span></span>
-<span>          <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span>option <span class="op">=</span> <span class="st">'inferno'</span>, limits <span class="op">=</span> <span class="va">value_limits</span><span class="op">)</span> <span class="op">+</span></span>
-<span>          <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>subtitle <span class="op">=</span> <span class="st">'em até 90 min.'</span>, fill<span class="op">=</span><span class="st">"Empregos"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>          <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">fig90</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">df_pt</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">mode</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">CMATT90</span> <span class="op">/</span> <span class="fl">1000</span><span class="op">)</span>, color <span class="op">=</span> <span class="cn">NA</span>, alpha <span class="op">=</span> <span class="fl">0.9</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span>option <span class="op">=</span> <span class="st">"inferno"</span>, limits <span class="op">=</span> <span class="va">value_limits</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>subtitle <span class="op">=</span> <span class="st">"em até 90 min."</span>, fill <span class="op">=</span> <span class="st">"Empregos"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># plot figure</span></span>
-<span><span class="va">fig60</span> <span class="op">+</span> <span class="va">fig90</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html">plot_layout</a></span><span class="op">(</span>guides <span class="op">=</span> <span class="st">'collect'</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">'Quantidade de empregos acessíveis por transporte público'</span>,</span>
-<span>                  subtitle <span class="op">=</span> <span class="st">"São Paulo"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">fig60</span> <span class="op">+</span></span>
+<span>  <span class="va">fig90</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html">plot_layout</a></span><span class="op">(</span>guides <span class="op">=</span> <span class="st">"collect"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_annotation.html">plot_annotation</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Quantidade de empregos acessíveis por transporte público"</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="st">"São Paulo"</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="9_aopdata_acessibilidade_files/figure-html/map%20CMATT60%20vs%20CMATT90-1.png" class="img-fluid" width="672"></p>
+<p><img src="9_aopdata_acessibilidade_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section><section id="desigualdades-de-acesso-a-oportunidades" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="desigualdades-de-acesso-a-oportunidades">
 <span class="header-section-number">9.4</span> Desigualdades de acesso a oportunidades</h2>
-<p>Existem diversas maneiras de se analisar quão desiguais são as condições de acesso a oportunidades a partir dos dados do <code>aopdata</code>. Nós apresentamos nesta subseção três exemplos de como esse tipo de análise pode ser realizada.</p>
+<p>Existem diversas maneiras de se analisar quão desiguais são as condições de acesso a oportunidades a partir dos dados do <a href="https://github.com/ipeaGIT/aopdata">aopdata</a>. Nós apresentamos nesta subseção três exemplos de como esse tipo de análise pode ser realizado.</p>
 <p><strong>Desigualdade no tempo de acesso <code>TMI</code></strong></p>
 <p>Neste primeiro exemplo, nós vamos comparar qual o tempo médio de viagem até o hospital mais próximo para pessoas de diferentes níveis de renda. Para isso, o código abaixo calcula o valor médio de <code>TMISA</code> ponderada pela população em cada hexágono. Essa ponderação é necessária porque o número de hexágonos pode variar muito entre hexágonos.</p>
 <p>Antes disso, cabe observar que alguns hexágonos da cidade não conseguem acessar nenhum hospital em até 2h de viagem. Em casos como esse, o valor das variáveis <code>TMI__</code> é infinito (<code>Inf</code>). Para lidar com esses casos, nós substituímos abaixo todos valores <code>Inf</code> por 120 minutos.</p>
@@ -662,52 +666,83 @@ Geodetic CRS:  WGS 84
 <span><span class="va">dt</span><span class="op">[</span>, <span class="va">TMISA</span> <span class="op">:=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html">fifelse</a></span><span class="op">(</span><span class="va">TMISA</span><span class="op">==</span><span class="cn">Inf</span>, <span class="fl">120</span>, <span class="va">TMISA</span><span class="op">)</span><span class="op">]</span></span>
 <span></span>
 <span><span class="co"># calculate average travel time by income</span></span>
-<span><span class="va">temp</span> <span class="op">&lt;-</span> <span class="va">dt</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span>average <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">TMISA</span>, w<span class="op">=</span><span class="va">P001</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span>, by<span class="op">=</span><span class="va">R003</span><span class="op">]</span></span>
+<span><span class="va">temp</span> <span class="op">&lt;-</span> <span class="va">dt</span><span class="op">[</span></span>
+<span>  ,</span>
+<span>  <span class="fu">.</span><span class="op">(</span>average <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">TMISA</span>, w <span class="op">=</span> <span class="va">P001</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  by <span class="op">=</span> <span class="va">R003</span></span>
+<span><span class="op">]</span></span>
 <span><span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">temp</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y<span class="op">=</span><span class="va">average</span>, x<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">R003</span><span class="op">)</span><span class="op">)</span>, fill<span class="op">=</span><span class="st">'#2c9e9e'</span>, color<span class="op">=</span><span class="cn">NA</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete</a></span><span class="op">(</span>labels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"D1\n+Pobres"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'D'</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span>, <span class="st">"D10\n+Ricos"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">'Média de tempo de viagem até o hospital mais proximo'</span>,</span>
-<span>       subtitle <span class="op">=</span> <span class="st">'por transporte público em São Paulo'</span>,</span>
-<span>       x<span class="op">=</span><span class="st">'Decil de renda'</span>, y<span class="op">=</span><span class="st">'Tempo de viagem\nem min.'</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">temp</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">average</span>, x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">R003</span><span class="op">)</span><span class="op">)</span>, fill <span class="op">=</span> <span class="st">"#2c9e9e"</span>, color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"D1\n+Pobres"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span>, <span class="st">"D10\n+Ricos"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Média de tempo de viagem até o hospital mais proximo"</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="st">"por transporte público em São Paulo"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Decil de renda"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Tempo de viagem\nem min."</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="9_aopdata_acessibilidade_files/figure-html/inequality%20TMISA-1.png" class="img-fluid" width="672"></p>
+<p><img src="9_aopdata_acessibilidade_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p><strong>Desigualdade do número de oportunidades acessíveis <code>CMA</code></strong></p>
 <p>Outra maneira de examinar a desigualdade de acesso a oportunidades é comparar a quantidade de oportunidades acessíveis por diferentes grupos populacionais considerando-se um mesmo modo de transporte e tempo de viagem. Nesse caso, nós analisamos o Indicador de acessibilidade cumulativo ativo (<code>CMA</code>).</p>
 <p>Neste exemplo abaixo, nós utilizamos <em>box plots</em> para comparar a quantidade de empregos acessíveis por transporte público em até 30 minutos de viagem.</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">dt</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">R003</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>               <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">R003</span><span class="op">)</span>, y<span class="op">=</span><span class="va">CMATT60</span><span class="op">/</span><span class="fl">1000</span>, color<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">R003</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_color_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">'RdBu'</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title<span class="op">=</span><span class="st">'Distribução do número de empregos acessíveis em até 30 min.'</span>, color<span class="op">=</span><span class="st">"Decil\nde renda"</span>,</span>
-<span>       subtitle<span class="op">=</span><span class="st">'por transporte público, São Paulo'</span>,</span>
-<span>       x<span class="op">=</span><span class="st">'Decil de renda'</span>, y<span class="op">=</span><span class="st">"N. de empregos acessíveis\n(em milhares)"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete</a></span><span class="op">(</span>labels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"D1\n+Pobres"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'D'</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span>, <span class="st">"D10\n+Ricos"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">dt</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">R003</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">R003</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">CMATT60</span> <span class="op">/</span> <span class="fl">1000</span>, color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">R003</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_color_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"RdBu"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Distribução do número de empregos acessíveis em até 30 min."</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">"Decil\nde renda"</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="st">"por transporte público, São Paulo"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Decil de renda"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"N. de empregos acessíveis\n(em milhares)"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"D1\n+Pobres"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span>, <span class="st">"D10\n+Ricos"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="9_aopdata_acessibilidade_files/figure-html/fig%20inequality%20CMATT30%20by%20income-1.png" class="img-fluid" width="672"></p>
+<p><img src="9_aopdata_acessibilidade_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Também é possível comparar como diferentes modos de transporte possibilitam diferentes níveis de acessibilidade, e como essa diferença pode variar muito entre cidades. Nesse exemplo, abaixo, nós vamos comparar a quantidade de empregos acessíveis em até 30 minutos de viagem a pé e de carro. O primeiro passo é baixar os dados de acessibilidade a pé e por automóvel para todas as cidades.</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># download data</span></span>
-<span><span class="va">df_car</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/aopdata/man/read_access.html">read_access</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">'all'</span>, mode<span class="op">=</span><span class="st">'car'</span>, year <span class="op">=</span> <span class="fl">2019</span>, showProgress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="va">df_walk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/aopdata/man/read_access.html">read_access</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">'all'</span>, mode<span class="op">=</span><span class="st">'walk'</span>, year <span class="op">=</span> <span class="fl">2019</span>, showProgress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">df_car</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/aopdata/man/read_access.html">read_access</a></span><span class="op">(</span></span>
+<span>  city <span class="op">=</span> <span class="st">"all"</span>,</span>
+<span>  mode <span class="op">=</span> <span class="st">"car"</span>,</span>
+<span>  year <span class="op">=</span> <span class="fl">2019</span>,</span>
+<span>  showProgress <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">df_walk</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/aopdata/man/read_access.html">read_access</a></span><span class="op">(</span></span>
+<span>  city <span class="op">=</span> <span class="st">"all"</span>,</span>
+<span>  mode <span class="op">=</span> <span class="st">"walk"</span>,</span>
+<span>  year <span class="op">=</span> <span class="fl">2019</span>,</span>
+<span>  showProgress <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>O próximo passo é calcular para cada cidade a média ponderada do número de empregos acessíveis em até 30 minutos (<code>CMATT30</code>) para cada um dos modos de transporte. Com esses resultados prontos para cada modo, nós juntamos essas estimativas num único <code>data.frame</code> e calculamos a razão da acessibilidade por carro dividida pela acessibilidade à pé.</p>
 <div class="cell">
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># calculate the average number of jobs accessible in 30min</span></span>
-<span><span class="va">df_car2</span> <span class="op">&lt;-</span> <span class="va">df_car</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span>access_car <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span><span class="op">(</span><span class="va">CMATT30</span>, w <span class="op">=</span> <span class="va">P001</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span>, by<span class="op">=</span><span class="va">name_muni</span><span class="op">]</span></span>
-<span><span class="va">df_walk2</span> <span class="op">&lt;-</span> <span class="va">df_walk</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span>access_walk <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span><span class="op">(</span><span class="va">CMATT30</span>, w <span class="op">=</span> <span class="va">P001</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span>, by<span class="op">=</span><span class="va">name_muni</span><span class="op">]</span></span>
+<span><span class="va">df_car2</span> <span class="op">&lt;-</span> <span class="va">df_car</span><span class="op">[</span></span>
+<span>  ,</span>
+<span>  <span class="fu">.</span><span class="op">(</span>access_car <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span><span class="op">(</span><span class="va">CMATT30</span>, w <span class="op">=</span> <span class="va">P001</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  by <span class="op">=</span> <span class="va">name_muni</span></span>
+<span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">df_walk2</span> <span class="op">&lt;-</span> <span class="va">df_walk</span><span class="op">[</span></span>
+<span>  ,</span>
+<span>  <span class="fu">.</span><span class="op">(</span>access_walk <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span><span class="op">(</span><span class="va">CMATT30</span>, w <span class="op">=</span> <span class="va">P001</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  by <span class="op">=</span> <span class="va">name_muni</span></span>
+<span><span class="op">]</span></span>
 <span></span>
 <span><span class="co"># merge and get the ratio between walking and driving access</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span><span class="op">(</span><span class="va">df_car2</span>, <span class="va">df_walk2</span><span class="op">)</span></span>
-<span><span class="va">df</span><span class="op">[</span>, <span class="va">ratio</span> <span class="op">:=</span> <span class="va">access_car</span><span class="op">/</span><span class="va">access_walk</span><span class="op">]</span></span>
+<span><span class="va">df</span><span class="op">[</span>, <span class="va">ratio</span> <span class="op">:=</span> <span class="va">access_car</span> <span class="op">/</span> <span class="va">access_walk</span><span class="op">]</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -722,16 +757,18 @@ Geodetic CRS:  WGS 84
 </div>
 <p>Pronto, agora é só visualizar os resultados. Como esperado, a figura abaixo mostra que é possível acessar muito mais empregos em 30 min. por automóvel do que em caminhada. No entanto, essa diferença varia muito entre cidades. Em São Paulo e em Brasília, 30 minutos de viagem por automóvel permite acessar, em média, um número de empregos 54 vezes maior do que a pé. Em Belém, onde observamos a menor diferença, o automóvel ainda permite acessar 17 vezes mais empregos do que a caminhada.</p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># plot</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">ratio</span>, y<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">name_muni</span>, <span class="va">ratio</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat<span class="op">=</span><span class="st">'identity'</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">ratio</span><span class="op">+</span><span class="fl">6</span> , label<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">ratio</span><span class="op">)</span>,<span class="st">'x'</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">'Diferença da quantidade de empregos acessiveis por\nautomóvel vs a pé'</span>,</span>
-<span>       subtitle<span class="op">=</span> <span class="st">'em até 30 min. de viagem'</span>,</span>
-<span>       y<span class="op">=</span><span class="st">''</span>, x<span class="op">=</span><span class="st">'Número de vezes'</span><span class="op">)</span> <span class="op">+</span></span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">ratio</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">name_muni</span>, <span class="va">ratio</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"identity"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">ratio</span> <span class="op">+</span> <span class="fl">6</span> , label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">ratio</span><span class="op">)</span>, <span class="st">"x"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Diferença da quantidade de empregos acessiveis por\nautomóvel vs a pé"</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="st">"em até 30 min. de viagem"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">""</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Número de vezes"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span><span class="op">(</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="9_aopdata_acessibilidade_files/figure-html/fig%20inequality%20CMATT30%20by%20mode-1.png" class="img-fluid" width="672"></p>
+<p><img src="9_aopdata_acessibilidade_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 
