@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.1.251">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="Rafael H. M. Pereira, Daniel Herszenhut">
-<meta name="dcterms.date" content="2022-10-13">
-
+<meta name="dcterms.date" content="2022-10-14">
 <title>Introdução à acessibilidade urbana</title>
 <style>
 code{white-space: pre-wrap;}
@@ -43,7 +40,6 @@ div.csl-indent {
 }
 </style>
 
-
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -60,8 +56,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -79,18 +74,13 @@ div.csl-indent {
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script>
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YVERJQF9PJ"></script>
-
-<script type="text/javascript">
+}</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YVERJQF9PJ"></script><script type="text/javascript">
 
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </script>
-
-
 <meta property="og:title" content="Introdução à acessibilidade urbana">
 <meta property="og:description" content="um guia prático em R">
 <meta property="og:image" content="https://ipeagit.github.io/aop_curso/images/cover.png">
@@ -104,45 +94,38 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <meta name="twitter:image-width" content="558">
 <meta name="twitter:card" content="summary_large_image">
 </head>
-
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
       <h1 class="quarto-secondary-nav-title">Introdução à acessibilidade urbana</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Introdução à acessibilidade urbana</a> 
         <div class="sidebar-tools-main">
     <a href="https://github.com/ipeaGIT/aop_curso" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
     <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
     <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+<li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
             <i class="bi bi-bi-twitter pe-1"></i>
           Twitter
           </a>
         </li>
         <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
             <i class="bi bi-bi-facebook pe-1"></i>
           Facebook
           </a>
         </li>
         <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
             <i class="bi bi-bi-linkedin pe-1"></i>
           LinkedIn
           </a>
@@ -158,7 +141,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link active">Apresentação</a>
   </div>
@@ -170,8 +153,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./1_conceito.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">O que é acessibilidade?</span></a>
   </div>
@@ -182,7 +165,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./s2_calculo.html" class="sidebar-item-text sidebar-link">SEÇÃO 2: Calculando acessibilidade</a>
@@ -190,14 +173,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./3_calculando_acesso.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculando acessibilidade urbana em R</span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./s3_dados_tp.html" class="sidebar-item-text sidebar-link">SEÇÃO 3: Dados de transporte público</a>
@@ -205,8 +188,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./4_dados_gtfs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Dados GTFS</span></a>
   </div>
@@ -217,7 +200,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./s4_avaliacao_impacto.html" class="sidebar-item-text sidebar-link">SEÇÃO 4: Avaliação de impacto</a>
@@ -225,14 +208,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./6_cenarios_transporte.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Comparando a acessibilidade entre dois cenários de transporte</span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./s5_dados_aop.html" class="sidebar-item-text sidebar-link">SEÇÃO 5: Dados do Projeto AOP</a>
@@ -240,8 +223,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./7_aopdata_populacao.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Dados de população e socioeconômicos</span></a>
   </div>
@@ -257,37 +240,32 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">Referências bibliográficas</a>
   </div>
 </li>
     </ul>
-    </div>
-</nav>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#apresentação" id="toc-apresentação" class="nav-link active" data-scroll-target="#apresentação">Apresentação</a>
+<li>
+<a href="#apresenta%C3%A7%C3%A3o" id="toc-apresentação" class="nav-link active" data-scroll-target="#apresenta%C3%A7%C3%A3o">Apresentação</a>
   <ul class="collapse">
-  <li><a href="#organização-do-livro" id="toc-organização-do-livro" class="nav-link" data-scroll-target="#organização-do-livro">Organização do livro</a></li>
-  <li><a href="#código-reproduzível" id="toc-código-reproduzível" class="nav-link" data-scroll-target="#código-reproduzível">Código reproduzível</a></li>
-  <li><a href="#licença-de-uso" id="toc-licença-de-uso" class="nav-link" data-scroll-target="#licença-de-uso">Licença de uso</a></li>
+<li><a href="#organiza%C3%A7%C3%A3o-do-livro" id="toc-organização-do-livro" class="nav-link" data-scroll-target="#organiza%C3%A7%C3%A3o-do-livro">Organização do livro</a></li>
+  <li><a href="#c%C3%B3digo-reproduz%C3%ADvel" id="toc-código-reproduzível" class="nav-link" data-scroll-target="#c%C3%B3digo-reproduz%C3%ADvel">Código reproduzível</a></li>
+  <li><a href="#licen%C3%A7a-de-uso" id="toc-licença-de-uso" class="nav-link" data-scroll-target="#licen%C3%A7a-de-uso">Licença de uso</a></li>
   <li><a href="#como-citar-o-livro" id="toc-como-citar-o-livro" class="nav-link" data-scroll-target="#como-citar-o-livro">Como citar o livro</a></li>
   <li><a href="#agradecimentos" id="toc-agradecimentos" class="nav-link" data-scroll-target="#agradecimentos">Agradecimentos</a></li>
-  </ul></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/index.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
+</li>
+  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/index.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title d-none d-lg-block">Introdução à acessibilidade urbana</h1>
 <p class="subtitle lead">um guia prático em R</p>
 </div>
@@ -306,7 +284,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 13, 2022</p>
+      <p class="date">October 14, 2022</p>
     </div>
   </div>
     
@@ -314,27 +292,28 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   
 
 </header>
-
-
-<section id="apresentação" class="level1 unnumbered">
-<p><img src="images/cover.png" title="Introdução à acessibilidade urbana" class="quarto-cover-image img-fluid"></p><h1 class="unnumbered">Apresentação</h1>
+<section id="apresentação" class="level1 unnumbered"><h1 class="unnumbered">Apresentação</h1><p><img src="images/cover.png" title="Introdução à acessibilidade urbana" class="quarto-cover-image img-fluid"></p>
 <p>O objetivo deste livro é apresentar uma introdução sobre os conceitos e habilidades práticas necessárias para fazer estudos e avaliações de impacto sobre acessibilidade urbana. O livro começa dando uma visão geral sobre o conceito e indicadores de acessibilidade. Em seguida, ensina como analisar dados espaciais e de redes de transporte para se calcular estimativas de acessibilidade por diferentes modos de transporte e como visualizar esses resultados em mapas e gráficos. O livro também busca familiarizar o leitor com dados de redes de transporte público em formato GTFS e ensina como manipular e visualizar esse tipo de dado. Num dos seus principais capítulos, o livro ensina ainda como os dados e metodologia apresentados nos capítulos anteriores podem ser utilizados para avaliar o impacto de projetos de transporte sobre as condições de acesso a oportunidades da população. Por fim, o livro ensina como baixar, analisar e visualizar estimativas de acessibilidade já calculadas para cidades brasileiras e disponibilizadas pela equipe do Projeto Acesso a Oportunidades (AOP) do Ipea.</p>
 <p>O tema da acessibilidade tem recebido cada vez mais atenção de agências de transporte, instituições de financiamento, tomadores de decisão e pesquisadores na área de planejamento urbano e de transportes <span class="citation" data-cites="papa2015accessibility boisjoly2017how">(<a href="references.html#ref-papa2015accessibility" role="doc-biblioref">Papa et al. 2015</a>; <a href="references.html#ref-boisjoly2017how" role="doc-biblioref">Boisjoly and El-Geneidy 2017</a>)</span>. Com isso, existe um crescente número de artigos científicos <span class="citation" data-cites="miller2018accessibility van2021transport">(<a href="references.html#ref-miller2018accessibility" role="doc-biblioref">Miller 2018</a>; <a href="references.html#ref-van2021transport" role="doc-biblioref"><strong>van2021transport?</strong></a>)</span> e livros <span class="citation" data-cites="levine2019mobility levinson2020transport">(<a href="references.html#ref-levine2019mobility" role="doc-biblioref"><strong>levine2019mobility?</strong></a>; <a href="references.html#ref-levinson2020transport" role="doc-biblioref">Levinson and King 2020</a>)</span> que trazem rico material para discussão e aprofundamento sobre questões relacionadas à acessibilidade urbana. No entanto, não existem na literatura livros ou artigos que sirvam simultaneamente de material didático introdutório sobre o tema e de manual prático de metodologia e análise de dados. A ausência desse tipo de material explica, ao menos em parte, porque diversas agências de transporte e analistas ainda enfrentam desafios em incorporar questões e indicadores de acessibilidade no seu dia-a-dia de planejamento e pesquisa <span class="citation" data-cites="silva2017accessibility buttner2021accessibility">(<a href="references.html#ref-silva2017accessibility" role="doc-biblioref"><strong>silva2017accessibility?</strong></a>; <a href="references.html#ref-buttner2021accessibility" role="doc-biblioref"><strong>buttner2021accessibility?</strong></a>)</span>.</p>
 <p>Este livro foi escrito pensando nas necessidades de trabalho de gestores públicos, analistas, alunos e pesquisadores de planejamento e transporte urbano. Por isso, o livro tem caráter prático. Todo material do livro é apresentado com exemplos reproduzíveis e dados abertos utilizando-se programação em R. O objetivo é equipar seus leitores com os conceitos fundamentais e as ferramentas de análise e processamento de dados necessárias para realizar análises de acessibilidade urbana e conduzir avaliações do impacto de projetos e políticas de transporte a partir de dados e programas de código abertos.</p>
-<section id="organização-do-livro" class="level2">
-<h2 class="anchored" data-anchor-id="organização-do-livro">Organização do livro</h2>
+<section id="organização-do-livro" class="level2"><h2 class="anchored" data-anchor-id="organização-do-livro">Organização do livro</h2>
 <p>Este livro está dividido em 5 seções:</p>
 <ol type="1">
 <li>Seção 1: A primeira seção apresenta o conceito de acessibilidade urbana, esclarece a diferença entre acessibilidade e mobilidade urbana, e apresenta os principais indicadores usados para medir a acessibilidade urbana.</li>
-<li>Seção 2: A segunda seção ensina como calcular estimativas de acessibilidade urbana em R usando os pacotes <code>{r5r}</code> e <code>{accessibility}</code> a partir de dados públicos abertos.</li>
-<li>Seção 3: A terceira seção apresenta o que é a especificação GTFS de dados de transporte público, e mostra como trabalhar e analisar dados de GTFS usando o pacote <code>{gtfstools}</code>.</li>
+<li>Seção 2: A segunda seção ensina como calcular estimativas de acessibilidade urbana em R usando os pacotes <a href="https://github.com/ipeaGIT/r5r">r5r</a> e <a href="https://github.com/ipeaGIT/accessibility">accessibility</a> a partir de dados públicos abertos.</li>
+<li>Seção 3: A terceira seção apresenta o que é a especificação GTFS de dados de transporte público, e mostra como trabalhar e analisar dados de GTFS usando o pacote <a href="https://ipeagit.github.io/gtfstools/">gtfstools</a>.</li>
 <li>Seção 4: A quarta seção mostra como o conhecimento dos capítulos anteriores pode ser utilizado para se avaliar o impacto de políticas urbanas sobre condições de acessibilidade urbana usando R.</li>
 <li>Seção 5: Por fim, a quinta seção mostra como fazer download e analisar os dados do projeto Acesso a Oportunidades (AOP) para analisar a distribuição espacial e socioeconômica das condições de acesso a oportunidades nas cidades brasileiras.</li>
-</ol>
-</section>
-<section id="código-reproduzível" class="level2">
-<h2 class="anchored" data-anchor-id="código-reproduzível">Código reproduzível</h2>
+</ol></section><section id="código-reproduzível" class="level2"><h2 class="anchored" data-anchor-id="código-reproduzível">Código reproduzível</h2>
 <p>Este livro traz diversos exemplos reproduzíveis de análise de dados em R. A maneira mais fácil de você rodar todo o código do livro no seu navegador (<em>web browser</em>) é utilizando o <a href="https://mybinder.org/v2/gh/ipeaGIT/intro_access_book/HEAD?urlpath=rstudio">Binder</a>. Clicando neste link, você será direcionado para uma sessão do RStudio dentro do seu navegador onde você poderá abrir e rodar os scripts de todos os capítulos do livro.</p>
+<div class="cell">
+<div id="fig-binder_badge" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><a href="https://mybinder.org/v2/gh/ipeaGIT/intro_access_book/HEAD?urlpath=rstudio">
+<img src="images/binder_badge.svg" class="figure-img"></a>
+<p></p><figcaption class="figure-caption">Figure&nbsp;1: <strong>?(caption)</strong></figcaption><p></p>
+</figure>
+</div>
+</div>
 <div class="callout-note callout callout-style-simple">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -347,20 +326,13 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 <p>Se você quiser rodar o conteúdo do livro localmente na sua máquina, você pode clonar o repositório do livro e ter o RStudio instalado. Após abrir o projeto <code>intro_access_book.Rproj</code>, basta rodar a função:</p>
 <p><code>quarto::quarto_preview()</code>.</p>
-</section>
-<section id="licença-de-uso" class="level2">
-<h2 class="anchored" data-anchor-id="licença-de-uso">Licença de uso</h2>
+</section><section id="licença-de-uso" class="level2"><h2 class="anchored" data-anchor-id="licença-de-uso">Licença de uso</h2>
 <p><img align="right" src="images/ipea_logo.png" width="240"> É permitida a reprodução e a exibição para uso educacional ou informativo, desde que respeitado o crédito ao autor original e citada a fonte. Permitida a inclusão da obra em Repositórios ou Portais de Acesso Aberto, desde que fique claro para os usuários os termos de uso da obra e quem é o detentor dos direitos autorais, o Instituto de Pesquisa Econômica Aplicada (Ipea). Proibido o uso comercial ou com finalidades lucrativas em qualquer hipótese. Proibida a criação de obras derivadas. Para imagens estáticas e em movimento (vídeos e audiovisuais), ATENÇÃO: os direitos de imagem foram cedidos apenas para a obra original, formato de distribuição e repositório. Esta licença está baseada em estudos sobre a Lei Brasileira de Direitos Autorais (Lei 9.610/1998).</p>
-</section>
-<section id="como-citar-o-livro" class="level2">
-<h2 class="anchored" data-anchor-id="como-citar-o-livro">Como citar o livro</h2>
+</section><section id="como-citar-o-livro" class="level2"><h2 class="anchored" data-anchor-id="como-citar-o-livro">Como citar o livro</h2>
 <p>Caso você use o material deste livro, pedimos por gentileza que você cite o livro utilizando a seguinte referência:</p>
 <ul>
 <li>Pereira, Rafael H. M. &amp; Herszenhut, Daniel. (2022) Introdução à acessibilidade urbana um guia prático em R. Instituto de Pesquisa Econômica Aplicada.</li>
-</ul>
-</section>
-<section id="agradecimentos" class="level2">
-<h2 class="anchored" data-anchor-id="agradecimentos">Agradecimentos</h2>
+</ul></section><section id="agradecimentos" class="level2"><h2 class="anchored" data-anchor-id="agradecimentos">Agradecimentos</h2>
 <p>Este livro foi elaborado pelo Instituto de Pesquisa Econômica Aplicada (Ipea) no âmbito da parceria entre Ipea e a Secretaria de Mobilidade e Desenvolvimento Regional e Urbano (SMDRU) do Ministério do Desenvolvimento Regional (MDR).</p>
 
 
@@ -378,11 +350,7 @@ Miller, Eric J. 2018. <span>“Accessibility: Measurement and Application in Tra
 Papa, Enrica, Cecilia Silva, Marco Te Brömmelstroet, and Angela Hull. 2015. <span>“Accessibility Instruments for Planning Practice: A Review of <span>European</span> Experiences.”</span> <em>Journal of Transport and Land Use</em>, June. <a href="https://doi.org/10.5198/jtlu.2015.585">https://doi.org/10.5198/jtlu.2015.585</a>.
 </div>
 </div>
-</section>
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -479,9 +447,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     });
   }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
       <a href="./s1_intro.html" class="pagination-link">
@@ -490,22 +456,20 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Ipea (Institute for Applied Economic Research)</div>   
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
-    <li class="nav-item compact">
+<li class="nav-item compact">
     <a class="nav-link active" href="https://github.com/ipeaGIT/aop_curso" aria-current="page">
       <i class="bi bi-github" role="img">
 </i> 
     </a>
   </li>  
 </ul>
-    </div>
+</div>
   </div>
 </footer>
-
 
 
 </body></html>
