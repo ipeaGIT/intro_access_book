@@ -2,29 +2,31 @@
 
 ## Download dos dados
 
-Finalmente, o pacote `aopdata` também permite baixar, para todas cidades incluídas no projeto, estimativas anuais de acesso a empregos, serviços saúde, educação e assistência social por modo de transporte
+Finalmente, o pacote `{aopdata}` também permite baixar, para todas cidades incluídas no projeto, estimativas anuais de acesso a empregos, serviços saúde, educação e assistência social por modo de transporte
 
-Todos esses dados podem ser baixados com a função `read_access()`, que funciona da mesma maneira que as funções `read_population()` e `read_landuse()` apresentadas nos capítulos anteriores. Aqui, no entanto, além de indicar a cidade (`city`) e o ano (`year`) de referência para baixar os dados, você também precisa informar qual o modo de transporte (`mode`) será baixado e se você quer estimativas de acessibilidade no horário de pico (`peak = TRUE`) ou fora-pico (`peak = TRUE`). Esses dados representam a acessibilidade mediana do período de pico (entre 6h e 8h) e fora-pico (entre 14h e 16h).
+Todos esses dados podem ser baixados com a função `read_access()`, que funciona da mesma maneira que as funções `read_population()` e `read_landuse()` apresentadas nos capítulos anteriores. Aqui, no entanto, além de indicar a cidade (`city`) e o ano (`year`) de referência para baixar os dados, você também precisa informar qual o modo de transporte (`mode`) será baixado e se você quer estimativas de acessibilidade no horário de pico (`peak = TRUE`) ou fora-pico (`peak = FALSE`). Esses dados representam a acessibilidade mediana entre 6h e 8h e entre 14h e 16h, respectivamente.
 
-Neste exemplo, abaixo, nós mostramos como baixar os dados de uso de acessibilidade urbana no ano de 2019 para São Paulo no período de pico. Nesse exemplo, nós baixamos tanto as estimativas de acessibilidade por automóvel quanto por transporte público, e empilhamos os dados num único `data.frame`.  Note que essa função automaticamente já baixa também os dados de população e de uso do solo, automaticamente.
+Neste exemplo, abaixo, nós mostramos como baixar os dados de acessibilidade urbana no ano de 2019 para São Paulo no período de pico. Nesse exemplo, nós baixamos tanto as estimativas de acessibilidade por automóvel quanto por transporte público, e empilhamos os dados num único `data.frame`. Note que essa função também baixa os dados de população e de uso do solo automaticamente.
 
-```{r download aop accessibility data, warning=FALSE, message=FALSE}
+```{r}
+#| warning: false
+#| message: false
 library(aopdata)
 
 # download aop accessibility data
 df_pt <- read_access(
-  city='São Paulo',
-  mode='public_transport',
-  year=2019,
+  city = "São Paulo",
+  mode = "public_transport",
+  year = 2019,
   peak = TRUE,
   geometry = TRUE,
   showProgress = FALSE
 )
 
 df_car <- read_access(
-  city='São Paulo',
-  mode='car',
-  year=2019,
+  city = "São Paulo",
+  mode = "car",
+  year = 2019,
   peak = TRUE,
   geometry = TRUE,
   showProgress = FALSE
@@ -33,122 +35,120 @@ df_car <- read_access(
 # row bind into a single data.frame
 df <- rbind(df_pt, df_car)
 head(df)
-
 ```
 
+Os nomes das variáveis (colunas) com estimativas de acessibilidade também estão organizadas com códigos, como `CMAEF30`, `TMISB` ou `CMPPM60`. O nome das colunas com estimativas de acessibilidade são a junção de três componentes: o tipo de indicador de acessibilidade; o tipo de oportunidade / pessoas; e o tempo limite.
 
-Os nomes das variáveis (colunas) com estimativas de acessibilidade também estão organizadas com códigos, como `CMAEF30`, `TMISB` ou `CMPPM60`. O nome das colunas com estimativas de acessibilidade são a junção de três componentes: 1) Tipo de indicador de acessibilidade 2) Tipo de oportunidade / pessoas 3) Tempo limite
+1. O **tipo de indicador** de acessibilidade é indicado pelas primeiras 3 letras. O projeto AOP atualmente inclui três tipos de indicadores:
 
-1) O **tipo de indicador** de acessibilidade é indicado pelas primeiras 3 letras. O projeto AOP atualmente inclui três tipos de indicadores:
-  - `CMA`	Indicador de acessibilidade cumulativo ativo
-  - `CMP`	Indicador de acessibilidade cumulativo passivo	
-  - `TMI`	Indicador de tempo mínimo até oportunidade mais próxima
+   - `CMA` - Indicador de acessibilidade cumulativo ativo
+   - `CMP` - Indicador de acessibilidade cumulativo passivo	
+   - `TMI` - Indicador de tempo mínimo até oportunidade mais próxima
 
+2. O **tipo de atividade** é indicado pelas letras seguintes, no meio do nome da variável. O projeto AOP atualmente inclui diversos tipos de atividades:
 
-2) O **tipo de atividade** é indicado pelas letras seguintes, no meio do nome da variável. O projeto AOP atualmente inclui diversos tipos de atividades:
-  - `TT` Todos empregos
-  - `TB` Empregos de baixa escolaridade
-  - `TM` Empregos de média escolaridade
-  - `TA` Empregos de alta escolaridade
-  - `ST` Todos estabelecimentos de saúde
-  - `SB` Estabelecimentos de saúde de baixa complexidade
-  - `SM` Estabelecimentos de saúde de média complexidade
-  - `SA` Estabelecimentos de saúde de alta complexidade
-  - ... e assim por diante.
+   - `TT` - Todos empregos
+   - `TB` - Empregos de baixa escolaridade
+   - `TM` - Empregos de média escolaridade
+   - `TA` - Empregos de alta escolaridade
+   - `ST` - Todos estabelecimentos de saúde
+   - `SB` - Estabelecimentos de saúde de baixa complexidade
+   - `SM` - Estabelecimentos de saúde de média complexidade
+   - `SA` - Estabelecimentos de saúde de alta complexidade
+   - ... e assim por diante.
 
-No caso do indicador de acessibilidade passiva (`CMP`), as letras do meio do nome da variável indicam qual o grupo populacional de referência.
+   No caso do indicador de acessibilidade passiva (`CMP`), as letras do meio do nome da variável indicam qual o grupo populacional de referência.
 
-  - `PT` População total
-  - `PH` População de homens
-  - `PM` População de mulheres
-  - `PB` População branca
-  - `PN` População negra
-  - `P1924I` População de 19 a 24 anos de idade
-  - `P2539I` População de 25 a 39 anos de idade
+   - `PT` - População total
+   - `PH` - População de homens
+   - `PM` - População de mulheres
+   - `PB` - População branca
+   - `PN` - População negra
+   - `P1924I` - População de 19 a 24 anos de idade
+   - `P2539I` - População de 25 a 39 anos de idade
 
-3) O **tempo limite de viagem** é indicado pelos números no final do nome da variável. Esses números somente se aplicam para os indicadores de acessibildade cumulativa ativa (`CMA`) e passiva (`CMP`).
+3. O **tempo limite de viagem** é indicado pelos números no final do nome da variável. Esses números somente se aplicam para os indicadores de acessibildade cumulativa ativa (`CMA`) e passiva (`CMP`).
 
 **Exemplos:**
+
 <ul>
   <li> <span style="color: red;">CMA</span><span style="color: black;">EF</span><span style="color: blue;">30</span>: Número de escolas de ensino fundamental acessíveis em até 30 minutos</li>
   <li> <span style="color: red;">TMI</span><span style="color: black;">SB</span>: Tempo de viagem até o estabelecimento de saúde mais próximo com serviços de baixa complexidade</li>
   <li> <span style="color: red;">CMP</span><span style="color: black;">PM</span><span style="color: blue;">60</span>: Quantidade de mulheres que conseguem acessar determinado hexágono em até 60 minutos</li>
 </ul>
 
-Lembre-se, a [descrição completa do dicionário de variáveis está disponível no site to pacote aopdata](https://ipeagit.github.io/aopdata/articles/data_dic_pt.html).
-
+Lembre-se, a descrição completa do dicionário de variáveis está disponível no [site to pacote `aopdata`](https://ipeagit.github.io/aopdata/articles/data_dic_pt.html).
 
 A seguir, nós mostramos alguns exemplos de como visualizar essas estimativas de acessibilidade.
 
-
 ## Mapa do tempo para acessar o hospital mais próximo
-
 
 Neste exemplo, nós vamos comparar o nível de acessibilidade até hospitais entre modos automóvel *vs* transporte público. Para analisar qual o tempo mínimo de viagem (`TMI`) até um hospital de alta complexidade (`SA`), nós precisamos analisar a variável `TMISA`. Com o código abaixo, nós carregamos as bibliotecas para manipulação e visualização de dados, e visualizamos a distribuição espacial dos valores de `TMISA` para ambos modos de transporte.
 
-Note, no entanto, que os tempos de viagem por transporte público costumam ser muito mais longos do que por automóvel. Então para facilitar a visualização dos resultados, nós truncamos  a distribuição dos valores de `TMISA` em 60 minutos ou mais.
+Note, no entanto, que os tempos de viagem por transporte público costumam ser muito mais longos do que por automóvel. Então para facilitar a visualização dos resultados, nós truncamos a distribuição dos valores de `TMISA` em 60 minutos ou mais.
 
-```{r plot TMISA by car and pt, warning=FALSE, message=FALSE}
-# load libraries
+```{r}
+#| warning: false
+#| message: false
 library(ggplot2)
 library(data.table)
 library(patchwork)
 library(scales)
 library(sf)
 
-
 # truncate max values to 60 min.
 df$TMISA <- ifelse(df$TMISA > 60, 60, df$TMISA) 
 
-# plot
-ggplot() +
-  geom_sf(data=subset(df, !is.na(mode)), aes(fill=TMISA), color=NA, alpha=.9) +
-  scale_fill_viridis_c(option = 'cividis', direction = -1,
-                       breaks = seq(0,60,10),
-                       labels = c(seq(0,50,10), "60+")) +
-  labs(title='Tempo de viagem até hospital de alta complex. mais próximo', 
-       subtitle = 'São Paulo', fill="Tempo em\nminutos") +
-  facet_grid(.~mode) +
+ggplot(subset(df, !is.na(mode))) +
+  geom_sf(aes(fill = TMISA), color = NA, alpha = 0.9) +
+  scale_fill_viridis_c(
+    option = "cividis",
+    direction = -1,
+    breaks = seq(0, 60, 10),
+    labels = c(seq(0, 50, 10), "60+")
+  ) +
+  labs(
+    title = "Tempo de viagem até hospital de alta complex. mais próximo",
+    subtitle = "São Paulo",
+    fill = "Tempo em\nminutos"
+  ) +
+  facet_grid(. ~ mode) +
   theme_void()
-
 ```
-
 
 ## Mapa da quantidade de oportunidades acessíveis
 
-Uma vez que os dados já foram baixados do `aopdata`, é muito simples comparar por exemplo a quantidade de oportunidades acessíveis em diferentes tempos de viagem. O código abaixo ilustra como visualizar num mapa o número de empregos acessíveis em até 60 e 90 minutos de viagem por transporte público, e como colocar esses mapas lado a lado para comparação.
+Uma vez que os dados já foram baixados do `{aopdata}`, é muito simples comparar por exemplo a quantidade de oportunidades acessíveis em diferentes tempos de viagem. O código abaixo ilustra como visualizar num mapa o número de empregos acessíveis em até 60 e 90 minutos de viagem por transporte público, e como colocar esses mapas lado a lado para comparação.
 
-```{r map CMATT60 vs CMATT90, warning=FALSE, message=FALSE}
-
+```{r}
 # limits for legend scale
-value_limits <- c(0, max(df_pt$CMATT90, na.rm=T)/1000)
+value_limits <- c(0, max(df_pt$CMATT90, na.rm=T) / 1000)
 
 # create maps
-fig60 <- ggplot() +
-          geom_sf(data=subset(df_pt, !is.na(mode)), aes(fill=CMATT60/1000), color=NA, alpha=.9) +
-          scale_fill_viridis_c(option = 'inferno', limits = value_limits) +
-          labs(subtitle = 'em até 60 min.', fill="Empregos") +
-          theme_void()
+fig60 <- ggplot(subset(df_pt, !is.na(mode))) +
+  geom_sf(aes(fill = CMATT60 / 1000), color = NA, alpha = 0.9) +
+  scale_fill_viridis_c(option = "inferno", limits = value_limits) +
+  labs(subtitle = "em até 60 min.", fill = "Empregos") +
+  theme_void()
 
-fig90 <- ggplot() +
-          geom_sf(data=subset(df_pt, !is.na(mode)), aes(fill=CMATT90/1000), color=NA, alpha=.9) +
-          scale_fill_viridis_c(option = 'inferno', limits = value_limits) +
-          labs(subtitle = 'em até 90 min.', fill="Empregos") +
-          theme_void()
+fig90 <- ggplot(subset(df_pt, !is.na(mode))) +
+  geom_sf(aes(fill = CMATT90 / 1000), color = NA, alpha = 0.9) +
+  scale_fill_viridis_c(option = "inferno", limits = value_limits) +
+  labs(subtitle = "em até 90 min.", fill = "Empregos") +
+  theme_void()
 
-# plot figure
-fig60 + fig90 + 
-  plot_layout(guides = 'collect') +
-  plot_annotation(title = 'Quantidade de empregos acessíveis por transporte público',
-                  subtitle = "São Paulo")
-
+fig60 +
+  fig90 + 
+  plot_layout(guides = "collect") +
+  plot_annotation(
+    title = "Quantidade de empregos acessíveis por transporte público",
+    subtitle = "São Paulo"
+  )
 ```
-
-
 
 ## Desigualdades de acesso a oportunidades
 
-Existem diversas maneiras de se analisar quão desiguais são as condições de acesso a oportunidades a partir dos dados do `aopdata`. Nós apresentamos nesta subseção três exemplos de como esse tipo de análise pode ser realizada.
+Existem diversas maneiras de se analisar quão desiguais são as condições de acesso a oportunidades a partir dos dados do `{aopdata}`. Nós apresentamos nesta subseção três exemplos de como esse tipo de análise pode ser realizado.
 
 **Desigualdade no tempo de acesso `TMI`**
 
@@ -156,8 +156,7 @@ Neste primeiro exemplo, nós vamos comparar qual o tempo médio de viagem até o
 
 Antes disso, cabe observar que alguns hexágonos da cidade não conseguem acessar nenhum hospital em até 2h de viagem. Em casos como esse, o valor das variáveis `TMI__` é infinito (`Inf`). Para lidar com esses casos, nós substituímos abaixo todos valores `Inf` por 120 minutos.
 
-
-```{r inequality TMISA}
+```{r}
 # copy data to new data.table
 dt <- copy(df_pt)
 setDT(dt)
@@ -166,21 +165,24 @@ setDT(dt)
 dt[, TMISA := fifelse(TMISA==Inf, 120, TMISA)]
 
 # calculate average travel time by income
-temp <- dt[, .(average = weighted.mean(x=TMISA, w=P001, na.rm=T)), by=R003]
+temp <- dt[
+  ,
+  .(average = weighted.mean(x = TMISA, w = P001, na.rm = TRUE)),
+  by = R003
+]
 temp <- na.omit(temp)
 
-ggplot() + 
-  geom_col(data=temp, aes(y=average, x=factor(R003)), fill='#2c9e9e', color=NA) +
-  scale_x_discrete(labels=c("D1\n+Pobres", paste0('D', 2:9), "D10\n+Ricos")) +
-  labs(title = 'Média de tempo de viagem até o hospital mais proximo',
-       subtitle = 'por transporte público em São Paulo',
-       x='Decil de renda', y='Tempo de viagem\nem min.') +
+ggplot(temp) + 
+  geom_col(aes(y = average, x = factor(R003)), fill = "#2c9e9e", color = NA) +
+  scale_x_discrete(labels = c("D1\n+Pobres", paste0("D", 2:9), "D10\n+Ricos")) +
+  labs(
+    title = "Média de tempo de viagem até o hospital mais proximo",
+    subtitle = "por transporte público em São Paulo",
+    x = "Decil de renda",
+    y = "Tempo de viagem\nem min."
+  ) +
   theme_minimal()
 ```
-
-
-
-
 
 **Desigualdade do número de oportunidades acessíveis `CMA`**
 
@@ -188,54 +190,76 @@ Outra maneira de examinar a desigualdade de acesso a oportunidades é comparar a
 
 Neste exemplo abaixo, nós utilizamos *box plots* para comparar a quantidade de empregos acessíveis por transporte público em até 30 minutos de viagem.
 
-```{r fig inequality CMATT30 by income}
-ggplot() +
-  geom_boxplot(data=subset(dt, !is.na(R003)),
-               aes(x = factor(R003), y=CMATT60/1000, color=factor(R003))) +
-  scale_color_brewer(palette = 'RdBu') +
-  labs(title='Distribução do número de empregos acessíveis em até 30 min.', color="Decil\nde renda",
-       subtitle='por transporte público, São Paulo',
-       x='Decil de renda', y="N. de empregos acessíveis\n(em milhares)") +
-  scale_x_discrete(labels=c("D1\n+Pobres", paste0('D', 2:9), "D10\n+Ricos")) +
+```{r}
+ggplot(subset(dt, !is.na(R003))) +
+  geom_boxplot(
+    aes(x = factor(R003), y = CMATT60 / 1000, color = factor(R003))
+  ) +
+  scale_color_brewer(palette = "RdBu") +
+  labs(
+    title = "Distribução do número de empregos acessíveis em até 30 min.",
+    color = "Decil\nde renda",
+    subtitle = "por transporte público, São Paulo",
+    x = "Decil de renda",
+    y = "N. de empregos acessíveis\n(em milhares)"
+  ) +
+  scale_x_discrete(labels = c("D1\n+Pobres", paste0("D", 2:9), "D10\n+Ricos")) +
   theme_minimal()
-
 ```
 
 Também é possível comparar como diferentes modos de transporte possibilitam diferentes níveis de acessibilidade, e como essa diferença pode variar muito entre cidades. Nesse exemplo, abaixo, nós vamos comparar a quantidade de empregos acessíveis em até 30 minutos de viagem a pé e de carro. O primeiro passo é baixar os dados de acessibilidade a pé e por automóvel para todas as cidades.
 
 ```{r download all access data, message=FALSE}
-# download data
-df_car <- read_access(city = 'all', mode='car', year = 2019, showProgress = FALSE)
-df_walk <- read_access(city = 'all', mode='walk', year = 2019, showProgress = FALSE)
+#| message: false
+df_car <- read_access(
+  city = "all",
+  mode = "car",
+  year = 2019,
+  showProgress = FALSE
+)
 
+df_walk <- read_access(
+  city = "all",
+  mode = "walk",
+  year = 2019,
+  showProgress = FALSE
+)
 ```
 
 O próximo passo é calcular para cada cidade a média ponderada do número de empregos acessíveis em até 30 minutos (`CMATT30`) para cada um dos modos de transporte. Com esses resultados prontos para cada modo, nós juntamos essas estimativas num único `data.frame` e calculamos a razão da acessibilidade por carro dividida pela acessibilidade à pé.
 
-```{r avg CMATT30 by mode}
+```{r}
 # calculate the average number of jobs accessible in 30min
-df_car2 <- df_car[, .(access_car = weighted.mean(CMATT30, w = P001, na.rm=T)), by=name_muni]
-df_walk2 <- df_walk[, .(access_walk = weighted.mean(CMATT30, w = P001, na.rm=T)), by=name_muni]
+df_car2 <- df_car[
+  ,
+  .(access_car = weighted.mean(CMATT30, w = P001, na.rm = TRUE)),
+  by = name_muni
+]
+
+df_walk2 <- df_walk[
+  ,
+  .(access_walk = weighted.mean(CMATT30, w = P001, na.rm = TRUE)),
+  by = name_muni
+]
 
 # merge and get the ratio between walking and driving access
 df <- merge(df_car2, df_walk2)
-df[, ratio := access_car/access_walk]
+df[, ratio := access_car / access_walk]
 
 head(df)
 ```
 
 Pronto, agora é só visualizar os resultados. Como esperado, a figura abaixo mostra que é possível acessar muito mais empregos em 30 min. por automóvel do que em caminhada. No entanto, essa diferença varia muito entre cidades. Em São Paulo e em Brasília, 30 minutos de viagem por automóvel permite acessar, em média, um número de empregos 54 vezes maior do que a pé. Em Belém, onde observamos a menor diferença, o automóvel ainda permite acessar 17 vezes mais empregos do que a caminhada.
 
-
-```{r fig inequality CMATT30 by mode}
-# plot
-ggplot(data=df, aes(x=ratio, y=reorder(name_muni, ratio))) +
-  geom_bar(stat='identity') +
-  geom_text(aes(x=ratio+6 , label=paste0(round(ratio),'x'))) +
-  labs(title = 'Diferença da quantidade de empregos acessiveis por\nautomóvel vs a pé',
-       subtitle= 'em até 30 min. de viagem',
-       y='', x='Número de vezes') +
+```{r}
+ggplot(df, aes(x = ratio, y = reorder(name_muni, ratio))) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(x = ratio + 6 , label = paste0(round(ratio), "x"))) +
+  labs(
+    title = "Diferença da quantidade de empregos acessiveis por\nautomóvel vs a pé",
+    subtitle = "em até 30 min. de viagem",
+    y = "",
+    x = "Número de vezes"
+  ) +
   theme_classic() 
-
 ```
-
