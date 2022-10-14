@@ -1,10 +1,18 @@
 #  Comparando a acessibilidade entre dois cenários de transporte
 
-Neste capítulo, avaliaremos o impacto de um cenário simplificado de um investimento de infraestrutura de transporte real: a implementação da Linha Leste do metrô de Fortaleza. O traçado da Linha Leste possui 7.3 km de extensão e liga o Centro de Fortaleza ao bairro Papicu, permitindo a integração das linhas de metrô Sul e Oeste com corredores de VLT e o terminal de ônibus no Papicu. É importante notar que a implementação deste investimento implica também em mudanças nas frequências das linhas de metrô Sul e Oeste e também no racionamento do sistema de ônibus municipais, conforme o Plano de Acessibilidade Sustentável de Fortaleza (Pasfor)[^1]. Essas mudanças adicionais no sistema de transporte público não foram incorporados aos nossos cenários. Para uma avaliação mais completa do impacto de acessibilidade da implementação da Linha Leste e das mudanças previstas no Pasfor, por favor veja @ref.
+Neste capítulo, nós vamos fazer uma avaliação do projeto de expansão da Linha Leste do metrô de Fortaleza (LINK para FIGURA). O traçado da Linha Leste possui 7.3 km de extensão e liga o Centro de Fortaleza ao bairro Papicu, permitindo a integração das linhas de metrô Sul e Oeste com corredores de Veículo Leve sobre Trilhos (VLT) e o terminal de ônibus no Papicu. No momento em que esse livro foi escrito, o metrô ainda estava em fase de construção. Portanto, estamos tratando de uma avaliação *ex-ante* em que avaliamos o futuro impacto esperado desta expansão de infraestrutura sobre a acessibilidade urbana da cidade.
+
+É importante notar que, na prática, a implementação deste investimento também deverá envolver mudanças nas frequências das linhas de metrô Sul e Oeste, além do racionamento do sistema de ônibus municipais, conforme o Plano de Acessibilidade Sustentável de Fortaleza (Pasfor)[^1]. Essas mudanças adicionais no sistema de transporte público não foram incorporados aos nossos cenários. Portanto, o estudo de caso que apresentamos aqui considera um cenário simplificado que considera apenas a implementação da Linha Leste. Para uma avaliação mais completa do impacto de acessibilidade da implementação da Linha Leste e das mudanças previstas no Pasfor, por favor veja @ref.
 
 [^1]: Disponível em <https://www.pasfor.com.br/>.
 
-Para isso, precisaremos comparar os níveis de acessibilidade antes e depois da implementação do novo corredor. Precisamos, portanto, utilizar diferentes arquivos GTFS para representar os cenários antes e depois, calcular duas matrizes de tempo de viagem distintas (uma antes e outra depois do investimento), calcular dois conjuntos de níveis de acessibilidade distintos e comparar esses conjuntos. Neste capítulo, vamos cobrir este passo-a-passo em detalhes, começando primeiro pelo detalhamento dos GTFS que vamos usar.
+Para a avaliação de impacto da Linha Leste do metrô, nós precisaremos comparar os níveis de acessibilidade antes e depois da implementação do novo corredor. Precisamos, portanto, utilizar diferentes arquivos GTFS para representar os cenários antes e depois, e seguir os seguintes passos:
+1. Calcular duas matrizes de tempo de viagem, uma antes e outra depois do investimento
+2. Calcular dois cenários de acessibilidade, um antes e outro depois do investimento 
+3. Comparar esses as condições de acessibilidade nos cenários antes e depois, examinando como os impactos de acessibilidade se distribuem espacialmente e entre populações de diferentes níveis socioeconômicos.
+
+Neste capítulo, vamos cobrir este passo-a-passo em detalhes, começando primeiro pelo detalhamento dos GTFS que vamos usar.
+
 
 ## Arquivos GTFS usados na análise
 
