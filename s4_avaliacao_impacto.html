@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introdução à acessibilidade urbana – s4_avaliacao_impacto</title>
+<title>Introdução à acessibilidade urbana - SEÇÃO 4: Avaliação de impacto de projetos de transporte</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,25 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
+}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
 }
 </style>
 
@@ -71,15 +90,21 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </script>
 
 
+<meta property="og:title" content="Introdução à acessibilidade urbana - SEÇÃO 4: Avaliação de impacto de projetos de transporte">
+<meta property="og:description" content="Objetivo: O objetivo desta seção é apresentar um exemplo de avaliação do impacto de um projeto de infra-estrutura de transportes sobre acessibilidade urbana usando R.">
+<meta property="og:site-name" content="Introdução à acessibilidade urbana">
+<meta name="twitter:title" content="Introdução à acessibilidade urbana - SEÇÃO 4: Avaliação de impacto de projetos de transporte">
+<meta name="twitter:description" content="Objetivo: O objetivo desta seção é apresentar um exemplo de avaliação do impacto de um projeto de infra-estrutura de transportes sobre acessibilidade urbana usando R.">
+<meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-sidebar floating fullcontent">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">(Untitled)</h1>
+      <h1 class="quarto-secondary-nav-title">SEÇÃO 4: Avaliação de impacto de projetos de transporte</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -188,7 +213,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./s4_avaliacao_impacto.html" class="sidebar-item-text sidebar-link active">s4_avaliacao_impacto.html</a>
+            <a href="./s4_avaliacao_impacto.html" class="sidebar-item-text sidebar-link active">SEÇÃO 4: Avaliação de impacto de projetos de transporte</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -235,18 +260,48 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
     </div>
 </nav>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">SEÇÃO 4: Avaliação de impacto de projetos de transporte</h1>
+</div>
 
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
 
 <p><strong>Objetivo</strong>: O objetivo desta seção é apresentar um exemplo de avaliação do impacto de um projeto de infra-estrutura de transportes sobre acessibilidade urbana usando R.</p>
-<p>Embora muito utilizado na literatura científica, o foco em questões de acessibilidade urbana ainda é relativamente recente no planejamento e operação de sistemas de transporte público por parte de agências de transportes e tomadores de decisão <span class="citation" data-cites="papa2015accessibility">(<a href="references.html#ref-boisjoly2017how" role="doc-biblioref"><strong>boisjoly2017how?</strong></a>)</span>. Muito disto se dá pela dificuldade de incorporar análises de acessibilidade a métodos de avaliação de projetos e à atividades de planejamento do dia-a-dia <span class="citation" data-cites="silva2017accessibility buttner2021accessibility">(<a href="references.html#ref-silva2017accessibility" role="doc-biblioref"><strong>silva2017accessibility?</strong></a>; <a href="references.html#ref-buttner2021accessibility" role="doc-biblioref"><strong>buttner2021accessibility?</strong></a>)</span>.</p>
+<p>Embora muito utilizado na literatura científica, o foco em questões de acessibilidade urbana ainda é relativamente recente no planejamento e operação de sistemas de transporte público por parte de agências de transportes e tomadores de decisão <span class="citation" data-cites="papa2015accessibility">Boisjoly and El-Geneidy (<a href="references.html#ref-boisjoly2017how" role="doc-biblioref">2017</a>)</span>. Muito disto se dá pela dificuldade de incorporar análises de acessibilidade a métodos de avaliação de projetos e à atividades de planejamento do dia-a-dia <span class="citation" data-cites="silva2017accessibility buttner2021accessibility">(<a href="references.html#ref-silva2017accessibility" role="doc-biblioref">Silva et al. 2017</a>; <a href="references.html#ref-buttner2021accessibility" role="doc-biblioref">Büttner 2021</a>)</span>.</p>
 <p>Nesta seção, nós usamos um estudo de caso de um projeto de expansão de metrô para ilustrar podemos usar o <code>R</code> para avaliar o impacto de projetos de infraestrutura de transporte sobre acessibilidade urbana. O capítulo apresenta um método para medir tanto o impacto de investimentos de transporte sobre o nível médio de acessibilidade da população, como também para investigar o impacto de projetos sobre as desigualdades de acesso a oportunidades. A aplicação do método envolve a edição de arquivos GTFS, o cálculo de matrizes de custo, a tomada de decisão por trás da escolha de qual medida de acessibilidade utilizar, a estimativa dos níveis de acessibilidade, a visualização espacial desses níveis e o cálculo e análise de indicadores de desigualdade. Assim, esse estudo de caso engloba muitos dos pontos abordados neste livro, e serve como uma aplicação prática dos conceitos até então apresentados.</p>
 <p>É importante mencionar que uma avaliação de projeto, investimento ou política pública deve abranger um grande leque de critérios de diferentes naturezas. Esses critérios vão desde aspectos de participação social na formulação da política/projeto até o seu impacto considerando dimensões ambientais, econômicas, sociais, entre outras. Embora uma avaliação de impacto de acessibilidade seja muito importante para a caracterização dos potenciais benefícios e desempenho de redes de transporte como um todo, ela é apenas uma dessas dimensões, e deve complementar ou ser complementada por outras análises.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-boisjoly2017how" class="csl-entry" role="doc-biblioentry">
+Boisjoly, Geneviève, and Ahmed M. El-Geneidy. 2017. <span>“How to Get There? <span>A</span> Critical Assessment of Accessibility Objectives and Indicators in Metropolitan Transportation Plans.”</span> <em>Transport Policy</em> 55 (April): 38–50. <a href="https://doi.org/10.1016/j.tranpol.2016.12.011">https://doi.org/10.1016/j.tranpol.2016.12.011</a>.
+</div>
+<div id="ref-buttner2021accessibility" class="csl-entry" role="doc-biblioentry">
+Büttner, Benjamin. 2021. <span>“Accessibility <span>Tools</span> for <span>Transport Policy</span> and <span>Planning</span>.”</span> In <em>International <span>Encyclopedia</span> of <span>Transportation</span></em>, edited by Roger Vickerman, 83–86. <span>Oxford</span>: <span>Elsevier</span>. <a href="https://doi.org/10.1016/B978-0-08-102671-7.10618-9">https://doi.org/10.1016/B978-0-08-102671-7.10618-9</a>.
+</div>
+<div id="ref-papa2015accessibility" class="csl-entry" role="doc-biblioentry">
+Papa, Enrica, Cecilia Silva, Marco Te Brömmelstroet, and Angela Hull. 2015. <span>“Accessibility Instruments for Planning Practice: A Review of <span>European</span> Experiences.”</span> <em>Journal of Transport and Land Use</em>, June. <a href="https://doi.org/10.5198/jtlu.2015.585">https://doi.org/10.5198/jtlu.2015.585</a>.
+</div>
+<div id="ref-silva2017accessibility" class="csl-entry" role="doc-biblioentry">
+Silva, Cecília, Luca Bertolini, Marco te Brömmelstroet, Dimitris Milakis, and Enrica Papa. 2017. <span>“Accessibility Instruments in Planning Practice: <span>Bridging</span> the Implementation Gap.”</span> <em>Transport Policy</em> 53 (January): 135–45. <a href="https://doi.org/10.1016/j.tranpol.2016.09.006">https://doi.org/10.1016/j.tranpol.2016.09.006</a>.
+</div>
+</div>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
