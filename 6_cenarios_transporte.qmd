@@ -30,68 +30,80 @@ Para a avaliação de impacto da Linha Leste do metrô, nós precisaremos compar
 2. Calcular dois cenários de acessibilidade, um antes e outro depois do investimento 
 3. Comparar esses as condições de acessibilidade nos cenários antes e depois, examinando como os impactos de acessibilidade se distribuem espacialmente e entre populações de diferentes níveis socioeconômicos.
 
-
 Neste capítulo, vamos cobrir este passo-a-passo em detalhes, começando primeiro pelo detalhamento dos dados de transporte público em formato GTFS que vamos usar.
+
 
 
 ## Dados de GTFS usados na análise
 
-Nesta análise, usaremos os arquivos GTFS da METROFOR e da ETUFOR, que descrevem o sistema de transporte público operante na cidade de Fortaleza. Como esses são arquivos grandes, somando quase 20 MB no total, eles não estão disponíveis dentro dos pacotes `{r5r}` e `{gtfstools}`, como até então era o caso das amostras de *feeds* que usamos nos exemplos. Precisamos, portanto, baixá-los para o nosso projeto:
+Nesta análise, usaremos os arquivos GTFS disponibilizados pela Empresa de Transporte Urbano de Fortaleza (Etufor) e a Empresa do Metrô de Fortaleza (Metrofor). Esses dados descrevem o sistema de transporte público operante na cidade de Fortaleza em outubro de 2019. Como esses são arquivos grandes, somando quase 20 MB no total, eles não estão disponíveis dentro dos pacotes `{r5r}` e `{gtfstools}`, como nos exemplos que usamos até aqui no livro. Para baixar esses dados, nós usamos o código abaixo, que faz o *download* dos *feeds* de GTFS para arquivos temporários usando a função o pacote `{httr}`:
 
 ```{r}
 #| results: false
+library(httr)
+
+# criar o endereço de arquivos temporários na máquina local
 metrofor_path <- tempfile("metrofor", fileext = ".zip")
 etufor_path <- tempfile("etufor", fileext = ".zip")
 
+# download dados da metrofor
 httr::GET(
   "https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/gtfs_for_metrofor_2021-01.zip",
   httr::write_disk(metrofor_path)
 )
 
+# download dados da etufor
 httr::GET(
   "https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/gtfs_for_etufor_2019-10.zip",
+  httr::progress(),
   httr::write_disk(etufor_path)
 )
 ```
 
-Para simularmos a operação da nova Linha Leste do metrô, precisamos também de um *feed* que descreva o funcionamento deste corredor. Este GTFS foi criado para o estudo de @ref, que avalia o impacto de acessibilidade da implementação da Linha Leste, e será reutilizado neste exemplo. Assim como os *feeds* da ETUFOR e da METROFOR, este arquivo GTFS está disponível para *download* no repositório do livro no GitHub:
+Para simularmos a operação da nova Linha Leste do metrô, precisamos também de um *feed* que descreva como deverá ser a operação deste corredor quando ele entrar em operação. Este *feed* deve conter algumas informações-chave, como por exemplo o traçado da futura linha de metrô, a localização de suas estações, a velocidade operacional do metrô e a frequência planejada dos serviços. No exemplo que vamos apresentar neste livro, nós vamos utilizar o GTFS do projeto da Linha Leste que foi criado anteriormente pelo Ipea para um estudo mais detalhado de avaliação do impacto de acessibilidade deste projeto [@braga2022impactos]. Assim como os *feeds* da ETUFOR e da METROFOR, este arquivo GTFS está disponível para *download* no repositório do livro no GitHub, e pode ser baixado com o código:
 
 ```{r}
 #| results: false
+# criar o endereço do arquivo temporário
 linha_leste_path <- tempfile("linha_leste", fileext = ".zip")
 
+# download do GTFS da Linha Leste
 httr::GET(
-  "https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/gtfs_linha_leste.zip",
+  "https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/gtfs_linha_leste.zip", 
   httr::write_disk(linha_leste_path)
 )
 ```
 
-Esses três arquivos GTFS serão usados em conjunto para calcular a acessibilidade dos cenários antes e depois. No primeiro, apenas os *feeds* da METROFOR e da ETUFOR serão usados no roteamento de transporte público, representando a típica operação de transporte público antes da implementação do novo corredor. No cenário pós-implementação, incluiremos também o GTFS da Linha Leste, incorporando à análise a operação planejada desta linha após sua finalização.
+Esses três arquivos GTFS serão usados em conjunto para calcular as condições de acessibilidade de Fortaleza em 2019 (antes da implementação do projeto do metrô) e para o cenário futuro quando a Linha Leste estiver funcionando. Para a análise de 2019, nós vamos calcular as matrizes de tempo de viagem com base apenas nos *feeds* da METROFOR e da ETUFOR de outubro de 2019, que representam a típica operação de transporte público da cidade antes da implementação do novo corredor. No cenário pós-implementação, incluiremos também o GTFS da Linha Leste, incorporando à análise a operação planejada desta linha após sua finalização.
+
 
 ## Cálculo das matrizes de tempo de viagem
 
-Tendo definido quais arquivos GTFS vamos usar em cada um dos cenários analisados, precisamos agora utilizá-los para calcular as matrizez de tempo de viagem, que por sua vez vamos usar para estimar os níveis de acessibilidade. Como apresentado na @sec-matrix, para isso vamos utilizar a função `travel_time_matrix()`, do pacote `{r5r}`.
+Tendo definido quais dados de GTFS vamos usar em cada um dos cenários analisados do transporte público, o próximo passo é calcular as matrizes de tempo de viagem, que posteriormente serão utilizadas para estimar os níveis de acessibilidade. Para isso, nós vamos utilizar a função `travel_time_matrix()` do pacote `{r5r}`, como apresentado anteriormente na @sec-matrix.
 
-Antes de calcular as matrizes de fato, nós precisamos organizar os nossos arquivos na estrutura que o `{r5r}` requer. Cada um dos nossos cenários (antes e depois) deve ser representado por uma pasta contendo os arquivos necessários para o roteamento. Vamos criar uma pasta dentro da qual vamos botar as pastas do roteamento:
+Antes de calcular as matrizes de fato, nós precisamos organizar os nossos arquivos na estrutura que o `{r5r}` requer. Com o código abaixo, nós vamos criar uma pasta separada para cada um dos nossos cenários (antes e depois), e vamos salvar nessas pastas os arquivos de dados necessários para o roteamento. Primeiro, vamos criar uma pasta raíz chamada `analysis_dir` dentro da qual vamos colocar as pastas dos cenários (`dir_before` e `dir_after`):
 
 ```{r}
 #| warning: false
+# cria pasta raíz da análise de dados
 analysis_dir <- "impact_analysis"
 
 dir.create(analysis_dir)
 ```
 
-Dentro desta pasta, vamos criar as pastas de roteamento dos cenários antes e depois, contendo seus respectivos *feeds*:
+Dentro desta pasta, vamos criar agora as pastas de roteamento dos cenários antes e depois, contendo seus respectivos *feeds*:
 
 ```{r}
 #| results: false
 #| warning: false
+# criando pasta dos cenários
 dir_before <- file.path(analysis_dir, "before")
 dir_after <- file.path(analysis_dir, "after")
 
 dir.create(dir_before)
 dir.create(dir_after)
 
+# copiando os arquivos de GTFS para as pastas dos cenários antes e depois
 file.copy(from = metrofor_path, to = file.path(dir_before, "metrofor.zip"))
 file.copy(from = metrofor_path, to = file.path(dir_after, "metrofor.zip"))
 
@@ -100,6 +112,7 @@ file.copy(from = etufor_path, to = file.path(dir_after, "etufor.zip"))
 
 file.copy(from = linha_leste_path, to = file.path(dir_after, "linha_leste.zip"))
 
+# visualizando esquema de arquivos na pasta
 fs::dir_tree(analysis_dir)
 ```
 
@@ -157,22 +170,27 @@ file.rename(
 )
 ```
 
-Para estimarmos o tempo de viagem na nossa área de estudo, precisamos ainda de um arquivo representando a rede viária do local, em formato `.pbf`, e opcionalmente iremos utilizar um arquivo representando a topografia local, em formato `.tif`. Esses arquivos, asssim como os GTFS, estão disponíveis para *download* no repositório do livro. Partindo do pressuposto que a implementação da Linha Leste não afetaria o traçado das ruas e calçadas na região, bem como a topografia local, podemos usar os mesmos arquivos nas duas matrizes de tempo de viagem:
+Para estimarmos o tempo de viagem na nossa área de estudo, nós precisamos também de um arquivo com os dados do *OpenStreetMap* representando a rede viária local em formato `.pbf`. E opcionalmente iremos utilizar também um arquivo representando a topografia local, em formato `.tif`. Esses arquivos, assim como os GTFS, estão disponíveis para *download* no repositório do livro. Partindo do pressuposto que a implementação da Linha Leste não afetaria o traçado das ruas e calçadas na região, bem como a topografia local, podemos usar os mesmos arquivos nas duas matrizes de tempo de viagem. No bloco de código seguinte, nós baixamos esses dados e copiamos esses arquivos para as pastas dos dois cenários de transporte.
 
 ```{r}
 #| results: false
+# cria endereço temporário dos arquivos na máquina local
 pbf_path <- tempfile("street_network", fileext = ".osm.pbf")
 tif_path <- tempfile("topography", fileext = ".tif")
 
+# download dos dados de OSM
 httr::GET(
   "https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/for_2020.osm.pbf",
   httr::write_disk(pbf_path)
 )
+
+# download dos dados de topografia
 httr::GET(
   "https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/topografia3_for.tif",
   httr::write_disk(tif_path)
 )
 
+# copia arquivo para as pastas dos cenários antes e depois
 file.copy(from = pbf_path, to = file.path(dir_before, "street_network.osm.pbf"))
 file.copy(from = pbf_path, to = file.path(dir_after, "street_network.osm.pbf"))
 
@@ -202,6 +220,7 @@ file.rename(
 ```
 
 ```{r}
+# visualizando esquema de arquivos na pasta
 fs::dir_tree(analysis_dir)
 ```
 
@@ -220,36 +239,45 @@ file.rename(
 )
 ```
 
-Finalmente, podemos começar o cálculo das matrizes. A primeira etapa é construir a rede de transporte multimodal usada pelo `{r5r}` no roteamento e criar uma conexão com o `R5`, o que é feito com o comando `setup_r5()`:
+Agora com os dados organizados nas pastas, podemos começar o cálculo das matrizes de tempo de viagem. A primeira etapa é construir a rede de transporte multimodal usada pelo `{r5r}` no roteamento, o que é feito com o comando `setup_r5()`. Essa rede de transporte multimodal é criada por esta função que combina os dados da malha de ruas, do sistema de transporte público e de topografia. Essa função também retorna uma  conexão com o `R5` que aqui nós chamamos de `r5r_core_`. No exemplo abaixo, nós vamos criar duas redes, uma para cada cenário:
 
 ```{r}
 #| message: false
 #| warning: false
+# aloca memória disponível para Java
 options(java.parameters = "-Xmx4G")
 
+# carrega biblioteca
 library(r5r)
 
+# cria rede de transporte multimodal de cada cenário
 r5r_core_before <- setup_r5(dir_before, use_elevation = TRUE, verbose = FALSE)
 r5r_core_after <- setup_r5(dir_after, use_elevation = TRUE, verbose = FALSE)
+
 ```
 
-Tendo sido criada a conexão com o `R5` para os dois cenários, prosseguimos agora para o cálculo da matriz, de fato. De forma a avaliar a expansão do metrô adequadamente, nós precisamos usar os mesmos parâmetros em ambos os cenários. Vamos considerar viagens a pé ou por transporte público, permitir até 800 metros nas pernas de acesso e egresso a paradas e limitar o tempo máximo de viagem em até 60 minutos. Vamos considerar o horário de partida de 07:00 em uma típica segunda-feira de operação. Como origens e destinos, vamos usar os centróides da grade de Fortaleza disponibilizada pelo pacote `{aopdata}` (mais detalhes sobre o pacote são apresentados na [Seção 5](s5_dados_aop.qmd)):
+Com as redes de transporte criadas para cada cenário, prosseguimos agora para o cálculo das matrizes de tempo de viagem. Nesta etapa nós vamos utilizar como origens e destinos os centróides de uma grade espacial de hexágonos de Fortaleza disponibilizada pelo pacote `{aopdata}` (mais detalhes sobre o pacote são apresentados na [Seção 5](s5_dados_aop.qmd)). Na grade espacial utilizada, cada hexágono tem uma área de aproximadamente  0.10 Km<sub>2</sub>, o que permite uma análise espacial bem detalhada.
+
+Para comparar os dois cenários, nós vamos calcular quanto tempo uma pessoa demoraria para viajar partindo de cada origem para todos os destinos considerando os mesmos parâmetros de viagem. Aqui, nós vamos considerar viagens a pé ou por transporte público, considerar que as pessoas iriam caminhar no máximo até 800 metros nas pernas de acesso e egresso das paradas de transporte público, e limitar o tempo máximo de viagem em até 60 minutos. Vamos considerar o horário de partida de 07:00 em uma típica segunda-feira de operação:
 
 ```{r}
 #| message: false
 #| warning: false
+# carrega bibliotecas
 library(data.table)
 library(aopdata)
 library(sf)
 
-for_grid <- read_grid("for")
+# leitura dos dados da grade espacial
+for_grid <- read_grid(city = "Fortaleza", showProgress = TRUE)
+
+# geração dos centroids das células espaciais
 points <- st_centroid(for_grid)
 
-setDT(points)
-points <- points[, .(id = id_hex, geom)]
-points[, setdiff(names(points), c("id", "geom")) := NULL]
-points <- st_sf(points)
+# renomeia o nome da coluna com id das células
+names(points)[1] <- 'id'
 
+# calcula matriz de tempo de viagem do cenário 'antes'
 ttm_before <- travel_time_matrix(
   r5r_core_before,
   origins = points,
@@ -265,6 +293,7 @@ ttm_before <- travel_time_matrix(
   progress = FALSE
 )
 
+# calcula matriz de tempo de viagem do cenário 'depois'
 ttm_after <- travel_time_matrix(
   r5r_core_after,
   origins = points,
@@ -280,9 +309,9 @@ ttm_after <- travel_time_matrix(
   progress = FALSE
 )
 
-ttm_before
+head(ttm_before)
 
-ttm_after
+head(ttm_after)
 ```
 
 ```{r}
@@ -292,9 +321,10 @@ ttm_after
 stop_r5()
 ```
 
-À primeira vista, nossas matrizes parecem iguais: todos os tempos de viagem na amostra de pares mostrados acima são idênticos. Isto ocorre porque muitos deslocamentos entre regiões da cidade de fato não são afetados pela implementação da nova linha de metrô, por serem realizados por outros modos de transporte público ou a pé. Se compararmos par a par, no entanto, veremos que vários dos tempos de viagens entre eles são impactados pela Linha Leste:
+À primeira vista, nossas matrizes parecem iguais: todos os tempos de viagem na amostra de pares mostrados acima são idênticos. Isto ocorre porque o projeto de expansão do metrô fica restrito à uma área relativamente pequena no centro da cidade de Fortaleza. Assim, muitos deslocamentos entre regiões da cidade de fato não devem ser afetados pela implementação da nova linha de metrô. Para diversos pares de origem-destino, no entanto, vemos que os tempos de viagens entre eles deverão ser impactados pela Linha Leste:
 
 ```{r}
+# merge dos tempos de viagem dos dois cenários
 comparison <- merge(
   ttm_before,
   ttm_after,
@@ -302,6 +332,7 @@ comparison <- merge(
   suffixes = c("_before", "_after")
 )
 
+# mostrar apenas os pares OD que deverão ter queda nos tempos de viagem
 comparison[travel_time_after < travel_time_before]
 ```
 
