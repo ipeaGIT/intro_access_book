@@ -14,14 +14,14 @@ Fonte: @braga2022impactos
 ```{r}
 #| echo: false
 #| label: fig-fortaleza_2
-#| fig-cap: Detalhamento da futura Linha Leste do metrô
+#| fig-cap: Detalhamento da futura Linha Leste do metrô de Fortaleza
 
 knitr::include_graphics("images/fortaleza_2.png")
 ```
 Fonte: @braga2022impactos
 
 
-É importante notar que, na prática, a implementação deste investimento também deverá envolver mudanças nas frequências das linhas de metrô Sul e Oeste, além do racionamento do sistema de ônibus municipais, conforme o Plano de Acessibilidade Sustentável de Fortaleza (Pasfor)[^1]. Essas mudanças adicionais no sistema de transporte público não foram incorporadas aos nossos cenários. Portanto, o estudo de caso que apresentamos aqui considera um cenário simplificado que considera apenas a implementação da Linha Leste. Para uma avaliação mais completa do impacto de acessibilidade da implementação da Linha Leste e das mudanças previstas no Pasfor, por favor veja -@braga2022impactos.
+É importante notar que, na prática, a implementação deste investimento também deverá envolver mudanças nas frequências das linhas de metrô Sul e Oeste, além do racionamento do sistema de ônibus municipais, conforme o Plano de Acessibilidade Sustentável de Fortaleza (Pasfor)[^1]. Essas mudanças adicionais no sistema de transporte público não foram incorporadas aos nossos cenários. Portanto, o estudo de caso que apresentamos aqui considera um cenário simplificado que considera apenas a implementação da Linha Leste. Para uma avaliação mais completa do impacto de acessibilidade da implementação da Linha Leste e das mudanças previstas no Pasfor, por favor veja @braga2022impactos.
 
 [^1]: Disponível em <https://www.pasfor.com.br/>.
 
@@ -31,10 +31,10 @@ Para a avaliação de impacto da Linha Leste do metrô, nós precisaremos compar
 3. Comparar esses as condições de acessibilidade nos cenários antes e depois, examinando como os impactos de acessibilidade se distribuem espacialmente e entre populações de diferentes níveis socioeconômicos.
 
 
-Neste capítulo, vamos cobrir este passo-a-passo em detalhes, começando primeiro pelo detalhamento dos dados de GTFS que vamos usar.
+Neste capítulo, vamos cobrir este passo-a-passo em detalhes, começando primeiro pelo detalhamento dos dados de transporte público em formato GTFS que vamos usar.
 
 
-## Arquivos GTFS usados na análise
+## Dados de GTFS usados na análise
 
 Nesta análise, usaremos os arquivos GTFS da METROFOR e da ETUFOR, que descrevem o sistema de transporte público operante na cidade de Fortaleza. Como esses são arquivos grandes, somando quase 20 MB no total, eles não estão disponíveis dentro dos pacotes `{r5r}` e `{gtfstools}`, como até então era o caso das amostras de *feeds* que usamos nos exemplos. Precisamos, portanto, baixá-los para o nosso projeto:
 
