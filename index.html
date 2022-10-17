@@ -5,7 +5,7 @@
 <meta name="generator" content="quarto-1.1.251">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Rafael H. M. Pereira, Daniel Herszenhut">
-<meta name="dcterms.date" content="2022-10-14">
+<meta name="dcterms.date" content="2022-10-17">
 <title>Introdução à acessibilidade urbana</title>
 <style>
 code{white-space: pre-wrap;}
@@ -18,25 +18,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
-}
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
 }
 </style>
 
@@ -284,7 +265,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 14, 2022</p>
+      <p class="date">October 17, 2022</p>
     </div>
   </div>
     
@@ -294,7 +275,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </header>
 <section id="apresentação" class="level1 unnumbered"><h1 class="unnumbered">Apresentação</h1><p><img src="images/cover.png" title="Introdução à acessibilidade urbana" class="quarto-cover-image img-fluid"></p>
 <p>O objetivo deste livro é apresentar uma introdução sobre os conceitos e habilidades práticas necessárias para fazer estudos e avaliações de impacto sobre acessibilidade urbana. O livro começa dando uma visão geral sobre o conceito e indicadores de acessibilidade. Em seguida, ensina como analisar dados espaciais e de redes de transporte para se calcular estimativas de acessibilidade por diferentes modos de transporte e como visualizar esses resultados em mapas e gráficos. O livro também busca familiarizar o leitor com dados de redes de transporte público em formato GTFS e ensina como manipular e visualizar esse tipo de dado. Num dos seus principais capítulos, o livro ensina ainda como os dados e metodologia apresentados nos capítulos anteriores podem ser utilizados para avaliar o impacto de projetos de transporte sobre as condições de acesso a oportunidades da população. Por fim, o livro ensina como baixar, analisar e visualizar estimativas de acessibilidade já calculadas para cidades brasileiras e disponibilizadas pela equipe do Projeto Acesso a Oportunidades (AOP) do Ipea.</p>
-<p>O tema da acessibilidade tem recebido cada vez mais atenção de agências de transporte, instituições de financiamento, tomadores de decisão e pesquisadores na área de planejamento urbano e de transportes <span class="citation" data-cites="papa2015accessibility boisjoly2017how">(<a href="references.html#ref-papa2015accessibility" role="doc-biblioref">Papa et al. 2015</a>; <a href="references.html#ref-boisjoly2017how" role="doc-biblioref">Boisjoly and El-Geneidy 2017</a>)</span>. Com isso, existe um crescente número de artigos científicos <span class="citation" data-cites="miller2018accessibility van2021transport">(<a href="references.html#ref-miller2018accessibility" role="doc-biblioref">Miller 2018</a>; <a href="references.html#ref-van2021transport" role="doc-biblioref"><strong>van2021transport?</strong></a>)</span> e livros <span class="citation" data-cites="levine2019mobility levinson2020transport">(<a href="references.html#ref-levine2019mobility" role="doc-biblioref"><strong>levine2019mobility?</strong></a>; <a href="references.html#ref-levinson2020transport" role="doc-biblioref">Levinson and King 2020</a>)</span> que trazem rico material para discussão e aprofundamento sobre questões relacionadas à acessibilidade urbana. No entanto, não existem na literatura livros ou artigos que sirvam simultaneamente de material didático introdutório sobre o tema e de manual prático de metodologia e análise de dados. A ausência desse tipo de material explica, ao menos em parte, porque diversas agências de transporte e analistas ainda enfrentam desafios em incorporar questões e indicadores de acessibilidade no seu dia-a-dia de planejamento e pesquisa <span class="citation" data-cites="silva2017accessibility buttner2021accessibility">(<a href="references.html#ref-silva2017accessibility" role="doc-biblioref"><strong>silva2017accessibility?</strong></a>; <a href="references.html#ref-buttner2021accessibility" role="doc-biblioref"><strong>buttner2021accessibility?</strong></a>)</span>.</p>
+<p>O tema da acessibilidade tem recebido cada vez mais atenção de agências de transporte, instituições de financiamento, tomadores de decisão e pesquisadores na área de planejamento urbano e de transportes <span class="citation" data-cites="papa2015accessibility boisjoly2017how">(<a href="references.html#ref-papa2015accessibility" role="doc-biblioref"><strong>papa2015accessibility?</strong></a>; <a href="references.html#ref-boisjoly2017how" role="doc-biblioref"><strong>boisjoly2017how?</strong></a>)</span>. Com isso, existe um crescente número de artigos científicos <span class="citation" data-cites="miller2018accessibility van2021transport">(<a href="references.html#ref-miller2018accessibility" role="doc-biblioref"><strong>miller2018accessibility?</strong></a>; <a href="references.html#ref-van2021transport" role="doc-biblioref"><strong>van2021transport?</strong></a>)</span> e livros <span class="citation" data-cites="levine2019mobility levinson2020transport">(<a href="references.html#ref-levine2019mobility" role="doc-biblioref"><strong>levine2019mobility?</strong></a>; <a href="references.html#ref-levinson2020transport" role="doc-biblioref"><strong>levinson2020transport?</strong></a>)</span> que trazem rico material para discussão e aprofundamento sobre questões relacionadas à acessibilidade urbana. No entanto, não existem na literatura livros ou artigos que sirvam simultaneamente de material didático introdutório sobre o tema e de manual prático de metodologia e análise de dados. A ausência desse tipo de material explica, ao menos em parte, porque diversas agências de transporte e analistas ainda enfrentam desafios em incorporar questões e indicadores de acessibilidade no seu dia-a-dia de planejamento e pesquisa <span class="citation" data-cites="silva2017accessibility buttner2021accessibility">(<a href="references.html#ref-silva2017accessibility" role="doc-biblioref"><strong>silva2017accessibility?</strong></a>; <a href="references.html#ref-buttner2021accessibility" role="doc-biblioref"><strong>buttner2021accessibility?</strong></a>)</span>.</p>
 <p>Este livro foi escrito pensando nas necessidades de trabalho de gestores públicos, analistas, alunos e pesquisadores de planejamento e transporte urbano. Por isso, o livro tem caráter prático. Todo material do livro é apresentado com exemplos reproduzíveis e dados abertos utilizando-se programação em R. O objetivo é equipar seus leitores com os conceitos fundamentais e as ferramentas de análise e processamento de dados necessárias para realizar análises de acessibilidade urbana e conduzir avaliações do impacto de projetos e políticas de transporte a partir de dados e programas de código abertos.</p>
 <section id="organização-do-livro" class="level2"><h2 class="anchored" data-anchor-id="organização-do-livro">Organização do livro</h2>
 <p>Este livro está dividido em 5 seções:</p>
@@ -334,20 +315,6 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p>Este livro foi elaborado pelo Instituto de Pesquisa Econômica Aplicada (Ipea) no âmbito da parceria entre Ipea e a Secretaria de Mobilidade e Desenvolvimento Regional e Urbano (SMDRU) do Ministério do Desenvolvimento Regional (MDR).</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
-<div id="ref-boisjoly2017how" class="csl-entry" role="doc-biblioentry">
-Boisjoly, Geneviève, and Ahmed M. El-Geneidy. 2017. <span>“How to Get There? <span>A</span> Critical Assessment of Accessibility Objectives and Indicators in Metropolitan Transportation Plans.”</span> <em>Transport Policy</em> 55 (April): 38–50. <a href="https://doi.org/10.1016/j.tranpol.2016.12.011">https://doi.org/10.1016/j.tranpol.2016.12.011</a>.
-</div>
-<div id="ref-levinson2020transport" class="csl-entry" role="doc-biblioentry">
-Levinson, David, and David King. 2020. <em>Transport Access Manual: <span>A</span> Guide for Measuring Connection Between People and Places</em>. <span>Committee of the Transport Access Manual, University of Sydney</span>.
-</div>
-<div id="ref-miller2018accessibility" class="csl-entry" role="doc-biblioentry">
-Miller, Eric J. 2018. <span>“Accessibility: Measurement and Application in Transportation Planning.”</span> <em>Transport Reviews</em> 38 (5): 551–55. <a href="https://doi.org/10.1080/01441647.2018.1492778">https://doi.org/10.1080/01441647.2018.1492778</a>.
-</div>
-<div id="ref-papa2015accessibility" class="csl-entry" role="doc-biblioentry">
-Papa, Enrica, Cecilia Silva, Marco Te Brömmelstroet, and Angela Hull. 2015. <span>“Accessibility Instruments for Planning Practice: A Review of <span>European</span> Experiences.”</span> <em>Journal of Transport and Land Use</em>, June. <a href="https://doi.org/10.5198/jtlu.2015.585">https://doi.org/10.5198/jtlu.2015.585</a>.
-</div>
-</div>
 </section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

@@ -20,25 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
 </style>
 
 
@@ -261,19 +242,11 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 
 
 <p><strong>Objetivo</strong>: O objetivo desta seção é apresentar um exemplo de avaliação do impacto de um projeto de infra-estrutura de transportes sobre acessibilidade urbana usando R.</p>
-<p>Embora muito utilizado na literatura científica, o foco em questões de acessibilidade urbana ainda é relativamente recente no planejamento e operação de sistemas de transporte público por parte de agências de transportes e tomadores de decisão <span class="citation" data-cites="papa2015accessibility">Boisjoly and El-Geneidy (<a href="references.html#ref-boisjoly2017how" role="doc-biblioref">2017</a>)</span>. Muito disto se dá pela dificuldade de incorporar análises de acessibilidade a métodos de avaliação de projetos e à atividades de planejamento do dia-a-dia <span class="citation" data-cites="silva2017accessibility buttner2021accessibility">(<a href="references.html#ref-silva2017accessibility" role="doc-biblioref"><strong>silva2017accessibility?</strong></a>; <a href="references.html#ref-buttner2021accessibility" role="doc-biblioref"><strong>buttner2021accessibility?</strong></a>)</span>.</p>
+<p>Embora muito utilizado na literatura científica, o foco em questões de acessibilidade urbana ainda é relativamente recente no planejamento e operação de sistemas de transporte público por parte de agências de transportes e tomadores de decisão <span class="citation" data-cites="papa2015accessibility">(<a href="references.html#ref-boisjoly2017how" role="doc-biblioref"><strong>boisjoly2017how?</strong></a>)</span>. Muito disto se dá pela dificuldade de incorporar análises de acessibilidade a métodos de avaliação de projetos e à atividades de planejamento do dia-a-dia <span class="citation" data-cites="silva2017accessibility buttner2021accessibility">(<a href="references.html#ref-silva2017accessibility" role="doc-biblioref"><strong>silva2017accessibility?</strong></a>; <a href="references.html#ref-buttner2021accessibility" role="doc-biblioref"><strong>buttner2021accessibility?</strong></a>)</span>.</p>
 <p>Nesta seção, nós usamos um estudo de caso de um projeto de expansão de metrô para ilustrar podemos usar o <code>R</code> para avaliar o impacto de projetos de infraestrutura de transporte sobre acessibilidade urbana. O capítulo apresenta um método para medir tanto o impacto de investimentos de transporte sobre o nível médio de acessibilidade da população, como também para investigar o impacto de projetos sobre as desigualdades de acesso a oportunidades. A aplicação do método envolve a edição de arquivos GTFS, o cálculo de matrizes de custo, a tomada de decisão por trás da escolha de qual medida de acessibilidade utilizar, a estimativa dos níveis de acessibilidade, a visualização espacial desses níveis e o cálculo e análise de indicadores de desigualdade. Assim, esse estudo de caso engloba muitos dos pontos abordados neste livro, e serve como uma aplicação prática dos conceitos até então apresentados.</p>
 <p>É importante mencionar que uma avaliação de projeto, investimento ou política pública deve abranger um grande leque de critérios de diferentes naturezas. Esses critérios vão desde aspectos de participação social na formulação da política/projeto até o seu impacto considerando dimensões ambientais, econômicas, sociais, entre outras. Embora uma avaliação de impacto de acessibilidade seja muito importante para a caracterização dos potenciais benefícios e desempenho de redes de transporte como um todo, ela é apenas uma dessas dimensões, e deve complementar ou ser complementada por outras análises.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
-<div id="ref-boisjoly2017how" class="csl-entry" role="doc-biblioentry">
-Boisjoly, Geneviève, and Ahmed M. El-Geneidy. 2017. <span>“How to Get There? <span>A</span> Critical Assessment of Accessibility Objectives and Indicators in Metropolitan Transportation Plans.”</span> <em>Transport Policy</em> 55 (April): 38–50. <a href="https://doi.org/10.1016/j.tranpol.2016.12.011">https://doi.org/10.1016/j.tranpol.2016.12.011</a>.
-</div>
-<div id="ref-papa2015accessibility" class="csl-entry" role="doc-biblioentry">
-Papa, Enrica, Cecilia Silva, Marco Te Brömmelstroet, and Angela Hull. 2015. <span>“Accessibility Instruments for Planning Practice: A Review of <span>European</span> Experiences.”</span> <em>Journal of Transport and Land Use</em>, June. <a href="https://doi.org/10.5198/jtlu.2015.585">https://doi.org/10.5198/jtlu.2015.585</a>.
-</div>
-</div>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
