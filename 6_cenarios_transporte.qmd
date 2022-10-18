@@ -55,7 +55,6 @@ httr::GET(
 # download dados da etufor
 httr::GET(
   "https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/gtfs_for_etufor_2019-10.zip",
-  httr::progress(),
   httr::write_disk(etufor_path)
 )
 ```
@@ -269,7 +268,7 @@ library(aopdata)
 library(sf)
 
 # leitura dos dados da grade espacial
-for_grid <- read_grid(city = "Fortaleza", showProgress = TRUE)
+for_grid <- read_grid(city = "Fortaleza", showProgress = FALSE)
 
 # geração dos centroids das células espaciais
 points <- st_centroid(for_grid)
@@ -451,14 +450,14 @@ resultado_medio
 
 # figura
 ggplot(data = resultado_medio, aes(x = scenario, y = avg_access/1000)) + 
-  geom_col() +
+  geom_col(fill='#0f3c53') +
   geom_text(aes(label = round(avg_access/1000, 2)), vjust = -0.5) +
   ylab("Empregos acessíveis\n(em milhares)") +
   theme_minimal()
   
 ```
 
-Analisando-se o tempo de acesso à escola pública de ensino médio mais próxima, nota-se que a Linha Leste deverá ter um resultado quase nulo na média de acessibilidade a essas escolas. 
+Analisando-se o tempo de acesso à escola pública de ensino médio mais próxima, nota-se que a Linha Leste deverá ter um resultado quase nulo na média de acessibilidade a essas escolas. Em média, a população de Fortaleza demorava em 2019 cerca de 13 minutos para chegar até a escola pública de ensino médio mais próxima de casa. Após a conclusão da extensão do metrô, esse resultado permance praticamente inalterado.
 
 ```{r}
 # recupera info da populacao residente nos hexágonos
@@ -473,16 +472,16 @@ resultado_medio
 
 # figura
 ggplot(data = resultado_medio, aes(x = scenario, y = avg_access)) + 
-  geom_col() +
+  geom_col(fill='#0d6556') +
   geom_text(aes(label = round(avg_access, 2)), vjust = -0.5) +
   ylab("Média do tempo até a escola\nmais próxima(em minutos)") +
   theme_minimal()
 
 ```
 
-Esse resultado ocorre em grande medida por duas razões. A primeira delas é porque, neste estudo de caso, estamos fazendo uma análise simplificada que considera apenas a construção do projeto da Linha Leste do metrô, e ignora as demais intervenções que deverão acompanhar esta intervenção, como o aumento de frequência das demais linhas de metrô e trens na cidade. A segunda razão de encontrarmos impactos tão baixos, é o fato de que a proposta da Linha Leste consiste numa extensão de trecho relativamente pequeno do metrô. Soma-se a isso o fato de que este projeto é localizado próximo ao centro da cidade, que já era a região de mais alta acessibilidade da cidade em 2019.
+Em síntese, os resultados mostram que o projeto de construção da Linha Leste do Metrô tem baixo impacto na acessibilidade média da população. Esse resultado  ocorre em grande medida por duas razões. A primeira delas é porque, neste estudo de caso, estamos fazendo uma análise simplificada que considera apenas a construção do projeto da Linha Leste do metrô, e ignora as demais intervenções que deverão acompanhar esta intervenção, como o aumento de frequência das demais linhas de metrô e trens na cidade. A segunda razão de encontrarmos impactos tão baixos é o fato de que a proposta da Linha Leste consiste numa extensão de trecho relativamente pequeno da rede de transporte. Soma-se a isso o fato de que este projeto é localizado próximo ao centro da cidade, que já era a região de mais alta acessibilidade da cidade em 2019.
 
-Embora tenhamos visto que o impacto médio do projeto deverá ser pequeno, é importante entendermos como esse impacto de acessibilidade varia espacialmente. Para isso, vamos juntar nossas tabelas de estimativas de acessibilidade com a grade espacial da nossa área de estudo, disponível no objeto `for_grid` baixado do pacote `{aopdata}` anteriormente.
+Embora tenhamos visto que o projeto deverá ter pequeno impacto na acessibilidade média de toda a cidade, é importante entendermos como esse impacto de acessibilidade varia espacialmente. Para isso, vamos juntar nossas tabelas de estimativas de acessibilidade com a grade espacial da nossa área de estudo, disponível no objeto `for_grid` baixado do pacote `{aopdata}` anteriormente.
 
 
 ```{r}
@@ -523,13 +522,14 @@ temp2 <- ggplot(subset(access_to_jobs_sf, diff >=0)) +
          labs(fill='Diferença de\nempregos\nacessíveis\n(em milhares)') +
          theme_void()
 # plot
-temp1 / temp2
+temp1 /temp2 + plot_layout(ncol=1,heights=c(1,1))
 ```
 
 
-Por sua vez, o mapa de diferença no tempo de acesso a escolas (abaixo) apresenta um cenário diferente: praticamente nenhuma região da cidade apresenta melhorias no tempo de acesso. Diferentemente da distribuição de empregos, que tende a seguir critérios econômicos, a distribuição de equipamentos públicos como escolas tende a ser planejada usando critérios de justiça social e equidade, sendo, portanto, mais equilibrada no território. Dessa forma, a construção da Linha Leste na parte central da cidade em nada afeta o tempo de acesso das pessoas que moram em locais afastados desse corredor. Não apenas isso, mas mesmo para as pessoas que moram perto do novo corredor a sua implementação não muda os níveis de acesso a escolas. Isto é um sinal que esta área possui uma boa oferta de escolas e já é bem servida de transporte público, mesmo antes da finalização da Linha Leste.
+Por sua vez, o mapa de diferença no tempo de acesso a escolas (abaixo) apresenta um cenário diferente: praticamente nenhuma região da cidade apresenta melhorias no tempo de acesso. Diferentemente da distribuição de empregos, que tende a seguir critérios econômicos, a distribuição de equipamentos públicos como escolas tende a ser planejada usando critérios de equidade, sendo, portanto, mais equilibrada no território. Isso explica em boa parte porque observamos maiores níveis de acessibilidade em quase todas regiões da cidade. Isso também explica porque a construção da Linha Leste na parte central da cidade em nada afeta o tempo de acesso das pessoas que moram em locais afastados desse corredor. Não apenas isso, mas mesmo para as pessoas que moram perto do novo corredor a sua implementação não muda os níveis de acesso a escolas. Isto é um sinal que esta área já possuia uma boa oferta de escolas e era bem servida de transporte público, mesmo antes da finalização da Linha Leste.
 
 ```{r}
+# mapas dos cenários antes-e-depois
 temp1 <- ggplot(time_to_schools_sf) +
          geom_sf(aes(fill = travel_time), color = NA) +
          facet_wrap(~ scenario, nrow = 1) +
@@ -538,7 +538,7 @@ temp1 <- ggplot(time_to_schools_sf) +
          labs(fill='Tempo até\n a escola\nmaispróxima\n(em minutos)') +
          theme_void()
 
-
+# mapa da diferença
 temp2 <- ggplot(subset(time_to_schools_sf, diff <=0)) +
          geom_sf(aes(fill = diff), color = NA) +
          scale_fill_viridis_c(
@@ -546,8 +546,8 @@ temp2 <- ggplot(subset(time_to_schools_sf, diff <=0)) +
         labs(fill='Diferença no\ntempo até\n a escola\nmaispróxima\n(em minutos)') +
         theme_void()
 
-
-temp1 /temp2
+# plot
+temp1 /temp2 + plot_layout(ncol=1,heights=c(1,1))
 ```
 
 
