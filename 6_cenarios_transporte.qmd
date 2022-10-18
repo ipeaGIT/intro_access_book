@@ -553,53 +553,44 @@ temp1 /temp2 + plot_layout(ncol=1,heights=c(1,1))
 
 ## Desigualdade de acessibilidade
 
+Uma dimensão-chave para avaliação de projetos de transporte é o seu aspecto distributivo. Quem se beneficia dessas políticas? Sob uma perspectiva de equidade, se espera que políticas governamentais deveriam priorizar melhorar as condições de acessibilidade das pessoas em piores condições socioeconômicas e que mais dependem do transporte público [@pereira2017distributive; @vanwee2022accessibility].
 
-Políticas que resultam em maiores ganhos de acessibilidade para determinados grupos populacionais em detrimento de outros, como é o caso observado nos níveis de acesso a empregos em Fortaleza, alteram também a distribuição da acessibilidade entre grupos socioeconômicos na cidade. Em outras palavras, políticas que trazem mais benefícios para certas pessoas do que para outras mudam a configuração da desigualdade de acessibilidade.
+Aqui nós vamos examinar como os ganhos de acessibilidade esperados da expansão do metrô de Fortaleza se distribuem entre pessoas de diferentes níveis de renda. Para isso, nós precisamos examinar como o nível de acesso a empregos se distribuía entre a população antes da construção da Linha Leste, e como essa distribuição deve ser alterada após a expansão da linha do metrô. O gráfico de *box plot* abaixo nos permite visualizar como é a distribuição de níveis de acessibilidade entre grupos socioeconômicos nos dois cenários da nossa análise, antes e após a construção da Linha Leste.
 
-Nós podemos entender como é a distribuição de níveis de acessibilidade entre grupos socioeconômicos usando um gráfico *box plot* e agrupando a nossa população por decis de renda. Separando a nossa visualização nos cenários antes e depois, compreendemos como a Linha Leste afeta os níveis de acessibilidade de decil de renda:
-
-```{r}
-# plot distribuição de acessibilidade por renda
-ggplot(access_to_jobs[!is.na(decile)]) +
-  geom_boxplot(aes(x=as.factor(decile), y=jobs/1000, color=as.factor(decile),
-                   weight = population, group = decile)) +
-  facet_wrap(~ scenario, nrow = 1) +
-  scale_colour_brewer(palette = 'RdBu') +
-  labs(x='Decil de renda', y='empregos acessíveis\n(em milhares)') +
-  theme_minimal()
-
-```
-
-Os dois paineis mostram claramente que em Fortaleza as pessoas mais ricas detêm os maiores níveis de acessibilidade ao emprego. Em Fortaleza, assim como na maior parte das grandes cidades brasileiras, os mais ricos tendem a morar próximos às grandes concentrações de emprego da cidade, enquanto os mais pobres tendem a ocupar regiões periféricas. Consequentemente, os níveis de acessibilidade dos mais ricos costuma ser maiores do que os dos mais pobres - não apenas porque moram mais perto dos empregos, mas porque também, geralmente, regiões centrais costumam ser mais bem servidas de transporte público do que as periferias.
-
-Assim como no caso da distribuição espacial da acessibilidade, é muito difícil enxergar diferenças consideráveis nos níveis de acesso entre os cenários antes e depois. Lançando mão do mesmo recurso que fizemos anteriormente, podemos enxergar essas diferenças mais claramente visualizando a distribuição da diferença de acessibilidade entre cada cenário por decil de renda:
 
 ```{r}
+# distribuição de acessibilidade por renda antes-e-depois
 ggplot(data = access_to_jobs[population > 0]) +
   geom_boxplot(aes(x=as.factor(decile), y=jobs/1000, color=as.factor(decile),
-                   weight = population, group = decile)) +
+                   weight = population, group = decile), show.legend = FALSE) +
   facet_wrap(~ scenario, nrow = 1) +
   scale_colour_brewer(palette = 'RdBu') +
   labs(x='Decil de renda', y='Empregos acessíveis\n(em milhares)') +
   scale_x_discrete(labels = c("D1 mais\nPobres", paste0("D", 2:9), "D10 mais\nRicos")) +
   theme_minimal()
 
+```
 
+Os dois gráficos mostram claramente que em Fortaleza as pessoas mais ricas possuem maior acesso a empregos. Em Fortaleza, assim como na maior parte das grandes cidades brasileiras, os mais ricos tendem a morar próximos às grandes concentrações de emprego e próximos ao centro da cidade, enquanto os mais pobres tendem a ocupar regiões periféricas [@pereira2022estimativas]. Consequentemente, os mais ricos costumam ter melhores condições de acessibilidade urbana do que os mais pobres - não apenas porque moram mais perto dos empregos, mas porque também, geralmente, moram em regiões centrais mais bem servidas de transporte público do que as periferias.
 
+Assim como no caso da distribuição espacial da acessibilidade, é difícil enxergar nesses *box plots acima* como as condições de acessibilidade mudaram entre os cenários antes e depois. Lançando mão do mesmo recurso que fizemos anteriormente, podemos enxergar na próxima figura como os ganhos de acessibilidade entre os cenários se distribuem por decil de renda:
+
+```{r}
+# diferença entre cenários
 ggplot(data = access_to_jobs[population > 0 & !is.na(diff)] ) +
   geom_boxplot(aes(x=as.factor(decile), y=diff, color=as.factor(decile),
-                   weight = population, group = decile)) +
+                   weight = population, group = decile), show.legend = FALSE) +
   scale_colour_brewer(palette = 'RdBu') +
-  labs(x='Decil de renda', y='empregos acessíveis\n(em milhares)',
+  labs(x='Decil de renda', y='Quantidade a mais de\nempregos acessíveis (em milhares)',
        color = 'Decil de\n renda') +
   scale_x_discrete(labels = c("D1 mais\nPobres", paste0("D", 2:9), "D10 mais\nRicos")) +
   theme_minimal()
 
 ```
 
-Como podemos ver, os ganhos de acessibilidade se concentram principalmente entre as camadas médias da população, em especial os decis 5, 6 e 7. No entanto, o hexágono que mostrou maior aumento de acessibilidade aparece como *outlier* do 10º decil, apresentando um ganho de mais de 60000 empregos em relação ao cenário pré-implementação.
+Como podemos ver, os ganhos de acessibilidade foram mais ou menos iguais para a população acima do terceiro decil de renda. Também é possível observar ganhos ligeiramente maiores entre as camadas médias da população, em especial os decis 5, 6 e 7. No entanto, o hexágono que mostrou maior aumento de acessibilidade aparece como *outlier* do 10º decil, apresentando um ganho de mais de `60.000` empregos em relação ao cenário pré-implementação.
 
-Uma forma frequentemente empregada de resumir o panorama da desigualdade de uma determinado local é com o uso de uma medida de desigualdade. Esse tipo de medida busca resumir a distribuição dos níveis de acessibilidade entre grupos populacionais (aqui, decis de renda) em um único indicador que facilite a comunicação dos resultados e que possa ser usado, por exemplo, na elaboração de planos e metas. As medidas de desigualdade mais frequentemente utilizadas na literatura de acessibilidade são a Razão de Palma e o Índice de Gini.
+Uma maneira simples de medir o impacto do projeto de transporte sobre a desigualdade de acessibilidade é utilizar uma medida sintética de desigualdade. Esse tipo de medida busca resumir a distribuição dos níveis de acessibilidade entre grupos populacionais (aqui, decis de renda) em um único indicador que facilite a comunicação dos resultados e que possa ser usado, por exemplo, na elaboração de planos e metas. As medidas de desigualdade mais frequentemente utilizadas na literatura de acessibilidade são a Razão de Palma e o Índice de Gini [@lucas2016method; @guzman2018accessibility; @pritchard2019international].
 
 Neste exemplo, vamos calcular a Razão de Palma dos cenários antes e depois. Esta medida é o resultado da divisão da acessibilidade média dos 10% mais ricos pela acessibilidade média dos 40% mais pobres:
 
@@ -607,32 +598,51 @@ $$P = \frac{\overline{A_{tp10}}}{\overline{A_{bt40}}}$$
 
 em que $P$ é a Razão de Palma, $\overline{A_{tp10}}$ é a acessibilidade média dos 10% mais ricos e $\overline{A_{bt40}}$ é a acessibilidade média dos 40% mais pobres.
 
-A principal vantagem da Razao de Palma frente ao Índice de Gini é a sua facilidade de comunicação e interpretação. Valores maiores do que 1 indicam um cenário em que os ricos possuem níveis médios do que os pobres, e valores menores do que 1 a situação inversa. Outra vantagem da Razão de Palma é que ela reflete claramente como a desigualdade varia entre dois grupos de especial interesse para nós: os mais privilegiados e os mais vulneráveis de uma população. O Índice de Gini, por sua vez, estima o quanto uma distribuição desvia de uma distribuição hipotética em que todos possuem o mesmo nível de acesso, mas nada diz sobre as condições socioeconômicos daqueles que detêm os maiores e menores níveis de acessibilidade. Se uma determinada política aumenta os níveis de acessibilidades de pessoas de alta renda que moram em locais de baixa acessibilidade, por exemplo, o Índice de Gini indicaria que houve uma diminuição da desigualdade, mesmo que nenhuma população vulnerável se beneficie dessa política. Esta dificilmente é, entretanto, uma política equitativa. Neste mesmo caso, a Razão de Palma indicaria um aumento da desigualdade, resultado mais alinhado às expectativas.
+::: {.callout-note appearance="simple"}
+Uma das vantagens da Razão de Palma frente ao Índice de Gini é a sua facilidade de comunicação e interpretação. Valores maiores do que 1 indicam um cenário em que os ricos possuem níveis médios de acessibilidade maior do que os pobres, e valores menores do que 1 a situação inversa. Outra vantagem da Razão de Palma é que ela reflete claramente como a desigualdade varia entre dois grupos de especial interesse para nós: os mais privilegiados e os mais vulneráveis de uma população. O Índice de Gini, por sua vez, estima o quanto uma distribuição desvia de uma distribuição hipotética em que todos possuem o mesmo nível de acesso, mas nada diz sobre as condições socioeconômicas daqueles que detêm os maiores e menores níveis de acessibilidade. Se uma determinada política aumenta os níveis de acessibilidades de pessoas de alta renda que moram em locais de baixa acessibilidade, por exemplo, o Índice de Gini indicaria que houve uma diminuição da desigualdade, mesmo que nenhuma população vulnerável tenha se beneficiado dessa política. Dificilmente uma política como essa poderia ser considerada equitativa.
+:::
 
-Analisar a Razão de Palma nos cenários antes e depois, dessa forma, nos permite entender qual o impacto da Linha Leste na desigualdade de acesso a empregos em Fortaleza:
+Ao calcularmos a Razão de Palma nos cenários antes e depois da implementação do projeto de transporte, nós conseguimos entender qual o impacto da Linha Leste na desigualdade de acesso a empregos em Fortaleza:
 
 ```{r}
+# calcula acessibilidade média dos mais ricos nos cenários antes-e-depois
 richest_access <- access_to_jobs[
   decile == 10,
   .(access = weighted.mean(jobs, w = population)),
   by = scenario
 ]
 
+# calcula acessibilidade média dos mais pobres nos cenários antes-e-depois
 poorest_access <- access_to_jobs[
   decile %in% 1:4,
   .(access = weighted.mean(jobs, w = as.numeric(population))),
   by = scenario
 ]
 
+# combina acessibilidade dos ricos e pobres
 palma_ratio <- merge(
   richest_access,
   poorest_access,
   by = "scenario",
   suffixes = c("_richest", "_poorest")
 )
+
+# calculando Razão de Palma
 palma_ratio[, palma := access_richest / access_poorest]
 
-ggplot(palma_ratio) + geom_col(aes(scenario, palma))
+# figura
+ggplot(data = palma_ratio, aes(x = scenario, y = palma)) + 
+  geom_col(fill='#0d6556') +
+  geom_text(aes(label = round(palma, 2)), vjust = -0.5) +
+  ylab("Razão de Palma") +
+  theme_minimal()
 ```
 
-Como podemos ver, a Razão de Palma sofreu uma ligeira queda entre os cenários pré e pós implementação da Linha Leste. Consequentemente, podemos concluir que a expansão do metrô de Fortaleza seria uma política progressiva neste nosso cenário simplificado, que leva em consideração apenas a construção do novo corredor e ignora ajustes nas frequências de outros corredores e mudanças nas linhas de ônibus da cidade.
+A figura acima aponta que, no ano de 2019, a população mais rica de Fortaleza conseguia acessar em média 2.19 vezes mais empregos do que a população mais pobre utilizando-se o transporte público em até 60 minutos de viagem. O gráfico também mostra que essa desigualdade medida pela Razão de Palma sofreu apenas uma pequena queda entre os cenários pré e pós implementação da Linha Leste. Ou seja, podemos concluir que, neste nosso cenário simplificado de avaliação da Linha Leste, a expansão do metrô de Fortaleza seria uma política apenas ligeiramente progressiva. Em outras palavras, o futuro impacto desse projeto deverá dar uma pequena contribuição para redução da desigualdade de acesso a oportunidades. 
+
+
+::: {.callout-note appearance="simple"}
+É importante lembrar que esta avaliação apresentada aqui é uma versão simplificada para fins didáticos. Para uma avaliação mais completa da Linha Leste do metrô de Fortaleza, que também considera ajustes nas frequências de outros corredores e mudanças nas linhas de ônibus da cidade, veja o trabalho de @Braga2022impactos.
+:::
+
+Neste capítulo nós focamos na avaliação de impacto de  projetos de transporte sobre as condições de acessibilidade da população. Vale ressaltar, no entanto, que uma avaliação completa de políticas públicas deve abranger considerar também outros critérios como participação social na formulação da política e seus impactos considerando dimensões ambientais, econômicas, sociais, entre outras. Embora uma avaliação de impacto de acessibilidade seja muito importante para a caracterização dos potenciais benefícios e desempenho de redes de transporte como um todo, ela é apenas uma dessas dimensões, e deve complementar ou ser complementada por outras análises.
