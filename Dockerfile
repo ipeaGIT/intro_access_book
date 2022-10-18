@@ -8,6 +8,4 @@ RUN Rscript --vanilla -e "install.packages(\"renv\", repos = \"https://cloud.r-p
 COPY renv.lock ${HOME}
 
 USER root
-RUN --mount=type=cache,target=/renv Rscript -e "renv::restore()"
-
-USER rstudio
+RUN Rscript -e "renv::restore()"
