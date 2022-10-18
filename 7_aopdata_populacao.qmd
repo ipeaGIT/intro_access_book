@@ -2,7 +2,7 @@
 
 ## Download dos dados
 
-Para fazer o download dos dados do projeto AOP usando o pacote aopdata, você pode usar a função `read_population()`. Essa função baixa estimativas do Censo Demográfico de 2010 [ref] do IBGE sobre a distribuição espacial da população e suas características em termos de renda domiciliar per capita, cor, sexo e idade. Nesta função, o parâmetro `city` permite você indicar os dados de qual cidade serão baixados.
+Para fazer o download dos dados do projeto AOP usando o pacote aopdata, você pode usar a função `read_population()`. Essa função baixa estimativas do Censo Demográfico de 2010 do IBGE sobre a distribuição espacial da população e suas características em termos de renda domiciliar per capita, cor, sexo e idade. Nesta função, o parâmetro `city` permite você indicar os dados de qual cidade serão baixados.
 
 Os dados estão agregados espacialmente em uma grade de [hexágonos H3](https://h3geo.org/) na resolução 9, na qual cada hexágono tem uma área de 0.11 km², o que equivale a aproximadamente o tamanho de um quarteirão. Para baixar os dados com as informações espaciais de geometria da grade espacial, você deve usar o parâmetro `geometry = TRUE`. 
 
