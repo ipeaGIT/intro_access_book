@@ -435,8 +435,12 @@ Os resultados abaixo mostram que, em 2019, a população de Fortaleza conseguia 
 
 
 ```{r}
-# recupera info da populacao residente nos hexágonos
-access_to_jobs[for_data, on = 'id', population := i.population]
+# carrega biblioteca de visualização de dados
+library(ggplot2)
+library(patchwork)
+
+# recupera info da populacao residente e renda nos hexágonos
+access_to_jobs[for_data, on = 'id', c('population', 'decile') := list(i.population, i.decile)]
 
 # calcula média ponderada de acessibilidade antes e depois
 resultado_medio <- access_to_jobs[population > 0, 
@@ -498,10 +502,6 @@ Os ganhos de acessibilidade ao emprego se concentram principalmente próximos à
 ```{r}
 #| message: false
 #| warning: false
-# carrega biblioteca de visualização de dados
-library(ggplot2)
-library(patchwork)
-
 # mapas dos cenários antes-e-depois
 temp1 <- ggplot(access_to_jobs_sf) +
          geom_sf(aes(fill = jobs), color = NA) +
@@ -559,12 +559,15 @@ Políticas que resultam em maiores ganhos de acessibilidade para determinados gr
 Nós podemos entender como é a distribuição de níveis de acessibilidade entre grupos socioeconômicos usando um gráfico *box plot* e agrupando a nossa população por decis de renda. Separando a nossa visualização nos cenários antes e depois, compreendemos como a Linha Leste afeta os níveis de acessibilidade de decil de renda:
 
 ```{r}
-for_data[, decile := factor(decile)]
-access_to_jobs[for_data, on = "id", decile := i.decile]
-
+# plot distribuição de acessibilidade por renda
 ggplot(access_to_jobs[!is.na(decile)]) +
-  geom_boxplot(aes(decile, jobs, weight = population, group = decile)) +
-  facet_wrap(~ scenario, nrow = 1)
+  geom_boxplot(aes(x=as.factor(decile), y=jobs/1000, color=as.factor(decile),
+                   weight = population, group = decile)) +
+  facet_wrap(~ scenario, nrow = 1) +
+  scale_colour_brewer(palette = 'RdBu') +
+  labs(x='Decil de renda', y='empregos acessíveis\n(em milhares)') +
+  theme_minimal()
+
 ```
 
 Os dois paineis mostram claramente que em Fortaleza as pessoas mais ricas detêm os maiores níveis de acessibilidade ao emprego. Em Fortaleza, assim como na maior parte das grandes cidades brasileiras, os mais ricos tendem a morar próximos às grandes concentrações de emprego da cidade, enquanto os mais pobres tendem a ocupar regiões periféricas. Consequentemente, os níveis de acessibilidade dos mais ricos costuma ser maiores do que os dos mais pobres - não apenas porque moram mais perto dos empregos, mas porque também, geralmente, regiões centrais costumam ser mais bem servidas de transporte público do que as periferias.
@@ -572,17 +575,26 @@ Os dois paineis mostram claramente que em Fortaleza as pessoas mais ricas detêm
 Assim como no caso da distribuição espacial da acessibilidade, é muito difícil enxergar diferenças consideráveis nos níveis de acesso entre os cenários antes e depois. Lançando mão do mesmo recurso que fizemos anteriormente, podemos enxergar essas diferenças mais claramente visualizando a distribuição da diferença de acessibilidade entre cada cenário por decil de renda:
 
 ```{r}
-access_to_jobs_diff[
-  for_data,
-  on = "id",
-  `:=`(
-    decile = i.decile,
-    population = i.population
-  )
-]
+ggplot(data = access_to_jobs[population > 0]) +
+  geom_boxplot(aes(x=as.factor(decile), y=jobs/1000, color=as.factor(decile),
+                   weight = population, group = decile)) +
+  facet_wrap(~ scenario, nrow = 1) +
+  scale_colour_brewer(palette = 'RdBu') +
+  labs(x='Decil de renda', y='Empregos acessíveis\n(em milhares)') +
+  scale_x_discrete(labels = c("D1 mais\nPobres", paste0("D", 2:9), "D10 mais\nRicos")) +
+  theme_minimal()
 
-ggplot(access_to_jobs_diff[!is.na(decile)]) +
-  geom_boxplot(aes(decile, difference, weight = population, group = decile))
+
+
+ggplot(data = access_to_jobs[population > 0 & !is.na(diff)] ) +
+  geom_boxplot(aes(x=as.factor(decile), y=diff, color=as.factor(decile),
+                   weight = population, group = decile)) +
+  scale_colour_brewer(palette = 'RdBu') +
+  labs(x='Decil de renda', y='empregos acessíveis\n(em milhares)',
+       color = 'Decil de\n renda') +
+  scale_x_discrete(labels = c("D1 mais\nPobres", paste0("D", 2:9), "D10 mais\nRicos")) +
+  theme_minimal()
+
 ```
 
 Como podemos ver, os ganhos de acessibilidade se concentram principalmente entre as camadas médias da população, em especial os decis 5, 6 e 7. No entanto, o hexágono que mostrou maior aumento de acessibilidade aparece como *outlier* do 10º decil, apresentando um ganho de mais de 60000 empregos em relação ao cenário pré-implementação.
