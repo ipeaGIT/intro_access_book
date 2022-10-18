@@ -1,9 +1,11 @@
-on: push
+on:
+  push:
+    paths: renv.lock
 
-name: build_binder
+name: dockerhub
 
 jobs:
-  build_binder:
+  dockerhub:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
