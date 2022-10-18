@@ -394,14 +394,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </section><section id="cálculo-das-matrizes-de-tempo-de-viagem" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="cálculo-das-matrizes-de-tempo-de-viagem">
 <span class="header-section-number">6.2</span> Cálculo das matrizes de tempo de viagem</h2>
 <p>Tendo definido quais dados de GTFS vamos usar em cada um dos cenários analisados do transporte público, o próximo passo é calcular as matrizes de tempo de viagem, que posteriormente serão utilizadas para estimar os níveis de acessibilidade. Para isso, nós vamos utilizar a função <code><a href="https://rdrr.io/pkg/r5r/man/travel_time_matrix.html">travel_time_matrix()</a></code> do pacote <a href="https://github.com/ipeaGIT/r5r">r5r</a>, como apresentado anteriormente na <a href="3_calculando_acesso.html#sec-matrix"><span>Section&nbsp;3.1</span></a>.</p>
-<p>Antes de calcular as matrizes de fato, nós precisamos organizar os nossos arquivos na estrutura que o <a href="https://github.com/ipeaGIT/r5r">r5r</a> requer. Com o código abaixo, nós vamos criar uma pasta separada para cada um dos nossos cenários (antes e depois), e vamos salvar nessas pastas os arquivos de dados necessários para o roteamento. Primeiro, vamos criar uma pasta raíz chamada <code>analysis_dir</code> dentro da qual vamos colocar as pastas dos cenários (<code>dir_before</code> e <code>dir_after</code>):</p>
+<p>Antes de calcular as matrizes de fato, nós precisamos organizar os nossos arquivos na estrutura que o <a href="https://github.com/ipeaGIT/r5r">r5r</a> requer. Com o código abaixo, nós vamos criar uma pasta separada para cada um dos nossos cenários (antes e depois), e vamos salvar nessas pastas os arquivos de dados necessários para o roteamento. Primeiro, vamos criar uma pasta raíz chamada <code>analysis_dir</code>:</p>
 <div class="cell">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># cria pasta raíz da análise de dados</span></span>
 <span><span class="va">analysis_dir</span> <span class="op">&lt;-</span> <span class="st">"impact_analysis"</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="va">analysis_dir</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Dentro desta pasta, vamos criar agora as pastas de roteamento dos cenários antes e depois, contendo seus respectivos <em>feeds</em>:</p>
+<p>Dentro desta pasta raiz, vamos criar agora as pastas de roteamento dos cenários antes e depois (<code>dir_before</code> e <code>dir_after</code>), contendo seus respectivos <em>feeds</em>:</p>
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># criando pasta dos cenários</span></span>
 <span><span class="va">dir_before</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">analysis_dir</span>, <span class="st">"before"</span><span class="op">)</span></span>
@@ -511,16 +511,188 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span><span class="va">for_grid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/aopdata/man/read_grid.html">read_grid</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Fortaleza"</span>, showProgress <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-  |                                                                            
-  |                                                                      |   0%
-  |                                                                            
-  |=============================                                         |  41%
-  |                                                                            
-  |====================================================                  |  74%
-  |                                                                            
-  |================================================================      |  91%
-  |                                                                            
-  |======================================================================| 100%</code></pre>
+Downloading: 1.6 kB     
+Downloading: 1.6 kB     
+Downloading: 1.7 kB     
+Downloading: 1.7 kB     
+Downloading: 1.7 kB     
+Downloading: 1.7 kB     
+Downloading: 1.7 kB     
+Downloading: 1.7 kB     
+Downloading: 9.8 kB     
+Downloading: 9.8 kB     
+Downloading: 9.8 kB     
+Downloading: 9.8 kB     
+Downloading: 9.8 kB     
+Downloading: 9.8 kB     
+Downloading: 9.8 kB     
+Downloading: 9.8 kB     
+Downloading: 18 kB     
+Downloading: 18 kB     
+Downloading: 18 kB     
+Downloading: 18 kB     
+Downloading: 18 kB     
+Downloading: 18 kB     
+Downloading: 18 kB     
+Downloading: 18 kB     
+Downloading: 26 kB     
+Downloading: 26 kB     
+Downloading: 26 kB     
+Downloading: 26 kB     
+Downloading: 26 kB     
+Downloading: 26 kB     
+Downloading: 34 kB     
+Downloading: 34 kB     
+Downloading: 34 kB     
+Downloading: 34 kB     
+Downloading: 34 kB     
+Downloading: 34 kB     
+Downloading: 34 kB     
+Downloading: 34 kB     
+Downloading: 42 kB     
+Downloading: 42 kB     
+Downloading: 42 kB     
+Downloading: 42 kB     
+Downloading: 42 kB     
+Downloading: 42 kB     
+Downloading: 42 kB     
+Downloading: 42 kB     
+Downloading: 42 kB     
+Downloading: 42 kB     
+Downloading: 50 kB     
+Downloading: 50 kB     
+Downloading: 50 kB     
+Downloading: 50 kB     
+Downloading: 50 kB     
+Downloading: 50 kB     
+Downloading: 58 kB     
+Downloading: 58 kB     
+Downloading: 58 kB     
+Downloading: 58 kB     
+Downloading: 58 kB     
+Downloading: 58 kB     
+Downloading: 58 kB     
+Downloading: 58 kB     
+Downloading: 66 kB     
+Downloading: 66 kB     
+Downloading: 66 kB     
+Downloading: 66 kB     
+Downloading: 66 kB     
+Downloading: 66 kB     
+Downloading: 75 kB     
+Downloading: 75 kB     
+Downloading: 75 kB     
+Downloading: 75 kB     
+Downloading: 75 kB     
+Downloading: 75 kB     
+Downloading: 83 kB     
+Downloading: 83 kB     
+Downloading: 83 kB     
+Downloading: 83 kB     
+Downloading: 83 kB     
+Downloading: 83 kB     
+Downloading: 91 kB     
+Downloading: 91 kB     
+Downloading: 91 kB     
+Downloading: 91 kB     
+Downloading: 91 kB     
+Downloading: 91 kB     
+Downloading: 91 kB     
+Downloading: 91 kB     
+Downloading: 91 kB     
+Downloading: 91 kB     
+Downloading: 99 kB     
+Downloading: 99 kB     
+Downloading: 99 kB     
+Downloading: 99 kB     
+Downloading: 99 kB     
+Downloading: 99 kB     
+Downloading: 110 kB     
+Downloading: 110 kB     
+Downloading: 110 kB     
+Downloading: 110 kB     
+Downloading: 110 kB     
+Downloading: 110 kB     
+Downloading: 120 kB     
+Downloading: 120 kB     
+Downloading: 120 kB     
+Downloading: 120 kB     
+Downloading: 120 kB     
+Downloading: 120 kB     
+Downloading: 120 kB     
+Downloading: 120 kB     
+Downloading: 120 kB     
+Downloading: 120 kB     
+Downloading: 120 kB     
+Downloading: 120 kB     
+Downloading: 120 kB     
+Downloading: 120 kB     
+Downloading: 130 kB     
+Downloading: 130 kB     
+Downloading: 130 kB     
+Downloading: 130 kB     
+Downloading: 130 kB     
+Downloading: 130 kB     
+Downloading: 140 kB     
+Downloading: 140 kB     
+Downloading: 140 kB     
+Downloading: 140 kB     
+Downloading: 140 kB     
+Downloading: 140 kB     
+Downloading: 150 kB     
+Downloading: 150 kB     
+Downloading: 150 kB     
+Downloading: 150 kB     
+Downloading: 150 kB     
+Downloading: 150 kB     
+Downloading: 150 kB     
+Downloading: 150 kB     
+Downloading: 150 kB     
+Downloading: 150 kB     
+Downloading: 160 kB     
+Downloading: 160 kB     
+Downloading: 160 kB     
+Downloading: 160 kB     
+Downloading: 160 kB     
+Downloading: 160 kB     
+Downloading: 160 kB     
+Downloading: 160 kB     
+Downloading: 160 kB     
+Downloading: 160 kB     
+Downloading: 160 kB     
+Downloading: 160 kB     
+Downloading: 170 kB     
+Downloading: 170 kB     
+Downloading: 170 kB     
+Downloading: 170 kB     
+Downloading: 170 kB     
+Downloading: 170 kB     
+Downloading: 180 kB     
+Downloading: 180 kB     
+Downloading: 180 kB     
+Downloading: 180 kB     
+Downloading: 180 kB     
+Downloading: 180 kB     
+Downloading: 190 kB     
+Downloading: 190 kB     
+Downloading: 200 kB     
+Downloading: 200 kB     
+Downloading: 200 kB     
+Downloading: 200 kB     
+Downloading: 200 kB     
+Downloading: 200 kB     
+Downloading: 210 kB     
+Downloading: 210 kB     
+Downloading: 220 kB     
+Downloading: 220 kB     
+Downloading: 220 kB     
+Downloading: 220 kB     
+Downloading: 220 kB     
+Downloading: 220 kB     
+Downloading: 220 kB     
+Downloading: 220 kB     
+Downloading: 220 kB     
+Downloading: 220 kB     </code></pre>
 </div>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># geração dos centroids das células espaciais</span></span>
 <span><span class="va">points</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html">st_centroid</a></span><span class="op">(</span><span class="va">for_grid</span><span class="op">)</span></span>
@@ -613,40 +785,46 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </section><section id="cálculo-da-acessibilidade-nos-cenários-antes-e-depois" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="cálculo-da-acessibilidade-nos-cenários-antes-e-depois">
 <span class="header-section-number">6.3</span> Cálculo da acessibilidade nos cenários antes e depois</h2>
-<p>O cálculo da acessibilidade é muito simples, requerendo apenas um processamento básico dos nossos dados e a aplicação de uma das funções de acessibilidade do pacote <a href="https://github.com/ipeaGIT/accessibility">accessibility</a>. Como tratamento dos dados, vamos juntar as matrizes dos dois cenários em uma única tabela, identificando cada cenário com a coluna <code>scenario</code>:</p>
+<p>O cálculo da acessibilidade é muito simples, e requer apenas um processamento básico dos nossos dados e a aplicação de uma das funções que calcula indicadores de acessibilidade do pacote <a href="https://github.com/ipeaGIT/accessibility">accessibility</a>. Para facilitar o tratamento dos dados, nós vamos empilhar as matrizes de tempo de viagem dos dois cenários em uma única tabela, identificando cada cenário com a coluna <code>scenario</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">ttm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">ttm_before</span>, <span class="va">ttm_after</span>, idcol <span class="op">=</span> <span class="st">"scenario"</span><span class="op">)</span></span>
-<span><span class="va">ttm</span><span class="op">[</span>, <span class="va">scenario</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">scenario</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"before"</span>, <span class="st">"after"</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># empilhando matrizes de tempo de viagem antes e depois</span></span>
+<span><span class="va">ttm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">ttm_before</span>, <span class="va">ttm_after</span>, idcol <span class="op">=</span> <span class="st">"scenario"</span><span class="op">)</span></span>
+<span><span class="va">ttm</span><span class="op">[</span>, <span class="va">scenario</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">scenario</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"antes"</span>, <span class="st">"depois"</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
 <span></span>
 <span><span class="va">ttm</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         scenario          fromId            toId travel_time
-      1:   before 89801040323ffff 89801040323ffff           2
-      2:   before 89801040323ffff 89801040327ffff          22
-      3:   before 89801040323ffff 8980104032fffff          14
-      4:   before 89801040323ffff 89801040333ffff           9
-      5:   before 89801040323ffff 89801040337ffff          30
+      1:    antes 89801040323ffff 89801040323ffff           2
+      2:    antes 89801040323ffff 89801040327ffff          22
+      3:    antes 89801040323ffff 8980104032fffff          14
+      4:    antes 89801040323ffff 89801040333ffff           9
+      5:    antes 89801040323ffff 89801040337ffff          30
      ---                                                     
-3336964:    after 8980107b6dbffff 8980107b6cbffff           8
-3336965:    after 8980107b6dbffff 8980107b6cfffff          14
-3336966:    after 8980107b6dbffff 8980107b6d3ffff           9
-3336967:    after 8980107b6dbffff 8980107b6d7ffff          15
-3336968:    after 8980107b6dbffff 8980107b6dbffff           0</code></pre>
+3336964:   depois 8980107b6dbffff 8980107b6cbffff           8
+3336965:   depois 8980107b6dbffff 8980107b6cfffff          14
+3336966:   depois 8980107b6dbffff 8980107b6d3ffff           9
+3336967:   depois 8980107b6dbffff 8980107b6d7ffff          15
+3336968:   depois 8980107b6dbffff 8980107b6dbffff           0</code></pre>
 </div>
 </div>
-<p>Para o cálculo da acessibilidade, vamos precisar de uma tabela com os dados de uso do solo da cidade de Fortaleza. Para isso, nós usamos a função <code><a href="https://rdrr.io/pkg/aopdata/man/read_landuse.html">read_landuse()</a></code> do pacote <a href="https://github.com/ipeaGIT/aopdata">aopdata</a>:</p>
+<p>Para o cálculo da acessibilidade, vamos precisar de uma tabela com os dados de uso do solo da cidade de Fortaleza. Para isso, nós usamos a função <code><a href="https://rdrr.io/pkg/aopdata/man/read_landuse.html">read_landuse()</a></code> do pacote <a href="https://github.com/ipeaGIT/aopdata">aopdata</a>, que traz a informação com a quantidade de população, e oportunidades de empregos e escolas em cada hexágono da cidade.</p>
 <div class="cell">
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">for_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/aopdata/man/read_landuse.html">read_landuse</a></span><span class="op">(</span><span class="st">"for"</span>, showProgress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># download dados de uso do solo</span></span>
+<span><span class="va">for_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/aopdata/man/read_landuse.html">read_landuse</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Fortaleza"</span>, showProgress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Para fins de demonstração, vamos calcular a acessibilidade a postos de trabalho e a escolas públicas na nossa área de estudo. Os dados do total de empregos e escolas em cada hexágono estão listados nas colunas <code>T001</code> e <code>E001</code>, respectivamente. Vamos renomeá-las para facilitar sua identificação e manter apenas as colunas necessárias na tabela de dados de uso do solo (vamos manter também as colunas <code>P001</code>, de população total em cada hexágono, e <code>R003</code>, do decil de renda em que cada hexágono se encontra, que serão úteis mais à frente):</p>
+<p>Para fins de demonstração, vamos calcular a acessibilidade a postos de trabalho e a escolas públicas de ensino médio na nossa área de estudo. Os dados do total de empregos e escolas em cada hexágono estão listados nas colunas <code>T001</code> e <code>E004</code>, respectivamente. Vamos renomeá-las para facilitar sua identificação e manter apenas as colunas necessárias na tabela de dados de uso do solo. Também vamos manter também as colunas <code>P001</code>, de população total em cada hexágono, e <code>R003</code>, do decil de renda em que cada hexágono se encontra, que serão úteis mais à frente:</p>
 <div class="cell">
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">cols_to_keep</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"id"</span>, <span class="st">"jobs"</span>, <span class="st">"schools"</span>, <span class="st">"population"</span>, <span class="st">"decile"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># nome das colunas a serem mantidas</span></span>
+<span><span class="va">cols_to_keep</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"id"</span>, <span class="st">"jobs"</span>, <span class="st">"schools"</span>, <span class="st">"population"</span>, <span class="st">"decile"</span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># renomeando colunas</span></span>
 <span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setattr.html">setnames</a></span><span class="op">(</span></span>
 <span>  <span class="va">for_data</span>,</span>
-<span>  old <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"id_hex"</span>, <span class="st">"T001"</span>, <span class="st">"E001"</span>, <span class="st">"P001"</span>, <span class="st">"R003"</span><span class="op">)</span>,</span>
+<span>  old <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"id_hex"</span>, <span class="st">"T001"</span>, <span class="st">"E004"</span>, <span class="st">"P001"</span>, <span class="st">"R003"</span><span class="op">)</span>,</span>
 <span>  new <span class="op">=</span> <span class="va">cols_to_keep</span></span>
 <span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># deletando demais colunas que não vamos usar</span></span>
 <span><span class="va">for_data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/sets.html">setdiff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">for_data</span><span class="op">)</span>, <span class="va">cols_to_keep</span><span class="op">)</span> <span class="op">:=</span> <span class="cn">NULL</span><span class="op">]</span></span>
 <span></span>
 <span><span class="va">for_data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -662,20 +840,25 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 2559: 8980107b6cfffff       2997      3    4       0
 2560: 8980107b6d3ffff       1751      8   14       0
 2561: 8980107b6d7ffff       2032      4  134       0
-2562: 8980107b6dbffff       1896      9  193       1</code></pre>
+2562: 8980107b6dbffff       1896      9  193       0</code></pre>
 </div>
 </div>
-<p>A parte mais difícil do processo do cálculo de acessibilidade é a definição da medida a ser utilizada. É extremamente importante pesar as vantagens e desvantagens de cada uma e compreender quais medidas se adequam às oportunidades para quais se deseja calcular os níveis de acessibilidade. Neste exemplo, utilizaremos duas medidas distintas:</p>
+<p>Uma decisão-chave no cálculo de acessibilidade é a escolha da medida a ser utilizada. É extremamente importante pesar as vantagens e desvantagens de cada medida e compreender quais indicadores se adequam às oportunidades para quais se deseja calcular os níveis de acessibilidade. Neste exemplo, utilizaremos duas medidas distintas:</p>
 <ul>
-<li><p>No cálculo da acessibilidade a empregos, vamos usar a medida de oportunidades cumulativas. Esta métrica nos permite entender quantos empregos são acessíveis dentro de um determinado custo de viagem, representando, desta forma, a oferta de empregos aos habitantes de cada uma das células de nossa grade. Embora essa medida não leve em consideração a competição por empregos, sua principal vantagem é que ela é de muito simples comunicação e interpretação. Em nosso exemplo, vamos tomar como limite de custo um tempo de viagem de 30 minutos.</p></li>
-<li><p>No cálculo da acessibilidade a escolas públicas, vamos usar a medida de custo mínimo de viagem. Esta métrica é especialmente útil para avaliar a cobertura de serviços públicos essenciais, como educação e saúde básica, pois é desejado que a maior parte da população de uma cidade esteja a uma distância considerada razoável desses serviços.</p></li>
+<li>No cálculo da <strong>acessibilidade a empregos</strong>, vamos usar a medida de oportunidades cumulativas. Esta métrica nos permite entender quantos empregos são acessíveis dentro de um determinado custo de viagem, representando, desta forma, a oferta de empregos aos habitantes de cada uma das células de nossa grade. Embora essa medida não leve em consideração a competição por empregos, sua principal vantagem é que ela é de muito simples comunicação e interpretação. Em nosso exemplo, vamos tomar como limite de custo um tempo de viagem de 60 minutos, que é muito próximo do tempo médio de deslocamento casa-trabalho por transporte público de Fortaleza em 2019 (cerca de 58 minutos), conforme o Pasfor<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</li>
+</ul>
+<ul>
+<li>No cálculo da acessibilidade a escolas públicas, vamos usar a medida de custo mínimo de viagem. Esta métrica é especialmente útil para avaliar a cobertura de serviços públicos essenciais, como educação e saúde básica. Ela também traz informações que permitem a gente identificar qual parcela da população de uma cidade está a uma distância maior do que seria razoável para acessar esses serviços essenciais.</li>
 </ul>
 <p>Como mostrado anteriormente, na <a href="3_calculando_acesso.html#sec-accessibility"><span>Section&nbsp;3.2</span></a>, o cálculo dessas medidas pode ser feito com as funções <code><a href="https://rdrr.io/pkg/accessibility/man/cumulative_cutoff.html">cumulative_cutoff()</a></code> e <code><a href="https://rdrr.io/pkg/accessibility/man/cost_to_closest.html">cost_to_closest()</a></code>, respectivamente, do pacote <a href="https://github.com/ipeaGIT/accessibility">accessibility</a>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ipeaGIT/accessibility">accessibility</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># carrega biblioteca</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ipeaGIT/accessibility">accessibility</a></span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># renomeia colunas</span></span>
 <span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setattr.html">setnames</a></span><span class="op">(</span><span class="va">ttm</span>, old <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"fromId"</span>, <span class="st">"toId"</span><span class="op">)</span>, new <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"from_id"</span>, <span class="st">"to_id"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># calcula medida de oportunidades cumulativas</span></span>
 <span><span class="va">access_to_jobs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/accessibility/man/cumulative_cutoff.html">cumulative_cutoff</a></span><span class="op">(</span></span>
 <span>  travel_matrix <span class="op">=</span> <span class="va">ttm</span>,</span>
 <span>  land_use_data <span class="op">=</span> <span class="va">for_data</span>,</span>
@@ -687,19 +870,20 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span><span class="va">access_to_jobs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                   id scenario   jobs
-   1: 89801040323ffff   before  46159
-   2: 89801040327ffff   before  25499
-   3: 8980104032bffff   before    118
-   4: 8980104032fffff   before  66513
-   5: 89801040333ffff   before  46159
+   1: 89801040323ffff    antes  46159
+   2: 89801040327ffff    antes  25499
+   3: 8980104032bffff    antes    118
+   4: 8980104032fffff    antes  66513
+   5: 89801040333ffff    antes  46159
   ---                                
-5120: 8980107b6cbffff    after 366197
-5121: 8980107b6cfffff    after 256888
-5122: 8980107b6d3ffff    after 324981
-5123: 8980107b6d7ffff    after 338965
-5124: 8980107b6dbffff    after 361967</code></pre>
+5120: 8980107b6cbffff   depois 366197
+5121: 8980107b6cfffff   depois 256888
+5122: 8980107b6d3ffff   depois 324981
+5123: 8980107b6d7ffff   depois 338965
+5124: 8980107b6dbffff   depois 361967</code></pre>
 </div>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">time_to_schools</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/accessibility/man/cost_to_closest.html">cost_to_closest</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># calcula medida de tempo mínimo de viagem</span></span>
+<span><span class="va">time_to_schools</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/accessibility/man/cost_to_closest.html">cost_to_closest</a></span><span class="op">(</span></span>
 <span>  travel_matrix <span class="op">=</span> <span class="va">ttm</span>,</span>
 <span>  land_use_data <span class="op">=</span> <span class="va">for_data</span>,</span>
 <span>  opportunity <span class="op">=</span> <span class="st">"schools"</span>,</span>
@@ -709,147 +893,193 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span><span class="va">time_to_schools</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                   id scenario travel_time
-   1: 89801040323ffff   before          25
-   2: 89801040323ffff    after          25
-   3: 89801040327ffff   before          35
-   4: 89801040327ffff    after          35
-   5: 8980104032bffff   before         Inf
+   1: 89801040323ffff    antes          36
+   2: 89801040323ffff   depois          36
+   3: 89801040327ffff    antes          41
+   4: 89801040327ffff   depois          41
+   5: 8980104032bffff    antes         Inf
   ---                                     
-5120: 8980107b6d3ffff    after           9
-5121: 8980107b6d7ffff   before          13
-5122: 8980107b6d7ffff    after          13
-5123: 8980107b6dbffff   before           0
-5124: 8980107b6dbffff    after           0</code></pre>
+5120: 8980107b6d3ffff   depois          18
+5121: 8980107b6d7ffff    antes          14
+5122: 8980107b6d7ffff   depois          14
+5123: 8980107b6dbffff    antes          15
+5124: 8980107b6dbffff   depois          15</code></pre>
 </div>
 </div>
-<p>Como podemos ver, o resultado da função de custo mínimo de viagem inclui alguns valores <code>Inf</code>. As origens listadas com este valor não conseguem alcançar dentro de 120 minutos (limite de tempo de viagem imposto no cálculo da matriz) nenhum destino em que está localizada ao menos uma escola pública. O valor <code>Inf</code>, portanto, é utilizado para sinalizar esta condição.</p>
+<p>Como podemos ver, o resultado da função de custo mínimo de viagem inclui alguns valores <code>Inf</code>. As origens listadas com este valor não conseguem alcançar nenhuma escola pública dentro de 60 minutos (limite de tempo de viagem imposto no cálculo da matriz). O valor <code>Inf</code>, portanto, é utilizado para sinalizar esta condição. Para fins de simplicidade, vamos considerar que essas regiões estão a 80 minutos de viagem de uma escola. Assim, nós podemos calcular a diferença de acessibilidade entre os cenários antes e depois da seguinte maneira:</p>
+<div class="cell">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># imputa tempo de viagem de 80 min. para valores Inf</span></span>
+<span><span class="va">time_to_schools</span><span class="op">[</span>, <span class="va">travel_time</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/is.finite.html">is.infinite</a></span><span class="op">(</span><span class="va">travel_time</span><span class="op">)</span>, <span class="fl">80</span>, <span class="va">travel_time</span><span class="op">)</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co"># calcula diferença de acessibilidade entre cenários</span></span>
+<span><span class="va">access_to_jobs</span><span class="op">[</span>, <span class="va">diff</span> <span class="op">:=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/shift.html">shift</a></span><span class="op">(</span><span class="va">jobs</span>, type <span class="op">=</span> <span class="st">"lead"</span><span class="op">)</span> <span class="op">-</span> <span class="va">jobs</span>, by <span class="op">=</span> <span class="va">id</span><span class="op">]</span></span>
+<span><span class="va">time_to_schools</span><span class="op">[</span>, <span class="va">diff</span> <span class="op">:=</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/shift.html">shift</a></span><span class="op">(</span><span class="va">travel_time</span>, type <span class="op">=</span> <span class="st">"lead"</span><span class="op">)</span> <span class="op">-</span> <span class="va">travel_time</span>, by <span class="op">=</span> <span class="va">id</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section><section id="análise-dos-níveis-de-acessibilidade-antes-e-depois" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="análise-dos-níveis-de-acessibilidade-antes-e-depois">
 <span class="header-section-number">6.4</span> Análise dos níveis de acessibilidade antes e depois</h2>
-<p>Agora que calculamos os níveis de acessibilidade em cada cenário, precisamos compreender como as mudanças na frequência das linhas de transporte público afetaram as condições de acessibilidade em nossa área de estudo. Uma boa forma de entender isso é olhando para a distribuição espacial dos níveis de acessibilidade. Vamos juntar usar as informações espaciais da nossa área de estudo, disponíveis no objeto <code>for_grid</code>, baixado do pacote <a href="https://github.com/ipeaGIT/aopdata">aopdata</a> anteriormente, às nossas tabelas de acessibilidade:</p>
+<p>Agora que calculamos os níveis de acessibilidade em cada cenário, precisamos compreender como a futura implementação da Linha Leste do Metrô deverá impactar as condições de acessibilidade em nossa área de estudo. Uma primeira maneira de captar isso é o impacto que expansão deverá ter na acessibilidade média da cidade. Para isso, nós calculamos a quantidade média de empregos acessíveis em cada cenário. Aqui é importante calcular a média de acessibilidade ponderada pela população de cada hexágono.</p>
+<p>Os resultados abaixo mostram que, em 2019, a população de Fortaleza conseguia acessar em média <code>240.663</code> empregos em até 60 minutos de transporte público. A implementação da nova Linha Leste do metrô deverá aumentar esse valor em 1%, para <code>243.023</code> empregos acessíveis em média.</p>
 <div class="cell">
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setDT.html">setDT</a></span><span class="op">(</span><span class="va">for_grid</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># carrega biblioteca de visualização de dados</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">access_to_jobs</span><span class="op">[</span><span class="va">for_grid</span>, on <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"id_hex"</span><span class="op">)</span>, <span class="va">geom</span> <span class="op">:=</span> <span class="va">i.geom</span><span class="op">]</span></span>
-<span><span class="va">time_to_schools</span><span class="op">[</span><span class="va">for_grid</span>, on <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"id_hex"</span><span class="op">)</span>, <span class="va">geom</span> <span class="op">:=</span> <span class="va">i.geom</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co"># recupera info da populacao residente e renda nos hexágonos</span></span>
+<span><span class="va">access_to_jobs</span><span class="op">[</span><span class="va">for_data</span>, on <span class="op">=</span> <span class="st">'id'</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">'population'</span>, <span class="st">'decile'</span><span class="op">)</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">i.population</span>, <span class="va">i.decile</span><span class="op">)</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co"># calcula média ponderada de acessibilidade antes e depois</span></span>
+<span><span class="va">resultado_medio</span> <span class="op">&lt;-</span> <span class="va">access_to_jobs</span><span class="op">[</span><span class="va">population</span> <span class="op">&gt;</span> <span class="fl">0</span>, </span>
+<span>                                  <span class="fu">.</span><span class="op">(</span>avg_access  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">jobs</span>, w <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">population</span><span class="op">)</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>                                  by<span class="op">=</span><span class="va">scenario</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">resultado_medio</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   scenario avg_access
+1:    antes   240663.3
+2:   depois   243023.3</code></pre>
 </div>
-<p>Feito isso, apresentamos os resultados em formato de mapa:</p>
-<div class="cell">
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">access_to_jobs_sf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sf.html">st_sf</a></span><span class="op">(</span><span class="va">access_to_jobs</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">access_to_jobs_sf</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">jobs</span><span class="op">)</span>, color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">scenario</span>, nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span></span>
-<span>    option <span class="op">=</span> <span class="st">"inferno"</span>,</span>
-<span>    label <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_number.html">label_number</a></span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">1000</span>, suffix <span class="op">=</span> <span class="st">"k"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># figura</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">resultado_medio</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">scenario</span>, y <span class="op">=</span> <span class="va">avg_access</span><span class="op">/</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">avg_access</span><span class="op">/</span><span class="fl">1000</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>, vjust <span class="op">=</span> <span class="op">-</span><span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Empregos acessíveis\n(em milhares)"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">time_to_schools_sf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sf.html">st_sf</a></span><span class="op">(</span><span class="va">time_to_schools</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">time_to_schools_sf</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">travel_time</span><span class="op">)</span>, color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">scenario</span>, nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span>option <span class="op">=</span> <span class="st">"cividis"</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-23-2.png" class="img-fluid" width="672"></p>
 </div>
-</div>
-<p>Como podemos ver, a construção da Linha Leste do metrô de Fortaleza por si só, ignorando as demais intervenções que acompanham esta invervenção, pouco afeta os níveis de acessibilidade na cidade. Isto fica claro quando olhamos para os níveis médios de acessibilidade nos dois cenários, que pouco se alteram:</p>
+<p>Analisando-se o tempo de acesso à escola pública de ensino médio mais próxima, nota-se que a Linha Leste deverá ter um resultado quase nulo na média de acessibilidade a essas escolas.</p>
 <div class="cell">
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">access_to_jobs</span><span class="op">[</span><span class="va">for_data</span>, on <span class="op">=</span> <span class="st">"id"</span>, <span class="va">population</span> <span class="op">:=</span> <span class="va">i.population</span><span class="op">]</span></span>
-<span><span class="va">avg_access_to_jobs</span> <span class="op">&lt;-</span> <span class="va">access_to_jobs</span><span class="op">[</span></span>
-<span>  ,</span>
-<span>  <span class="fu">.</span><span class="op">(</span>avg_access <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span><span class="op">(</span><span class="va">jobs</span>, w <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">population</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  by <span class="op">=</span> <span class="va">scenario</span></span>
-<span><span class="op">]</span></span>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># recupera info da populacao residente nos hexágonos</span></span>
+<span><span class="va">time_to_schools</span><span class="op">[</span><span class="va">for_data</span>, on <span class="op">=</span> <span class="st">'id'</span>, <span class="va">population</span> <span class="op">:=</span> <span class="va">i.population</span><span class="op">]</span></span>
 <span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">avg_access_to_jobs</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">scenario</span>, <span class="va">avg_access</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co"># calcula média ponderada de acessibilidade antes e depois</span></span>
+<span><span class="va">resultado_medio</span> <span class="op">&lt;-</span> <span class="va">time_to_schools</span><span class="op">[</span><span class="va">population</span> <span class="op">&gt;</span> <span class="fl">0</span>, </span>
+<span>                                  <span class="fu">.</span><span class="op">(</span>avg_access  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">travel_time</span>, w <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">population</span><span class="op">)</span>, na.rm<span class="op">=</span><span class="cn">T</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>                                  by<span class="op">=</span><span class="va">scenario</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">resultado_medio</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   scenario avg_access
+1:    antes   13.05281
+2:   depois   13.04322</code></pre>
+</div>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># figura</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">resultado_medio</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">scenario</span>, y <span class="op">=</span> <span class="va">avg_access</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">avg_access</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>, vjust <span class="op">=</span> <span class="op">-</span><span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Média do tempo até a escola\nmais próxima(em minutos)"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">time_to_schools</span><span class="op">[</span><span class="va">for_data</span>, on <span class="op">=</span> <span class="st">"id"</span>, <span class="va">population</span> <span class="op">:=</span> <span class="va">i.population</span><span class="op">]</span></span>
-<span><span class="va">time_to_schools</span><span class="op">[</span></span>
-<span>  ,</span>
-<span>  <span class="va">treated_travel_time</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/is.finite.html">is.infinite</a></span><span class="op">(</span><span class="va">travel_time</span><span class="op">)</span>, <span class="fl">120</span>, <span class="va">travel_time</span><span class="op">)</span></span>
-<span><span class="op">]</span></span>
-<span><span class="va">avg_time_to_schools</span> <span class="op">&lt;-</span> <span class="va">time_to_schools</span><span class="op">[</span></span>
-<span>  ,</span>
-<span>  <span class="fu">.</span><span class="op">(</span>avg_time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span><span class="op">(</span><span class="va">treated_travel_time</span>, w <span class="op">=</span> <span class="va">population</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>  by <span class="op">=</span> <span class="va">scenario</span></span>
-<span><span class="op">]</span></span>
-<span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">avg_time_to_schools</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">scenario</span>, <span class="va">avg_time</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-24-2.png" class="img-fluid" width="672"></p>
 </div>
-</div>
-<p>Neste caso, uma forma de mostrar o impacto da política de forma mais clara é apresentar a distribuição espacial da diferença de acessibilidade entre os dois cenários:</p>
+<p>Esse resultado ocorre em grande medida por duas razões. A primeira delas é porque, neste estudo de caso, estamos fazendo uma análise simplificada que considera apenas a construção do projeto da Linha Leste do metrô, e ignora as demais intervenções que deverão acompanhar esta intervenção, como o aumento de frequência das demais linhas de metrô e trens na cidade. A segunda razão de encontrarmos impactos tão baixos, é o fato de que a proposta da Linha Leste consiste numa extensão de trecho relativamente pequeno do metrô. Soma-se a isso o fato de que este projeto é localizado próximo ao centro da cidade, que já era a região de mais alta acessibilidade da cidade em 2019.</p>
+<p>Embora tenhamos visto que o impacto médio do projeto deverá ser pequeno, é importante entendermos como esse impacto de acessibilidade varia espacialmente. Para isso, vamos juntar nossas tabelas de estimativas de acessibilidade com a grade espacial da nossa área de estudo, disponível no objeto <code>for_grid</code> baixado do pacote <a href="https://github.com/ipeaGIT/aopdata">aopdata</a> anteriormente.</p>
 <div class="cell">
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">access_to_jobs_diff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/dcast.data.table.html">dcast</a></span><span class="op">(</span></span>
-<span>  <span class="va">access_to_jobs</span>,</span>
-<span>  <span class="va">id</span> <span class="op">~</span> <span class="va">scenario</span>,</span>
-<span>  value.var <span class="op">=</span> <span class="st">"jobs"</span></span>
-<span><span class="op">)</span></span>
-<span><span class="va">access_to_jobs_diff</span><span class="op">[</span>, <span class="va">difference</span> <span class="op">:=</span> <span class="va">after</span> <span class="op">-</span> <span class="va">before</span><span class="op">]</span></span>
-<span><span class="va">access_to_jobs_diff</span><span class="op">[</span><span class="va">for_grid</span>, on <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"id_hex"</span><span class="op">)</span>, <span class="va">geom</span> <span class="op">:=</span> <span class="va">i.geom</span><span class="op">]</span></span>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># traz info espacial para tabelas de acessibilidade</span></span>
+<span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setDT.html">setDT</a></span><span class="op">(</span><span class="va">for_grid</span><span class="op">)</span></span>
+<span><span class="va">access_to_jobs</span><span class="op">[</span><span class="va">for_grid</span>, on <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"id_hex"</span><span class="op">)</span>, <span class="va">geom</span> <span class="op">:=</span> <span class="va">i.geom</span><span class="op">]</span></span>
+<span><span class="va">time_to_schools</span><span class="op">[</span><span class="va">for_grid</span>, on <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"id_hex"</span><span class="op">)</span>, <span class="va">geom</span> <span class="op">:=</span> <span class="va">i.geom</span><span class="op">]</span></span>
 <span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/sf.html">st_sf</a></span><span class="op">(</span><span class="va">access_to_jobs_diff</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">difference</span><span class="op">)</span>, color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+<span><span class="co"># converte tabela em objeto espacial</span></span>
+<span><span class="va">access_to_jobs_sf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sf.html">st_sf</a></span><span class="op">(</span><span class="va">access_to_jobs</span><span class="op">)</span></span>
+<span><span class="va">time_to_schools_sf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sf.html">st_sf</a></span><span class="op">(</span><span class="va">time_to_schools</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">time_to_schools_diff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/dcast.data.table.html">dcast</a></span><span class="op">(</span></span>
-<span>  <span class="va">time_to_schools</span>,</span>
-<span>  <span class="va">id</span> <span class="op">~</span> <span class="va">scenario</span>,</span>
-<span>  value.var <span class="op">=</span> <span class="st">"travel_time"</span></span>
-<span><span class="op">)</span></span>
-<span><span class="va">time_to_schools_diff</span><span class="op">[</span>, <span class="va">difference</span> <span class="op">:=</span> <span class="va">after</span> <span class="op">-</span> <span class="va">before</span><span class="op">]</span></span>
-<span><span class="va">time_to_schools_diff</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/is.finite.html">is.nan</a></span><span class="op">(</span><span class="va">difference</span><span class="op">)</span>, <span class="va">difference</span> <span class="op">:=</span> <span class="fl">0</span><span class="op">]</span></span>
-<span><span class="va">time_to_schools_diff</span><span class="op">[</span><span class="va">for_grid</span>, on <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"id_hex"</span><span class="op">)</span>, <span class="va">geom</span> <span class="op">:=</span> <span class="va">i.geom</span><span class="op">]</span></span>
-<span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/sf.html">st_sf</a></span><span class="op">(</span><span class="va">time_to_schools_diff</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">difference</span><span class="op">)</span>, color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-25-2.png" class="img-fluid" width="672"></p>
-</div>
-</div>
+<p>Feito isso, o código abaixo mostra nos mapas a distribuição espacial dos níveis de acessibilidade nos dois cenários (antes e depois) e a diferênça de acessibilidade entre os dois cenários.</p>
 <p>Os ganhos de acessibilidade ao emprego se concentram principalmente próximos às estações do novo corredor e dos corredores já existentes que se ligam a ele. Isto mostra como a implantação de uma infraestrutura de transporte pode impactar não apenas suas imediações, mas também locais mais afastados, graças à conectividade da rede.</p>
-<p>Por sua vez, o mapa de diferença no tempo de acesso a escolas apresenta um cenário diferente: nenhuma região da cidade apresenta melhorias no tempo de acesso. Diferentemente da distribuição de empregos, que tende a seguir critérios econômicos e mercadológicos, a distribuição de equipamentos públicos, entre eles escolas públicas, tende a ser planejada usando critérios de justiça social e equidade, sendo, portanto, mais equilibrada no território. Dessa forma, a construção da Linha Leste na parte central da cidade em nada afeta o tempo de acesso das pessoas que moram em locais afastados desse corredor. Não apenas isso, mas mesmo para as pessoas que moram perto do novo corredor a sua implementação não muda os níveis de acesso a escolas. Isto é um sinal que esta área possui uma boa oferta de escolas e já é bem servida de transporte público, mesmo antes da finalização da Linha Leste.</p>
+<div class="cell">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># mapas dos cenários antes-e-depois</span></span>
+<span><span class="va">temp1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">access_to_jobs_sf</span><span class="op">)</span> <span class="op">+</span></span>
+<span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">jobs</span><span class="op">)</span>, color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span></span>
+<span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">scenario</span>, nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span></span>
+<span>           option <span class="op">=</span> <span class="st">"inferno"</span>,</span>
+<span>           label <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_number.html">label_number</a></span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">1000</span><span class="op">)</span></span>
+<span>           <span class="op">)</span> <span class="op">+</span> </span>
+<span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>fill<span class="op">=</span><span class="st">'Empregos\nacessíveis\n(em milhares)'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># mapa da diferença</span></span>
+<span><span class="va">temp2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">access_to_jobs_sf</span>, <span class="va">diff</span> <span class="op">&gt;=</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">diff</span><span class="op">)</span>, color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span></span>
+<span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span></span>
+<span>           option <span class="op">=</span> <span class="st">"cividis"</span>,</span>
+<span>           label <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_number.html">label_number</a></span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">1000</span><span class="op">)</span></span>
+<span>         <span class="op">)</span> <span class="op">+</span> </span>
+<span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>fill<span class="op">=</span><span class="st">'Diferença de\nempregos\nacessíveis\n(em milhares)'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co"># plot</span></span>
+<span><span class="va">temp1</span> <span class="op">/</span> <span class="va">temp2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Por sua vez, o mapa de diferença no tempo de acesso a escolas (abaixo) apresenta um cenário diferente: praticamente nenhuma região da cidade apresenta melhorias no tempo de acesso. Diferentemente da distribuição de empregos, que tende a seguir critérios econômicos, a distribuição de equipamentos públicos como escolas tende a ser planejada usando critérios de justiça social e equidade, sendo, portanto, mais equilibrada no território. Dessa forma, a construção da Linha Leste na parte central da cidade em nada afeta o tempo de acesso das pessoas que moram em locais afastados desse corredor. Não apenas isso, mas mesmo para as pessoas que moram perto do novo corredor a sua implementação não muda os níveis de acesso a escolas. Isto é um sinal que esta área possui uma boa oferta de escolas e já é bem servida de transporte público, mesmo antes da finalização da Linha Leste.</p>
+<div class="cell">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">temp1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">time_to_schools_sf</span><span class="op">)</span> <span class="op">+</span></span>
+<span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">travel_time</span><span class="op">)</span>, color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span></span>
+<span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">scenario</span>, nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span></span>
+<span>           option <span class="op">=</span> <span class="st">"viridis"</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>fill<span class="op">=</span><span class="st">'Tempo até\n a escola\nmaispróxima\n(em minutos)'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="va">temp2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">time_to_schools_sf</span>, <span class="va">diff</span> <span class="op">&lt;=</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">diff</span><span class="op">)</span>, color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span></span>
+<span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span></span>
+<span>           option <span class="op">=</span> <span class="st">"viridis"</span>, direction <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>fill<span class="op">=</span><span class="st">'Diferença no\ntempo até\n a escola\nmaispróxima\n(em minutos)'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="va">temp1</span> <span class="op">/</span><span class="va">temp2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 </section><section id="desigualdade-de-acessibilidade" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="desigualdade-de-acessibilidade">
 <span class="header-section-number">6.5</span> Desigualdade de acessibilidade</h2>
 <p>Políticas que resultam em maiores ganhos de acessibilidade para determinados grupos populacionais em detrimento de outros, como é o caso observado nos níveis de acesso a empregos em Fortaleza, alteram também a distribuição da acessibilidade entre grupos socioeconômicos na cidade. Em outras palavras, políticas que trazem mais benefícios para certas pessoas do que para outras mudam a configuração da desigualdade de acessibilidade.</p>
 <p>Nós podemos entender como é a distribuição de níveis de acessibilidade entre grupos socioeconômicos usando um gráfico <em>box plot</em> e agrupando a nossa população por decis de renda. Separando a nossa visualização nos cenários antes e depois, compreendemos como a Linha Leste afeta os níveis de acessibilidade de decil de renda:</p>
 <div class="cell">
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">for_data</span><span class="op">[</span>, <span class="va">decile</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">decile</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="va">access_to_jobs</span><span class="op">[</span><span class="va">for_data</span>, on <span class="op">=</span> <span class="st">"id"</span>, <span class="va">decile</span> <span class="op">:=</span> <span class="va">i.decile</span><span class="op">]</span></span>
-<span></span>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># plot distribuição de acessibilidade por renda</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">access_to_jobs</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">decile</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">decile</span>, <span class="va">jobs</span>, weight <span class="op">=</span> <span class="va">population</span>, group <span class="op">=</span> <span class="va">decile</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">scenario</span>, nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">decile</span><span class="op">)</span>, y<span class="op">=</span><span class="va">jobs</span><span class="op">/</span><span class="fl">1000</span>, color<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">decile</span><span class="op">)</span>,</span>
+<span>                   weight <span class="op">=</span> <span class="va">population</span>, group <span class="op">=</span> <span class="va">decile</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">scenario</span>, nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_colour_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">'RdBu'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">'Decil de renda'</span>, y<span class="op">=</span><span class="st">'empregos acessíveis\n(em milhares)'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Os dois paineis mostram claramente que em Fortaleza as pessoas mais ricas detêm os maiores níveis de acessibilidade ao emprego. Em Fortaleza, assim como na maior parte das grandes cidades brasileiras, os mais ricos tendem a morar próximos às grandes concentrações de emprego da cidade, enquanto os mais pobres tendem a ocupar regiões periféricas. Consequentemente, os níveis de acessibilidade dos mais ricos costuma ser maiores do que os dos mais pobres - não apenas porque moram mais perto dos empregos, mas porque também, geralmente, regiões centrais costumam ser mais bem servidas de transporte público do que as periferias.</p>
 <p>Assim como no caso da distribuição espacial da acessibilidade, é muito difícil enxergar diferenças consideráveis nos níveis de acesso entre os cenários antes e depois. Lançando mão do mesmo recurso que fizemos anteriormente, podemos enxergar essas diferenças mais claramente visualizando a distribuição da diferença de acessibilidade entre cada cenário por decil de renda:</p>
 <div class="cell">
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">access_to_jobs_diff</span><span class="op">[</span></span>
-<span>  <span class="va">for_data</span>,</span>
-<span>  on <span class="op">=</span> <span class="st">"id"</span>,</span>
-<span>  <span class="fu">`:=`</span><span class="op">(</span></span>
-<span>    decile <span class="op">=</span> <span class="va">i.decile</span>,</span>
-<span>    population <span class="op">=</span> <span class="va">i.population</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="op">]</span></span>
-<span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">access_to_jobs_diff</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">decile</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">decile</span>, <span class="va">difference</span>, weight <span class="op">=</span> <span class="va">population</span>, group <span class="op">=</span> <span class="va">decile</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">access_to_jobs</span><span class="op">[</span><span class="va">population</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">decile</span><span class="op">)</span>, y<span class="op">=</span><span class="va">jobs</span><span class="op">/</span><span class="fl">1000</span>, color<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">decile</span><span class="op">)</span>,</span>
+<span>                   weight <span class="op">=</span> <span class="va">population</span>, group <span class="op">=</span> <span class="va">decile</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">scenario</span>, nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_colour_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">'RdBu'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">'Decil de renda'</span>, y<span class="op">=</span><span class="st">'Empregos acessíveis\n(em milhares)'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"D1 mais\nPobres"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span>, <span class="st">"D10 mais\nRicos"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">access_to_jobs</span><span class="op">[</span><span class="va">population</span> <span class="op">&gt;</span> <span class="fl">0</span> <span class="op">&amp;</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">diff</span><span class="op">)</span><span class="op">]</span> <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">decile</span><span class="op">)</span>, y<span class="op">=</span><span class="va">diff</span>, color<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">decile</span><span class="op">)</span>,</span>
+<span>                   weight <span class="op">=</span> <span class="va">population</span>, group <span class="op">=</span> <span class="va">decile</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_colour_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">'RdBu'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">'Decil de renda'</span>, y<span class="op">=</span><span class="st">'empregos acessíveis\n(em milhares)'</span>,</span>
+<span>       color <span class="op">=</span> <span class="st">'Decil de\n renda'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"D1 mais\nPobres"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span>, <span class="st">"D10 mais\nRicos"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-29-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Como podemos ver, os ganhos de acessibilidade se concentram principalmente entre as camadas médias da população, em especial os decis 5, 6 e 7. No entanto, o hexágono que mostrou maior aumento de acessibilidade aparece como <em>outlier</em> do 10º decil, apresentando um ganho de mais de 60000 empregos em relação ao cenário pré-implementação.</p>
@@ -860,7 +1090,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p>A principal vantagem da Razao de Palma frente ao Índice de Gini é a sua facilidade de comunicação e interpretação. Valores maiores do que 1 indicam um cenário em que os ricos possuem níveis médios do que os pobres, e valores menores do que 1 a situação inversa. Outra vantagem da Razão de Palma é que ela reflete claramente como a desigualdade varia entre dois grupos de especial interesse para nós: os mais privilegiados e os mais vulneráveis de uma população. O Índice de Gini, por sua vez, estima o quanto uma distribuição desvia de uma distribuição hipotética em que todos possuem o mesmo nível de acesso, mas nada diz sobre as condições socioeconômicos daqueles que detêm os maiores e menores níveis de acessibilidade. Se uma determinada política aumenta os níveis de acessibilidades de pessoas de alta renda que moram em locais de baixa acessibilidade, por exemplo, o Índice de Gini indicaria que houve uma diminuição da desigualdade, mesmo que nenhuma população vulnerável se beneficie dessa política. Esta dificilmente é, entretanto, uma política equitativa. Neste mesmo caso, a Razão de Palma indicaria um aumento da desigualdade, resultado mais alinhado às expectativas.</p>
 <p>Analisar a Razão de Palma nos cenários antes e depois, dessa forma, nos permite entender qual o impacto da Linha Leste na desigualdade de acesso a empregos em Fortaleza:</p>
 <div class="cell">
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">richest_access</span> <span class="op">&lt;-</span> <span class="va">access_to_jobs</span><span class="op">[</span></span>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">richest_access</span> <span class="op">&lt;-</span> <span class="va">access_to_jobs</span><span class="op">[</span></span>
 <span>  <span class="va">decile</span> <span class="op">==</span> <span class="fl">10</span>,</span>
 <span>  <span class="fu">.</span><span class="op">(</span>access <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span><span class="op">(</span><span class="va">jobs</span>, w <span class="op">=</span> <span class="va">population</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  by <span class="op">=</span> <span class="va">scenario</span></span>
@@ -882,7 +1112,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">palma_ratio</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">scenario</span>, <span class="va">palma</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Como podemos ver, a Razão de Palma sofreu uma ligeira queda entre os cenários pré e pós implementação da Linha Leste. Consequentemente, podemos concluir que a expansão do metrô de Fortaleza seria uma política progressiva neste nosso cenário simplificado, que leva em consideração apenas a construção do novo corredor e ignora ajustes nas frequências de outros corredores e mudanças nas linhas de ônibus da cidade.</p>
@@ -896,6 +1126,7 @@ Braga, Carlos Kaue Vieira, Diego Bogado Tomasiello, Daniel Herszenhut, João Luc
 </section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1"><p>Disponível em <a href="https://www.pasfor.com.br/" class="uri">https://www.pasfor.com.br/</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Disponível em <a href="https://www.pasfor.com.br/" class="uri">https://www.pasfor.com.br/</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
