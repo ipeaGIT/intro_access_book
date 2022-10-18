@@ -81,7 +81,7 @@ Esses três arquivos GTFS serão usados em conjunto para calcular as condições
 
 Tendo definido quais dados de GTFS vamos usar em cada um dos cenários analisados do transporte público, o próximo passo é calcular as matrizes de tempo de viagem, que posteriormente serão utilizadas para estimar os níveis de acessibilidade. Para isso, nós vamos utilizar a função `travel_time_matrix()` do pacote `{r5r}`, como apresentado anteriormente na @sec-matrix.
 
-Antes de calcular as matrizes de fato, nós precisamos organizar os nossos arquivos na estrutura que o `{r5r}` requer. Com o código abaixo, nós vamos criar uma pasta separada para cada um dos nossos cenários (antes e depois), e vamos salvar nessas pastas os arquivos de dados necessários para o roteamento. Primeiro, vamos criar uma pasta raíz chamada `analysis_dir` dentro da qual vamos colocar as pastas dos cenários (`dir_before` e `dir_after`):
+Antes de calcular as matrizes de fato, nós precisamos organizar os nossos arquivos na estrutura que o `{r5r}` requer. Com o código abaixo, nós vamos criar uma pasta separada para cada um dos nossos cenários (antes e depois), e vamos salvar nessas pastas os arquivos de dados necessários para o roteamento. Primeiro, vamos criar uma pasta raíz chamada `analysis_dir`:
 
 ```{r}
 #| warning: false
@@ -91,7 +91,7 @@ analysis_dir <- "impact_analysis"
 dir.create(analysis_dir)
 ```
 
-Dentro desta pasta, vamos criar agora as pastas de roteamento dos cenários antes e depois, contendo seus respectivos *feeds*:
+Dentro desta pasta raiz, vamos criar agora as pastas de roteamento dos cenários antes e depois (`dir_before` e `dir_after`), contendo seus respectivos *feeds*:
 
 ```{r}
 #| results: false
@@ -338,50 +338,62 @@ comparison[travel_time_after < travel_time_before]
 
 ## Cálculo da acessibilidade nos cenários antes e depois
 
-O cálculo da acessibilidade é muito simples, requerendo apenas um processamento básico dos nossos dados e a aplicação de uma das funções de acessibilidade do pacote `{accessibility}`. Como tratamento dos dados, vamos juntar as matrizes dos dois cenários em uma única tabela, identificando cada cenário com a coluna `scenario`:
+O cálculo da acessibilidade é muito simples, e requer apenas um processamento básico dos nossos dados e a aplicação de uma das funções que calcula indicadores de acessibilidade do pacote `{accessibility}`. Para facilitar o tratamento dos dados, nós vamos empilhar as matrizes de tempo de viagem dos dois cenários em uma única tabela, identificando cada cenário com a coluna `scenario`:
 
 ```{r}
+# empilhando matrizes de tempo de viagem antes e depois
 ttm <- rbind(ttm_before, ttm_after, idcol = "scenario")
-ttm[, scenario := factor(scenario, labels = c("before", "after"))]
+ttm[, scenario := factor(scenario, labels = c("antes", "depois"))]
 
 ttm
+
 ```
 
-Para o cálculo da acessibilidade, vamos precisar de uma tabela com os dados de uso do solo da cidade de Fortaleza. Para isso, nós usamos a função `read_landuse()` do pacote `{aopdata}`:
+Para o cálculo da acessibilidade, vamos precisar de uma tabela com os dados de uso do solo da cidade de Fortaleza. Para isso, nós usamos a função `read_landuse()` do pacote `{aopdata}`, que  traz a informação com a quantidade de população, e oportunidades de empregos e escolas em cada hexágono da cidade.
 
 ```{r}
 #| message: false
-for_data <- read_landuse("for", showProgress = FALSE)
+# download dados de uso do solo
+for_data <- read_landuse(city = "Fortaleza", showProgress = FALSE)
 ```
 
-Para fins de demonstração, vamos calcular a acessibilidade a postos de trabalho e a escolas públicas na nossa área de estudo. Os dados do total de empregos e escolas em cada hexágono estão listados nas colunas `T001` e `E001`, respectivamente. Vamos renomeá-las para facilitar sua identificação e manter apenas as colunas necessárias na tabela de dados de uso do solo (vamos manter também as colunas `P001`, de população total em cada hexágono, e `R003`, do decil de renda em que cada hexágono se encontra, que serão úteis mais à frente):
+Para fins de demonstração, vamos calcular a acessibilidade a postos de trabalho e a escolas públicas de ensino médio na nossa área de estudo. Os dados do total de empregos e escolas em cada hexágono estão listados nas colunas `T001` e `E004`, respectivamente. Vamos renomeá-las para facilitar sua identificação e manter apenas as colunas necessárias na tabela de dados de uso do solo. Também vamos manter também as colunas `P001`, de população total em cada hexágono, e `R003`, do decil de renda em que cada hexágono se encontra, que serão úteis mais à frente:
 
 ```{r}
+# nome das colunas a serem mantidas
 cols_to_keep <- c("id", "jobs", "schools", "population", "decile")
 
+# renomeando colunas
 setnames(
   for_data,
-  old = c("id_hex", "T001", "E001", "P001", "R003"),
+  old = c("id_hex", "T001", "E004", "P001", "R003"),
   new = cols_to_keep
 )
+
+# deletando demais colunas que não vamos usar
 for_data[, setdiff(names(for_data), cols_to_keep) := NULL]
 
 for_data
 ```
 
-A parte mais difícil do processo do cálculo de acessibilidade é a definição da medida a ser utilizada. É extremamente importante pesar as vantagens e desvantagens de cada uma e compreender quais medidas se adequam às oportunidades para quais se deseja calcular os níveis de acessibilidade. Neste exemplo, utilizaremos duas medidas distintas:
+Uma decisão-chave no cálculo de acessibilidade é a escolha da medida a ser utilizada. É extremamente importante pesar as vantagens e desvantagens de cada medida e compreender quais indicadores se adequam às oportunidades para quais se deseja calcular os níveis de acessibilidade. Neste exemplo, utilizaremos duas medidas distintas:
 
-- No cálculo da acessibilidade a empregos, vamos usar a medida de oportunidades cumulativas. Esta métrica nos permite entender quantos empregos são acessíveis dentro de um determinado custo de viagem, representando, desta forma, a oferta de empregos aos habitantes de cada uma das células de nossa grade. Embora essa medida não leve em consideração a competição por empregos, sua principal vantagem é que ela é de muito simples comunicação e interpretação. Em nosso exemplo, vamos tomar como limite de custo um tempo de viagem de 30 minutos.
+- No cálculo da **acessibilidade a empregos**, vamos usar a medida de oportunidades cumulativas. Esta métrica nos permite entender quantos empregos são acessíveis dentro de um determinado custo de viagem, representando, desta forma, a oferta de empregos aos habitantes de cada uma das células de nossa grade. Embora essa medida não leve em consideração a competição por empregos, sua principal vantagem é que ela é de muito simples comunicação e interpretação. Em nosso exemplo, vamos tomar como limite de custo um tempo de viagem de 60 minutos, que é muito próximo do tempo médio de deslocamento casa-trabalho por transporte público de Fortaleza em 2019 (cerca de 58 minutos), conforme o Pasfor[^1].
 
-- No cálculo da acessibilidade a escolas públicas, vamos usar a medida de custo mínimo de viagem. Esta métrica é especialmente útil para avaliar a cobertura de serviços públicos essenciais, como educação e saúde básica, pois é desejado que a maior parte da população de uma cidade esteja a uma distância considerada razoável desses serviços.
+[^1]: Disponível em <https://www.pasfor.com.br/>.
+
+- No cálculo da acessibilidade a escolas públicas, vamos usar a medida de custo mínimo de viagem. Esta métrica é especialmente útil para avaliar a cobertura de serviços públicos essenciais, como educação e saúde básica. Ela também traz informações que permitem a gente identificar qual parcela da população de uma cidade está a uma distância maior do que seria razoável para acessar esses serviços essenciais.
 
 Como mostrado anteriormente, na @sec-accessibility, o cálculo dessas medidas pode ser feito com as funções `cumulative_cutoff()` e `cost_to_closest()`, respectivamente, do pacote `{accessibility}`:
 
 ```{r}
+# carrega biblioteca
 library(accessibility)
 
+# renomeia colunas
 setnames(ttm, old = c("fromId", "toId"), new = c("from_id", "to_id"))
 
+# calcula medida de oportunidades cumulativas
 access_to_jobs <- cumulative_cutoff(
   travel_matrix = ttm,
   land_use_data = for_data,
@@ -392,6 +404,7 @@ access_to_jobs <- cumulative_cutoff(
 )
 access_to_jobs
 
+# calcula medida de tempo mínimo de viagem
 time_to_schools <- cost_to_closest(
   travel_matrix = ttm,
   land_use_data = for_data,
@@ -402,100 +415,141 @@ time_to_schools <- cost_to_closest(
 time_to_schools
 ```
 
-Como podemos ver, o resultado da função de custo mínimo de viagem inclui alguns valores `Inf`. As origens listadas com este valor não conseguem alcançar dentro de 120 minutos (limite de tempo de viagem imposto no cálculo da matriz) nenhum destino em que está localizada ao menos uma escola pública. O valor `Inf`, portanto, é utilizado para sinalizar esta condição.
+Como podemos ver, o resultado da função de custo mínimo de viagem inclui alguns valores `Inf`. As origens listadas com este valor não conseguem alcançar nenhuma escola pública dentro de 60 minutos (limite de tempo de viagem imposto no cálculo da matriz). O valor `Inf`, portanto, é utilizado para sinalizar esta condição. Para fins de simplicidade, vamos considerar que essas regiões estão a 80 minutos de viagem de uma escola. Assim, nós podemos calcular a diferença de acessibilidade entre os cenários antes e depois da seguinte maneira:
+
+```{r}
+# imputa tempo de viagem de 80 min. para valores Inf
+time_to_schools[, travel_time := ifelse( is.infinite(travel_time), 80, travel_time)]
+
+# calcula diferença de acessibilidade entre cenários
+access_to_jobs[, diff := shift(jobs, type = "lead") - jobs, by = id]
+time_to_schools[, diff := shift(travel_time, type = "lead") - travel_time, by = id]
+```
+
 
 ## Análise dos níveis de acessibilidade antes e depois
 
-Agora que calculamos os níveis de acessibilidade em cada cenário, precisamos compreender como as mudanças na frequência das linhas de transporte público afetaram as condições de acessibilidade em nossa área de estudo. Uma boa forma de entender isso é olhando para a distribuição espacial dos níveis de acessibilidade. Vamos juntar usar as informações espaciais da nossa área de estudo, disponíveis no objeto `for_grid`, baixado do pacote `{aopdata}` anteriormente, às nossas tabelas de acessibilidade:
+Agora que calculamos os níveis de acessibilidade em cada cenário, precisamos compreender como a futura implementação da Linha Leste do Metrô deverá impactar as condições de acessibilidade em nossa área de estudo. Uma primeira maneira de captar isso é o impacto que expansão deverá ter na acessibilidade média da cidade. Para isso, nós calculamos a quantidade média de empregos acessíveis em cada cenário. Aqui é importante calcular a média de acessibilidade ponderada pela população de cada hexágono.
+
+Os resultados abaixo mostram que, em 2019, a população de Fortaleza conseguia acessar em média `240.663` empregos em até 60 minutos de transporte público. A implementação da nova Linha Leste do metrô deverá aumentar esse valor em 1%, para `243.023` empregos acessíveis em média.
+
 
 ```{r}
-setDT(for_grid)
+# recupera info da populacao residente nos hexágonos
+access_to_jobs[for_data, on = 'id', population := i.population]
 
-access_to_jobs[for_grid, on = c(id = "id_hex"), geom := i.geom]
-time_to_schools[for_grid, on = c(id = "id_hex"), geom := i.geom]
+# calcula média ponderada de acessibilidade antes e depois
+resultado_medio <- access_to_jobs[population > 0, 
+                                  .(avg_access  = weighted.mean(x=jobs, w = as.numeric(population), na.rm=T)), 
+                                  by=scenario]
+
+resultado_medio
+
+# figura
+ggplot(data = resultado_medio, aes(x = scenario, y = avg_access/1000)) + 
+  geom_col() +
+  geom_text(aes(label = round(avg_access/1000, 2)), vjust = -0.5) +
+  ylab("Empregos acessíveis\n(em milhares)") +
+  theme_minimal()
+  
 ```
 
-Feito isso, apresentamos os resultados em formato de mapa:
+Analisando-se o tempo de acesso à escola pública de ensino médio mais próxima, nota-se que a Linha Leste deverá ter um resultado quase nulo na média de acessibilidade a essas escolas. 
 
+```{r}
+# recupera info da populacao residente nos hexágonos
+time_to_schools[for_data, on = 'id', population := i.population]
+
+# calcula média ponderada de acessibilidade antes e depois
+resultado_medio <- time_to_schools[population > 0, 
+                                  .(avg_access  = weighted.mean(x=travel_time, w = as.numeric(population), na.rm=T)), 
+                                  by=scenario]
+
+resultado_medio
+
+# figura
+ggplot(data = resultado_medio, aes(x = scenario, y = avg_access)) + 
+  geom_col() +
+  geom_text(aes(label = round(avg_access, 2)), vjust = -0.5) +
+  ylab("Média do tempo até a escola\nmais próxima(em minutos)") +
+  theme_minimal()
+
+```
+
+Esse resultado ocorre em grande medida por duas razões. A primeira delas é porque, neste estudo de caso, estamos fazendo uma análise simplificada que considera apenas a construção do projeto da Linha Leste do metrô, e ignora as demais intervenções que deverão acompanhar esta intervenção, como o aumento de frequência das demais linhas de metrô e trens na cidade. A segunda razão de encontrarmos impactos tão baixos, é o fato de que a proposta da Linha Leste consiste numa extensão de trecho relativamente pequeno do metrô. Soma-se a isso o fato de que este projeto é localizado próximo ao centro da cidade, que já era a região de mais alta acessibilidade da cidade em 2019.
+
+Embora tenhamos visto que o impacto médio do projeto deverá ser pequeno, é importante entendermos como esse impacto de acessibilidade varia espacialmente. Para isso, vamos juntar nossas tabelas de estimativas de acessibilidade com a grade espacial da nossa área de estudo, disponível no objeto `for_grid` baixado do pacote `{aopdata}` anteriormente.
+
+
+```{r}
+# traz info espacial para tabelas de acessibilidade
+setDT(for_grid)
+access_to_jobs[for_grid, on = c(id = "id_hex"), geom := i.geom]
+time_to_schools[for_grid, on = c(id = "id_hex"), geom := i.geom]
+
+# converte tabela em objeto espacial
+access_to_jobs_sf <- st_sf(access_to_jobs)
+time_to_schools_sf <- st_sf(time_to_schools)
+```
+
+Feito isso, o código abaixo mostra nos mapas a distribuição espacial dos níveis de acessibilidade nos dois cenários (antes e depois) e a diferênça de acessibilidade entre os dois cenários.
+
+Os ganhos de acessibilidade ao emprego se concentram principalmente próximos às estações do novo corredor e dos corredores já existentes que se ligam a ele. Isto mostra como a implantação de uma infraestrutura de transporte pode impactar não apenas suas imediações, mas também locais mais afastados, graças à conectividade da rede.
 ```{r}
 #| message: false
 #| warning: false
+# carrega biblioteca de visualização de dados
 library(ggplot2)
+library(patchwork)
 
-access_to_jobs_sf <- st_sf(access_to_jobs)
+# mapas dos cenários antes-e-depois
+temp1 <- ggplot(access_to_jobs_sf) +
+         geom_sf(aes(fill = jobs), color = NA) +
+         facet_wrap(~ scenario, nrow = 1) +
+         scale_fill_viridis_c(
+           option = "inferno",
+           label = scales::label_number(scale = 1/1000)
+           ) + 
+         labs(fill='Empregos\nacessíveis\n(em milhares)') +
+         theme_void()
 
-ggplot(access_to_jobs_sf) +
-  geom_sf(aes(fill = jobs), color = NA) +
-  facet_wrap(~ scenario, nrow = 1) +
-  scale_fill_viridis_c(
-    option = "inferno",
-    label = scales::label_number(scale = 1/1000, suffix = "k")
-  )
-
-time_to_schools_sf <- st_sf(time_to_schools)
-
-ggplot(time_to_schools_sf) +
-  geom_sf(aes(fill = travel_time), color = NA) +
-  facet_wrap(~ scenario, nrow = 1) +
-  scale_fill_viridis_c(option = "cividis", direction = -1)
+# mapa da diferença
+temp2 <- ggplot(subset(access_to_jobs_sf, diff >=0)) +
+         geom_sf(aes(fill = diff), color = NA) +
+         scale_fill_viridis_c(
+           option = "cividis",
+           label = scales::label_number(scale = 1/1000)
+         ) + 
+         labs(fill='Diferença de\nempregos\nacessíveis\n(em milhares)') +
+         theme_void()
+# plot
+temp1 / temp2
 ```
 
-Como podemos ver, a construção da Linha Leste do metrô de Fortaleza por si só, ignorando as demais intervenções que acompanham esta invervenção, pouco afeta os níveis de acessibilidade na cidade. Isto fica claro quando olhamos para os níveis médios de acessibilidade nos dois cenários, que pouco se alteram:
+
+Por sua vez, o mapa de diferença no tempo de acesso a escolas (abaixo) apresenta um cenário diferente: praticamente nenhuma região da cidade apresenta melhorias no tempo de acesso. Diferentemente da distribuição de empregos, que tende a seguir critérios econômicos, a distribuição de equipamentos públicos como escolas tende a ser planejada usando critérios de justiça social e equidade, sendo, portanto, mais equilibrada no território. Dessa forma, a construção da Linha Leste na parte central da cidade em nada afeta o tempo de acesso das pessoas que moram em locais afastados desse corredor. Não apenas isso, mas mesmo para as pessoas que moram perto do novo corredor a sua implementação não muda os níveis de acesso a escolas. Isto é um sinal que esta área possui uma boa oferta de escolas e já é bem servida de transporte público, mesmo antes da finalização da Linha Leste.
 
 ```{r}
-access_to_jobs[for_data, on = "id", population := i.population]
-avg_access_to_jobs <- access_to_jobs[
-  ,
-  .(avg_access = weighted.mean(jobs, w = as.numeric(population))),
-  by = scenario
-]
+temp1 <- ggplot(time_to_schools_sf) +
+         geom_sf(aes(fill = travel_time), color = NA) +
+         facet_wrap(~ scenario, nrow = 1) +
+         scale_fill_viridis_c(
+           option = "viridis", direction = -1) + 
+         labs(fill='Tempo até\n a escola\nmaispróxima\n(em minutos)') +
+         theme_void()
 
-ggplot(avg_access_to_jobs) + geom_col(aes(scenario, avg_access))
 
-time_to_schools[for_data, on = "id", population := i.population]
-time_to_schools[
-  ,
-  treated_travel_time := ifelse(is.infinite(travel_time), 120, travel_time)
-]
-avg_time_to_schools <- time_to_schools[
-  ,
-  .(avg_time = weighted.mean(treated_travel_time, w = population)),
-  by = scenario
-]
+temp2 <- ggplot(subset(time_to_schools_sf, diff <=0)) +
+         geom_sf(aes(fill = diff), color = NA) +
+         scale_fill_viridis_c(
+           option = "viridis", direction = -1) + 
+        labs(fill='Diferença no\ntempo até\n a escola\nmaispróxima\n(em minutos)') +
+        theme_void()
 
-ggplot(avg_time_to_schools) + geom_col(aes(scenario, avg_time))
+
+temp1 /temp2
 ```
 
-Neste caso, uma forma de mostrar o impacto da política de forma mais clara é apresentar a distribuição espacial da diferença de acessibilidade entre os dois cenários:
-
-```{r}
-access_to_jobs_diff <- dcast(
-  access_to_jobs,
-  id ~ scenario,
-  value.var = "jobs"
-)
-access_to_jobs_diff[, difference := after - before]
-access_to_jobs_diff[for_grid, on = c(id = "id_hex"), geom := i.geom]
-
-ggplot(st_sf(access_to_jobs_diff)) +
-  geom_sf(aes(fill = difference), color = NA)
-
-time_to_schools_diff <- dcast(
-  time_to_schools,
-  id ~ scenario,
-  value.var = "travel_time"
-)
-time_to_schools_diff[, difference := after - before]
-time_to_schools_diff[is.nan(difference), difference := 0]
-time_to_schools_diff[for_grid, on = c(id = "id_hex"), geom := i.geom]
-
-ggplot(st_sf(time_to_schools_diff)) +
-  geom_sf(aes(fill = difference), color = NA)
-```
-
-Os ganhos de acessibilidade ao emprego se concentram principalmente próximos às estações do novo corredor e dos corredores já existentes que se ligam a ele. Isto mostra como a implantação de uma infraestrutura de transporte pode impactar não apenas suas imediações, mas também locais mais afastados, graças à conectividade da rede.
-
-Por sua vez, o mapa de diferença no tempo de acesso a escolas apresenta um cenário diferente: nenhuma região da cidade apresenta melhorias no tempo de acesso. Diferentemente da distribuição de empregos, que tende a seguir critérios econômicos e mercadológicos, a distribuição de equipamentos públicos, entre eles escolas públicas, tende a ser planejada usando critérios de justiça social e equidade, sendo, portanto, mais equilibrada no território. Dessa forma, a construção da Linha Leste na parte central da cidade em nada afeta o tempo de acesso das pessoas que moram em locais afastados desse corredor. Não apenas isso, mas mesmo para as pessoas que moram perto do novo corredor a sua implementação não muda os níveis de acesso a escolas. Isto é um sinal que esta área possui uma boa oferta de escolas e já é bem servida de transporte público, mesmo antes da finalização da Linha Leste.
 
 ## Desigualdade de acessibilidade
 
