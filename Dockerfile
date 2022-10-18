@@ -1,9 +1,13 @@
+# syntax = docker/dockerfile:1.2
+
 FROM rocker/binder:4.2.1
 
-ARG NB_USER
-ARG NB_UID
-
-COPY --chown=${NB_USER} . ${HOME}
-
+ENV RENV_PATHS_ROOT=/renv
 RUN Rscript --vanilla -e "install.packages(\"renv\", repos = \"https://cloud.r-project.org/\")"
-RUN Rscript -e "renv::restore()"
+
+COPY renv.lock ${HOME}
+
+USER root
+RUN --mount=type=cache,target=/renv Rscript -e "renv::restore()"
+
+USER rstudio
