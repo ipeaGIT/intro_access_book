@@ -6,5 +6,6 @@ ARG NB_UID
 COPY --chown=${NB_USER} . ${HOME}
 
 RUN cp -r /renv/cache/v5 renv/library
+RUN chown -R ${NB_USER} renv/library
 
 USER rstudio
