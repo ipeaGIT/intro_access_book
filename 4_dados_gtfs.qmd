@@ -18,11 +18,10 @@ Um *feed* é nada mais do que um arquivo comprimido em formato `.zip` que conté
 ```{r}
 #| echo: false
 #| label: fig-scheme
-#| fig-cap: Esquema do formato GTFS
+#| fig-cap: Esquema do formato GTFS. Fonte - @pereira2022exploring
 
 knitr::include_graphics("images/gtfs_scheme.png")
 ```
-Fonte: @pereira2022exploring
 
 Ao todo, 22 tabelas compõem o formato GTFS[^1]. Nem todas, no entanto, são obrigatórias para que um feed seja considerado válido - sendo consideradas, portanto, opcionais. A especificação classifica cada tabela conforme sua obrigatoriedade em três possíveis categorias: obrigatórias, opcionais e condicionalmente obrigatórias (quando a obrigatoriedade de uma tabela depende da existência de uma determinada tabela, coluna ou valor). Para fins de simplicidade, neste livro nós consideraremos apenas as duas primeiras categorias e faremos comentários quanto à obrigatoriedade de cada tabela quando apropriado. Desta forma, ficam assim classificadas as tabelas:
 
