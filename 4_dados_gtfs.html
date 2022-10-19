@@ -287,12 +287,12 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <section id="estrutura-de-arquivos-gtfs" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="estrutura-de-arquivos-gtfs">
 <span class="header-section-number">4.1</span> Estrutura de arquivos GTFS</h2>
 <p>Usualmente, refere-se a um arquivo no formato GTFS Schedule (daqui em diante chamado apenas de GTFS) como <em>feed</em>. Neste livro, nós utilizaremos os termos <em>feed</em> e arquivo GTFS como sinônimos.</p>
-<p>Um <em>feed</em> é nada mais do que um arquivo comprimido em formato <code>.zip</code> que contém um conjunto de tabelas salvas em formato <code>.txt</code> com algumas informações sobre a rede de transporte público (e.g.&nbsp;localização das paradas, frequências das viagens, traçado das rotas etc). Como em uma base de dados relacional, as tabelas de um <em>feed</em> têm algumas colunas-chave que permitem vincular os dados rotas, viagens, tabelas de horários etc. O esquema geral do GTFS é mostrado na <a href="#fig-scheme">Figure&nbsp;<span>4.1</span></a>, mostrando apenas algumas das principais tabelas e com as colunas-chave destacadas como os pontos finais das setas.</p>
+<p>Um <em>feed</em> é nada mais do que um arquivo comprimido em formato <code>.zip</code> que contém um conjunto de tabelas salvas em formato <code>.txt</code> com algumas informações sobre a rede de transporte público (e.g.&nbsp;localização das paradas, frequências das viagens, traçado das rotas etc). Como em uma base de dados relacional, as tabelas de um <em>feed</em> têm algumas colunas-chave que permitem vincular os dados rotas, viagens, tabelas de horários etc. O esquema geral do GTFS é mostrado na <a href="#fig-scheme">Figura&nbsp;<span>4.1</span></a>, mostrando apenas algumas das principais tabelas e com as colunas-chave destacadas como os pontos finais das setas.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-scheme" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="images/gtfs_scheme.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;4.1: Esquema do formato GTFS</figcaption><p></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;4.1: Esquema do formato GTFS</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -315,12 +315,12 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p>Arquivo utilizado para descrever as operadoras de transporte que atuam no sistema descrito no arquivo GTFS. Embora o termo <em>agency</em> (agência) seja usado em lugar de <em>operators</em> (operadoras), por exemplo, fica a cargo do produtor do <em>feed</em> definir quais instituições serão listadas na tabela.</p>
 <p>Por exemplo: múltiplas concessionárias de ônibus atuam em um determinado local, mas todo o planejamento de cronograma e de tarifa é realizado por uma instituição, em geral uma secretaria de transporte ou empresa pública específica. Esta instituição é também entendida pelos usuários do sistema como a operadora, de fato. Neste caso, devemos listar a instituição responsável pelo planejamento na tabela.</p>
 <p>Agora, imagine um sistema em que a agência de transporte público local transfere a responsabilidade da operação de um sistema multimodal a diversas empresas, por meio de concessões. Cada uma dessas empresas é responsável pelo planejamento de cronogramas e tarifas dos modos que operam, desde que sejam seguidos determinados parâmetros pré-estabelecidos em contrato. Neste caso, deve-se listar as operadoras (concessionárias) na tabela, e não a agência de transporte público em si.</p>
-<p>A <a href="#tbl-agency">Table&nbsp;<span>4.1</span></a> mostra o arquivo <code>agency.txt</code> do <em>feed</em> da SPTrans. Como vocês podem ver, os responsáveis pelo <em>feed</em> optaram por listar a própria empresa no arquivo, e não as concessionárias que operam os ônibus e o metrô da cidade.</p>
+<p>A <a href="#tbl-agency">Tabela&nbsp;<span>4.1</span></a> mostra o arquivo <code>agency.txt</code> do <em>feed</em> da SPTrans. Como vocês podem ver, os responsáveis pelo <em>feed</em> optaram por listar a própria empresa no arquivo, e não as concessionárias que operam os ônibus e o metrô da cidade.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-agency" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;4.1: Exemplo de arquivo <code>agency.txt</code>
+<caption>Tabela&nbsp;4.1: Exemplo de arquivo <code>agency.txt</code>
 </caption>
 <colgroup>
 <col style="width: 10%">
@@ -357,12 +357,12 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p>Por uma questão de comunicação e interpretação dos dados, ao longo desta seção sempre apresentaremos os exemplos em formato de tabela. É importante ter em mente, porém, que essas tabelas são internamente organizadas no GTFS como mostrado acima.</p>
 </section><section id="stops.txt" class="level3" data-number="4.1.2"><h3 data-number="4.1.2" class="anchored" data-anchor-id="stops.txt">
 <span class="header-section-number">4.1.2</span> stops.txt</h3>
-<p>Arquivo usado para descrever as paradas de transporte público que compõem o sistema. Os pontos listados neste arquivo podem fazer menção a paradas mais simples (como pontos de ônibus), estações, plataformas, entradas e saídas de estações, etc. A <a href="#tbl-stops">Table&nbsp;<span>4.2</span></a> mostra o <code>stops.txt</code> do <em>feed</em> da SPTrans.</p>
+<p>Arquivo usado para descrever as paradas de transporte público que compõem o sistema. Os pontos listados neste arquivo podem fazer menção a paradas mais simples (como pontos de ônibus), estações, plataformas, entradas e saídas de estações, etc. A <a href="#tbl-stops">Tabela&nbsp;<span>4.2</span></a> mostra o <code>stops.txt</code> do <em>feed</em> da SPTrans.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-stops" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;4.2: Exemplo de arquivo <code>stops.txt</code>
+<caption>Tabela&nbsp;4.2: Exemplo de arquivo <code>stops.txt</code>
 </caption>
 <colgroup>
 <col style="width: 6%">
@@ -431,12 +431,12 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p>Entre as colunas opcionais não presentes neste feed estão a <code>location_type</code> e a <code>parent_station</code>. A <code>location_type</code> é utilizada para denotar o tipo de localização a que cada ponto se refere. Quando ausente, todos os pontos são interpretados como paradas de transporte público, mas valores distintos podem ser usados para distinguir uma parada (<code>location_type = 0</code>) de uma estação (<code>location_type = 1</code>) ou uma área de embarque (<code>location_type = 2</code>), por exemplo. A coluna <code>parent_station</code> é utilizada para descrever relações de hierarquia entre dois pontos. Por exemplo, uma área de desembarque deve dizer a qual parada/plataforma ela pertence e uma parada/plataforma pode também, opcionalmente, listar a qual estação ela pertence.</p>
 </section><section id="routes.txt" class="level3" data-number="4.1.3"><h3 data-number="4.1.3" class="anchored" data-anchor-id="routes.txt">
 <span class="header-section-number">4.1.3</span> routes.txt</h3>
-<p>Arquivo usado para descrever as linhas de transporte público que rodam no sistema descrito pelo arquivo GTFS, incluindo os modos de transporte utilizados em cada uma. A <a href="#tbl-routes">Table&nbsp;<span>4.3</span></a> mostra o <code>routes.txt</code> do <em>feed</em> da SPTrans.</p>
+<p>Arquivo usado para descrever as linhas de transporte público que rodam no sistema descrito pelo arquivo GTFS, incluindo os modos de transporte utilizados em cada uma. A <a href="#tbl-routes">Tabela&nbsp;<span>4.3</span></a> mostra o <code>routes.txt</code> do <em>feed</em> da SPTrans.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-routes" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;4.3: Exemplo de arquivo <code>routes.txt</code>
+<caption>Tabela&nbsp;4.3: Exemplo de arquivo <code>routes.txt</code>
 </caption>
 <colgroup>
 <col style="width: 11%">
@@ -505,12 +505,12 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p>A coluna <code>route_type</code> é utilizada para descrever o modo de transporte utilizado em cada linha. Esta coluna aceita diferentes números, cada um representando um determinado modo. Este exemplo descreve linhas de trem, cujo valor numérico correspondente é 2. Os valores correspondentes para outros modos de transporte são listados na <a href="https://gtfs.org/schedule/reference/#routestxt">especificação</a>.</p>
 </section><section id="trips.txt" class="level3" data-number="4.1.4"><h3 data-number="4.1.4" class="anchored" data-anchor-id="trips.txt">
 <span class="header-section-number">4.1.4</span> trips.txt</h3>
-<p>Arquivo usado para descrever as viagens realizadas pelo sistema de transporte público descrito pelo <em>feed</em>. A viagem é a unidade básica de movimento do formato GTFS: ela associa diferentes partidas de cada linha de transporte público a uma linha de transporte público (<code>route_id</code>), um serviço que opera em determinados dias da semana (como veremos mais à frente no arquivo <code>calendar.txt</code>) e uma trajetória espacial de viagem (como veremos mais à frente no arquivo <code>shapes.txt</code>). A <a href="#tbl-trips">Table&nbsp;<span>4.4</span></a> mostra o <code>trips.txt</code> do <em>feed</em> da SPTrans.</p>
+<p>Arquivo usado para descrever as viagens realizadas pelo sistema de transporte público descrito pelo <em>feed</em>. A viagem é a unidade básica de movimento do formato GTFS: ela associa diferentes partidas de cada linha de transporte público a uma linha de transporte público (<code>route_id</code>), um serviço que opera em determinados dias da semana (como veremos mais à frente no arquivo <code>calendar.txt</code>) e uma trajetória espacial de viagem (como veremos mais à frente no arquivo <code>shapes.txt</code>). A <a href="#tbl-trips">Tabela&nbsp;<span>4.4</span></a> mostra o <code>trips.txt</code> do <em>feed</em> da SPTrans.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-trips" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;4.4: Exemplo de arquivo <code>trips.txt</code>
+<caption>Tabela&nbsp;4.4: Exemplo de arquivo <code>trips.txt</code>
 </caption>
 <colgroup>
 <col style="width: 16%">
@@ -586,12 +586,12 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p>As duas colunas restantes, <code>trip_headsign</code> e <code>direction_id</code>, são opcionais e devem ser utilizadas para descrever o sentido/destino da viagem. A primeira, <code>trip_headsign</code>, é utilizada para ditar o texto que aparece no letreiro de veículos (no caso de um ônibus, por exemplo) ou em painéis informativos (como em metrôs e trens) destacando o destino da viagem. Já a coluna <code>direction_id</code> é frequentemente utilizada em conjunto com a primeira para dar uma conotação de ida ou volta para cada viagem, onde <code>0</code> representa ida e <code>1</code> volta, ou vice-versa (assim como ida e volta são conceitos que mudam conforme o referencial, os valores <code>0</code> e <code>1</code> podem ser usados como desejado, desde que um represente um sentido e o outro o contrário). No caso do nosso exemplo, as duas primeiras linhas são viagens que fazem menção à mesma rota de transporte público (<code>CPTM L07</code>), porém em sentidos opostos: uma corre em direção a Jundiaí, e a outra à Luz.</p>
 </section><section id="calendar.txt" class="level3" data-number="4.1.5"><h3 data-number="4.1.5" class="anchored" data-anchor-id="calendar.txt">
 <span class="header-section-number">4.1.5</span> calendar.txt</h3>
-<p>Arquivo usado para descrever os diferentes tipos de serviço existentes no sistema de transporte público descrito pelo <em>feed</em>. Um serviço, neste contexto, denota um conjunto de dias da semana em que viagens são realizadas. Cada serviço também é definido pela data em que começa a valer e pela data a partir do qual ele não é mais válido. A <a href="#tbl-calendar">Table&nbsp;<span>4.5</span></a> mostra o <code>calendar.txt</code> do <em>feed</em> da SPTrans.</p>
+<p>Arquivo usado para descrever os diferentes tipos de serviço existentes no sistema de transporte público descrito pelo <em>feed</em>. Um serviço, neste contexto, denota um conjunto de dias da semana em que viagens são realizadas. Cada serviço também é definido pela data em que começa a valer e pela data a partir do qual ele não é mais válido. A <a href="#tbl-calendar">Tabela&nbsp;<span>4.5</span></a> mostra o <code>calendar.txt</code> do <em>feed</em> da SPTrans.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-calendar" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;4.5: Exemplo de arquivo <code>calendar.txt</code>
+<caption>Tabela&nbsp;4.5: Exemplo de arquivo <code>calendar.txt</code>
 </caption>
 <colgroup>
 <col style="width: 12%">
@@ -700,12 +700,12 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p>Por fim, as colunas <code>start_date</code> e <code>end_date</code> delimitam o intervalo em que cada serviço é válido. As datas do formato GTFS são sempre formatadas segundo a regra <code>YYYYMMDD</code> - ou seja, os primeiros quatro números definem o ano, os dois subsequentes definem o mês e os últimos dois, o dia. O valor <code>20220428</code>, por exemplo, representa o dia 28 de abril de 2022.</p>
 </section><section id="shapes.txt" class="level3" data-number="4.1.6"><h3 data-number="4.1.6" class="anchored" data-anchor-id="shapes.txt">
 <span class="header-section-number">4.1.6</span> shapes.txt</h3>
-<p>Arquivo usado para descrever a trajetória espacial de cada viagem listada no <em>feed</em>. Este arquivo é opcional, mas fortemente recomendado que agências de transporte o incluam em seus arquivos de GTFS. A <a href="#tbl-shapes">Table&nbsp;<span>4.6</span></a> mostra o <code>shapes.txt</code> do <em>feed</em> da SPTrans.</p>
+<p>Arquivo usado para descrever a trajetória espacial de cada viagem listada no <em>feed</em>. Este arquivo é opcional, mas fortemente recomendado que agências de transporte o incluam em seus arquivos de GTFS. A <a href="#tbl-shapes">Tabela&nbsp;<span>4.6</span></a> mostra o <code>shapes.txt</code> do <em>feed</em> da SPTrans.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-shapes" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;4.6: Exemplo de arquivo <code>shapes.txt</code>
+<caption>Tabela&nbsp;4.6: Exemplo de arquivo <code>shapes.txt</code>
 </caption>
 <thead><tr class="header">
 <th style="text-align: left;">shape_id</th>
@@ -758,12 +758,12 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p>A coluna <code>shape_id</code> identifica cada uma das trajetórias descritas na tabela. Como mostrado anteriormente, este identificador é usado também no arquivo <code>trips.txt</code>, e é o responsável por associar cada viagem à sua trajetória espacial. Diferentemente de todos os outros identificadores que vimos até então, no entanto, o identificador <code>shape_id</code> se repete em diversas observações da tabela. Isso porque o arquivo apresenta para cada <code>shape_id</code> uma série de pontos espaciais, cujas coordenadas geográficas são apresentadas nas colunas <code>shape_pt_lat</code> e <code>shape_pt_lon</code>. Por sua vez, a coluna <code>shape_pt_sequence</code> lista a sequência na qual cada ponto se conecta para formar a trajetória de cada <code>shape_id</code>. Os valores listados nesta coluna devem ser ordenados de forma crescente.</p>
 </section><section id="stop_times.txt" class="level3" data-number="4.1.7"><h3 data-number="4.1.7" class="anchored" data-anchor-id="stop_times.txt">
 <span class="header-section-number">4.1.7</span> stop_times.txt</h3>
-<p>Arquivo usado para descrever a tabela de horários de cada viagem, incluindo o horário de chegada e partida em cada uma das paradas. A formatação deste arquivo depende da existência ou não de um arquivo <code>frequencies.txt</code>, o qual cobriremos a seguir. Por enquanto olharemos para o <code>stop_times.txt</code> do <em>feed</em> da SPTrans, que também conta com um <code>frequencies.txt</code>, na <a href="#tbl-stop_times">Table&nbsp;<span>4.7</span></a>.</p>
+<p>Arquivo usado para descrever a tabela de horários de cada viagem, incluindo o horário de chegada e partida em cada uma das paradas. A formatação deste arquivo depende da existência ou não de um arquivo <code>frequencies.txt</code>, o qual cobriremos a seguir. Por enquanto olharemos para o <code>stop_times.txt</code> do <em>feed</em> da SPTrans, que também conta com um <code>frequencies.txt</code>, na <a href="#tbl-stop_times">Tabela&nbsp;<span>4.7</span></a>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-stop_times" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;4.7: Exemplo de arquivo <code>stop_times.txt</code>
+<caption>Tabela&nbsp;4.7: Exemplo de arquivo <code>stop_times.txt</code>
 </caption>
 <thead><tr class="header">
 <th style="text-align: left;">trip_id</th>
@@ -825,12 +825,12 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p>Vale destacar aqui a diferença entre os arquivos <code>shapes.txt</code> e <code>stop_times.txt</code>. Embora os dois descrevam uma viagem espacialmente, eles o fazem de forma diferente. O <code>stop_times.txt</code> descreve a sequência de paradas e horários que compõem um cronograma, mas nada diz sobre o trajeto percorrido pelo veículo entre cada uma das paradas. Já o <code>shapes.txt</code> traz a trajetória detalhada da viagem como um todo, mas não descreve em que ponto do espaço estão as paradas da viagem. Quando usamos os dois arquivos em conjunto, portanto, sabemos tanto o cronograma de cada viagem quanto a trajetória espacial da viagem entre paradas.</p>
 </section><section id="frequencies.txt" class="level3" data-number="4.1.8"><h3 data-number="4.1.8" class="anchored" data-anchor-id="frequencies.txt">
 <span class="header-section-number">4.1.8</span> frequencies.txt</h3>
-<p>Arquivo opcional usado para descrever a frequência de cada viagem dentro de um determinado período do dia. A <a href="#tbl-frequencies">Table&nbsp;<span>4.8</span></a> mostra o <code>frequencies.txt</code> do <em>feed</em> da SPTrans.</p>
+<p>Arquivo opcional usado para descrever a frequência de cada viagem dentro de um determinado período do dia. A <a href="#tbl-frequencies">Tabela&nbsp;<span>4.8</span></a> mostra o <code>frequencies.txt</code> do <em>feed</em> da SPTrans.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-frequencies" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;4.8: Exemplo de arquivo <code>frequencies.txt</code>
+<caption>Tabela&nbsp;4.8: Exemplo de arquivo <code>frequencies.txt</code>
 </caption>
 <thead><tr class="header">
 <th style="text-align: left;">trip_id</th>
@@ -889,12 +889,12 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p>Outra variável que afeta a forma na qual o <code>frequencies.txt</code> afeta as tabelas de horários na tabela <code>stop_times.txt</code> é a coluna opcional <code>exact_times</code>. Um valor de <code>0</code> nesta coluna (ou quando ela está ausente do <em>feed</em>, como no caso do arquivo GTFS da SPTrans) indica que a viagem não necessariamente segue um cronograma fixo ao longo do período. Ao invés disso, operadores tentam se ater a um determinado <em>headway</em> durante o período. Naquele exemplo de uma viagem cujo <em>headway</em> é de 12 minutos entre as 04:00h e 05:00h, isto significaria que não necessariamente a primeira partida sairá exatamente às 04:00h, a segunda às 04:12h, e por aí em diante. A primeira pode, por exemplo, sair às 04:02h. A segunda, às 04:14h ou 04:13h, etc. Caso desejemos definir um cronograma que é seguido à risca, obtendo o mesmo resultado que seria obtido se definíssemos diversas viagens semelhantes partindo em diferentes horários no <code>stop_times.txt</code> (como mostrado anteriormente), devemos utilizar o valor <code>1</code> na coluna <code>exact_times</code>.</p>
 </section></section><section id="onde-encontrar-gtfs-de-cidades-brasileiras" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="onde-encontrar-gtfs-de-cidades-brasileiras">
 <span class="header-section-number">4.2</span> Onde encontrar GTFS de cidades brasileiras</h2>
-<p>No Brasil, existem dados de GTFS para diversas cidades. Em muitos casos, no entanto, esses dados são de propriedade de empresas operadoras e concessionárias de transporte, e não do poder público. Infelizmente, esses arquivos raramente são disponibilizados aberta e publicamente, contrariando boas práticas de gestão e compartilhamento de dados de interesse público. A <a href="#tbl-gtfs_brasil">Table&nbsp;<span>4.9</span></a> mostra as fontes dos dados GTFS de algumas das poucas cidades do Brasil que disponibilizavam seus feeds abertamente no momento da publicação deste livro.</p>
+<p>No Brasil, existem dados de GTFS para diversas cidades. Em muitos casos, no entanto, esses dados são de propriedade de empresas operadoras e concessionárias de transporte, e não do poder público. Infelizmente, esses arquivos raramente são disponibilizados aberta e publicamente, contrariando boas práticas de gestão e compartilhamento de dados de interesse público. A <a href="#tbl-gtfs_brasil">Tabela&nbsp;<span>4.9</span></a> mostra as fontes dos dados GTFS de algumas das poucas cidades do Brasil que disponibilizavam seus feeds abertamente no momento da publicação deste livro.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-gtfs_brasil" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Table&nbsp;4.9: Fontes de dados GTFS publicamente disponíveis no Brasil</caption>
+<caption>Tabela&nbsp;4.9: Fontes de dados GTFS publicamente disponíveis no Brasil</caption>
 <thead><tr class="header">
 <th style="text-align: left;">Cidade</th>
 <th style="text-align: left;">Fonte</th>
