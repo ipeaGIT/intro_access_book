@@ -80,6 +80,25 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -313,7 +332,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </div>
   
 
-</header><p>Usualmente, arquivos GTFS provenientes de fontes oficiais são utilizados para desenvolver análises e pesquisas que possuem diversos elementos comuns. Visando facilitar a leitura, o processamento e a análise desses dados, a equipe do Projeto Acesso a Oportunidades vêm desenvolvendo o pacote de R <a href="https://ipeagit.github.io/gtfstools/">gtfstools</a> [<span class="citation" data-cites="Herszenhut2022gtfstools">(<a href="references.html#ref-Herszenhut2022gtfstools" role="doc-biblioref"><strong>Herszenhut2022gtfstools?</strong></a>)</span>]<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, que oferece diversas funções que facilitam a manipulação e a exploração de feeds.</p>
+</header><p>Usualmente, arquivos GTFS provenientes de fontes oficiais são utilizados para desenvolver análises e pesquisas que possuem diversos elementos comuns. Visando facilitar a leitura, o processamento e a análise desses dados, a equipe do Projeto Acesso a Oportunidades vem desenvolvendo o pacote de R <a href="https://ipeagit.github.io/gtfstools/">gtfstools</a><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="citation" data-cites="herszenhut2022gtfstools">(<a href="references.html#ref-herszenhut2022gtfstools" role="doc-biblioref">Herszenhut et al. 2022</a>)</span>, que oferece diversas funções que facilitam a manipulação e a exploração de <em>feeds</em>.</p>
 <p>Neste capítulo, nós iremos passar por algumas das funcionalidades mais frequentemente utilizadas do pacote. Para isso, vamos utilizar uma amostra do <em>feed</em> da SPTrans apresentado no capítulo anterior, disponível dentro do <a href="https://ipeagit.github.io/gtfstools/">gtfstools</a>.</p>
 <section id="leitura-e-manipulação-básica-de-arquivos-gtfs" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="leitura-e-manipulação-básica-de-arquivos-gtfs">
 <span class="header-section-number">5.1</span> Leitura e manipulação básica de arquivos GTFS</h2>
@@ -335,7 +354,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 [6] "stop_times"  "stops"       "trips"      </code></pre>
 </div>
 </div>
-<p>Como podemos ver, cada <code>data.table</code> dentro do objeto GTFS é nomeado de acordo com a tabela que ele representa, porém sem a extensão <code>.txt</code>. Isso nos permite selecionar e manipular cada uma das tabelas separadamente. O código abaixo, por exemplo, mostra os 6 primeiros registros da tabela <em>trips</em>:</p>
+<p>Como podemos ver, cada <code>data.table</code> dentro do objeto GTFS é nomeado de acordo com a tabela que ele representa, sem a extensão <code>.txt</code>. Isso nos permite selecionar e manipular cada uma das tabelas separadamente. O código abaixo, por exemplo, mostra os 6 primeiros registros da tabela <em>trips</em>:</p>
 <div class="cell">
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">gtfs</span><span class="op">$</span><span class="va">trips</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -348,7 +367,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 6: CPTM L09        USD CPTM L09-1        OSASCO            1    17851</code></pre>
 </div>
 </div>
-<p>As tabelas dentro de um objeto GTFS podem ser facilmente manipuladas usando a sintaxe de tabelas <code>data.table</code>. O pacote <a href="https://r-datatable.com/">data.table</a> oferece diversas funcionalidades úteis, como a edição de colunas por referência, filtros de linhas muito rápidos e agregação de dados eficiente<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Para adicionar 100 segundos a todos os <em>headways</em> listados na tabela <em>frequencies</em> e reverter essa mudança em seguida, por exemplo, nós podemos usar o código abaixo:</p>
+<p>As tabelas dentro de um objeto GTFS podem ser facilmente manipuladas usando a sintaxe do pacote <a href="https://r-datatable.com">data.table</a>. Este pacote oferece diversas funcionalidades úteis, principalmente para a manipulação de tabelas com uma grande quantidade de registros, como a edição de colunas por referência, filtros de linhas muito rápidos e agregação de dados eficiente<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Para adicionar 100 segundos a todos os <em>headways</em> listados na tabela <em>frequencies</em> e reverter essa mudança em seguida, por exemplo, nós podemos usar o código abaixo:</p>
 <div class="cell">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># original</span></span>
 <span><span class="va">original_headway</span> <span class="op">&lt;-</span> <span class="va">gtfs</span><span class="op">$</span><span class="va">frequencies</span><span class="op">$</span><span class="va">headway_secs</span></span>
@@ -378,7 +397,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 3: CPTM L07-0   06:00:00 06:59:00          360</code></pre>
 </div>
 </div>
-<p>Ao final de edições de um objeto GTFS no R, frequentemente vamos querer usar o GTFS manipulado para fazer análises de diferentes tipos. Para isso, é comum que precisemos do arquivo GTFS em formato <code>.zip</code> novamente, e não no formato de lista de tabelas dentro do R. O pacote <a href="https://ipeagit.github.io/gtfstools/">gtfstools</a> disponibiliza a função <code><a href="https://ipeagit.github.io/gtfstools/reference/write_gtfs.html">write_gtfs()</a></code> exatamente com a finalidade de transformar objetos GTFS que existem apenas dentro do R em arquivos GTFS para arquivos compactados salvos no disco do seu computador. Para esta função, é necessário apenas listar o objeto e o endereço no qual o arquivo deve ser salvo:</p>
+<p>Após editarmos um objeto GTFS no R, frequentemente vamos querer usar o GTFS manipulado para fazer análises de diferentes tipos. Para isso, é comum que precisemos do arquivo GTFS em formato <code>.zip</code> novamente, e não como uma lista de tabelas dentro do R. O pacote <a href="https://ipeagit.github.io/gtfstools/">gtfstools</a> disponibiliza a função <code><a href="https://ipeagit.github.io/gtfstools/reference/write_gtfs.html">write_gtfs()</a></code> exatamente com a finalidade de transformar objetos GTFS que existem apenas dentro do R em arquivos GTFS armazenados no seu computador. Para usar esta função, é necessário apenas listar o objeto e o endereço no qual o arquivo deve ser salvo:</p>
 <div class="cell">
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># aponta endereço onde arquivo deve ser salvo</span></span>
 <span><span class="va">dest_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span><span class="op">(</span><span class="st">"new_gtfs"</span>, fileext <span class="op">=</span> <span class="st">".zip"</span><span class="op">)</span></span>
@@ -386,24 +405,25 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span><span class="co"># salve GTFS localmente</span></span>
 <span><span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/write_gtfs.html">write_gtfs</a></span><span class="op">(</span><span class="va">gtfs</span>, <span class="va">dest_path</span><span class="op">)</span></span>
 <span></span>
+<span></span>
 <span><span class="co"># listar arquivos dentro do feed salvo</span></span>
 <span><span class="fu">zip</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/zip/man/zip_list.html">zip_list</a></span><span class="op">(</span><span class="va">dest_path</span><span class="op">)</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"filename"</span>, <span class="st">"compressed_size"</span>, <span class="st">"timestamp"</span><span class="op">)</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         filename compressed_size           timestamp
-1      agency.txt             112 2022-10-11 22:25:10
-2    calendar.txt             129 2022-10-11 22:25:10
-3 frequencies.txt            2381 2022-10-11 22:25:10
-4      routes.txt             659 2022-10-11 22:25:10
-5      shapes.txt          160470 2022-10-11 22:25:10
-6  stop_times.txt            7907 2022-10-11 22:25:10
-7       stops.txt           18797 2022-10-11 22:25:10
-8       trips.txt             717 2022-10-11 22:25:10</code></pre>
+1      agency.txt             112 2022-10-21 12:54:50
+2    calendar.txt             129 2022-10-21 12:54:50
+3 frequencies.txt            2381 2022-10-21 12:54:50
+4      routes.txt             659 2022-10-21 12:54:50
+5      shapes.txt          160470 2022-10-21 12:54:50
+6  stop_times.txt            7907 2022-10-21 12:54:50
+7       stops.txt           18797 2022-10-21 12:54:50
+8       trips.txt             717 2022-10-21 12:54:50</code></pre>
 </div>
 </div>
 </section><section id="cálculo-de-velocidade-das-linhas" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="cálculo-de-velocidade-das-linhas">
 <span class="header-section-number">5.2</span> Cálculo de velocidade das linhas</h2>
 <p>Arquivos GTFS são frequentemente utilizados em estimativas de roteamento de transporte público e para informar passageiros sobre a tabela de horários das diferentes rotas que operam em uma região. Dessa forma, é extremamente importante que o cronograma das viagens e a velocidade operacional de cada linha estejam adequadamente descritos no <em>feed</em>.</p>
-<p>O <a href="https://ipeagit.github.io/gtfstools/">gtfstools</a> disponibiliza a função <code><a href="https://ipeagit.github.io/gtfstools/reference/get_trip_speed.html">get_trip_speed()</a></code> para facilitar o cálculo da velocidade de cada viagem presente no <em>feed</em>. Por padrão a função retorna a velocidade (em km/h) de todas as viagens do GTFS, mas viagens individuais também podem ser especificadas:</p>
+<p>O <a href="https://ipeagit.github.io/gtfstools/">gtfstools</a> disponibiliza a função <code><a href="https://ipeagit.github.io/gtfstools/reference/get_trip_speed.html">get_trip_speed()</a></code> para facilitar o cálculo da velocidade de cada viagem presente no <em>feed</em>. Por padrão, a função retorna a velocidade (em km/h) de todas as viagens do GTFS, mas viagens individuais também podem ser especificadas:</p>
 <div class="cell">
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># calcular velocidade de todas viagens</span></span>
 <span><span class="va">speeds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/get_trip_speed.html">get_trip_speed</a></span><span class="op">(</span><span class="va">gtfs</span><span class="op">)</span></span>
@@ -465,7 +485,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </section><section id="combinando-e-filtrando-feeds" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="combinando-e-filtrando-feeds">
 <span class="header-section-number">5.3</span> Combinando e filtrando <em>feeds</em>
 </h2>
-<p>Muitas vezes o processo de processamento e edição de arquivos GTFS é realizado, em grande medida, manualmente. Consequentemente, pequenas inconsistências podem passar batidas pelos responsáveis por esse processamento. Um problema comumente observado em <em>feeds</em> é a presença de registros duplicados em uma mesma tabela. O <em>feed</em> da SPTrans, por exemplo, possui registros duplicados tanto no <em>agency.txt</em> quanto no <em>calendar.txt</em>:</p>
+<p>Muitas vezes o processamento e a edição de arquivos GTFS é realizado, em grande medida, manualmente. Consequentemente, pequenas inconsistências podem passar batidas pelos responsáveis por esse processamento. Um problema comumente observado em <em>feeds</em> é a presença de registros duplicados em uma mesma tabela. O <em>feed</em> da SPTrans, por exemplo, possui registros duplicados tanto no <em>agency.txt</em> quanto no <em>calendar.txt</em>:</p>
 <div class="cell">
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">gtfs</span><span class="op">$</span><span class="va">agency</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -598,8 +618,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
-<p>Um outro tipo de operação muito utilizada no tratamento de arquivos GTFS é o de filtragem desses arquivos. Frequentemente, <em>feeds</em> são usados para descrever redes de transporte público de grande escala, o que pode transformar sua edição, análise e transferência em operações mais complexas. Por esse motivo, pesquisadores e planejadores muitas vezes precisar trabalhar com um subconjunto de dados descritos nos <em>feeds</em>. Caso desejemos estimar a performance da rede de transporte em uma determinada região no horário de pico da manhã, por exemplo, podemos filtrar o nosso arquivo GTFS de modo a manter apenas os registros referentes a viagens que ocorrem nesse intervalo do dia.</p>
-<p>O pacote <a href="https://ipeagit.github.io/gtfstools/">gtfstools</a> também traz diversas funções para facilitar a filtragem de arquivos GTFS. São elas:</p>
+<p>Um outro tipo de operação muito utilizada no tratamento de arquivos GTFS é o de filtragem desses arquivos. Frequentemente, <em>feeds</em> são usados para descrever redes de transporte público de grande escala, o que pode transformar sua edição, análise e compartilhamento em operações mais complexas. Por esse motivo, pesquisadores e planejadores muitas vezes precisar trabalhar com um subconjunto de dados descritos nos <em>feeds</em>. Por exemplo, caso desejemos estimar a performance da rede de transporte em uma determinada região no horário de pico da manhã, podemos filtrar o nosso arquivo GTFS de modo a manter apenas os registros referentes a viagens que ocorrem nesse intervalo do dia.</p>
+<p>O pacote <a href="https://ipeagit.github.io/gtfstools/">gtfstools</a> traz diversas funções para facilitar a filtragem de arquivos GTFS. São elas:</p>
 <ul>
 <li><code><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_agency_id.html">filter_by_agency_id()</a></code></li>
 <li><code><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_route_id.html">filter_by_route_id()</a></code></li>
@@ -612,6 +632,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <li><code><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_time_of_day.html">filter_by_time_of_day()</a></code></li>
 <li><code><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_sf.html">filter_by_sf()</a></code></li>
 </ul>
+<p><strong>Filtro por identificadores</strong></p>
 <p>As seis primeiras (<code><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_agency_id.html">filter_by_agency_id()</a></code>, <code><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_route_id.html">filter_by_route_id()</a></code>, <code><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_service_id.html">filter_by_service_id()</a></code>, <code><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_shape_id.html">filter_by_shape_id()</a></code>, <code><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_stop_id.html">filter_by_stop_id()</a></code> e <code><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_trip_id.html">filter_by_trip_id()</a></code>) funcionam de forma muito similar. O usuário deve especificar um vetor de identificadores, e a função mantém no objeto GTFS apenas os registros referentes a esses identificadores. O exemplo abaixo demonstra essa funcionalidade com a <code><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_trip_id.html">filter_by_trip_id()</a></code>:</p>
 <div class="cell">
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># checando tamanho do feed antes do filtro</span></span>
@@ -674,7 +695,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </div>
 <p>Como podemos ver, as viagens especificadas, bem como suas trajetórias, não estão presentes no GTFS filtrado. A mesma lógica aqui demonstrada com a <code><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_trip_id.html">filter_by_trip_id()</a></code> é válida para as funções que filtram objetos GTFS pelos identificadores <code>agency_id</code>, <code>route_id</code>, <code>service_id</code>, <code>shape_id</code>, <code>stop_id</code> e <code>route_type</code>.</p>
-<p><strong>Filtro por dia da semana</strong></p>
+<p><strong>Filtro por dia e hora</strong></p>
 <p>Outra operação que recorrentemente aparece em análises que envolvem dados GTFS é a de manter serviços que funcionem apenas em determinados horários do dia ou dias da semana. Para isso, o pacote disponibiliza as funções <code><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_weekday.html">filter_by_weekday()</a></code> e <code><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_time_of_day.html">filter_by_time_of_day()</a></code>.</p>
 <p>A <code><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_weekday.html">filter_by_weekday()</a></code> recebe os dias da semana (em inglês) cujos serviços que neles operam devem ser mantidos. Adicionalmente, a função também inclui o argumento <code>combine</code>, que define como filtros de dois ou mais dias funcionam. Quando este recebe o valor <code>”and”</code>, apenas serviços que operam em todos os dias especificados são mantidos. Quando recebe o valor <code>”or”</code>, serviços que operam em pelo menos um dos dias são mantidos:</p>
 <div class="cell">
@@ -708,7 +729,6 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 5:        _S_      0        1</code></pre>
 </div>
 </div>
-<p><strong>Filtro por hora do dia</strong></p>
 <p>A <code><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_time_of_day.html">filter_by_time_of_day()</a></code>, por sua vez, recebe o começo e o final de uma janela de tempo e mantém os registros relacionados a viagens que rodam dentro dessa janela de horário. O funcionamento da função depende da presença ou não da tabela <code>frequencies</code> no GTFS: o cronograma descrito na <code>stop_times</code> das viagens descritas na tabela <code>frequencies</code> não deve ser filtrado, pois, como comentado no capítulo anterior, ele serve como um modelo que dita o tempo de viagem entre uma parada e outra. Caso a <code>frequencies</code> esteja ausente, no entanto, a <code>stop_times</code> é filtrada segundo o intervalo de tempo especificado. Vamos ver como isso funciona com um exemplo:</p>
 <div class="cell">
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># filtro mantendo apenas viagens dentro do período de 5 às 6 da manhã</span></span>
@@ -750,7 +770,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 6: CPTM L07-0       05:44:00     05:44:00</code></pre>
 </div>
 </div>
-<p>O filtro da tabela <code>stop_times</code> pode funcionar de duas formas distintas. Uma opção é manter intactas todas as viagens que cruzam a janela de tempo especificada. A outra é manter apenas os segmentos de viagens que ocorrem dentro da janela (comportamento padrão da função). Este comportamento é controlado com o parâmetro <code>full_trips</code>, como mostrado a seguir (prestem atenção nos horários e nos segmentos presentes em cada exemplo):</p>
+<p>O filtro da tabela <code>stop_times</code> pode funcionar de duas formas distintas. Uma opção é manter intactas todas as viagens que cruzam a janela de tempo especificada. A outra é manter apenas os segmentos de viagens que ocorrem dentro da janela (comportamento padrão da função). Este comportamento é controlado com o parâmetro <code>full_trips</code>, como mostrado a seguir (atenção aos horários e aos segmentos presentes em cada exemplo):</p>
 <div class="cell">
 <div class="sourceCode" id="cb69"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># filtro mantendo apenas viagens inteiramente dentro do período de 5 às 6 da manhã</span></span>
 <span><span class="va">smaller_gtfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_time_of_day.html">filter_by_time_of_day</a></span><span class="op">(</span></span>
@@ -800,76 +820,58 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </div>
 <p><strong>Filtro espacial</strong></p>
-<p>Por fim, o pacote <a href="https://ipeagit.github.io/gtfstools/">gtfstools</a> também disponibiliza uma função que permite filtrar o objeto GTFS usando um polígono espacial. A <code><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_sf.html">filter_by_sf()</a></code> recebe um objeto do tipo <code>sf</code>/<code>sfc</code> (representação espacial estabelecida pelo pacote <a href="https://r-spatial.github.io/sf/"><code>sf</code></a>), ou sua <em>bounding box</em>, e mantém os registros cujas viagens são selecionadas por uma operação espacial especificada pelo usuário. Embora aparentemente complicado, este processo de filtragem é muito facilmente compreendido quando apresentado visualmente. Para isso, vamos criar uma função auxiliar:</p>
+<p>Por fim, o pacote <a href="https://ipeagit.github.io/gtfstools/">gtfstools</a> também disponibiliza uma função que permite filtrar o objeto GTFS usando um polígono espacial. A <code><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_sf.html">filter_by_sf()</a></code> recebe um objeto do tipo <code>sf</code>/<code>sfc</code> (representação espacial estabelecida pelo pacote <a href="https://r-spatial.github.io/sf/"><code>sf</code></a>), ou sua <em>bounding box</em>, e mantém os registros cujas viagens são selecionadas por uma operação espacial especificada pelo usuário. Embora aparentemente complicado, este processo de filtragem é muito facilmente compreendido quando apresentado visualmente. Para isso, vamos filtrar o GTFS da SPTrans pela <em>bouding box</em> da trajetória de <em>id</em> <code>68962</code>. O código abaixo apresenta a distribuição espacial dos dados não filtrados, com a <em>bounding box</em> destacada em vermelho:</p>
 <div class="cell">
 <div class="sourceCode" id="cb73"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># carreg biblioteca ggplot2 para visualização de dados</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># cria uma função genérica para filtrar GTFS e plotar figura</span></span>
-<span><span class="va">plotter</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">gtfs</span>,</span>
-<span>                    <span class="va">geom</span>,</span>
-<span>                    <span class="va">spatial_operation</span> <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="va"><a href="https://r-spatial.github.io/sf/reference/geos_binary_pred.html">st_intersects</a></span>,</span>
-<span>                    <span class="va">keep</span> <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>                    <span class="va">do_filter</span> <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">do_filter</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">gtfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_sf.html">filter_by_sf</a></span><span class="op">(</span><span class="va">gtfs</span>, <span class="va">geom</span>, <span class="va">spatial_operation</span>, <span class="va">keep</span><span class="op">)</span></span>
-<span>  <span class="op">}</span></span>
-<span> </span>
-<span>  <span class="va">shapes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/convert_shapes_to_sf.html">convert_shapes_to_sf</a></span><span class="op">(</span><span class="va">gtfs</span><span class="op">)</span></span>
-<span>  <span class="va">trips</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/get_trip_geometry.html">get_trip_geometry</a></span><span class="op">(</span><span class="va">gtfs</span>, file <span class="op">=</span> <span class="st">"stop_times"</span><span class="op">)</span></span>
-<span>  <span class="va">geom</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sfc.html">st_as_sfc</a></span><span class="op">(</span><span class="va">geom</span><span class="op">)</span></span>
-<span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">trips</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">shapes</span><span class="op">)</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">geom</span>, fill <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">shape_68962</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/convert_shapes_to_sf.html">convert_shapes_to_sf</a></span><span class="op">(</span><span class="va">gtfs</span>, shape_id <span class="op">=</span> <span class="st">"68962"</span><span class="op">)</span></span>
+<span><span class="va">bbox</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_bbox.html">st_bbox</a></span><span class="op">(</span><span class="va">shape_68962</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">shapes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/convert_shapes_to_sf.html">convert_shapes_to_sf</a></span><span class="op">(</span><span class="va">gtfs</span><span class="op">)</span></span>
+<span><span class="va">bbox_geom</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_as_sfc.html">st_as_sfc</a></span><span class="op">(</span><span class="va">bbox</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">shapes</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">bbox_geom</span>, fill <span class="op">=</span> <span class="cn">NA</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="5_gtfstools_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
-<p>Esta função genérica criada acima:</p>
-<ul>
-<li>Possui os mesmos parâmetros da <code><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_sf.html">filter_by_sf()</a></code>, com a exceção do parâmetro <code>do_filter</code>, usado para mostrar os dados não filtrados;</li>
-<li>Condicionalmente filtra um objeto GTFS usando uma <em>bounding box</em> chamada <code>geom</code>;</li>
-<li>Gera a geometria das viagens usando as funções <code><a href="https://ipeagit.github.io/gtfstools/reference/convert_shapes_to_sf.html">convert_shapes_to_sf()</a></code> e <code><a href="https://ipeagit.github.io/gtfstools/reference/get_trip_geometry.html">get_trip_geometry()</a></code>;</li>
-<li>Cria um polígono a partir da <em>bounding box</em>;</li>
-</ul>
-<p>Vamos usar como exemplo a filtragem usando a <em>bounding box</em> da trajetória de <em>id</em> <code>68962</code>. O código abaixo apresenta a distribuição espacial dos dados não filtrados:</p>
+</div>
+<p>Note que nós usamos a função <code><a href="https://ipeagit.github.io/gtfstools/reference/convert_shapes_to_sf.html">convert_shapes_to_sf()</a></code>, também disponibilizada pelo <a href="https://ipeagit.github.io/gtfstools/">gtfstools</a>, que converte uma determinada trajetória descrita no GTFS em um objeto espacial do tipo <code>sf</code>. Por padrão, a <code><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_sf.html">filter_by_sf()</a></code> mantém os dados relacionados aos registros de viagens cujas trajetórias possuem alguma interseção com o polígono espacial selecionado:</p>
 <div class="cell">
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># converte para objeto espacial sf o traçado de um shape_id </span></span>
-<span><span class="co"># pega o bounding box desse traçado</span></span>
-<span><span class="va">bbox</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/convert_shapes_to_sf.html">convert_shapes_to_sf</a></span><span class="op">(</span><span class="va">gtfs</span>, shape_id <span class="op">=</span> <span class="st">"68962"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>        <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_bbox.html">st_bbox</a></span><span class="op">(</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">filtered_gtfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_sf.html">filter_by_sf</a></span><span class="op">(</span><span class="va">gtfs</span>, <span class="va">bbox</span>, spatial_operation <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="va"><a href="https://r-spatial.github.io/sf/reference/geos_binary_pred.html">st_intersects</a></span><span class="op">)</span></span>
+<span><span class="va">filtered_shapes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/convert_shapes_to_sf.html">convert_shapes_to_sf</a></span><span class="op">(</span><span class="va">filtered_gtfs</span><span class="op">)</span></span>
 <span></span>
-<span></span>
-<span><span class="co"># plota toda rede de transporte público e o bounding box construído acima</span></span>
-<span><span class="fu">plotter</span><span class="op">(</span><span class="va">gtfs</span>, <span class="va">bbox</span>, do_filter <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">filtered_shapes</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">bbox_geom</span>, fill <span class="op">=</span> <span class="cn">NA</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="5_gtfstools_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Note aqui que nós usamos a função <code><a href="https://ipeagit.github.io/gtfstools/reference/convert_shapes_to_sf.html">convert_shapes_to_sf()</a></code>, que converte uma determinada trajetória descrita no GTFS em um objeto espacial do tipo <code>sf</code>, para obter a <em>bounding box</em> da trajetória. Por padrão, a <code><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_sf.html">filter_by_sf()</a></code> (e a <code>plotter()</code>, consequentemente) mantém os dados relacionados aos registros de viagens cujas trajetórias possuem alguma interseção com o polígono espacial selecionado:</p>
+<p>Nós podemos, no entanto, controlar a operação espacial usada no processo de filtragem. Por exemplo, o código abaixo mostra como nós podemos manter os dados relacionados a viagens que estão <em>contidas</em> dentro do polígono espacial:</p>
 <div class="cell">
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plotter</span><span class="op">(</span><span class="va">gtfs</span>, <span class="va">bbox</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">filtered_gtfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_sf.html">filter_by_sf</a></span><span class="op">(</span><span class="va">gtfs</span>, <span class="va">bbox</span>, spatial_operation <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="va"><a href="https://r-spatial.github.io/sf/reference/geos_binary_pred.html">st_contains</a></span><span class="op">)</span></span>
+<span><span class="va">filtered_shapes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/convert_shapes_to_sf.html">convert_shapes_to_sf</a></span><span class="op">(</span><span class="va">filtered_gtfs</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">filtered_shapes</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">bbox_geom</span>, fill <span class="op">=</span> <span class="cn">NA</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="5_gtfstools_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Nós podemos, no entanto, controlar a operação espacial usada no processo de filtragem. Por exemplo, o código abaixo mostra como nós podemos manter os dados relacionados a viagens que estão <em>contidas</em> dentro do polígono espacial:</p>
-<div class="cell">
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">plotter</span><span class="op">(</span><span class="va">gtfs</span>, <span class="va">bbox</span>, spatial_operation <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="va"><a href="https://r-spatial.github.io/sf/reference/geos_binary_pred.html">st_contains</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="5_gtfstools_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
 </section><section id="mapeamento-do-headway-das-linhas" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="mapeamento-do-headway-das-linhas">
 <span class="header-section-number">5.4</span> Mapeamento do <em>headway</em> das linhas</h2>
-<p>Como mostrado nas seções anteriores, o <a href="https://ipeagit.github.io/gtfstools/">gtfstools</a> disponibiliza uma grande caixa de ferramentas que podem ser usadas no processamento e na análise de arquivos GTFS. O pacote, no entanto, oferece diversas outras funções que não puderam ser apresentadas neste livro, por questões de espaço. A lista completa de funções disponíveis no pacote pode ser conferida no <a href="https://ipeagit.github.io/gtfstools/reference/index.html">site do <code>{gtfstools}</code></a>.</p>
+<p>Como mostrado nas seções anteriores, o <a href="https://ipeagit.github.io/gtfstools/">gtfstools</a> disponibiliza uma grande caixa de ferramentas que podem ser usadas no processamento e na análise de arquivos GTFS. O pacote, no entanto, oferece diversas outras funções que não podem ser apresentadas neste livro, por questões de espaço. A lista completa de funções disponíveis pode ser conferida no <a href="https://ipeagit.github.io/gtfstools/reference/index.html">site do pacote</a>.</p>
 <p>A apresentação das funções feitas até aqui tem um importante caráter demonstrativo, porém não mostra como elas podem ser usadas de forma conjunta no desenvolvimento de uma análise de um arquivo GTFS. Esta seção preenche esta lacuna, mostrando como o pacote pode ser usado, por exemplo, para responder a seguinte pergunta: como se distribuem espacialmente os tempos entre veículos de uma mesma linha (ou seja, o <em>headway</em>) no GTFS da SPTrans?</p>
 <p>A primeira etapa é definir o escopo da nossa análise. A fim de exemplo, vamos considerar o <em>headway</em> no pico da manhã, entre 7h e 9h, em uma típica terça-feira de operação. Para isso, precisamos filtrar o nosso <em>feed</em>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># ler dados de GTFS</span></span>
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># ler dados de GTFS</span></span>
 <span><span class="va">gtfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/read_gtfs.html">read_gtfs</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># filtando GTFS</span></span>
+<span><span class="co"># filtrando GTFS</span></span>
 <span><span class="va">filtered_gtfs</span> <span class="op">&lt;-</span> <span class="va">gtfs</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/remove_duplicates.html">remove_duplicates</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_weekday.html">filter_by_weekday</a></span><span class="op">(</span><span class="st">"tuesday"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -882,7 +884,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 1: 2105-10-0   07:00:00 07:59:00          900
 2: 2105-10-0   08:00:00 08:59:00         1200</code></pre>
 </div>
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># checando resultado do filtro</span></span>
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># checando resultado do filtro</span></span>
 <span><span class="va">filtered_gtfs</span><span class="op">$</span><span class="va">calendar</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   service_id monday tuesday wednesday thursday friday saturday sunday
@@ -893,10 +895,10 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 2: 2008-01-01 2020-05-01</code></pre>
 </div>
 </div>
-<p>Em seguida, precisamos calcular o <em>headway</em> dentro do período estabelecido. Essa informação pode ser encontrada na tabela <em>frequencies</em>, porém há um elemento complicador: cada viagem está associada a mais de um <em>headway</em>, como podemos ver acima (um entre 7:00 e 7:59, e outro entre 8:00 e 8:59. Para resolver esta questão, portanto, vamos calcular o <em>headway médio</em> neste intervalo entre 7:00 e 8:59.</p>
-<p>Os primeiros registros da tabela <em>frequencies</em> do GTFS da SPTrans parecem sugerir que os períodos do dia estão listados sempre de uma em uma hora, porém isto não é uma regra estabelecida na especificação GTFS e nem é a prática adotada em outros GTFS. Por isso, nós vamos calcular a <em>média ponderada</em> do <em>headway</em> no período especificado. Para isso, nós precisamos multiplicar cada <em>headway</em> pelo intervalo de tempo em que ele é válido, e dividir o total desta soma pelo intervalo de tempo total (duas horas). Para calcular o intervalo de tempo em que cada <em>headway</em> é válido, nós usamos a função <code><a href="https://ipeagit.github.io/gtfstools/reference/convert_time_to_seconds.html">convert_time_to_seconds()</a></code> para calcular o começo e o fim do intervalo em segundos e subtraímos o valor do fim pelo do começo, como abaixo:</p>
+<p>Em seguida, precisamos calcular o <em>headway</em> dentro do período estabelecido. Essa informação pode ser encontrada na tabela <em>frequencies</em>, porém há um elemento complicador: cada viagem está associada a mais de um <em>headway</em>, como podemos ver acima (um registro para o período entre 7:00h e 7:59h e outro para o período entre entre 8:00h e 8:59h). Para resolver esta questão, portanto, vamos calcular o <em>headway médio</em> no intervalo entre 7:00h e 9:00h.</p>
+<p>Os primeiros registros da tabela <em>frequencies</em> do GTFS da SPTrans parecem sugerir que os períodos do dia estão listados sempre de uma em uma hora, porém isto não é uma regra estabelecida na especificação GTFS e nem é a prática adotada em outros GTFS. Por isso, nós vamos calcular a <em>média ponderada</em> do <em>headway</em> no período especificado. Para isso, precisamos multiplicar cada <em>headway</em> pelo intervalo de tempo em que ele é válido, e dividir o total desta soma pelo intervalo de tempo total (duas horas). Para calcular o intervalo de tempo em que cada <em>headway</em> é válido, nós usamos a função <code><a href="https://ipeagit.github.io/gtfstools/reference/convert_time_to_seconds.html">convert_time_to_seconds()</a></code> para calcular o começo e o fim do intervalo em segundos e subtraímos o valor do fim pelo do começo, como abaixo:</p>
 <div class="cell">
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">filtered_gtfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/convert_time_to_seconds.html">convert_time_to_seconds</a></span><span class="op">(</span><span class="va">filtered_gtfs</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">filtered_gtfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/convert_time_to_seconds.html">convert_time_to_seconds</a></span><span class="op">(</span><span class="va">filtered_gtfs</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">filtered_gtfs</span><span class="op">$</span><span class="va">frequencies</span><span class="op">[</span><span class="va">trip_id</span> <span class="op">==</span> <span class="st">"2105-10-0"</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -904,11 +906,11 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 1: 2105-10-0   07:00:00 07:59:00          900           25200         28740
 2: 2105-10-0   08:00:00 08:59:00         1200           28800         32340</code></pre>
 </div>
-<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">filtered_gtfs</span><span class="op">$</span><span class="va">frequencies</span><span class="op">[</span>, <span class="va">time_interval</span> <span class="op">:=</span> <span class="va">end_time_secs</span> <span class="op">-</span> <span class="va">start_time_secs</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">filtered_gtfs</span><span class="op">$</span><span class="va">frequencies</span><span class="op">[</span>, <span class="va">time_interval</span> <span class="op">:=</span> <span class="va">end_time_secs</span> <span class="op">-</span> <span class="va">start_time_secs</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Em seguida, nós calculamos o <em>headway</em> médio:</p>
+<p>Em seguida, calculamos o <em>headway</em> médio:</p>
 <div class="cell">
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">avg_headway</span> <span class="op">&lt;-</span> <span class="va">filtered_gtfs</span><span class="op">$</span><span class="va">frequencies</span><span class="op">[</span></span>
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">avg_headway</span> <span class="op">&lt;-</span> <span class="va">filtered_gtfs</span><span class="op">$</span><span class="va">frequencies</span><span class="op">[</span></span>
 <span>  ,</span>
 <span>  <span class="fu">.</span><span class="op">(</span>avg_headway <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span><span class="op">(</span><span class="va">headway_secs</span>, w <span class="op">=</span> <span class="va">time_interval</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  by <span class="op">=</span> <span class="va">trip_id</span></span>
@@ -919,7 +921,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <pre><code>     trip_id avg_headway
 1: 2105-10-0        1050</code></pre>
 </div>
-<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">avg_headway</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">avg_headway</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      trip_id avg_headway
 1: CPTM L07-0         360
@@ -930,9 +932,9 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 6: CPTM L09-1         240</code></pre>
 </div>
 </div>
-<p>Nós precisamos agora gerar a trajetória espacial de cada viagem e juntar esta informação à do <em>headway</em> médio. Para isso, nós vamos utilizar a função <code><a href="https://ipeagit.github.io/gtfstools/reference/get_trip_geometry.html">get_trip_geometry()</a></code>, que, dado um objeto GTFS, retorna a trajetória espacial de suas viagens. Esta função nos permite especificar de quais viagens nós queremos as trajetórias, logo nós vamos calcular apenas as daquelas que estão presentes na tabela de <em>headways</em> médios:</p>
+<p>Precisamos agora gerar a trajetória espacial de cada viagem e juntar esta informação à do <em>headway</em> médio. Para isso, vamos utilizar a função <code><a href="https://ipeagit.github.io/gtfstools/reference/get_trip_geometry.html">get_trip_geometry()</a></code>, que, dado um objeto GTFS, retorna a trajetória espacial de suas viagens. Esta função nos permite especificar de quais viagens nós queremos as trajetórias, logo vamos calcular apenas as daquelas que estão presentes na tabela de <em>headways</em> médios:</p>
 <div class="cell">
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">selected_trips</span> <span class="op">&lt;-</span> <span class="va">avg_headway</span><span class="op">$</span><span class="va">trip_id</span></span>
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">selected_trips</span> <span class="op">&lt;-</span> <span class="va">avg_headway</span><span class="op">$</span><span class="va">trip_id</span></span>
 <span></span>
 <span><span class="va">geoms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/get_trip_geometry.html">get_trip_geometry</a></span><span class="op">(</span></span>
 <span>  <span class="va">filtered_gtfs</span>,</span>
@@ -956,9 +958,9 @@ Geodetic CRS:  WGS 84
 6 CPTM L09-1      shapes LINESTRING (-46.69711 -23.7...</code></pre>
 </div>
 </div>
-<p>O objeto <code>geoms</code> está no formato <code>sf</code>, e não no <code>data.table</code>, que precisamos que ele esteja para juntarmos à tabela de <em>headways</em>. Depois de convertê-lo para o formato desejado adequado e juntá-lo à tabela de <em>headways</em>, nós precisamos apenas configurar o nosso mapa como desejado. No exemplo abaixo, nós usamos cores e espessuras de linhas que variam de acordo com o <em>headway</em> de cada viagem:</p>
+<p>O objeto <code>geoms</code> está no formato <code>sf</code>, e não no <code>data.table</code>, que precisamos que ele esteja para juntarmos à tabela de <em>headways</em>. Depois de convertê-lo para o formato adequado e juntá-lo à tabela de <em>headways</em>, precisamos apenas configurar o nosso mapa como desejado. No exemplo abaixo, nós usamos cores e espessuras de linhas que variam de acordo com o <em>headway</em> de cada viagem:</p>
 <div class="cell">
-<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com">data.table</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com">data.table</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># converte objeto em data.table e faz ‘merge’ para fazer as infos espaciais</span></span>
@@ -966,22 +968,27 @@ Geodetic CRS:  WGS 84
 <span><span class="va">avg_headway</span><span class="op">[</span><span class="va">geoms</span>, on <span class="op">=</span> <span class="st">"trip_id"</span>, <span class="va">geometry</span> <span class="op">:=</span> <span class="va">i.geometry</span><span class="op">]</span></span>
 <span></span>
 <span><span class="co"># converte objeto de volta para sf para poder fazer o mapa</span></span>
-<span><span class="va">avg_headway</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sf.html">st_sf</a></span><span class="op">(</span><span class="va">avg_headway</span><span class="op">)</span></span>
+<span><span class="va">avg_headway_sf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sf.html">st_sf</a></span><span class="op">(</span><span class="va">avg_headway</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># plotar figura</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">avg_headway</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">avg_headway_sf</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">avg_headway</span>, size <span class="op">=</span> <span class="va">avg_headway</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="5_gtfstools_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+<p><img src="5_gtfstools_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Como podemos ver, o pacote <a href="https://ipeagit.github.io/gtfstools/">gtfstools</a> torna o desenvolvimento de análises de <em>feeds</em> de transporte público algo fácil e que requer apenas o conhecimento básico de pacotes de manipulação de tabela (como o <code>data.table</code> ou <code>dplyr</code>) para grande parte das etapas que as compõem. O exemplo apresentado nesta seção mostra como muitas de suas funções podem ser usadas conjuntamente para revelar aspectos importantes de sistemas de transporte público descritos no formato GTFS.</p>
+<p>Como podemos ver, o pacote <a href="https://ipeagit.github.io/gtfstools/">gtfstools</a> torna o desenvolvimento de análises de <em>feeds</em> de transporte público algo fácil e que requer apenas o conhecimento básico de pacotes de manipulação de tabela (como o <a href="https://r-datatable.com">data.table</a> ou o <a href="https://dplyr.tidyverse.org">dplyr</a>) para grande parte das etapas que as compõem. O exemplo apresentado nesta seção mostra como muitas de suas funções podem ser usadas conjuntamente para revelar aspectos importantes de sistemas de transporte público descritos no formato GTFS.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-herszenhut2022gtfstools" class="csl-entry" role="doc-biblioentry">
+Herszenhut, Daniel, Rafael H. M. Pereira, Pedro R. Andrade, and João Bazzo. 2022. <span>“Gtfstools: <span>General Transit Feed Specification</span> (<span>GTFS</span>) <span>Editing</span> and <span>Analysing Tools</span>.”</span> Zenodo. <a href="https://doi.org/10.5281/ZENODO.6577028">https://doi.org/10.5281/ZENODO.6577028</a>.
+</div>
+</div>
 </section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1"><p>Disponível em <a href="https://github.com/ipeaGIT/gtfstools" class="uri">https://github.com/ipeaGIT/gtfstools</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Mais detalhes sobre o uso e a sintaxe do <code>data.table</code> podem ser lidos em <a href="https://rdatatable.gitlab.io/data.table/index.html" class="uri">https://rdatatable.gitlab.io/data.table/index.html</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Mais detalhes sobre o uso e a sintaxe do <a href="https://r-datatable.com">data.table</a> podem ser lidos em <a href="https://rdatatable.gitlab.io/data.table/index.html" class="uri">https://rdatatable.gitlab.io/data.table/index.html</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
