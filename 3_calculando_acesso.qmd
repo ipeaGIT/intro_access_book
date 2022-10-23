@@ -21,7 +21,7 @@ Além do R, o pacote `{r5r}` requer também a instalação do Java 11[^2]. Use o
 [^2]: O Java 11 pode ser baixado em <https://www.oracle.com/java/technologies/downloads/#java11> ou em <https://jdk.java.net/java-se-ri/11>.
 
 ```{r}
-cat(processx::run("java", args = "-version")$stdout)
+cat(processx::run("java", args = "-version")$stderr)
 ```
 
 Como podemos ver, a versão instalada no livro é compatível com o `{r5r}`. Caso a versão instalada na sua máquina não seja (resultado do código mencionando a versão 12 ou 1.8.0, por exemplo), por favor atualize o Java para a versão 11.
