@@ -342,10 +342,10 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ipeagit.github.io/gtfstools/">gtfstools</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># aponta string com endereço do arquivo</span></span>
-<span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/spo_gtfs.zip"</span>, package <span class="op">=</span> <span class="st">"gtfstools"</span><span class="op">)</span></span>
+<span><span class="va">file_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/spo_gtfs.zip"</span>, package <span class="op">=</span> <span class="st">"gtfstools"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># leitura do gtfs</span></span>
-<span><span class="va">gtfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/read_gtfs.html">read_gtfs</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span>
+<span><span class="va">gtfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/read_gtfs.html">read_gtfs</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">file_path</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># consulta o nome das tabelas dentro da lista</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">gtfs</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -410,14 +410,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span><span class="fu">zip</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/zip/man/zip_list.html">zip_list</a></span><span class="op">(</span><span class="va">dest_path</span><span class="op">)</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"filename"</span>, <span class="st">"compressed_size"</span>, <span class="st">"timestamp"</span><span class="op">)</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         filename compressed_size           timestamp
-1      agency.txt             112 2022-10-21 12:54:50
-2    calendar.txt             129 2022-10-21 12:54:50
-3 frequencies.txt            2381 2022-10-21 12:54:50
-4      routes.txt             659 2022-10-21 12:54:50
-5      shapes.txt          160470 2022-10-21 12:54:50
-6  stop_times.txt            7907 2022-10-21 12:54:50
-7       stops.txt           18797 2022-10-21 12:54:50
-8       trips.txt             717 2022-10-21 12:54:50</code></pre>
+1      agency.txt             112 2022-10-23 19:47:52
+2    calendar.txt             129 2022-10-23 19:47:52
+3 frequencies.txt            2381 2022-10-23 19:47:52
+4      routes.txt             659 2022-10-23 19:47:52
+5      shapes.txt          160470 2022-10-23 19:47:52
+6  stop_times.txt            7907 2022-10-23 19:47:52
+7       stops.txt           18797 2022-10-23 19:47:52
+8       trips.txt             717 2022-10-23 19:47:52</code></pre>
 </div>
 </div>
 </section><section id="cálculo-de-velocidade-das-linhas" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="cálculo-de-velocidade-das-linhas">
@@ -467,8 +467,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 5: CPTM L09-0 31.88906      shapes
 6: CPTM L09-1 31.88906      shapes</code></pre>
 </div>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># tempo de duração de todas viagens</span></span>
-<span><span class="va">duration</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/get_trip_duration.html">get_trip_duration</a></span><span class="op">(</span><span class="va">gtfs</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># tempo de duração de todas viagens em minutis</span></span>
+<span><span class="va">duration</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/get_trip_duration.html">get_trip_duration</a></span><span class="op">(</span><span class="va">gtfs</span>, unit <span class="op">=</span> <span class="st">'min'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">duration</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -675,7 +675,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># filtro removendo duas viagens do feed</span></span>
 <span><span class="va">smaller_gtfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_trip_id.html">filter_by_trip_id</a></span><span class="op">(</span></span>
 <span>  <span class="va">gtfs</span>,</span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CPTM L07-0"</span>, <span class="st">"CPTM L07-1"</span><span class="op">)</span>,</span>
+<span>  trip_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CPTM L07-0"</span>, <span class="st">"CPTM L07-1"</span><span class="op">)</span>,</span>
 <span>  keep <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -701,7 +701,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="cell">
 <div class="sourceCode" id="cb59"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># filtro mantendo apenas serviços que operam no sábado e no domingo</span></span>
 <span><span class="va">smaller_gtfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_weekday.html">filter_by_weekday</a></span><span class="op">(</span></span>
-<span>  <span class="va">no_dups_gtfs</span>,</span>
+<span>  gtfs <span class="op">=</span> <span class="va">no_dups_gtfs</span>,</span>
 <span>  weekday <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"saturday"</span>, <span class="st">"sunday"</span><span class="op">)</span>,</span>
 <span>  combine <span class="op">=</span> <span class="st">"and"</span></span>
 <span><span class="op">)</span></span>
@@ -714,7 +714,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 <div class="sourceCode" id="cb61"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># filtro mantendo apenas serviços que operam ou sábado ou no domingo</span></span>
 <span><span class="va">smaller_gtfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_weekday.html">filter_by_weekday</a></span><span class="op">(</span></span>
-<span>  <span class="va">no_dups_gtfs</span>,</span>
+<span>  gtfs <span class="op">=</span> <span class="va">no_dups_gtfs</span>,</span>
 <span>  weekday <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sunday"</span>, <span class="st">"saturday"</span><span class="op">)</span>,</span>
 <span>  combine <span class="op">=</span> <span class="st">"or"</span></span>
 <span><span class="op">)</span></span>
@@ -775,14 +775,13 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="sourceCode" id="cb69"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># filtro mantendo apenas viagens inteiramente dentro do período de 5 às 6 da manhã</span></span>
 <span><span class="va">smaller_gtfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_time_of_day.html">filter_by_time_of_day</a></span><span class="op">(</span></span>
 <span>  <span class="va">gtfs</span>,</span>
-<span>  <span class="st">"05:00:00"</span>,</span>
-<span>  <span class="st">"06:00:00"</span>,</span>
+<span>  from <span class="op">=</span> <span class="st">"05:00:00"</span>, </span>
+<span>  to <span class="op">=</span> <span class="st">"06:00:00"</span>,</span>
 <span>  full_trips <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span></span>
-<span>  <span class="va">smaller_gtfs</span><span class="op">$</span><span class="va">stop_times</span><span class="op">[</span></span>
-<span>    ,</span>
+<span>  <span class="va">smaller_gtfs</span><span class="op">$</span><span class="va">stop_times</span><span class="op">[</span>,</span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"trip_id"</span>, <span class="st">"departure_time"</span>, <span class="st">"arrival_time"</span>, <span class="st">"stop_sequence"</span><span class="op">)</span></span>
 <span>  <span class="op">]</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -798,14 +797,13 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="sourceCode" id="cb71"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># filtro mantendo apenas viagens que do período que estão funcionando entre 5 e 6 da manhã</span></span>
 <span><span class="va">smaller_gtfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_time_of_day.html">filter_by_time_of_day</a></span><span class="op">(</span></span>
 <span>  <span class="va">gtfs</span>,</span>
-<span>  <span class="st">"05:00:00"</span>,</span>
-<span>  <span class="st">"06:00:00"</span>,</span>
+<span>  from <span class="op">=</span> <span class="st">"05:00:00"</span>,</span>
+<span>  to <span class="op">=</span> <span class="st">"06:00:00"</span>,</span>
 <span>  full_trips <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span></span>
-<span>  <span class="va">smaller_gtfs</span><span class="op">$</span><span class="va">stop_times</span><span class="op">[</span></span>
-<span>    ,</span>
+<span>  <span class="va">smaller_gtfs</span><span class="op">$</span><span class="va">stop_times</span><span class="op">[</span>,</span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"trip_id"</span>, <span class="st">"departure_time"</span>, <span class="st">"arrival_time"</span>, <span class="st">"stop_sequence"</span><span class="op">)</span></span>
 <span>  <span class="op">]</span></span>
 <span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -833,7 +831,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">shapes</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">bbox_geom</span>, fill <span class="op">=</span> <span class="cn">NA</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">bbox_geom</span>, fill <span class="op">=</span> <span class="cn">NA</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="5_gtfstools_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -845,7 +844,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">filtered_shapes</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">bbox_geom</span>, fill <span class="op">=</span> <span class="cn">NA</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">bbox_geom</span>, fill <span class="op">=</span> <span class="cn">NA</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="5_gtfstools_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -857,7 +857,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">filtered_shapes</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">bbox_geom</span>, fill <span class="op">=</span> <span class="cn">NA</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">bbox_geom</span>, fill <span class="op">=</span> <span class="cn">NA</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="5_gtfstools_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -869,7 +870,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p>A primeira etapa é definir o escopo da nossa análise. A fim de exemplo, vamos considerar o <em>headway</em> no pico da manhã, entre 7h e 9h, em uma típica terça-feira de operação. Para isso, precisamos filtrar o nosso <em>feed</em>:</p>
 <div class="cell">
 <div class="sourceCode" id="cb76"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># ler dados de GTFS</span></span>
-<span><span class="va">gtfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/read_gtfs.html">read_gtfs</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span>
+<span><span class="va">gtfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/read_gtfs.html">read_gtfs</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">file_path</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># filtrando GTFS</span></span>
 <span><span class="va">filtered_gtfs</span> <span class="op">&lt;-</span> <span class="va">gtfs</span> <span class="op">|&gt;</span></span>
@@ -910,9 +911,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 <p>Em seguida, calculamos o <em>headway</em> médio:</p>
 <div class="cell">
-<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">avg_headway</span> <span class="op">&lt;-</span> <span class="va">filtered_gtfs</span><span class="op">$</span><span class="va">frequencies</span><span class="op">[</span></span>
-<span>  ,</span>
-<span>  <span class="fu">.</span><span class="op">(</span>avg_headway <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span><span class="op">(</span><span class="va">headway_secs</span>, w <span class="op">=</span> <span class="va">time_interval</span><span class="op">)</span><span class="op">)</span>,</span>
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">avg_headway</span> <span class="op">&lt;-</span> <span class="va">filtered_gtfs</span><span class="op">$</span><span class="va">frequencies</span><span class="op">[</span>,</span>
+<span>  <span class="fu">.</span><span class="op">(</span>avg_headway <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">headway_secs</span>, w <span class="op">=</span> <span class="va">time_interval</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  by <span class="op">=</span> <span class="va">trip_id</span></span>
 <span><span class="op">]</span></span>
 <span></span>
@@ -937,7 +937,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="sourceCode" id="cb87"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">selected_trips</span> <span class="op">&lt;-</span> <span class="va">avg_headway</span><span class="op">$</span><span class="va">trip_id</span></span>
 <span></span>
 <span><span class="va">geoms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/get_trip_geometry.html">get_trip_geometry</a></span><span class="op">(</span></span>
-<span>  <span class="va">filtered_gtfs</span>,</span>
+<span>  gtfs <span class="op">=</span> <span class="va">filtered_gtfs</span>,</span>
 <span>  trip_id <span class="op">=</span> <span class="va">selected_trips</span>,</span>
 <span>  file <span class="op">=</span> <span class="st">"shapes"</span></span>
 <span><span class="op">)</span></span>
@@ -972,7 +972,8 @@ Geodetic CRS:  WGS 84
 <span></span>
 <span><span class="co"># plotar figura</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">avg_headway_sf</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">avg_headway</span>, size <span class="op">=</span> <span class="va">avg_headway</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color <span class="op">=</span> <span class="va">avg_headway</span>, size <span class="op">=</span> <span class="va">avg_headway</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="5_gtfstools_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
 </div>
