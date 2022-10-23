@@ -15,10 +15,10 @@ A leitura de arquivos GTFS com o `{gtfstools}` é feita com a função `read_gtf
 library(gtfstools)
 
 # aponta string com endereço do arquivo
-path <- system.file("extdata/spo_gtfs.zip", package = "gtfstools")
+file_path <- system.file("extdata/spo_gtfs.zip", package = "gtfstools")
 
 # leitura do gtfs
-gtfs <- read_gtfs(path)
+gtfs <- read_gtfs(path = file_path)
 
 # consulta o nome das tabelas dentro da lista
 names(gtfs)
@@ -90,8 +90,8 @@ length <- get_trip_length(gtfs, file = "shapes")
 
 head(length)
 
-# tempo de duração de todas viagens
-duration <- get_trip_duration(gtfs)
+# tempo de duração de todas viagens em minutis
+duration <- get_trip_duration(gtfs, unit = 'min')
 
 head(duration)
 ```
@@ -194,7 +194,7 @@ A função também pode funcionar com o comportamento diametralmente oposto: em 
 # filtro removendo duas viagens do feed
 smaller_gtfs <- filter_by_trip_id(
   gtfs,
-  c("CPTM L07-0", "CPTM L07-1"),
+  trip_id = c("CPTM L07-0", "CPTM L07-1"),
   keep = FALSE
 )
 
@@ -214,7 +214,7 @@ A `filter_by_weekday()` recebe os dias da semana (em inglês) cujos serviços qu
 ```{r}
 # filtro mantendo apenas serviços que operam no sábado e no domingo
 smaller_gtfs <- filter_by_weekday(
-  no_dups_gtfs,
+  gtfs = no_dups_gtfs,
   weekday = c("saturday", "sunday"),
   combine = "and"
 )
@@ -224,7 +224,7 @@ smaller_gtfs$calendar[, c("service_id", "sunday", "saturday")]
 
 # filtro mantendo apenas serviços que operam ou sábado ou no domingo
 smaller_gtfs <- filter_by_weekday(
-  no_dups_gtfs,
+  gtfs = no_dups_gtfs,
   weekday = c("sunday", "saturday"),
   combine = "or"
 )
@@ -256,14 +256,13 @@ O filtro da tabela `stop_times` pode funcionar de duas formas distintas. Uma op�
 # filtro mantendo apenas viagens inteiramente dentro do período de 5 às 6 da manhã
 smaller_gtfs <- filter_by_time_of_day(
   gtfs,
-  "05:00:00",
-  "06:00:00",
+  from = "05:00:00", 
+  to = "06:00:00",
   full_trips = TRUE
 )
 
 head(
-  smaller_gtfs$stop_times[
-    ,
+  smaller_gtfs$stop_times[,
     c("trip_id", "departure_time", "arrival_time", "stop_sequence")
   ]
 )
@@ -271,14 +270,13 @@ head(
 # filtro mantendo apenas viagens que do período que estão funcionando entre 5 e 6 da manhã
 smaller_gtfs <- filter_by_time_of_day(
   gtfs,
-  "05:00:00",
-  "06:00:00",
+  from = "05:00:00",
+  to = "06:00:00",
   full_trips = FALSE
 )
 
 head(
-  smaller_gtfs$stop_times[
-    ,
+  smaller_gtfs$stop_times[,
     c("trip_id", "departure_time", "arrival_time", "stop_sequence")
   ]
 )
@@ -300,7 +298,8 @@ bbox_geom <- sf::st_as_sfc(bbox)
 
 ggplot() +
   geom_sf(data = shapes) +
-  geom_sf(data = bbox_geom, fill = NA, color = "red")
+  geom_sf(data = bbox_geom, fill = NA, color = "red") +
+  theme_minimal()
 ```
 
 Note que nós usamos a função `convert_shapes_to_sf()`, também disponibilizada pelo `{gtfstools}`, que converte uma determinada trajetória descrita no GTFS em um objeto espacial do tipo `sf`. Por padrão, a `filter_by_sf()` mantém os dados relacionados aos registros de viagens cujas trajetórias possuem alguma interseção com o polígono espacial selecionado:
@@ -311,7 +310,8 @@ filtered_shapes <- convert_shapes_to_sf(filtered_gtfs)
 
 ggplot() +
   geom_sf(data = filtered_shapes) +
-  geom_sf(data = bbox_geom, fill = NA, color = "red")
+  geom_sf(data = bbox_geom, fill = NA, color = "red") +
+  theme_minimal()
 ```
 
 Nós podemos, no entanto, controlar a operação espacial usada no processo de filtragem. Por exemplo, o código abaixo mostra como nós podemos manter os dados relacionados a viagens que estão *contidas* dentro do polígono espacial:
@@ -322,7 +322,8 @@ filtered_shapes <- convert_shapes_to_sf(filtered_gtfs)
 
 ggplot() +
   geom_sf(data = filtered_shapes) +
-  geom_sf(data = bbox_geom, fill = NA, color = "red")
+  geom_sf(data = bbox_geom, fill = NA, color = "red") +
+  theme_minimal()
 ```
 
 ## Mapeamento do *headway* das linhas
@@ -335,7 +336,7 @@ A primeira etapa é definir o escopo da nossa análise. A fim de exemplo, vamos 
 
 ```{r}
 # ler dados de GTFS
-gtfs <- read_gtfs(path)
+gtfs <- read_gtfs(path = file_path)
 
 # filtrando GTFS
 filtered_gtfs <- gtfs |>
@@ -365,9 +366,8 @@ filtered_gtfs$frequencies[, time_interval := end_time_secs - start_time_secs]
 Em seguida, calculamos o *headway* médio:
 
 ```{r}
-avg_headway <- filtered_gtfs$frequencies[
-  ,
-  .(avg_headway = weighted.mean(headway_secs, w = time_interval)),
+avg_headway <- filtered_gtfs$frequencies[,
+  .(avg_headway = weighted.mean(x = headway_secs, w = time_interval)),
   by = trip_id
 ]
 
@@ -382,7 +382,7 @@ Precisamos agora gerar a trajetória espacial de cada viagem e juntar esta infor
 selected_trips <- avg_headway$trip_id
 
 geoms <- get_trip_geometry(
-  filtered_gtfs,
+  gtfs = filtered_gtfs,
   trip_id = selected_trips,
   file = "shapes"
 )
@@ -406,7 +406,8 @@ avg_headway_sf <- st_sf(avg_headway)
 
 # plotar figura
 ggplot(avg_headway_sf) +
-  geom_sf(aes(color = avg_headway, size = avg_headway))
+  geom_sf(aes(color = avg_headway, size = avg_headway), alpha = 0.8) +
+  theme_minimal()
 ```
 
 Como podemos ver, o pacote `{gtfstools}` torna o desenvolvimento de análises de *feeds* de transporte público algo fácil e que requer apenas o conhecimento básico de pacotes de manipulação de tabela (como o `{data.table}` ou o `{dplyr}`) para grande parte das etapas que as compõem. O exemplo apresentado nesta seção mostra como muitas de suas funções podem ser usadas conjuntamente para revelar aspectos importantes de sistemas de transporte público descritos no formato GTFS.
