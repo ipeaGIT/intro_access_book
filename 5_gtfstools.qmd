@@ -90,7 +90,7 @@ length <- get_trip_length(gtfs, file = "shapes")
 
 head(length)
 
-# tempo de duração de todas viagens em minutis
+# tempo de duração de todas viagens em minutos
 duration <- get_trip_duration(gtfs, unit = 'min')
 
 head(duration)
@@ -287,7 +287,7 @@ head(
 Por fim, o pacote `{gtfstools}` também disponibiliza uma função que permite filtrar o objeto GTFS usando um polígono espacial. A `filter_by_sf()` recebe um objeto do tipo `sf`/`sfc` (representação espacial estabelecida pelo pacote [`sf`](https://r-spatial.github.io/sf/)), ou sua *bounding box*, e mantém os registros cujas viagens são selecionadas por uma operação espacial especificada pelo usuário. Embora aparentemente complicado, este processo de filtragem é muito facilmente compreendido quando apresentado visualmente. Para isso, vamos filtrar o GTFS da SPTrans pela *bouding box* da trajetória de *id* `68962`. O código abaixo apresenta a distribuição espacial dos dados não filtrados, com a *bounding box* destacada em vermelho:
 
 ```{r}
-# carreg biblioteca ggplot2 para visualização de dados
+# carrega biblioteca ggplot2 para visualização de dados
 library(ggplot2)
 
 shape_68962 <- convert_shapes_to_sf(gtfs, shape_id = "68962")
