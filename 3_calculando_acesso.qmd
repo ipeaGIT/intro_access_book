@@ -37,6 +37,12 @@ O uso do pacote `{r5r}` requer diferentes tipos de dados. A lista abaixo descrev
   - [HOT Export Tool](https://export.hotosm.org/), *website*;
   - [BBBike Extract Service](https://extract.bbbike.org/), *website*.
 
+:::{.callout-caution} 
+## Qualidade dos Dados OpenStreetMap 
+
+O OpenStreetMap (OSM) é uma base de dados geográfica que traz informações sobre malha viária, prédios, parques, etc. Por ser uma base de dados alimentada voluntariamente pela comunidade, a cobertura e a qualidade dos dados do OSM podem variar muito entre regiões [@barrington-leigh2017world]. Via de regra, os dados do OSM no Brasil e no mundo tendem a ter melhor cobertura e qualidade em regiões mais desenvolvidas, em áreas urbanas e com maior população [@barrington-leigh2017world; @camboim2015investigation].
+:::
+
 - **Rede de transporte público** (opcional): um arquivo GTFS descrevendo a rede de transporte público da área de estudo. Caso ausente, deslocamentos por transporte público não podem ser roteados. Pode ser baixado com:
   - [tidytransit](http://tidytransit.r-transit.org/), pacote de R;
   - [Transitland](https://www.transit.land/), *website*;
