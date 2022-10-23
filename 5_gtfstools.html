@@ -410,14 +410,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span><span class="fu">zip</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/zip/man/zip_list.html">zip_list</a></span><span class="op">(</span><span class="va">dest_path</span><span class="op">)</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"filename"</span>, <span class="st">"compressed_size"</span>, <span class="st">"timestamp"</span><span class="op">)</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         filename compressed_size           timestamp
-1      agency.txt             112 2022-10-23 19:47:52
-2    calendar.txt             129 2022-10-23 19:47:52
-3 frequencies.txt            2381 2022-10-23 19:47:52
-4      routes.txt             659 2022-10-23 19:47:52
-5      shapes.txt          160470 2022-10-23 19:47:52
-6  stop_times.txt            7907 2022-10-23 19:47:52
-7       stops.txt           18797 2022-10-23 19:47:52
-8       trips.txt             717 2022-10-23 19:47:52</code></pre>
+1      agency.txt             112 2022-10-23 19:55:42
+2    calendar.txt             129 2022-10-23 19:55:42
+3 frequencies.txt            2381 2022-10-23 19:55:42
+4      routes.txt             659 2022-10-23 19:55:42
+5      shapes.txt          160470 2022-10-23 19:55:42
+6  stop_times.txt            7907 2022-10-23 19:55:42
+7       stops.txt           18797 2022-10-23 19:55:42
+8       trips.txt             717 2022-10-23 19:55:42</code></pre>
 </div>
 </div>
 </section><section id="cálculo-de-velocidade-das-linhas" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="cálculo-de-velocidade-das-linhas">
@@ -467,7 +467,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 5: CPTM L09-0 31.88906      shapes
 6: CPTM L09-1 31.88906      shapes</code></pre>
 </div>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># tempo de duração de todas viagens em minutis</span></span>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># tempo de duração de todas viagens em minutos</span></span>
 <span><span class="va">duration</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/get_trip_duration.html">get_trip_duration</a></span><span class="op">(</span><span class="va">gtfs</span>, unit <span class="op">=</span> <span class="st">'min'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">duration</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -820,7 +820,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p><strong>Filtro espacial</strong></p>
 <p>Por fim, o pacote <a href="https://ipeagit.github.io/gtfstools/">gtfstools</a> também disponibiliza uma função que permite filtrar o objeto GTFS usando um polígono espacial. A <code><a href="https://ipeagit.github.io/gtfstools/reference/filter_by_sf.html">filter_by_sf()</a></code> recebe um objeto do tipo <code>sf</code>/<code>sfc</code> (representação espacial estabelecida pelo pacote <a href="https://r-spatial.github.io/sf/"><code>sf</code></a>), ou sua <em>bounding box</em>, e mantém os registros cujas viagens são selecionadas por uma operação espacial especificada pelo usuário. Embora aparentemente complicado, este processo de filtragem é muito facilmente compreendido quando apresentado visualmente. Para isso, vamos filtrar o GTFS da SPTrans pela <em>bouding box</em> da trajetória de <em>id</em> <code>68962</code>. O código abaixo apresenta a distribuição espacial dos dados não filtrados, com a <em>bounding box</em> destacada em vermelho:</p>
 <div class="cell">
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># carreg biblioteca ggplot2 para visualização de dados</span></span>
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># carrega biblioteca ggplot2 para visualização de dados</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">shape_68962</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ipeagit.github.io/gtfstools/reference/convert_shapes_to_sf.html">convert_shapes_to_sf</a></span><span class="op">(</span><span class="va">gtfs</span>, shape_id <span class="op">=</span> <span class="st">"68962"</span><span class="op">)</span></span>
