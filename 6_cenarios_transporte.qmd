@@ -244,14 +244,14 @@ Agora com os dados organizados nas pastas, podemos começar o cálculo das matri
 #| message: false
 #| warning: false
 # aloca memória disponível para Java
-options(java.parameters = "-Xmx4G")
+options(java.parameters = "-Xmx2G")
 
 # carrega biblioteca
 library(r5r)
 
 # cria rede de transporte multimodal de cada cenário
-r5r_core_before <- setup_r5(dir_before, use_elevation = TRUE, verbose = FALSE)
-r5r_core_after <- setup_r5(dir_after, use_elevation = TRUE, verbose = FALSE)
+r5r_core_before <- setup_r5(dir_before, use_elevation = FALSE, verbose = FALSE)
+r5r_core_after <- setup_r5(dir_after, use_elevation = FALSE, verbose = FALSE)
 
 ```
 
@@ -346,6 +346,13 @@ ttm[, scenario := factor(scenario, labels = c("antes", "depois"))]
 
 ttm
 
+```
+
+
+```{r}
+# deletando objetos para liberar memória RAM
+rm(ttm_before, ttm_after, comparison)
+gc()
 ```
 
 Para o cálculo da acessibilidade, vamos precisar de uma tabela com os dados de uso do solo da cidade de Fortaleza. Para isso, nós usamos a função `read_landuse()` do pacote `{aopdata}`, que  traz a informação com a quantidade de população, e oportunidades de empregos e escolas em cada hexágono da cidade.
