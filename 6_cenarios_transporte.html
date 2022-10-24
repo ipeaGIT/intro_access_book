@@ -489,14 +489,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p>Agora com os dados organizados nas pastas, podemos começar o cálculo das matrizes de tempo de viagem. A primeira etapa é construir a rede de transporte multimodal usada pelo <a href="https://github.com/ipeaGIT/r5r">r5r</a> no roteamento, o que é feito com o comando <code><a href="https://rdrr.io/pkg/r5r/man/setup_r5.html">setup_r5()</a></code>. Essa rede de transporte multimodal é criada por esta função que combina os dados da malha de ruas, do sistema de transporte público e de topografia. Essa função também retorna uma conexão com o <code>R5</code> que aqui nós chamamos de <code>r5r_core_</code>. No exemplo abaixo, nós vamos criar duas redes, uma para cada cenário:</p>
 <div class="cell">
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># aloca memória disponível para Java</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>java.parameters <span class="op">=</span> <span class="st">"-Xmx4G"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>java.parameters <span class="op">=</span> <span class="st">"-Xmx2G"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># carrega biblioteca</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ipeaGIT/r5r">r5r</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># cria rede de transporte multimodal de cada cenário</span></span>
-<span><span class="va">r5r_core_before</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/r5r/man/setup_r5.html">setup_r5</a></span><span class="op">(</span><span class="va">dir_before</span>, use_elevation <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="va">r5r_core_after</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/r5r/man/setup_r5.html">setup_r5</a></span><span class="op">(</span><span class="va">dir_after</span>, use_elevation <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="va">r5r_core_before</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/r5r/man/setup_r5.html">setup_r5</a></span><span class="op">(</span><span class="va">dir_before</span>, use_elevation <span class="op">=</span> <span class="cn">FALSE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">r5r_core_after</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/r5r/man/setup_r5.html">setup_r5</a></span><span class="op">(</span><span class="va">dir_after</span>, use_elevation <span class="op">=</span> <span class="cn">FALSE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Com as redes de transporte criadas para cada cenário, prosseguimos agora para o cálculo das matrizes de tempo de viagem. Nesta etapa nós vamos utilizar como origens e destinos os centróides de uma grade espacial de hexágonos de Fortaleza disponibilizada pelo pacote <a href="https://github.com/ipeaGIT/aopdata">aopdata</a> (mais detalhes sobre o pacote são apresentados na <a href="./s5_dados_aop.html">Seção 5</a>). Na grade espacial utilizada, cada hexágono tem uma área de aproximadamente 0.10 Km<sub>2</sub>, o que permite uma análise espacial bem detalhada.</p>
 <p>Para comparar os dois cenários, nós vamos calcular quanto tempo uma pessoa demoraria para viajar partindo de cada origem para todos os destinos considerando os mesmos parâmetros de viagem. Aqui, nós vamos considerar viagens a pé ou por transporte público, considerar que as pessoas iriam caminhar no máximo até 800 metros nas pernas de acesso e egresso das paradas de transporte público, e limitar o tempo máximo de viagem em até 60 minutos. Vamos considerar o horário de partida de 07:00 em uma típica segunda-feira de operação:</p>
@@ -591,11 +591,11 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
    4: 8980104532bffff 8980104c13bffff                 57                53
    5: 89801045363ffff 8980104c13bffff                 57                53
   ---                                                                     
-8283: 8980107b6dbffff 8980104c02fffff                 58                52
-8284: 8980107b6dbffff 8980104c13bffff                 48                42
-8285: 8980107b6dbffff 8980104c14bffff                 57                54
-8286: 8980107b6dbffff 8980104c15bffff                 58                53
-8287: 8980107b6dbffff 8980104c397ffff                 58                48</code></pre>
+8673: 8980107b6dbffff 8980104c02fffff                 56                52
+8674: 8980107b6dbffff 8980104c13bffff                 45                42
+8675: 8980107b6dbffff 8980104c14bffff                 57                54
+8676: 8980107b6dbffff 8980104c15bffff                 56                53
+8677: 8980107b6dbffff 8980104c397ffff                 58                48</code></pre>
 </div>
 </div>
 </section><section id="cálculo-da-acessibilidade-nos-cenários-antes-e-depois" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="cálculo-da-acessibilidade-nos-cenários-antes-e-depois">
@@ -615,21 +615,31 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       4:    antes 89801040323ffff 89801040333ffff           9
       5:    antes 89801040323ffff 89801040337ffff          30
      ---                                                     
-3336964:   depois 8980107b6dbffff 8980107b6cbffff           8
-3336965:   depois 8980107b6dbffff 8980107b6cfffff          14
-3336966:   depois 8980107b6dbffff 8980107b6d3ffff           9
-3336967:   depois 8980107b6dbffff 8980107b6d7ffff          15
-3336968:   depois 8980107b6dbffff 8980107b6dbffff           0</code></pre>
+3406972:   depois 8980107b6dbffff 8980107b6cbffff           8
+3406973:   depois 8980107b6dbffff 8980107b6cfffff          14
+3406974:   depois 8980107b6dbffff 8980107b6d3ffff           8
+3406975:   depois 8980107b6dbffff 8980107b6d7ffff          15
+3406976:   depois 8980107b6dbffff 8980107b6dbffff           0</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># deletando objetos para liberar memória RAM</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span><span class="va">ttm_before</span>, <span class="va">ttm_after</span>, <span class="va">comparison</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/gc.html">gc</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           used (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  1157652 61.9    2127610 113.7  1739675  93.0
+Vcells 12427057 94.9   38745054 295.7 38745054 295.7</code></pre>
 </div>
 </div>
 <p>Para o cálculo da acessibilidade, vamos precisar de uma tabela com os dados de uso do solo da cidade de Fortaleza. Para isso, nós usamos a função <code><a href="https://rdrr.io/pkg/aopdata/man/read_landuse.html">read_landuse()</a></code> do pacote <a href="https://github.com/ipeaGIT/aopdata">aopdata</a>, que traz a informação com a quantidade de população, e oportunidades de empregos e escolas em cada hexágono da cidade.</p>
 <div class="cell">
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># download dados de uso do solo</span></span>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># download dados de uso do solo</span></span>
 <span><span class="va">for_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/aopdata/man/read_landuse.html">read_landuse</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Fortaleza"</span>, showProgress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Para fins de demonstração, vamos calcular a acessibilidade a postos de trabalho e a escolas públicas de ensino médio na nossa área de estudo. Os dados do total de empregos e escolas em cada hexágono estão listados nas colunas <code>T001</code> e <code>E004</code>, respectivamente. Vamos renomeá-las para facilitar sua identificação e manter apenas as colunas necessárias na tabela de dados de uso do solo. Também vamos manter também as colunas <code>P001</code>, de população total em cada hexágono, e <code>R003</code>, do decil de renda em que cada hexágono se encontra, que serão úteis mais à frente:</p>
 <div class="cell">
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># nome das colunas a serem mantidas</span></span>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># nome das colunas a serem mantidas</span></span>
 <span><span class="va">cols_to_keep</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"id"</span>, <span class="st">"jobs"</span>, <span class="st">"schools"</span>, <span class="st">"population"</span>, <span class="st">"decile"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># renomeando colunas</span></span>
@@ -667,7 +677,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </ul>
 <p>Como mostrado anteriormente, na <a href="3_calculando_acesso.html#sec-accessibility"><span>Section&nbsp;3.2</span></a>, o cálculo dessas medidas pode ser feito com as funções <code><a href="https://rdrr.io/pkg/accessibility/man/cumulative_cutoff.html">cumulative_cutoff()</a></code> e <code><a href="https://rdrr.io/pkg/accessibility/man/cost_to_closest.html">cost_to_closest()</a></code>, respectivamente, do pacote <a href="https://github.com/ipeaGIT/accessibility">accessibility</a>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># carrega biblioteca</span></span>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># carrega biblioteca</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ipeaGIT/accessibility">accessibility</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># renomeia colunas</span></span>
@@ -693,11 +703,11 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   ---                                
 5120: 8980107b6cbffff   depois 366197
 5121: 8980107b6cfffff   depois 256888
-5122: 8980107b6d3ffff   depois 324981
+5122: 8980107b6d3ffff   depois 332209
 5123: 8980107b6d7ffff   depois 338965
-5124: 8980107b6dbffff   depois 361967</code></pre>
+5124: 8980107b6dbffff   depois 367061</code></pre>
 </div>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># calcula medida de tempo mínimo de viagem</span></span>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># calcula medida de tempo mínimo de viagem</span></span>
 <span><span class="va">time_to_schools</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/accessibility/man/cost_to_closest.html">cost_to_closest</a></span><span class="op">(</span></span>
 <span>  travel_matrix <span class="op">=</span> <span class="va">ttm</span>,</span>
 <span>  land_use_data <span class="op">=</span> <span class="va">for_data</span>,</span>
@@ -723,7 +733,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 <p>Como podemos ver, o resultado da função de custo mínimo de viagem inclui alguns valores <code>Inf</code>. As origens listadas com este valor não conseguem alcançar nenhuma escola pública dentro de 60 minutos (limite de tempo de viagem imposto no cálculo da matriz). O valor <code>Inf</code>, portanto, é utilizado para sinalizar esta condição. Para fins de simplicidade, vamos considerar que essas regiões estão a 80 minutos de viagem de uma escola. Assim, nós podemos calcular a diferença de acessibilidade entre os cenários antes e depois da seguinte maneira:</p>
 <div class="cell">
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># imputa tempo de viagem de 80 min. para valores Inf</span></span>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># imputa tempo de viagem de 80 min. para valores Inf</span></span>
 <span><span class="va">time_to_schools</span><span class="op">[</span>, <span class="va">travel_time</span> <span class="op">:=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span> <span class="fu"><a href="https://rdrr.io/r/base/is.finite.html">is.infinite</a></span><span class="op">(</span><span class="va">travel_time</span><span class="op">)</span>, <span class="fl">80</span>, <span class="va">travel_time</span><span class="op">)</span><span class="op">]</span></span>
 <span></span>
 <span><span class="co"># calcula diferença de acessibilidade entre cenários</span></span>
@@ -735,7 +745,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p>Agora que calculamos os níveis de acessibilidade em cada cenário, precisamos compreender como a futura implementação da Linha Leste do Metrô deverá impactar as condições de acessibilidade em nossa área de estudo. Uma primeira maneira de captar isso é o impacto que expansão deverá ter na acessibilidade média da cidade. Para isso, nós calculamos a quantidade média de empregos acessíveis em cada cenário. Aqui é importante calcular a média de acessibilidade ponderada pela população de cada hexágono.</p>
 <p>Os resultados abaixo mostram que, em 2019, a população de Fortaleza conseguia acessar em média <code>240.663</code> empregos em até 60 minutos de transporte público. A implementação da nova Linha Leste do metrô deverá aumentar esse valor em 1%, para <code>243.023</code> empregos acessíveis em média.</p>
 <div class="cell">
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># carrega biblioteca de visualização de dados</span></span>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># carrega biblioteca de visualização de dados</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
 <span></span>
@@ -750,22 +760,22 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span><span class="va">resultado_medio</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   scenario avg_access
-1:    antes   240663.3
-2:   depois   243023.3</code></pre>
+1:    antes   243898.4
+2:   depois   246328.2</code></pre>
 </div>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># figura</span></span>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># figura</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">resultado_medio</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">scenario</span>, y <span class="op">=</span> <span class="va">avg_access</span><span class="op">/</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span>fill<span class="op">=</span><span class="st">'#0f3c53'</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">avg_access</span><span class="op">/</span><span class="fl">1000</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>, vjust <span class="op">=</span> <span class="op">-</span><span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Empregos acessíveis\n(em milhares)"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Analisando-se o tempo de acesso à escola pública de ensino médio mais próxima, nota-se que a Linha Leste deverá ter um resultado quase nulo na média de acessibilidade a essas escolas. Em média, a população de Fortaleza demorava em 2019 cerca de 13 minutos para chegar até a escola pública de ensino médio mais próxima de casa. Após a conclusão da extensão do metrô, esse resultado permance praticamente inalterado.</p>
 <div class="cell">
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># recupera info da populacao residente nos hexágonos</span></span>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># recupera info da populacao residente nos hexágonos</span></span>
 <span><span class="va">time_to_schools</span><span class="op">[</span><span class="va">for_data</span>, on <span class="op">=</span> <span class="st">'id'</span>, <span class="va">population</span> <span class="op">:=</span> <span class="va">i.population</span><span class="op">]</span></span>
 <span></span>
 <span><span class="co"># calcula média ponderada de acessibilidade antes e depois</span></span>
@@ -776,23 +786,23 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span><span class="va">resultado_medio</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   scenario avg_access
-1:    antes   13.05281
-2:   depois   13.04322</code></pre>
+1:    antes   12.66587
+2:   depois   12.65692</code></pre>
 </div>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># figura</span></span>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># figura</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">resultado_medio</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">scenario</span>, y <span class="op">=</span> <span class="va">avg_access</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span>fill<span class="op">=</span><span class="st">'#0d6556'</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">avg_access</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span>, vjust <span class="op">=</span> <span class="op">-</span><span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Média do tempo até a escola\nmais próxima(em minutos)"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Em síntese, os resultados mostram que o projeto de construção da Linha Leste do Metrô tem baixo impacto na acessibilidade média da população. Esse resultado ocorre em grande medida por duas razões. A primeira delas é porque, neste estudo de caso, estamos fazendo uma análise simplificada que considera apenas a construção do projeto da Linha Leste do metrô, e ignora as demais intervenções que deverão acompanhar esta intervenção, como o aumento de frequência das demais linhas de metrô e trens na cidade. A segunda razão de encontrarmos impactos tão baixos é o fato de que a proposta da Linha Leste consiste numa extensão de trecho relativamente pequeno da rede de transporte. Soma-se a isso o fato de que este projeto é localizado próximo ao centro da cidade, que já era a região de mais alta acessibilidade da cidade em 2019.</p>
 <p>Embora tenhamos visto que o projeto deverá ter pequeno impacto na acessibilidade média de toda a cidade, é importante entendermos como esse impacto de acessibilidade varia espacialmente. Para isso, vamos juntar nossas tabelas de estimativas de acessibilidade com a grade espacial da nossa área de estudo, disponível no objeto <code>for_grid</code> baixado do pacote <a href="https://github.com/ipeaGIT/aopdata">aopdata</a> anteriormente.</p>
 <div class="cell">
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># traz info espacial para tabelas de acessibilidade</span></span>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># traz info espacial para tabelas de acessibilidade</span></span>
 <span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setDT.html">setDT</a></span><span class="op">(</span><span class="va">for_grid</span><span class="op">)</span></span>
 <span><span class="va">access_to_jobs</span><span class="op">[</span><span class="va">for_grid</span>, on <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"id_hex"</span><span class="op">)</span>, <span class="va">geom</span> <span class="op">:=</span> <span class="va">i.geom</span><span class="op">]</span></span>
 <span><span class="va">time_to_schools</span><span class="op">[</span><span class="va">for_grid</span>, on <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"id_hex"</span><span class="op">)</span>, <span class="va">geom</span> <span class="op">:=</span> <span class="va">i.geom</span><span class="op">]</span></span>
@@ -804,7 +814,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p>Feito isso, o código abaixo mostra nos mapas a distribuição espacial dos níveis de acessibilidade nos dois cenários (antes e depois) e a diferênça de acessibilidade entre os dois cenários.</p>
 <p>Os ganhos de acessibilidade ao emprego se concentram principalmente próximos às estações do novo corredor e dos corredores já existentes que se ligam a ele. Isto mostra como a implantação de uma infraestrutura de transporte pode impactar não apenas suas imediações, mas também locais mais afastados, graças à conectividade da rede.</p>
 <div class="cell">
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># mapas dos cenários antes-e-depois</span></span>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># mapas dos cenários antes-e-depois</span></span>
 <span><span class="va">temp1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">access_to_jobs_sf</span><span class="op">)</span> <span class="op">+</span></span>
 <span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">jobs</span><span class="op">)</span>, color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span></span>
 <span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">scenario</span>, nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
@@ -827,12 +837,12 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span><span class="co"># plot</span></span>
 <span><span class="va">temp1</span> <span class="op">/</span><span class="va">temp2</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html">plot_layout</a></span><span class="op">(</span>ncol<span class="op">=</span><span class="fl">1</span>,heights<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Por sua vez, o mapa de diferença no tempo de acesso a escolas (abaixo) apresenta um cenário diferente: praticamente nenhuma região da cidade apresenta melhorias no tempo de acesso. Diferentemente da distribuição de empregos, que tende a seguir critérios econômicos, a distribuição de equipamentos públicos como escolas tende a ser planejada usando critérios de equidade, sendo, portanto, mais equilibrada no território. Isso explica em boa parte porque observamos maiores níveis de acessibilidade em quase todas regiões da cidade. Isso também explica porque a construção da Linha Leste na parte central da cidade em nada afeta o tempo de acesso das pessoas que moram em locais afastados desse corredor. Não apenas isso, mas mesmo para as pessoas que moram perto do novo corredor a sua implementação não muda os níveis de acesso a escolas. Isto é um sinal que esta área já possuia uma boa oferta de escolas e era bem servida de transporte público, mesmo antes da finalização da Linha Leste.</p>
 <div class="cell">
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># mapas dos cenários antes-e-depois</span></span>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># mapas dos cenários antes-e-depois</span></span>
 <span><span class="va">temp1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">time_to_schools_sf</span><span class="op">)</span> <span class="op">+</span></span>
 <span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">travel_time</span><span class="op">)</span>, color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span></span>
 <span>         <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">scenario</span>, nrow <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
@@ -852,7 +862,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span><span class="co"># plot</span></span>
 <span><span class="va">temp1</span> <span class="op">/</span><span class="va">temp2</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html">plot_layout</a></span><span class="op">(</span>ncol<span class="op">=</span><span class="fl">1</span>,heights<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section><section id="desigualdade-de-acessibilidade" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="desigualdade-de-acessibilidade">
@@ -860,7 +870,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p>Uma dimensão-chave para avaliação de projetos de transporte é o seu aspecto distributivo. Quem se beneficia dessas políticas? Sob uma perspectiva de equidade, se espera que políticas governamentais deveriam priorizar melhorar as condições de acessibilidade das pessoas em piores condições socioeconômicas e que mais dependem do transporte público <span class="citation" data-cites="pereira2017distributive vanwee2022accessibility">(<a href="references.html#ref-pereira2017distributive" role="doc-biblioref">Pereira, Schwanen, and Banister 2017</a>; <a href="references.html#ref-vanwee2022accessibility" role="doc-biblioref">van Wee 2022</a>)</span>.</p>
 <p>Aqui nós vamos examinar como os ganhos de acessibilidade esperados da expansão do metrô de Fortaleza se distribuem entre pessoas de diferentes níveis de renda. Para isso, nós precisamos examinar como o nível de acesso a empregos se distribuía entre a população antes da construção da Linha Leste, e como essa distribuição deve ser alterada após a expansão da linha do metrô. O gráfico de <em>box plot</em> abaixo nos permite visualizar como é a distribuição de níveis de acessibilidade entre grupos socioeconômicos nos dois cenários da nossa análise, antes e após a construção da Linha Leste.</p>
 <div class="cell">
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># distribuição de acessibilidade por renda antes-e-depois</span></span>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># distribuição de acessibilidade por renda antes-e-depois</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">access_to_jobs</span><span class="op">[</span><span class="va">population</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">decile</span><span class="op">)</span>, y<span class="op">=</span><span class="va">jobs</span><span class="op">/</span><span class="fl">1000</span>, color<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">decile</span><span class="op">)</span>,</span>
 <span>                   weight <span class="op">=</span> <span class="va">population</span>, group <span class="op">=</span> <span class="va">decile</span><span class="op">)</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
@@ -870,13 +880,13 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"D1 mais\nPobres"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span>, <span class="st">"D10 mais\nRicos"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Os dois gráficos mostram claramente que em Fortaleza as pessoas mais ricas possuem maior acesso a empregos. Em Fortaleza, assim como na maior parte das grandes cidades brasileiras, os mais ricos tendem a morar próximos às grandes concentrações de emprego e próximos ao centro da cidade, enquanto os mais pobres tendem a ocupar regiões periféricas <span class="citation" data-cites="pereira2022estimativas">(<a href="references.html#ref-pereira2022estimativas" role="doc-biblioref">Pereira et al. 2022</a>)</span>. Consequentemente, os mais ricos costumam ter melhores condições de acessibilidade urbana do que os mais pobres - não apenas porque moram mais perto dos empregos, mas porque também, geralmente, moram em regiões centrais mais bem servidas de transporte público do que as periferias.</p>
 <p>Assim como no caso da distribuição espacial da acessibilidade, é difícil enxergar nesses <em>box plots acima</em> como as condições de acessibilidade mudaram entre os cenários antes e depois. Lançando mão do mesmo recurso que fizemos anteriormente, podemos enxergar na próxima figura como os ganhos de acessibilidade entre os cenários se distribuem por decil de renda:</p>
 <div class="cell">
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># diferença entre cenários</span></span>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># diferença entre cenários</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">access_to_jobs</span><span class="op">[</span><span class="va">population</span> <span class="op">&gt;</span> <span class="fl">0</span> <span class="op">&amp;</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">diff</span><span class="op">)</span><span class="op">]</span> <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">decile</span><span class="op">)</span>, y<span class="op">=</span><span class="va">diff</span>, color<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">decile</span><span class="op">)</span>,</span>
 <span>                   weight <span class="op">=</span> <span class="va">population</span>, group <span class="op">=</span> <span class="va">decile</span><span class="op">)</span>, show.legend <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
@@ -886,7 +896,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"D1 mais\nPobres"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"D"</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span>, <span class="st">"D10 mais\nRicos"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Como podemos ver, os ganhos de acessibilidade foram mais ou menos iguais para a população acima do terceiro decil de renda. Também é possível observar ganhos ligeiramente maiores entre as camadas médias da população, em especial os decis 5, 6 e 7. No entanto, o hexágono que mostrou maior aumento de acessibilidade aparece como <em>outlier</em> do 10º decil, apresentando um ganho de mais de <code>60.000</code> empregos em relação ao cenário pré-implementação.</p>
@@ -912,7 +922,7 @@ Vantagens da Razão de Palma
 </div>
 <p>Ao calcularmos a Razão de Palma nos cenários antes e depois da implementação do projeto de transporte, nós conseguimos entender qual o impacto da Linha Leste na desigualdade de acesso a empregos em Fortaleza:</p>
 <div class="cell">
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># calcula acessibilidade média dos mais ricos nos cenários antes-e-depois</span></span>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># calcula acessibilidade média dos mais ricos nos cenários antes-e-depois</span></span>
 <span><span class="va">richest_access</span> <span class="op">&lt;-</span> <span class="va">access_to_jobs</span><span class="op">[</span></span>
 <span>  <span class="va">decile</span> <span class="op">==</span> <span class="fl">10</span>,</span>
 <span>  <span class="fu">.</span><span class="op">(</span>access <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/weighted.mean.html">weighted.mean</a></span><span class="op">(</span><span class="va">jobs</span>, w <span class="op">=</span> <span class="va">population</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -944,7 +954,7 @@ Vantagens da Razão de Palma
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Razão de Palma"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>A figura acima aponta que, no ano de 2019, a população mais rica de Fortaleza conseguia acessar em média 2.19 vezes mais empregos do que a população mais pobre utilizando-se o transporte público em até 60 minutos de viagem. O gráfico também mostra que essa desigualdade medida pela Razão de Palma sofreu apenas uma pequena queda entre os cenários pré e pós implementação da Linha Leste. Ou seja, podemos concluir que, neste nosso cenário simplificado de avaliação da Linha Leste, a expansão do metrô de Fortaleza seria uma política apenas ligeiramente progressiva. Em outras palavras, o futuro impacto desse projeto deverá dar uma pequena contribuição para redução da desigualdade de acesso a oportunidades.</p>
