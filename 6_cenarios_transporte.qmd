@@ -312,12 +312,18 @@ head(ttm_before)
 
 head(ttm_after)
 ```
+Antes de prosseguir, vamos parar a conexão com o R5 e limpar espaço na memória RAM.
 
 ```{r}
 #| results: false
 #| message: false
 #| echo: false
+# parando a conexão com R5
 stop_r5()
+
+# libera memória RAM
+rJava::.jgc()
+gc()
 ```
 
 À primeira vista, nossas matrizes parecem iguais: todos os tempos de viagem na amostra de pares mostrados acima são idênticos. Isto ocorre porque o projeto de expansão do metrô fica restrito à uma área relativamente pequena no centro da cidade de Fortaleza. Assim, muitos deslocamentos entre regiões da cidade de fato não devem ser afetados pela implementação da nova linha de metrô. Para diversos pares de origem-destino, no entanto, vemos que os tempos de viagens entre eles deverão ser impactados pela Linha Leste:
@@ -340,8 +346,6 @@ comparison[travel_time_after < travel_time_before]
 O cálculo da acessibilidade é muito simples, e requer apenas um processamento básico dos nossos dados e a aplicação de uma das funções que calcula indicadores de acessibilidade do pacote `{accessibility}`. Para facilitar o tratamento dos dados, nós vamos empilhar as matrizes de tempo de viagem dos dois cenários em uma única tabela, identificando cada cenário com a coluna `scenario`:
 
 ```{r}
-rm(comparison); gc()
-
 # empilhando matrizes de tempo de viagem antes e depois
 ttm <- rbind(ttm_before, ttm_after, idcol = "scenario")
 ttm[, scenario := factor(scenario, labels = c("antes", "depois"))]
@@ -350,10 +354,11 @@ ttm
 
 ```
 
+Ante de prosseguir, vamos deletar alguns objetos que não vamos usar para liberar espaço de memória RAM.
 
 ```{r}
 # deletando objetos para liberar memória RAM
-rm(ttm_before, ttm_after)
+rm(ttm_before, ttm_after comparison)
 gc()
 ```
 
