@@ -358,7 +358,7 @@ Ante de prosseguir, vamos deletar alguns objetos que não vamos usar para libera
 
 ```{r}
 # deletando objetos para liberar memória RAM
-rm(ttm_before, ttm_after comparison)
+rm(ttm_before, ttm_after, comparison)
 gc()
 ```
 
