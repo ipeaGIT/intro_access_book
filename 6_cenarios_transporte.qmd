@@ -340,6 +340,8 @@ comparison[travel_time_after < travel_time_before]
 O cálculo da acessibilidade é muito simples, e requer apenas um processamento básico dos nossos dados e a aplicação de uma das funções que calcula indicadores de acessibilidade do pacote `{accessibility}`. Para facilitar o tratamento dos dados, nós vamos empilhar as matrizes de tempo de viagem dos dois cenários em uma única tabela, identificando cada cenário com a coluna `scenario`:
 
 ```{r}
+rm(comparison); gc()
+
 # empilhando matrizes de tempo de viagem antes e depois
 ttm <- rbind(ttm_before, ttm_after, idcol = "scenario")
 ttm[, scenario := factor(scenario, labels = c("antes", "depois"))]
@@ -351,7 +353,7 @@ ttm
 
 ```{r}
 # deletando objetos para liberar memória RAM
-rm(ttm_before, ttm_after, comparison)
+rm(ttm_before, ttm_after)
 gc()
 ```
 
