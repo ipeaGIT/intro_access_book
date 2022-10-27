@@ -37,53 +37,48 @@ knitr::include_graphics("images/fortaleza_2.png")
 
 [^1]: Disponível em <https://www.pasfor.com.br/>.
 
-A população de Fortaleza está majoritariamente distribuída na região central e na porção oeste da cidade, embora haja alguns pontos de alta densidade populacional no sudeste da cidade. Via de regra, a população de mais alta renda (em tons de azul) está localizada na região do centro expandido e sudeste do município de Fortaleza, enquanto as populações de menor renda (em tons de vermelho) estão principalmente localizadas nas regiões periféricas ao sul e ao oeste. Os empregos formais na cidade se distribuem principalmente ao longo de grandes avenidas, com uma maior concentração no centro da cidade. Em contraste, as escolas públicas de nível médio têm uma distribuição espacial mais equilibrada por todo território.
+A população de Fortaleza está majoritariamente distribuída na região central e na porção oeste da cidade, embora haja alguns pontos de alta densidade populacional no sudeste da cidade. Via de regra, a população de mais alta renda (em tons de azul no mapa da distribuição de decis de renda) está localizada na região do centro expandido e sudeste do município, enquanto as populações de menor renda (em tons de vermelho) estão principalmente localizadas nas regiões periféricas ao sul e a oeste. Os empregos formais na cidade se distribuem principalmente ao longo de grandes avenidas, com uma maior concentração no centro da cidade. Em contraste, as escolas públicas de nível médio têm uma distribuição espacial mais equilibrada por todo território.
 
 ```{r}
 #| echo: false
 #| results: false
 #| warning: false
 #| message: false
-
 library(ggplot2)
 library(aopdata)
 library(patchwork)
 
 # download dos dados
-for_sf <- aopdata::read_landuse(city='fortaleza', 
-                                year=2019, 
-                                showProgress = FALSE, 
-                                geometry = TRUE)
+for_sf <- aopdata::read_landuse(
+  city = "Fortaleza", 
+  year = 2019,
+  showProgress = FALSE, 
+  geometry = TRUE
+)
 
-
-fig_pessoas <- 
-  ggplot(data=for_sf) +
-  geom_sf(aes(fill=P001), color = NA) +
+fig_pessoas <- ggplot(data = for_sf) +
+  geom_sf(aes(fill = P001), color = NA) +
   labs(fill = "Número de\npessoas") +
-  scale_fill_distiller(palette = "YlGnBu", direction = 1) +
+  scale_fill_distiller(palette = "PuBu", direction = 1) +
   theme_void()
 
-fig_renda <- 
-  ggplot(data=subset(for_sf, P001 > 0)) +
-  geom_sf(aes(fill=as.factor(R003)), color=NA, alpha = 0.8) +
+fig_renda <- ggplot(data = subset(for_sf, P001 > 0)) +
+  geom_sf(aes(fill = as.factor(R003)), color=NA, alpha = 0.8) +
   labs(fill = "Decil de\nrenda") +
   scale_fill_brewer(palette = "RdBu") +
   theme_void()
 
-fig_empregos <- 
-  ggplot(data=for_sf) +
-  geom_sf(aes(fill=T001), color = NA) +
+fig_empregos <- ggplot(data = for_sf) +
+  geom_sf(aes(fill = T001), color = NA) +
   labs(fill = "Número de\nempregos") +
   scale_fill_distiller(palette = "OrRd", direction = 1) +
   theme_void()
 
-fig_escolas <- 
-  ggplot(data=for_sf) +
-  geom_sf(aes(fill=as.factor(E004)), color = NA) +
+fig_escolas <- ggplot(data = for_sf) +
+  geom_sf(aes(fill = as.factor(E004)), color = NA) +
   scale_fill_manual(values = c("grey90", "#66c2a5", "#5e4fa2")) +
   labs(fill = "Número de\nescolas") +
   theme_void()
-
 
 fig_pessoas + fig_renda + fig_empregos + fig_escolas + plot_layout(ncol = 2)
 ```
