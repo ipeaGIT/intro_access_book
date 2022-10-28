@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.1.251">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
 <title>Introdução à acessibilidade urbana - 3&nbsp; Calculando acessibilidade urbana em R</title>
 <style>
 code{white-space: pre-wrap;}
@@ -101,6 +104,7 @@ div.csl-indent {
 }
 </style>
 
+
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
@@ -115,10 +119,13 @@ div.csl-indent {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -136,13 +143,18 @@ div.csl-indent {
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit"
   }
-}</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YVERJQF9PJ"></script><script type="text/javascript">
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YVERJQF9PJ"></script>
+
+<script type="text/javascript">
 
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </script>
+
+
 <meta property="og:title" content="Introdução à acessibilidade urbana - 3&nbsp; Calculando acessibilidade urbana em R">
 <meta property="og:description" content="A primeira etapa necessária para estimar os níveis de acessibilidade de uma área urbana é calcular a matriz de custo de viagem entre as diversas origens e destinos que a compõem.">
 <meta property="og:site-name" content="Introdução à acessibilidade urbana">
@@ -150,43 +162,51 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <meta name="twitter:description" content="A primeira etapa necessária para estimar os níveis de acessibilidade de uma área urbana é calcular a matriz de custo de viagem entre as diversas origens e destinos que a compõem.">
 <meta name="twitter:card" content="summary">
 </head>
+
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
       <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculando acessibilidade urbana em R</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Introdução à acessibilidade urbana</a> 
-        <div class="sidebar-tools-main">
+        <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/ipeaGIT/aop_curso" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
     <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
     <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
-<li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
             <i class="bi bi-bi-twitter pe-1"></i>
           Twitter
           </a>
         </li>
         <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
             <i class="bi bi-bi-facebook pe-1"></i>
           Facebook
           </a>
         </li>
         <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
             <i class="bi bi-bi-linkedin pe-1"></i>
           LinkedIn
           </a>
         </li>
     </ul>
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
       </div>
@@ -197,7 +217,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">Apresentação</a>
   </div>
@@ -209,8 +229,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./1_conceito.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">O que é acessibilidade?</span></a>
   </div>
@@ -221,7 +241,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./s2_calculo.html" class="sidebar-item-text sidebar-link">SEÇÃO 2: Calculando acessibilidade</a>
@@ -229,14 +249,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./3_calculando_acesso.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculando acessibilidade urbana em R</span></a>
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./s3_dados_tp.html" class="sidebar-item-text sidebar-link">SEÇÃO 3: Dados de transporte público</a>
@@ -244,8 +264,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./4_dados_gtfs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Dados GTFS</span></a>
   </div>
@@ -256,7 +276,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./s4_avaliacao_impacto.html" class="sidebar-item-text sidebar-link">SEÇÃO 4: Avaliação de impacto de projetos de transporte</a>
@@ -264,14 +284,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./6_cenarios_transporte.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Comparando a acessibilidade entre dois cenários de transporte</span></a>
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./s5_dados_aop.html" class="sidebar-item-text sidebar-link">SEÇÃO 5: Dados do Projeto AOP</a>
@@ -279,8 +299,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./7_aopdata_populacao.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Dados de população e socioeconômicos</span></a>
   </div>
@@ -296,33 +316,38 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">Referências bibliográficas</a>
   </div>
 </li>
     </ul>
-</div>
-</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li>
-<a href="#sec-matrix" id="toc-sec-matrix" class="nav-link active" data-scroll-target="#sec-matrix"><span class="toc-section-number">3.1</span>  Cálculo da matriz de tempo de viagem</a>
+  <li><a href="#sec-matrix" id="toc-sec-matrix" class="nav-link active" data-scroll-target="#sec-matrix"><span class="toc-section-number">3.1</span>  Cálculo da matriz de tempo de viagem</a>
   <ul class="collapse">
-<li><a href="#instala%C3%A7%C3%A3o-do-r5r" id="toc-instalação-do-r5r" class="nav-link" data-scroll-target="#instala%C3%A7%C3%A3o-do-r5r"><span class="toc-section-number">3.1.1</span>  Instalação do r5r</a></li>
-  <li><a href="#dados-necess%C3%A1rios" id="toc-dados-necessários" class="nav-link" data-scroll-target="#dados-necess%C3%A1rios"><span class="toc-section-number">3.1.2</span>  Dados necessários</a></li>
+  <li><a href="#instalação-do-r5r" id="toc-instalação-do-r5r" class="nav-link" data-scroll-target="#instalação-do-r5r"><span class="toc-section-number">3.1.1</span>  Instalação do r5r</a></li>
+  <li><a href="#dados-necessários" id="toc-dados-necessários" class="nav-link" data-scroll-target="#dados-necessários"><span class="toc-section-number">3.1.2</span>  Dados necessários</a></li>
   <li><a href="#calculando-a-matriz-de-tempo-de-viagens" id="toc-calculando-a-matriz-de-tempo-de-viagens" class="nav-link" data-scroll-target="#calculando-a-matriz-de-tempo-de-viagens"><span class="toc-section-number">3.1.3</span>  Calculando a matriz de tempo de viagens</a></li>
-  </ul>
-</li>
+  </ul></li>
   <li><a href="#sec-accessibility" id="toc-sec-accessibility" class="nav-link" data-scroll-target="#sec-accessibility"><span class="toc-section-number">3.2</span>  Cálculo de acessibilidade</a></li>
-  <li><a href="#c%C3%A1lculo-de-acessibilidade-com-o-r5r" id="toc-cálculo-de-acessibilidade-com-o-r5r" class="nav-link" data-scroll-target="#c%C3%A1lculo-de-acessibilidade-com-o-r5r"><span class="toc-section-number">3.3</span>  Cálculo de acessibilidade com o r5r</a></li>
-  <li><a href="#an%C3%A1lises-de-acessibilidade" id="toc-análises-de-acessibilidade" class="nav-link" data-scroll-target="#an%C3%A1lises-de-acessibilidade"><span class="toc-section-number">3.4</span>  Análises de acessibilidade</a></li>
-  </ul><div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/3_calculando_acesso.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
+  <li><a href="#cálculo-de-acessibilidade-com-o-r5r" id="toc-cálculo-de-acessibilidade-com-o-r5r" class="nav-link" data-scroll-target="#cálculo-de-acessibilidade-com-o-r5r"><span class="toc-section-number">3.3</span>  Cálculo de acessibilidade com o r5r</a></li>
+  <li><a href="#análises-de-acessibilidade" id="toc-análises-de-acessibilidade" class="nav-link" data-scroll-target="#análises-de-acessibilidade"><span class="toc-section-number">3.4</span>  Análises de acessibilidade</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/3_calculando_acesso.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
 <h1 class="title"><span id="sec-3_calculando_acesso" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculando acessibilidade urbana em R</span></span></h1>
 </div>
 
@@ -335,43 +360,40 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </div>
   
 
-</header><section id="sec-matrix" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="sec-matrix">
-<span class="header-section-number">3.1</span> Cálculo da matriz de tempo de viagem</h2>
+</header>
+
+<section id="sec-matrix" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="sec-matrix"><span class="header-section-number">3.1</span> Cálculo da matriz de tempo de viagem</h2>
 <p>A primeira etapa necessária para estimar os níveis de acessibilidade de uma área urbana é calcular a matriz de custo de viagem entre as diversas origens e destinos que a compõem. Como comentado anteriormente, na literatura científica e na prática do planejamento de sistemas de transporte esse custo é mais frequentemente representado pelo tempo de viagem que separa dois pontos <span class="citation" data-cites="el-geneidy2016cost venter2016assessing">(<a href="references.html#ref-el-geneidy2016cost" role="doc-biblioref">El-Geneidy et al. 2016</a>; <a href="references.html#ref-venter2016assessing" role="doc-biblioref">Venter 2016</a>)</span>, embora trabalhos recentes tenham considerado também outros fatores, como o dinheiro necessário para realizar uma viagem e o nível de conforto da viagem entre um ponto e outro <span class="citation" data-cites="arbex2020estimating herszenhut2022impact">(<a href="references.html#ref-arbex2020estimating" role="doc-biblioref">Arbex and Cunha 2020</a>; <a href="references.html#ref-herszenhut2022impact" role="doc-biblioref">Herszenhut et al. 2022</a>)</span>. Pela prevalência deste tipo de matriz na literatura e na prática, porém, iremos nos focar em matrizes de tempo de viagem.</p>
-<p>Atualmente, a forma mais fácil e rápida de gerar uma matriz de tempo de viagem em R é utilizando o pacote <a href="https://github.com/ipeaGIT/r5r">r5r</a> <span class="citation" data-cites="pereira2021r5r">(<a href="references.html#ref-pereira2021r5r" role="doc-biblioref">Rafael H. M. Pereira et al. 2021</a>)</span>, desenvolvido pela equipe do Projeto Acesso a Oportunidades, do Ipea. O pacote utiliza, por trás dos panos, o <em>software</em> de roteamento de transporte multimodal R5, desenvolvido pela Conveyal<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
-<section id="instalação-do-r5r" class="level3" data-number="3.1.1"><h3 data-number="3.1.1" class="anchored" data-anchor-id="instalação-do-r5r">
-<span class="header-section-number">3.1.1</span> Instalação do r5r</h3>
-<p>A instalação do <a href="https://github.com/ipeaGIT/r5r">r5r</a> funciona como a instalação de qualquer pacote de R (todos os exemplos de código a seguir devem ser rodados em uma sessão de R).</p>
+<p>Atualmente, a forma mais fácil e rápida de gerar uma matriz de tempo de viagem em R é utilizando o pacote <code>{r5r}</code> <span class="citation" data-cites="pereira2021r5r">(<a href="references.html#ref-pereira2021r5r" role="doc-biblioref">Rafael H. M. Pereira et al. 2021</a>)</span>, desenvolvido pela equipe do Projeto Acesso a Oportunidades, do Ipea. O pacote utiliza, por trás dos panos, o <em>software</em> de roteamento de transporte multimodal R5, desenvolvido pela Conveyal<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<section id="instalação-do-r5r" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="instalação-do-r5r"><span class="header-section-number">3.1.1</span> Instalação do r5r</h3>
+<p>A instalação do <code>{r5r}</code> funciona como a instalação de qualquer pacote de R (todos os exemplos de código a seguir devem ser rodados em uma sessão de R).</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"r5r"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"r5r"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Além do R, o pacote <a href="https://github.com/ipeaGIT/r5r">r5r</a> requer também a instalação do Java 11<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Use o comando abaixo para checar a versão do Java instalada em seu computador.</p>
+<p>Além do R, o pacote <code>{r5r}</code> requer também a instalação do Java 11<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Use o comando abaixo para checar a versão do Java instalada em seu computador.</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu">processx</span><span class="fu">::</span><span class="fu"><a href="http://processx.r-lib.org/reference/run.html">run</a></span><span class="op">(</span><span class="st">"java"</span>, args <span class="op">=</span> <span class="st">"-version"</span><span class="op">)</span><span class="op">$</span><span class="va">stderr</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(processx<span class="sc">::</span><span class="fu">run</span>(<span class="st">"java"</span>, <span class="at">args =</span> <span class="st">"-version"</span>)<span class="sc">$</span>stderr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>openjdk version "11.0.17" 2022-10-18 LTS
 OpenJDK Runtime Environment Zulu11.60+19-CA (build 11.0.17+8-LTS)
 OpenJDK 64-Bit Server VM Zulu11.60+19-CA (build 11.0.17+8-LTS, mixed mode)</code></pre>
 </div>
 </div>
-<p>Como podemos ver, a versão instalada no livro é compatível com o <a href="https://github.com/ipeaGIT/r5r">r5r</a>. Caso a versão instalada na sua máquina não seja (resultado do código mencionando a versão 12 ou 1.8.0, por exemplo), por favor atualize o Java para a versão 11.</p>
-</section><section id="dados-necessários" class="level3" data-number="3.1.2"><h3 data-number="3.1.2" class="anchored" data-anchor-id="dados-necessários">
-<span class="header-section-number">3.1.2</span> Dados necessários</h3>
-<p>O uso do pacote <a href="https://github.com/ipeaGIT/r5r">r5r</a> requer diferentes tipos de dados. A lista abaixo descreve cada um deles, comenta sobre sua obrigatoriedade e apresenta algumas fontes onde esses dados podem ser obtidos:</p>
+<p>Como podemos ver, a versão instalada no livro é compatível com o <code>{r5r}</code>. Caso a versão instalada na sua máquina não seja (resultado do código mencionando a versão 12 ou 1.8.0, por exemplo), por favor atualize o Java para a versão 11.</p>
+</section>
+<section id="dados-necessários" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="dados-necessários"><span class="header-section-number">3.1.2</span> Dados necessários</h3>
+<p>O uso do pacote <code>{r5r}</code> requer diferentes tipos de dados. A lista abaixo descreve cada um deles, comenta sobre sua obrigatoriedade e apresenta algumas fontes onde esses dados podem ser obtidos:</p>
 <ul>
-<li>
-<strong>Rede viária</strong> (obrigatório): um arquivo com a rede viária e de infraestrutura de pedestres do <em>OpenStreetMap</em>, em formato <code>.pbf</code>. Pode ser baixado com:
+<li><strong>Rede viária</strong> (obrigatório): um arquivo com a rede viária e de infraestrutura de pedestres do <em>OpenStreetMap</em>, em formato <code>.pbf</code>. Pode ser baixado com:
 <ul>
-<li>
-<a href="https://docs.ropensci.org/osmextract/">osmextract</a>, pacote de R;</li>
-<li>
-<a href="https://download.geofabrik.de/">Geofabrik</a>, <em>website</em>;</li>
-<li>
-<a href="https://export.hotosm.org/">HOT Export Tool</a>, <em>website</em>;</li>
-<li>
-<a href="https://extract.bbbike.org/">BBBike Extract Service</a>, <em>website</em>.</li>
-</ul>
-</li>
+<li><a href="https://docs.ropensci.org/osmextract/">osmextract</a>, pacote de R;</li>
+<li><a href="https://download.geofabrik.de/">Geofabrik</a>, <em>website</em>;</li>
+<li><a href="https://export.hotosm.org/">HOT Export Tool</a>, <em>website</em>;</li>
+<li><a href="https://extract.bbbike.org/">BBBike Extract Service</a>, <em>website</em>.</li>
+</ul></li>
 </ul>
 <div class="callout-caution callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -387,26 +409,19 @@ Qualidade dos Dados OpenStreetMap
 </div>
 </div>
 <ul>
-<li>
-<strong>Rede de transporte público</strong> (opcional): um arquivo GTFS descrevendo a rede de transporte público da área de estudo. Caso ausente, deslocamentos por transporte público não podem ser roteados. Pode ser baixado com:
+<li><strong>Rede de transporte público</strong> (opcional): um arquivo GTFS descrevendo a rede de transporte público da área de estudo. Caso ausente, deslocamentos por transporte público não podem ser roteados. Pode ser baixado com:
 <ul>
-<li>
-<a href="https://r-transit.github.io/tidytransit/">tidytransit</a>, pacote de R;</li>
-<li>
-<a href="https://www.transit.land/">Transitland</a>, <em>website</em>;</li>
+<li><a href="https://r-transit.github.io/tidytransit/">tidytransit</a>, pacote de R;</li>
+<li><a href="https://www.transit.land/">Transitland</a>, <em>website</em>;</li>
 <li>No capítulo <a href="4_dados_gtfs.html"><span>Chapter&nbsp;4</span></a> deste livro (<a href="4_dados_gtfs.html#tbl-gtfs_brasil">Tabela&nbsp;<span>4.9</span></a>) nós indicamos também onde baixar os dados de GTFS de algumas cidades brasileiras que compartilham seus dados publicamente.</li>
-</ul>
-</li>
-<li>
-<strong>Topografia</strong> (opcional): um arquivo de dados <em>raster</em>, com o modelo digital de elevação em formato <code>.tif</code>. Utilizado caso deseje-se levar em consideração os efeitos da topografia do local sobre os tempos de caminhada e de viagens de bicicleta. Pode ser baixado com:
+</ul></li>
+<li><strong>Topografia</strong> (opcional): um arquivo de dados <em>raster</em>, com o modelo digital de elevação em formato <code>.tif</code>. Utilizado caso deseje-se levar em consideração os efeitos da topografia do local sobre os tempos de caminhada e de viagens de bicicleta. Pode ser baixado com:
 <ul>
-<li>
-<a href="https://github.com/jhollist/elevatr">elevatr</a>, pacote de R;</li>
+<li><a href="https://github.com/jhollist/elevatr">elevatr</a>, pacote de R;</li>
 <li>Nasa’s <a href="https://lpdaac.usgs.gov/products/srtmgl1v003/">SRTMGL1</a>, <em>website</em>.</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<p>Esses dados devem ser salvos em uma mesma pasta que, preferencialmente, não contenha nenhum outro arquivo. Como veremos adiante, o <a href="https://github.com/ipeaGIT/r5r">r5r</a> combina todos os dados salvos nesta pasta para criar uma rede de transporte multimodal que é utilizada para roteamento e cálculo das matrizes de tempo de viagem. Note que é possível ter mais de um arquivo GTFS na mesma pasta: nesse caso, o <a href="https://github.com/ipeaGIT/r5r">r5r</a> considera as redes de transporte públicos de todos os <em>feeds</em> de forma conjunta. No entanto, a pasta deve conter um único arquivo de rede viária. Assumindo que os scripts de R estarão em uma pasta chamada R, uma possível organização dos arquivos segue o esquema abaixo:</p>
+<p>Esses dados devem ser salvos em uma mesma pasta que, preferencialmente, não contenha nenhum outro arquivo. Como veremos adiante, o <code>{r5r}</code> combina todos os dados salvos nesta pasta para criar uma rede de transporte multimodal que é utilizada para roteamento e cálculo das matrizes de tempo de viagem. Note que é possível ter mais de um arquivo GTFS na mesma pasta: nesse caso, o <code>{r5r}</code> considera as redes de transporte públicos de todos os <em>feeds</em> de forma conjunta. No entanto, a pasta deve conter um único arquivo de rede viária. Assumindo que os scripts de R estarão em uma pasta chamada R, uma possível organização dos arquivos segue o esquema abaixo:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>/tmp/Rtmpa4kvhO/projeto_acessibilidade
@@ -419,7 +434,7 @@ Qualidade dos Dados OpenStreetMap
     └── topografia.tif</code></pre>
 </div>
 </div>
-<p>Para ilustrar as funcionalidades do <a href="https://github.com/ipeaGIT/r5r">r5r</a>, nós vamos usar uma pequena amostra de dados da cidade de Porto Alegre, Brasil. Esses dados estão disponíveis dentro do próprio pacote <a href="https://github.com/ipeaGIT/r5r">r5r</a>, e seu endereço pode ser acessado com o comando <code>system.file("extdata/poa", package = "r5r")</code>:</p>
+<p>Para ilustrar as funcionalidades do <code>{r5r}</code>, nós vamos usar uma pequena amostra de dados da cidade de Porto Alegre, Brasil. Esses dados estão disponíveis dentro do próprio pacote <code>{r5r}</code>, e seu endereço pode ser acessado com o comando <code>system.file("extdata/poa", package = "r5r")</code>:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>/home/runner/work/intro_access_book/intro_access_book/renv/library/R-4.2/x86_64-pc-linux-gnu/r5r/extdata/poa
@@ -436,28 +451,30 @@ Qualidade dos Dados OpenStreetMap
 <li>Dois <em>feeds</em> de GTFS das redes de ônibus e de trens: <code>poa_eptc.zip</code> e <code>poa_trensurb.zip</code>;</li>
 <li>O modelo digital de elevação da cidade: <code>poa_elevation.tif</code>;</li>
 <li>O arquivo <code>poa_hexgrid.csv</code>, com as coordenadas geográficas dos centróides de uma grade hexagonal regular que cobre toda a área de estudo e com informações sobre o tamanho da população residente e o número de oportunidades (empregos, escolas e hospitais) em cada hexágono. Esses pontos serão utilizados como as origens e destinos no cálculo da matriz de tempo de viagem.</li>
-</ul></section><section id="calculando-a-matriz-de-tempo-de-viagens" class="level3" data-number="3.1.3"><h3 data-number="3.1.3" class="anchored" data-anchor-id="calculando-a-matriz-de-tempo-de-viagens">
-<span class="header-section-number">3.1.3</span> Calculando a matriz de tempo de viagens</h3>
-<p>Antes de calcular a matriz de tempo de viagem, precisamos aumentar a memória disponível para o Java. Isto é necessário porque, por padrão, o R aloca apenas 512MB de memória para processos do Java, o que frequentemente não é suficiente para o cálculo de grandes matrizes com o <a href="https://github.com/ipeaGIT/r5r">r5r</a>. Para aumentar a memória disponível para 2GB, por exemplo, usamos o seguinte comando no início do <em>script</em>, antes mesmo de carregar as bibliotecas de R necessárias:</p>
+</ul>
+</section>
+<section id="calculando-a-matriz-de-tempo-de-viagens" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="calculando-a-matriz-de-tempo-de-viagens"><span class="header-section-number">3.1.3</span> Calculando a matriz de tempo de viagens</h3>
+<p>Antes de calcular a matriz de tempo de viagem, precisamos aumentar a memória disponível para o Java. Isto é necessário porque, por padrão, o R aloca apenas 512MB de memória para processos do Java, o que frequentemente não é suficiente para o cálculo de grandes matrizes com o <code>{r5r}</code>. Para aumentar a memória disponível para 2GB, por exemplo, usamos o seguinte comando no início do <em>script</em>, antes mesmo de carregar as bibliotecas de R necessárias:</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>java.parameters <span class="op">=</span> <span class="st">"-Xmx2G"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">java.parameters =</span> <span class="st">"-Xmx2G"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Feito isso, agora podemos carregar as bibliotecas que vamos utilizar neste capítulo.</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ipeaGIT/r5r">r5r</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ipeaGIT/accessibility">accessibility</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/">sf</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-datatable.com">data.table</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ipeaGIT/aopdata">aopdata</a></span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(r5r)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(accessibility)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(aopdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>O cálculo de uma matriz de tempo de viagem de uma área de estudo é feito em dois passos. O primeiro é gerar a rede de transporte multimodal que será utilizada no roteamento. Para isso, nós utilizamos a função <code><a href="https://rdrr.io/pkg/r5r/man/setup_r5.html">setup_r5()</a></code>, que baixa o <em>software</em> de roteamento R5 e o utiliza para criar a rede. Esta função recebe como <em>input</em> o caminho da pasta onde os dados necessários para o roteamento estão armazenados. Como resultado, a função salva na pasta alguns arquivos necessários para o roteamento e retorna uma conexão com o R5, neste exemplo chamada de <code>r5r_core</code>, que é utilizada no cálculo da matriz de tempo de viagem.</p>
+<p>O cálculo de uma matriz de tempo de viagem de uma área de estudo é feito em dois passos. O primeiro é gerar a rede de transporte multimodal que será utilizada no roteamento. Para isso, nós utilizamos a função <code>setup_r5()</code>, que baixa o <em>software</em> de roteamento R5 e o utiliza para criar a rede. Esta função recebe como <em>input</em> o caminho da pasta onde os dados necessários para o roteamento estão armazenados. Como resultado, a função salva na pasta alguns arquivos necessários para o roteamento e retorna uma conexão com o R5, neste exemplo chamada de <code>r5r_core</code>, que é utilizada no cálculo da matriz de tempo de viagem.</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata/poa"</span>, package <span class="op">=</span> <span class="st">"r5r"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">r5r_core</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/r5r/man/setup_r5.html">setup_r5</a></span><span class="op">(</span><span class="va">path</span>, use_elevation <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/dir_tree.html">dir_tree</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/poa"</span>, <span class="at">package =</span> <span class="st">"r5r"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>r5r_core <span class="ot">&lt;-</span> <span class="fu">setup_r5</span>(path, <span class="at">use_elevation =</span> <span class="cn">TRUE</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>fs<span class="sc">::</span><span class="fu">dir_tree</span>(path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>/home/runner/work/_temp/renv/cache/v5/R-4.2/x86_64-pc-linux-gnu/r5r/0.7.1/61db001154cd833466a25c4eb195c9b0/r5r/extdata/poa
 ├── network.dat
@@ -470,26 +487,26 @@ Qualidade dos Dados OpenStreetMap
 └── poa_points_of_interest.csv</code></pre>
 </div>
 </div>
-<p>O passo final é usar a função <code><a href="https://rdrr.io/pkg/r5r/man/travel_time_matrix.html">travel_time_matrix()</a></code> para o cálculo da matriz de tempo de viagem. Como <em>inputs</em> básicos, a função recebe a conexão com o R5 criada acima, pontos de origem e destino em formato de <code>data.frame</code> com as colunas <code>id</code>, <code>lon</code> e <code>lat</code>, o modo de transporte a ser utilizado e o horário de partida, o tempo máximo de caminhada permitido da origem até o embarque no transporte público e do desembarque até o destino, e o tempo máximo de viagem a ser considerado.</p>
+<p>O passo final é usar a função <code>travel_time_matrix()</code> para o cálculo da matriz de tempo de viagem. Como <em>inputs</em> básicos, a função recebe a conexão com o R5 criada acima, pontos de origem e destino em formato de <code>data.frame</code> com as colunas <code>id</code>, <code>lon</code> e <code>lat</code>, o modo de transporte a ser utilizado e o horário de partida, o tempo máximo de caminhada permitido da origem até o embarque no transporte público e do desembarque até o destino, e o tempo máximo de viagem a ser considerado.</p>
 <div class="cell">
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">points</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html">fread</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">path</span>, <span class="st">"poa_hexgrid.csv"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">ttm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/r5r/man/travel_time_matrix.html">travel_time_matrix</a></span><span class="op">(</span></span>
-<span>  <span class="va">r5r_core</span>,</span>
-<span>  origins <span class="op">=</span> <span class="va">points</span>,</span>
-<span>  destinations <span class="op">=</span> <span class="va">points</span>,</span>
-<span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"WALK"</span>, <span class="st">"TRANSIT"</span><span class="op">)</span>,</span>
-<span>  departure_datetime <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html">as.POSIXct</a></span><span class="op">(</span></span>
-<span>    <span class="st">"13-05-2019 14:00:00"</span>,</span>
-<span>    format <span class="op">=</span> <span class="st">"%d-%m-%Y %H:%M:%S"</span></span>
-<span>  <span class="op">)</span>,</span>
-<span>  max_walk_dist <span class="op">=</span> <span class="fl">800</span>,</span>
-<span>  max_trip_duration <span class="op">=</span> <span class="fl">120</span>,</span>
-<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  progress <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">ttm</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>points <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="fu">file.path</span>(path, <span class="st">"poa_hexgrid.csv"</span>))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>ttm <span class="ot">&lt;-</span> <span class="fu">travel_time_matrix</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  r5r_core,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">origins =</span> points,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">destinations =</span> points,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">mode =</span> <span class="fu">c</span>(<span class="st">"WALK"</span>, <span class="st">"TRANSIT"</span>),</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">departure_datetime =</span> <span class="fu">as.POSIXct</span>(</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"13-05-2019 14:00:00"</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">format =</span> <span class="st">"%d-%m-%Y %H:%M:%S"</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_walk_dist =</span> <span class="dv">800</span>,</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_trip_duration =</span> <span class="dv">120</span>,</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">progress =</span> <span class="cn">FALSE</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ttm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            fromId            toId travel_time
 1: 89a901291abffff 89a901291abffff           1
@@ -500,36 +517,38 @@ Qualidade dos Dados OpenStreetMap
 6: 89a901291abffff 89a90129b47ffff          58</code></pre>
 </div>
 </div>
-<p>Na prática, o que a função <code><a href="https://rdrr.io/pkg/r5r/man/travel_time_matrix.html">travel_time_matrix()</a></code> faz é encontrar a rota mais rápida partindo de cada ponto de origem para todos os possíveis pontos de destino, considerando o modo de viagem, o horário de partida e os demais parâmetros passados pelo usuário. Para isso, o <a href="https://github.com/ipeaGIT/r5r">r5r</a> considera tempos de viagem de porta-a-porta: no caso de uma viagem por transporte público, por exemplo, o tempo total de viagem inclui a) o tempo de caminhada até a parada de transporte público; b) o tempo de espera pelo veículo na parada; c) o tempo de deslocamento dentro do veículo; e d) o tempo de viagem a pé da parada de desembarque até o destino. Em casos em que mais de uma rota de transporte público é utilizada, o <a href="https://github.com/ipeaGIT/r5r">r5r</a> também contabiliza o tempo gasto nas conexões, considerando a caminhada entre paradas e o tempo de espera pelo próximo veículo.</p>
-<p>Diversos outros <em>inputs</em> podem ser passados para o cálculo da matriz, como a velocidade de caminhada e o número máximo de pernas de transporte público permitido, entre outros. Para mais informações sobre cada um dos parâmetros, por favor consulte a documentação da função disponível no pacote em uma sessão de R (com os comandos <code>?travel_time_matrix()</code> e <code>help(“travel_time_matrix”)</code>) ou no site do <a href="https://github.com/ipeaGIT/r5r">r5r</a>, <a href="https://ipeagit.github.io/r5r/reference/travel_time_matrix.html">aqui</a>.</p>
+<p>Na prática, o que a função <code>travel_time_matrix()</code> faz é encontrar a rota mais rápida partindo de cada ponto de origem para todos os possíveis pontos de destino, considerando o modo de viagem, o horário de partida e os demais parâmetros passados pelo usuário. Para isso, o <code>{r5r}</code> considera tempos de viagem de porta-a-porta: no caso de uma viagem por transporte público, por exemplo, o tempo total de viagem inclui a) o tempo de caminhada até a parada de transporte público; b) o tempo de espera pelo veículo na parada; c) o tempo de deslocamento dentro do veículo; e d) o tempo de viagem a pé da parada de desembarque até o destino. Em casos em que mais de uma rota de transporte público é utilizada, o <code>{r5r}</code> também contabiliza o tempo gasto nas conexões, considerando a caminhada entre paradas e o tempo de espera pelo próximo veículo.</p>
+<p>Diversos outros <em>inputs</em> podem ser passados para o cálculo da matriz, como a velocidade de caminhada e o número máximo de pernas de transporte público permitido, entre outros. Para mais informações sobre cada um dos parâmetros, por favor consulte a documentação da função disponível no pacote em uma sessão de R (com os comandos <code>?travel_time_matrix()</code> e <code>help(“travel_time_matrix”)</code>) ou no site do <code>{r5r}</code>, <a href="https://ipeagit.github.io/r5r/reference/travel_time_matrix.html">aqui</a>.</p>
 <div class="callout-note callout callout-style-simple">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>A função <code><a href="https://rdrr.io/pkg/r5r/man/travel_time_matrix.html">travel_time_matrix()</a></code> utiliza uma extensão do algoritmo de roteamento RAPTOR <span class="citation" data-cites="conway2017evidencebased">(<a href="references.html#ref-conway2017evidencebased" role="doc-biblioref">Conway, Byrd, and van der Linden 2017</a>)</span>, o que torna o R5 extremamente rápido. A depender da quantidade de pares de origem-destino, o <a href="https://github.com/ipeaGIT/r5r">r5r</a> pode ser entre 6 e 200 vezes mais rápido do que outros <em>softwares</em> de roteamento multimodal no cálculo de uma matriz de tempo de viagem <span class="citation" data-cites="higgins2022calculating">(<a href="references.html#ref-higgins2022calculating" role="doc-biblioref">Higgins et al. 2022</a>)</span>.</p>
+<p>A função <code>travel_time_matrix()</code> utiliza uma extensão do algoritmo de roteamento RAPTOR <span class="citation" data-cites="conway2017evidencebased">(<a href="references.html#ref-conway2017evidencebased" role="doc-biblioref">Conway, Byrd, and van der Linden 2017</a>)</span>, o que torna o R5 extremamente rápido. A depender da quantidade de pares de origem-destino, o <code>{r5r}</code> pode ser entre 6 e 200 vezes mais rápido do que outros <em>softwares</em> de roteamento multimodal no cálculo de uma matriz de tempo de viagem <span class="citation" data-cites="higgins2022calculating">(<a href="references.html#ref-higgins2022calculating" role="doc-biblioref">Higgins et al. 2022</a>)</span>.</p>
 </div>
 </div>
 </div>
-</section></section><section id="sec-accessibility" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="sec-accessibility">
-<span class="header-section-number">3.2</span> Cálculo de acessibilidade</h2>
-<p>Após calculada a matriz de tempo de viagem entre as origens e os destinos da área de estudo, nós precisamos utilizá-la para calcular os níveis de acessibilidade do local. Para isso, nós utilizaremos o pacote <a href="https://github.com/ipeaGIT/accessibility">accessibility</a><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, também desenvolvido pela equipe do Projeto Acesso a Oportunidades, Ipea, que contém diversas funções para o cálculo de vários indicadores de acessibilidade. Como <em>input</em> básico, todas as funções requerem uma matriz de custo pré-calculada (no nosso caso, a matriz de tempo de viagem calculada na seção anterior) e dados de uso do solo, como, por exemplo, o número de determinados tipos de oportunidades em cada célula da grade que cobre a área de estudo.</p>
+</section>
+</section>
+<section id="sec-accessibility" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="sec-accessibility"><span class="header-section-number">3.2</span> Cálculo de acessibilidade</h2>
+<p>Após calculada a matriz de tempo de viagem entre as origens e os destinos da área de estudo, nós precisamos utilizá-la para calcular os níveis de acessibilidade do local. Para isso, nós utilizaremos o pacote <code>{accessibility}</code><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, também desenvolvido pela equipe do Projeto Acesso a Oportunidades, Ipea, que contém diversas funções para o cálculo de vários indicadores de acessibilidade. Como <em>input</em> básico, todas as funções requerem uma matriz de custo pré-calculada (no nosso caso, a matriz de tempo de viagem calculada na seção anterior) e dados de uso do solo, como, por exemplo, o número de determinados tipos de oportunidades em cada célula da grade que cobre a área de estudo.</p>
 <p><strong>Medida de oportunidades cumulativas</strong></p>
-<p>A função <code><a href="https://rdrr.io/pkg/accessibility/man/cumulative_cutoff.html">cumulative_cutoff()</a></code> é utilizada para calcular o número de oportunidades que pode ser alcançado em um determinado limite de custo de viagem. No exemplo abaixo, nós calculamos o número de escolas que podem ser alcançados em até 30 minutos de viagem a partir de cada origem presente em nossa matriz de tempo de viagem.</p>
+<p>A função <code>cumulative_cutoff()</code> é utilizada para calcular o número de oportunidades que pode ser alcançado em um determinado limite de custo de viagem. No exemplo abaixo, nós calculamos o número de escolas que podem ser alcançados em até 30 minutos de viagem a partir de cada origem presente em nossa matriz de tempo de viagem.</p>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># renomear nome das colunas</span></span>
-<span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setattr.html">setnames</a></span><span class="op">(</span><span class="va">ttm</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"fromId"</span>, <span class="st">"toId"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"from_id"</span>, <span class="st">"to_id"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">cumulative_access</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/accessibility/man/cumulative_cutoff.html">cumulative_cutoff</a></span><span class="op">(</span></span>
-<span>  travel_matrix <span class="op">=</span> <span class="va">ttm</span>,</span>
-<span>  land_use_data <span class="op">=</span> <span class="va">points</span>,</span>
-<span>  opportunity <span class="op">=</span> <span class="st">"schools"</span>,</span>
-<span>  travel_cost <span class="op">=</span> <span class="st">"travel_time"</span>,</span>
-<span>  cutoff <span class="op">=</span> <span class="fl">30</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">cumulative_access</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># renomear nome das colunas</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setnames</span>(ttm, <span class="fu">c</span>(<span class="st">"fromId"</span>, <span class="st">"toId"</span>), <span class="fu">c</span>(<span class="st">"from_id"</span>, <span class="st">"to_id"</span>))</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>cumulative_access <span class="ot">&lt;-</span> <span class="fu">cumulative_cutoff</span>(</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">travel_matrix =</span> ttm,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">land_use_data =</span> points,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">opportunity =</span> <span class="st">"schools"</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">travel_cost =</span> <span class="st">"travel_time"</span>,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">cutoff =</span> <span class="dv">30</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cumulative_access)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                id schools
 1: 89a901291abffff      19
@@ -541,16 +560,16 @@ Qualidade dos Dados OpenStreetMap
 </div>
 </div>
 <p><strong>Custo mínimo de viagem</strong></p>
-<p>A função <code><a href="https://rdrr.io/pkg/accessibility/man/cost_to_closest.html">cost_to_closest()</a></code>, por sua vez, calcula o custo mínimo de viagem necessário para alcançar um determinado número de oportunidades. O código abaixo, por exemplo, calcula o tempo de viagem mínimo para alcançar o hospital mais próximo a partir de cada origem.</p>
+<p>A função <code>cost_to_closest()</code>, por sua vez, calcula o custo mínimo de viagem necessário para alcançar um determinado número de oportunidades. O código abaixo, por exemplo, calcula o tempo de viagem mínimo para alcançar o hospital mais próximo a partir de cada origem.</p>
 <div class="cell">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">min_cost</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/accessibility/man/cost_to_closest.html">cost_to_closest</a></span><span class="op">(</span></span>
-<span>  travel_matrix <span class="op">=</span> <span class="va">ttm</span>,</span>
-<span>  land_use_data <span class="op">=</span> <span class="va">points</span>,</span>
-<span>  opportunity <span class="op">=</span> <span class="st">"schools"</span>,</span>
-<span>  travel_cost <span class="op">=</span> <span class="st">"travel_time"</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">min_cost</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>min_cost <span class="ot">&lt;-</span> <span class="fu">cost_to_closest</span>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">travel_matrix =</span> ttm,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">land_use_data =</span> points,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">opportunity =</span> <span class="st">"schools"</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">travel_cost =</span> <span class="st">"travel_time"</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(min_cost)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                id travel_time
 1: 89a9012124fffff           0
@@ -562,17 +581,17 @@ Qualidade dos Dados OpenStreetMap
 </div>
 </div>
 <p><strong>Medidas gravitacionais</strong></p>
-<p>A função <code><a href="https://rdrr.io/pkg/accessibility/man/gravity.html">gravity()</a></code> calcula medidas gravitacionais de acessibilidade - ou seja, aquelas nas quais o peso de cada oportunidade diminui gradualmente com o aumento do custo de viagem. Existem, no entanto, uma gama de diferentes tipos de funções de decaimento que podem ser utilizadas, como funções de decaimento exponenciais negativas, de potências inversas, entre outras. Por isso, esta função recebe um <em>input</em> adicional: a função de decaimento a ser utilizada no cálculo. O exemplo abaixo apresenta o cálculo de acessibilidade a estabelecimentos de educação usando uma medida gravitacional exponencial negativa com parâmetro de decaimento igual a 0.2.</p>
+<p>A função <code>gravity()</code> calcula medidas gravitacionais de acessibilidade - ou seja, aquelas nas quais o peso de cada oportunidade diminui gradualmente com o aumento do custo de viagem. Existem, no entanto, uma gama de diferentes tipos de funções de decaimento que podem ser utilizadas, como funções de decaimento exponenciais negativas, de potências inversas, entre outras. Por isso, esta função recebe um <em>input</em> adicional: a função de decaimento a ser utilizada no cálculo. O exemplo abaixo apresenta o cálculo de acessibilidade a estabelecimentos de educação usando uma medida gravitacional exponencial negativa com parâmetro de decaimento igual a 0.2.</p>
 <div class="cell">
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">negative_exp_access</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/accessibility/man/gravity.html">gravity</a></span><span class="op">(</span></span>
-<span>  travel_matrix  <span class="op">=</span> <span class="va">ttm</span>,</span>
-<span>  land_use_data <span class="op">=</span> <span class="va">points</span>,</span>
-<span>  opportunity <span class="op">=</span> <span class="st">"schools"</span>,</span>
-<span>  travel_cost <span class="op">=</span> <span class="st">"travel_time"</span>,</span>
-<span>  decay_function <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/accessibility/man/decay_exponential.html">decay_exponential</a></span><span class="op">(</span><span class="fl">0.2</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">negative_exp_access</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>negative_exp_access <span class="ot">&lt;-</span> <span class="fu">gravity</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">travel_matrix  =</span> ttm,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">land_use_data =</span> points,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">opportunity =</span> <span class="st">"schools"</span>,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">travel_cost =</span> <span class="st">"travel_time"</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">decay_function =</span> <span class="fu">decay_exponential</span>(<span class="fl">0.2</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(negative_exp_access)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                id   schools
 1: 89a901291abffff 0.3589287
@@ -584,19 +603,19 @@ Qualidade dos Dados OpenStreetMap
 </div>
 </div>
 <p><strong>Medidas com competição</strong></p>
-<p>Por fim, a função <code><a href="https://rdrr.io/pkg/accessibility/man/floating_catchment_area.html">floating_catchment_area()</a></code> calcula níveis de acessibilidade levando em consideração a competição por oportunidades usando diferentes indicadores do tipo <em>floating catchment area</em>. Como diversos métodos de FCA podem ser utilizados, a função requer que o método desejado seja explicitamente assinalado. E, assim como a função de acessibilidade gravitacional, a função de decaimento utilizada também deve ser definida pelo usuário. O código a seguir mostra um exemplo de cálculo de acessibilidade a oportunidades de emprego usando o método BFCA <span class="citation" data-cites="paez2019demand">(<a href="references.html#ref-paez2019demand" role="doc-biblioref">Paez, Higgins, and Vivona 2019</a>)</span>, levando em consideração os efeitos de competição entre a população como um todo e uma função de decaimento exponencial com parâmetro de decaimento igual a 0.05.</p>
+<p>Por fim, a função <code>floating_catchment_area()</code> calcula níveis de acessibilidade levando em consideração a competição por oportunidades usando diferentes indicadores do tipo <em>floating catchment area</em>. Como diversos métodos de FCA podem ser utilizados, a função requer que o método desejado seja explicitamente assinalado. E, assim como a função de acessibilidade gravitacional, a função de decaimento utilizada também deve ser definida pelo usuário. O código a seguir mostra um exemplo de cálculo de acessibilidade a oportunidades de emprego usando o método BFCA <span class="citation" data-cites="paez2019demand">(<a href="references.html#ref-paez2019demand" role="doc-biblioref">Paez, Higgins, and Vivona 2019</a>)</span>, levando em consideração os efeitos de competição entre a população como um todo e uma função de decaimento exponencial com parâmetro de decaimento igual a 0.05.</p>
 <div class="cell">
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">bfca_access</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/accessibility/man/floating_catchment_area.html">floating_catchment_area</a></span><span class="op">(</span></span>
-<span>  travel_matrix <span class="op">=</span> <span class="va">ttm</span>,</span>
-<span>  land_use_data <span class="op">=</span> <span class="va">points</span>,</span>
-<span>  opportunity <span class="op">=</span> <span class="st">"schools"</span>,</span>
-<span>  travel_cost <span class="op">=</span> <span class="st">"travel_time"</span>,</span>
-<span>  demand <span class="op">=</span> <span class="st">"population"</span>,</span>
-<span>  method <span class="op">=</span> <span class="st">"bfca"</span>,</span>
-<span>  decay_function <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/accessibility/man/decay_exponential.html">decay_exponential</a></span><span class="op">(</span><span class="fl">0.05</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">bfca_access</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>bfca_access <span class="ot">&lt;-</span> <span class="fu">floating_catchment_area</span>(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">travel_matrix =</span> ttm,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">land_use_data =</span> points,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">opportunity =</span> <span class="st">"schools"</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">travel_cost =</span> <span class="st">"travel_time"</span>,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">demand =</span> <span class="st">"population"</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"bfca"</span>,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">decay_function =</span> <span class="fu">decay_exponential</span>(<span class="fl">0.05</span>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bfca_access)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                id      schools
 1: 89a901291abffff 0.0002574442
@@ -607,31 +626,32 @@ Qualidade dos Dados OpenStreetMap
 6: 89a901285cfffff 0.0003928648</code></pre>
 </div>
 </div>
-<p>As funções apresentadas nesta seção também podem receber outros <em>inputs</em> não explicitamente mencionados aqui. Para mais informações sobre cada um dos parâmetros, por favor consulte a documentação do pacote <a href="https://github.com/ipeaGIT/accessibility">accessibility</a> em seu <a href="https://ipeagit.github.io/accessibility/">site</a>.</p>
-</section><section id="cálculo-de-acessibilidade-com-o-r5r" class="level2" data-number="3.3"><h2 data-number="3.3" class="anchored" data-anchor-id="cálculo-de-acessibilidade-com-o-r5r">
-<span class="header-section-number">3.3</span> Cálculo de acessibilidade com o r5r</h2>
-<p>Ao longo das duas seções anteriores, nós mostramos como calcular níveis de acessibilidade passo-a-passo. Para fins didáticos, é importante entender que o cálculo de estimativas de acessibilidade tem como primeiro passo a geração de uma matriz de custos de viagens que posteriormente é utilizada para estimar níveis de acessibilidade. No entanto, o <a href="https://github.com/ipeaGIT/r5r">r5r</a> inclui também uma função chamada <code><a href="https://rdrr.io/pkg/r5r/man/accessibility.html">accessibility()</a></code> que faz todo esse processamento de uma vez só.</p>
-<p>De forma parecida com a função de cálculo de matriz de tempo de viagem, a função <code><a href="https://rdrr.io/pkg/r5r/man/accessibility.html">accessibility()</a></code> recebe como <em>inputs</em> uma conexão com o R5, as origens, os destinos, os modos de transporte e o tempo de partida, entre outros argumentos. Adicionalmente, devem ser listadas também quais oportunidades devem ser consideradas e a função de decaimento que deve ser utilizada, bem como o valor do limite de custo e do parâmetro de decaimento. O exemplo abaixo mostra uma aplicação desta função.</p>
+<p>As funções apresentadas nesta seção também podem receber outros <em>inputs</em> não explicitamente mencionados aqui. Para mais informações sobre cada um dos parâmetros, por favor consulte a documentação do pacote <code>{accessibility}</code> em seu <a href="https://ipeagit.github.io/accessibility/">site</a>.</p>
+</section>
+<section id="cálculo-de-acessibilidade-com-o-r5r" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="cálculo-de-acessibilidade-com-o-r5r"><span class="header-section-number">3.3</span> Cálculo de acessibilidade com o r5r</h2>
+<p>Ao longo das duas seções anteriores, nós mostramos como calcular níveis de acessibilidade passo-a-passo. Para fins didáticos, é importante entender que o cálculo de estimativas de acessibilidade tem como primeiro passo a geração de uma matriz de custos de viagens que posteriormente é utilizada para estimar níveis de acessibilidade. No entanto, o <code>{r5r}</code> inclui também uma função chamada <code>accessibility()</code> que faz todo esse processamento de uma vez só.</p>
+<p>De forma parecida com a função de cálculo de matriz de tempo de viagem, a função <code>accessibility()</code> recebe como <em>inputs</em> uma conexão com o R5, as origens, os destinos, os modos de transporte e o tempo de partida, entre outros argumentos. Adicionalmente, devem ser listadas também quais oportunidades devem ser consideradas e a função de decaimento que deve ser utilizada, bem como o valor do limite de custo e do parâmetro de decaimento. O exemplo abaixo mostra uma aplicação desta função.</p>
 <div class="cell">
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">r5r_access</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/r5r/man/accessibility.html">accessibility</a></span><span class="op">(</span></span>
-<span>  <span class="va">r5r_core</span>,</span>
-<span>  origins <span class="op">=</span> <span class="va">points</span>,</span>
-<span>  destinations <span class="op">=</span> <span class="va">points</span>,</span>
-<span>  opportunities_colname <span class="op">=</span> <span class="st">"schools"</span>,</span>
-<span>  decay_function <span class="op">=</span> <span class="st">"step"</span>,</span>
-<span>  cutoffs <span class="op">=</span> <span class="fl">30</span>,</span>
-<span>  mode <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"WALK"</span>, <span class="st">"TRANSIT"</span><span class="op">)</span>,</span>
-<span>  departure_datetime <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html">as.POSIXct</a></span><span class="op">(</span></span>
-<span>    <span class="st">"13-05-2019 14:00:00"</span>,</span>
-<span>    format <span class="op">=</span> <span class="st">"%d-%m-%Y %H:%M:%S"</span></span>
-<span>  <span class="op">)</span>,</span>
-<span>  max_walk_dist <span class="op">=</span> <span class="fl">800</span>,</span>
-<span>  max_trip_duration <span class="op">=</span> <span class="fl">120</span>,</span>
-<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  progress <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">r5r_access</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>r5r_access <span class="ot">&lt;-</span> <span class="fu">accessibility</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  r5r_core,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">origins =</span> points,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">destinations =</span> points,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">opportunities_colname =</span> <span class="st">"schools"</span>,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">decay_function =</span> <span class="st">"step"</span>,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">cutoffs =</span> <span class="dv">30</span>,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">mode =</span> <span class="fu">c</span>(<span class="st">"WALK"</span>, <span class="st">"TRANSIT"</span>),</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">departure_datetime =</span> <span class="fu">as.POSIXct</span>(</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"13-05-2019 14:00:00"</span>,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">format =</span> <span class="st">"%d-%m-%Y %H:%M:%S"</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_walk_dist =</span> <span class="dv">800</span>,</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_trip_duration =</span> <span class="dv">120</span>,</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">progress =</span> <span class="cn">FALSE</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(r5r_access)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           from_id percentile cutoff accessibility
 1: 89a901291abffff         50     30            17
@@ -643,40 +663,41 @@ Qualidade dos Dados OpenStreetMap
 </div>
 </div>
 <p>Como podemos observar, o resultado desta função são os mesmos níveis de acessibilidade já calculados anteriormente, no exemplo da medida de oportunidades cumulativas. A informação “intermediária” do tempo de viagem entre origens e destinos, consequentemente, não fica disponível ao usuário com o uso desta função. Ainda assim, este fluxo de trabalho pode ser uma boa alternativa para pessoas que estejam interessadas unicamente nos níveis de acessibilidade, não dependendo do tempo de viagem em suas análises.</p>
-</section><section id="análises-de-acessibilidade" class="level2" data-number="3.4"><h2 data-number="3.4" class="anchored" data-anchor-id="análises-de-acessibilidade">
-<span class="header-section-number">3.4</span> Análises de acessibilidade</h2>
+</section>
+<section id="análises-de-acessibilidade" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="análises-de-acessibilidade"><span class="header-section-number">3.4</span> Análises de acessibilidade</h2>
 <p>Calculados os níveis de acessibilidade, procedemos então para sua análise. Existe uma grande variedade de análises que podem ser feitas usando esses dados: por exemplo, em diagnósticos das condições de acessibilidade urbana de diferentes bairros, pesquisas sobre desigualdades de acesso a oportunidades entre diferentes grupos sociais, análises sobre exclusão social e <em>accessibility poverty</em> (insuficiência de acessibilidade, em tradução livre), etc. Nesta seção, no entanto, nos restringiremos a apresentar duas análises relativamente simples e de fácil comunicação: a distribuição espacial da acessibilidade e sua distribuição entre diferentes grupos de renda.</p>
 <p><strong>Distribuição espacial de acessibilidade urbana</strong></p>
-<p>Para compreendermos a distribuição espacial da acessibilidade urbana de uma determinada cidade ou região, primeiro precisamos obter as informações espaciais dos pontos que foram utilizados como origens e destinos no cálculo da matriz. Os pontos que nós usamos nos exemplos anteriores, por exemplo, correspondem a células de uma grade hexagonal baseadas no índice H3, desenvolvido pela Uber <span class="citation" data-cites="brodsky2018h3">(<a href="references.html#ref-brodsky2018h3" role="doc-biblioref">Brodsky 2018</a>)</span>. O código e o mapa a seguir mostram a distribuição desses hexágonos na nossa área de estudo. Aqui, a gente faz o download da grade espacial disponível no pacote <a href="https://github.com/ipeaGIT/aopdata">aopdata</a>, que será apresentado com mais detalhes na seção <span class="quarto-unresolved-ref">?sec-s5_dados_aop</span>;</p>
+<p>Para compreendermos a distribuição espacial da acessibilidade urbana de uma determinada cidade ou região, primeiro precisamos obter as informações espaciais dos pontos que foram utilizados como origens e destinos no cálculo da matriz. Os pontos que nós usamos nos exemplos anteriores, por exemplo, correspondem a células de uma grade hexagonal baseadas no índice H3, desenvolvido pela Uber <span class="citation" data-cites="brodsky2018h3">(<a href="references.html#ref-brodsky2018h3" role="doc-biblioref">Brodsky 2018</a>)</span>. O código e o mapa a seguir mostram a distribuição desses hexágonos na nossa área de estudo. Aqui, a gente faz o download da grade espacial disponível no pacote <code>{aopdata}</code>, que será apresentado com mais detalhes na seção <span class="quarto-unresolved-ref">?sec-s5_dados_aop</span>;</p>
 <div class="cell">
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># download grade espacial</span></span>
-<span><span class="va">poa_grid</span> <span class="op">&lt;-</span> <span class="fu">aopdata</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/aopdata/man/read_grid.html">read_grid</a></span><span class="op">(</span>city<span class="op">=</span><span class="st">"Porto Alegre"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">poa_grid</span> <span class="op">&lt;-</span> <span class="va">poa_grid</span><span class="op">[</span><span class="va">poa_grid</span><span class="op">$</span><span class="va">id_hex</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">points</span><span class="op">$</span><span class="va">id</span>, <span class="op">]</span></span>
-<span></span>
-<span><span class="co"># cria mapa</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">poa_grid</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># download grade espacial</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>poa_grid <span class="ot">&lt;-</span> aopdata<span class="sc">::</span><span class="fu">read_grid</span>(<span class="at">city=</span><span class="st">"Porto Alegre"</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>poa_grid <span class="ot">&lt;-</span> poa_grid[poa_grid<span class="sc">$</span>id_hex <span class="sc">%in%</span> points<span class="sc">$</span>id, ]</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co"># cria mapa</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(poa_grid) <span class="sc">+</span> <span class="fu">geom_sf</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="3_calculando_acesso_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Para visualizarmos os nossos dados de acessibilidade espacialmente, portanto, nós precisamos unir a nossa tabela de estimativas de acessibilidade (vamos usar os níveis calculados com a medida de oportunidades cumulativas) com a tabela que contém os dados espaciais da grade, usando as colunas de identificação dos hexágonos como colunas-chave. A operação de <em>left join</em> usada para isso, bem como o seu resultado em formato de imagem, são apresentados a seguir.</p>
 <div class="cell">
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># converte objeto para data.table</span></span>
-<span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setDT.html">setDT</a></span><span class="op">(</span><span class="va">poa_grid</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># merge para trazer info do número de escolas</span></span>
-<span><span class="va">poa_grid</span><span class="op">[</span><span class="va">cumulative_access</span>, on <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>id_hex <span class="op">=</span> <span class="st">"id"</span><span class="op">)</span>, <span class="va">schools_access</span> <span class="op">:=</span> <span class="va">i.schools</span><span class="op">]</span></span>
-<span></span>
-<span><span class="co"># converte de volta para objeto espacial sf</span></span>
-<span><span class="va">poa_grid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r-spatial.github.io/sf/reference/sf.html">st_sf</a></span><span class="op">(</span><span class="va">poa_grid</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># plotar mapa</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">poa_grid</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">schools_access</span><span class="op">)</span>, color <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_viridis.html">scale_fill_viridis_c</a></span><span class="op">(</span>option <span class="op">=</span> <span class="st">"inferno"</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>fill<span class="op">=</span><span class="st">'Núm. de escolas\nacessíveis'</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># converte objeto para data.table</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">setDT</span>(poa_grid)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># merge para trazer info do número de escolas</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>poa_grid[cumulative_access, on <span class="ot">=</span> <span class="fu">c</span>(<span class="at">id_hex =</span> <span class="st">"id"</span>), schools_access <span class="sc">:</span><span class="er">=</span> i.schools]</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co"># converte de volta para objeto espacial sf</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>poa_grid <span class="ot">&lt;-</span> <span class="fu">st_sf</span>(poa_grid)</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="co"># plotar mapa</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(poa_grid) <span class="sc">+</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> schools_access), <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"inferno"</span>) <span class="sc">+</span> </span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill=</span><span class="st">'Núm. de escolas</span><span class="sc">\n</span><span class="st">acessíveis'</span>) <span class="sc">+</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="3_calculando_acesso_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -684,21 +705,21 @@ Qualidade dos Dados OpenStreetMap
 <p>Como podemos ver, os níveis de acessibilidade tendem a se concentrar de forma mais acentuada no centro da cidade, onde existe maior concentração de empregos, e próximos aos grandes corredores de transportes da cidade. Por terem fácil acesso a modos de alta capacidade e velocidade, pessoas que moram mais perto desses corredores tendem a acessar locais distantes relativamente rápido. Em contraste, pessoas que moram mais longe desses corredores, dependem de modos de menor menor frequência e velocidade operacional (como os ônibus municipais, por exemplo) e precisam gastar mais tempo para alcançar os corredores de média e alta capacidade. Como consequência, os níveis de acessibilidade de pessoas que moram afastadas do centro e de corredores de alta capacidade tendem a ser menores.</p>
 <p><strong>Distribuição socioeconômica de acessibilidade urbana</strong></p>
 <p>O mapa acima, embora revelador quanto aos locais em que estão dispostas as maiores concentrações de acessibilidade, nada diz sobre quais são os grupos socioeconômicos que possuem os maiores potenciais de acesso a oportunidades na região. Para isso, nós precisamos cruzar informações demográficas e econômicas das pessoas que moram em cada um dos nossos pontos de origem com os dados de acessibilidade previamente calculados.</p>
-<p>No exemplo abaixo, nós juntamos aos dados de acessibilidade a informação do decil de renda de cada uma das origens, considerando a renda média de cada uma das pessoas que as habitam. Assim, nós conseguimos identificar se um hexágono é de baixa, média ou alta renda. Os dados socioeconômicos que utilizamos no exemplo vêm do censo demográfico brasileiro de 2010, e foram agregados na grade espacial de hexágonos por <span class="citation" data-cites="pereira2022usosolo">(<a href="references.html#ref-pereira2022usosolo" role="doc-biblioref"><strong>pereira2022usosolo?</strong></a>)</span>. Aqui, nós acessamos os dados no R usando o pacote <a href="https://github.com/ipeaGIT/aopdata">aopdata</a>, que será apresentado em mais detalhes na seção <span class="quarto-unresolved-ref">?sec-s5_dados_aop</span>.</p>
+<p>No exemplo abaixo, nós juntamos aos dados de acessibilidade a informação do decil de renda de cada uma das origens, considerando a renda média de cada uma das pessoas que as habitam. Assim, nós conseguimos identificar se um hexágono é de baixa, média ou alta renda. Os dados socioeconômicos que utilizamos no exemplo vêm do censo demográfico brasileiro de 2010, e foram agregados na grade espacial de hexágonos por <span class="citation" data-cites="pereira2022usosolo">(<a href="references.html#ref-pereira2022usosolo" role="doc-biblioref"><strong>pereira2022usosolo?</strong></a>)</span>. Aqui, nós acessamos os dados no R usando o pacote <code>{aopdata}</code>, que será apresentado em mais detalhes na seção <span class="quarto-unresolved-ref">?sec-s5_dados_aop</span>.</p>
 <div class="cell">
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">poa_population</span> <span class="op">&lt;-</span> <span class="fu">aopdata</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/aopdata/man/read_population.html">read_population</a></span><span class="op">(</span><span class="st">"Porto Alegre"</span>, showProgress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/setDT.html">setDT</a></span><span class="op">(</span><span class="va">poa_grid</span><span class="op">)</span></span>
-<span><span class="va">poa_grid</span><span class="op">[</span></span>
-<span>  <span class="va">poa_population</span>,</span>
-<span>  on <span class="op">=</span> <span class="st">"id_hex"</span>,</span>
-<span>  <span class="fu">`:=`</span><span class="op">(</span></span>
-<span>    pop_count <span class="op">=</span> <span class="va">i.P001</span>,</span>
-<span>    income_decile <span class="op">=</span> <span class="va">i.R003</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="op">]</span></span>
-<span></span>
-<span><span class="va">poa_grid</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span><span class="va">id_hex</span>, <span class="va">schools_access</span>, <span class="va">pop_count</span>, <span class="va">income_decile</span><span class="op">)</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>poa_population <span class="ot">&lt;-</span> aopdata<span class="sc">::</span><span class="fu">read_population</span>(<span class="st">"Porto Alegre"</span>, <span class="at">showProgress =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">setDT</span>(poa_grid)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>poa_grid[</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  poa_population,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  on <span class="ot">=</span> <span class="st">"id_hex"</span>,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">:=</span><span class="st">`</span>(</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">pop_count =</span> i.P001,</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">income_decile =</span> i.R003</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>poa_grid[, .(id_hex, schools_access, pop_count, income_decile)] <span class="sc">|&gt;</span> <span class="fu">head</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            id_hex schools_access pop_count income_decile
 1: 89a9012124fffff             14       733             9
@@ -711,19 +732,19 @@ Qualidade dos Dados OpenStreetMap
 </div>
 <p>Tendo a informação do decil de renda em que cada hexágono se encontra, nós podemos calcular a distribuição da acessibilidade da população dentro de cada um desses níveis de renda. Para isso, nós precisamos ponderar o nível de acessibilidade de cada origem pela quantidade de pessoas que residem ali - daí o porquê de termos também trazido a informação da contagem populacional em cada hexágono. Fazendo a ponderação, nós obtemos a distribuição da acessibilidade das pessoas localizadas em origens de um determinado decil de renda. Caso não ponderássemos, no entanto, nós teríamos a distribuição de acessibilidade não das pessoas localizadas em cada hexágono, mas dos hexágonos em si. Como em nossa análise nós nos importamos com as pessoas, e não com as unidades espaciais em que elas estão agregadas, precisamos fazer a ponderação. Nós podemos visualizar a distribuição de acessibilidade de cada decil usando um <em>boxplot</em>, como feito a seguir.</p>
 <div class="cell">
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">poa_grid</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">income_decile</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span></span>
-<span>    x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">income_decile</span><span class="op">)</span>,</span>
-<span>    y <span class="op">=</span> <span class="va">schools_access</span>,</span>
-<span>    color <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">income_decile</span><span class="op">)</span>,</span>
-<span>    weight <span class="op">=</span> <span class="va">pop_count</span></span>
-<span>    <span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>color<span class="op">=</span><span class="st">"Decil de\nrenda"</span>, x<span class="op">=</span><span class="st">"Decil de Renda"</span>, y<span class="op">=</span><span class="st">"Número de escolas\nacessíveis"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_color_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">'RdBu'</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete</a></span><span class="op">(</span>labels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"D1 mais\nPobres"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">'D'</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span>, <span class="st">"D10 mais\nRicos"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(poa_grid[<span class="sc">!</span><span class="fu">is.na</span>(income_decile)]) <span class="sc">+</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">as.factor</span>(income_decile),</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> schools_access,</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="fu">as.factor</span>(income_decile),</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">weight =</span> pop_count</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color=</span><span class="st">"Decil de</span><span class="sc">\n</span><span class="st">renda"</span>, <span class="at">x=</span><span class="st">"Decil de Renda"</span>, <span class="at">y=</span><span class="st">"Número de escolas</span><span class="sc">\n</span><span class="st">acessíveis"</span>) <span class="sc">+</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">'RdBu'</span>) <span class="sc">+</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels=</span><span class="fu">c</span>(<span class="st">"D1 mais</span><span class="sc">\n</span><span class="st">Pobres"</span>, <span class="fu">paste0</span>(<span class="st">'D'</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>), <span class="st">"D10 mais</span><span class="sc">\n</span><span class="st">Ricos"</span>)) <span class="sc">+</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="3_calculando_acesso_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -769,12 +790,18 @@ Pereira, Rafael H. M., Marcus Saraiva, Daniel Herszenhut, Carlos Kaue Vieira Bra
 Venter, Christoffel. 2016. <span>“Assessing the Potential of Bus Rapid Transit-Led Network Restructuring for Enhancing Affordable Access to Employment <span>The</span> Case of <span>Johannesburg</span>’s <span>Corridors</span> of <span>Freedom</span>.”</span> <em>Research in Transportation Economics</em> 59 (November): 441–49. <a href="https://doi.org/10.1016/j.retrec.2016.05.006">https://doi.org/10.1016/j.retrec.2016.05.006</a>.
 </div>
 </div>
-</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
 <ol>
 <li id="fn1"><p>Disponível em <a href="https://github.com/conveyal/r5" class="uri">https://github.com/conveyal/r5</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>O Java 11 pode ser baixado em <a href="https://www.oracle.com/java/technologies/downloads/#java11" class="uri">https://www.oracle.com/java/technologies/downloads/#java11</a> ou em <a href="https://jdk.java.net/java-se-ri/11" class="uri">https://jdk.java.net/java-se-ri/11</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>Disponível em <a href="https://github.com/ipeaGIT/accessibility" class="uri">https://github.com/ipeaGIT/accessibility</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -794,6 +821,119 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
   toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -871,7 +1011,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     });
   }
 });
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
       <a href="./s2_calculo.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">SEÇÃO 2: Calculando acessibilidade</span>
       </a>          
@@ -883,20 +1025,22 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer">
+<footer class="footer">
+  <div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Ipea (Institute for Applied Economic Research)</div>   
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
-<li class="nav-item compact">
+    <li class="nav-item compact">
     <a class="nav-link active" href="https://github.com/ipeaGIT/aop_curso" aria-current="page">
       <i class="bi bi-github" role="img">
 </i> 
     </a>
   </li>  
 </ul>
-</div>
+    </div>
   </div>
 </footer>
+
 
 
 </body></html>
