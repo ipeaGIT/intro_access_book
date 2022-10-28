@@ -56,22 +56,14 @@ book:
 
 bibliography: references.bib
 
-format:
-  html:
-    theme: cosmo
-    cover-image: images/cover.png
-    code-link: true
-  pdf:
-    documentclass: scrreprt
-
 editor_options:
   markdown:
     wrap: 80
     canonical: true
 
 theme:
-  light: flatly
-  dark: darkly
+  light: cosmo
+  dark: superhero
   
 crossref:
   fig-title: Figura
