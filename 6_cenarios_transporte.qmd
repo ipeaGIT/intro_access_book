@@ -44,6 +44,61 @@ A população de Fortaleza está majoritariamente distribuída na região centra
 #| results: false
 #| warning: false
 #| message: false
+
+# DOWNLOAD E ORGANIZA DADOS DE TRILHOS PARA INCLUIR NOS MAPAS
+
+library(httr)
+library(gtfstools)
+library(ggplot2)
+library(data.table)
+
+# criar o endereço de arquivos temporários na máquina local
+metrofor_path <- tempfile("metrofor", fileext = ".zip")
+linha_leste_path <- tempfile("linha_leste", fileext = ".zip")
+
+# download dados da metrofor
+httr::GET(
+  "https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/gtfs_for_metrofor_2021-01.zip",
+  httr::write_disk(metrofor_path)
+)
+
+# download do GTFS da Linha Leste
+httr::GET(
+  "https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/gtfs_linha_leste.zip", 
+  httr::write_disk(linha_leste_path)
+)
+
+# read gtfs
+metrofor_gtfs <- gtfstools::read_gtfs(metrofor_path)
+linha_leste_gtfs <- gtfstools::read_gtfs(linha_leste_path)
+
+# keep one trip per route in metrofor
+metrofor_gtfs <- gtfstools::filter_by_trip_id(metrofor_gtfs, trip_id = c('4', '34', '159'))
+
+# convert to sf
+metrofor_gtfs$stop_times <- metrofor_gtfs$stop_times[order(trip_id, stop_sequence)]
+metrofor_sf <- gtfstools::get_trip_geometry(metrofor_gtfs)
+linha_leste_sf <- gtfstools::convert_shapes_to_sf(linha_leste_gtfs, shape_id = 'LL_0')
+
+# rename transport routes and rbind data
+linha_leste_sf$shape_id <- 'Linha Leste'
+setnames(metrofor_sf, 'trip_id', 'shape_id')
+metrofor_sf$origin_file <- NULL
+metrofor_sf$shape_id <- fcase(metrofor_sf$shape_id == 4, 'Linha Oeste', 
+                              metrofor_sf$shape_id == 34, 'Linha Sul', 
+                              metrofor_sf$shape_id == 159, 'VLT')
+
+rail_sf <- rbind(metrofor_sf, linha_leste_sf)
+```
+
+```{r}
+#| echo: false
+#| results: false
+#| warning: false
+#| message: false
+
+# MAPAS DE POPULACAO, RENDA, EMPREGOS E ESCOLAS
+
 library(ggplot2)
 library(aopdata)
 library(patchwork)
@@ -58,26 +113,34 @@ for_sf <- aopdata::read_landuse(
 
 fig_pessoas <- ggplot(data = for_sf) +
   geom_sf(aes(fill = P001), color = NA) +
-  labs(fill = "Número de\npessoas") +
+  labs(fill = "Número de\npessoas", color='Linhas') +
   scale_fill_distiller(palette = "PuBu", direction = 1) +
+  geom_sf(data=rail_sf, aes(color=shape_id), alpha=.8) +
+  scale_color_manual(values=c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
   theme_void()
 
 fig_renda <- ggplot(data = subset(for_sf, P001 > 0)) +
   geom_sf(aes(fill = as.factor(R003)), color=NA, alpha = 0.8) +
-  labs(fill = "Decil de\nrenda") +
+  labs(fill = "Decil de\nrenda", color='Linhas') +
   scale_fill_brewer(palette = "RdBu") +
+  geom_sf(data=rail_sf, aes(color=shape_id), alpha=.8) +
+  scale_color_manual(values=c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
   theme_void()
 
 fig_empregos <- ggplot(data = for_sf) +
   geom_sf(aes(fill = T001), color = NA) +
-  labs(fill = "Número de\nempregos") +
+  labs(fill = "Número de\nempregos", color='Linhas') +
   scale_fill_distiller(palette = "OrRd", direction = 1) +
+  geom_sf(data=rail_sf, aes(color=shape_id), alpha=.8) +
+  scale_color_manual(values=c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
   theme_void()
 
 fig_escolas <- ggplot(data = for_sf) +
   geom_sf(aes(fill = as.factor(E004)), color = NA) +
   scale_fill_manual(values = c("grey90", "#66c2a5", "#5e4fa2")) +
-  labs(fill = "Número de\nescolas") +
+  labs(fill = "Número de\nescolas", color='Linhas') +
+  geom_sf(data=rail_sf, aes(color=shape_id), alpha=.8) +
+  scale_color_manual(values=c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
   theme_void()
 
 fig_pessoas + fig_renda + fig_empregos + fig_escolas + plot_layout(ncol = 2)
@@ -574,7 +637,9 @@ access_dist <- ggplot(access_to_jobs_sf) +
     option = "inferno",
     label = scales::label_number(scale = 1 / 1000)
   ) +
-  labs(fill = "Empregos\nacessíveis\n(em milhares)") +
+  labs(fill = "Empregos\nacessíveis\n(em milhares)", color='Linhas') +
+  geom_sf(data=rail_sf, aes(color=shape_id), alpha=.8) +
+  scale_color_manual(values=c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
   theme_void()
 
 # mapa da diferença
@@ -584,7 +649,9 @@ diff_dist <- ggplot(subset(access_to_jobs_sf, !is.na(diff))) +
     option = "cividis",
     label = scales::label_number(scale = 1 / 1000)
   ) +
-  labs(fill = "Diferença de\nempregos\nacessíveis\n(em milhares)") +
+  labs(fill = "Diferença de\nempregos\nacessíveis\n(em milhares)", color='Linhas') +
+  geom_sf(data=rail_sf, aes(color=shape_id), alpha=.8) +
+  scale_color_manual(values=c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
   theme_void()
 
 # plot
