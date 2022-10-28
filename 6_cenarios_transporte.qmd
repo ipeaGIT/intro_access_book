@@ -115,7 +115,7 @@ fig_pessoas <- ggplot(data = for_sf) +
   geom_sf(aes(fill = P001), color = NA) +
   labs(fill = "Número de\npessoas", color='Linhas') +
   scale_fill_distiller(palette = "PuBu", direction = 1) +
-  geom_sf(data=rail_sf, aes(color=shape_id), alpha=.8) +
+  geom_sf(data=rail_sf, aes(color=shape_id), alpha=.8, show.legend = FALSE) +
   scale_color_manual(values=c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
   theme_void()
 
@@ -123,15 +123,15 @@ fig_renda <- ggplot(data = subset(for_sf, P001 > 0)) +
   geom_sf(aes(fill = as.factor(R003)), color=NA, alpha = 0.8) +
   labs(fill = "Decil de\nrenda", color='Linhas') +
   scale_fill_brewer(palette = "RdBu") +
-  geom_sf(data=rail_sf, aes(color=shape_id), alpha=.8) +
+  geom_sf(data=rail_sf, aes(color=shape_id), alpha=.8, show.legend = FALSE) +
   scale_color_manual(values=c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
   theme_void()
 
 fig_empregos <- ggplot(data = for_sf) +
   geom_sf(aes(fill = T001), color = NA) +
-  labs(fill = "Número de\nempregos", color='Linhas') +
+  labs(fill = "Número de\nempregos") +
   scale_fill_distiller(palette = "OrRd", direction = 1) +
-  geom_sf(data=rail_sf, aes(color=shape_id), alpha=.8) +
+  geom_sf(data=rail_sf, aes(color=shape_id), alpha=.8, show.legend = FALSE) +
   scale_color_manual(values=c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
   theme_void()
 
@@ -638,7 +638,7 @@ access_dist <- ggplot(access_to_jobs_sf) +
     label = scales::label_number(scale = 1 / 1000)
   ) +
   labs(fill = "Empregos\nacessíveis\n(em milhares)", color='Linhas') +
-  geom_sf(data=rail_sf, aes(color=shape_id), alpha=.8) +
+  geom_sf(data=rail_sf, aes(color=shape_id), alpha=.8, show.legend = FALSE) +
   scale_color_manual(values=c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
   theme_void()
 
