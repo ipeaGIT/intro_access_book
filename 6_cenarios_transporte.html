@@ -372,8 +372,11 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 <p>A população de Fortaleza está majoritariamente distribuída na região central e na porção oeste da cidade, embora haja alguns pontos de alta densidade populacional no sudeste da cidade. Via de regra, a população de mais alta renda (em tons de azul no mapa da distribuição de decis de renda) está localizada na região do centro expandido e sudeste do município, enquanto as populações de menor renda (em tons de vermelho) estão principalmente localizadas nas regiões periféricas ao sul e a oeste. Os empregos formais na cidade se distribuem principalmente ao longo de grandes avenidas, com uma maior concentração no centro da cidade. Em contraste, as escolas públicas de nível médio têm uma distribuição espacial mais equilibrada por todo território.</p>
 <div class="cell">
+
+</div>
+<div class="cell">
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section><section id="dados-gtfs-usados-na-análise" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="dados-gtfs-usados-na-análise">
@@ -788,7 +791,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Empregos acessíveis\n(em milhares)"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Analisando o tempo médio de acesso à escola pública de ensino médio mais próxima, notamos que a Linha Leste pouco altera a acessibilidade a essas escolas. Em média, em 2019 a população de Fortaleza demorava cerca de 13 minutos para chegar à escola pública de ensino médio mais próxima de sua casa. Após a conclusão da extensão do metrô, esse resultado permanecerá praticamente inalterado.</p>
@@ -815,7 +818,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Média do tempo até a escola\nmais próxima (em minutos)"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Em síntese, os resultados mostram que a construção da Linha Leste do metrô tem baixo impacto na acessibilidade média da população, tanto quando olhamos para empregos quanto para escolas de nível médio. Esse resultado ocorre, em grande medida, por duas razões. A primeira delas é o fato de estarmos fazendo uma análise simplificada, que considera apenas o projeto da Linha Leste e ignora as demais medidas que deverão acompanhar esta intervenção, como o aumento de frequência das outras linhas de metrô da cidade, por exemplo. A segunda razão se dá pelo fato de que a proposta de corredor da Linha Leste consiste em um trecho relativamente pequeno da rede de transporte localizado próximo ao centro da cidade, região de mais alta acessibilidade da cidade já em 2019. Sendo assim, os benefícios de acessibilidade deste corredor, quando ignoradas as demais intervenções que acompanham sua implementação, se concentram em áreas que pouco têm a ganhar em termos de acessibilidade.</p>
@@ -840,7 +843,9 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span>    option <span class="op">=</span> <span class="st">"inferno"</span>,</span>
 <span>    label <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_number.html">label_number</a></span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">1000</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"Empregos\nacessíveis\n(em milhares)"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"Empregos\nacessíveis\n(em milhares)"</span>, color<span class="op">=</span><span class="st">'Linhas'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">rail_sf</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">shape_id</span><span class="op">)</span>, alpha<span class="op">=</span><span class="fl">.8</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#F8766D"</span>, <span class="st">"#7CAE00"</span>, <span class="st">"#00BFC4"</span>, <span class="st">"#C77CFF"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># mapa da diferença</span></span>
@@ -850,13 +855,15 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span>    option <span class="op">=</span> <span class="st">"cividis"</span>,</span>
 <span>    label <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_number.html">label_number</a></span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">1000</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"Diferença de\nempregos\nacessíveis\n(em milhares)"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"Diferença de\nempregos\nacessíveis\n(em milhares)"</span>, color<span class="op">=</span><span class="st">'Linhas'</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html">geom_sf</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">rail_sf</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>color<span class="op">=</span><span class="va">shape_id</span><span class="op">)</span>, alpha<span class="op">=</span><span class="fl">.8</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_color_manual</a></span><span class="op">(</span>values<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#F8766D"</span>, <span class="st">"#7CAE00"</span>, <span class="st">"#00BFC4"</span>, <span class="st">"#C77CFF"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># plot</span></span>
 <span><span class="va">access_dist</span> <span class="op">/</span><span class="va">diff_dist</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html">plot_layout</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">1</span>, heights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Os ganhos de acessibilidade ao emprego se concentram principalmente próximos às estações do novo corredor e dos corredores já existentes que se ligam a ele. Isto mostra como a implantação de uma infraestrutura de transporte pode impactar não apenas suas imediações, mas também locais mais afastados, graças à conectividade da rede de transporte. Os mapas de distribuição no tempo de acesso a escolas de nível médio, no entanto, apresentam uma situação diferente:</p>
@@ -879,7 +886,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span><span class="co"># plot</span></span>
 <span><span class="va">time_dist</span> <span class="op">/</span> <span class="va">time_diff_dist</span> <span class="op">+</span> <span class="fu"><a href="https://patchwork.data-imaginist.com/reference/plot_layout.html">plot_layout</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">1</span>, heights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>A Linha Leste praticamente não altera o panorama da acessibilidade a escolas de nível médio em Fortaleza, o que faz com que pouquíssimos hexágonos apresentem algum tipo de ganho de acessibilidade entre os dois cenários. Diferentemente da distribuição de empregos, que tende a seguir critérios econômicos, a distribuição de equipamentos públicos como escolas tende a ser planejada usando critérios de equidade, sendo, portanto, mais equilibrada no território. Isso explica porque observamos maiores níveis de acessibilidade em quase todas as regiões da cidade. Como consequência, a construção da Linha Leste na parte central da cidade não afeta o tempo de acesso das pessoas que moram em locais afastados desse corredor. Não apenas isso, mas mesmo para as pessoas que moram perto do novo corredor a sua implementação não muda os níveis de acesso a escolas, com pouquíssimas exceções. Isto é um sinal que esta área possui uma boa oferta de escolas e já é bem servida de transporte público, mesmo antes da finalização da Linha Leste.</p>
@@ -908,7 +915,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Os dois gráficos mostram claramente que as pessoas mais ricas de Fortaleza possuem maiores níveis de acesso a empregos do que seus pares mais pobres, tanto antes quanto depois da implementação da Linha Leste. Em Fortaleza, assim como na maior parte das grandes cidades brasileiras, os mais ricos tendem a morar próximos às grandes concentrações de emprego e do centro da cidade, enquanto os mais pobres tendem a ocupar regiões periféricas <span class="citation" data-cites="pereira2022estimativas">(<a href="references.html#ref-pereira2022estimativas" role="doc-biblioref">Pereira et al. 2022</a>)</span>. Consequentemente, os mais ricos costumam ter melhores condições de acessibilidade urbana do que os mais pobres - não apenas porque moram mais perto dos empregos, mas porque também, geralmente, moram em regiões centrais mais bem servidas de transporte público do que as periferias.</p>
@@ -936,7 +943,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Como podemos ver, as parcelas mais pobres da população, dos decis 1 e 2, foram as que tiveram menores ganhos de acessibilidade. A partir do terceiro decil de renda, os ganhos estabilizam-se e permanecem relativamente parecidos. Ainda assim, é possível observar ganhos ligeiramente maiores entre as camadas médias da população, em especial os decis 5, 6 e 7. O hexágono no qual houve maior aumento de acessibilidade aparece como <em>outlier</em> do 10º decil, apresentando um ganho de mais de 60.000 empregos em relação ao cenário pré-implementação.</p>
@@ -999,7 +1006,7 @@ Por que usar a Razão de Palma?
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Razão de Palma"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
+<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>A figura acima aponta que em 2019 a população mais rica de Fortaleza conseguia acessar em até 60 minutos de transporte público, em média, 2,19 vezes mais empregos do que a população mais pobre. O gráfico também mostra que a desigualdade medida pela Razão de Palma sofreu uma pequena queda entre os cenários pré e pós implementação da Linha Leste. Ou seja, podemos concluir que, neste nosso cenário simplificado de avaliação da Linha Leste, a expansão do metrô de Fortaleza seria uma política progressiva - embora apenas ligeiramente, dada a pequena magnitude da mudança entre os dois momentos analisados. Em outras palavras, a Linha Leste, quando analisada de forma isolada das demais intervenções que acompanham sua implementação, contribui positivamente para a redução da desigualdade de acesso a oportunidades de emprego em Fortaleza.</p>
