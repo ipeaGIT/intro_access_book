@@ -425,7 +425,7 @@ Qualidade dos Dados OpenStreetMap
 <p>Esses dados devem ser salvos em uma mesma pasta que, preferencialmente, não contenha nenhum outro arquivo. Como veremos adiante, o <code>{r5r}</code> combina todos os dados salvos nesta pasta para criar uma rede de transporte multimodal que é utilizada para roteamento e cálculo das matrizes de tempo de viagem. Note que é possível ter mais de um arquivo GTFS na mesma pasta: nesse caso, o <code>{r5r}</code> considera as redes de transporte públicos de todos os <em>feeds</em> de forma conjunta. No entanto, a pasta deve conter um único arquivo de rede viária. Assumindo que os scripts de R estarão em uma pasta chamada R, uma possível organização dos arquivos segue o esquema abaixo:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>/tmp/Rtmpa4kvhO/projeto_acessibilidade
+<pre><code>/tmp/Rtmp8eyD0I/projeto_acessibilidade
 ├── R
 │   ├── script1.R
 │   └── script2.R
@@ -674,10 +674,11 @@ Qualidade dos Dados OpenStreetMap
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># download grade espacial</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>poa_grid <span class="ot">&lt;-</span> aopdata<span class="sc">::</span><span class="fu">read_grid</span>(<span class="at">city=</span><span class="st">"Porto Alegre"</span>)</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>poa_grid <span class="ot">&lt;-</span> poa_grid[poa_grid<span class="sc">$</span>id_hex <span class="sc">%in%</span> points<span class="sc">$</span>id, ]</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co"># cria mapa</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(poa_grid) <span class="sc">+</span> <span class="fu">geom_sf</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># filtra apenas hexagonos utilizados na análise</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>poa_grid <span class="ot">&lt;-</span> <span class="fu">subset</span>(poa_grid, id_hex <span class="sc">%in%</span> points<span class="sc">$</span>id)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># cria mapa</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(poa_grid) <span class="sc">+</span> <span class="fu">geom_sf</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="3_calculando_acesso_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
 </div>
