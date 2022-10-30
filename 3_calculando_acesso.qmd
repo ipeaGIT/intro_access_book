@@ -279,7 +279,8 @@ Para compreendermos a distribuição espacial da acessibilidade urbana de uma de
 # download grade espacial
 poa_grid <- aopdata::read_grid(city="Porto Alegre")
 
-poa_grid <- poa_grid[poa_grid$id_hex %in% points$id, ]
+# filtra apenas hexagonos utilizados na análise
+poa_grid <- subset(poa_grid, id_hex %in% points$id)
 
 # cria mapa
 ggplot(poa_grid) + geom_sf()
