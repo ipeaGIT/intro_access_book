@@ -100,4 +100,4 @@ tabela_dados_pop <- data.table::data.table(
 knitr::kable(tabela_dados_pop)
 ```
 
-Todas as bases de dados criadas pelo AOP estão disponíveis para download no [site do projeto](https://www.ipea.gov.br/acessooportunidades/dados/) ou pelo pacote de R `{aopdata}`. Os capítulos desta seção apresentam diversos exemplos de como baixar e visualizar esses dados em R.
+Todas as bases de dados criadas pelo AOP estão disponíveis para download no [site do projeto](https://www.ipea.gov.br/acessooportunidades/dados/) ou pelo pacote de R `{aopdata}`. O dicionário de dados pode ser visualizado quando se roda no R a função `aopdata::aopdata_dictionary(lang = "pt")`. Os capítulos desta seção apresentam diversos exemplos de como baixar e visualizar esses dados em R.

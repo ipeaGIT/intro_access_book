@@ -28,7 +28,9 @@ Os dados da tabela tem essa aparência aqui:
 head(df)
 ```
 
-De imediato, se nota que os nomes das variáveis (colunas) da base de dados estão organizadas com códigos, como `P001`, `P002`, ..., `R001`, `R002`, etc. A descrição completa do dicionário de variáveis está disponível [aqui](https://ipeagit.github.io/aopdata/articles/data_dic_pt.html). A descrição de algumas dessas colunas é apresentada nas próximas seções, onde mostramos como fazer a visualização de alguns desses dados em mapas e gráficos.
+De imediato, se nota que os nomes das variáveis (colunas) da base de dados estão organizadas com códigos, como `P001`, `P002`, ..., `R001`, `R002`, etc. A descrição completa do dicionário de variáveis está disponível [aqui](https://ipeagit.github.io/aopdata/articles/data_dic_pt.html) ou pode ser consultada de dentro do R usando a função `aopdata::aopdata_dictionary(lang = "pt")`.
+
+. A descrição de algumas dessas colunas é apresentada nas próximas seções, onde mostramos como fazer a visualização de alguns desses dados em mapas e gráficos.
 
 ## Mapa de população total
 
