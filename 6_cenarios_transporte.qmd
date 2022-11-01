@@ -118,7 +118,7 @@ fig_pessoas <- ggplot(data = for_sf) +
   geom_sf(data=rail_sf, aes(color=shape_id), alpha=.8, show.legend = FALSE) +
   scale_color_manual(values=c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
   theme_void() +
-  theme(legend.key.size = unit(.5, 'cm'))
+  theme(legend.key.size = unit(.4, 'cm'))
 
 fig_renda <- ggplot(data = subset(for_sf, P001 > 0)) +
   geom_sf(aes(fill = as.factor(R003)), color=NA, alpha = 0.8) +
@@ -136,7 +136,7 @@ fig_empregos <- ggplot(data = for_sf) +
   geom_sf(data=rail_sf, aes(color=shape_id), alpha=.8, show.legend = FALSE) +
   scale_color_manual(values=c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
   theme_void() +
-  theme(legend.key.size = unit(.5, 'cm'))
+  theme(legend.key.size = unit(.4, 'cm'))
 
 fig_escolas <- ggplot(data = for_sf) +
   geom_sf(aes(fill = as.factor(E004)), color = NA) +
@@ -145,7 +145,7 @@ fig_escolas <- ggplot(data = for_sf) +
   geom_sf(data=rail_sf, aes(color=shape_id), alpha=.8) +
   scale_color_manual(values=c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
   theme_void() +
-  theme(legend.key.size = unit(.5, 'cm'))
+  theme(legend.key.size = unit(.4, 'cm'))
 
 fig_pessoas + fig_renda + fig_empregos + fig_escolas + plot_layout(ncol = 2)
 ```
@@ -645,7 +645,7 @@ access_dist <- ggplot(access_to_jobs_sf) +
   geom_sf(data=rail_sf, aes(color=shape_id), alpha=.8, show.legend = FALSE) +
   scale_color_manual(values=c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
   theme_void() +
-  theme(legend.key.size = unit(.5, 'cm'))
+  theme(legend.key.size = unit(.4, 'cm'))
 
 # mapa da diferença
 diff_dist <- ggplot(subset(access_to_jobs_sf, !is.na(diff))) +
@@ -658,7 +658,7 @@ diff_dist <- ggplot(subset(access_to_jobs_sf, !is.na(diff))) +
   geom_sf(data=rail_sf, aes(color=shape_id), alpha=.8) +
   scale_color_manual(values=c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
   theme_void() +
-  theme(legend.key.size = unit(.5, 'cm'))
+  theme(legend.key.size = unit(.4, 'cm'))
 
 # plot
 access_dist /diff_dist + plot_layout(ncol = 1, heights = c(1, 1))
