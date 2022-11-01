@@ -272,7 +272,7 @@ Calculados os níveis de acessibilidade, procedemos então para sua análise. Ex
 
 **Distribuição espacial de acessibilidade urbana**
 
-Para compreendermos a distribuição espacial da acessibilidade urbana de uma determinada cidade ou região, primeiro precisamos obter as informações espaciais dos pontos que foram utilizados como origens e destinos no cálculo da matriz. Os pontos que nós usamos nos exemplos anteriores, por exemplo, correspondem a células de uma grade hexagonal baseadas no índice H3, desenvolvido pela Uber [@brodsky2018h3]. O código e o mapa a seguir mostram a distribuição desses hexágonos na nossa área de estudo. Aqui, a gente faz o download da grade espacial disponível no pacote `{aopdata}`, que será apresentado com mais detalhes na seção @sec-s5_dados_aop;
+Para compreendermos a distribuição espacial da acessibilidade urbana de uma determinada cidade ou região, primeiro precisamos obter as informações espaciais dos pontos que foram utilizados como origens e destinos no cálculo da matriz. Os pontos que nós usamos nos exemplos anteriores, por exemplo, correspondem a células de uma grade hexagonal baseadas no índice H3, desenvolvido pela Uber [@brodsky2018h3]. O código e o mapa a seguir mostram a distribuição desses hexágonos na nossa área de estudo. Aqui, a gente faz o download da grade espacial disponível no pacote `{aopdata}`, que será apresentado com mais detalhes na [Seção 5](s5_dados_aop.qmd):
 
 ```{r}
 #| message: false
@@ -314,7 +314,7 @@ Como podemos ver, os níveis de acessibilidade tendem a se concentrar de forma m
 
 O mapa acima, embora revelador quanto aos locais em que estão dispostas as maiores concentrações de acessibilidade, nada diz sobre quais são os grupos socioeconômicos que possuem os maiores potenciais de acesso a oportunidades na região. Para isso, nós precisamos cruzar informações demográficas e econômicas das pessoas que moram em cada um dos nossos pontos de origem com os dados de acessibilidade previamente calculados.
 
-No exemplo abaixo, nós juntamos aos dados de acessibilidade a informação do decil de renda de cada uma das origens, considerando a renda média de cada uma das pessoas que as habitam. Assim, nós conseguimos identificar se um hexágono é de baixa, média ou alta renda. Os dados socioeconômicos que utilizamos no exemplo vêm do censo demográfico brasileiro de 2010, e foram agregados na grade espacial de hexágonos por @pereira2022usosolo. Aqui, nós acessamos os dados no R usando o pacote `{aopdata}`, que será apresentado em mais detalhes na seção @sec-s5_dados_aop.
+No exemplo abaixo, nós juntamos aos dados de acessibilidade a informação do decil de renda de cada uma das origens, considerando a renda média de cada uma das pessoas que as habitam. Assim, nós conseguimos identificar se um hexágono é de baixa, média ou alta renda. Os dados socioeconômicos que utilizamos no exemplo vêm do censo demográfico brasileiro de 2010, e foram agregados na grade espacial de hexágonos por @pereira2022usosolo. Aqui, nós acessamos os dados no R usando o pacote `{aopdata}`.
 
 ```{r}
 #| message: false
