@@ -314,7 +314,7 @@ Como podemos ver, os níveis de acessibilidade tendem a se concentrar de forma m
 
 O mapa acima, embora revelador quanto aos locais em que estão dispostas as maiores concentrações de acessibilidade, nada diz sobre quais são os grupos socioeconômicos que possuem os maiores potenciais de acesso a oportunidades na região. Para isso, nós precisamos cruzar informações demográficas e econômicas das pessoas que moram em cada um dos nossos pontos de origem com os dados de acessibilidade previamente calculados.
 
-No exemplo abaixo, nós juntamos aos dados de acessibilidade a informação do decil de renda de cada uma das origens, considerando a renda média de cada uma das pessoas que as habitam. Assim, nós conseguimos identificar se um hexágono é de baixa, média ou alta renda. Os dados socioeconômicos que utilizamos no exemplo vêm do censo demográfico brasileiro de 2010, e foram agregados na grade espacial de hexágonos por @pereira2022usosolo. Aqui, nós acessamos os dados no R usando o pacote `{aopdata}`.
+No exemplo abaixo, nós juntamos aos dados de acessibilidade a informação do decil de renda de cada uma das origens, considerando a renda média de cada uma das pessoas que as habitam. Assim, nós conseguimos identificar se um hexágono é de baixa, média ou alta renda. Os dados socioeconômicos que utilizamos no exemplo vêm do censo demográfico brasileiro de 2010, e foram agregados na grade espacial de hexágonos por @pereira2022distribuicao. Aqui, nós acessamos os dados no R usando o pacote `{aopdata}`.
 
 ```{r}
 #| message: false
