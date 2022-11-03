@@ -62,3 +62,20 @@ quarto::quarto_render()
 **Nota 2:** A renderização do livro, em particular do Capítulo 6, requer cerca de **4 GB de memória RAM**. Certifique-se de que o seu computador consiga cumpir com este requisito, caso contrário os comandos provavelmente retornarão uma mensagem de erro e o seu computador ficará muito lento.
 
 O primeiro comando (`quarto::quarto_preview()`) renderiza os capítulo e abre o livro gerado localmente em uma aba do seu navegador. O segundo apenas renderiza os capítulos. Ao final de sua execução, os arquivos renderizados ficam salvos na pasta `_book`, criada pelos comandos.
+
+## Reproduzindo o livro com um *binder*
+
+Um *binder* é uma ferramenta que permite rodar códigos na nuvem através de um navegador. O código do livro pode ser rodado usando um servidor publicado pelo [mybinder](https://mybinder.org/). Para isso, clique no ícone abaixo: após alguns instantes, uma sessão do RStudio Cloud começará a rodar no seu navegador. Esta sessão inclui todos os arquivos e dados necessários para rodar o código do livro.
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ipeaGIT/intro_access_book/HEAD?urlpath=rstudio)
+
+Por favor, note que sessões do mybinder estão limitadas a 2 GB de memória RAM. Esta restrição pode impedir que capítulos de processamento um pouco mais pesado, em particular o Capítulo 6, sejam executados adequadamente. Em caso de uso do *binder*, sugerimos que não tente renderizar o livro todo com o Quarto, como mostrado acima.
+
+## Licença de uso
+
+<img align="right" src="images/ipea_logo.png" width="240">
+É permitida a reprodução e a exibição para uso educacional ou informativo, desde que respeitado o crédito ao autor original e citada a fonte. Permitida a inclusão da obra em Repositórios ou Portais de Acesso Aberto, desde que fique claro para os usuários os termos de uso da obra e quem é o detentor dos direitos autorais, o Instituto de Pesquisa Econômica Aplicada (Ipea). Proibido o uso comercial ou com finalidades lucrativas em qualquer hipótese. Proibida a criação de obras derivadas. Para imagens estáticas e em movimento (vídeos e audiovisuais), ATENÇÃO: os direitos de imagem foram cedidos apenas para a obra original, formato de distribuição e repositório. Esta licença está baseada em estudos sobre a Lei Brasileira de Direitos Autorais (Lei 9.610/1998).
+
+## Agradecimentos
+
+Este livro foi elaborado pelo Instituto de Pesquisa Econômica Aplicada (Ipea) no âmbito da parceria entre Ipea e a Secretaria de Mobilidade e Desenvolvimento Regional e Urbano (SMDRU) do Ministério do Desenvolvimento Regional (MDR). Os autores agradecem aos comentários e sugestões de Lucas Mation.
