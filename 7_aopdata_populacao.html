@@ -138,10 +138,10 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 
 
 <meta property="og:title" content="Introdução à acessibilidade urbana - 7&nbsp; Dados de população e socioeconômicos">
-<meta property="og:description" content="Para fazer o download dos dados do projeto AOP usando o pacote aopdata, você pode usar a função read_population().">
+<meta property="og:description" content="Os dados de distribuição espacial da população e de suas características em termos de renda domiciliar per capita, cor, sexo e idade, provenientes do Censo 2010 e agregadas no projeto Acesso a…">
 <meta property="og:site-name" content="Introdução à acessibilidade urbana">
 <meta name="twitter:title" content="Introdução à acessibilidade urbana - 7&nbsp; Dados de população e socioeconômicos">
-<meta name="twitter:description" content="Para fazer o download dos dados do projeto AOP usando o pacote aopdata, você pode usar a função read_population().">
+<meta name="twitter:description" content="Os dados de distribuição espacial da população e de suas características em termos de renda domiciliar per capita, cor, sexo e idade, provenientes do Censo 2010 e agregadas no projeto Acesso a…">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -313,10 +313,9 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#download-dos-dados" id="toc-download-dos-dados" class="nav-link active" data-scroll-target="#download-dos-dados"><span class="toc-section-number">7.1</span>  Download dos dados</a></li>
-  <li><a href="#mapa-de-população-total" id="toc-mapa-de-população-total" class="nav-link" data-scroll-target="#mapa-de-população-total"><span class="toc-section-number">7.2</span>  Mapa de população total</a></li>
-  <li><a href="#mapa-de-população-por-cor" id="toc-mapa-de-população-por-cor" class="nav-link" data-scroll-target="#mapa-de-população-por-cor"><span class="toc-section-number">7.3</span>  Mapa de população por cor</a></li>
-  <li><a href="#mapa-de-população-por-renda" id="toc-mapa-de-população-por-renda" class="nav-link" data-scroll-target="#mapa-de-população-por-renda"><span class="toc-section-number">7.4</span>  Mapa de população por renda</a></li>
+  <li><a href="#mapa-de-população-total" id="toc-mapa-de-população-total" class="nav-link active" data-scroll-target="#mapa-de-população-total"><span class="toc-section-number">7.1</span>  Mapa de população total</a></li>
+  <li><a href="#mapa-de-população-por-cor" id="toc-mapa-de-população-por-cor" class="nav-link" data-scroll-target="#mapa-de-população-por-cor"><span class="toc-section-number">7.2</span>  Mapa de população por cor</a></li>
+  <li><a href="#mapa-de-população-por-renda" id="toc-mapa-de-população-por-renda" class="nav-link" data-scroll-target="#mapa-de-população-por-renda"><span class="toc-section-number">7.3</span>  Mapa de população por renda</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/7_aopdata_populacao.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
     </div>
@@ -339,135 +338,242 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 
 </header>
 
-<section id="download-dos-dados" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="download-dos-dados"><span class="header-section-number">7.1</span> Download dos dados</h2>
-<p>Para fazer o download dos dados do projeto AOP usando o pacote aopdata, você pode usar a função <code>read_population()</code>. Essa função baixa estimativas do Censo Demográfico de 2010 do IBGE sobre a distribuição espacial da população e suas características em termos de renda domiciliar per capita, cor, sexo e idade. Nesta função, o parâmetro <code>city</code> permite você indicar os dados de qual cidade serão baixados.</p>
-<p>Os dados estão agregados espacialmente em uma grade de <a href="https://h3geo.org/">hexágonos H3</a> na resolução 9, na qual cada hexágono tem uma área de 0.11 km², o que equivale a aproximadamente o tamanho de um quarteirão. Para baixar os dados com as informações espaciais de geometria da grade espacial, você deve usar o parâmetro <code>geometry = TRUE</code>.</p>
-<p>Neste exemplo, abaixo, nós mostramos como baixar os dados de população do Censo de 2010 para Fortaleza.</p>
+<p>Os dados de distribuição espacial da população e de suas características em termos de renda domiciliar <em>per capita</em>, cor, sexo e idade, provenientes do Censo 2010 e agregadas no projeto Acesso a Oportunidades, podem ser baixados com a função <code>read_population()</code>. A função requer que um valor seja passado para o parâmetro <code>city</code>, utilizado para indicar a cidade cujos dados devem ser baixados. Para baixar os dados com as informações espaciais de cada célula da grade, o parâmetro <code>geometry</code> deve receber o valor <code>TRUE</code> (por padrão, este valor é <code>FALSE</code>, fazendo com que a geometria das células não seja baixada).</p>
+<p>No exemplo abaixo, mostramos como baixar os dados populacionais e socioeconômicos de Fortaleza:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(aopdata)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># download aop population data</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_population</span>(</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">city =</span> <span class="st">"Fortaleza"</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">year =</span> <span class="dv">2010</span>,</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">geometry =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">showProgress =</span> <span class="cn">FALSE</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># baixa os dados sociodemográficos do AOP</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>for_data <span class="ot">&lt;-</span> aopdata<span class="sc">::</span><span class="fu">read_population</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">city =</span> <span class="st">"Fortaleza"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">year =</span> <span class="dv">2010</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">geometry =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">showProgress =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Os dados da tabela tem essa aparência aqui:</p>
+<p>A tabela inclui o ano de referência do censo demográfico, dados de identificação do hexágono e do município e dados socioeconômicos em colunas cujos nomes estão codificados:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(for_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Simple feature collection with 6 features and 22 fields
-Geometry type: POLYGON
-Dimension:     XY
-Bounding box:  xmin: -38.50828 ymin: -3.889301 xmax: -38.4983 ymax: -3.878958
-Geodetic CRS:  WGS 84
-  year          id_hex abbrev_muni name_muni code_muni P001 P002 P003 P004 P005
-1 2010 89801040323ffff         for Fortaleza   2304400   30    8   21    0    1
-2 2010 89801040327ffff         for Fortaleza   2304400  318   77  233    0    8
-3 2010 8980104032bffff         for Fortaleza   2304400    0    0    0    0    0
-4 2010 8980104032fffff         for Fortaleza   2304400  103   24   77    0    2
-5 2010 89801040333ffff         for Fortaleza   2304400   43   11   31    0    1
-6 2010 89801040337ffff         for Fortaleza   2304400  348   86  252    0   10
-  P006 P007 P010 P011 P012 P013 P014 P015 P016  R001 R002 R003
-1   17   13    3    4    2    3    8    9    1 168.6    1    1
-2  168  150   30   50   26   38   80   82   12 202.6    1    1
-3    0    0    0    0    0    0    0    0    0    NA   NA   NA
-4   53   50   10   16    8   13   25   27    4 245.6    1    1
-5   22   21    4    7    3    5   11   12    1 187.3    1    1
-6  175  173   34   54   27   41   89   89   14 168.6    1    1
-                        geometry
-1 POLYGON ((-38.50232 -3.8858...
-2 POLYGON ((-38.50527 -3.8840...
-3 POLYGON ((-38.49932 -3.8841...
-4 POLYGON ((-38.50227 -3.8824...
-5 POLYGON ((-38.50237 -3.8893...
-6 POLYGON ((-38.50532 -3.8875...</code></pre>
+<pre><code> [1] "year"        "id_hex"      "abbrev_muni" "name_muni"   "code_muni"  
+ [6] "P001"        "P002"        "P003"        "P004"        "P005"       
+[11] "P006"        "P007"        "P010"        "P011"        "P012"       
+[16] "P013"        "P014"        "P015"        "P016"        "R001"       
+[21] "R002"        "R003"        "geometry"   </code></pre>
 </div>
 </div>
-<p>De imediato, se nota que os nomes das variáveis (colunas) da base de dados estão organizadas com códigos, como <code>P001</code>, <code>P002</code>, …, <code>R001</code>, <code>R002</code>, etc. A descrição completa do dicionário de variáveis está disponível <a href="https://ipeagit.github.io/aopdata/articles/data_dic_pt.html">aqui</a> ou pode ser consultada de dentro do R usando a função <code>aopdata::aopdata_dictionary(lang = "pt")</code>.</p>
-<p>. A descrição de algumas dessas colunas é apresentada nas próximas seções, onde mostramos como fazer a visualização de alguns desses dados em mapas e gráficos.</p>
-</section>
-<section id="mapa-de-população-total" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="mapa-de-população-total"><span class="header-section-number">7.2</span> Mapa de população total</h2>
-<p>Antes de visualizar os dados do <code>{aopdata}</code>, nós precisamos carregar algumas bibliotecas de visualização e manipulação de dados.</p>
+<p>A <a href="#tbl-population_dictionary">Tabela&nbsp;<span>7.1</span></a> apresenta a descrição de cada uma das colunas da tabela, bem como observações sobre alguns de seus valores. Essa descrição também pode ser consultada na documentação da função, rodando em uma sessão do R o comando <code>?read_population</code>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-population_dictionary" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Tabela&nbsp;7.1: Descrição das colunas da tabela de dados populacionais e socioeconômicos</caption>
+<colgroup>
+<col style="width: 12%">
+<col style="width: 41%">
+<col style="width: 45%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Coluna</th>
+<th style="text-align: left;">Descrição</th>
+<th style="text-align: left;">Observação</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">year</td>
+<td style="text-align: left;">Ano de referência</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">id_hex</td>
+<td style="text-align: left;">Identificador único do hexágono</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">abbrev_muni</td>
+<td style="text-align: left;">Sigla de 3 letras do município</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">name_muni</td>
+<td style="text-align: left;">Nome do município</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">code_muni</td>
+<td style="text-align: left;">Código de 7 dígitos do IBGE do município</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P001</td>
+<td style="text-align: left;">Quantidade total de pessoas</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P002</td>
+<td style="text-align: left;">Quantidade de pessoas de cor branca</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P003</td>
+<td style="text-align: left;">Quantidade de pessoas de cor negra</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P004</td>
+<td style="text-align: left;">Quantidade de pessoas de cor indígena</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P005</td>
+<td style="text-align: left;">Quantidade de pessoas de cor amarela</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P006</td>
+<td style="text-align: left;">Quantidade de homens</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P007</td>
+<td style="text-align: left;">Quantidade de mulheres</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P010</td>
+<td style="text-align: left;">Quantidade de pessoas de 0 a 5 anos</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P011</td>
+<td style="text-align: left;">Quantidade de pessoas de 6 a 14 anos</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P012</td>
+<td style="text-align: left;">Quantidade de pessoas de 15 a 18 anos</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P013</td>
+<td style="text-align: left;">Quantidade de pessoas de 19 a 24 anos</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P014</td>
+<td style="text-align: left;">Quantidade de pessoas de 25 a 39 anos</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P015</td>
+<td style="text-align: left;">Quantidade de pessoas de 40 a 69 anos</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P016</td>
+<td style="text-align: left;">Quantidade de pessoas de 70 anos ou mais</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">R001</td>
+<td style="text-align: left;">Renda domiciliar <em>per capita</em> média</td>
+<td style="text-align: left;">Valores de 2010, em reais (R$)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">R002</td>
+<td style="text-align: left;">Quintil de renda</td>
+<td style="text-align: left;">Valores de 1 (mais pobres) a 5 (mais ricos)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">R003</td>
+<td style="text-align: left;">Decil de renda</td>
+<td style="text-align: left;">Valores de 1 (mais pobres) a 10 (mais ricos)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">geometry</td>
+<td style="text-align: left;">Geometria espacial</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>As seções a seguir mostram exemplos de visualizações desses dados em forma de mapas.</p>
+<section id="mapa-de-população-total" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="mapa-de-população-total"><span class="header-section-number">7.1</span> Mapa de população total</h2>
+<p>No código abaixo, carregamos bibliotecas de visualização de dados e configuramos o mapa. Com um comando, podemos visualizar a distribuição espacial da população de Fortaleza. A figura mostra um mapa coroplético onde a cor de cada célula da grade espacial é preenchida com base na quantidade total de pessoas que ali residem (variável <code>P001</code>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Com um comando, é possível visualizar a distribuição espacial da população de Fortaleza. A figura mostra um mapa coroplético onde a cor de cada célula da grade espacial é preenchida com base na quantidade total de pessoas residentes (variável <code>P001</code>).</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">subset</span>(df, P001 <span class="sc">&gt;</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> P001), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_distiller</span>(<span class="at">palette =</span> <span class="st">"YlOrRd"</span>, <span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Population distribution"</span>,</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Fortaleza"</span>,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Total population"</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">subset</span>(for_data, P001 <span class="sc">&gt;</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> P001), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_distiller</span>(<span class="at">palette =</span> <span class="st">"YlOrRd"</span>, <span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribuição populacional"</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Fortaleza"</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Contagem populacional"</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="7_aopdata_populacao_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="mapa-de-população-por-cor" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="mapa-de-população-por-cor"><span class="header-section-number">7.3</span> Mapa de população por cor</h2>
-<p>Além da informação sobre a população total em cada célula, o dados do <code>{aopdata}</code> também permitem saber a quantidade de pessoas de diferentes cores (variáveis <code>P002</code> a <code>P005</code>), sexo (variáveis <code>P006</code> e <code>P007</code>) e faixas etárias (variáveis <code>P010</code> a <code>P016</code>). O código abaixo ilustra como é simples calcular a proporção de pessoas negras e brancas em cada hexágono e visualizar esses dados num mapa.</p>
+<section id="mapa-de-população-por-cor" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="mapa-de-população-por-cor"><span class="header-section-number">7.2</span> Mapa de população por cor</h2>
+<p>Além da informação sobre a população total em cada célula, o dados também informam a contagem populacional por classificações de cor (variáveis <code>P002</code> a <code>P005</code>), sexo (variáveis <code>P006</code> e <code>P007</code>) e faixa etária (variáveis <code>P010</code> a <code>P016</code>) em cada unidade espacial. O código abaixo ilustra como é simples calcular a proporção de pessoas negras e brancas em cada hexágono e visualizar essas proporções em um mapa.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pop_b <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">subset</span>(df, P001 <span class="sc">&gt;</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> P003 <span class="sc">/</span> P001), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_distiller</span>(</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> <span class="st">"RdPu"</span>,</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">direction =</span> <span class="dv">1</span>,</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> percent,</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Proportion of black population"</span>, <span class="at">fill =</span> <span class="st">"Black pop."</span>) <span class="sc">+</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>pop_w <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">subset</span>(df, P001 <span class="sc">&gt;</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> P002 <span class="sc">/</span> P001), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_distiller</span>(</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> <span class="st">"YlGnBu"</span>,</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">direction =</span> <span class="dv">1</span>,</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> percent,</span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Proportion of white population"</span>, <span class="at">fill =</span> <span class="st">"White pop."</span>) <span class="sc">+</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>pop_b <span class="sc">+</span> pop_w</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pop_n <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">subset</span>(for_data, P001 <span class="sc">&gt;</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> P003 <span class="sc">/</span> P001), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_distiller</span>(</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> <span class="st">"RdPu"</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">direction =</span> <span class="dv">1</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> scales<span class="sc">::</span>percent,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Proporção de pessoas negras"</span>, <span class="at">fill =</span> <span class="st">"Pop. negra"</span>) <span class="sc">+</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>pop_b <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">subset</span>(for_data, P001 <span class="sc">&gt;</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> P002 <span class="sc">/</span> P001), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_distiller</span>(</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> <span class="st">"YlGnBu"</span>,</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">direction =</span> <span class="dv">1</span>,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> scales<span class="sc">::</span>percent,</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Proporção de pessoas brancas"</span>, <span class="at">fill =</span> <span class="st">"Pop. branca"</span>) <span class="sc">+</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>pop_n <span class="sc">+</span> pop_b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="7_aopdata_populacao_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="mapa-de-população-por-renda" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="mapa-de-população-por-renda"><span class="header-section-number">7.4</span> Mapa de população por renda</h2>
-<p>Os dados trazem também informação sobre a renda domiciliar per capita média de cada hexágono (<code>R001</code>), e sua classificação em termos de quintil (<code>R002</code>) e decil de renda (<code>R003</code>). Com esses dados, é possível visualizar com o comando abaixo a distribuição espacial dos diferentes níveis de renda da cidade.R</p>
+<section id="mapa-de-população-por-renda" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="mapa-de-população-por-renda"><span class="header-section-number">7.3</span> Mapa de população por renda</h2>
+<p>Por fim, os dados também trazem informações sobre a renda domiciliar <em>per capita</em> média de cada hexágono (<code>R001</code>) e sua classificação em termos de quintil (<code>R002</code>) e decil de renda (<code>R003</code>). Com esses dados, podemos visualizar a distribuição espacial dos níveis de renda na cidade.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>renda_c <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">subset</span>(df, P001 <span class="sc">&gt;</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> R001), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_distiller</span>(<span class="at">palette =</span> <span class="st">"YlOrRd"</span>, <span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Renda domiciliar per capita média"</span>, <span class="at">fill =</span> <span class="st">"Renda em R$"</span>) <span class="sc">+</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>renda_d <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">subset</span>(df, <span class="sc">!</span><span class="fu">is.na</span>(R002))) <span class="sc">+</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">factor</span>(R003)), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"RdBu"</span>) <span class="sc">+</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Decils de renda domiciliar per capita"</span>,</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Decil de renda"</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">0.3</span>, <span class="st">"cm"</span>))</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>renda_c <span class="sc">+</span> renda_d</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>renda <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">subset</span>(for_data, P001 <span class="sc">&gt;</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> R001), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_distiller</span>(<span class="at">palette =</span> <span class="st">"YlOrRd"</span>, <span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Renda domiciliar per capita média"</span>, <span class="at">fill =</span> <span class="st">"Renda (R$)"</span>) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>decis <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">subset</span>(for_data, <span class="sc">!</span><span class="fu">is.na</span>(R002))) <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">factor</span>(R003)), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"RdBu"</span>) <span class="sc">+</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Decis de renda domiciliar per capita"</span>,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Decil de renda"</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">0.3</span>, <span class="st">"cm"</span>))</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>renda <span class="sc">+</span> decis</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="7_aopdata_populacao_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
