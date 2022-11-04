@@ -5,7 +5,7 @@
 
 Este repositório contém o código-fonte do livro [Introdução à acessibilidade urbana: um guia prático em R](https://ipeagit.github.io/intro_access_book/), escrito por [Rafael H. M. Pereira](https://www.urbandemographics.org/) e [Daniel Herszenhut](https://dhersz.netlify.app/pt/). Caso use o material deste livro, pedimos por gentileza que cite-o utilizando a seguinte referência:
 
-> Pereira, Rafael H. M. & Herszenhut, Daniel. (2022) Introdução à acessibilidade urbana: um guia prático em R. Instituto de Pesquisa Econômica Aplicada.
+> Pereira, Rafael H. M. & Herszenhut, Daniel. (2022) Introdução à acessibilidade urbana: um guia prático em R. Instituto de Pesquisa Econômica Aplicada (Ipea).
 
 **Nota:** Este livro é um trabalho em construção e, portanto, não se encontra finalizado. Ainda assim, acreditamos que seu conteúdo já pode ser útil para interessados pelos temas de planejamento de transporte urbano e ciência de dados. Sua versão online pode ser acessada em <https://ipeagit.github.io/intro_access_book/>. Em breve o livro contará também com versão em PDF e EPUB.
 
@@ -17,7 +17,7 @@ A forma mais fácil de baixar o código-fonte do livro é utilizando o *software
 git clone https://github.com/ipeaGIT/intro_access_book.git
 ```
 
-Alternativamente, o código pode ser baixado manualmente no *link* a seguir: <https://github.com/ipeaGIT/intro_access_book/archive/refs/heads/main.zip>. Caso seja seguido este método, é necessário também extrair o conteúdo do arquivo ZIP baixado para uma nova pasta.
+Alternativamente, o código pode ser baixado manualmente no *link* a seguir: <https://github.com/ipeaGIT/intro_access_book/archive/refs/heads/main.zip>. Caso este método seja utilizado, é necessário também extrair o conteúdo do arquivo ZIP baixado para uma nova pasta.
 
 ## Reproduzindo o livro localmente
 
@@ -45,7 +45,8 @@ renv::restore()
 
 Neste momento, uma série de pacotes serão listados e o `{renv}` pedirá para confirmar se você deseja instalá-los. Após esta confirmação, os pacotes serão instalados.
 
-**Nota:** Este processo pode tomar um longo tempo. A instalação de todos os pacotes, caso você nunca tenha usado o `{renv}` antes, pode tomar de 5 a 30 minutos, dependendo das configurações da sua máquina.
+**Nota:** Este processo pode tomar um longo tempo. A instalação de todos os pacotes, 
+você nunca tenha usado o `{renv}` antes, pode tomar de 5 a 30 minutos, dependendo das configurações da sua máquina.
 
 **Nota 2:** Este livro depende do pacote `{sf}`. Caso você esteja tentando reproduzir o livro em uma distribuição do Linux, a instalação deste pacote requer a instalação de algumas dependências a nível de sistema. Por favor veja as [instruções de instalação](https://github.com/r-spatial/sf#linux) do `{sf}` para mais detalhes sobre como proceder neste caso. As dependências de sistema devem ser instaladas **antes** de rodar o comando `renv::restore()`.
 
@@ -61,9 +62,11 @@ quarto::quarto_render()
 
 **Nota 2:** A renderização do livro, em particular do Capítulo 6, requer cerca de **4 GB de memória RAM**. Certifique-se de que o seu computador consiga cumpir com este requisito, caso contrário os comandos provavelmente retornarão uma mensagem de erro e o seu computador ficará muito lento.
 
-O primeiro comando (`quarto::quarto_preview()`) renderiza os capítulo e abre o livro gerado localmente em uma aba do seu navegador. O segundo apenas renderiza os capítulos. Ao final de sua execução, os arquivos renderizados ficam salvos na pasta `_book`, criada pelos comandos.
+O primeiro comando (`quarto::quarto_preview()`) renderiza os capítulo e abre![image](https://user-images.githubusercontent.com/7448421/199976653-638d84f2-bdbd-4294-af1f-8d30cb5d7b5e.png)
+ o livro gerado localmente em uma aba do seu navegador. O segundo apenas renderiza os capítulos. Ao final de sua execução, os arquivos renderizados ficam salvos na pasta `_book`, criada pelos comandos.
 
 ## Reproduzindo o livro com um *binder*
+![image](https://user-images.githubusercontent.com/7448421/199976490-dd970001-609b-434c-bd0f-b30cc89a60b3.png)
 
 Um *binder* é uma ferramenta que permite rodar códigos na nuvem através de um navegador. O código do livro pode ser rodado usando um servidor publicado pelo [mybinder](https://mybinder.org/). Para isso, clique no ícone abaixo: após alguns instantes, uma sessão do RStudio Cloud começará a rodar no seu navegador. Esta sessão inclui todos os arquivos e dados necessários para rodar o código do livro.
 
