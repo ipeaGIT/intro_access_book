@@ -62,11 +62,9 @@ quarto::quarto_render()
 
 **Nota 2:** A renderização do livro, em particular do Capítulo 6, requer cerca de **4 GB de memória RAM**. Certifique-se de que o seu computador consiga cumpir com este requisito, caso contrário os comandos provavelmente retornarão uma mensagem de erro e o seu computador ficará muito lento.
 
-O primeiro comando (`quarto::quarto_preview()`) renderiza os capítulo e abre![image](https://user-images.githubusercontent.com/7448421/199976653-638d84f2-bdbd-4294-af1f-8d30cb5d7b5e.png)
- o livro gerado localmente em uma aba do seu navegador. O segundo apenas renderiza os capítulos. Ao final de sua execução, os arquivos renderizados ficam salvos na pasta `_book`, criada pelos comandos.
+O primeiro comando (`quarto::quarto_preview()`) renderiza os capítulo e abre o livro gerado localmente em uma aba do seu navegador. O segundo apenas renderiza os capítulos. Ao final de sua execução, os arquivos renderizados ficam salvos na pasta `_book`, criada pelos comandos.
 
 ## Reproduzindo o livro com um *binder*
-![image](https://user-images.githubusercontent.com/7448421/199976490-dd970001-609b-434c-bd0f-b30cc89a60b3.png)
 
 Um *binder* é uma ferramenta que permite rodar códigos na nuvem através de um navegador. O código do livro pode ser rodado usando um servidor publicado pelo [mybinder](https://mybinder.org/). Para isso, clique no ícone abaixo: após alguns instantes, uma sessão do RStudio Cloud começará a rodar no seu navegador. Esta sessão inclui todos os arquivos e dados necessários para rodar o código do livro.
 
@@ -81,4 +79,4 @@ Por favor, note que sessões do mybinder estão limitadas a 2 GB de memória RAM
 
 ## Agradecimentos
 
-Este livro foi elaborado pelo Instituto de Pesquisa Econômica Aplicada (Ipea) no âmbito da parceria entre Ipea e a Secretaria de Mobilidade e Desenvolvimento Regional e Urbano (SMDRU) do Ministério do Desenvolvimento Regional (MDR). Os autores agradecem aos comentários e sugestões de Lucas Mation.
+Este livro foi elaborado pelo Instituto de Pesquisa Econômica Aplicada (Ipea) no âmbito da parceria entre Ipea e a Secretaria de Mobilidade e Desenvolvimento Regional e Urbano (SMDRU) do Ministério do Desenvolvimento Regional (MDR). Os autores agradecem aos comentários e sugestões de Lucas Mation. 
