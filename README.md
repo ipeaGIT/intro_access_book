@@ -11,7 +11,7 @@ Este repositório contém o código-fonte do livro [Introdução à acessibilida
 
 ## Baixando o código-fonte
 
-A forma mais fácil de baixar o código-fonte do livro é utilizando o *software* [git](https://git-scm.com/). Depois de instalá-lo, o o código pode ser baixado com o seguinte comando:
+A forma mais fácil de baixar o código-fonte do livro é utilizando o *software* [git](https://git-scm.com/). Depois de instalá-lo, o código pode ser baixado com o seguinte comando:
 
 ```
 git clone https://github.com/ipeaGIT/intro_access_book.git
@@ -37,7 +37,7 @@ Para isso, primeiro abra o projeto do livro. Usuários do RStudio devem abrir o 
 * Use `renv::restore()` to install packages recorded in the lockfile.
 ```
 
-Após isto, rode o seguinte comando para instalar as dependências usadas no livro:
+Após isso, rode o seguinte comando para instalar as dependências usadas no livro:
 
 ```r
 renv::restore()
@@ -45,7 +45,7 @@ renv::restore()
 
 Neste momento, uma série de pacotes serão listados e o `{renv}` pedirá para confirmar se você deseja instalá-los. Após esta confirmação, os pacotes serão instalados.
 
-**Nota:** Este processo pode tomar um longo tempo. A instalação de todos os pacotes, caso você nunca tenha usado o `{renv}` antes, pode tomar de 5 a 30 minutos, dependendo das configurações da sua máquina.
+**Nota:** Este processo pode tomar um longo tempo. A instalação de todos os pacotes, caso você nunca tenha usado o `{renv}` antes, pode levar de 5 a 30 minutos, dependendo das configurações da sua máquina.
 
 **Nota 2:** Este livro depende do pacote `{sf}`. Caso você esteja tentando reproduzir o livro em uma distribuição do Linux, a instalação deste pacote requer a instalação de algumas dependências a nível de sistema. Por favor veja as [instruções de instalação](https://github.com/r-spatial/sf#linux) do `{sf}` para mais detalhes sobre como proceder neste caso. As dependências de sistema devem ser instaladas **antes** de rodar o comando `renv::restore()`.
 
@@ -57,9 +57,9 @@ quarto::quarto_preview()
 quarto::quarto_render()
 ```
 
-**Nota:** A renderização do livro pode tomar algum tempo. Em nossa experiência, o processo como um todo pode tomar de 5 a 15 minutos, dependendo das especificações do seu computador.
+**Nota:** A renderização do livro pode tomar algum tempo. Em nossa experiência, o processo como um todo pode levar de 5 a 15 minutos, dependendo das especificações do seu computador.
 
-**Nota 2:** A renderização do livro, em particular do Capítulo 6, requer cerca de **4 GB de memória RAM**. Certifique-se de que o seu computador consiga cumpir com este requisito, caso contrário os comandos provavelmente retornarão uma mensagem de erro e o seu computador ficará muito lento.
+**Nota 2:** A renderização do livro, em particular do Capítulo 6, requer cerca de **4 GB de memória RAM**. Certifique-se de que o seu computador consiga cumprir com este requisito, caso contrário os comandos provavelmente retornarão uma mensagem de erro e o seu computador ficará muito lento.
 
 O primeiro comando (`quarto::quarto_preview()`) renderiza os capítulo e abre o livro gerado localmente em uma aba do seu navegador. O segundo apenas renderiza os capítulos. Ao final de sua execução, os arquivos renderizados ficam salvos na pasta `_book`, criada pelos comandos.
 
