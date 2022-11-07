@@ -45,8 +45,7 @@ renv::restore()
 
 Neste momento, uma série de pacotes serão listados e o `{renv}` pedirá para confirmar se você deseja instalá-los. Após esta confirmação, os pacotes serão instalados.
 
-**Nota:** Este processo pode tomar um longo tempo. A instalação de todos os pacotes, 
-você nunca tenha usado o `{renv}` antes, pode tomar de 5 a 30 minutos, dependendo das configurações da sua máquina.
+**Nota:** Este processo pode tomar um longo tempo. A instalação de todos os pacotes, caso você nunca tenha usado o `{renv}` antes, pode tomar de 5 a 30 minutos, dependendo das configurações da sua máquina.
 
 **Nota 2:** Este livro depende do pacote `{sf}`. Caso você esteja tentando reproduzir o livro em uma distribuição do Linux, a instalação deste pacote requer a instalação de algumas dependências a nível de sistema. Por favor veja as [instruções de instalação](https://github.com/r-spatial/sf#linux) do `{sf}` para mais detalhes sobre como proceder neste caso. As dependências de sistema devem ser instaladas **antes** de rodar o comando `renv::restore()`.
 
@@ -79,4 +78,4 @@ Por favor, note que sessões do mybinder estão limitadas a 2 GB de memória RAM
 
 ## Agradecimentos
 
-Este livro foi elaborado pelo Instituto de Pesquisa Econômica Aplicada (Ipea) no âmbito da parceria entre Ipea e a Secretaria de Mobilidade e Desenvolvimento Regional e Urbano (SMDRU) do Ministério do Desenvolvimento Regional (MDR). Os autores agradecem aos comentários e sugestões de Lucas Mation. 
+Este livro foi elaborado pelo Instituto de Pesquisa Econômica Aplicada (Ipea) no âmbito da parceria entre Ipea e a Secretaria de Mobilidade e Desenvolvimento Regional e Urbano (SMDRU) do Ministério do Desenvolvimento Regional (MDR). Os autores agradecem aos comentários e sugestões de Lucas Mation.
