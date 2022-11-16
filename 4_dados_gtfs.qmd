@@ -1,19 +1,20 @@
 #  Dados GTFS {#sec-4_dados_gtfs}
 
-O formato GTFS é uma especificação aberta e colaborativa que visa descrever os principais componentes de uma rede de transporte público. O formato padrão GTFS foi originalmente criado em meados dos anos 2000 por uma parceria entre Google e TriMet, a agência de transporte de Portland, Oregon, nos Estados Unidos [@mchugh2013pioneering]. Atualmente, dados GTFS podem ser divididos em duas grandes categorias:
 
-- *GTFS Schedule*, ou *GTFS Static*, que contém o cronograma planejado de linhas de transporte público e informações espaciais sobre o itinerário de cada linha e suas paradas;
-- *GTFS Realtime*, que contém informações de localização de veículos em tempo real e alertas de possíveis atrasos, de mudanças de percurso e de eventos que possam interferir no cronograma planejado.
+O formato GTFS é uma especificação aberta e colaborativa que visa descrever os principais componentes de uma rede de transporte público. Originalmente criada em meados dos anos 2000 por uma parceria entre Google e TriMet, a agência de transporte de Portland, Oregon, nos Estados Unidos, a especificação GTFS hoje é utilizada por agências de transporte em milhares de cidades, espalhadas por todos os continentes do globo [@mchugh2013pioneering]. Atualmente, esta especificação é dividida em dois componentes distintos:
 
-Ao longo desta seção, nós focaremos no **GTFS Schedule**, por ser o formato de GTFS mais amplamente utilizado por agências de transporte e em análises de acessibilidade. Clique [aqui](https://gtfs.org/realtime/) para mais informações sobre o GTFS Realtime.
+- O GTFS *Schedule*, ou GTFS *Static*, que contém o cronograma planejado de linhas de transporte público, informações sobre suas tarifas e informações espaciais sobre os seus itinerários;
+- O GTFS *Realtime*, que contém informações de localização de veículos em tempo real e alertas de possíveis atrasos, de mudanças de percurso e de eventos que possam interferir no cronograma planejado.
 
-Por ser uma especificação aberta e colaborativa, o formato GTFS tenta abarcar em sua definição um grande número de usos distintos que agências de transporte e desenvolvedores de ferramentas possam dar a ele. No entanto, agências e *softwares* podem ainda assim depender de informações que não constem na especificação oficial. Surgem, dessa forma, extensões da especificação. Algumas dessas [extensões](https://gtfs.org/extensions/) podem eventualmente se tornar parte da especificação oficial, caso isto seja aceito pela comunidade de usuários do GTFS. Nesta seção, nós focaremos em um subconjunto de informações presentes no formato *GTFS Schedule* “puro”, e, portanto, não cobriremos suas extensões.
+Ao longo desta seção, focaremos no **GTFS _Schedule_**, por ser o formato de GTFS mais amplamente utilizado por agências de transporte e em análises de acessibilidade. Clique [aqui](https://gtfs.org/realtime/) para mais informações sobre o GTFS *Realtime*.
+
+Por ser uma especificação aberta e colaborativa, o formato GTFS tenta abarcar em sua definição um grande número de usos distintos que agências de transporte e desenvolvedores de ferramentas possam dar a ele. No entanto, agências e *softwares* podem ainda assim depender de informações que não constem na especificação oficial. Surgem, dessa forma, extensões da especificação. Algumas dessas [extensões](https://gtfs.org/extensions/) podem eventualmente se tornar parte da especificação oficial, caso isto seja aceito pela comunidade de usuários do GTFS. Nesta seção, focaremos em um subconjunto de informações presentes no formato GTFS *Schedule* “puro”, e, portanto, não cobriremos suas extensões.
 
 ## Estrutura de arquivos GTFS
 
-Usualmente, refere-se a um arquivo no formato *GTFS Schedule* (daqui em diante chamado apenas de GTFS) como *feed*. Neste livro, nós utilizaremos os termos *feed* e arquivo GTFS como sinônimos.
+Arquivos no formato GTFS *Schedule* (daqui em diante chamado apenas de GTFS) também são conhecidos pela denominação *feed*[^1]. Um *feed* é nada mais do que um arquivo comprimido em formato `.zip` que contém um conjunto de tabelas, salvas em formato `.txt`, com algumas informações sobre a rede de transporte público (localização das paradas, frequências das viagens, traçado das rotas, entre outras). Como em uma base de dados relacional, as tabelas de um *feed* possuem colunas-chaves que permitem vincular os dados de rotas, viagens e tabelas de horários entre si. O esquema geral do GTFS é apresentado na @fig-scheme, que mostra algumas das principais tabelas que compõem a especificação e destaca como elas se relacionam a partir de suas colunas-chaves.
 
-Um *feed* é nada mais do que um arquivo comprimido em formato `.zip` que contém um conjunto de tabelas, salvas em formato `.txt`, com algumas informações sobre a rede de transporte público (e.g. localização das paradas, frequências das viagens, traçado das rotas, entre outras). Como em uma base de dados relacional, as tabelas de um *feed* têm algumas colunas-chaves que permitem vincular os dados de rotas, viagens e tabelas de horários entre si. O esquema geral do GTFS é apresentado na @fig-scheme, que mostra algumas das principais tabelas que compõem a especificação e destaca como algumas delas se relacionam a partir de suas colunas-chaves.
+[^1]: Neste livro, utilizaremos os termos *feed*, arquivo GTFS e dados GTFS como sinônimos.
 
 ```{r}
 #| echo: false
@@ -23,18 +24,18 @@ Um *feed* é nada mais do que um arquivo comprimido em formato `.zip` que conté
 knitr::include_graphics("images/gtfs_scheme.png")
 ```
 
-Ao todo, 22 tabelas compõem o formato GTFS[^1]. Nem todas, no entanto, devem estar obrigatoriamente presentes para que um *feed* seja considerado válido - sendo consideradas, portanto, opcionais. A especificação classifica cada tabela conforme sua obrigatoriedade em três possíveis categorias: obrigatórias, opcionais e condicionalmente obrigatórias (quando a obrigatoriedade de uma tabela depende da existência de uma determinada tabela, coluna ou valor). Para fins de simplicidade, neste livro nós consideraremos apenas as duas primeiras categorias e faremos comentários quanto à obrigatoriedade de cada tabela quando apropriado. Desta forma, ficam assim classificadas as tabelas:
+Ao todo, 22 tabelas compõem o formato GTFS[^2]. Nem todas, no entanto, devem estar obrigatoriamente presentes para que um *feed* seja considerado válido - sendo consideradas, portanto, opcionais. A especificação classifica cada tabela conforme sua obrigatoriedade em três possíveis categorias: obrigatórias, opcionais e condicionalmente obrigatórias (quando a obrigatoriedade de uma tabela depende da existência de uma determinada tabela, coluna ou valor). Para fins de simplicidade, neste livro consideraremos apenas as duas primeiras categorias e faremos comentários quanto à obrigatoriedade de cada tabela quando apropriado. Desta forma, ficam assim classificadas as tabelas:
 
-[^1]: Conforme a [especificação oficial](https://gtfs.org/schedule/reference/), versão da revisão 9 de maio de 2022.
+[^2]: Conforme a [especificação oficial](https://gtfs.org/schedule/reference/), versão da revisão 9 de maio de 2022.
 
 - **Obrigatórias**: `agency.txt`, `stops.txt`, `routes.txt`, `trips.txt`, `stop_times.txt`, `calendar.txt`.
 - **Opcionais**: `calendar_dates.txt`, `fare_attributes.txt`, `fare_rules.txt`, `fare_products.txt`, `fare_leg_rules.txt`, `fare_transfer_rules.txt`, `areas.txt`, `stop_areas.txt`, `shapes.txt`, `frequencies.txt`, `transfers.txt`, `pathways.txt`, `levels.txt`, `translations.txt`, `feed_info.txt`, `attributions.txt`.
 
-Ao longo desta seção, nós aprenderemos a estrutura básica de um arquivo GTFS e das tabelas que o compõem. Portanto, vamos olhar apenas para as tabelas obrigatórias e para as tabelas opcionais mais frequentemente utilizadas por produtores e consumidores desses arquivos. Para mais informações sobre as tabelas e as colunas não abordadas nesta seção, por favor verifique a [especificação oficial](https://gtfs.org/schedule/reference/).
+Ao longo desta seção, aprenderemos sobre a estrutura básica de um arquivo GTFS e das tabelas que o compõem. Portanto, vamos olhar apenas para as tabelas obrigatórias e para as tabelas opcionais mais frequentemente utilizadas por produtores e consumidores desses arquivos. Para mais informações sobre as tabelas e as colunas não abordadas nesta seção, por favor verifique a [especificação oficial](https://gtfs.org/schedule/reference/).
 
-Nesta demonstração, nós utilizaremos um subconjunto de dados provenientes do *feed* da cidade de São Paulo criado pela SPTrans[^2] e baixado em outubro de 2019. O *feed* contém as seis tabelas obrigatórias e mais duas tabelas opcionais bastante utilizadas, `shapes.txt` e `frequencies.txt`, o que permite uma boa visão geral sobre o formato GTFS.
+Nesta demonstração, utilizaremos um subconjunto de dados provenientes do *feed* da cidade de São Paulo criado pela SPTrans[^3] e baixado em outubro de 2019. O *feed* contém as seis tabelas obrigatórias e mais duas tabelas opcionais bastante utilizadas, a `shapes.txt` e a `frequencies.txt`, o que permite uma boa visão geral sobre o formato GTFS.
 
-[^2]: Disponível em <https://www.sptrans.com.br/desenvolvedores/>.
+[^3]: Disponível em <https://www.sptrans.com.br/desenvolvedores/>.
 
 ```{r}
 #| echo: false
@@ -48,11 +49,11 @@ gtfs <- gtfstools::remove_duplicates(gtfs)
 
 Arquivo utilizado para descrever as operadoras de transporte que atuam no sistema descrito pelo arquivo GTFS. Embora o termo *agency* (agência) seja usado em lugar de *operators* (operadoras), por exemplo, fica a cargo do produtor do *feed* definir quais instituições serão listadas na tabela.
 
-Por exemplo: múltiplas concessionárias de ônibus atuam em um determinado local, mas todo o planejamento de cronograma e de tarifa é realizado por uma instituição, em geral uma secretaria de transporte ou empresa pública específica. Esta instituição é também entendida pelos usuários do sistema como a operadora, de fato. Neste caso, devemos listar a instituição responsável pelo planejamento na tabela.
+Por exemplo: múltiplas concessionárias de ônibus atuam em um determinado local, mas todo o planejamento de cronograma e de tarifa é realizado por uma única instituição, em geral uma secretaria de transporte ou empresa pública específica. Esta instituição é também entendida pelos usuários do sistema como a operadora, de fato. Neste caso, devemos listar a instituição responsável pelo planejamento na tabela.
 
-Agora, imagine um sistema em que a agência de transporte público local transfere a responsabilidade da operação de um sistema multimodal a diversas empresas, por meio de concessões. Cada uma dessas empresas é responsável pelo planejamento de cronogramas e tarifas dos modos que operam, desde que sejam seguidos determinados parâmetros pré-estabelecidos em contrato. Neste caso, deve-se listar as operadoras (concessionárias) na tabela, e não a agência de transporte público em si.
+Agora, imagine um sistema em que a agência de transporte público local transfere a responsabilidade da operação de um sistema multimodal a diversas empresas, por meio de concessões. Cada uma dessas empresas é responsável pelo planejamento de cronogramas e tarifas dos modos que operam, desde que sejam seguidos determinados parâmetros pré-estabelecidos em contrato. Neste caso, devemos listar as operadoras (concessionárias) na tabela, e não a agência de transporte público em si.
 
-A @tbl-agency mostra o arquivo `agency.txt` do *feed* da SPTrans. Como vocês podem ver, os responsáveis pelo *feed* optaram por listar a própria empresa no arquivo, e não as concessionárias que operam os ônibus e o metrô da cidade.
+A @tbl-agency mostra o arquivo `agency.txt` do *feed* da SPTrans. Como podemos ver, os responsáveis pelo *feed* optaram por listar a própria empresa no arquivo, e não as concessionárias que operam os ônibus e o metrô da cidade.
 
 ```{r}
 #| echo: false
@@ -73,11 +74,11 @@ content <- readLines(tmpfile)
 cat(paste(content, collapse = "\n"), "\n")
 ```
 
-Por uma questão de comunicação e interpretação dos dados, ao longo desta seção sempre apresentaremos os exemplos em formato de tabela. É importante ter em mente, porém, que essas tabelas são internamente organizadas no GTFS como mostrado acima.
+Por uma questão de comunicação e interpretação dos dados, ao longo desta seção sempre apresentaremos os exemplos em formato de tabela. É importante ter em mente, porém, que essas tabelas são organizadas como mostrado acima.
 
 ### stops.txt
 
-Arquivo usado para descrever as paradas de transporte público que compõem o sistema. Os pontos listados neste arquivo podem fazer menção a paradas mais simples (como pontos de ônibus), estações, plataformas, entradas e saídas de estações, etc. A @tbl-stops mostra o `stops.txt` do *feed* da SPTrans.
+Arquivo usado para descrever as paradas de transporte público que compõem o sistema. Os pontos listados neste arquivo podem fazer menção a paradas mais simples (como pontos de ônibus), estações, plataformas, entradas e saídas de estações, *etc*. A @tbl-stops mostra o `stops.txt` do *feed* da SPTrans.
 
 ```{r}
 #| echo: false
@@ -86,7 +87,7 @@ Arquivo usado para descrever as paradas de transporte público que compõem o si
 knitr::kable(head(gtfs$stops[stop_desc != ""]))
 ```
 
-As colunas `stop_id` e `stop_name` servem como identificadores de cada parada, porém cumprem papéis distintos. O principal propósito da `stop_id` é identificar relações entre esta tabela e outras que compõem a especificação (como veremos mais à frente no arquivo `stop_times.txt`, por exemplo). Já a coluna `stop_name` serve como um identificador que seja facilmente reconhecido pelo passageiro. Seus valores, portanto, costumam ser nomes de estações, nomes de pontos de interesse da cidade ou endereços (como no caso do *feed* da SPTrans).
+As colunas `stop_id` e `stop_name` servem como identificadores de cada parada, porém cumprem papéis distintos. O principal propósito da `stop_id` é identificar relações entre esta tabela e outras que compõem a especificação (como veremos mais à frente no arquivo `stop_times.txt`, por exemplo). Já a coluna `stop_name` cumpre o papel de um identificador facilmente reconhecido pelo passageiro. Seus valores, portanto, costumam ser nomes de estações, nomes de pontos de interesse da cidade ou endereços (como no caso do *feed* da SPTrans).
 
 A coluna `stop_desc`, presente no *feed* da SPTrans, é opcional e permite à agência de transporte adicionar uma descrição de cada parada e de seu entorno. As colunas `stop_lat` e `stop_lon`, por fim, são as responsáveis por associar cada parada a uma posição espacial, através de suas coordenadas geográficas de latitude e longitude.
 
@@ -94,7 +95,7 @@ Entre as colunas opcionais não presentes no *stops.txt* deste *feed* estão a `
 
 ### routes.txt
 
-Arquivo usado para descrever as linhas de transporte público que rodam no sistema descrito pelo arquivo GTFS, incluindo os modos de transporte utilizados em cada uma. A @tbl-routes mostra o `routes.txt` do *feed* da SPTrans.
+Arquivo usado para descrever as linhas de transporte público que rodam no sistema, incluindo os modos de transporte utilizados em cada uma. A @tbl-routes mostra o `routes.txt` do *feed* da SPTrans.
 
 ```{r}
 #| echo: false
@@ -111,7 +112,7 @@ A coluna `route_type` é utilizada para descrever o modo de transporte utilizado
 
 ### trips.txt
 
-Arquivo usado para descrever as viagens realizadas no sistema de transporte público descrito pelo *feed*. A viagem é a unidade básica de movimento do formato GTFS: cada viagem é associada a uma linha de transporte público (`route_id`), a um serviço que opera em determinados dias da semana (como veremos mais à frente no arquivo `calendar.txt`) e a uma trajetória espacial (como veremos mais à frente no arquivo `shapes.txt`). A @tbl-trips mostra o ` trips.txt` do *feed* da SPTrans.
+Arquivo usado para descrever as viagens realizadas no sistema. A viagem é a unidade básica de movimento do formato GTFS: cada viagem é associada a uma linha de transporte público (`route_id`), a um serviço que opera em determinados dias da semana (como veremos mais à frente no arquivo `calendar.txt`) e a uma trajetória espacial (como veremos mais à frente no arquivo `shapes.txt`). A @tbl-trips mostra o ` trips.txt` do *feed* da SPTrans.
 
 ```{r}
 #| echo: false
@@ -123,13 +124,13 @@ data.table::setcolorder(gtfs$trips, "trip_id")
 knitr::kable(head(gtfs$trips))
 ```
 
-A coluna `trip_id` identifica cada uma das viagens descritas na tabela, assim como a `route_id` faz referência a uma linha de transporte público identificada no arquivo `routes.txt`. A coluna `service_id` identifica serviços que determinam os dias da semana em que cada uma das viagens opera (dias úteis, finais de semana, uma mistura dos dois, etc), descritos detalhadamente no arquivo `calendar.txt`. A última coluna à direita na tabela acima é a `shape_id`, que identifica a trajetória espacial de cada uma das viagens, descrita em detalhes no arquivo `shapes.txt`.
+A coluna `trip_id` identifica cada uma das viagens descritas na tabela, assim como a `route_id` faz referência a uma linha de transporte público identificada no arquivo `routes.txt`. A coluna `service_id` identifica serviços que determinam os dias da semana em que cada uma das viagens opera (dias úteis, finais de semana, uma mistura dos dois, *etc*), descritos detalhadamente no arquivo `calendar.txt`. A última coluna à direita na tabela acima é a `shape_id`, que identifica a trajetória espacial de cada uma das viagens, descrita em detalhes no arquivo `shapes.txt`.
 
 As duas colunas restantes, `trip_headsign` e `direction_id`, são opcionais e devem ser utilizadas para descrever o sentido/destino da viagem. A primeira, `trip_headsign`, é utilizada para ditar o texto que aparece no letreiro de veículos (no caso de um ônibus, por exemplo) ou em painéis informativos (como em metrôs e trens) destacando o destino da viagem. Já a coluna `direction_id` é frequentemente utilizada em conjunto com a primeira para dar uma conotação de ida ou volta para cada viagem, onde `0` representa ida e `1` volta, ou vice-versa (assim como ida e volta são conceitos que mudam conforme o referencial, os valores `0` e `1` podem ser usados como desejado, desde que um represente um sentido e o outro o contrário). No caso do nosso exemplo, as duas primeiras linhas são viagens que fazem menção à mesma rota de transporte público (`CPTM L07`), porém em sentidos opostos: uma corre em direção a Jundiaí, e a outra à Luz.
 
 ### calendar.txt
 
-Arquivo usado para descrever os diferentes tipos de serviço existentes no sistema de transporte público descrito pelo *feed*. Um serviço, neste contexto, denota um conjunto de dias da semana em que viagens são realizadas. Cada serviço também é definido pela data em que começa a valer e pela data a partir do qual ele não é mais válido. A @tbl-calendar mostra o `calendar.txt` do *feed* da SPTrans.
+Arquivo usado para descrever os diferentes tipos de serviço existentes no sistema. Um serviço, neste contexto, denota um conjunto de dias da semana em que viagens são realizadas. Cada serviço também é definido pela data em que começa a valer e pela data a partir do qual ele não é mais válido. A @tbl-calendar mostra o `calendar.txt` do *feed* da SPTrans.
 
 ```{r}
 #| echo: false
@@ -138,8 +139,8 @@ Arquivo usado para descrever os diferentes tipos de serviço existentes no siste
 gtfs$calendar[
   ,
   `:=`(
-    start_date = as.integer(strftime(start_date, format = "%Y%m%d")),
-    end_date = as.integer(strftime(end_date, format = "%Y%m%d"))
+	start_date = as.integer(strftime(start_date, format = "%Y%m%d")),
+	end_date = as.integer(strftime(end_date, format = "%Y%m%d"))
   )
 ]
 
@@ -148,7 +149,7 @@ knitr::kable(gtfs$calendar)
 
 A coluna `service_id` identifica cada um dos serviços descritos na tabela. Como mostrado anteriormente, este identificador é usado também no arquivo `trips.txt`, e é o responsável por associar cada viagem a um determinado serviço.
 
-As colunas `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday` e `sunday` (segunda-feira a domingo, em inglês) são utilizadas para delimitar os dias em que cada serviço funciona. Um valor de `1` significa que o serviço opera em um determinado dia, enquanto um valor de `0` significa que ele não opera. Como podemos ver no exemplo acima, o serviço `USD` opera em todos os dias da semana. Já o serviço `U__` opera apenas em dias úteis.
+As colunas `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday` e `sunday` (segunda-feira a domingo, em inglês) são utilizadas para delimitar os dias em que cada serviço funciona. Um valor de `1` significa que o serviço opera naquele dia, enquanto um valor de `0` significa que ele não opera. Como podemos ver no exemplo acima, o serviço `USD` opera em todos os dias da semana. Já o serviço `U__` opera apenas em dias úteis.
 
 Por fim, as colunas `start_date` e `end_date` delimitam o intervalo em que cada serviço é válido. As datas do formato GTFS são sempre formatadas segundo a regra `YYYYMMDD` - ou seja, os primeiros quatro números definem o ano, os dois subsequentes definem o mês e os últimos dois, o dia. O valor `20220428`, por exemplo, representa o dia 28 de abril de 2022.
 
@@ -167,7 +168,7 @@ A coluna `shape_id` identifica cada uma das trajetórias descritas na tabela. Co
 
 ### stop_times.txt
 
-Arquivo usado para descrever a tabela de horários de cada viagem, incluindo o horário de chegada e partida em cada uma das paradas. A formatação deste arquivo depende da existência ou não de um arquivo `frequencies.txt`, detalhe que cobriremos mais adiante. Por enquanto olharemos para o `stop_times.txt` do *feed* da SPTrans, que também conta com um `frequencies.txt`, na @tbl-stop_times.
+Arquivo usado para descrever a tabela de horários de cada viagem, incluindo o horário de chegada e partida em cada uma das paradas. A formatação deste arquivo depende da existência ou não de um arquivo `frequencies.txt`, detalhe que cobriremos mais adiante. Por enquanto, olharemos para o `stop_times.txt` do *feed* da SPTrans, que também conta com um `frequencies.txt`, na @tbl-stop_times.
 
 ```{r}
 #| echo: false
@@ -178,7 +179,7 @@ knitr::kable(head(gtfs$stop_times))
 
 A viagem cuja tabela de horários está sendo descrita é identificada pela coluna `trip_id`. De forma análoga ao que acontece na tabela de trajetórias, um mesmo `trip_id` se repete em muitas observações da tabela. Isto porque, assim como uma trajetória é composta por uma sequência de pontos espaciais, uma tabela de horários é composta por uma sequência de diversos horários de partida/chegada em diversas paradas de transporte público.
 
-As colunas seguintes, `arrival_time`, `departure_time` e `stop_id`, são as responsáveis por descrever o cronograma de cada viagem, associando um horário de chegada e um horário de partida para cada uma das paradas visitadas na viagem. As colunas de horário são formatadas segundo a regra `HH:MM:SS` - ou seja, os dois primeiros números definem a hora, os dois subsequentes os minutos e os últimos dois, os segundos. Esta formatação aceita valores de hora maiores do que `24`: ou seja, uma viagem cuja última parada é visitada às 1h da manhã do dia seguinte ao que começou a rodar (digamos que ela tenha partido do ponto inicial às 23h) deve ter como horário de chegada `25:00:00`, e não `01:00:00`. A coluna `stop_id`, por sua vez, associa os horários de chegada e partida a uma parada descrita no arquivo `stops.txt`. Por fim, a coluna `stop_sequence` lista a sequência na qual cada parada se conecta às demais para formar o cronograma da viagem. Seus valores devem ser sempre ordenados de forma crescente.
+As colunas seguintes, `arrival_time`, `departure_time` e `stop_id`, são as responsáveis por descrever o cronograma de cada viagem, associando um horário de chegada e um horário de partida a cada uma das paradas visitadas na viagem. As colunas de horário são formatadas segundo a regra `HH:MM:SS` - ou seja, os dois primeiros números definem a hora, os dois subsequentes os minutos e os últimos dois, os segundos. Esta formatação aceita valores de hora maiores do que `24`: ou seja, uma viagem cuja última parada é visitada às 1h da manhã do dia seguinte ao que começou a rodar (digamos que ela tenha partido do ponto inicial às 23h) deve ter como horário de chegada `25:00:00`, e não `01:00:00`. A coluna `stop_id`, por sua vez, associa os horários de chegada e partida a uma parada descrita no arquivo `stops.txt`. Por fim, a coluna `stop_sequence` lista a sequência na qual cada parada se conecta às demais para formar o cronograma da viagem. Seus valores devem ser sempre ordenados de forma crescente.
 
 Vale destacar aqui a diferença entre os arquivos `shapes.txt` e `stop_times.txt`. Embora os dois descrevam uma viagem espacialmente, eles o fazem de forma diferente. O `stop_times.txt` descreve a sequência de paradas e horários que compõem um cronograma, mas nada diz sobre o trajeto percorrido pelo veículo entre cada uma das paradas. Já o `shapes.txt` traz a trajetória detalhada da viagem como um todo, mas não descreve em que ponto do espaço estão as paradas da viagem. Quando usamos os dois arquivos em conjunto, portanto, sabemos tanto o cronograma de cada viagem quanto a trajetória espacial da viagem entre paradas.
 
@@ -199,36 +200,36 @@ Dentro do período especificado por essas duas colunas, a viagem possui um *head
 
 **Usando as tabelas `frequencies.txt` e `stop_times.txt` conjuntamente**
 
-É importante entender, agora, como a presença da tabela `frequencies.txt` altera a especificação da tabela `stop_times.txt`. Como podemos ver no nosso exemplo, o horário de partida definido no `stop_times.txt` para a viagem `CPTM L07-0` é 04:00h, e ela chega na segunda parada às 04:08h. O cronograma de chegada e saída de uma mesma parada de uma viagem, no entanto, não pode ser definido mais de uma vez na tabela. Como então definir o cronograma das viagens que partem às 04:12h, 04:24h, 04:36h, etc (lembre-se que o *headway* desta viagem é de 12 minutos)?
+É importante entender, agora, como a presença da tabela `frequencies.txt` altera a especificação da tabela `stop_times.txt`. Como podemos ver no exemplo da tabela `stop_times.txt`, a viagem `CPTM L07-0` parte da primeira parada às 04:00h e chega na segunda às 04:08h. O cronograma de chegada e saída de uma mesma parada de uma viagem, no entanto, não pode ser definido mais de uma vez na tabela. Como então definir o cronograma das viagens que partem às 04:12h, 04:24h, 04:36h, *etc* (lembrando que o *headway* desta viagem é de 12 minutos)?
 
 No caso em que a frequência de uma viagem é especificada no `frequencies.txt`, o cronograma (a tabela de horários) de uma viagem definido no `stop_times.txt` deve ser entendido como uma referência que descreve o tempo entre paradas. Isto é, os horários ali definidos não devem ser interpretados à risca. Por exemplo, o cronograma listado estabelece que o tempo de viagem entre a primeira e a segunda parada é de 8 minutos, e o tempo entre a segunda e a terceira também. Ou seja, a viagem que parte da primeira parada às 04:00h chega na segunda às 04:08h, e na terceira às 04:16h. A próxima viagem, que parte da primeira parada às 04:12h, por sua vez, chega na segunda parada às 04:20h, e na terceira às 04:28h.
 
-Entretanto, poderíamos descrever as mesmas viagens no `stop_times.txt` sem fazer uso do arquivo `frequencies.txt`. Para isso poderíamos adicionar um sufixo que identificasse cada uma das viagens referentes à linha `CPTM L07` no sentido `0` ao longo do dia. A viagem (`trip_id`) com identificador `CPTM L07-0_1`, por exemplo, seria a primeira viagem do dia e partiria da primeira parada às 04:00h e chegaria na segunda parada às 04:08h. A viagem `CPTM L07-0_2`, por sua vez, seria a segunda viagem e partiria da primeira parada às 04:12h e chegaria na segunda às 04:20h, e daí em diante. Cada uma dessas viagens deveria ser também adicionada ao arquivo `trips.txt` e a quaisquer outros que possuam a coluna `trip_id` como identificador.
+Entretanto, poderíamos descrever as mesmas viagens no `stop_times.txt` sem fazer uso do arquivo `frequencies.txt`. Para isso, poderíamos adicionar um sufixo que identificasse cada uma das viagens referentes à linha `CPTM L07` no sentido `0` ao longo do dia. A viagem (`trip_id`) com identificador `CPTM L07-0_1`, por exemplo, seria a primeira viagem no sentido `0` do dia e partiria da primeira parada às 04:00h e chegaria na segunda às 04:08h. A viagem `CPTM L07-0_2`, por sua vez, seria a segunda viagem e partiria da primeira parada às 04:12h e chegaria na segunda às 04:20h, e daí em diante. Cada uma dessas viagens deveria ser também adicionada ao arquivo `trips.txt` e a quaisquer outros que possuam a coluna `trip_id` como identificador.
 
 Outra variável que afeta a forma na qual o `frequencies.txt` afeta as tabelas de horários na tabela `stop_times.txt` é a coluna opcional `exact_times`. Um valor de `0` nesta coluna (ou quando ela está ausente do *feed*, como no caso do arquivo GTFS da SPTrans) indica que a viagem não necessariamente segue um cronograma fixo ao longo do período. Em vez disso, operadores tentam se ater a um determinado *headway* durante o período. Usando o mesmo exemplo de uma viagem cujo *headway* é de 12 minutos entre as 04:00h e 05:00h, isto significaria que não necessariamente a primeira partida sairá exatamente às 04:00h, a segunda às 04:12h, e por aí em diante. A primeira pode, por exemplo, sair às 04:02h. A segunda, às 04:14h ou 04:13h, etc. Caso desejemos definir um cronograma que é seguido à risca, obtendo o mesmo resultado que seria obtido se definíssemos diversas viagens semelhantes partindo em diferentes horários no `stop_times.txt` (como mostrado no parágrafo anterior), devemos utilizar o valor `1` na coluna `exact_times`.
 
-## Onde encontrar GTFS de cidades brasileiras
+## Onde encontrar dados GTFS de cidades brasileiras
 
-No Brasil, diversas cidades usam dados de GTFS no planejamento e operação de seus sistemas de transportes. Em muitos casos, no entanto, esses dados são de propriedade de empresas operadoras e concessionárias de transporte, e não do poder público. Infelizmente, esses arquivos raramente são disponibilizados aberta e publicamente, contrariando boas práticas de gestão e compartilhamento de dados de interesse público. A @tbl-gtfs_brasil mostra as fontes dos dados GTFS de algumas das poucas cidades do Brasil que disponibilizam seus *feeds* abertamente[^3].
+Os dados de GTFS de diversas cidades do mundo podem ser baixados com o pacote de R [{tidytransit}](https://r-transit.github.io/tidytransit/) ou no *site* [Transitland](https://www.transit.land/). No Brasil, diversas cidades usam dados GTFS no planejamento e operação de seus sistemas de transportes. Em muitos casos, no entanto, esses dados são de propriedade de empresas operadoras e concessionárias, e não do poder público. Infelizmente, esses arquivos raramente são disponibilizados aberta e publicamente, contrariando boas práticas de gestão e compartilhamento de dados de interesse público. A @tbl-gtfs_brasil mostra as fontes dos dados GTFS de algumas das poucas cidades do Brasil que disponibilizam seus *feeds* abertamente[^4].
 
-[^3]: Levantamento realizado até o momento da publicação do livro.
+[^4]: Levantamento realizado até o momento da publicação do livro.
 
 ```{r}
 #| echo: false
 #| label: tbl-gtfs_brasil
 #| tbl-cap: Fontes de dados GTFS publicamente disponíveis no Brasil
 gtfs_brasil_df <- tibble::tribble(
-  ~Cidade,          ~Fonte,     ~Informações,
+  ~Cidade,      	~Fonte, 	~Informações,
   "Belo Horizonte", "BHTrans",  "Dado aberto: [transporte convencional](https://dados.pbh.gov.br/dataset/gtfs-estatico-do-sistema-convencional); [transporte suplementar](https://dados.pbh.gov.br/dataset/feed-gtfs-estatico-do-sistema-suplementar).",
-  "Fortaleza",      "ETUFOR",   "[Dado aberto](https://dados.fortaleza.ce.gov.br/dataset/gtfs).",
-  "Fortaleza",      "Metrofor", "[Dado aberto](https://www.metrofor.ce.gov.br/gtfs/).",
-  "Porto Alegre",   "EPTC",     "[Dado aberto](https://dados.portoalegre.rs.gov.br/dataset/gtfs).",
-  "Rio de Janeiro", "SMTR",     "[Dado aberto](https://www.data.rio/datasets/gtfs-do-rio-de-janeiro/about).",
-  "São Paulo",      "EMTU",     "Download [neste link](https://www.emtu.sp.gov.br/emtu/dados-abertos/dados-abertos-principal/gtfs.fss). Necessário cadastro.",
-  "São Paulo",      "SPTrans",  "Download [neste link](https://www.sptrans.com.br/desenvolvedores/). Necessário cadastro."
+  "Fortaleza",  	"ETUFOR",   "[Dado aberto](https://dados.fortaleza.ce.gov.br/dataset/gtfs).",
+  "Fortaleza",  	"Metrofor", "[Dado aberto](https://www.metrofor.ce.gov.br/gtfs/).",
+  "Porto Alegre",   "EPTC", 	"[Dado aberto](https://dados.portoalegre.rs.gov.br/dataset/gtfs).",
+  "Rio de Janeiro", "SMTR", 	"[Dado aberto](https://www.data.rio/datasets/gtfs-do-rio-de-janeiro/about).",
+  "São Paulo",  	"EMTU", 	"Download [neste link](https://www.emtu.sp.gov.br/emtu/dados-abertos/dados-abertos-principal/gtfs.fss). Necessário cadastro.",
+  "São Paulo",  	"SPTrans",  "Download [neste link](https://www.sptrans.com.br/desenvolvedores/). Necessário cadastro."
 )
 
 knitr::kable(gtfs_brasil_df)
 ```
 
-Obs.: Os dados de GTFS disponibilizados pela Secretaria Municipal de Transportes do Rio de Janeiro não incluem os dados dos sistemas de trem e metrô.
+Observação: Os dados de GTFS disponibilizados pela Secretaria Municipal de Transportes do Rio de Janeiro não incluem os dados dos sistemas de trem e de metrô.
