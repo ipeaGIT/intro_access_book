@@ -1,24 +1,24 @@
 # Manipulação e visualização de dados GTFS
 
-Usualmente, arquivos GTFS provenientes de fontes oficiais são utilizados para desenvolver análises e pesquisas que possuem diversos elementos comuns. Visando facilitar a leitura, o processamento e a análise desses dados, a equipe do Projeto Acesso a Oportunidades vem desenvolvendo o pacote de R `{gtfstools}`[^1] [@herszenhut2022gtfstools], que oferece diversas funções que facilitam a manipulação e a exploração de *feeds*.
+Usualmente, arquivos GTFS provenientes de fontes oficiais são utilizados para desenvolver análises e pesquisas que possuem diversos elementos comuns. Visando facilitar a leitura, o processamento e a análise desses dados, a equipe do Projeto Acesso a Oportunidades vem desenvolvendo o pacote de R `{gtfstools}`[^1] [@Herszenhut2022gtfstools], que disponibiliza diversas funções que facilitam a manipulação e a exploração de *feeds*.
 
 [^1]: Disponível em <https://github.com/ipeaGIT/gtfstools>.
 
-Neste capítulo, nós iremos passar por algumas das funcionalidades mais frequentemente utilizadas do pacote. Para isso, vamos utilizar uma amostra do *feed* da SPTrans apresentado no capítulo anterior, disponível dentro do `{gtfstools}`.
+Neste capítulo, passaremos por algumas das funcionalidades mais frequentemente utilizadas do pacote. Para isso, vamos utilizar uma amostra do *feed* da SPTrans apresentado no capítulo anterior, disponível dentro do `{gtfstools}`.
 
 ## Leitura e manipulação básica de arquivos GTFS
 
-A leitura de arquivos GTFS com o `{gtfstools}` é feita com a função `read_gtfs()`, que recebe uma *string* com o caminho do arquivo. Após sua leitura, o *feed* é representado como uma lista de `data.table`s, uma versão de alta performance da classe `data.frame`. Ao longo deste capítulo, nós vamos nos referir a esta lista de tabelas como um **objeto GTFS**. Por padrão, a função lê todas as tabelas `.txt` do *feed*:
+A leitura de arquivos GTFS com o `{gtfstools}` é feita com a função `read_gtfs()`, que recebe uma *string* com o caminho do arquivo. Após sua leitura, o *feed* é representado como uma lista de `data.table`s, uma versão de alta performance da classe `data.frame`. Ao longo deste capítulo, vamos nos referir a esta lista de tabelas como um **objeto GTFS**. Por padrão, a função lê todas as tabelas `.txt` do *feed*:
 
 ```{r}
 # carrega biblioteca
 library(gtfstools)
 
-# aponta string com endereço do arquivo
-file_path <- system.file("extdata/spo_gtfs.zip", package = "gtfstools")
+# aponta para o endereço do arquivo gtfs dentro do {gtfstools}
+endereco <- system.file("extdata/spo_gtfs.zip", package = "gtfstools")
 
-# leitura do gtfs
-gtfs <- read_gtfs(path = file_path)
+# le o gtfs
+gtfs <- read_gtfs(endereco)
 
 # consulta o nome das tabelas dentro da lista
 names(gtfs)
@@ -30,36 +30,36 @@ Como podemos ver, cada `data.table` dentro do objeto GTFS é nomeado de acordo c
 head(gtfs$trips)
 ```
 
-As tabelas dentro de um objeto GTFS podem ser facilmente manipuladas usando a sintaxe do pacote  `{data.table}`. Este pacote oferece diversas funcionalidades úteis, principalmente para a manipulação de tabelas com uma grande quantidade de registros, como a edição de colunas por referência, filtros de linhas muito rápidos e agregação de dados eficiente[^2]. Para adicionar 100 segundos a todos os *headways* listados na tabela *frequencies* e reverter essa mudança em seguida, por exemplo, nós podemos usar o código abaixo:
+As tabelas dentro de um objeto GTFS podem ser facilmente manipuladas usando a sintaxe do pacote  `{data.table}`. Este pacote oferece diversas funcionalidades úteis, principalmente para a manipulação de tabelas com uma grande quantidade de registros, como a edição de colunas por referência, filtros de linhas muito rápidos e agregação de dados eficiente[^2]. Para adicionar 100 segundos a todos os *headways* listados na tabela *frequencies* e reverter essa mudança em seguida, por exemplo, podemos usar o código abaixo:
 
 [^2]: Mais detalhes sobre o uso e a sintaxe do `{data.table}` podem ser lidos em <https://rdatatable.gitlab.io/data.table/index.html>.
 
 ```{r}
-# original
-original_headway <- gtfs$frequencies$headway_secs
+# salva o headway original
+headway_original <- gtfs$frequencies$headway_secs
 head(gtfs$frequencies, 3)
 
-# frequência modificada
+# modifica o headway
 gtfs$frequencies[, headway_secs := headway_secs + 100]
 head(gtfs$frequencies, 3)
 
-# recupera frequencia original
-gtfs$frequencies[, headway_secs := original_headway]
+# restitui o headway original
+gtfs$frequencies[, headway_secs := headway_original]
 head(gtfs$frequencies, 3)
 ```
 
-Após editarmos um objeto GTFS no R, frequentemente vamos querer usar o GTFS manipulado para fazer análises de diferentes tipos. Para isso, é comum que precisemos do arquivo GTFS em formato `.zip` novamente, e não como uma lista de tabelas dentro do R. O pacote `{gtfstools}` disponibiliza a função `write_gtfs()` exatamente com a finalidade de transformar objetos GTFS que existem apenas dentro do R em arquivos GTFS armazenados no seu computador. Para usar esta função, é necessário apenas listar o objeto e o endereço no qual o arquivo deve ser salvo:
+Após editarmos um objeto GTFS no R, frequentemente vamos querer usar o GTFS manipulado para fazer análises de diferentes tipos. Para isso, é comum que precisemos do arquivo GTFS em formato `.zip` novamente, e não como uma lista de tabelas dentro do R. O pacote `{gtfstools}` disponibiliza a função `write_gtfs()` exatamente com a finalidade de transformar objetos GTFS que existem apenas dentro do R em arquivos GTFS armazenados no seu computador. Para usar esta função, precisamos apenas listar o objeto e o endereço no qual o arquivo deve ser salvo:
 
 ```{r}
-# aponta endereço onde arquivo deve ser salvo
-dest_path <- tempfile("new_gtfs", fileext = ".zip")
+# aponta para o endereço onde arquivo deve ser salvo
+endereco_destino <- tempfile("novo_gtfs", fileext = ".zip")
 
-# salve GTFS localmente
-write_gtfs(gtfs, dest_path)
+# salva o GTFS no endereco
+write_gtfs(gtfs, path = endereco_destino)
 
 
-# listar arquivos dentro do feed salvo
-zip::zip_list(dest_path)[, c("filename", "compressed_size", "timestamp")]
+# lista arquivos dentro do feed recém-salvo
+zip::zip_list(endereco_destino)[, c("filename", "compressed_size", "timestamp")]
 ```
 
 ## Cálculo de velocidade das linhas
@@ -69,34 +69,34 @@ Arquivos GTFS são frequentemente utilizados em estimativas de roteamento de tra
 O `{gtfstools}` disponibiliza a função `get_trip_speed()` para facilitar o cálculo da velocidade de cada viagem presente no *feed*. Por padrão, a função retorna a velocidade (em km/h) de todas as viagens do GTFS, mas viagens individuais também podem ser especificadas:
 
 ```{r}
-# calcular velocidade de todas viagens
-speeds <- get_trip_speed(gtfs)
+# calcula as velocidade de todas as viagens
+velocidades <- get_trip_speed(gtfs)
 
-head(speeds)
+head(velocidades)
 
-nrow(speeds)
+nrow(velocidades)
 
-# calcular velocidade de duas viagens específicas
-speeds <- get_trip_speed(gtfs, trip_id = c("CPTM L07-0", "2002-10-0"))
+# calcula as velocidade de duas viagens específicas
+velocidades <- get_trip_speed(gtfs, trip_id = c("CPTM L07-0", "2002-10-0"))
 
-head(speeds)
+head(velocidades)
 ```
 
-Calcular a velocidade de uma viagem requer que nós saibamos o seu comprimento e em quanto tempo ela foi realizada. Para isso, portanto, a `get_trip_speed()` utiliza duas outras funções do `{gtfstools}` por trás dos panos: a `get_trip_length()` e a `get_trip_duration()`. O funcionamento das duas é muito parecido com o mostrado anteriormente, retornando o comprimento/duração de todas as viagens por padrão, ou de apenas algumas selecionadas, caso desejado. Abaixo nós mostramos seus comportamentos padrões:
+Calcular a velocidade de uma viagem requer que saibamos o seu comprimento e em quanto tempo ela foi realizada. Para isso, portanto, a `get_trip_speed()` utiliza duas outras funções do `{gtfstools}` por trás dos panos: a `get_trip_length()` e a `get_trip_duration()`. O funcionamento das duas é muito parecido com o mostrado anteriormente, retornando o comprimento/duração de todas as viagens por padrão, ou de apenas algumas selecionadas, caso desejado. Abaixo, mostramos seus comportamentos padrões:
 
 ```{r}
-# distância percorrida de todas viagens
-length <- get_trip_length(gtfs, file = "shapes")
+# calcula a distância percorrida de todas viagens
+distancias <- get_trip_length(gtfs, file = "shapes")
 
-head(length)
+head(distancias)
 
-# tempo de duração de todas viagens em minutos
-duration <- get_trip_duration(gtfs, unit = 'min')
+# calcula a duração de todas viagens, em minutos
+duracao <- get_trip_duration(gtfs, unit = 'min')
 
-head(duration)
+head(duracao)
 ```
 
-Assim como a `get_trip_speed()` retorna velocidades em km/h por padrão, a `get_trip_length()` retorna os comprimentos em km e a `get_trip_duration()` retorna a duração em minutos. Essas unidades podem ser ajustadas com o argumento `unit`, presente em todas as funções.
+Assim como a `get_trip_speed()` retorna as velocidades em km/h por padrão, a `get_trip_length()` retorna os comprimentos em km e a `get_trip_duration()` retorna a duração em minutos. Essas unidades podem ser ajustadas com o argumento `unit`, presente em todas as funções.
 
 ## Combinando e filtrando *feeds*
 
@@ -111,46 +111,46 @@ gtfs$calendar
 O `{gtfstools}` disponibiliza a função `remove_duplicates()` para remover essas duplicatas. Esta função recebe como *input* um objeto GTFS e retorna o mesmo objeto, porém sem registros duplicados:
 
 ```{r}
-# removendo valores duplicados
-no_dups_gtfs <- remove_duplicates(gtfs)
+# remove valores duplicados
+gtfs_sem_dups <- remove_duplicates(gtfs)
 
-# checagem do resultado
-no_dups_gtfs$agency
+# checa resultado
+gtfs_sem_dups$agency
 
-no_dups_gtfs$calendar
+gtfs_sem_dups$calendar
 ```
 
-Frequentemente, também, lidamos com múltiplos *feeds* em uma mesma área de estudo. Por exemplo, quando os dados dos sistemas de ônibus e de trens de uma mesma cidade estão salvos em arquivos GTFS separados. Neste caso, muitas vezes gostaríamos de uni-los em um único arquivo, diminuindo assim o esforço de manipulação e processamento dos dados. Para isso, o `{gtfstools}` disponibiliza a função `merge_gtfs()`. O exemplo abaixo mostra o resultado da combinação de dois *feeds* distintos, o da SPTrans (sem duplicatas) e o da EMTU, de Porto Alegre:
+Frequentemente, também, lidamos com múltiplos *feeds* em uma mesma área de estudo. - por exemplo, quando os dados dos sistemas de ônibus e de trens de uma mesma cidade estão salvos em arquivos GTFS separados. Neste caso, muitas vezes gostaríamos de uni-los em um único arquivo, diminuindo assim o esforço de manipulação e processamento dos dados. Para isso, o `{gtfstools}` disponibiliza a função `merge_gtfs()`. O exemplo abaixo mostra o resultado da combinação de dois *feeds* distintos, o da SPTrans (sem duplicatas) e o da EMTU, de Porto Alegre:
 
 ```{r}
-# leitura do GTFS de Porto Alegre
-poa_path <- system.file("extdata/poa_gtfs.zip", package = "gtfstools")
-poa_gtfs <- read_gtfs(poa_path)
+# lê GTFS de Porto Alegre
+endereco_poa <- system.file("extdata/poa_gtfs.zip", package = "gtfstools")
+gtfs_poa <- read_gtfs(endereco_poa)
 
-poa_gtfs$agency
+gtfs_poa$agency
 
-no_dups_gtfs$agency
+gtfs_sem_dups$agency
 
-# Combinando GTFS de Porto Alegre e São Paulo
-combined_gtfs <- merge_gtfs(no_dups_gtfs, poa_gtfs)
+# combina objetos GTFS de Porto Alegre e São Paulo
+gtfs_combinado <- merge_gtfs(gtfs_sem_dups, gtfs_poa)
 
-# checagem dos resultados
-combined_gtfs$agency
+# checa resultados
+gtfs_combinado$agency
 ```
 
 Como podemos ver, os registros das tabelas de ambos os *feeds* foram combinados em uma única tabela. Este é o caso quando os dois (ou mais, caso desejado) objetos GTFS possuem registros de uma mesma tabela (a *agency*, no exemplo). Caso apenas um dos objetos possua uma das tabelas, o resultado da operação de combinação copia esta tabela para o resultado final. É o caso, por exemplo, da tabela *frequencies*, que existe apenas no *feed* da SPTrans, mas não no da EMTU: 
 
 ```{r}
-names(poa_gtfs)
+names(gtfs_poa)
 
-names(no_dups_gtfs)
+names(gtfs_sem_dups)
 
-names(combined_gtfs)
+names(gtfs_combinado)
 
-identical(no_dups_gtfs$frequencies, combined_gtfs$frequencies)
+identical(gtfs_sem_dups$frequencies, gtfs_combinado$frequencies)
 ```
 
-Um outro tipo de operação muito utilizada no tratamento de arquivos GTFS é o de filtragem desses arquivos. Frequentemente, *feeds* são usados para descrever redes de transporte público de grande escala, o que pode transformar sua edição, análise e compartilhamento em operações mais complexas. Por esse motivo, pesquisadores e planejadores muitas vezes precisar trabalhar com um subconjunto de dados descritos nos *feeds*. Por exemplo, caso desejemos estimar a performance da rede de transporte em uma determinada região no horário de pico da manhã, podemos filtrar o nosso arquivo GTFS de modo a manter apenas os registros referentes a viagens que ocorrem nesse intervalo do dia.
+Um outro tipo de operação muito utilizada no tratamento de arquivos GTFS é o de filtragem desses arquivos. Frequentemente, *feeds* são usados para descrever redes de transporte público de grande escala, o que pode transformar sua edição, análise e compartilhamento em operações complexas. Por esse motivo, pesquisadores e planejadores muitas vezes precisar trabalhar com um subconjunto de dados descritos nos *feeds*. Por exemplo, caso desejemos estimar a performance da rede de transporte em uma determinada região no horário de pico da manhã, podemos filtrar o nosso arquivo GTFS de modo a manter apenas os registros referentes a viagens que ocorrem nesse intervalo do dia.
 
 O pacote `{gtfstools}` traz diversas funções para facilitar a filtragem de arquivos GTFS. São elas:
 
@@ -167,40 +167,43 @@ O pacote `{gtfstools}` traz diversas funções para facilitar a filtragem de arq
 
 **Filtro por identificadores**
 
-As seis primeiras (`filter_by_agency_id()`, `filter_by_route_id()`, `filter_by_service_id()`, `filter_by_shape_id()`, `filter_by_stop_id()` e `filter_by_trip_id()`) funcionam de forma muito similar. O usuário deve especificar um vetor de identificadores, e a função mantém no objeto GTFS apenas os registros referentes a esses identificadores. O exemplo abaixo demonstra essa funcionalidade com a `filter_by_trip_id()`:
+As seis primeiras (`filter_by_agency_id()`, `filter_by_route_id()`, `filter_by_service_id()`, `filter_by_shape_id()`, `filter_by_stop_id()` e `filter_by_trip_id()`) funcionam de forma muito similar. Devemos especificar um vetor de identificadores que é utilizado pela função para manter no objeto GTFS apenas os registros relacionados a esses identificadores. O exemplo abaixo demonstra essa funcionalidade com a `filter_by_trip_id()`:
 
 ```{r}
-# checando tamanho do feed antes do filtro
+# checa tamanho do feed antes do filtro
 utils::object.size(gtfs)
 
 head(gtfs$trips[, .(trip_id, trip_headsign, shape_id)])
 
-# filtro mantendo apenas duas viagens
-smaller_gtfs <- filter_by_trip_id(gtfs, trip_id = c("CPTM L07-0", "CPTM L07-1"))
+# mantém apenas registros relacionados a duas viagens
+gtfs_filtrado <- filter_by_trip_id(
+  gtfs,
+  trip_id = c("CPTM L07-0", "CPTM L07-1")
+)
 
-# checando tamanho do feed após o filtro
-utils::object.size(smaller_gtfs)
+# checa tamanho do feed após o filtro
+utils::object.size(gtfs_filtrado)
 
-head(smaller_gtfs$trips[, .(trip_id, trip_headsign, shape_id)])
+head(gtfs_filtrado$trips[, .(trip_id, trip_headsign, shape_id)])
 
-unique(smaller_gtfs$shapes$shape_id)
+unique(gtfs_filtrado$shapes$shape_id)
 ```
 
-O código acima mostra que a função não filtra apenas a tabela `trips`, mas também as outras tabelas que fazem referência aos identificadores especificados. Por exemplo, a trajetória das viagens `CPTM L07-0` and `CPTM L07-1` é descrita pelos `shape_id`s `17846` and `17847`, respectivamente. Esses são, portanto, os únicos identificadores da tabela `shapes` mantidos no GTFS filtrado.
+O código acima mostra que a função não filtra apenas a tabela `trips`, mas também as outras tabelas que possuem algum tipo de relação com os identificadores especificados. Por exemplo, a trajetória das viagens `CPTM L07-0` e `CPTM L07-1` é descrita pelos `shape_id`s `17846` e `17847`, respectivamente. Esses são, portanto, os únicos identificadores da tabela `shapes` mantidos no GTFS filtrado.
 
 A função também pode funcionar com o comportamento diametralmente oposto: em vez de definirmos os identificadores cujos registros devem ser *mantidos* no *feed*, podemos especificar os identificadores que devem ser *retirados* dele. Para isso, usamos o argumento `keep` com valor `FALSE`:
 
 ```{r}
-# filtro removendo duas viagens do feed
-smaller_gtfs <- filter_by_trip_id(
+# remove duas viagens do feed
+gtfs_filtrado <- filter_by_trip_id(
   gtfs,
   trip_id = c("CPTM L07-0", "CPTM L07-1"),
   keep = FALSE
 )
 
-head(smaller_gtfs$trips[, .(trip_id, trip_headsign, shape_id)])
+head(gtfs_filtrado$trips[, .(trip_id, trip_headsign, shape_id)])
 
-head(unique(smaller_gtfs$shapes$shape_id))
+head(unique(gtfs_filtrado$shapes$shape_id))
 ```
 
 Como podemos ver, as viagens especificadas, bem como suas trajetórias, não estão presentes no GTFS filtrado. A mesma lógica aqui demonstrada com a `filter_by_trip_id()` é válida para as funções que filtram objetos GTFS pelos identificadores `agency_id`, `route_id`, `service_id`, `shape_id`, `stop_id` e `route_type`.
@@ -212,49 +215,49 @@ Outra operação que recorrentemente aparece em análises que envolvem dados GTF
 A `filter_by_weekday()` recebe os dias da semana (em inglês) cujos serviços que neles operam devem ser mantidos. Adicionalmente, a função também inclui o argumento `combine`, que define como filtros de dois ou mais dias funcionam. Quando este recebe o valor `”and”`, apenas serviços que operam em todos os dias especificados são mantidos. Quando recebe o valor `”or”`, serviços que operam em pelo menos um dos dias são mantidos:
 
 ```{r}
-# filtro mantendo apenas serviços que operam no sábado e no domingo
-smaller_gtfs <- filter_by_weekday(
-  gtfs = no_dups_gtfs,
+# mantém apenas serviços que operam no sábado E no domingo
+gtfs_filtrado <- filter_by_weekday(
+  gtfs = gtfs_sem_dups,
   weekday = c("saturday", "sunday"),
   combine = "and"
 )
 
-smaller_gtfs$calendar[, c("service_id", "sunday", "saturday")]
+gtfs_filtrado$calendar[, c("service_id", "sunday", "saturday")]
 
-
-# filtro mantendo apenas serviços que operam ou sábado ou no domingo
-smaller_gtfs <- filter_by_weekday(
-  gtfs = no_dups_gtfs,
+# mantém apenas serviços que operam OU no sábado OU no domingo
+gtfs_filtrado <- filter_by_weekday(
+  gtfs = gtfs_sem_dups,
   weekday = c("sunday", "saturday"),
   combine = "or"
 )
 
-smaller_gtfs$calendar[, c("service_id", "sunday", "saturday")]
+gtfs_filtrado$calendar[, c("service_id", "sunday", "saturday")]
 ```
 
-A `filter_by_time_of_day()`, por sua vez, recebe o começo e o final de uma janela de tempo e mantém os registros relacionados a viagens que rodam dentro dessa janela de horário. O funcionamento da função depende da presença ou não da tabela `frequencies` no GTFS: o cronograma descrito na `stop_times` das viagens descritas na tabela `frequencies` não deve ser filtrado, pois, como comentado no capítulo anterior, ele serve como um modelo que dita o tempo de viagem entre uma parada e outra. Caso a `frequencies` esteja ausente, no entanto, a `stop_times` é filtrada segundo o intervalo de tempo especificado. Vamos ver como isso funciona com um exemplo:
+A `filter_by_time_of_day()`, por sua vez, recebe o começo e o final de uma janela de tempo e mantém os registros relacionados a viagens que rodam dentro dessa janela. O funcionamento da função depende da presença ou não da tabela `frequencies` no GTFS: o cronograma descrito na `stop_times` das viagens descritas na tabela `frequencies` não deve ser filtrado, pois, como comentado no [capítulo anterior](4_dados_gtfs.qmd#frequencies.txt), ele serve como um modelo que dita o tempo de viagem entre uma parada e outra. Caso a `frequencies` esteja ausente, no entanto, a `stop_times` é filtrada segundo o intervalo de tempo especificado. Vamos ver como isso funciona com um exemplo:
 
 ```{r}
-# filtro mantendo apenas viagens dentro do período de 5 às 6 da manhã
-smaller_gtfs <- filter_by_time_of_day(gtfs, from = "05:00:00", to = "06:00:00")
+# mantém apenas viagens dentro do período de 5 às 6 da manhã
+gtfs_filtrado <- filter_by_time_of_day(gtfs, from = "05:00:00", to = "06:00:00")
 
-head(smaller_gtfs$frequencies)
+head(gtfs_filtrado$frequencies)
 
-head(smaller_gtfs$stop_times[, c("trip_id", "departure_time", "arrival_time")])
+head(gtfs_filtrado$stop_times[, c("trip_id", "departure_time", "arrival_time")])
 
+# salva a tabela frequencies e a remove do objeto gtfs
 frequencies <- gtfs$frequencies
 gtfs$frequencies <- NULL
 
-smaller_gtfs <- filter_by_time_of_day(gtfs, from = "05:00:00", to = "06:00:00")
+gtfs_filtrado <- filter_by_time_of_day(gtfs, from = "05:00:00", to = "06:00:00")
 
-head(smaller_gtfs$stop_times[, c("trip_id", "departure_time", "arrival_time")])
+head(gtfs_filtrado$stop_times[, c("trip_id", "departure_time", "arrival_time")])
 ```
 
-O filtro da tabela `stop_times` pode funcionar de duas formas distintas. Uma opção é manter intactas todas as viagens que cruzam a janela de tempo especificada. A outra é manter apenas os segmentos de viagens que ocorrem dentro da janela (comportamento padrão da função). Este comportamento é controlado com o parâmetro `full_trips`, como mostrado a seguir (atenção aos horários e aos segmentos presentes em cada exemplo):
+O filtro da tabela `stop_times` pode funcionar de duas formas distintas. Uma opção é manter intactas todas as *viagens* que *cruzam* a janela de tempo especificada. A outra é manter apenas no cronograma apenas as *paradas* que são visitadas *dentro* da janela (comportamento padrão da função). Este comportamento é controlado com o parâmetro `full_trips`, como mostrado a seguir (atenção aos horários e aos segmentos presentes em cada exemplo):
 
 ```{r}
-# filtro mantendo apenas viagens inteiramente dentro do período de 5 às 6 da manhã
-smaller_gtfs <- filter_by_time_of_day(
+# mantém apenas viagens inteiramente dentro do período de 5 às 6 da manhã
+gtfs_filtrado <- filter_by_time_of_day(
   gtfs,
   from = "05:00:00", 
   to = "06:00:00",
@@ -262,13 +265,14 @@ smaller_gtfs <- filter_by_time_of_day(
 )
 
 head(
-  smaller_gtfs$stop_times[,
+  gtfs_filtrado$stop_times[
+    ,
     c("trip_id", "departure_time", "arrival_time", "stop_sequence")
   ]
 )
 
-# filtro mantendo apenas viagens que do período que estão funcionando entre 5 e 6 da manhã
-smaller_gtfs <- filter_by_time_of_day(
+# mantém apenas paradas que são visitadas entre 5 e 6 da manhã
+gtfs_filtrado <- filter_by_time_of_day(
   gtfs,
   from = "05:00:00",
   to = "06:00:00",
@@ -276,7 +280,8 @@ smaller_gtfs <- filter_by_time_of_day(
 )
 
 head(
-  smaller_gtfs$stop_times[,
+  smaller_gtfs$stop_times[
+    ,
     c("trip_id", "departure_time", "arrival_time", "stop_sequence")
   ]
 )
@@ -284,130 +289,129 @@ head(
 
 **Filtro espacial**
 
-Por fim, o pacote `{gtfstools}` também disponibiliza uma função que permite filtrar o objeto GTFS usando um polígono espacial. A `filter_by_sf()` recebe um objeto do tipo `sf`/`sfc` (representação espacial estabelecida pelo pacote [`sf`](https://r-spatial.github.io/sf/)), ou sua *bounding box*, e mantém os registros cujas viagens são selecionadas por uma operação espacial especificada pelo usuário. Embora aparentemente complicado, este processo de filtragem é muito facilmente compreendido quando apresentado visualmente. Para isso, vamos filtrar o GTFS da SPTrans pela *bouding box* da trajetória de *id* `68962`. O código abaixo apresenta a distribuição espacial dos dados não filtrados, com a *bounding box* destacada em vermelho:
+Por fim, o `{gtfstools}` também disponibiliza uma função que permite filtrar o objeto GTFS usando um polígono espacial. A `filter_by_sf()` recebe um objeto do tipo `sf`/`sfc` (representação espacial criada pelo pacote [`{sf}`](https://r-spatial.github.io/sf/)), ou sua *bounding box*, e mantém os registros cujas viagens são selecionadas por uma operação espacial que também deve ser especificada. Embora aparentemente complicado, este processo de filtragem é facilmente compreendido quando apresentado visualmente. Para isso, vamos filtrar o GTFS da SPTrans pela *bouding box* da trajetória `68962`. Com o código abaixo, apresentamos a distribuição espacial dos dados não filtrados, com a *bounding box* destacada em vermelho:
 
 ```{r}
 # carrega biblioteca ggplot2 para visualização de dados
 library(ggplot2)
 
-shape_68962 <- convert_shapes_to_sf(gtfs, shape_id = "68962")
-bbox <- sf::st_bbox(shape_68962)
+# cria poligono com a bounding box da trajetoria 68962
+trajetoria_68962 <- convert_shapes_to_sf(gtfs, shape_id = "68962")
+bbox <- sf::st_bbox(trajetoria_68962)
+geometria_bbox <- sf::st_as_sfc(bbox)
 
-shapes <- convert_shapes_to_sf(gtfs)
-bbox_geom <- sf::st_as_sfc(bbox)
+# gera geometria de todas as trajetorias do gtfs
+todas_as_trajetorias <- convert_shapes_to_sf(gtfs)
 
 ggplot() +
-  geom_sf(data = shapes) +
-  geom_sf(data = bbox_geom, fill = NA, color = "red") +
+  geom_sf(data = todas_as_trajetorias) +
+  geom_sf(data = geometria_bbox, fill = NA, color = "red") +
   theme_minimal()
 ```
 
-Note que nós usamos a função `convert_shapes_to_sf()`, também disponibilizada pelo `{gtfstools}`, que converte uma determinada trajetória descrita no GTFS em um objeto espacial do tipo `sf`. Por padrão, a `filter_by_sf()` mantém os dados relacionados aos registros de viagens cujas trajetórias possuem alguma interseção com o polígono espacial selecionado:
+Note que usamos a função `convert_shapes_to_sf()`, também disponibilizada pelo `{gtfstools}`, que converte uma determinada trajetória descrita no GTFS em um objeto espacial do tipo `sf`. Por padrão, a `filter_by_sf()` mantém os dados relacionados aos registros de viagens cujas trajetórias possuem alguma interseção com o polígono espacial selecionado:
 
 ```{r}
-filtered_gtfs <- filter_by_sf(gtfs, bbox, spatial_operation = sf::st_intersects)
-filtered_shapes <- convert_shapes_to_sf(filtered_gtfs)
+gtfs_filtrado <- filter_by_sf(gtfs, bbox)
+trajetorias_filtradas <- convert_shapes_to_sf(gtfs_filtrado)
 
 ggplot() +
-  geom_sf(data = filtered_shapes) +
-  geom_sf(data = bbox_geom, fill = NA, color = "red") +
+  geom_sf(data = trajetorias_filtradas) +
+  geom_sf(data = geometria_bbox, fill = NA, color = "red") +
   theme_minimal()
 ```
 
-Nós podemos, no entanto, controlar a operação espacial usada no processo de filtragem. Por exemplo, o código abaixo mostra como nós podemos manter os dados relacionados a viagens que estão *contidas* dentro do polígono espacial:
+Podemos, no entanto, controlar a operação espacial usada no processo de filtragem. Por exemplo, o código abaixo mostra como podemos manter os dados relacionados a viagens que estão *contidas* dentro do polígono espacial:
 
 ```{r}
-filtered_gtfs <- filter_by_sf(gtfs, bbox, spatial_operation = sf::st_contains)
-filtered_shapes <- convert_shapes_to_sf(filtered_gtfs)
+gtfs_filtrado <- filter_by_sf(gtfs, bbox, spatial_operation = sf::st_contains)
+trajetorias_filtradas <- convert_shapes_to_sf(gtfs_filtrado)
 
 ggplot() +
-  geom_sf(data = filtered_shapes) +
-  geom_sf(data = bbox_geom, fill = NA, color = "red") +
+  geom_sf(data = trajetorias_filtradas) +
+  geom_sf(data = geometria_bbox, fill = NA, color = "red") +
   theme_minimal()
 ```
 
-## Mapeamento do *headway* das linhas
+## Fluxo de trabalho com o `{gtfstools}`: mapeando o *headway* das linhas
 
-Como mostrado nas seções anteriores, o `{gtfstools}` disponibiliza uma grande caixa de ferramentas que podem ser usadas no processamento e na análise de arquivos GTFS. O pacote, no entanto, oferece diversas outras funções que não podem ser apresentadas neste livro, por questões de espaço. A lista completa de funções disponíveis pode ser conferida no [site do pacote](https://ipeagit.github.io/gtfstools/reference/index.html).
+Como mostrado nas seções anteriores, o `{gtfstools}` disponibiliza uma grande caixa de ferramentas que podem ser usadas no processamento e na análise de arquivos GTFS. O pacote, no entanto, oferece diversas outras funções que não puderam ser apresentadas neste livro, por questões de espaço. A lista completa de funções disponíveis pode ser conferida no [site do pacote](https://ipeagit.github.io/gtfstools/reference/index.html).
 
-A apresentação das funções feitas até aqui tem um importante caráter demonstrativo, porém não mostra como elas podem ser usadas de forma conjunta no desenvolvimento de uma análise de um arquivo GTFS. Esta seção preenche esta lacuna, mostrando como o pacote pode ser usado, por exemplo, para responder a seguinte pergunta: como se distribuem espacialmente os tempos entre veículos de uma mesma linha (ou seja, o *headway*) no GTFS da SPTrans?
+A apresentação das funções feitas até aqui tem um importante caráter demonstrativo, porém não mostra como elas podem ser usadas de forma conjunta no desenvolvimento de uma análise de um arquivo GTFS. Esta seção preenche esta lacuna, mostrando como o pacote pode ser usado, por exemplo, para responder a seguinte pergunta: como se distribuem espacialmente os tempos entre veículos de uma mesma linha (os *headways*) no GTFS da SPTrans?
 
 A primeira etapa é definir o escopo da nossa análise. A fim de exemplo, vamos considerar o *headway* no pico da manhã, entre 7h e 9h, em uma típica terça-feira de operação. Para isso, precisamos filtrar o nosso *feed*:
 
 ```{r}
-# ler dados de GTFS
-gtfs <- read_gtfs(path = file_path)
+# lê o arquivo GTFS
+gtfs <- read_gtfs(endereco)
 
-# filtrando GTFS
-filtered_gtfs <- gtfs |>
+# filtra o GTFS
+gtfs_filtrado <- gtfs |>
   remove_duplicates() |>
   filter_by_weekday("tuesday") |>
   filter_by_time_of_day(from = "07:00:00", to = "09:00:00")
 
-# checando resultado do filtro
-filtered_gtfs$frequencies[trip_id == "2105-10-0"]
+# checa resultado do filtro
+gtfs_filtrado$frequencies[trip_id == "2105-10-0"]
 
-# checando resultado do filtro
-filtered_gtfs$calendar
+
+gtfs_filtrado$calendar
 ```
 
 Em seguida, precisamos calcular o *headway* dentro do período estabelecido. Essa informação pode ser encontrada na tabela *frequencies*, porém há um elemento complicador: cada viagem está associada a mais de um *headway*, como podemos ver acima (um registro para o período entre 7:00h e 7:59h e outro para o período entre entre 8:00h e 8:59h). Para resolver esta questão, portanto, vamos calcular o *headway médio* no intervalo entre 7:00h e 9:00h.
 
-Os primeiros registros da tabela *frequencies* do GTFS da SPTrans parecem sugerir que os períodos do dia estão listados sempre de uma em uma hora, porém isto não é uma regra estabelecida na especificação GTFS e nem é a prática adotada em outros GTFS. Por isso, nós vamos calcular a *média ponderada* do *headway* no período especificado. Para isso, precisamos multiplicar cada *headway* pelo intervalo de tempo em que ele é válido, e dividir o total desta soma pelo intervalo de tempo total (duas horas). Para calcular o intervalo de tempo em que cada *headway* é válido, nós usamos a função `convert_time_to_seconds()` para calcular o começo e o fim do intervalo em segundos e subtraímos o valor do fim pelo do começo, como abaixo:
+Os primeiros registros da tabela *frequencies* do GTFS da SPTrans parecem sugerir que os períodos do dia estão listados sempre de uma em uma hora, porém isto não é uma regra estabelecida na especificação GTFS e nem é a prática adotada em outros *feeds*. Por isso, vamos calcular a *média ponderada* do *headway* no período especificado. Para isso, precisamos multiplicar cada *headway* pelo intervalo de tempo em que ele é válido, e dividir o total desta soma pelo intervalo de tempo total (duas horas). Para calcular o intervalo de tempo em que cada *headway* é válido, usamos a função `convert_time_to_seconds()` para calcular o começo e o fim do intervalo em segundos e subtraímos o valor do fim pelo do começo, como abaixo:
 
 ```{r}
-filtered_gtfs <- convert_time_to_seconds(filtered_gtfs)
+gtfs_filtrado <- convert_time_to_seconds(gtfs_filtrado)
 
-filtered_gtfs$frequencies[trip_id == "2105-10-0"]
+gtfs_filtrado$frequencies[trip_id == "2105-10-0"]
 
-filtered_gtfs$frequencies[, time_interval := end_time_secs - start_time_secs]
+gtfs_filtrado$frequencies[, time_interval := end_time_secs - start_time_secs]
 ```
 
 Em seguida, calculamos o *headway* médio:
 
 ```{r}
-avg_headway <- filtered_gtfs$frequencies[,
-  .(avg_headway = weighted.mean(x = headway_secs, w = time_interval)),
+headway_medio <- gtfs_filtrado$frequencies[,
+  .(headway_medio = weighted.mean(x = headway_secs, w = time_interval)),
   by = trip_id
 ]
 
-avg_headway[trip_id == "2105-10-0"]
+headway_medio[trip_id == "2105-10-0"]
 
-head(avg_headway)
+head(headway_medio)
 ```
 
-Precisamos agora gerar a trajetória espacial de cada viagem e juntar esta informação à do *headway* médio. Para isso, vamos utilizar a função `get_trip_geometry()`, que, dado um objeto GTFS, retorna a trajetória espacial de suas viagens. Esta função nos permite especificar de quais viagens nós queremos as trajetórias, logo vamos calcular apenas as daquelas que estão presentes na tabela de *headways* médios:
+Precisamos agora gerar a trajetória espacial de cada viagem e juntar esta informação à do *headway* médio. Para isso, vamos utilizar a função `get_trip_geometry()`, que, dado um objeto GTFS, retorna a trajetória espacial de suas viagens. Esta função nos permite especificar as viagens cujas trajetórias gerar, logo vamos calcular apenas as trajetórias daquelas que estão presentes na tabela de *headways* médios:
 
 ```{r}
-selected_trips <- avg_headway$trip_id
+viagens_selecionadas <- headway_medio$trip_id
 
-geoms <- get_trip_geometry(
-  gtfs = filtered_gtfs,
-  trip_id = selected_trips,
+trajetorias <- get_trip_geometry(
+  gtfs = gtfs_filtrado,
+  trip_id = viagens_selecionadas,
   file = "shapes"
 )
 
-head(geoms)
+head(trajetorias)
 ```
 
-O objeto `geoms` está no formato `sf`, e não no `data.table`, que precisamos que ele esteja para juntarmos à tabela de *headways*. Depois de convertê-lo para o formato adequado e juntá-lo à tabela de *headways*, precisamos apenas configurar o nosso mapa como desejado. No exemplo abaixo, nós usamos cores e espessuras de linhas que variam de acordo com o *headway* de cada viagem:
+Geradas as trajetórias espaciais de cada viagem, precisamos juntá-las à informação de *headway* médio e, em seguida, configurar o nosso mapa como desejado. No exemplo abaixo, usamos cores e espessuras de linhas que variam de acordo com o *headway* de cada viagem:
 
 ```{r}
 #| message: false
-library(data.table)
-library(sf)
+traj_com_headways <- merge(
+  trajetorias,
+  headway_medio,
+  by = "trip_id"
+)
 
-# converte objeto em data.table e faz ‘merge’ para fazer as infos espaciais
-setDT(geoms)
-avg_headway[geoms, on = "trip_id", geometry := i.geometry]
-
-# converte objeto de volta para sf para poder fazer o mapa
-avg_headway_sf <- st_sf(avg_headway)
-
-# plotar figura
-ggplot(avg_headway_sf) +
-  geom_sf(aes(color = avg_headway, size = avg_headway), alpha = 0.8) +
+# configura figura
+ggplot(traj_com_headways) +
+  geom_sf(aes(color = headway_medio, size = headway_medio), alpha = 0.8) +
+  scale_color_gradient(high = "#132B43", low = "#56B1F7") +
   theme_minimal()
 ```
 
-Como podemos ver, o pacote `{gtfstools}` torna o desenvolvimento de análises de *feeds* de transporte público algo fácil e que requer apenas o conhecimento básico de pacotes de manipulação de tabela (como o `{data.table}` ou o `{dplyr}`) para grande parte das etapas que as compõem. O exemplo apresentado nesta seção mostra como muitas de suas funções podem ser usadas conjuntamente para revelar aspectos importantes de sistemas de transporte público descritos no formato GTFS.
+Como podemos ver, o pacote `{gtfstools}` torna o desenvolvimento de análises de *feeds* de transporte público algo fácil e que requer apenas o conhecimento básico de pacotes de manipulação de tabelas (como o `{data.table}` e o `{dplyr}`). O exemplo apresentado nesta seção mostra como muitas de suas funções podem ser usadas conjuntamente para revelar aspectos importantes de sistemas de transporte público descritos no formato GTFS.
