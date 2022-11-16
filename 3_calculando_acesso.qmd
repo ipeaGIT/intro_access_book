@@ -1,18 +1,19 @@
-# Calculando acessibilidade urbana em R {#sec-3_calculando_acesso}
+# Calculando estimativas de acessibilidade urbana em R {#sec-3_calculando_acesso}
 
 ## Cálculo da matriz de tempo de viagem {#sec-matrix}
 
-A primeira etapa necessária para estimar os níveis de acessibilidade de uma área urbana é calcular a matriz de custo de viagem entre as diversas origens e destinos que a compõem. Como comentado anteriormente, na literatura científica e na prática do planejamento de sistemas de transporte esse custo é mais frequentemente representado pelo tempo de viagem que separa dois pontos [@el-geneidy2016cost; @venter2016assessing], embora trabalhos recentes tenham considerado também outros fatores, como o dinheiro necessário para realizar uma viagem e o nível de conforto da viagem entre um ponto e outro [@arbex2020estimating; @herszenhut2022impact]. Pela prevalência deste tipo de matriz na literatura e na prática, porém, iremos nos focar em matrizes de tempo de viagem.
+A primeira etapa necessária para estimar os níveis de acessibilidade de uma área de estudo é calcular a matriz de custo de viagem entre as diversas origens e destinos que a compõem. Como comentado anteriormente, na literatura científica e na prática do planejamento de sistemas de transporte esse custo é mais frequentemente representado pelo tempo de viagem que separa dois pontos [@el-geneidy2016cost; @venter2016assessing], embora trabalhos recentes tenham considerado também outros fatores, como o dinheiro necessário para realizar uma viagem e o nível de conforto da viagem entre um ponto e outro [@arbex2020estimating; @herszenhut2022impact]. Pela prevalência deste tipo de matriz na literatura e na prática, porém, iremos nos focar em matrizes de tempo de viagem.
 
 Atualmente, a forma mais fácil e rápida de gerar uma matriz de tempo de viagem em R é utilizando o pacote `{r5r}` [@pereira2021r5r], desenvolvido pela equipe do Projeto Acesso a Oportunidades, do Ipea. O pacote utiliza, por trás dos panos, o *software* de roteamento de transporte multimodal R5, desenvolvido pela Conveyal[^1].
 
 [^1]: Disponível em <https://github.com/conveyal/r5>.
 
-### Instalação do r5r
+### Instalação do `{r5r}`
 
 A instalação do `{r5r}` funciona como a instalação de qualquer pacote de R (todos os exemplos de código a seguir devem ser rodados em uma sessão de R).
 
-```{r, eval = FALSE}
+```{r}
+#| eval: false
 install.packages("r5r")
 ```
 
@@ -26,7 +27,6 @@ cat(processx::run("java", args = "-version")$stderr)
 
 Como podemos ver, a versão instalada no livro é compatível com o `{r5r}`. Caso a versão instalada na sua máquina não seja (resultado do código mencionando a versão 12 ou 1.8.0, por exemplo), por favor atualize o Java para a versão 11.
 
-
 ### Dados necessários
 
 O uso do pacote `{r5r}` requer diferentes tipos de dados. A lista abaixo descreve cada um deles, comenta sobre sua obrigatoriedade e apresenta algumas fontes onde esses dados podem ser obtidos:
@@ -38,21 +38,21 @@ O uso do pacote `{r5r}` requer diferentes tipos de dados. A lista abaixo descrev
   - [BBBike Extract Service](https://extract.bbbike.org/), *website*.
 
 :::{.callout-caution} 
-## Qualidade dos Dados OpenStreetMap 
+## Qualidade dos dados do *OpenStreetMap* 
 
-O OpenStreetMap (OSM) é uma base de dados geográfica que traz informações sobre malha viária, prédios, parques, etc. Por ser uma base de dados alimentada voluntariamente pela comunidade, a cobertura e a qualidade dos dados do OSM podem variar muito entre regiões [@barrington-leigh2017world]. Via de regra, os dados do OSM no Brasil e no mundo tendem a ter melhor cobertura e qualidade em regiões mais desenvolvidas, em áreas urbanas e com maior população [@barrington-leigh2017world; @camboim2015investigation].
+O *OpenStreetMap* (OSM) é uma base de dados geográfica que traz informações sobre malha viária, prédios, parques, *etc*. Por ser uma base de dados alimentada voluntariamente pela comunidade que a utiliza, a cobertura e a qualidade dos dados do OSM podem variar muito entre regiões [@barrington-leigh2017world]. Via de regra, os dados do OSM no Brasil e no mundo tendem a ter melhor cobertura e qualidade em regiões mais desenvolvidas e áreas urbanas com grandes populações [@barrington-leigh2017world; @camboim2015investigation].
 :::
 
-- **Rede de transporte público** (opcional): um arquivo GTFS descrevendo a rede de transporte público da área de estudo. Caso ausente, deslocamentos por transporte público não podem ser roteados. Pode ser baixado com:
-  - [tidytransit](https://r-transit.github.io/tidytransit/), pacote de R;
+- **Rede de transporte público** (opcional): um ou mais arquivos GTFS descrevendo a rede de transporte público da área de estudo. Caso ausente, deslocamentos por transporte público não são considerados no cálculo da matriz de tempo de viagem. Esses dados podem ser ser baixados com:
+  - [{tidytransit}](https://r-transit.github.io/tidytransit/), pacote de R;
   - [Transitland](https://www.transit.land/), *website*;
-  - No capítulo @sec-4_dados_gtfs deste livro (@tbl-gtfs_brasil) nós indicamos também onde baixar os dados de GTFS de algumas cidades brasileiras que compartilham seus dados publicamente.
+  - No [Capítulo 4](4_dados_gtfs.qmd) deste livro (@tbl-gtfs_brasil) nós indicamos também onde baixar dados de GTFS de algumas cidades brasileiras que compartilham seus dados publicamente.
 
-- **Topografia** (opcional): um arquivo de dados *raster*, com o modelo digital de elevação em formato `.tif`. Utilizado caso deseje-se levar em consideração os efeitos da topografia do local sobre os tempos de caminhada e de viagens de bicicleta.  Pode ser baixado com:
+- **Topografia** (opcional): um arquivo de dados *raster* contendo o modelo digital de elevação da área de estudo em formato `.tif`/`.tiff`. Utilizado caso deseje-se levar em consideração os efeitos da topografia do local sobre os tempos de caminhada e de viagens de bicicleta.  Pode ser baixado com:
   - [elevatr](https://github.com/jhollist/elevatr), pacote de R;
   - Nasa's [SRTMGL1](https://lpdaac.usgs.gov/products/srtmgl1v003/), *website*.
   
-Esses dados devem ser salvos em uma mesma pasta que, preferencialmente, não contenha nenhum outro arquivo. Como veremos adiante, o `{r5r}` combina todos os dados salvos nesta pasta para criar uma rede de transporte multimodal que é utilizada para roteamento e cálculo das matrizes de tempo de viagem. Note que é possível ter mais de um arquivo GTFS na mesma pasta: nesse caso, o `{r5r}` considera as redes de transporte públicos de todos os *feeds* de forma conjunta. No entanto, a pasta deve conter um único arquivo de rede viária. Assumindo que os scripts de R estarão em uma pasta chamada R, uma possível organização dos arquivos segue o esquema abaixo:
+Esses dados devem ser salvos em uma mesma pasta que, preferencialmente, não contenha nenhum outro arquivo. Como veremos adiante, o `{r5r}` combina todos os dados salvos nesta pasta para criar uma rede de transporte multimodal que é utilizada no roteamento de viagens entre pares origem-destino e, consequentemente, no cálculo das matrizes de tempo de viagem. Note que é possível ter mais de um arquivo GTFS na mesma pasta: nesse caso, o `{r5r}` considera as redes de transporte públicos de todos os *feeds* de forma conjunta. No entanto, a rede viária e a topografia da área de estudo devem ser descritas por um único arquivo cada. Assumindo que os *scripts* de R estejam em uma pasta chamada `R`, uma possível organização dos arquivos segue o esquema abaixo:
 
 ```{r}
 #| echo: false
@@ -73,66 +73,59 @@ invisible({
 fs::dir_tree(tmp)
 ```
 
-Para ilustrar as funcionalidades do `{r5r}`, nós vamos usar uma pequena amostra de dados da cidade de Porto Alegre, Brasil. Esses dados estão disponíveis dentro do próprio pacote `{r5r}`, e seu endereço pode ser acessado com o comando `system.file("extdata/poa", package = "r5r")`:
+Para ilustrar as funcionalidades do `{r5r}`, vamos usar uma pequena amostra de dados da cidade de Porto Alegre, Brasil. Esses dados estão disponíveis dentro do próprio pacote `{r5r}`, e seu endereço pode ser acessado com o comando `system.file("extdata/poa", package = "r5r")`:
+
+```{r}
+pasta <- system.file("extdata/poa", package = "r5r")
+pasta
+```
+
+```{r}
+#| results: false
+fs::dir_tree(pasta)
+```
 
 ```{r}
 #| echo: false
-path <- system.file("extdata/poa", package = "r5r")
-
-fs::dir_tree(path, regexp = "\\.zip$|\\.csv$|\\.pbf$|\\.tif$")
+fs::dir_tree(pasta, regexp = "\\.zip$|\\.csv$|\\.pbf$|\\.tif$")
 ```
 
-
-Esta pasta possui quatro arquivos que vamos usar agora:
+Esta pasta possui quatro arquivos que vamos utilizar ao longo deste capítulo:
 
 - A rede viária do *OpenStreetMap*: `poa_osm.pbf`;
-- Dois *feeds* de GTFS das redes de ônibus e de trens: `poa_eptc.zip` e `poa_trensurb.zip`;
+- Um *feed* de GTFS descrevendo algumas linhas da rede de ônibus da cidade: `poa.zip`;
 - O modelo digital de elevação da cidade: `poa_elevation.tif`;
-- O arquivo `poa_hexgrid.csv`, com as coordenadas geográficas dos centróides de uma grade hexagonal regular que cobre toda a área de estudo e com informações sobre o tamanho da população residente e o número de oportunidades (empregos, escolas e hospitais) em cada hexágono. Esses pontos serão utilizados como as origens e destinos no cálculo da matriz de tempo de viagem.
+- O arquivo `poa_hexgrid.csv`, com as coordenadas geográficas dos centróides de uma grade hexagonal regular que cobre toda a área de estudo e com informações sobre o tamanho da população residente e o número de escolas em cada hexágono. Esses pontos serão utilizados como as origens e os destinos no cálculo da matriz de tempo de viagem.
 
 
-### Calculando a matriz de tempo de viagens
+### Calculando a matriz de tempo de viagem 666
 
-Antes de calcular a matriz de tempo de viagem, precisamos aumentar a memória disponível para o Java. Isto é necessário porque, por padrão, o R aloca apenas 512MB de memória para processos do Java, o que frequentemente não é suficiente para o cálculo de grandes matrizes com o `{r5r}`. Para aumentar a memória disponível para 2GB, por exemplo, usamos o seguinte comando no início do *script*, antes mesmo de carregar as bibliotecas de R necessárias:
+Antes de calcular a matriz de tempo de viagem, precisamos aumentar a memória disponível para a execução de processos do Java, linguagem em que o R5 é escrito. Isto é necessário porque, por padrão, o R aloca apenas 512 MB de memória para processos do Java, o que frequentemente não é suficiente para o cálculo de grandes matrizes com o `{r5r}`. Para aumentar a memória disponível para 2 GB, por exemplo, usamos o seguinte comando no início do *script*, antes mesmo de carregar as bibliotecas de R necessárias para a nossa análise:
 
 ```{r}
 options(java.parameters = "-Xmx2G")
 ```
 
-Feito isso, agora podemos carregar as bibliotecas que vamos utilizar neste capítulo.
+Feito isso, podemos prosseguir com o cálculo da matriz de tempo de viagem, realizado em dois passos. O primeiro é gerar a rede de transporte multimodal que será utilizada no roteamento. Para isso, carregamos a biblioteca `{r5r}` e utilizamos a função `setup_r5()`, que baixa o *software* de roteamento R5 e o utiliza para criar a rede. Esta função recebe como *input* o caminho da pasta onde os dados necessários para o roteamento estão armazenados. Como resultado, a função salva na pasta alguns arquivos necessários para o roteamento e retorna uma conexão com o R5, neste exemplo chamada de `conexao_r5r`. Esta conexão é responsável por garantir que o roteamento seja feito com a rede de transportes descrita pelos arquivos dentro da pasta e é utilizada no cálculo da matriz de tempo de viagem.
 
 ```{r}
-#| warning: false
 #| message: false
 library(r5r)
-library(accessibility)
-library(sf)
-library(data.table)
-library(ggplot2)
-library(aopdata)
+
+conexao_r5r <- setup_r5(pasta, use_elevation = TRUE, verbose = FALSE)
+
+fs::dir_tree(pasta)
 ```
 
-O cálculo de uma matriz de tempo de viagem de uma área de estudo é feito em dois passos. O primeiro é gerar a rede de transporte multimodal que será utilizada no roteamento. Para isso, nós utilizamos a função `setup_r5()`, que  baixa o *software* de roteamento R5 e o utiliza para criar a rede. Esta função recebe como *input* o caminho da pasta onde os dados necessários para o roteamento estão armazenados. Como resultado, a função salva na pasta alguns arquivos necessários para o roteamento e retorna uma conexão com o R5, neste exemplo chamada de `r5r_core`, que é utilizada no cálculo da matriz de tempo de viagem.
+O passo final consiste em calcular a matriz de tempo de viagem com a função `travel_time_matrix()`. Como *inputs* básicos, a função recebe a conexão com o R5 criada acima, pontos de origem e destino em formato de `data.frame` com as colunas `id`, `lon` e `lat`, o modo de transporte a ser utilizado, o horário de partida, o tempo máximo de caminhada permitido da origem até o embarque no transporte público e do desembarque até o destino, e o tempo máximo de viagem a ser considerado. Diversos outros *inputs* também podem ser usados, como a velocidade de caminhada e o número máximo de pernas de transporte público permitido, entre outros. Para mais informações sobre cada um dos parâmetros, por favor consulte a documentação da função em uma sessão de R (com os comandos `?travel_time_matrix()` ou `help(“travel_time_matrix”)`) ou no site do `{r5r}`, [neste link](https://ipeagit.github.io/r5r/reference/travel_time_matrix.html).
 
 ```{r}
-#| message: false
-path <- system.file("extdata/poa", package = "r5r")
+pontos <- data.table::fread(file.path(pasta, "poa_hexgrid.csv"))
 
-r5r_core <- setup_r5(path, use_elevation = TRUE, verbose = FALSE)
-
-fs::dir_tree(path)
-
-```
-
-O passo final é usar a função `travel_time_matrix()` para o cálculo da matriz de tempo de viagem. Como *inputs* básicos, a função recebe a conexão com o R5 criada acima, pontos de origem e destino em formato de `data.frame` com as colunas `id`, `lon` e `lat`, o modo de transporte a ser utilizado e o horário de partida, o tempo máximo de caminhada permitido da origem até o embarque no transporte público e do desembarque até o destino, e o tempo máximo de viagem a ser considerado.
-
-```{r}
-points <- fread(file.path(path, "poa_hexgrid.csv"))
-
-ttm <- travel_time_matrix(
-  r5r_core,
-  origins = points,
-  destinations = points,
+matriz <- travel_time_matrix(
+  conexao_r5r,
+  origins = pontos,
+  destinations = pontos,
   mode = c("WALK", "TRANSIT"),
   departure_datetime = as.POSIXct(
     "13-05-2019 14:00:00",
@@ -144,84 +137,82 @@ ttm <- travel_time_matrix(
   progress = FALSE
 )
 
-head(ttm)
+head(matriz)
 ```
 
-Na prática, o que a função `travel_time_matrix()` faz é encontrar a rota mais rápida partindo de cada ponto de origem para todos os possíveis pontos de destino, considerando o modo de viagem, o horário de partida e os demais parâmetros passados pelo usuário. Para isso, o `{r5r}` considera tempos de viagem de porta-a-porta: no caso de uma viagem por transporte público, por exemplo, o tempo total de viagem inclui a) o tempo de caminhada até a parada de transporte público; b) o tempo de espera pelo veículo na parada; c) o tempo de deslocamento dentro do veículo; e d) o tempo de viagem a pé da parada de desembarque até o destino. Em casos em que mais de uma rota de transporte público é utilizada, o `{r5r}` também contabiliza o tempo gasto nas conexões, considerando a caminhada entre paradas e o tempo de espera pelo próximo veículo.
-
-Diversos outros *inputs* podem ser passados para o cálculo da matriz, como a velocidade de caminhada e o número máximo de pernas de transporte público permitido, entre outros. Para mais informações sobre cada um dos parâmetros, por favor consulte a documentação da função disponível no pacote em uma sessão de R (com os comandos `?travel_time_matrix()` e `help(“travel_time_matrix”)`) ou no site do `{r5r}`, [aqui](https://ipeagit.github.io/r5r/reference/travel_time_matrix.html).
+Na prática, a função `travel_time_matrix()` encontra a rota mais rápida partindo de cada ponto de origem para todos os possíveis pontos de destino, considerando o modo de viagem, o horário de partida e os demais parâmetros passados pelo usuário. Para isso, o `{r5r}` considera tempos de viagem de porta-a-porta: no caso de uma viagem por transporte público, por exemplo, o tempo total de viagem inclui a) o tempo de caminhada até a parada de transporte público; b) o tempo de espera pelo veículo na parada; c) o tempo de deslocamento dentro do veículo; e d) o tempo de viagem a pé da parada de desembarque até o destino. Em casos em que mais de uma rota de transporte público é utilizada, o `{r5r}` também contabiliza o tempo gasto nas conexões, considerando a caminhada entre paradas e o tempo de espera pelo próximo veículo.
 
 ::: {.callout-note appearance="simple"}
-A função `travel_time_matrix()` utiliza uma extensão do algoritmo de roteamento RAPTOR [@conway2017evidencebased], o que torna o R5 extremamente rápido. A depender da quantidade de pares de origem-destino, o `{r5r}` pode ser entre 6 e 200 vezes mais rápido do que outros *softwares* de roteamento multimodal no cálculo de  uma matriz de tempo de viagem [@higgins2022calculating].
+A função `travel_time_matrix()` utiliza uma extensão do algoritmo de roteamento RAPTOR [@conway2017evidencebased], o que torna o R5 extremamente rápido. A depender da quantidade de pares origem-destino, o `{r5r}` pode ser entre 6 e 200 vezes mais rápido do que outros *softwares* de roteamento multimodal no cálculo de matrizes de tempo de viagem [@higgins2022calculating].
 :::
-
 
 ## Cálculo de acessibilidade {#sec-accessibility}
 
-Após calculada a matriz de tempo de viagem entre as origens e os destinos da área de estudo, nós precisamos utilizá-la para calcular os níveis de acessibilidade do local. Para isso, nós utilizaremos o pacote `{accessibility}`[^3], também desenvolvido pela equipe do Projeto Acesso a Oportunidades, Ipea, que contém diversas funções para o cálculo de vários indicadores de acessibilidade. Como *input* básico, todas as funções requerem uma matriz de custo pré-calculada (no nosso caso, a matriz de tempo de viagem calculada na seção anterior) e dados de uso do solo, como, por exemplo, o número de determinados tipos de oportunidades em cada célula da grade que cobre a área de estudo.
+Calculada a matriz de tempo de viagem entre as origens e os destinos da área de estudo, precisamos utilizá-la para calcular os níveis de acessibilidade do local. Para isso, utilizaremos o pacote `{accessibility}` [@pereira2022accessibility] [^3], também desenvolvido pela equipe do Projeto Acesso a Oportunidades, Ipea, e que disponibiliza funções para o cálculo de vários indicadores de acessibilidade. Como *input* básico, todas as funções requerem uma matriz de custo pré-calculada (no nosso caso, a matriz de tempo de viagem calculada na seção anterior) e dados de uso do solo, como, por exemplo, o número de determinados tipos de oportunidades em cada célula da grade que cobre a área de estudo.
 
 [^3]: Disponível em <https://github.com/ipeaGIT/accessibility>.
 
+### Medida de oportunidades cumulativas
 
-**Medida de oportunidades cumulativas**
-
-A função `cumulative_cutoff()` é utilizada para calcular o número de oportunidades que pode ser alcançado em um determinado limite de custo de viagem. No exemplo abaixo, nós calculamos o número de escolas que podem ser alcançados em até 30 minutos de viagem a partir de cada origem presente em nossa matriz de tempo de viagem.
+A função `cumulative_cutoff()` é utilizada para calcular o número de oportunidades que podem ser alcançadas em um determinado limite de custo de viagem. No exemplo abaixo, primeiro carregamos a biblioteca `{accessibility}` e adequamos a nossa matriz para que ela possa ser utilizada no cálculo da acessibilidade. Em seguida, calculamos o número de escolas que podem ser alcançadas em até 30 minutos de viagem a partir de cada origem presente em nossa matriz de tempo de viagem.
 
 ```{r}
-# renomear nome das colunas
-setnames(ttm, c("fromId", "toId"), c("from_id", "to_id"))
+library(accessibility)
 
-cumulative_access <- cumulative_cutoff(
-  travel_matrix = ttm,
-  land_use_data = points,
+# renomeia colunas para usar o pacote {accessibility}
+data.table::setnames(matriz, c("fromId", "toId"), c("from_id", "to_id"))
+
+oportunidades_cumulativas <- cumulative_cutoff(
+  travel_matrix = matriz,
+  land_use_data = pontos,
   opportunity = "schools",
   travel_cost = "travel_time",
   cutoff = 30
 )
 
-head(cumulative_access)
+head(oportunidades_cumulativas)
 ```
 
+## Custo mínimo de viagem
 
-**Custo mínimo de viagem**
 
-A função `cost_to_closest()`, por sua vez, calcula o custo mínimo de viagem necessário para alcançar um determinado número de oportunidades. O código abaixo, por exemplo, calcula o tempo de viagem mínimo para alcançar o hospital mais próximo a partir de cada origem.
+A função `cost_to_closest()`, por sua vez, calcula o custo mínimo de viagem necessário para alcançar um determinado número de oportunidades. Com o código abaixo, por exemplo, calculamos o tempo de viagem mínimo para alcançar o hospital mais próximo a partir de cada origem.
 
 ```{r}
-min_cost <- cost_to_closest(
-  travel_matrix = ttm,
-  land_use_data = points,
+custo_minimo <- cost_to_closest(
+  travel_matrix = matriz,
+  land_use_data = pontos,
   opportunity = "schools",
   travel_cost = "travel_time"
 )
 
-head(min_cost)
+head(custo_minimo)
 ```
 
-**Medidas gravitacionais**
+## Medidas gravitacionais
 
-A função `gravity()` calcula medidas gravitacionais de acessibilidade - ou seja, aquelas nas quais o peso de cada oportunidade diminui gradualmente com o aumento do custo de viagem. Existem, no entanto, uma gama de diferentes tipos de funções de decaimento que podem ser utilizadas, como funções de decaimento exponenciais negativas, de potências inversas, entre outras. Por isso, esta função recebe um *input* adicional: a função de decaimento a ser utilizada no cálculo. O exemplo abaixo apresenta o cálculo de acessibilidade a estabelecimentos de educação usando uma medida gravitacional exponencial negativa com parâmetro de decaimento igual a 0.2.
+A função `gravity()` calcula medidas gravitacionais de acessibilidade - ou seja, aquelas nas quais o peso de cada oportunidade diminui gradualmente com o aumento do custo de viagem. Existem, no entanto, uma gama de diferentes tipos de funções de decaimento que podem ser utilizadas, como funções de decaimento exponenciais negativas, de potências inversas, entre outras. Por isso, esta função recebe um *input* adicional: a função de decaimento a ser utilizada no cálculo. O exemplo abaixo apresenta o cálculo de acessibilidade a estabelecimentos de educação usando uma medida gravitacional exponencial negativa com parâmetro de decaimento igual a 0,2.
 
 ```{r}
-negative_exp_access <- gravity(
-  travel_matrix  = ttm,
-  land_use_data = points,
+grav_exp_negativa <- gravity(
+  travel_matrix  = matriz,
+  land_use_data = pontos,
   opportunity = "schools",
   travel_cost = "travel_time",
   decay_function = decay_exponential(0.2)
 )
 
-head(negative_exp_access)
+head(grav_exp_negativa)
 ```
 
-**Medidas com competição**
+## Medidas com competição
 
-Por fim, a função `floating_catchment_area()` calcula níveis de acessibilidade levando em consideração a competição por oportunidades usando diferentes indicadores do tipo *floating catchment area*. Como diversos métodos de FCA podem ser utilizados, a função requer que o método desejado seja explicitamente assinalado. E, assim como a função de acessibilidade gravitacional, a função de decaimento utilizada também deve ser definida pelo usuário. O código a seguir mostra um exemplo de cálculo de acessibilidade a oportunidades de emprego usando o método BFCA [@paez2019demand], levando em consideração os efeitos de competição entre a população como um todo e uma função de decaimento exponencial com parâmetro de decaimento igual a 0.05.
+Por fim, a função `floating_catchment_area()` calcula níveis de acessibilidade levando em consideração a competição por oportunidades usando diferentes indicadores do tipo *floating catchment area* (FCA). Como diversos métodos de FCA podem ser utilizados, a função requer que o método desejado seja explicitamente assinalado. E, assim como a função de acessibilidade gravitacional, a função de decaimento utilizada também deve ser definida pelo usuário. O código a seguir mostra um exemplo de cálculo de acessibilidade a estabelecimentos de saúde usando o método BFCA [@paez2019demand], levando em consideração os efeitos de competição entre a população como um todo e uma função de decaimento exponencial com parâmetro de decaimento igual a 0,05.
 
 ```{r}
-bfca_access <- floating_catchment_area(
-  travel_matrix = ttm,
-  land_use_data = points,
+competicao_bfca <- floating_catchment_area(
+  travel_matrix = matriz,
+  land_use_data = pontos,
   opportunity = "schools",
   travel_cost = "travel_time",
   demand = "population",
@@ -229,23 +220,22 @@ bfca_access <- floating_catchment_area(
   decay_function = decay_exponential(0.05)
 )
 
-head(bfca_access)
+head(competicao_bfca)
 ```
 
 As funções apresentadas nesta seção também podem receber outros *inputs* não explicitamente mencionados aqui. Para mais informações sobre cada um dos parâmetros, por favor consulte a documentação do pacote `{accessibility}` em seu [site](https://ipeagit.github.io/accessibility/).
 
+### Cálculo de acessibilidade com o `{r5r}`
 
-## Cálculo de acessibilidade com o r5r
-
-Ao longo das duas seções anteriores, nós mostramos como calcular níveis de acessibilidade passo-a-passo. Para fins didáticos, é importante entender que o cálculo de estimativas de acessibilidade tem como primeiro passo a geração de uma matriz de custos de viagens que posteriormente é utilizada para estimar níveis de acessibilidade. No entanto, o `{r5r}` inclui também uma função chamada `accessibility()` que faz todo esse processamento de uma vez só.
+Ao longo das duas seções anteriores, mostramos como calcular níveis de acessibilidade passo-a-passo. Para fins didáticos, é importante entender que o cálculo de estimativas de acessibilidade tem como primeiro passo a geração de uma matriz de custos de viagens que, em seguida, é utilizada para estimar níveis de acessibilidade. No entanto, o `{r5r}` inclui também uma função chamada `accessibility()` que calcula os níveis de acessibilidade com uma única chamada, sem etapas intermediárias.
 
 De forma parecida com a função de cálculo de matriz de tempo de viagem, a função `accessibility()` recebe como *inputs* uma conexão com o R5, as origens, os destinos, os modos de transporte e o tempo de partida, entre outros argumentos. Adicionalmente, devem ser listadas também quais oportunidades devem ser consideradas e a função de decaimento que deve ser utilizada, bem como o valor do limite de custo e do parâmetro de decaimento. O exemplo abaixo mostra uma aplicação desta função.
 
 ```{r}
-r5r_access <- accessibility(
-  r5r_core,
-  origins = points,
-  destinations = points,
+acessibilidade_r5r <- accessibility(
+  conexao_r5r,
+  origins = pontos,
+  destinations = pontos,
   opportunities_colname = "schools",
   decay_function = "step",
   cutoffs = 30,
@@ -260,96 +250,138 @@ r5r_access <- accessibility(
   progress = FALSE
 )
 
-head(r5r_access)
+head(acessibilidade_r5r)
 ```
 
+Uma pequena diferença entre o comportamento desta função `r5r::accessibility()`e o da `cumulative_access()` do pacote `{accessibility}` está no fato de que, nesta, pares origem-destino cujos tempos de viagem são iguais ao valor definido como limite são excluídos do cálculo da acessibilidade, enquanto na função do pacote `{accessibility}` eles são incluídos. Ou seja, para simularmos o cálculo acima com a `cumulative_access()` precisamos estabelecer um tempo de viagem limite de 29 minutos, e não 30. No código abaixo, comparamos os resultados das duas funções.
 
-Como podemos observar, o resultado desta função são os mesmos níveis de acessibilidade já calculados anteriormente, no exemplo da medida de oportunidades cumulativas. A informação “intermediária” do tempo de viagem entre origens e destinos, consequentemente, não fica disponível ao usuário com o uso desta função. Ainda assim, este fluxo de trabalho pode ser uma boa alternativa para pessoas que estejam interessadas unicamente nos níveis de acessibilidade, não dependendo do tempo de viagem em suas análises.
+```{r}
+ops_cumulativas_29 <- cumulative_cutoff(
+	travel_matrix = matriz,
+	land_use_data = pontos,
+	opportunity = "schools",
+	travel_cost = "travel_time",
+	cutoff = 29
+)
+
+# compara os niveis de acessibilidade calculados das duas maneiras distintas
+comparacao_acessibilidade <- merge(
+  acessibilidade_r5r,
+  ops_cumulativas_29,
+  by.x = "from_id",
+  by.y = "id"
+)
+
+# renomeia colunas com niveis de acessibilidade
+data.table::setnames(
+  comparacao_acessibilidade,
+  old = c("accessibility", "schools"),
+  new = c("acesso_r5r", "acesso_accessibility")
+)
+
+head(comparacao_acessibilidade[, .(from_id, acesso_r5r, acesso_accessibility)])
+```
+
+Como podemos observar, fora a pequena diferença de comportamento, o resultado das duas funções é o mesmo. A principal diferença entre os dois métodos, no entanto, é que a informação “intermediária” do tempo de viagem entre origens e destinos não fica disponível ao usuário com o uso da função `accessibility()` do pacote `{r5r}`. Ainda assim, este fluxo de trabalho pode ser uma boa alternativa para pessoas que estejam interessadas unicamente nos níveis de acessibilidade, não dependendo do tempo de viagem em suas análises.
+
+:::{.callout-caution} 
+## Considerando outros tipos de custo de viagem no cálculo da acessibilidade
+
+Outra diferença entre a função de acessibilidade do `{r5r}` e as funções do pacote `{accessibility}` está no fato de que estas podem trabalhar com variados tipos de custo de viagem, como tempo, custo monetário, conforto, *etc*. A função do `{r5r}`, porém, é menos flexível, limitando-se a considerar apenas restrições de tempo de viagem.
+:::
 
 ## Análises de acessibilidade
 
-Calculados os níveis de acessibilidade, procedemos então para sua análise. Existe uma grande variedade de análises que podem ser feitas usando esses dados: por exemplo, em diagnósticos das condições de acessibilidade urbana de diferentes bairros, pesquisas sobre desigualdades de acesso a oportunidades entre diferentes grupos sociais, análises sobre exclusão social e *accessibility poverty* (insuficiência de acessibilidade, em tradução livre), etc. Nesta seção, no entanto, nos restringiremos a apresentar duas análises relativamente simples e de fácil comunicação: a distribuição espacial da acessibilidade e sua distribuição entre diferentes grupos de renda.
+Calculados os níveis de acessibilidade, procedemos então para sua análise. Existe uma grande variedade de análises que podem ser feitas usando esses dados: por exemplo, diagnósticos das condições de acessibilidade urbana de diferentes bairros, pesquisas sobre desigualdades de acesso a oportunidades entre diferentes grupos sociais, análises sobre exclusão social e *accessibility poverty* (insuficiência de acessibilidade), *etc*. Nesta seção, no entanto, apresentaremos apenas duas análises relativamente simples e de fácil comunicação: a distribuição espacial da acessibilidade e sua distribuição entre diferentes grupos de renda.
 
 **Distribuição espacial de acessibilidade urbana**
 
-Para compreendermos a distribuição espacial da acessibilidade urbana de uma determinada cidade ou região, primeiro precisamos obter as informações espaciais dos pontos que foram utilizados como origens e destinos no cálculo da matriz. Os pontos que nós usamos nos exemplos anteriores, por exemplo, correspondem a células de uma grade hexagonal baseadas no índice H3, desenvolvido pela Uber [@brodsky2018h3]. O código e o mapa a seguir mostram a distribuição desses hexágonos na nossa área de estudo. Aqui, a gente faz o download da grade espacial disponível no pacote `{aopdata}`, que será apresentado com mais detalhes na [Seção 5](s5_dados_aop.qmd):
+Para compreendermos a distribuição espacial da acessibilidade urbana de uma determinada cidade ou região, primeiro precisamos obter as informações espaciais dos pontos que foram utilizados como origens e destinos no cálculo da matriz. Os pontos que usamos nos exemplos anteriores, por exemplo, correspondem aos centróides de células de uma grade hexagonal baseadas no índice [H3](https://h3geo.org/), desenvolvido pela Uber [@brodsky2018h3]. A grade da cidade de Porto Alegre, bem como informações sociodemográficas e de uso do solo, é disponibilizada pela equipe do Projeto Acesso a Oportunidades através do pacote de R `{aopdata}` [@pereira2022aopdata]. O pacote e suas funções são apresentados em detalhes na [Seção 5](s5_dados_aop.qmd). Com o código abaixo, carregamos a biblioteca de visualização de dados, baixamos as informações espaciais da grade e as apresentamos em forma de mapa.
 
 ```{r}
 #| message: false
-# download grade espacial
-poa_grid <- aopdata::read_grid(city="Porto Alegre")
+library(ggplot2)
 
-# filtra apenas hexagonos utilizados na análise
-poa_grid <- subset(poa_grid, id_hex %in% points$id)
+# baixa a grade espacial
+grade_poa <- aopdata::read_grid(city = "Porto Alegre")
 
-# cria mapa
-ggplot(poa_grid) + geom_sf()
+# mantem na grade apenas os hexagonos utilizados na analise
+grade_poa <- subset(grade_poa, id_hex %in% pontos$id)
+
+# visualizando o mapa
+ggplot(grade_poa) + geom_sf() + theme_minimal()
 ```
 
-
-Para visualizarmos os nossos dados de acessibilidade espacialmente, portanto, nós precisamos unir a nossa tabela de estimativas de acessibilidade (vamos usar os níveis calculados com a medida de oportunidades cumulativas) com a tabela que contém os dados espaciais da grade, usando as colunas de identificação dos hexágonos como colunas-chave. A operação de *left join* usada para isso, bem como o seu resultado em formato de imagem, são apresentados a seguir.
+Para visualizarmos os nossos dados de acessibilidade espacialmente, precisamos unir a tabela de estimativas de acessibilidade (vamos usar os níveis calculados com a medida de oportunidades cumulativas) com a tabela que contém os dados espaciais da grade, usando as colunas de identificação dos hexágonos como colunas-chave. A operação usada para isso e o seu resultado em formato de mapa são apresentados a seguir.
 
 ```{r}
-# converte objeto para data.table
-setDT(poa_grid)
+# junta as tabelas de dados espaciais e de niveis de acessibilidade
+acesso_espacial <- merge(
+  grade_poa,
+  oportunidades_cumulativas,
+  by.x = "id_hex",
+  by.y = "id"
+)
 
-# merge para trazer info do número de escolas
-poa_grid[cumulative_access, on = c(id_hex = "id"), schools_access := i.schools]
-
-# converte de volta para objeto espacial sf
-poa_grid <- st_sf(poa_grid)
-
-# plotar mapa
-ggplot(poa_grid) +
-  geom_sf(aes(fill = schools_access), color = NA) +
-  scale_fill_viridis_c(option = "inferno") + 
-  labs(fill='Núm. de escolas\nacessíveis') +
+# configura mapa
+ggplot(acesso_espacial) +
+  geom_sf(aes(fill = schools), color = NA) +
+  scale_fill_viridis_c(option = "inferno") +
+  labs(fill = "Núm. de escolas\nacessíveis") +
   theme_minimal()
 ```
 
-
-Como podemos ver, os níveis de acessibilidade tendem a se concentrar de forma mais acentuada no centro da cidade, onde existe maior concentração de empregos, e próximos aos grandes corredores de transportes da cidade. Por terem fácil acesso a modos de alta capacidade e velocidade, pessoas que moram mais perto desses corredores tendem a acessar locais distantes relativamente rápido. Em contraste, pessoas que moram mais longe desses corredores,  dependem de modos de menor menor frequência e velocidade operacional (como os ônibus municipais, por exemplo) e precisam gastar mais tempo para alcançar os corredores de média e alta capacidade. Como consequência, os níveis de acessibilidade de pessoas que moram afastadas do centro e de corredores de alta capacidade tendem a ser menores.
+Como podemos ver, os níveis de acessibilidade tendem a se concentrar de forma mais acentuada no centro da cidade, onde existe maior concentração de empregos, e próximos aos grandes corredores de transportes da cidade. Por terem fácil acesso a modos de alta capacidade e velocidade, pessoas que moram mais perto desses corredores tendem a acessar locais distantes relativamente rápido. Em contraste, pessoas que moram mais afastadas desses corredores, dependem de modos de menor menor frequência e velocidade operacional (como os ônibus municipais, por exemplo) e precisam gastar mais tempo para alcançar os corredores de média e alta capacidade. Como consequência, os níveis de acessibilidade de pessoas que moram afastadas do centro e de corredores de alta capacidade tendem a ser menores.
 
 **Distribuição socioeconômica de acessibilidade urbana**
 
-O mapa acima, embora revelador quanto aos locais em que estão dispostas as maiores concentrações de acessibilidade, nada diz sobre quais são os grupos socioeconômicos que possuem os maiores potenciais de acesso a oportunidades na região. Para isso, nós precisamos cruzar informações demográficas e econômicas das pessoas que moram em cada um dos nossos pontos de origem com os dados de acessibilidade previamente calculados.
+O mapa acima, embora revelador quanto aos locais em que estão dispostas as maiores concentrações de acessibilidade, nada diz sobre quais são os grupos socioeconômicos que possuem os maiores potenciais de acesso a oportunidades na região. Para isso, precisamos cruzar informações demográficas e econômicas das pessoas que moram em cada um dos pontos de origem com os dados de acessibilidade previamente calculados.
 
-No exemplo abaixo, nós juntamos aos dados de acessibilidade a informação do decil de renda de cada uma das origens, considerando a renda média de cada uma das pessoas que as habitam. Assim, nós conseguimos identificar se um hexágono é de baixa, média ou alta renda. Os dados socioeconômicos que utilizamos no exemplo vêm do censo demográfico brasileiro de 2010, e foram agregados na grade espacial de hexágonos por @pereira2022distribuicao. Aqui, nós acessamos os dados no R usando o pacote `{aopdata}`.
+No exemplo abaixo, juntamos aos dados de acessibilidade a informação do decil de renda de cada uma das origens, considerando a renda média de cada uma das pessoas que as habitam (dado também proveniente do pacote `{aopdata}`). Assim, conseguimos identificar se um hexágono é de baixa, média ou alta renda.
 
 ```{r}
 #| message: false
-poa_population <- aopdata::read_population("Porto Alegre", showProgress = FALSE)
+populacao_poa <- aopdata::read_population("Porto Alegre", showProgress = FALSE)
 
-setDT(poa_grid)
-poa_grid[
-  poa_population,
-  on = "id_hex",
-  `:=`(
-	pop_count = i.P001,
-	income_decile = i.R003
-  )
-]
+# renomeia colunas com contagem populacional e decil de renda
+data.table::setnames(
+  populacao_poa,
+  old = c("P001", "R003"),
+  new = c("contagem_pop", "decil")
+)
 
-poa_grid[, .(id_hex, schools_access, pop_count, income_decile)] |> head()
+# junta as tabelas de niveis de acessibilidade espacializados e dados sociodem.
+acesso_sociodemografico <- merge(
+  acesso_espacial,
+  populacao_poa,
+  by = "id_hex"
+)
+
+head(acesso_sociodemografico[, c("id_hex", "schools", "contagem_pop", "decil")])
 ```
 
-Tendo a informação do decil de renda em que cada hexágono se encontra, nós podemos calcular a distribuição da acessibilidade da população dentro de cada um desses níveis de renda. Para isso, nós precisamos ponderar o nível de acessibilidade de cada origem pela quantidade de pessoas que residem ali - daí o porquê de termos também trazido a informação da contagem populacional em cada hexágono. Fazendo a ponderação, nós obtemos a distribuição da acessibilidade das pessoas localizadas em origens de um determinado decil de renda. Caso não ponderássemos, no entanto, nós teríamos a distribuição de acessibilidade não das pessoas localizadas em cada hexágono, mas dos hexágonos em si. Como em nossa análise nós nos importamos com as pessoas, e não com as unidades espaciais em que elas estão agregadas, precisamos fazer a ponderação. Nós podemos visualizar a distribuição de acessibilidade de cada decil usando um *boxplot*, como feito a seguir.
+Tendo a informação do decil de renda em que cada hexágono se encontra, podemos calcular a distribuição da acessibilidade da população dentro de cada um desses níveis de renda. Para isso, precisamos ponderar o nível de acessibilidade de cada origem pela quantidade de pessoas que residem ali - daí o porquê de termos também trazido a informação da contagem populacional em cada hexágono. Fazendo a ponderação, obtemos a distribuição da acessibilidade das pessoas localizadas em origens de um determinado decil de renda. Caso não ponderássemos, no entanto, teríamos a distribuição de acessibilidade não das pessoas localizadas em cada hexágono, mas dos hexágonos em si. Como em nossa análise nos importamos com as pessoas, e não com as unidades espaciais em que elas estão agregadas, precisamos fazer a ponderação. Podemos visualizar a distribuição de acessibilidade de cada decil usando um *box plot*, como feito a seguir.
 
 ```{r}
-ggplot(poa_grid[!is.na(income_decile)]) +
+ggplot(subset(acesso_sociodemografico, !is.na(decil))) +
   geom_boxplot(
-	aes(
-  	x = as.factor(income_decile),
-  	y = schools_access,
-  	color = as.factor(income_decile),
-  	weight = pop_count
-	)
+      aes(
+   	 x = as.factor(decil),
+   	 y = schools,
+   	 color = as.factor(decil),
+   	 weight = contagem_pop
+      )
   ) +
-  labs(color="Decil de\nrenda", x="Decil de Renda", y="Número de escolas\nacessíveis") +
-  scale_color_brewer(palette = 'RdBu') +
-  scale_x_discrete(labels=c("D1 mais\nPobres", paste0('D', 2:9), "D10 mais\nRicos")) +
+  labs(
+	color = "Decil de\nrenda",
+	x = "Decil de renda",
+	y = "Número de escolas\nacessíveis"
+  ) +
+  scale_color_brewer(palette = "RdBu") +
+  scale_x_discrete(
+	labels = c("D1\nmais\npobres", paste0("D", 2:9), "D10\nmais\nricos")
+  ) +
   theme_minimal()
-
 ```
 
-O gráfico é muito claro em seu conteúdo: pessoas de mais baixa renda tendem a ter níveis de acessibilidade consideravelmente menores do que as de alta renda. Isso é um padrão comum em praticamente todas as cidades brasileiras [@pereira2019desigualdades]. Isto ocorre, em larga medida, devido à localização espacial das comunidades de baixa e alta renda no território: os mais ricos costumam morar em áreas mais valorizadas, próximas das grandes concentração de empregos (e oportunidades de educação, saúde, lazer, etc., também) e com maior oferta de transporte público de média e alta capacidade. Os mais pobres, por sua vez, tendem a morar em locais mais afastados, onde o valor da terra é menor. Consequentemente, tendem também a se afastar das grandes concentrações de oportunidades. Junta-se a isso o fato de, na maior parte dos casos, a oferta de serviços de transporte público de média e alta capacidade ser pior em locais com maior concentração de pessoas de baixa renda. Como consequência, seus níveis de acessibilidade são, em média, muito menores do que os dos mais ricos, como o gráfico deixa claro.
+O gráfico é muito claro em seu conteúdo: pessoas de mais baixa renda tendem a ter níveis de acessibilidade consideravelmente menores do que as de alta renda. Este é um padrão comum em praticamente todas as cidades brasileiras [@pereira2019desigualdades] que ocorre, em larga medida, devido à localização espacial das comunidades de baixa e alta renda no território: os mais ricos costumam morar em áreas mais valorizadas, próximas das grandes concentração de empregos (e oportunidades de educação, saúde, lazer, *etc*) e com maior oferta de transporte público de média e alta capacidade. Os mais pobres, por sua vez, tendem a morar em locais mais afastados, onde o valor da terra é menor. Consequentemente, tendem também a se afastar das grandes concentrações de oportunidades. Junta-se a isso o fato de, na maior parte dos casos, a oferta de serviços de transporte público de média e alta capacidade ser pior em locais com maior concentração de pessoas de baixa renda. Como consequência, seus níveis de acessibilidade são, em média, muito menores do que os dos mais ricos, como o gráfico deixa claro.
