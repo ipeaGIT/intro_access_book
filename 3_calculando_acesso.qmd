@@ -98,7 +98,7 @@ Esta pasta possui quatro arquivos que vamos utilizar ao longo deste capítulo:
 - O arquivo `poa_hexgrid.csv`, com as coordenadas geográficas dos centróides de uma grade hexagonal regular que cobre toda a área de estudo e com informações sobre o tamanho da população residente e o número de escolas em cada hexágono. Esses pontos serão utilizados como as origens e os destinos no cálculo da matriz de tempo de viagem.
 
 
-### Calculando a matriz de tempo de viagem 666
+### Calculando a matriz de tempo de viagem
 
 Antes de calcular a matriz de tempo de viagem, precisamos aumentar a memória disponível para a execução de processos do Java, linguagem em que o R5 é escrito. Isto é necessário porque, por padrão, o R aloca apenas 512 MB de memória para processos do Java, o que frequentemente não é suficiente para o cálculo de grandes matrizes com o `{r5r}`. Para aumentar a memória disponível para 2 GB, por exemplo, usamos o seguinte comando no início do *script*, antes mesmo de carregar as bibliotecas de R necessárias para a nossa análise:
 
