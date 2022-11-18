@@ -280,7 +280,7 @@ gtfs_filtrado <- filter_by_time_of_day(
 )
 
 head(
-  smaller_gtfs$stop_times[
+  gtfs_filtrado$stop_times[
     ,
     c("trip_id", "departure_time", "arrival_time", "stop_sequence")
   ]
