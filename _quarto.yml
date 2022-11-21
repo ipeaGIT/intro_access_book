@@ -9,7 +9,11 @@ book:
   subtitle: "um guia prático em R"
   author:
   -   Rafael H. M. Pereira
+      url: https://www.urbandemographics.org/about/
+      affiliation: Ipea - Instituto de Pesquisa Econômica Aplicada
   -   Daniel Herszenhut
+      url: https://dhersz.netlify.app/en/
+      affiliation: Ipea - Instituto de Pesquisa Econômica Aplicada
   date: today
   status: "forthcoming"
   language: pt
@@ -52,12 +56,10 @@ book:
   page-navigation: true
   page-footer: 
     border: false
-    left: "Copyright 2022, Ipea (Institute for Applied Economic Research)" 
+    left: "Copyright 2022, Ipea - Instituto de Pesquisa Econômica Aplicada" 
     right: 
       - icon: github
         href: https://github.com/ipeaGIT/aop_curso
-
-bibliography: references.bib
 
 citation:
   type: book
@@ -65,10 +67,10 @@ citation:
   author:
   -   Rafael H. M. Pereira
   -   Daniel Herszenhut
-
   url: https://ipeagit.github.io/intro_access_book/
-  publisher: "Instituto de Pesquisa Econômica Aplicada (Ipea)"
-  issued: 2023
+  publisher: "Ipea - Instituto de Pesquisa Econômica Aplicada""
+  issued: 2022
+bibliography: references.bib
 google-scholar: true
 
 editor_options:
