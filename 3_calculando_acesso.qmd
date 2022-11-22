@@ -1,4 +1,4 @@
-# Calculando estimativas de acessibilidade urbana em R {#sec-3_calculando_acesso}
+# Calculando estimativas de acessibilidade em R {#sec-3_calculando_acesso}
 
 ## Cálculo da matriz de tempo de viagem {#sec-matrix}
 
@@ -173,7 +173,7 @@ oportunidades_cumulativas <- cumulative_cutoff(
 head(oportunidades_cumulativas)
 ```
 
-## Custo mínimo de viagem
+### Custo mínimo de viagem
 
 
 A função `cost_to_closest()`, por sua vez, calcula o custo mínimo de viagem necessário para alcançar um determinado número de oportunidades. Com o código abaixo, por exemplo, calculamos o tempo de viagem mínimo para alcançar o hospital mais próximo a partir de cada origem.
@@ -189,7 +189,7 @@ custo_minimo <- cost_to_closest(
 head(custo_minimo)
 ```
 
-## Medidas gravitacionais
+### Medidas gravitacionais
 
 A função `gravity()` calcula medidas gravitacionais de acessibilidade - ou seja, aquelas nas quais o peso de cada oportunidade diminui gradualmente com o aumento do custo de viagem. Existem, no entanto, uma gama de diferentes tipos de funções de decaimento que podem ser utilizadas, como funções de decaimento exponenciais negativas, de potências inversas, entre outras. Por isso, esta função recebe um *input* adicional: a função de decaimento a ser utilizada no cálculo. O exemplo abaixo apresenta o cálculo de acessibilidade a estabelecimentos de educação usando uma medida gravitacional exponencial negativa com parâmetro de decaimento igual a 0,2.
 
@@ -205,7 +205,7 @@ grav_exp_negativa <- gravity(
 head(grav_exp_negativa)
 ```
 
-## Medidas com competição
+### Medidas com competição
 
 Por fim, a função `floating_catchment_area()` calcula níveis de acessibilidade levando em consideração a competição por oportunidades usando diferentes indicadores do tipo *floating catchment area* (FCA). Como diversos métodos de FCA podem ser utilizados, a função requer que o método desejado seja explicitamente assinalado. E, assim como a função de acessibilidade gravitacional, a função de decaimento utilizada também deve ser definida pelo usuário. O código a seguir mostra um exemplo de cálculo de acessibilidade a estabelecimentos de saúde usando o método BFCA [@paez2019demand], levando em consideração os efeitos de competição entre a população como um todo e uma função de decaimento exponencial com parâmetro de decaimento igual a 0,05.
 
