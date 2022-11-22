@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.2.269">
@@ -9,7 +9,7 @@
 <meta name="author" content="Rafael H. M. Pereira">
 <meta name="author" content="Daniel Herszenhut">
 
-<title>Introdução à acessibilidade urbana - 3&nbsp; Calculando estimativas de acessibilidade urbana em R</title>
+<title>Introdução à acessibilidade urbana - 3&nbsp; Calculando estimativas de acessibilidade em R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -136,15 +136,15 @@ div.csl-indent {
   "type": "textbox",
   "limit": 20,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar"
   }
 }</script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YVERJQF9PJ"></script>
@@ -158,20 +158,22 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </script>
 
 
-<meta property="og:title" content="Introdução à acessibilidade urbana - 3&nbsp; Calculando estimativas de acessibilidade urbana em R">
+<meta property="og:title" content="Introdução à acessibilidade urbana - 3&nbsp; Calculando estimativas de acessibilidade em R">
 <meta property="og:description" content="A primeira etapa necessária para estimar os níveis de acessibilidade de uma área de estudo é calcular a matriz de custo de viagem entre as diversas origens e destinos que a compõem.">
 <meta property="og:site-name" content="Introdução à acessibilidade urbana">
-<meta name="twitter:title" content="Introdução à acessibilidade urbana - 3&nbsp; Calculando estimativas de acessibilidade urbana em R">
+<meta name="twitter:title" content="Introdução à acessibilidade urbana - 3&nbsp; Calculando estimativas de acessibilidade em R">
 <meta name="twitter:description" content="A primeira etapa necessária para estimar os níveis de acessibilidade de uma área de estudo é calcular a matriz de custo de viagem entre as diversas origens e destinos que a compõem.">
 <meta name="twitter:card" content="summary">
 <meta name="citation_title" content="Introdução à acessibilidade urbana: um guia prático em R">
+<meta name="citation_abstract" content="O objetivo deste livro é apresentar os conceitos e habilidades práticas necessárias para fazer estudos e avaliações de impacto de acessibilidade urbana. O livro começa dando uma visão geral sobre o conceito e os principais indicadores de acessibilidade. Em seguida, ensina como analisar dados espaciais e de redes de transporte para estimar níveis de acessibilidade por diferentes modos de transporte e como visualizar os resultados em forma de mapas e gráficos. O livro também familiariza o leitor com dados de redes de transporte público em formato GTFS e ensina como manipular e visualizar esse tipo de dado. Num dos seus principais capítulos, o livro ensina também como os dados e a metodologia apresentados nos capítulos anteriores podem ser utilizados para avaliar o impacto de projetos de transporte sobre as condições de acesso a oportunidades da população. Por fim, o livro apresenta como baixar, analisar e visualizar estimativas de acessibilidade já calculadas para cidades brasileiras e disponibilizadas pela equipe do Projeto Acesso a Oportunidades, do Ipea.">
 <meta name="citation_author" content="Rafael H. M. Pereira">
 <meta name="citation_author" content="Daniel Herszenhut">
 <meta name="citation_publication_date" content="2022">
 <meta name="citation_cover_date" content="2022">
 <meta name="citation_year" content="2022">
 <meta name="citation_fulltext_html_url" content="https://ipeagit.github.io/intro_access_book/">
-<meta name="citation_language" content="en">
+<meta name="citation_language" content="pt">
+<meta name="citation_book_title" content="Introdução à acessibilidade urbana: um guia prático em R">
 <meta name="citation_reference" content="citation_title=Transport modelling in the age of big data;,citation_author=Cuauhtemoc Anda;,citation_author=Alexander Erath;,citation_author=Pieter Jacobus Fourie;,citation_publication_date=2017-08;,citation_cover_date=2017-08;,citation_year=2017;,citation_issue=sup1;,citation_doi=10.1080/12265934.2017.1281150;,citation_issn=1226-5934;,citation_volume=21;,citation_journal_title=International Journal of Urban Sciences;,citation_publisher=Routledge;">
 <meta name="citation_reference" content="citation_title=Estimating the influence of crowding and travel time variability on accessibility to jobs in a large public transport network using smart card big data;,citation_author=Renato Arbex;,citation_author=Claudio B. Cunha;,citation_publication_date=2020-05;,citation_cover_date=2020-05;,citation_year=2020;,citation_doi=10.1016/j.jtrangeo.2020.102671;,citation_issn=09666923;,citation_volume=85;,citation_language=en-US;,citation_journal_title=Journal of Transport Geography;">
 <meta name="citation_reference" content="citation_title=The sustainable mobility paradigm;,citation_author=David Banister;,citation_publication_date=2008-03;,citation_cover_date=2008-03;,citation_year=2008;,citation_issue=2;,citation_doi=10.1016/j.tranpol.2007.10.005;,citation_issn=0967070X;,citation_volume=15;,citation_language=en-US;,citation_journal_title=Transport Policy;">
@@ -236,7 +238,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculando estimativas de acessibilidade urbana em R</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculando estimativas de acessibilidade em R</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -311,7 +313,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./s2_calculo.html" class="sidebar-item-text sidebar-link">SEÇÃO 2: Calculando estimativas de acessibilidade</a>
+            <a href="./s2_calculo.html" class="sidebar-item-text sidebar-link">SEÇÃO 2: Como calcular acessibilidade urbana</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -319,7 +321,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3_calculando_acesso.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculando estimativas de acessibilidade urbana em R</span></a>
+  <a href="./3_calculando_acesso.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculando estimativas de acessibilidade em R</span></a>
   </div>
 </li>
       </ul>
@@ -395,7 +397,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Table of contents</h2>
+    <h2 id="toc-title">Índice</h2>
    
   <ul>
   <li><a href="#sec-matrix" id="toc-sec-matrix" class="nav-link active" data-scroll-target="#sec-matrix"><span class="toc-section-number">3.1</span>  Cálculo da matriz de tempo de viagem</a>
@@ -407,29 +409,27 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   <li><a href="#sec-accessibility" id="toc-sec-accessibility" class="nav-link" data-scroll-target="#sec-accessibility"><span class="toc-section-number">3.2</span>  Cálculo de acessibilidade</a>
   <ul class="collapse">
   <li><a href="#medida-de-oportunidades-cumulativas" id="toc-medida-de-oportunidades-cumulativas" class="nav-link" data-scroll-target="#medida-de-oportunidades-cumulativas"><span class="toc-section-number">3.2.1</span>  Medida de oportunidades cumulativas</a></li>
+  <li><a href="#custo-mínimo-de-viagem" id="toc-custo-mínimo-de-viagem" class="nav-link" data-scroll-target="#custo-mínimo-de-viagem"><span class="toc-section-number">3.2.2</span>  Custo mínimo de viagem</a></li>
+  <li><a href="#medidas-gravitacionais" id="toc-medidas-gravitacionais" class="nav-link" data-scroll-target="#medidas-gravitacionais"><span class="toc-section-number">3.2.3</span>  Medidas gravitacionais</a></li>
+  <li><a href="#medidas-com-competição" id="toc-medidas-com-competição" class="nav-link" data-scroll-target="#medidas-com-competição"><span class="toc-section-number">3.2.4</span>  Medidas com competição</a></li>
+  <li><a href="#cálculo-de-acessibilidade-com-o-r5r" id="toc-cálculo-de-acessibilidade-com-o-r5r" class="nav-link" data-scroll-target="#cálculo-de-acessibilidade-com-o-r5r"><span class="toc-section-number">3.2.5</span>  Cálculo de acessibilidade com o <code>{r5r}</code></a></li>
   </ul></li>
-  <li><a href="#custo-mínimo-de-viagem" id="toc-custo-mínimo-de-viagem" class="nav-link" data-scroll-target="#custo-mínimo-de-viagem"><span class="toc-section-number">3.3</span>  Custo mínimo de viagem</a></li>
-  <li><a href="#medidas-gravitacionais" id="toc-medidas-gravitacionais" class="nav-link" data-scroll-target="#medidas-gravitacionais"><span class="toc-section-number">3.4</span>  Medidas gravitacionais</a></li>
-  <li><a href="#medidas-com-competição" id="toc-medidas-com-competição" class="nav-link" data-scroll-target="#medidas-com-competição"><span class="toc-section-number">3.5</span>  Medidas com competição</a>
-  <ul class="collapse">
-  <li><a href="#cálculo-de-acessibilidade-com-o-r5r" id="toc-cálculo-de-acessibilidade-com-o-r5r" class="nav-link" data-scroll-target="#cálculo-de-acessibilidade-com-o-r5r"><span class="toc-section-number">3.5.1</span>  Cálculo de acessibilidade com o <code>{r5r}</code></a></li>
-  </ul></li>
-  <li><a href="#análises-de-acessibilidade" id="toc-análises-de-acessibilidade" class="nav-link" data-scroll-target="#análises-de-acessibilidade"><span class="toc-section-number">3.6</span>  Análises de acessibilidade</a></li>
+  <li><a href="#análises-de-acessibilidade" id="toc-análises-de-acessibilidade" class="nav-link" data-scroll-target="#análises-de-acessibilidade"><span class="toc-section-number">3.3</span>  Análises de acessibilidade</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/3_calculando_acesso.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/3_calculando_acesso.qmd" class="toc-action">Editar essa página</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span id="sec-3_calculando_acesso" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculando estimativas de acessibilidade urbana em R</span></span></h1>
+<h1 class="title"><span id="sec-3_calculando_acesso" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculando estimativas de acessibilidade em R</span></span></h1>
 </div>
 
 
 <div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">Authors</div>
-  <div class="quarto-title-meta-heading">Affiliation</div>
+  <div class="quarto-title-meta-heading">Autores</div>
+  <div class="quarto-title-meta-heading">Afiliação</div>
   
     <div class="quarto-title-meta-contents">
     <a href="https://www.urbandemographics.org/about/">Rafael H. M. Pereira</a> <a href="https://orcid.org/0000-0003-2125-7465" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
@@ -461,17 +461,17 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 
 <section id="sec-matrix" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="sec-matrix"><span class="header-section-number">3.1</span> Cálculo da matriz de tempo de viagem</h2>
-<p>A primeira etapa necessária para estimar os níveis de acessibilidade de uma área de estudo é calcular a matriz de custo de viagem entre as diversas origens e destinos que a compõem. Como comentado anteriormente, na literatura científica e na prática do planejamento de sistemas de transporte esse custo é mais frequentemente representado pelo tempo de viagem que separa dois pontos <span class="citation" data-cites="el-geneidy2016cost venter2016assessing">(<a href="references.html#ref-el-geneidy2016cost" role="doc-biblioref">El-Geneidy et al. 2016</a>; <a href="references.html#ref-venter2016assessing" role="doc-biblioref">Venter 2016</a>)</span>, embora trabalhos recentes tenham considerado também outros fatores, como o dinheiro necessário para realizar uma viagem e o nível de conforto da viagem entre um ponto e outro <span class="citation" data-cites="arbex2020estimating herszenhut2022impact">(<a href="references.html#ref-arbex2020estimating" role="doc-biblioref">Arbex and Cunha 2020</a>; <a href="references.html#ref-herszenhut2022impact" role="doc-biblioref">Herszenhut et al. 2022</a>)</span>. Pela prevalência deste tipo de matriz na literatura e na prática, porém, iremos nos focar em matrizes de tempo de viagem.</p>
+<p>A primeira etapa necessária para estimar os níveis de acessibilidade de uma área de estudo é calcular a matriz de custo de viagem entre as diversas origens e destinos que a compõem. Como comentado anteriormente, na literatura científica e na prática do planejamento de sistemas de transporte esse custo é mais frequentemente representado pelo tempo de viagem que separa dois pontos <span class="citation" data-cites="el-geneidy2016cost venter2016assessing">(<a href="references.html#ref-el-geneidy2016cost" role="doc-biblioref">El-Geneidy et al. 2016</a>; <a href="references.html#ref-venter2016assessing" role="doc-biblioref">Venter 2016</a>)</span>, embora trabalhos recentes tenham considerado também outros fatores, como o dinheiro necessário para realizar uma viagem e o nível de conforto da viagem entre um ponto e outro <span class="citation" data-cites="arbex2020estimating herszenhut2022impact">(<a href="references.html#ref-arbex2020estimating" role="doc-biblioref">Arbex e Cunha 2020</a>; <a href="references.html#ref-herszenhut2022impact" role="doc-biblioref">Herszenhut et al. 2022</a>)</span>. Pela prevalência deste tipo de matriz na literatura e na prática, porém, iremos nos focar em matrizes de tempo de viagem.</p>
 <p>Atualmente, a forma mais fácil e rápida de gerar uma matriz de tempo de viagem em R é utilizando o pacote <code>{r5r}</code> <span class="citation" data-cites="pereira2021r5r">(<a href="references.html#ref-pereira2021r5r" role="doc-biblioref">Pereira et al. 2021</a>)</span>, desenvolvido pela equipe do Projeto Acesso a Oportunidades, do Ipea. O pacote utiliza, por trás dos panos, o <em>software</em> de roteamento de transporte multimodal R5, desenvolvido pela Conveyal<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <section id="instalação-do-r5r" class="level3" data-number="3.1.1">
 <h3 data-number="3.1.1" class="anchored" data-anchor-id="instalação-do-r5r"><span class="header-section-number">3.1.1</span> Instalação do <code>{r5r}</code></h3>
 <p>A instalação do <code>{r5r}</code> funciona como a instalação de qualquer pacote de R (todos os exemplos de código a seguir devem ser rodados em uma sessão de R).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"r5r"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"r5r"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Além do R, o pacote <code>{r5r}</code> requer também a instalação do Java 11<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Use o comando abaixo para checar a versão do Java instalada em seu computador.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(processx<span class="sc">::</span><span class="fu">run</span>(<span class="st">"java"</span>, <span class="at">args =</span> <span class="st">"-version"</span>)<span class="sc">$</span>stderr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(processx<span class="sc">::</span><span class="fu">run</span>(<span class="st">"java"</span>, <span class="at">args =</span> <span class="st">"-version"</span>)<span class="sc">$</span>stderr)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>openjdk version "11.0.17" 2022-10-18 LTS
 OpenJDK Runtime Environment Zulu11.60+19-CA (build 11.0.17+8-LTS)
@@ -502,7 +502,7 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>O <em>OpenStreetMap</em> (OSM) é uma base de dados geográfica que traz informações sobre malha viária, prédios, parques, <em>etc</em>. Por ser uma base de dados alimentada voluntariamente pela comunidade que a utiliza, a cobertura e a qualidade dos dados do OSM podem variar muito entre regiões <span class="citation" data-cites="barrington-leigh2017world">(<a href="references.html#ref-barrington-leigh2017world" role="doc-biblioref">Barrington-Leigh and Millard-Ball 2017</a>)</span>. Via de regra, os dados do OSM no Brasil e no mundo tendem a ter melhor cobertura e qualidade em regiões mais desenvolvidas e áreas urbanas com grandes populações <span class="citation" data-cites="barrington-leigh2017world camboim2015investigation">(<a href="references.html#ref-barrington-leigh2017world" role="doc-biblioref">Barrington-Leigh and Millard-Ball 2017</a>; <a href="references.html#ref-camboim2015investigation" role="doc-biblioref">Camboim, Bravo, and Sluter 2015</a>)</span>.</p>
+<p>O <em>OpenStreetMap</em> (OSM) é uma base de dados geográfica que traz informações sobre malha viária, prédios, parques, <em>etc</em>. Por ser uma base de dados alimentada voluntariamente pela comunidade que a utiliza, a cobertura e a qualidade dos dados do OSM podem variar muito entre regiões <span class="citation" data-cites="barrington-leigh2017world">(<a href="references.html#ref-barrington-leigh2017world" role="doc-biblioref">Barrington-Leigh e Millard-Ball 2017</a>)</span>. Via de regra, os dados do OSM no Brasil e no mundo tendem a ter melhor cobertura e qualidade em regiões mais desenvolvidas e áreas urbanas com grandes populações <span class="citation" data-cites="barrington-leigh2017world camboim2015investigation">(<a href="references.html#ref-barrington-leigh2017world" role="doc-biblioref">Barrington-Leigh e Millard-Ball 2017</a>; <a href="references.html#ref-camboim2015investigation" role="doc-biblioref">Camboim, Bravo, e Sluter 2015</a>)</span>.</p>
 </div>
 </div>
 <ul>
@@ -521,7 +521,7 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 <p>Esses dados devem ser salvos em uma mesma pasta que, preferencialmente, não contenha nenhum outro arquivo. Como veremos adiante, o <code>{r5r}</code> combina todos os dados salvos nesta pasta para criar uma rede de transporte multimodal que é utilizada no roteamento de viagens entre pares origem-destino e, consequentemente, no cálculo das matrizes de tempo de viagem. Note que é possível ter mais de um arquivo GTFS na mesma pasta: nesse caso, o <code>{r5r}</code> considera as redes de transporte públicos de todos os <em>feeds</em> de forma conjunta. No entanto, a rede viária e a topografia da área de estudo devem ser descritas por um único arquivo cada. Assumindo que os <em>scripts</em> de R estejam em uma pasta chamada <code>R</code>, uma possível organização dos arquivos segue o esquema abaixo:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>/tmp/RtmpjmtJFi/projeto_acessibilidade
+<pre><code>/tmp/RtmpnjJx7r/projeto_acessibilidade
 ├── R
 │   ├── script1.R
 │   └── script2.R
@@ -534,13 +534,13 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 <p>Para ilustrar as funcionalidades do <code>{r5r}</code>, vamos usar uma pequena amostra de dados da cidade de Porto Alegre, Brasil. Esses dados estão disponíveis dentro do próprio pacote <code>{r5r}</code>, e seu endereço pode ser acessado com o comando <code>system.file("extdata/poa", package = "r5r")</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pasta <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/poa"</span>, <span class="at">package =</span> <span class="st">"r5r"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>pasta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>pasta</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "/home/runner/work/intro_access_book/intro_access_book/renv/library/R-4.2/x86_64-pc-linux-gnu/r5r/extdata/poa"</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fs<span class="sc">::</span><span class="fu">dir_tree</span>(pasta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fs<span class="sc">::</span><span class="fu">dir_tree</span>(pasta)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -564,7 +564,7 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 <h3 data-number="3.1.3" class="anchored" data-anchor-id="calculando-a-matriz-de-tempo-de-viagem"><span class="header-section-number">3.1.3</span> Calculando a matriz de tempo de viagem</h3>
 <p>Antes de calcular a matriz de tempo de viagem, precisamos aumentar a memória disponível para a execução de processos do Java, linguagem em que o R5 é escrito. Isto é necessário porque, por padrão, o R aloca apenas 512 MB de memória para processos do Java, o que frequentemente não é suficiente para o cálculo de grandes matrizes com o <code>{r5r}</code>. Para aumentar a memória disponível para 2 GB, por exemplo, usamos o seguinte comando no início do <em>script</em>, antes mesmo de carregar as bibliotecas de R necessárias para a nossa análise:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">java.parameters =</span> <span class="st">"-Xmx2G"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">java.parameters =</span> <span class="st">"-Xmx2G"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Feito isso, podemos prosseguir com o cálculo da matriz de tempo de viagem, realizado em dois passos. O primeiro é gerar a rede de transporte multimodal que será utilizada no roteamento. Para isso, carregamos a biblioteca <code>{r5r}</code> e utilizamos a função <code>setup_r5()</code>, que baixa o <em>software</em> de roteamento R5 e o utiliza para criar a rede. Esta função recebe como <em>input</em> o caminho da pasta onde os dados necessários para o roteamento estão armazenados. Como resultado, a função salva na pasta alguns arquivos necessários para o roteamento e retorna uma conexão com o R5, neste exemplo chamada de <code>conexao_r5r</code>. Esta conexão é responsável por garantir que o roteamento seja feito com a rede de transportes descrita pelos arquivos dentro da pasta e é utilizada no cálculo da matriz de tempo de viagem.</p>
 <div class="cell">
@@ -572,7 +572,7 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>conexao_r5r <span class="ot">&lt;-</span> <span class="fu">setup_r5</span>(pasta, <span class="at">use_elevation =</span> <span class="cn">TRUE</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>fs<span class="sc">::</span><span class="fu">dir_tree</span>(pasta)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>fs<span class="sc">::</span><span class="fu">dir_tree</span>(pasta)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>/home/runner/work/intro_access_book/intro_access_book/renv/library/R-4.2/x86_64-pc-linux-gnu/r5r/extdata/poa
 ├── network.dat
@@ -604,7 +604,7 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 <span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">progress =</span> <span class="cn">FALSE</span></span>
 <span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(matriz)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(matriz)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            fromId            toId travel_time
 1: 89a901291abffff 89a901291abffff           1
@@ -622,7 +622,7 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>A função <code>travel_time_matrix()</code> utiliza uma extensão do algoritmo de roteamento RAPTOR <span class="citation" data-cites="conway2017evidencebased">(<a href="references.html#ref-conway2017evidencebased" role="doc-biblioref">Conway, Byrd, and van der Linden 2017</a>)</span>, o que torna o R5 extremamente rápido. A depender da quantidade de pares origem-destino, o <code>{r5r}</code> pode ser entre 6 e 200 vezes mais rápido do que outros <em>softwares</em> de roteamento multimodal no cálculo de matrizes de tempo de viagem <span class="citation" data-cites="higgins2022calculating">(<a href="references.html#ref-higgins2022calculating" role="doc-biblioref">Higgins et al. 2022</a>)</span>.</p>
+<p>A função <code>travel_time_matrix()</code> utiliza uma extensão do algoritmo de roteamento RAPTOR <span class="citation" data-cites="conway2017evidencebased">(<a href="references.html#ref-conway2017evidencebased" role="doc-biblioref">Conway, Byrd, e van der Linden 2017</a>)</span>, o que torna o R5 extremamente rápido. A depender da quantidade de pares origem-destino, o <code>{r5r}</code> pode ser entre 6 e 200 vezes mais rápido do que outros <em>softwares</em> de roteamento multimodal no cálculo de matrizes de tempo de viagem <span class="citation" data-cites="higgins2022calculating">(<a href="references.html#ref-higgins2022calculating" role="doc-biblioref">Higgins et al. 2022</a>)</span>.</p>
 </div>
 </div>
 </div>
@@ -630,7 +630,7 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 </section>
 <section id="sec-accessibility" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="sec-accessibility"><span class="header-section-number">3.2</span> Cálculo de acessibilidade</h2>
-<p>Calculada a matriz de tempo de viagem entre as origens e os destinos da área de estudo, precisamos utilizá-la para calcular os níveis de acessibilidade do local. Para isso, utilizaremos o pacote <code>{accessibility}</code> <span class="citation" data-cites="pereira2022accessibility">(<a href="references.html#ref-pereira2022accessibility" role="doc-biblioref">Pereira and Herszenhut 2022</a>)</span> <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, também desenvolvido pela equipe do Projeto Acesso a Oportunidades, Ipea, e que disponibiliza funções para o cálculo de vários indicadores de acessibilidade. Como <em>input</em> básico, todas as funções requerem uma matriz de custo pré-calculada (no nosso caso, a matriz de tempo de viagem calculada na seção anterior) e dados de uso do solo, como, por exemplo, o número de determinados tipos de oportunidades em cada célula da grade que cobre a área de estudo.</p>
+<p>Calculada a matriz de tempo de viagem entre as origens e os destinos da área de estudo, precisamos utilizá-la para calcular os níveis de acessibilidade do local. Para isso, utilizaremos o pacote <code>{accessibility}</code> <span class="citation" data-cites="pereira2022accessibility">(<a href="references.html#ref-pereira2022accessibility" role="doc-biblioref">Pereira e Herszenhut 2022</a>)</span> <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, também desenvolvido pela equipe do Projeto Acesso a Oportunidades, Ipea, e que disponibiliza funções para o cálculo de vários indicadores de acessibilidade. Como <em>input</em> básico, todas as funções requerem uma matriz de custo pré-calculada (no nosso caso, a matriz de tempo de viagem calculada na seção anterior) e dados de uso do solo, como, por exemplo, o número de determinados tipos de oportunidades em cada célula da grade que cobre a área de estudo.</p>
 <section id="medida-de-oportunidades-cumulativas" class="level3" data-number="3.2.1">
 <h3 data-number="3.2.1" class="anchored" data-anchor-id="medida-de-oportunidades-cumulativas"><span class="header-section-number">3.2.1</span> Medida de oportunidades cumulativas</h3>
 <p>A função <code>cumulative_cutoff()</code> é utilizada para calcular o número de oportunidades que podem ser alcançadas em um determinado limite de custo de viagem. No exemplo abaixo, primeiro carregamos a biblioteca <code>{accessibility}</code> e adequamos a nossa matriz para que ela possa ser utilizada no cálculo da acessibilidade. Em seguida, calculamos o número de escolas que podem ser alcançadas em até 30 minutos de viagem a partir de cada origem presente em nossa matriz de tempo de viagem.</p>
@@ -648,7 +648,7 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 <span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">cutoff =</span> <span class="dv">30</span></span>
 <span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(oportunidades_cumulativas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(oportunidades_cumulativas)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                id schools
 1: 89a901291abffff      19
@@ -660,9 +660,8 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 </div>
 </div>
 </section>
-</section>
-<section id="custo-mínimo-de-viagem" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="custo-mínimo-de-viagem"><span class="header-section-number">3.3</span> Custo mínimo de viagem</h2>
+<section id="custo-mínimo-de-viagem" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="custo-mínimo-de-viagem"><span class="header-section-number">3.2.2</span> Custo mínimo de viagem</h3>
 <p>A função <code>cost_to_closest()</code>, por sua vez, calcula o custo mínimo de viagem necessário para alcançar um determinado número de oportunidades. Com o código abaixo, por exemplo, calculamos o tempo de viagem mínimo para alcançar o hospital mais próximo a partir de cada origem.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>custo_minimo <span class="ot">&lt;-</span> <span class="fu">cost_to_closest</span>(</span>
@@ -672,7 +671,7 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">travel_cost =</span> <span class="st">"travel_time"</span></span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(custo_minimo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(custo_minimo)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                id travel_time
 1: 89a9012124fffff           0
@@ -684,8 +683,8 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 </div>
 </div>
 </section>
-<section id="medidas-gravitacionais" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="medidas-gravitacionais"><span class="header-section-number">3.4</span> Medidas gravitacionais</h2>
+<section id="medidas-gravitacionais" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="medidas-gravitacionais"><span class="header-section-number">3.2.3</span> Medidas gravitacionais</h3>
 <p>A função <code>gravity()</code> calcula medidas gravitacionais de acessibilidade - ou seja, aquelas nas quais o peso de cada oportunidade diminui gradualmente com o aumento do custo de viagem. Existem, no entanto, uma gama de diferentes tipos de funções de decaimento que podem ser utilizadas, como funções de decaimento exponenciais negativas, de potências inversas, entre outras. Por isso, esta função recebe um <em>input</em> adicional: a função de decaimento a ser utilizada no cálculo. O exemplo abaixo apresenta o cálculo de acessibilidade a estabelecimentos de educação usando uma medida gravitacional exponencial negativa com parâmetro de decaimento igual a 0,2.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>grav_exp_negativa <span class="ot">&lt;-</span> <span class="fu">gravity</span>(</span>
@@ -696,7 +695,7 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">decay_function =</span> <span class="fu">decay_exponential</span>(<span class="fl">0.2</span>)</span>
 <span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(grav_exp_negativa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(grav_exp_negativa)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                id   schools
 1: 89a901291abffff 0.3589287
@@ -708,9 +707,9 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 </div>
 </div>
 </section>
-<section id="medidas-com-competição" class="level2" data-number="3.5">
-<h2 data-number="3.5" class="anchored" data-anchor-id="medidas-com-competição"><span class="header-section-number">3.5</span> Medidas com competição</h2>
-<p>Por fim, a função <code>floating_catchment_area()</code> calcula níveis de acessibilidade levando em consideração a competição por oportunidades usando diferentes indicadores do tipo <em>floating catchment area</em> (FCA). Como diversos métodos de FCA podem ser utilizados, a função requer que o método desejado seja explicitamente assinalado. E, assim como a função de acessibilidade gravitacional, a função de decaimento utilizada também deve ser definida pelo usuário. O código a seguir mostra um exemplo de cálculo de acessibilidade a estabelecimentos de saúde usando o método BFCA <span class="citation" data-cites="paez2019demand">(<a href="references.html#ref-paez2019demand" role="doc-biblioref">Paez, Higgins, and Vivona 2019</a>)</span>, levando em consideração os efeitos de competição entre a população como um todo e uma função de decaimento exponencial com parâmetro de decaimento igual a 0,05.</p>
+<section id="medidas-com-competição" class="level3" data-number="3.2.4">
+<h3 data-number="3.2.4" class="anchored" data-anchor-id="medidas-com-competição"><span class="header-section-number">3.2.4</span> Medidas com competição</h3>
+<p>Por fim, a função <code>floating_catchment_area()</code> calcula níveis de acessibilidade levando em consideração a competição por oportunidades usando diferentes indicadores do tipo <em>floating catchment area</em> (FCA). Como diversos métodos de FCA podem ser utilizados, a função requer que o método desejado seja explicitamente assinalado. E, assim como a função de acessibilidade gravitacional, a função de decaimento utilizada também deve ser definida pelo usuário. O código a seguir mostra um exemplo de cálculo de acessibilidade a estabelecimentos de saúde usando o método BFCA <span class="citation" data-cites="paez2019demand">(<a href="references.html#ref-paez2019demand" role="doc-biblioref">Paez, Higgins, e Vivona 2019</a>)</span>, levando em consideração os efeitos de competição entre a população como um todo e uma função de decaimento exponencial com parâmetro de decaimento igual a 0,05.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>competicao_bfca <span class="ot">&lt;-</span> <span class="fu">floating_catchment_area</span>(</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">travel_matrix =</span> matriz,</span>
@@ -722,7 +721,7 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 <span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">decay_function =</span> <span class="fu">decay_exponential</span>(<span class="fl">0.05</span>)</span>
 <span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(competicao_bfca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(competicao_bfca)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                id      schools
 1: 89a901291abffff 0.0002574442
@@ -734,8 +733,9 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 </div>
 </div>
 <p>As funções apresentadas nesta seção também podem receber outros <em>inputs</em> não explicitamente mencionados aqui. Para mais informações sobre cada um dos parâmetros, por favor consulte a documentação do pacote <code>{accessibility}</code> em seu <a href="https://ipeagit.github.io/accessibility/">site</a>.</p>
-<section id="cálculo-de-acessibilidade-com-o-r5r" class="level3" data-number="3.5.1">
-<h3 data-number="3.5.1" class="anchored" data-anchor-id="cálculo-de-acessibilidade-com-o-r5r"><span class="header-section-number">3.5.1</span> Cálculo de acessibilidade com o <code>{r5r}</code></h3>
+</section>
+<section id="cálculo-de-acessibilidade-com-o-r5r" class="level3" data-number="3.2.5">
+<h3 data-number="3.2.5" class="anchored" data-anchor-id="cálculo-de-acessibilidade-com-o-r5r"><span class="header-section-number">3.2.5</span> Cálculo de acessibilidade com o <code>{r5r}</code></h3>
 <p>Ao longo das duas seções anteriores, mostramos como calcular níveis de acessibilidade passo-a-passo. Para fins didáticos, é importante entender que o cálculo de estimativas de acessibilidade tem como primeiro passo a geração de uma matriz de custos de viagens que, em seguida, é utilizada para estimar níveis de acessibilidade. No entanto, o <code>{r5r}</code> inclui também uma função chamada <code>accessibility()</code> que calcula os níveis de acessibilidade com uma única chamada, sem etapas intermediárias.</p>
 <p>De forma parecida com a função de cálculo de matriz de tempo de viagem, a função <code>accessibility()</code> recebe como <em>inputs</em> uma conexão com o R5, as origens, os destinos, os modos de transporte e o tempo de partida, entre outros argumentos. Adicionalmente, devem ser listadas também quais oportunidades devem ser consideradas e a função de decaimento que deve ser utilizada, bem como o valor do limite de custo e do parâmetro de decaimento. O exemplo abaixo mostra uma aplicação desta função.</p>
 <div class="cell">
@@ -757,7 +757,7 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 <span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">progress =</span> <span class="cn">FALSE</span></span>
 <span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(acessibilidade_r5r)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(acessibilidade_r5r)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           from_id percentile cutoff accessibility
 1: 89a901291abffff         50     30            17
@@ -793,7 +793,7 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 <span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">new =</span> <span class="fu">c</span>(<span class="st">"acesso_r5r"</span>, <span class="st">"acesso_accessibility"</span>)</span>
 <span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(comparacao_acessibilidade[, .(from_id, acesso_r5r, acesso_accessibility)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(comparacao_acessibilidade[, .(from_id, acesso_r5r, acesso_accessibility)])</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           from_id acesso_r5r acesso_accessibility
 1: 89a9012124fffff         14                   14
@@ -820,8 +820,8 @@ Considerando outros tipos de custo de viagem no cálculo da acessibilidade
 </div>
 </section>
 </section>
-<section id="análises-de-acessibilidade" class="level2" data-number="3.6">
-<h2 data-number="3.6" class="anchored" data-anchor-id="análises-de-acessibilidade"><span class="header-section-number">3.6</span> Análises de acessibilidade</h2>
+<section id="análises-de-acessibilidade" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="análises-de-acessibilidade"><span class="header-section-number">3.3</span> Análises de acessibilidade</h2>
 <p>Calculados os níveis de acessibilidade, procedemos então para sua análise. Existe uma grande variedade de análises que podem ser feitas usando esses dados: por exemplo, diagnósticos das condições de acessibilidade urbana de diferentes bairros, pesquisas sobre desigualdades de acesso a oportunidades entre diferentes grupos sociais, análises sobre exclusão social e <em>accessibility poverty</em> (insuficiência de acessibilidade), <em>etc</em>. Nesta seção, no entanto, apresentaremos apenas duas análises relativamente simples e de fácil comunicação: a distribuição espacial da acessibilidade e sua distribuição entre diferentes grupos de renda.</p>
 <p><strong>Distribuição espacial de acessibilidade urbana</strong></p>
 <p>Para compreendermos a distribuição espacial da acessibilidade urbana de uma determinada cidade ou região, primeiro precisamos obter as informações espaciais dos pontos que foram utilizados como origens e destinos no cálculo da matriz. Os pontos que usamos nos exemplos anteriores, por exemplo, correspondem aos centróides de células de uma grade hexagonal baseadas no índice <a href="https://h3geo.org/">H3</a>, desenvolvido pela Uber <span class="citation" data-cites="brodsky2018h3">(<a href="references.html#ref-brodsky2018h3" role="doc-biblioref">Brodsky 2018</a>)</span>. A grade da cidade de Porto Alegre, bem como informações sociodemográficas e de uso do solo, é disponibilizada pela equipe do Projeto Acesso a Oportunidades através do pacote de R <code>{aopdata}</code> <span class="citation" data-cites="pereira2022aopdata">(<a href="references.html#ref-pereira2022aopdata" role="doc-biblioref">Pereira et al. 2022</a>)</span>. O pacote e suas funções são apresentados em detalhes na <a href="./s5_dados_aop.html">Seção 5</a>. Com o código abaixo, carregamos a biblioteca de visualização de dados, baixamos as informações espaciais da grade e as apresentamos em forma de mapa.</p>
@@ -835,7 +835,7 @@ Considerando outros tipos de custo de viagem no cálculo da acessibilidade
 <span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>grade_poa <span class="ot">&lt;-</span> <span class="fu">subset</span>(grade_poa, id_hex <span class="sc">%in%</span> pontos<span class="sc">$</span>id)</span>
 <span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co"># visualizando o mapa</span></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(grade_poa) <span class="sc">+</span> <span class="fu">geom_sf</span>() <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(grade_poa) <span class="sc">+</span> <span class="fu">geom_sf</span>() <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="3_calculando_acesso_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -855,7 +855,7 @@ Considerando outros tipos de custo de viagem no cálculo da acessibilidade
 <span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> schools), <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
 <span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"inferno"</span>) <span class="sc">+</span></span>
 <span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Núm. de escolas</span><span class="sc">\n</span><span class="st">acessíveis"</span>) <span class="sc">+</span></span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="3_calculando_acesso_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -881,7 +881,7 @@ Considerando outros tipos de custo de viagem no cálculo da acessibilidade
 <span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">"id_hex"</span></span>
 <span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(acesso_sociodemografico[, <span class="fu">c</span>(<span class="st">"id_hex"</span>, <span class="st">"schools"</span>, <span class="st">"contagem_pop"</span>, <span class="st">"decil"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(acesso_sociodemografico[, <span class="fu">c</span>(<span class="st">"id_hex"</span>, <span class="st">"schools"</span>, <span class="st">"contagem_pop"</span>, <span class="st">"decil"</span>)])</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Simple feature collection with 6 features and 4 fields
 Geometry type: POLYGON
@@ -917,7 +917,7 @@ Geodetic CRS:  WGS 84
 <span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
 <span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"D1</span><span class="sc">\n</span><span class="st">mais</span><span class="sc">\n</span><span class="st">pobres"</span>, <span class="fu">paste0</span>(<span class="st">"D"</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>), <span class="st">"D10</span><span class="sc">\n</span><span class="st">mais</span><span class="sc">\n</span><span class="st">ricos"</span>)</span>
 <span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="3_calculando_acesso_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -927,46 +927,46 @@ Geodetic CRS:  WGS 84
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
 <div id="ref-arbex2020estimating" class="csl-entry" role="doc-biblioentry">
-Arbex, Renato, and Claudio B. Cunha. 2020. <span>“Estimating the Influence of Crowding and Travel Time Variability on Accessibility to Jobs in a Large Public Transport Network Using Smart Card Big Data.”</span> <em>Journal of Transport Geography</em> 85 (May): 102671. <a href="https://doi.org/10.1016/j.jtrangeo.2020.102671">https://doi.org/10.1016/j.jtrangeo.2020.102671</a>.
+Arbex, Renato, e Claudio B. Cunha. 2020. <span>"Estimating the Influence of Crowding and Travel Time Variability on Accessibility to Jobs in a Large Public Transport Network Using Smart Card Big Data"</span>. <em>Journal of Transport Geography</em> 85: 102671. <a href="https://doi.org/10.1016/j.jtrangeo.2020.102671">https://doi.org/10.1016/j.jtrangeo.2020.102671</a>.
 </div>
 <div id="ref-barrington-leigh2017world" class="csl-entry" role="doc-biblioentry">
-Barrington-Leigh, Christopher, and Adam Millard-Ball. 2017. <span>“The World’s User-Generated Road Map Is More Than 80% Complete.”</span> <em>PLOS ONE</em> 12 (8): e0180698. <a href="https://doi.org/10.1371/journal.pone.0180698">https://doi.org/10.1371/journal.pone.0180698</a>.
+Barrington-Leigh, Christopher, e Adam Millard-Ball. 2017. <span>"The World’s User-Generated Road Map Is More Than 80% Complete"</span>. <em>PLOS ONE</em> 12 (8): e0180698. <a href="https://doi.org/10.1371/journal.pone.0180698">https://doi.org/10.1371/journal.pone.0180698</a>.
 </div>
 <div id="ref-brodsky2018h3" class="csl-entry" role="doc-biblioentry">
-Brodsky, Isaac. 2018. <span>“H3: <span>Uber</span>’s <span>Hexagonal Hierarchical Spatial Index</span>.”</span> <em>Uber Engineering Blog</em>. https://eng.uber.com/h3/.
+Brodsky, Isaac. 2018. <span>"H3: <span>Uber</span>’s <span>Hexagonal Hierarchical Spatial Index</span>"</span>. <em>Uber Engineering Blog</em>. https://eng.uber.com/h3/.
 </div>
 <div id="ref-camboim2015investigation" class="csl-entry" role="doc-biblioentry">
-Camboim, Silvana Philippi, João Vitor Meza Bravo, and Claudia Robbi Sluter. 2015. <span>“An <span>Investigation</span> into the <span>Completeness</span> of, and the <span>Updates</span> to, <span>OpenStreetMap Data</span> in a <span>Heterogeneous Area</span> in <span>Brazil</span>.”</span> <em>ISPRS International Journal of Geo-Information</em> 4 (3): 1366–88. <a href="https://doi.org/10.3390/ijgi4031366">https://doi.org/10.3390/ijgi4031366</a>.
+Camboim, Silvana Philippi, João Vitor Meza Bravo, e Claudia Robbi Sluter. 2015. <span>"An <span>Investigation</span> into the <span>Completeness</span> of, and the <span>Updates</span> to, <span>OpenStreetMap Data</span> in a <span>Heterogeneous Area</span> in <span>Brazil</span>"</span>. <em>ISPRS International Journal of Geo-Information</em> 4 (3): 1366–88. <a href="https://doi.org/10.3390/ijgi4031366">https://doi.org/10.3390/ijgi4031366</a>.
 </div>
 <div id="ref-conway2017evidencebased" class="csl-entry" role="doc-biblioentry">
-Conway, Matthew Wigginton, Andrew Byrd, and Marco van der Linden. 2017. <span>“Evidence-<span>Based Transit</span> and <span>Land Use Sketch Planning Using Interactive Accessibility Methods</span> on <span>Combined Schedule</span> and <span>Headway-Based Networks</span>.”</span> <em>Transportation Research Record: Journal of the Transportation Research Board</em> 2653 (1): 45–53. <a href="https://doi.org/10.3141/2653-06">https://doi.org/10.3141/2653-06</a>.
+Conway, Matthew Wigginton, Andrew Byrd, e Marco van der Linden. 2017. <span>"Evidence-<span>Based Transit</span> and <span>Land Use Sketch Planning Using Interactive Accessibility Methods</span> on <span>Combined Schedule</span> and <span>Headway-Based Networks</span>"</span>. <em>Transportation Research Record: Journal of the Transportation Research Board</em> 2653 (1): 45–53. <a href="https://doi.org/10.3141/2653-06">https://doi.org/10.3141/2653-06</a>.
 </div>
 <div id="ref-el-geneidy2016cost" class="csl-entry" role="doc-biblioentry">
-El-Geneidy, Ahmed, David Levinson, Ehab Diab, Genevieve Boisjoly, David Verbich, and Charis Loong. 2016. <span>“The Cost of Equity: <span>Assessing</span> Transit Accessibility and Social Disparity Using Total Travel Cost.”</span> <em>Transportation Research Part A: Policy and Practice</em> 91 (September): 302–16. <a href="https://doi.org/10.1016/j.tra.2016.07.003">https://doi.org/10.1016/j.tra.2016.07.003</a>.
+El-Geneidy, Ahmed, David Levinson, Ehab Diab, Genevieve Boisjoly, David Verbich, e Charis Loong. 2016. <span>"The Cost of Equity: <span>Assessing</span> Transit Accessibility and Social Disparity Using Total Travel Cost"</span>. <em>Transportation Research Part A: Policy and Practice</em> 91 (setembro): 302–16. <a href="https://doi.org/10.1016/j.tra.2016.07.003">https://doi.org/10.1016/j.tra.2016.07.003</a>.
 </div>
 <div id="ref-herszenhut2022impact" class="csl-entry" role="doc-biblioentry">
-Herszenhut, Daniel, Rafael H. M. Pereira, Licinio da Silva Portugal, and Matheus Henrique de Sousa Oliveira. 2022. <span>“The Impact of Transit Monetary Costs on Transport Inequality.”</span> <em>Journal of Transport Geography</em> 99 (February): 103309. <a href="https://doi.org/10.1016/j.jtrangeo.2022.103309">https://doi.org/10.1016/j.jtrangeo.2022.103309</a>.
+Herszenhut, Daniel, Rafael H. M. Pereira, Licinio da Silva Portugal, e Matheus Henrique de Sousa Oliveira. 2022. <span>"The Impact of Transit Monetary Costs on Transport Inequality"</span>. <em>Journal of Transport Geography</em> 99 (fevereiro): 103309. <a href="https://doi.org/10.1016/j.jtrangeo.2022.103309">https://doi.org/10.1016/j.jtrangeo.2022.103309</a>.
 </div>
 <div id="ref-higgins2022calculating" class="csl-entry" role="doc-biblioentry">
-Higgins, Christopher, Matthew Palm, Amber DeJohn, Luna Xi, James Vaughan, Steven Farber, Michael Widener, and Eric Miller. 2022. <span>“Calculating Place-Based Transit Accessibility: <span>Methods</span>, Tools and Algorithmic Dependence.”</span> <em>Journal of Transport and Land Use</em> 15 (1). <a href="https://doi.org/10.5198/jtlu.2022.2012">https://doi.org/10.5198/jtlu.2022.2012</a>.
+Higgins, Christopher, Matthew Palm, Amber DeJohn, Luna Xi, James Vaughan, Steven Farber, Michael Widener, e Eric Miller. 2022. <span>"Calculating Place-Based Transit Accessibility: <span>Methods</span>, Tools and Algorithmic Dependence"</span>. <em>Journal of Transport and Land Use</em> 15 (1). <a href="https://doi.org/10.5198/jtlu.2022.2012">https://doi.org/10.5198/jtlu.2022.2012</a>.
 </div>
 <div id="ref-paez2019demand" class="csl-entry" role="doc-biblioentry">
-Paez, Antonio, Christopher D. Higgins, and Salvatore F. Vivona. 2019. <span>“Demand and Level of Service Inflation in <span>Floating Catchment Area</span> (<span>FCA</span>) Methods.”</span> Edited by Tayyab Ikram Shah. <em>PLOS ONE</em> 14 (6): e0218773. <a href="https://doi.org/10.1371/journal.pone.0218773">https://doi.org/10.1371/journal.pone.0218773</a>.
+Paez, Antonio, Christopher D. Higgins, e Salvatore F. Vivona. 2019. <span>"Demand and Level of Service Inflation in <span>Floating Catchment Area</span> (<span>FCA</span>) Methods"</span>. Editado por Tayyab Ikram Shah. <em>PLOS ONE</em> 14 (6): e0218773. <a href="https://doi.org/10.1371/journal.pone.0218773">https://doi.org/10.1371/journal.pone.0218773</a>.
 </div>
 <div id="ref-pereira2019desigualdades" class="csl-entry" role="doc-biblioentry">
-Pereira, Rafael H. M., Carlos Kaue Vieira Braga, Bernardo Serra, and Vanessa Nadalin. 2019. <span>“<span>Desigualdades socioespaciais de acesso a oportunidades nas cidades brasileiras, 2019</span>.”</span> {Texto para Discuss\~ao} 2535. <span>Instituto de Pesquisa Econômica Aplicada (Ipea)</span>.
+Pereira, Rafael H. M., Carlos Kaue Vieira Braga, Bernardo Serra, e Vanessa Nadalin. 2019. <span>"<span>Desigualdades socioespaciais de acesso a oportunidades nas cidades brasileiras, 2019</span>"</span>. {Texto para Discuss\~ao} 2535. <span>Instituto de Pesquisa Econômica Aplicada (Ipea)</span>.
 </div>
 <div id="ref-pereira2022accessibility" class="csl-entry" role="doc-biblioentry">
-Pereira, Rafael H. M., and Daniel Herszenhut. 2022. <span>“Accessibility: <span>Transport Accessibility Measures</span>.”</span> <span>CRAN</span>.
+Pereira, Rafael H. M., e Daniel Herszenhut. 2022. <span>"Accessibility: <span>Transport Accessibility Measures</span>"</span>. <span>CRAN</span>.
 </div>
 <div id="ref-pereira2022aopdata" class="csl-entry" role="doc-biblioentry">
-Pereira, Rafael H. M., Daniel Herszenhut, Carlos K. V. Braga, Diego B. Tomasiello, and Marcus Saraiva. 2022. <span>“Aopdata: <span>Data</span> from the <span>Access</span> to <span>Opportunities Project</span>.”</span> <span>CRAN</span>.
+Pereira, Rafael H. M., Daniel Herszenhut, Carlos K. V. Braga, Diego B. Tomasiello, e Marcus Saraiva. 2022. <span>"Aopdata: <span>Data</span> from the <span>Access</span> to <span>Opportunities Project</span>"</span>. <span>CRAN</span>.
 </div>
 <div id="ref-pereira2021r5r" class="csl-entry" role="doc-biblioentry">
-Pereira, Rafael H. M., Marcus Saraiva, Daniel Herszenhut, Carlos Kaue Vieira Braga, and Matthew Wigginton Conway. 2021. <span>“R5r: <span>Rapid Realistic Routing</span> on <span>Multimodal Transport Networks</span> with <span>R</span><span><sup>5</sup></span> in <span>R</span>.”</span> <em>Transport Findings</em>, March, 21262. <a href="https://doi.org/10.32866/001c.21262">https://doi.org/10.32866/001c.21262</a>.
+Pereira, Rafael H. M., Marcus Saraiva, Daniel Herszenhut, Carlos Kaue Vieira Braga, e Matthew Wigginton Conway. 2021. <span>"R5r: <span>Rapid Realistic Routing</span> on <span>Multimodal Transport Networks</span> with <span>R</span><span><sup>5</sup></span> in <span>R</span>"</span>. <em>Transport Findings</em>, março, 21262. <a href="https://doi.org/10.32866/001c.21262">https://doi.org/10.32866/001c.21262</a>.
 </div>
 <div id="ref-venter2016assessing" class="csl-entry" role="doc-biblioentry">
-Venter, Christoffel. 2016. <span>“Assessing the Potential of Bus Rapid Transit-Led Network Restructuring for Enhancing Affordable Access to Employment <span>The</span> Case of <span>Johannesburg</span>’s <span>Corridors</span> of <span>Freedom</span>.”</span> <em>Research in Transportation Economics</em> 59 (November): 441–49. <a href="https://doi.org/10.1016/j.retrec.2016.05.006">https://doi.org/10.1016/j.retrec.2016.05.006</a>.
+Venter, Christoffel. 2016. <span>"Assessing the Potential of Bus Rapid Transit-Led Network Restructuring for Enhancing Affordable Access to Employment <span>The</span> Case of <span>Johannesburg</span>’s <span>Corridors</span> of <span>Freedom</span>"</span>. <em>Research in Transportation Economics</em> 59 (novembro): 441–49. <a href="https://doi.org/10.1016/j.retrec.2016.05.006">https://doi.org/10.1016/j.retrec.2016.05.006</a>.
 </div>
 </div>
 </section>
@@ -1135,12 +1135,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // flash "checked"
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
+    button.setAttribute("title", "Copiada");
     let tooltip;
     if (window.bootstrap) {
       button.setAttribute("data-bs-toggle", "tooltip");
       button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
+      button.setAttribute("data-bs-title", "Copiada");
       tooltip = new bootstrap.Tooltip(button, 
         { trigger: "manual", 
           customClass: "code-copy-button-tooltip",
@@ -1231,7 +1231,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./s2_calculo.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">SEÇÃO 2: Calculando estimativas de acessibilidade</span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">SEÇÃO 2: Como calcular acessibilidade urbana</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

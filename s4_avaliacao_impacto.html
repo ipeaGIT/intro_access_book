@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.2.269">
@@ -73,15 +73,15 @@ div.csl-indent {
   "type": "textbox",
   "limit": 20,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar"
   }
 }</script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YVERJQF9PJ"></script>
@@ -96,19 +96,21 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 
 
 <meta property="og:title" content="Introdução à acessibilidade urbana - SEÇÃO 4: Avaliação de impacto de projetos de transporte">
-<meta property="og:description" content="Objetivo: O objetivo desta seção é apresentar o passo-a-passo de um exemplo de avaliação do impacto de um projeto de infraestrutura de transportes sobre as condições de acessibilidade urbana locais…">
+<meta property="og:description" content="O objetivo desta seção é apresentar o passo-a-passo de um exemplo de avaliação do impacto de um projeto de infraestrutura de transportes sobre as condições de acessibilidade urbana locais usando R.">
 <meta property="og:site-name" content="Introdução à acessibilidade urbana">
 <meta name="twitter:title" content="Introdução à acessibilidade urbana - SEÇÃO 4: Avaliação de impacto de projetos de transporte">
-<meta name="twitter:description" content="Objetivo: O objetivo desta seção é apresentar o passo-a-passo de um exemplo de avaliação do impacto de um projeto de infraestrutura de transportes sobre as condições de acessibilidade urbana locais…">
+<meta name="twitter:description" content="O objetivo desta seção é apresentar o passo-a-passo de um exemplo de avaliação do impacto de um projeto de infraestrutura de transportes sobre as condições de acessibilidade urbana locais usando R.">
 <meta name="twitter:card" content="summary">
 <meta name="citation_title" content="Introdução à acessibilidade urbana: um guia prático em R">
+<meta name="citation_abstract" content="O objetivo deste livro é apresentar os conceitos e habilidades práticas necessárias para fazer estudos e avaliações de impacto de acessibilidade urbana. O livro começa dando uma visão geral sobre o conceito e os principais indicadores de acessibilidade. Em seguida, ensina como analisar dados espaciais e de redes de transporte para estimar níveis de acessibilidade por diferentes modos de transporte e como visualizar os resultados em forma de mapas e gráficos. O livro também familiariza o leitor com dados de redes de transporte público em formato GTFS e ensina como manipular e visualizar esse tipo de dado. Num dos seus principais capítulos, o livro ensina também como os dados e a metodologia apresentados nos capítulos anteriores podem ser utilizados para avaliar o impacto de projetos de transporte sobre as condições de acesso a oportunidades da população. Por fim, o livro apresenta como baixar, analisar e visualizar estimativas de acessibilidade já calculadas para cidades brasileiras e disponibilizadas pela equipe do Projeto Acesso a Oportunidades, do Ipea.">
 <meta name="citation_author" content="Rafael H. M. Pereira">
 <meta name="citation_author" content="Daniel Herszenhut">
 <meta name="citation_publication_date" content="2022">
 <meta name="citation_cover_date" content="2022">
 <meta name="citation_year" content="2022">
 <meta name="citation_fulltext_html_url" content="https://ipeagit.github.io/intro_access_book/">
-<meta name="citation_language" content="en">
+<meta name="citation_language" content="pt">
+<meta name="citation_book_title" content="Introdução à acessibilidade urbana: um guia prático em R">
 <meta name="citation_reference" content="citation_title=Transport modelling in the age of big data;,citation_author=Cuauhtemoc Anda;,citation_author=Alexander Erath;,citation_author=Pieter Jacobus Fourie;,citation_publication_date=2017-08;,citation_cover_date=2017-08;,citation_year=2017;,citation_issue=sup1;,citation_doi=10.1080/12265934.2017.1281150;,citation_issn=1226-5934;,citation_volume=21;,citation_journal_title=International Journal of Urban Sciences;,citation_publisher=Routledge;">
 <meta name="citation_reference" content="citation_title=Estimating the influence of crowding and travel time variability on accessibility to jobs in a large public transport network using smart card big data;,citation_author=Renato Arbex;,citation_author=Claudio B. Cunha;,citation_publication_date=2020-05;,citation_cover_date=2020-05;,citation_year=2020;,citation_doi=10.1016/j.jtrangeo.2020.102671;,citation_issn=09666923;,citation_volume=85;,citation_language=en-US;,citation_journal_title=Journal of Transport Geography;">
 <meta name="citation_reference" content="citation_title=The sustainable mobility paradigm;,citation_author=David Banister;,citation_publication_date=2008-03;,citation_cover_date=2008-03;,citation_year=2008;,citation_issue=2;,citation_doi=10.1016/j.tranpol.2007.10.005;,citation_issn=0967070X;,citation_volume=15;,citation_language=en-US;,citation_journal_title=Transport Policy;">
@@ -248,7 +250,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./s2_calculo.html" class="sidebar-item-text sidebar-link">SEÇÃO 2: Calculando estimativas de acessibilidade</a>
+            <a href="./s2_calculo.html" class="sidebar-item-text sidebar-link">SEÇÃO 2: Como calcular acessibilidade urbana</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -256,7 +258,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3_calculando_acesso.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculando estimativas de acessibilidade urbana em R</span></a>
+  <a href="./3_calculando_acesso.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculando estimativas de acessibilidade em R</span></a>
   </div>
 </li>
       </ul>
@@ -343,8 +345,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 
 
 <div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">Authors</div>
-  <div class="quarto-title-meta-heading">Affiliation</div>
+  <div class="quarto-title-meta-heading">Autores</div>
+  <div class="quarto-title-meta-heading">Afiliação</div>
   
     <div class="quarto-title-meta-contents">
     <a href="https://www.urbandemographics.org/about/">Rafael H. M. Pereira</a> <a href="https://orcid.org/0000-0003-2125-7465" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
@@ -374,24 +376,24 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 
 </header>
 
-<p><strong>Objetivo:</strong> O objetivo desta seção é apresentar o passo-a-passo de um exemplo de avaliação do impacto de um projeto de infraestrutura de transportes sobre as condições de acessibilidade urbana locais usando R.</p>
-<p>Embora análises de acessibilidade sejam frequentemente utilizadas na literatura científica há mais de duas décadas, apenas recentemente agências de transporte e tomadores de decisão começaram a focar em questões de acessibilidade urbana nas suas atividades de planejamento e operação de sistemas de transporte público <span class="citation" data-cites="papa2015accessibility boisjoly2017how">(<a href="references.html#ref-papa2015accessibility" role="doc-biblioref">Papa et al. 2015</a>; <a href="references.html#ref-boisjoly2017how" role="doc-biblioref">Boisjoly and El-Geneidy 2017</a>)</span>. Muito disto se dá pela dificuldade de incorporar análises de acessibilidade a métodos de avaliação de projetos e a atividades de planejamento do dia-a-dia <span class="citation" data-cites="silva2017accessibility buttner2021accessibility">(<a href="references.html#ref-silva2017accessibility" role="doc-biblioref">Silva et al. 2017</a>; <a href="references.html#ref-buttner2021accessibility" role="doc-biblioref">Büttner 2021</a>)</span>.</p>
+<p><strong>O objetivo desta seção</strong> é apresentar o passo-a-passo de um exemplo de avaliação do impacto de um projeto de infraestrutura de transportes sobre as condições de acessibilidade urbana locais usando R.</p>
+<p>Embora análises de acessibilidade sejam frequentemente utilizadas na literatura científica há mais de duas décadas, apenas recentemente agências de transporte e tomadores de decisão começaram a focar em questões de acessibilidade urbana nas suas atividades de planejamento e operação de sistemas de transporte público <span class="citation" data-cites="papa2015accessibility boisjoly2017how">(<a href="references.html#ref-papa2015accessibility" role="doc-biblioref">Papa et al. 2015</a>; <a href="references.html#ref-boisjoly2017how" role="doc-biblioref">Boisjoly e El-Geneidy 2017</a>)</span>. Muito disto se dá pela dificuldade de incorporar análises de acessibilidade a métodos de avaliação de projetos e a atividades de planejamento do dia-a-dia <span class="citation" data-cites="silva2017accessibility buttner2021accessibility">(<a href="references.html#ref-silva2017accessibility" role="doc-biblioref">Silva et al. 2017</a>; <a href="references.html#ref-buttner2021accessibility" role="doc-biblioref">Büttner 2021</a>)</span>.</p>
 <p>Nesta seção, usamos o projeto de expansão do metrô de Fortaleza como estudo de caso para ilustrar como realizar uma avaliação de impacto de projetos de infraestrutura de transporte sobre a acessibilidade urbana em R, utilizando para isso os pacotes apresentados nos capítulos anteriores. O <a href="./6_cenarios_transporte.html">Capítulo 6</a> apresenta um método tanto para medir o impacto de investimentos de transporte sobre o nível médio de acessibilidade da população quanto para investigar como esse impacto se distribui espacialmente e entre grupos socioeconômicos, afetando as desigualdades de acesso a oportunidades. A aplicação do método envolve o uso e a manipulação de diferentes arquivos GTFS, o cálculo de matrizes de tempo de viagem, a tomada de decisão por trás da escolha de qual medida de acessibilidade utilizar, a estimativa dos níveis de acessibilidade, a visualização espacial desses níveis e o cálculo e análise de indicadores de desigualdade. Assim, esse estudo de caso engloba muitos dos pontos abordados neste livro, e serve como uma aplicação prática dos conceitos até então apresentados.</p>
 <p>É importante mencionar que uma avaliação de projeto, investimento ou política pública deve abranger um grande leque de critérios de diferentes naturezas. Esses critérios vão desde aspectos de participação social na formulação das políticas e projetos até o seus impactos considerando dimensões ambientais, econômicas, sociais, entre outras. Embora uma avaliação de impacto de acessibilidade seja muito importante para a caracterização dos potenciais benefícios e do desempenho de uma rede de transportes como um todo, ela oferece uma perspectiva limitada dos efeitos de uma dada política. Avaliações desse tipo devem, portanto, complementar e ser acompanhadas de outras análises que investiguem os demais impactos dos projetos de forma mais a fundo.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
 <div id="ref-boisjoly2017how" class="csl-entry" role="doc-biblioentry">
-Boisjoly, Geneviève, and Ahmed M. El-Geneidy. 2017. <span>“How to Get There? <span>A</span> Critical Assessment of Accessibility Objectives and Indicators in Metropolitan Transportation Plans.”</span> <em>Transport Policy</em> 55 (April): 38–50. <a href="https://doi.org/10.1016/j.tranpol.2016.12.011">https://doi.org/10.1016/j.tranpol.2016.12.011</a>.
+Boisjoly, Geneviève, e Ahmed M. El-Geneidy. 2017. <span>"How to Get There? <span>A</span> Critical Assessment of Accessibility Objectives and Indicators in Metropolitan Transportation Plans"</span>. <em>Transport Policy</em> 55 (abril): 38–50. <a href="https://doi.org/10.1016/j.tranpol.2016.12.011">https://doi.org/10.1016/j.tranpol.2016.12.011</a>.
 </div>
 <div id="ref-buttner2021accessibility" class="csl-entry" role="doc-biblioentry">
-Büttner, Benjamin. 2021. <span>“Accessibility <span>Tools</span> for <span>Transport Policy</span> and <span>Planning</span>.”</span> In <em>International <span>Encyclopedia</span> of <span>Transportation</span></em>, edited by Roger Vickerman, 83–86. <span>Oxford</span>: <span>Elsevier</span>. <a href="https://doi.org/10.1016/B978-0-08-102671-7.10618-9">https://doi.org/10.1016/B978-0-08-102671-7.10618-9</a>.
+Büttner, Benjamin. 2021. <span>"Accessibility <span>Tools</span> for <span>Transport Policy</span> and <span>Planning</span>"</span>. Em <em>International <span>Encyclopedia</span> of <span>Transportation</span></em>, editado por Roger Vickerman, 83–86. <span>Oxford</span>: <span>Elsevier</span>. <a href="https://doi.org/10.1016/B978-0-08-102671-7.10618-9">https://doi.org/10.1016/B978-0-08-102671-7.10618-9</a>.
 </div>
 <div id="ref-papa2015accessibility" class="csl-entry" role="doc-biblioentry">
-Papa, Enrica, Cecilia Silva, Marco Te Brömmelstroet, and Angela Hull. 2015. <span>“Accessibility Instruments for Planning Practice: A Review of <span>European</span> Experiences.”</span> <em>Journal of Transport and Land Use</em>, June. <a href="https://doi.org/10.5198/jtlu.2015.585">https://doi.org/10.5198/jtlu.2015.585</a>.
+Papa, Enrica, Cecilia Silva, Marco Te Brömmelstroet, e Angela Hull. 2015. <span>"Accessibility Instruments for Planning Practice: A Review of <span>European</span> Experiences"</span>. <em>Journal of Transport and Land Use</em>, junho. <a href="https://doi.org/10.5198/jtlu.2015.585">https://doi.org/10.5198/jtlu.2015.585</a>.
 </div>
 <div id="ref-silva2017accessibility" class="csl-entry" role="doc-biblioentry">
-Silva, Cecília, Luca Bertolini, Marco te Brömmelstroet, Dimitris Milakis, and Enrica Papa. 2017. <span>“Accessibility Instruments in Planning Practice: <span>Bridging</span> the Implementation Gap.”</span> <em>Transport Policy</em> 53 (January): 135–45. <a href="https://doi.org/10.1016/j.tranpol.2016.09.006">https://doi.org/10.1016/j.tranpol.2016.09.006</a>.
+Silva, Cecília, Luca Bertolini, Marco te Brömmelstroet, Dimitris Milakis, e Enrica Papa. 2017. <span>"Accessibility Instruments in Planning Practice: <span>Bridging</span> the Implementation Gap"</span>. <em>Transport Policy</em> 53 (janeiro): 135–45. <a href="https://doi.org/10.1016/j.tranpol.2016.09.006">https://doi.org/10.1016/j.tranpol.2016.09.006</a>.
 </div>
 </div>
 
@@ -551,12 +553,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // flash "checked"
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
+    button.setAttribute("title", "Copiada");
     let tooltip;
     if (window.bootstrap) {
       button.setAttribute("data-bs-toggle", "tooltip");
       button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
+      button.setAttribute("data-bs-title", "Copiada");
       tooltip = new bootstrap.Tooltip(button, 
         { trigger: "manual", 
           customClass: "code-copy-button-tooltip",
