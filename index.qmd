@@ -1,6 +1,6 @@
 # Apresentação {.unnumbered}
 
-Acessibilidade é a facilidade com que as pessoas conseguem alcançar lugares e oportunidades como empregos, serviços de saúde e educação, atividades culturais, áreas verdes, etc. O nível de acessibilidade de uma cidade ou bairro depende da eficiência e conectividade da rede de transporte, mas também da proximidade entre pessoas e atividades. O tema da acessibilidade tem recebido cada vez mais atenção de agências de transporte, instituições de financiamento, tomadores de decisão e pesquisadores da área de planejamento urbano e de transportes [@papa2015accessibility, @boisjoly2017how]. Com isso, existe um crescente número de artigos científicos [@miller2018accessibility, @vanwee2021transport] e livros [@levine2019mobility, @levinson2020transport] que trazem rico material para discussão e aprofundamento sobre questões relacionadas à acessibilidade urbana. No entanto, atualmente não existem livros ou artigos que sirvam simultaneamente de material didático introdutório sobre o tema e de manual prático de metodologia para calcular e analisar dados de acessibilidade. A ausência desse tipo de material explica, ao menos em parte, porque diversas agências de transporte e analistas ainda enfrentam desafios em incorporar questões e indicadores de acessibilidade no dia-a-dia de planejamento e pesquisa [@silva2017accessibility, @buttner2021accessibility].
+Acessibilidade é a facilidade com que as pessoas conseguem alcançar lugares e oportunidades como empregos, serviços de saúde e educação, atividades culturais, áreas verdes, *etc*. As condições de acessibilidade em uma cidade ou bairro dependem da eficiência e conectividade da rede de transportes e da proximidade entre pessoas e atividades. O tema da acessibilidade tem recebido cada vez mais atenção de agências de transporte, instituições de financiamento, tomadores de decisão e pesquisadores da área de planejamento urbano e de transportes [@papa2015accessibility, @boisjoly2017how]. Com isso, existe um crescente número de artigos científicos [@miller2018accessibility, @vanwee2021transport] e livros [@levine2019mobility, @levinson2020transport] que trazem rico material para discussão e aprofundamento sobre questões relacionadas à acessibilidade urbana. No entanto, atualmente não existem livros ou artigos que sirvam simultaneamente de material didático introdutório sobre o tema e de manual prático de metodologia para calcular e analisar dados de acessibilidade. A ausência desse tipo de material explica, ao menos em parte, porque diversas agências de transporte e analistas ainda enfrentam desafios em incorporar questões e indicadores de acessibilidade no dia-a-dia do planejamento e da pesquisa [@silva2017accessibility, @buttner2021accessibility].
 
 O objetivo deste livro é equipar seus leitores com os conceitos fundamentais e as ferramentas de análise e processamento de dados necessárias para realizar análises de acessibilidade urbana e conduzir avaliações de impacto de projetos e políticas de transporte. O livro foi escrito pensando nas necessidades de trabalho de gestores públicos, analistas, alunos e pesquisadores de planejamento e transporte urbano e, por isso, possui caráter prático. Todo material do livro é apresentado com exemplos reproduzíveis e dados abertos, utilizando para isso a linguagem de programação [R](https://www.r-project.org/).
 
@@ -40,23 +40,33 @@ knitr::kable(tbl, align = c("c", "l"))
 
 
 
-## Código reproduzível
+## Reproduzindo o livro localmente
 
-Este livro traz diversos exemplos reproduzíveis de análise de dados em R. A maneira mais fácil de rodar o código do livro é utilizando um [*binder*](https://github.com/jupyterhub/binderhub), ferramenta que permite rodar códigos na nuvem através de um navegador. O código do livro pode ser rodado usando um servidor publicado pelo [mybinder](https://mybinder.org/). Para isso, clique no ícone abaixo: após alguns instantes, uma sessão do RStudio começará a rodar no seu navegador. Esta sessão inclui todos os arquivos e dados necessários para rodar o código do livro.
-
-```{r}
-#| echo: false
-htmltools::a(
-  href = "https://mybinder.org/v2/gh/ipeaGIT/intro_access_book/HEAD?urlpath=rstudio",
-  htmltools::img(src="images/binder_badge.svg")
-)
-```
+Para reproduzir o livro localmente, você deve primeiro baixar o seu código-conte. Isso pode ser feito com o *software* [git](https://git-scm.com/) ou manualmente, clicando no *link* a seguir: <https://github.com/ipeaGIT/intro_access_book/archive/refs/heads/main.zip>. Caso o segundo método seja utilizado, é necessário também extrair o conteúdo do arquivo ZIP baixado para uma nova pasta.
 
 ::: {.callout-note appearance="simple"}
-Este livro foi escrito e publicado com o sistema de publicação [Quarto](https://quarto.org). Todo o código utilizado em seu preparo e na sua publicação pode ser encontrado [neste repositório](https://github.com/ipeaGIT/aop_curso/tree/main/aop_curso_pt). 
-:::
+Este livro foi escrito e publicado com o sistema de publicação [Quarto](https://quarto.org). Todo o código utilizado em seu preparo e na sua publicação pode ser encontrado [neste repositório](https://github.com/ipeaGIT/intro_access_book). 
+::
 
-Para rodar o conteúdo do livro localmente, clone o repositório do livro. Com o RStudio instalado, abra o projeto clicando no arquivo `intro_access_book.Rproj` e rode o comando `quarto::quarto_preview()`.
+A renderização do livro requer que o programa [Quarto](https://quarto.org/) esteja instalado. A reprodução dos seus capítulos, por sua vez, requer o uso do pacote de R [`{renv}`](https://rstudio.github.io/renv/index.html), que faz a gestão de dependências do livro.
+
+Depois de instaladas as dependências do livro, seu código-fonte poderá ser executado normalmente. Os capítulos estão ordenados numericamente em arquivos no formato `.qmd`. Para rodar todos os capítulos de uma vez, utilize um dos seguintes comandos:
+
+```r
+quarto::quarto_preview()
+
+quarto::quarto_render()
+```
+
+Para mais detalhes de como instalar as dependências do livro e rodar seu conteúdo localmente, por favor veja as instruções completas de instalação no [repositório do livro](https://github.com/ipeaGIT/intro_access_book).
+
+## Reproduzindo o livro na nuvem com um *binder*
+
+Um *binder* é uma ferramenta que permite rodar códigos na nuvem em um navegador, como o Chrome e o Firefox. O código do livro pode ser rodado usando um servidor publicado pelo [mybinder](https://mybinder.org/). Para isso, clique no ícone abaixo: após alguns instantes, uma sessão do RStudio Cloud começará a rodar no seu navegador. Esta sessão inclui todos os arquivos e dados necessários para rodar o código do livro.
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ipeaGIT/intro_access_book/HEAD?urlpath=rstudio)
+
+Por favor, note que as sessões do mybinder estão limitadas a 2 GB de memória RAM. Esta restrição pode impedir que capítulos de processamento um pouco mais pesado, em particular o Capítulo 6, sejam executados adequadamente. Em caso de uso do *binder*, sugerimos que não tente renderizar o livro todo com o Quarto, como mostrado acima.
 
 ## Licença de uso
 
@@ -72,3 +82,4 @@ Caso use o material deste livro, pedimos por gentileza que cite o livro utilizan
 ## Agradecimentos
 
 Este livro foi elaborado pelo Instituto de Pesquisa Econômica Aplicada (Ipea) no âmbito da parceria entre Ipea e a Secretaria de Mobilidade e Desenvolvimento Regional e Urbano (SMDRU) do Ministério do Desenvolvimento Regional (MDR). Os autores agradecem aos comentários e sugestões de Lucas Mation.
+
