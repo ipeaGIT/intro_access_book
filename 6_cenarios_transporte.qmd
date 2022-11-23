@@ -2,7 +2,7 @@
 
 Neste capítulo, vamos ilustrar como usar de forma conjunta o material ensinado nos capítulos anteriores para medir o impacto de um projeto de infraestrutura de transporte sobre a acessibilidade urbana. Para avaliar o impacto de projetos de transporte, precisaremos comparar os níveis de acessibilidade antes e depois da implementação do projeto. Precisamos, portanto:
 
-1. Utilizar diferentes conjuntos de arquivos GTFS para representar os cenários antes e depois da implementação do projeto;
+1. Utilizar diferentes conjuntos de arquivos GTFS e fazer as edições necessárias para representar os cenários antes e depois da implementação do projeto;
 2. Calcular duas matrizes de tempo de viagem, uma antes e outra depois do investimento;
 3. Calcular os níveis de acessibilidade, tanto antes quanto depois do investimento;
 4. Comparar as condições de acessibilidade em cada cenário, examinando como os impactos se distribuem espacialmente e entre populações de diferentes níveis socioeconômicos.
@@ -11,7 +11,7 @@ Neste capítulo, vamos cobrir este passo-a-passo em detalhes, começando por uma
 
 ## Apresentação do estudo de caso
 
-Como estudo de caso, vamos fazer uma avaliação do projeto de construção da Linha Leste do metrô de Fortaleza (@fig-fortaleza_1). O município de Fortaleza é a capital do estado do Ceará, localizado na região Nordeste do Brasil. Com uma população estimada de 2,7 milhões habitantes, Fortaleza é a quinta cidade mais populosa do Brasil.
+Como estudo de caso, vamos fazer uma avaliação do projeto de construção da Linha Leste do metrô de Fortaleza (@fig-fortaleza_1). O município de Fortaleza é a capital do estado do Ceará, localizado na região Nordeste do Brasil. Com uma população estimada de 2,7 milhões habitantes, Fortaleza é a quinta cidade mais populosa do país
 
 ```{r}
 #| echo: false
@@ -21,7 +21,7 @@ Como estudo de caso, vamos fazer uma avaliação do projeto de construção da L
 knitr::include_graphics("images/fortaleza_1.png")
 ```
 
-Um dos grandes investimentos recentes no sistema de transporte de Fortaleza é a Linha Leste do metrô de Fortaleza. O traçado da Linha Leste possui 7,3 km de extensão e liga o Centro de Fortaleza ao bairro Papicu, permitindo a integração das linhas de metrô Sul e Oeste com corredores de Veículo Leve sobre Trilhos (VLT) e o terminal de ônibus no Papicu (@fig-fortaleza_2). Como a Linha Leste ainda estava em fase de construção quando da publicação deste livro, a análise deste capítulo trata de uma avaliação *ex-ante* - ou seja,  em que avaliamos o futuro impacto de um projeto sobre a acessibilidade urbana. Este tipo de análise se contrapõe a avaliações *ex-post*, usadas para avaliar o impacto causado por projetos já implementados.
+Um dos grandes investimentos recentes no sistema de transporte de Fortaleza é a Linha Leste do metrô. O traçado da Linha Leste possui 7,3 km de extensão e liga o Centro da cidade ao bairro Papicu, permitindo a integração das linhas de metrô Sul e Oeste com corredores de Veículo Leve sobre Trilhos (VLT) e o terminal de ônibus no Papicu (@fig-fortaleza_2). Como a Linha Leste ainda se encontra em construção até o momento da publicação deste livro, a análise deste capítulo trata de uma avaliação *ex-ante* - ou seja,  em que avaliamos o futuro impacto de um projeto sobre a acessibilidade urbana. Este tipo de análise se contrapõe a avaliações *ex-post*, usadas para avaliar o impacto causado por projetos já implementados.
 
 ```{r}
 #| echo: false
@@ -32,63 +32,66 @@ knitr::include_graphics("images/fortaleza_2.png")
 ```
 
 ::: {.callout-important appearance="simple"}
-É importante notar que a implementação deste projeto também será acompanhada de mudanças nas frequências das linhas Sul e Oeste do metrô, além do racionamento do sistema de ônibus municipais, conforme o Plano de Acessibilidade Sustentável de Fortaleza (Pasfor)[^1]. Para fins didáticos, no entanto, essas mudanças adicionais no sistema de transporte público não foram incorporadas aos cenários da nossa análise. Portanto, o estudo de caso que apresentamos aqui representa um cenário simplificado que considera apenas a implementação da Linha Leste. Para uma avaliação mais completa do impacto de acessibilidade da implementação da Linha Leste e das mudanças previstas no Pasfor, por favor veja o trabalho de @braga2022impactos.
+É importante notar que a implementação deste projeto também será acompanhada de mudanças nas frequências das linhas Sul e Oeste do metrô e no corredor de VLT Parangaba-Mucuripe, além do racionamento do sistema de ônibus municipais, conforme o Plano de Acessibilidade Sustentável de Fortaleza (Pasfor)[^1]. Para fins didáticos, no entanto, as mudanças relativas ao racionamento do sistema de ônibus não foram incorporadas aos cenários da nossa análise. Portanto, o estudo de caso que apresentamos aqui representa um cenário simplificado, que considera apenas a implementação da Linha Leste e as mudanças nas frequências das demais linhas do metrô e do VLT. Para uma avaliação mais completa, que leva em consideração todas as mudanças previstas no Pasfor, por favor veja o trabalho de @braga2022impactos.
 :::
 
 [^1]: Disponível em <https://www.pasfor.com.br/>.
 
-A população de Fortaleza está majoritariamente distribuída na região central e na porção oeste da cidade, embora haja alguns pontos de alta densidade populacional no sudeste da cidade. Via de regra, a população de mais alta renda (em tons de azul no mapa da distribuição de decis de renda) está localizada na região do centro expandido e sudeste do município, enquanto as populações de menor renda (em tons de vermelho) estão principalmente localizadas nas regiões periféricas ao sul e a oeste. Os empregos formais na cidade se distribuem principalmente ao longo de grandes avenidas, com uma maior concentração no centro da cidade. Em contraste, as escolas públicas de nível médio têm uma distribuição espacial mais equilibrada por todo território.
+Como mostra a @fig-fortaleza_3, a população de Fortaleza está majoritariamente distribuída na região central e na porção oeste da cidade, embora haja alguns pontos de alta densidade populacional no sudeste da cidade. Via de regra, a população de mais alta renda (em tons de azul no mapa da distribuição de decis de renda) está localizada na região do centro expandido e sudeste do município, enquanto as populações de menor renda (em tons de vermelho) estão principalmente localizadas nas regiões periféricas ao sul e a oeste. Os empregos formais na cidade se distribuem principalmente ao longo de grandes avenidas, com uma maior concentração no centro da cidade. Em contraste, as escolas públicas de nível médio têm uma distribuição espacial mais equilibrada por todo território.
 
 ```{r}
 #| echo: false
 #| results: false
 #| warning: false
 #| message: false
+# cria o endereço de arquivos temporários
+end_metrofor <- tempfile("metrofor", fileext = ".zip")
+end_linha_leste <- tempfile("linha_leste", fileext = ".zip")
 
-# DOWNLOAD E ORGANIZA DADOS DE TRILHOS PARA INCLUIR NOS MAPAS
-
-library(httr)
-library(gtfstools)
-library(ggplot2)
-library(data.table)
-
-# criar o endereço de arquivos temporários na máquina local
-metrofor_path <- tempfile("metrofor", fileext = ".zip")
-linha_leste_path <- tempfile("linha_leste", fileext = ".zip")
-
-# download dados da metrofor
+# baixa o gtfs da metrofor
 httr::GET(
   "https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/gtfs_for_metrofor_2021-01.zip",
-  httr::write_disk(metrofor_path)
+  httr::write_disk(end_metrofor)
 )
 
-# download do GTFS da Linha Leste
+# baixa o gtfs da Linha Leste
 httr::GET(
-  "https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/gtfs_linha_leste.zip", 
-  httr::write_disk(linha_leste_path)
+  "https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/gtfs_linha_leste.zip",
+  httr::write_disk(end_linha_leste)
 )
 
-# read gtfs
-metrofor_gtfs <- gtfstools::read_gtfs(metrofor_path)
-linha_leste_gtfs <- gtfstools::read_gtfs(linha_leste_path)
+# lê objetos gtfs
+gtfs_metrofor <- gtfstools::read_gtfs(end_metrofor)
+gtfs_linha_leste <- gtfstools::read_gtfs(end_linha_leste)
 
-# keep one trip per route in metrofor
-metrofor_gtfs <- gtfstools::filter_by_trip_id(metrofor_gtfs, trip_id = c('4', '34', '159'))
+# mantém apenas linhas de metrô e de VLT no gtfs da metrofor
+gtfs_metrofor <- gtfstools::filter_by_trip_id(
+  gtfs_metrofor,
+  trip_id = c("4", "34", "159")
+)
 
-# convert to sf
-metrofor_gtfs$stop_times <- metrofor_gtfs$stop_times[order(trip_id, stop_sequence)]
-metrofor_sf <- gtfstools::get_trip_geometry(metrofor_gtfs)
-linha_leste_sf <- gtfstools::convert_shapes_to_sf(linha_leste_gtfs, shape_id = 'LL_0')
+# converte corredores para sf
+gtfs_metrofor$stop_times <- gtfs_metrofor$stop_times[
+  order(trip_id, stop_sequence)
+]
+traj_metrofor <- gtfstools::get_trip_geometry(gtfs_metrofor)
 
-# rename transport routes and rbind data
-linha_leste_sf$shape_id <- 'Linha Leste'
-setnames(metrofor_sf, 'trip_id', 'shape_id')
-metrofor_sf$origin_file <- NULL
-metrofor_sf$shape_id <- fcase(metrofor_sf$shape_id == 4, 'Linha Oeste', 
-                              metrofor_sf$shape_id == 34, 'Linha Sul', 
-                              metrofor_sf$shape_id == 159, 'VLT')
+traj_linha_leste <- gtfstools::convert_shapes_to_sf(
+  gtfs_linha_leste,
+  shape_id = "LL_0"
+)
 
-rail_sf <- rbind(metrofor_sf, linha_leste_sf)
+# renomeia linhas de transporte
+traj_linha_leste$shape_id <- "Linha Leste"
+traj_metrofor$shape_id <- data.table::fcase(
+  traj_metrofor$trip_id == 4, "Linha Oeste",
+  traj_metrofor$trip_id == 34, "Linha Sul",
+  traj_metrofor$trip_id == 159, "VLT"
+)
+
+traj_metrofor$origin_file <- NULL
+traj_metrofor$trip_id <- NULL
+traj_corredores <- rbind(traj_metrofor, traj_linha_leste)
 ```
 
 ```{r}
@@ -96,97 +99,122 @@ rail_sf <- rbind(metrofor_sf, linha_leste_sf)
 #| results: false
 #| warning: false
 #| message: false
-
-# MAPAS DE POPULACAO, RENDA, EMPREGOS E ESCOLAS
-
+#| label: fig-fortaleza_3
+#| fig-cap: Distribuição sociodemográfica, de oportunidades de emprego e de educação e de corredores de transporte público em Fortaleza
 library(ggplot2)
-library(aopdata)
 library(patchwork)
 
 # download dos dados
-for_sf <- aopdata::read_landuse(
-  city = "Fortaleza", 
+dados_fortaleza <- aopdata::read_landuse(
+  city = "Fortaleza",
   year = 2019,
-  showProgress = FALSE, 
+  showProgress = FALSE,
   geometry = TRUE
 )
 
-fig_pessoas <- ggplot(data = for_sf) +
+fig_pessoas <- ggplot(data = dados_fortaleza) +
   geom_sf(aes(fill = P001), color = NA) +
-  labs(fill = "Número de\npessoas", color='Linhas') +
+  labs(fill = "Número de\npessoas", color = "Linhas") +
   scale_fill_distiller(palette = "PuBu", direction = 1) +
-  geom_sf(data=rail_sf, aes(color=shape_id), alpha=.8, show.legend = FALSE) +
-  scale_color_manual(values=c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
+  geom_sf(
+	data = traj_corredores,
+	mapping = aes(color = shape_id),
+	alpha = 0.8,
+	show.legend = FALSE
+  ) +
+  scale_color_manual(values = c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
   theme_void() +
-  theme(legend.key.size = unit(.4, 'cm'))
+  theme(legend.key.size = unit(0.4, "cm"))
 
-fig_renda <- ggplot(data = subset(for_sf, P001 > 0)) +
-  geom_sf(aes(fill = as.factor(R003)), color=NA, alpha = 0.8) +
-  labs(fill = "Decil de\nrenda", color='Linhas') +
+fig_renda <- ggplot(data = subset(dados_fortaleza, P001 > 0)) +
+  geom_sf(aes(fill = as.factor(R003)), color = NA, alpha = 0.8) +
+  labs(fill = "Decil de\nrenda", color = "Linhas") +
   scale_fill_brewer(palette = "RdBu") +
-  geom_sf(data=rail_sf, aes(color=shape_id), alpha=.8, show.legend = FALSE) +
-  scale_color_manual(values=c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
+  geom_sf(
+	data = traj_corredores,
+	mapping = aes(color = shape_id),
+	alpha = 0.8,
+	show.legend = FALSE
+  ) +
+  scale_color_manual(values = c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
   theme_void() +
-  theme(legend.key.size = unit(.3, 'cm'))
+  theme(legend.key.size = unit(0.3, "cm"))
 
-fig_empregos <- ggplot(data = for_sf) +
+fig_empregos <- ggplot(data = dados_fortaleza) +
   geom_sf(aes(fill = T001), color = NA) +
   labs(fill = "Número de\nempregos") +
   scale_fill_distiller(palette = "OrRd", direction = 1) +
-  geom_sf(data=rail_sf, aes(color=shape_id), alpha=.8, show.legend = FALSE) +
-  scale_color_manual(values=c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
+  geom_sf(
+	data = traj_corredores,
+	mapping = aes(color = shape_id),
+	alpha = 0.8,
+	show.legend = FALSE
+  ) +
+  scale_color_manual(values = c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
   theme_void() +
-  theme(legend.key.size = unit(.4, 'cm'))
+  theme(legend.key.size = unit(0.4, "cm"))
 
-fig_escolas <- ggplot(data = for_sf) +
+fig_escolas <- ggplot(data = dados_fortaleza) +
   geom_sf(aes(fill = as.factor(E004)), color = NA) +
   scale_fill_manual(values = c("grey90", "#66c2a5", "#5e4fa2")) +
-  labs(fill = "Número de\nescolas", color='Linhas') +
-  geom_sf(data=rail_sf, aes(color=shape_id), alpha=.8) +
-  scale_color_manual(values=c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
+  labs(fill = "Número de\nescolas", color = "Linhas") +
+  geom_sf(
+	data = traj_corredores,
+	mapping = aes(color = shape_id),
+	alpha = 0.8
+  ) +
+  scale_color_manual(values = c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
   theme_void() +
-  theme(legend.key.size = unit(.4, 'cm'))
+  theme(legend.key.size = unit(0.4, "cm"))
 
 fig_pessoas + fig_renda + fig_empregos + fig_escolas + plot_layout(ncol = 2)
+
+detach("package:patchwork", unload = TRUE)
+detach("package:ggplot2", unload = TRUE)
+rm(dados_fortaleza)
+rm(list = c("traj_corredores", "traj_linha_leste", "traj_metrofor"))
 ```
+
 
 ## Dados GTFS usados na análise
 
-Nesta análise, usaremos os arquivos GTFS disponibilizados pela Empresa de Transporte Urbano de Fortaleza (Etufor) e a Empresa do Metrô de Fortaleza (Metrofor). Esses dados descrevem o sistema de transporte público operante na cidade de Fortaleza em outubro de 2019. Como esses são arquivos grandes, somando quase 20 MB no total, eles não estão disponíveis dentro dos pacotes `{r5r}` e `{gtfstools}`, como nos exemplos que usamos até aqui no livro. Para ter acesso a esses dados nós usamos o código abaixo, que faz o *download* dos *feeds* de GTFS usando o pacote `{httr}`:
+Nesta análise, usaremos os arquivos GTFS disponibilizados pela Empresa de Transporte Urbano de Fortaleza (Etufor) e a Empresa do Metrô de Fortaleza (Metrofor). Esses dados descrevem o sistema de transporte público operante na cidade de Fortaleza em outubro de 2019. Para ter acesso a esses dados,usamos o código abaixo, que baixa os *feeds* usando o pacote `{httr}`:
 
 ```{r}
 #| results: false
-# criar o endereço de arquivos temporários na máquina local
-metrofor_path <- tempfile("metrofor", fileext = ".zip")
-etufor_path <- tempfile("etufor", fileext = ".zip")
+# cria o endereço de arquivos temporários
+end_metrofor <- tempfile("metrofor", fileext = ".zip")
+end_etufor <- tempfile("etufor", fileext = ".zip")
 
-# download dados da metrofor
+# baixa dados da metrofor
 httr::GET(
   "https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/gtfs_for_metrofor_2021-01.zip",
-  httr::write_disk(metrofor_path)
+  httr::write_disk(end_metrofor)
 )
 
-# download dados da etufor
+# baixa dados da etufor
 httr::GET(
   "https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/gtfs_for_etufor_2019-10.zip",
   httr::progress(),
-  httr::write_disk(etufor_path)
+  httr::write_disk(end_etufor)
 )
 ```
 
-Para simularmos a implementação da nova Linha Leste do metrô, precisamos também de um *feed* que descreva como deverá ser a sua operação. Este *feed* deve conter algumas informações-chave, como por exemplo o traçado da futura linha de metrô, a localização de suas estações, o tempo de viagem entre estações e a frequência planejada dos serviços. Neste exemplo, vamos utilizar o GTFS do projeto da Linha Leste criado anteriormente pelo Ipea para um estudo mais detalhado de avaliação do impacto de acessibilidade deste projeto [@braga2022impactos]. Assim como os *feeds* da Etufor e da Metrofor, este arquivo GTFS está disponível para *download* no repositório do livro no GitHub e pode ser baixado com o código abaixo:
+
+Para simularmos a implementação da nova Linha Leste do metrô, precisamos também de um *feed* que descreva como deverá ser a sua operação. Este *feed* deve conter algumas informações-chave, como, por exemplo, o traçado da futura linha de metrô, a localização de suas estações, o tempo de viagem entre estações e a frequência planejada dos serviços. Neste exemplo, vamos utilizar o GTFS do projeto da Linha Leste criado anteriormente pelo Ipea para um estudo mais detalhado de avaliação do impacto de acessibilidade deste projeto [@braga2022impactos]. Assim como os *feeds* da Etufor e da Metrofor, este arquivo GTFS está disponível para *download* no repositório do livro no GitHub e pode ser baixado com o código abaixo:
 
 ```{r}
 #| results: false
-# criar o endereço do arquivo temporário
-linha_leste_path <- tempfile("linha_leste", fileext = ".zip")
+# cria o endereço do arquivo temporário
+end_linha_leste <- tempfile("linha_leste", fileext = ".zip")
 
-# download do GTFS da Linha Leste
+# baixa o GTFS da Linha Leste
 httr::GET(
   "https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/gtfs_linha_leste.zip",
-  httr::write_disk(linha_leste_path)
+  httr::write_disk(end_linha_leste)
 )
 ```
+
 
 Esses três arquivos GTFS serão usados em conjunto para calcular as condições de acessibilidade de Fortaleza antes da implementação do projeto do corredor e para o cenário futuro, quando a Linha Leste estiver funcionando. No cenário pré Linha Leste, vamos calcular as matrizes de tempo de viagem com base apenas nos *feeds* da Metrofor e da Etufor de outubro de 2019, que representam a típica operação de transporte público da cidade antes da implementação do novo corredor. No cenário pós implementação, incluiremos também o GTFS da Linha Leste, incorporando à análise a operação planejada desta linha após sua finalização.
 
