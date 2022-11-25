@@ -508,7 +508,7 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 <ul>
 <li><strong>Rede de transporte público</strong> (opcional): um ou mais arquivos GTFS descrevendo a rede de transporte público da área de estudo. Caso ausente, deslocamentos por transporte público não são considerados no cálculo da matriz de tempo de viagem. Esses dados podem ser ser baixados com:
 <ul>
-<li><a href="https://r-transit.github.io/tidytransit/">{tidytransit}</a>, pacote de R;</li>
+<li><a href="https://r-transit.github.io/tidytransit/"><code>{tidytransit}</code></a>, pacote de R;</li>
 <li><a href="https://www.transit.land/">Transitland</a>, <em>website</em>;</li>
 <li>No <a href="./4_dados_gtfs.html">Capítulo 4</a> deste livro (<a href="4_dados_gtfs.html#tbl-gtfs_brasil">Tabela&nbsp;<span>4.9</span></a>) nós indicamos também onde baixar dados de GTFS de algumas cidades brasileiras que compartilham seus dados publicamente.</li>
 </ul></li>
@@ -521,7 +521,7 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 <p>Esses dados devem ser salvos em uma mesma pasta que, preferencialmente, não contenha nenhum outro arquivo. Como veremos adiante, o <code>{r5r}</code> combina todos os dados salvos nesta pasta para criar uma rede de transporte multimodal que é utilizada no roteamento de viagens entre pares origem-destino e, consequentemente, no cálculo das matrizes de tempo de viagem. Note que é possível ter mais de um arquivo GTFS na mesma pasta: nesse caso, o <code>{r5r}</code> considera as redes de transporte públicos de todos os <em>feeds</em> de forma conjunta. No entanto, a rede viária e a topografia da área de estudo devem ser descritas por um único arquivo cada. Assumindo que os <em>scripts</em> de R estejam em uma pasta chamada <code>R</code>, uma possível organização dos arquivos segue o esquema abaixo:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>/tmp/RtmpnjJx7r/projeto_acessibilidade
+<pre><code>/tmp/Rtmp5tU7Xs/projeto_acessibilidade
 ├── R
 │   ├── script1.R
 │   └── script2.R
