@@ -1,6 +1,5 @@
 #  Dados GTFS {#sec-4_dados_gtfs}
 
-
 O formato GTFS é uma especificação aberta e colaborativa que visa descrever os principais componentes de uma rede de transporte público. Originalmente criada em meados dos anos 2000 por uma parceria entre Google e TriMet, a agência de transporte de Portland, Oregon, nos Estados Unidos, a especificação GTFS hoje é utilizada por agências de transporte em milhares de cidades, espalhadas por todos os continentes do globo [@mchugh2013pioneering]. Atualmente, esta especificação é dividida em dois componentes distintos:
 
 - O GTFS *Schedule*, ou GTFS *Static*, que contém o cronograma planejado de linhas de transporte público, informações sobre suas tarifas e informações espaciais sobre os seus itinerários;
@@ -210,7 +209,7 @@ Outra variável que afeta a forma na qual o `frequencies.txt` afeta as tabelas d
 
 ## Onde encontrar dados GTFS de cidades brasileiras
 
-Os dados de GTFS de diversas cidades do mundo podem ser baixados com o pacote de R [{tidytransit}](https://r-transit.github.io/tidytransit/) ou no *site* [Transitland](https://www.transit.land/). No Brasil, diversas cidades usam dados GTFS no planejamento e operação de seus sistemas de transportes. Em muitos casos, no entanto, esses dados são de propriedade de empresas operadoras e concessionárias, e não do poder público. Infelizmente, esses arquivos raramente são disponibilizados aberta e publicamente, contrariando boas práticas de gestão e compartilhamento de dados de interesse público. A @tbl-gtfs_brasil mostra as fontes dos dados GTFS de algumas das poucas cidades do Brasil que disponibilizam seus *feeds* abertamente[^4].
+Os dados de GTFS de diversas cidades do mundo podem ser baixados com o pacote de R [`{tidytransit}`](https://r-transit.github.io/tidytransit/) ou no *site* [Transitland](https://www.transit.land/). No Brasil, diversas cidades usam dados GTFS no planejamento e operação de seus sistemas de transportes. Em muitos casos, no entanto, esses dados são de propriedade de empresas operadoras e concessionárias, e não do poder público. Infelizmente, esses arquivos raramente são disponibilizados aberta e publicamente, contrariando boas práticas de gestão e compartilhamento de dados de interesse público. A @tbl-gtfs_brasil mostra as fontes dos dados GTFS de algumas das poucas cidades do Brasil que disponibilizam seus *feeds* abertamente[^4].
 
 [^4]: Levantamento realizado até o momento da publicação do livro.
 
