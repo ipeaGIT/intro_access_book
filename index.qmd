@@ -20,25 +20,23 @@ Este livro está dividido em 5 seções:
 #| echo: false
 tbl <- data.frame(
   Seção = c(
-	"[1: Introdução à acessibilidade urbana](s1_intro.qmd)",
-	"[2: Calculando acessibilidade](s2_calculo.qmd)",
-	"[3: Dados de transporte público](s3_dados_tp.qmd)",
-	"[4: Avaliação de impacto de projetos de transporte](s4_avaliacao_impacto.qmd)",
-	"[5: Dados do Projeto AOP](s5_dados_aop.qmd)"
+  	"[1: Introdução à acessibilidade urbana](s1_intro.qmd)",
+  	"[2: Calculando acessibilidade](s2_calculo.qmd)",
+  	"[3: Dados de transporte público](s3_dados_tp.qmd)",
+  	"[4: Avaliação de impacto de projetos de transporte](s4_avaliacao_impacto.qmd)",
+  	"[5: Dados do Projeto AOP](s5_dados_aop.qmd)"
   ),
   Descrição = c(
-	"A primeira seção apresenta o conceito de acessibilidade urbana, esclarece as diferenças entre acessibilidade e mobilidade, e apresenta os principais indicadores usados para medir a acessibilidade urbana.",
-	"A segunda ensina como calcular estimativas de acessibilidade urbana em R usando os pacotes `{r5r}` e `{accessibility}` a partir de dados públicos abertos, e como visualizar os resultados com mapas e gráficos.",
-	"A terceira apresenta o que é a especificação GTFS de dados de transporte público, e mostra como trabalhar e analisar dados de GTFS usando o pacote `{gtfstools}`.",
-	"A quarta traz um estudo de caso para mostrar como o conhecimento dos capítulos anteriores pode ser utilizado para avaliar o impacto de políticas públicas sobre as condições de acessibilidade urbana.",
-	"Por fim, a quinta seção mostra como baixar, analisar e visualizar os dados do projeto Acesso a Oportunidades para analisar a distribuição espacial e socioeconômica das condições de acesso a oportunidades nas cidades brasileiras."
+  	"A primeira seção apresenta o conceito de acessibilidade urbana, esclarece as diferenças entre acessibilidade e mobilidade, e apresenta os principais indicadores usados para medir a acessibilidade urbana.",
+  	"A segunda ensina como calcular estimativas de acessibilidade urbana em R usando os pacotes `{r5r}` e `{accessibility}` a partir de dados públicos abertos, e como visualizar os resultados com mapas e gráficos.",
+  	"A terceira apresenta o que é a especificação GTFS de dados de transporte público, e mostra como trabalhar e analisar dados de GTFS usando o pacote `{gtfstools}`.",
+  	"A quarta traz um estudo de caso para mostrar como o conhecimento dos capítulos anteriores pode ser utilizado para avaliar o impacto de políticas públicas sobre as condições de acessibilidade urbana.",
+  	"Por fim, a quinta seção mostra como baixar, analisar e visualizar os dados do projeto Acesso a Oportunidades para analisar a distribuição espacial e socioeconômica das condições de acesso a oportunidades nas cidades brasileiras."
   )
 )
 
 knitr::kable(tbl, align = c("c", "l"))
 ```
-
-
 
 ## Código reproduzível
 
