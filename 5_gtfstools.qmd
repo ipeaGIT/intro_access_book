@@ -1,8 +1,6 @@
 # Manipulação e visualização de dados GTFS
 
-Usualmente, arquivos GTFS provenientes de fontes oficiais são utilizados para desenvolver análises e pesquisas que possuem diversos elementos comuns. Visando facilitar a leitura, o processamento e a análise desses dados, a equipe do Projeto Acesso a Oportunidades vem desenvolvendo o pacote de R `{gtfstools}`[^1] [@Herszenhut2022gtfstools], que disponibiliza diversas funções que facilitam a manipulação e a exploração de *feeds*.
-
-[^1]: Disponível em <https://github.com/ipeaGIT/gtfstools>.
+Usualmente, arquivos GTFS provenientes de fontes oficiais são utilizados para desenvolver análises e pesquisas que possuem diversos elementos comuns. Visando facilitar a leitura, o processamento e a análise desses dados, a equipe do Projeto Acesso a Oportunidades vem desenvolvendo o pacote de R [`{gtfstools}`](https://github.com/ipeaGIT/gtfstools), que disponibiliza diversas funções que facilitam a manipulação e a exploração de *feeds*.
 
 Neste capítulo, passaremos por algumas das funcionalidades mais frequentemente utilizadas do pacote. Para isso, vamos utilizar uma amostra do *feed* da SPTrans apresentado no capítulo anterior, disponível dentro do `{gtfstools}`.
 
@@ -30,9 +28,9 @@ Como podemos ver, cada `data.table` dentro do objeto GTFS é nomeado de acordo c
 head(gtfs$trips)
 ```
 
-As tabelas dentro de um objeto GTFS podem ser facilmente manipuladas usando a sintaxe do pacote  `{data.table}`. Este pacote oferece diversas funcionalidades úteis, principalmente para a manipulação de tabelas com uma grande quantidade de registros, como a edição de colunas por referência, filtros de linhas muito rápidos e agregação de dados eficiente[^2]. Para adicionar 100 segundos a todos os *headways* listados na tabela *frequencies* e reverter essa mudança em seguida, por exemplo, podemos usar o código abaixo:
+As tabelas dentro de um objeto GTFS podem ser facilmente manipuladas usando a sintaxe do pacote  `{data.table}`. Este pacote oferece diversas funcionalidades úteis, principalmente para a manipulação de tabelas com uma grande quantidade de registros, como a edição de colunas por referência, filtros de linhas muito rápidos e agregação de dados eficiente[^1]. Para adicionar 100 segundos a todos os *headways* listados na tabela *frequencies* e reverter essa mudança em seguida, por exemplo, podemos usar o código abaixo:
 
-[^2]: Mais detalhes sobre o uso e a sintaxe do `{data.table}` podem ser lidos em <https://rdatatable.gitlab.io/data.table/index.html>.
+[^1]: Mais detalhes sobre o uso e a sintaxe do `{data.table}` podem ser lidos em <https://rdatatable.gitlab.io/data.table/index.html>.
 
 ```{r}
 # salva o headway original
@@ -56,7 +54,6 @@ endereco_destino <- tempfile("novo_gtfs", fileext = ".zip")
 
 # salva o GTFS no endereco
 write_gtfs(gtfs, path = endereco_destino)
-
 
 # lista arquivos dentro do feed recém-salvo
 zip::zip_list(endereco_destino)[, c("filename", "compressed_size", "timestamp")]
