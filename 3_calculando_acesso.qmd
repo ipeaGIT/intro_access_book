@@ -44,7 +44,7 @@ O *OpenStreetMap* (OSM) é uma base de dados geográfica que traz informações 
 :::
 
 - **Rede de transporte público** (opcional): um ou mais arquivos GTFS descrevendo a rede de transporte público da área de estudo. Caso ausente, deslocamentos por transporte público não são considerados no cálculo da matriz de tempo de viagem. Esses dados podem ser ser baixados com:
-  - [{tidytransit}](https://r-transit.github.io/tidytransit/), pacote de R;
+  - [`{tidytransit}`](https://r-transit.github.io/tidytransit/), pacote de R;
   - [Transitland](https://www.transit.land/), *website*;
   - No [Capítulo 4](4_dados_gtfs.qmd) deste livro (@tbl-gtfs_brasil) nós indicamos também onde baixar dados de GTFS de algumas cidades brasileiras que compartilham seus dados publicamente.
 
@@ -96,7 +96,6 @@ Esta pasta possui quatro arquivos que vamos utilizar ao longo deste capítulo:
 - Um *feed* de GTFS descrevendo algumas linhas da rede de ônibus da cidade: `poa.zip`;
 - O modelo digital de elevação da cidade: `poa_elevation.tif`;
 - O arquivo `poa_hexgrid.csv`, com as coordenadas geográficas dos centróides de uma grade hexagonal regular que cobre toda a área de estudo e com informações sobre o tamanho da população residente e o número de escolas em cada hexágono. Esses pontos serão utilizados como as origens e os destinos no cálculo da matriz de tempo de viagem.
-
 
 ### Calculando a matriz de tempo de viagem
 
@@ -174,7 +173,6 @@ head(oportunidades_cumulativas)
 ```
 
 ### Custo mínimo de viagem
-
 
 A função `cost_to_closest()`, por sua vez, calcula o custo mínimo de viagem necessário para alcançar um determinado número de oportunidades. Com o código abaixo, por exemplo, calculamos o tempo de viagem mínimo para alcançar o hospital mais próximo a partir de cada origem.
 
