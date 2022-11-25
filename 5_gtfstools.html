@@ -429,7 +429,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 
 </header>
 
-<p>Usualmente, arquivos GTFS provenientes de fontes oficiais são utilizados para desenvolver análises e pesquisas que possuem diversos elementos comuns. Visando facilitar a leitura, o processamento e a análise desses dados, a equipe do Projeto Acesso a Oportunidades vem desenvolvendo o pacote de R <code>{gtfstools}</code><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <span class="citation" data-cites="Herszenhut2022gtfstools">(<a href="references.html#ref-Herszenhut2022gtfstools" role="doc-biblioref"><strong>Herszenhut2022gtfstools?</strong></a>)</span>, que disponibiliza diversas funções que facilitam a manipulação e a exploração de <em>feeds</em>.</p>
+<p>Usualmente, arquivos GTFS provenientes de fontes oficiais são utilizados para desenvolver análises e pesquisas que possuem diversos elementos comuns. Visando facilitar a leitura, o processamento e a análise desses dados, a equipe do Projeto Acesso a Oportunidades vem desenvolvendo o pacote de R <a href="https://github.com/ipeaGIT/gtfstools"><code>{gtfstools}</code></a>, que disponibiliza diversas funções que facilitam a manipulação e a exploração de <em>feeds</em>.</p>
 <p>Neste capítulo, passaremos por algumas das funcionalidades mais frequentemente utilizadas do pacote. Para isso, vamos utilizar uma amostra do <em>feed</em> da SPTrans apresentado no capítulo anterior, disponível dentro do <code>{gtfstools}</code>.</p>
 <section id="leitura-e-manipulação-básica-de-arquivos-gtfs" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="leitura-e-manipulação-básica-de-arquivos-gtfs"><span class="header-section-number">5.1</span> Leitura e manipulação básica de arquivos GTFS</h2>
@@ -464,7 +464,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 6: CPTM L09        USD CPTM L09-1        OSASCO            1    17851</code></pre>
 </div>
 </div>
-<p>As tabelas dentro de um objeto GTFS podem ser facilmente manipuladas usando a sintaxe do pacote <code>{data.table}</code>. Este pacote oferece diversas funcionalidades úteis, principalmente para a manipulação de tabelas com uma grande quantidade de registros, como a edição de colunas por referência, filtros de linhas muito rápidos e agregação de dados eficiente<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Para adicionar 100 segundos a todos os <em>headways</em> listados na tabela <em>frequencies</em> e reverter essa mudança em seguida, por exemplo, podemos usar o código abaixo:</p>
+<p>As tabelas dentro de um objeto GTFS podem ser facilmente manipuladas usando a sintaxe do pacote <code>{data.table}</code>. Este pacote oferece diversas funcionalidades úteis, principalmente para a manipulação de tabelas com uma grande quantidade de registros, como a edição de colunas por referência, filtros de linhas muito rápidos e agregação de dados eficiente<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Para adicionar 100 segundos a todos os <em>headways</em> listados na tabela <em>frequencies</em> e reverter essa mudança em seguida, por exemplo, podemos usar o código abaixo:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># salva o headway original</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>headway_original <span class="ot">&lt;-</span> gtfs<span class="sc">$</span>frequencies<span class="sc">$</span>headway_secs</span>
@@ -502,19 +502,18 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># salva o GTFS no endereco</span></span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write_gtfs</span>(gtfs, <span class="at">path =</span> endereco_destino)</span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># lista arquivos dentro do feed recém-salvo</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>zip<span class="sc">::</span><span class="fu">zip_list</span>(endereco_destino)[, <span class="fu">c</span>(<span class="st">"filename"</span>, <span class="st">"compressed_size"</span>, <span class="st">"timestamp"</span>)]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># lista arquivos dentro do feed recém-salvo</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>zip<span class="sc">::</span><span class="fu">zip_list</span>(endereco_destino)[, <span class="fu">c</span>(<span class="st">"filename"</span>, <span class="st">"compressed_size"</span>, <span class="st">"timestamp"</span>)]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         filename compressed_size           timestamp
-1      agency.txt             112 2022-11-18 23:45:24
-2    calendar.txt             129 2022-11-18 23:45:24
-3 frequencies.txt            2381 2022-11-18 23:45:24
-4      routes.txt             659 2022-11-18 23:45:24
-5      shapes.txt          160470 2022-11-18 23:45:24
-6  stop_times.txt            7907 2022-11-18 23:45:24
-7       stops.txt           18797 2022-11-18 23:45:24
-8       trips.txt             717 2022-11-18 23:45:24</code></pre>
+1      agency.txt             112 2022-11-25 18:15:42
+2    calendar.txt             129 2022-11-25 18:15:42
+3 frequencies.txt            2381 2022-11-25 18:15:42
+4      routes.txt             659 2022-11-25 18:15:42
+5      shapes.txt          160470 2022-11-25 18:15:42
+6  stop_times.txt            7907 2022-11-25 18:15:42
+7       stops.txt           18797 2022-11-25 18:15:42
+8       trips.txt             717 2022-11-25 18:15:42</code></pre>
 </div>
 </div>
 </section>
@@ -1088,8 +1087,7 @@ Geodetic CRS:  WGS 84
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>Disponível em <a href="https://github.com/ipeaGIT/gtfstools" class="uri">https://github.com/ipeaGIT/gtfstools</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Mais detalhes sobre o uso e a sintaxe do <code>{data.table}</code> podem ser lidos em <a href="https://rdatatable.gitlab.io/data.table/index.html" class="uri">https://rdatatable.gitlab.io/data.table/index.html</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Mais detalhes sobre o uso e a sintaxe do <code>{data.table}</code> podem ser lidos em <a href="https://rdatatable.gitlab.io/data.table/index.html" class="uri">https://rdatatable.gitlab.io/data.table/index.html</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
