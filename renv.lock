@@ -449,18 +449,21 @@
     },
     "gtfstools": {
       "Package": "gtfstools",
-      "Version": "1.1.0",
+      "Version": "1.2.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "3057e591c9b4b1e0b061eeb2d566fbd3",
+      "Hash": "b11fad9b86069245ec30be432eab7cb4",
       "Requirements": [
         "checkmate",
         "cpp11",
+        "curl",
         "data.table",
         "gtfsio",
+        "processx",
         "sf",
         "sfheaders",
-        "units"
+        "units",
+        "zip"
       ]
     },
     "highr": {
