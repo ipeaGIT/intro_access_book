@@ -330,6 +330,52 @@ ggplot() +
   theme_minimal()
 ```
 
+## Validação de arquivos GTFS
+
+Planejadores e pesquisadores frequentemente querem avaliar a qualidade dos arquivos GTFS que estão utilizando em suas análises ou que estão produzindo. Os *feeds* estão estruturados conforme [boas práticas](https://github.com/MobilityData/GTFS_Schedule_Best-Practices) adotadas pela comunidade que usa a especificação? As tabelas e colunas estão formatadas corretamente? A informação descrita pelo *feed* parece verossímil (velocidade das viagens, localização das paradas, etc)? Essas são algumas das perguntas que podem surgir ao lidar com dados no formato GTFS.
+
+Para responder a essas e outras perguntas, o `{gtfstools}` inclui a função `validate_gtfs()`. Esta função serve como interface entre o R e o [Canonical GTFS Validator](https://github.com/MobilityData/gtfs-validator), *software* desenvolvido pela MobilityData. O uso do validador requer que o Java versão 11 ou superior esteja instalado. Para informações de como checar a versão do Java instalado em seu computador e como instalar a versão correta, caso necessário, por favor veja o [Capítulo 3](3_calculando_acesso.qmd#instalação-do-r5r).
+
+Usar a `validate_gtfs()` é muito simples. Primeiro, precisamos baixar o *software* de validação. Para isso, podemos usar a função `download_validator()`, também disponível no pacote, que recebe o endereço de uma pasta na qual o validador deve ser salvo e a versão do validador desejada (por padrão, a mais recente). Como resultado, a função retorna o endereço do arquivo baixado:
+
+```{r}
+pasta_temporaria <- tempdir()
+
+endereco_validador <- download_validator(pasta_temporaria)
+endereco_validador
+```
+
+A segunda (e última) etapa consiste em de fato rodar a função `validate_gtfs()`. Essa função aceita que os dados GTFS a serem validados sejam passados de diferentes formas: (a) como um objeto GTFS existente apenas no R, (b) como o endereço de um arquivo GTFS salvo localmente em formato `.zip`, (c) como a URL para um *feed* ou (d) como uma pasta que contém os dados GTFS não compactados. A função também recebe o endereço para uma pasta onde o resultado da validação deve ser salvo e o endereço para o validador que deve ser usado. Neste exemplo, vamos fazer a validação a partir do endereço do GTFS da SPTrans, lido anteriormente:
+
+```{r}
+pasta_resultado <- tempfile("validacao_com_endereco")
+
+validate_gtfs(
+  endereco,
+  output_path = pasta_resultado,
+  validator_path = endereco_validador
+)
+
+list.files(pasta_resultado)
+```
+
+Como podemos ver, a validação gera alguns arquivos como resultado:
+
+- `report.html`, mostrado na @fig-report, que resume os resultados da validação em uma página HTML (apenas disponível quando utilizado o validador v3.1.0 ou superior);
+- `report.json`, que resume a mesma informação apresentada na página HTML, porém em formato JSON, que pode ser usado para processar e interpretar os resultados de forma programática;
+- `system_errors.json`, que apresenta eventuais erros de sistema que tenham ocorrido durante a validação e que podem comprometer os resultados;
+- `validation_stderr.txt`, que lista mensagens informativas enviadas pelo validador, incluindo uma lista dos testes realizados, eventuais mensagens de erro, etc[^2];
+
+[^2]: Mensagens informativas podem também ser listadas no arquivo `validation_stdout.txt`. As mensagens listadas no `validation_stderr.txt` e no `validation_stdout.txt` dependem da versão do validador utilizada.
+
+```{r}
+#| echo: false
+#| label: fig-report
+#| fig-cap: Exemplo de relatório gerado durante a validação
+
+knitr::include_graphics("images/validator_report.png")
+```
+
 ## Fluxo de trabalho com o `{gtfstools}`: mapeando o *headway* das linhas
 
 Como mostrado nas seções anteriores, o `{gtfstools}` disponibiliza uma grande caixa de ferramentas que podem ser usadas no processamento e na análise de arquivos GTFS. O pacote, no entanto, oferece diversas outras funções que não puderam ser apresentadas neste livro, por questões de espaço. A lista completa de funções disponíveis pode ser conferida no [site do pacote](https://ipeagit.github.io/gtfstools/reference/index.html).
