@@ -66,7 +66,7 @@ Já a @tbl-tabela_dados_aop apresenta os dados de características socioeconômi
 
 ```{r}
 #| echo: false
-#| label: tbl-tabela_dados_pop
+#| label: tbl-tabela_dados_aop
 #| tbl-cap: Informações socioeconômicas da população e de distribuição espacial de atividades, segundo ano e fonte de dados
 tabela_dados_pop <- data.table::data.table(
   Dado = c(
