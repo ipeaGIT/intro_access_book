@@ -384,7 +384,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   <li><a href="#leitura-e-manipulação-básica-de-arquivos-gtfs" id="toc-leitura-e-manipulação-básica-de-arquivos-gtfs" class="nav-link active" data-scroll-target="#leitura-e-manipulação-básica-de-arquivos-gtfs"><span class="toc-section-number">5.1</span>  Leitura e manipulação básica de arquivos GTFS</a></li>
   <li><a href="#cálculo-de-velocidade-das-linhas" id="toc-cálculo-de-velocidade-das-linhas" class="nav-link" data-scroll-target="#cálculo-de-velocidade-das-linhas"><span class="toc-section-number">5.2</span>  Cálculo de velocidade das linhas</a></li>
   <li><a href="#combinando-e-filtrando-feeds" id="toc-combinando-e-filtrando-feeds" class="nav-link" data-scroll-target="#combinando-e-filtrando-feeds"><span class="toc-section-number">5.3</span>  Combinando e filtrando <em>feeds</em></a></li>
-  <li><a href="#fluxo-de-trabalho-com-o-gtfstools-mapeando-o-headway-das-linhas" id="toc-fluxo-de-trabalho-com-o-gtfstools-mapeando-o-headway-das-linhas" class="nav-link" data-scroll-target="#fluxo-de-trabalho-com-o-gtfstools-mapeando-o-headway-das-linhas"><span class="toc-section-number">5.4</span>  Fluxo de trabalho com o <code>{gtfstools}</code>: mapeando o <em>headway</em> das linhas</a></li>
+  <li><a href="#validação-de-arquivos-gtfs" id="toc-validação-de-arquivos-gtfs" class="nav-link" data-scroll-target="#validação-de-arquivos-gtfs"><span class="toc-section-number">5.4</span>  Validação de arquivos GTFS</a></li>
+  <li><a href="#fluxo-de-trabalho-com-o-gtfstools-mapeando-o-headway-das-linhas" id="toc-fluxo-de-trabalho-com-o-gtfstools-mapeando-o-headway-das-linhas" class="nav-link" data-scroll-target="#fluxo-de-trabalho-com-o-gtfstools-mapeando-o-headway-das-linhas"><span class="toc-section-number">5.5</span>  Fluxo de trabalho com o <code>{gtfstools}</code>: mapeando o <em>headway</em> das linhas</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/5_gtfstools.qmd" class="toc-action">Editar essa página</a></p></div></div></nav>
     </div>
@@ -506,14 +507,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>zip<span class="sc">::</span><span class="fu">zip_list</span>(endereco_destino)[, <span class="fu">c</span>(<span class="st">"filename"</span>, <span class="st">"compressed_size"</span>, <span class="st">"timestamp"</span>)]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         filename compressed_size           timestamp
-1      agency.txt             112 2022-11-25 18:15:42
-2    calendar.txt             129 2022-11-25 18:15:42
-3 frequencies.txt            2381 2022-11-25 18:15:42
-4      routes.txt             659 2022-11-25 18:15:42
-5      shapes.txt          160470 2022-11-25 18:15:42
-6  stop_times.txt            7907 2022-11-25 18:15:42
-7       stops.txt           18797 2022-11-25 18:15:42
-8       trips.txt             717 2022-11-25 18:15:42</code></pre>
+1      agency.txt             112 2022-11-29 15:46:04
+2    calendar.txt             129 2022-11-29 15:46:04
+3 frequencies.txt            2381 2022-11-29 15:46:04
+4      routes.txt             659 2022-11-29 15:46:04
+5      shapes.txt          160470 2022-11-29 15:46:04
+6  stop_times.txt            7907 2022-11-29 15:46:04
+7       stops.txt           18797 2022-11-29 15:46:04
+8       trips.txt             717 2022-11-29 15:46:04</code></pre>
 </div>
 </div>
 </section>
@@ -969,29 +970,77 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </div>
 </section>
-<section id="fluxo-de-trabalho-com-o-gtfstools-mapeando-o-headway-das-linhas" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="fluxo-de-trabalho-com-o-gtfstools-mapeando-o-headway-das-linhas"><span class="header-section-number">5.4</span> Fluxo de trabalho com o <code>{gtfstools}</code>: mapeando o <em>headway</em> das linhas</h2>
+<section id="validação-de-arquivos-gtfs" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="validação-de-arquivos-gtfs"><span class="header-section-number">5.4</span> Validação de arquivos GTFS</h2>
+<p>Planejadores e pesquisadores frequentemente querem avaliar a qualidade dos arquivos GTFS que estão utilizando em suas análises ou que estão produzindo. Os <em>feeds</em> estão estruturados conforme <a href="https://github.com/MobilityData/GTFS_Schedule_Best-Practices">boas práticas</a> adotadas pela comunidade que usa a especificação? As tabelas e colunas estão formatadas corretamente? A informação descrita pelo <em>feed</em> parece verossímil (velocidade das viagens, localização das paradas, etc)? Essas são algumas das perguntas que podem surgir ao lidar com dados no formato GTFS.</p>
+<p>Para responder a essas e outras perguntas, o <code>{gtfstools}</code> inclui a função <code>validate_gtfs()</code>. Esta função serve como interface entre o R e o <a href="https://github.com/MobilityData/gtfs-validator">Canonical GTFS Validator</a>, <em>software</em> desenvolvido pela MobilityData. O uso do validador requer que o Java versão 11 ou superior esteja instalado. Para informações de como checar a versão do Java instalado em seu computador e como instalar a versão correta, caso necessário, por favor veja o <a href="./3_calculando_acesso.html#instalação-do-r5r">Capítulo 3</a>.</p>
+<p>Usar a <code>validate_gtfs()</code> é muito simples. Primeiro, precisamos baixar o <em>software</em> de validação. Para isso, podemos usar a função <code>download_validator()</code>, também disponível no pacote, que recebe o endereço de uma pasta na qual o validador deve ser salvo e a versão do validador desejada (por padrão, a mais recente). Como resultado, a função retorna o endereço do arquivo baixado:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>pasta_temporaria <span class="ot">&lt;-</span> <span class="fu">tempdir</span>()</span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>endereco_validador <span class="ot">&lt;-</span> <span class="fu">download_validator</span>(pasta_temporaria)</span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>endereco_validador</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "/tmp/RtmpViJj6g/gtfs-validator-v4.0.0.jar"</code></pre>
+</div>
+</div>
+<p>A segunda (e última) etapa consiste em de fato rodar a função <code>validate_gtfs()</code>. Essa função aceita que os dados GTFS a serem validados sejam passados de diferentes formas: (a) como um objeto GTFS existente apenas no R, (b) como o endereço de um arquivo GTFS salvo localmente em formato <code>.zip</code>, (c) como a URL para um <em>feed</em> ou (d) como uma pasta que contém os dados GTFS não compactados. A função também recebe o endereço para uma pasta onde o resultado da validação deve ser salvo e o endereço para o validador que deve ser usado. Neste exemplo, vamos fazer a validação a partir do endereço do GTFS da SPTrans, lido anteriormente:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>pasta_resultado <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="st">"validacao_com_endereco"</span>)</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a><span class="fu">validate_gtfs</span>(</span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a>  endereco,</span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">output_path =</span> pasta_resultado,</span>
+<span id="cb78-6"><a href="#cb78-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">validator_path =</span> endereco_validador</span>
+<span id="cb78-7"><a href="#cb78-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb78-8"><a href="#cb78-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-9"><a href="#cb78-9" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(pasta_resultado)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "report.html"           "report.json"           "system_errors.json"   
+[4] "validation_stderr.txt"</code></pre>
+</div>
+</div>
+<p>Como podemos ver, a validação gera alguns arquivos como resultado:</p>
+<ul>
+<li><code>report.html</code>, mostrado na <a href="#fig-report">Figura&nbsp;<span>5.1</span></a>, que resume os resultados da validação em uma página HTML (apenas disponível quando utilizado o validador v3.1.0 ou superior);</li>
+<li><code>report.json</code>, que resume a mesma informação apresentada na página HTML, porém em formato JSON, que pode ser usado para processar e interpretar os resultados de forma programática;</li>
+<li><code>system_errors.json</code>, que apresenta eventuais erros de sistema que tenham ocorrido durante a validação e que podem comprometer os resultados;</li>
+<li><code>validation_stderr.txt</code>, que lista mensagens informativas enviadas pelo validador, incluindo uma lista dos testes realizados, eventuais mensagens de erro, etc<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>;</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-report" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="images/validator_report.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Figura&nbsp;5.1: Exemplo de relatório gerado durante a validação</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="fluxo-de-trabalho-com-o-gtfstools-mapeando-o-headway-das-linhas" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="fluxo-de-trabalho-com-o-gtfstools-mapeando-o-headway-das-linhas"><span class="header-section-number">5.5</span> Fluxo de trabalho com o <code>{gtfstools}</code>: mapeando o <em>headway</em> das linhas</h2>
 <p>Como mostrado nas seções anteriores, o <code>{gtfstools}</code> disponibiliza uma grande caixa de ferramentas que podem ser usadas no processamento e na análise de arquivos GTFS. O pacote, no entanto, oferece diversas outras funções que não puderam ser apresentadas neste livro, por questões de espaço. A lista completa de funções disponíveis pode ser conferida no <a href="https://ipeagit.github.io/gtfstools/reference/index.html">site do pacote</a>.</p>
 <p>A apresentação das funções feitas até aqui tem um importante caráter demonstrativo, porém não mostra como elas podem ser usadas de forma conjunta no desenvolvimento de uma análise de um arquivo GTFS. Esta seção preenche esta lacuna, mostrando como o pacote pode ser usado, por exemplo, para responder a seguinte pergunta: como se distribuem espacialmente os tempos entre veículos de uma mesma linha (os <em>headways</em>) no GTFS da SPTrans?</p>
 <p>A primeira etapa é definir o escopo da nossa análise. A fim de exemplo, vamos considerar o <em>headway</em> no pico da manhã, entre 7h e 9h, em uma típica terça-feira de operação. Para isso, precisamos filtrar o nosso <em>feed</em>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lê o arquivo GTFS</span></span>
-<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>gtfs <span class="ot">&lt;-</span> <span class="fu">read_gtfs</span>(endereco)</span>
-<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a><span class="co"># filtra o GTFS</span></span>
-<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a>gtfs_filtrado <span class="ot">&lt;-</span> gtfs <span class="sc">|&gt;</span></span>
-<span id="cb76-6"><a href="#cb76-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">remove_duplicates</span>() <span class="sc">|&gt;</span></span>
-<span id="cb76-7"><a href="#cb76-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter_by_weekday</span>(<span class="st">"tuesday"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb76-8"><a href="#cb76-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter_by_time_of_day</span>(<span class="at">from =</span> <span class="st">"07:00:00"</span>, <span class="at">to =</span> <span class="st">"09:00:00"</span>)</span>
-<span id="cb76-9"><a href="#cb76-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb76-10"><a href="#cb76-10" aria-hidden="true" tabindex="-1"></a><span class="co"># checa resultado do filtro</span></span>
-<span id="cb76-11"><a href="#cb76-11" aria-hidden="true" tabindex="-1"></a>gtfs_filtrado<span class="sc">$</span>frequencies[trip_id <span class="sc">==</span> <span class="st">"2105-10-0"</span>]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lê o arquivo GTFS</span></span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>gtfs <span class="ot">&lt;-</span> <span class="fu">read_gtfs</span>(endereco)</span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a><span class="co"># filtra o GTFS</span></span>
+<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a>gtfs_filtrado <span class="ot">&lt;-</span> gtfs <span class="sc">|&gt;</span></span>
+<span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">remove_duplicates</span>() <span class="sc">|&gt;</span></span>
+<span id="cb80-7"><a href="#cb80-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter_by_weekday</span>(<span class="st">"tuesday"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb80-8"><a href="#cb80-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter_by_time_of_day</span>(<span class="at">from =</span> <span class="st">"07:00:00"</span>, <span class="at">to =</span> <span class="st">"09:00:00"</span>)</span>
+<span id="cb80-9"><a href="#cb80-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-10"><a href="#cb80-10" aria-hidden="true" tabindex="-1"></a><span class="co"># checa resultado do filtro</span></span>
+<span id="cb80-11"><a href="#cb80-11" aria-hidden="true" tabindex="-1"></a>gtfs_filtrado<span class="sc">$</span>frequencies[trip_id <span class="sc">==</span> <span class="st">"2105-10-0"</span>]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     trip_id start_time end_time headway_secs
 1: 2105-10-0   07:00:00 07:59:00          900
 2: 2105-10-0   08:00:00 08:59:00         1200</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>gtfs_filtrado<span class="sc">$</span>calendar</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>gtfs_filtrado<span class="sc">$</span>calendar</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   service_id monday tuesday wednesday thursday friday saturday sunday
 1:        USD      1       1         1        1      1        1      1
@@ -1004,29 +1053,29 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p>Em seguida, precisamos calcular o <em>headway</em> dentro do período estabelecido. Essa informação pode ser encontrada na tabela <em>frequencies</em>, porém há um elemento complicador: cada viagem está associada a mais de um <em>headway</em>, como podemos ver acima (um registro para o período entre 7:00h e 7:59h e outro para o período entre entre 8:00h e 8:59h). Para resolver esta questão, portanto, vamos calcular o <em>headway médio</em> no intervalo entre 7:00h e 9:00h.</p>
 <p>Os primeiros registros da tabela <em>frequencies</em> do GTFS da SPTrans parecem sugerir que os períodos do dia estão listados sempre de uma em uma hora, porém isto não é uma regra estabelecida na especificação GTFS e nem é a prática adotada em outros <em>feeds</em>. Por isso, vamos calcular a <em>média ponderada</em> do <em>headway</em> no período especificado. Para isso, precisamos multiplicar cada <em>headway</em> pelo intervalo de tempo em que ele é válido, e dividir o total desta soma pelo intervalo de tempo total (duas horas). Para calcular o intervalo de tempo em que cada <em>headway</em> é válido, usamos a função <code>convert_time_to_seconds()</code> para calcular o começo e o fim do intervalo em segundos e subtraímos o valor do fim pelo do começo, como abaixo:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>gtfs_filtrado <span class="ot">&lt;-</span> <span class="fu">convert_time_to_seconds</span>(gtfs_filtrado)</span>
-<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>gtfs_filtrado<span class="sc">$</span>frequencies[trip_id <span class="sc">==</span> <span class="st">"2105-10-0"</span>]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>gtfs_filtrado <span class="ot">&lt;-</span> <span class="fu">convert_time_to_seconds</span>(gtfs_filtrado)</span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>gtfs_filtrado<span class="sc">$</span>frequencies[trip_id <span class="sc">==</span> <span class="st">"2105-10-0"</span>]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     trip_id start_time end_time headway_secs start_time_secs end_time_secs
 1: 2105-10-0   07:00:00 07:59:00          900           25200         28740
 2: 2105-10-0   08:00:00 08:59:00         1200           28800         32340</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>gtfs_filtrado<span class="sc">$</span>frequencies[, time_interval <span class="sc">:</span><span class="er">=</span> end_time_secs <span class="sc">-</span> start_time_secs]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>gtfs_filtrado<span class="sc">$</span>frequencies[, time_interval <span class="sc">:</span><span class="er">=</span> end_time_secs <span class="sc">-</span> start_time_secs]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Em seguida, calculamos o <em>headway</em> médio:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>headway_medio <span class="ot">&lt;-</span> gtfs_filtrado<span class="sc">$</span>frequencies[,</span>
-<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>  .(<span class="at">headway_medio =</span> <span class="fu">weighted.mean</span>(<span class="at">x =</span> headway_secs, <span class="at">w =</span> time_interval)),</span>
-<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>  by <span class="ot">=</span> trip_id</span>
-<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a>headway_medio[trip_id <span class="sc">==</span> <span class="st">"2105-10-0"</span>]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>headway_medio <span class="ot">&lt;-</span> gtfs_filtrado<span class="sc">$</span>frequencies[,</span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>  .(<span class="at">headway_medio =</span> <span class="fu">weighted.mean</span>(<span class="at">x =</span> headway_secs, <span class="at">w =</span> time_interval)),</span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>  by <span class="ot">=</span> trip_id</span>
+<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-6"><a href="#cb87-6" aria-hidden="true" tabindex="-1"></a>headway_medio[trip_id <span class="sc">==</span> <span class="st">"2105-10-0"</span>]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     trip_id headway_medio
 1: 2105-10-0          1050</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(headway_medio)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(headway_medio)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      trip_id headway_medio
 1: CPTM L07-0           360
@@ -1039,15 +1088,15 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 <p>Precisamos agora gerar a trajetória espacial de cada viagem e juntar esta informação à do <em>headway</em> médio. Para isso, vamos utilizar a função <code>get_trip_geometry()</code>, que, dado um objeto GTFS, retorna a trajetória espacial de suas viagens. Esta função nos permite especificar as viagens cujas trajetórias gerar, logo vamos calcular apenas as trajetórias daquelas que estão presentes na tabela de <em>headways</em> médios:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>viagens_selecionadas <span class="ot">&lt;-</span> headway_medio<span class="sc">$</span>trip_id</span>
-<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>trajetorias <span class="ot">&lt;-</span> <span class="fu">get_trip_geometry</span>(</span>
-<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">gtfs =</span> gtfs_filtrado,</span>
-<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">trip_id =</span> viagens_selecionadas,</span>
-<span id="cb87-6"><a href="#cb87-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"shapes"</span></span>
-<span id="cb87-7"><a href="#cb87-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb87-8"><a href="#cb87-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb87-9"><a href="#cb87-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(trajetorias)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>viagens_selecionadas <span class="ot">&lt;-</span> headway_medio<span class="sc">$</span>trip_id</span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>trajetorias <span class="ot">&lt;-</span> <span class="fu">get_trip_geometry</span>(</span>
+<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">gtfs =</span> gtfs_filtrado,</span>
+<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">trip_id =</span> viagens_selecionadas,</span>
+<span id="cb91-6"><a href="#cb91-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">"shapes"</span></span>
+<span id="cb91-7"><a href="#cb91-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb91-8"><a href="#cb91-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb91-9"><a href="#cb91-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(trajetorias)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Simple feature collection with 6 features and 2 fields
 Geometry type: LINESTRING
@@ -1065,19 +1114,19 @@ Geodetic CRS:  WGS 84
 </div>
 <p>Geradas as trajetórias espaciais de cada viagem, precisamos juntá-las à informação de <em>headway</em> médio e, em seguida, configurar o nosso mapa como desejado. No exemplo abaixo, usamos cores e espessuras de linhas que variam de acordo com o <em>headway</em> de cada viagem:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>traj_com_headways <span class="ot">&lt;-</span> <span class="fu">merge</span>(</span>
-<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>  trajetorias,</span>
-<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a>  headway_medio,</span>
-<span id="cb89-4"><a href="#cb89-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">"trip_id"</span></span>
-<span id="cb89-5"><a href="#cb89-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb89-6"><a href="#cb89-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-7"><a href="#cb89-7" aria-hidden="true" tabindex="-1"></a><span class="co"># configura figura</span></span>
-<span id="cb89-8"><a href="#cb89-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(traj_com_headways) <span class="sc">+</span></span>
-<span id="cb89-9"><a href="#cb89-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">color =</span> headway_medio, <span class="at">size =</span> headway_medio), <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb89-10"><a href="#cb89-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradient</span>(<span class="at">high =</span> <span class="st">"#132B43"</span>, <span class="at">low =</span> <span class="st">"#56B1F7"</span>) <span class="sc">+</span></span>
-<span id="cb89-11"><a href="#cb89-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>traj_com_headways <span class="ot">&lt;-</span> <span class="fu">merge</span>(</span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>  trajetorias,</span>
+<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a>  headway_medio,</span>
+<span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">"trip_id"</span></span>
+<span id="cb93-5"><a href="#cb93-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb93-6"><a href="#cb93-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-7"><a href="#cb93-7" aria-hidden="true" tabindex="-1"></a><span class="co"># configura figura</span></span>
+<span id="cb93-8"><a href="#cb93-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(traj_com_headways) <span class="sc">+</span></span>
+<span id="cb93-9"><a href="#cb93-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">color =</span> headway_medio, <span class="at">size =</span> headway_medio), <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb93-10"><a href="#cb93-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradient</span>(<span class="at">high =</span> <span class="st">"#132B43"</span>, <span class="at">low =</span> <span class="st">"#56B1F7"</span>) <span class="sc">+</span></span>
+<span id="cb93-11"><a href="#cb93-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="5_gtfstools_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+<p><img src="5_gtfstools_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Como podemos ver, o pacote <code>{gtfstools}</code> torna o desenvolvimento de análises de <em>feeds</em> de transporte público algo fácil e que requer apenas o conhecimento básico de pacotes de manipulação de tabelas (como o <code>{data.table}</code> e o <code>{dplyr}</code>). O exemplo apresentado nesta seção mostra como muitas de suas funções podem ser usadas conjuntamente para revelar aspectos importantes de sistemas de transporte público descritos no formato GTFS.</p>
@@ -1088,6 +1137,7 @@ Geodetic CRS:  WGS 84
 <hr>
 <ol>
 <li id="fn1"><p>Mais detalhes sobre o uso e a sintaxe do <code>{data.table}</code> podem ser lidos em <a href="https://rdatatable.gitlab.io/data.table/index.html" class="uri">https://rdatatable.gitlab.io/data.table/index.html</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Mensagens informativas podem também ser listadas no arquivo <code>validation_stdout.txt</code>. As mensagens listadas no <code>validation_stderr.txt</code> e no <code>validation_stdout.txt</code> dependem da versão do validador utilizada.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

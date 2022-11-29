@@ -650,13 +650,13 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p>Precisamos agora adicionar uma tabela <code>frequencies</code> que descreva a frequência de cada viagem. A especificação requer, no entanto, que listemos o <em>headway</em> de cada linha, e não a sua frequência. Como o <em>headway</em> é o inverso da frequência, precisamos dividir o intervalo de uma hora (3600 segundos) pela frequência de cada linha (10 viagens/hora para a Linha Sul, 5 viagens/hora para a Linha Oeste e 8 viagens/hora para o VLT). Como resultado, temos que os <em>headways</em> da Linha Sul, da Linha Oeste e do VLT passarão a ser, respectivamente, 360, 720 e 450 segundos. Com o código abaixo, criamos uma tabela <code>frequencies</code> com os pacotes <code>{tibble}</code> e <code>{data.table}</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>frequencias <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>trip_id,     <span class="sc">~</span>start_time, <span class="sc">~</span>end_time,  <span class="sc">~</span>headway_secs, <span class="sc">~</span>exact_times,</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"metro_oeste_0"</span>, <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 720L,           <span class="dv">1</span>,</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"metro_oeste_1"</span>, <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 720L,           <span class="dv">1</span>,</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"metro_sul_0"</span>,   <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 360L,           <span class="dv">1</span>,</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"metro_sul_1"</span>,   <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 360L,           <span class="dv">1</span>,</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"vlt_0"</span>,      <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 450L,          <span class="dv">1</span>,</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"vlt_1"</span>,      <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 450L,          <span class="dv">1</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>trip_id,        <span class="sc">~</span>start_time, <span class="sc">~</span>end_time,  <span class="sc">~</span>headway_secs, <span class="sc">~</span>exact_times,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"metro_oeste_0"</span>, <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 720L,            <span class="dv">1</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"metro_oeste_1"</span>, <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 720L,            <span class="dv">1</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"metro_sul_0"</span>,   <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 360L,            <span class="dv">1</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"metro_sul_1"</span>,   <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 360L,            <span class="dv">1</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"vlt_0"</span>,         <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 450L,            <span class="dv">1</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"vlt_1"</span>,         <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 450L,            <span class="dv">1</span></span>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co"># converte tabela para data.table</span></span>
@@ -1337,7 +1337,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb53-33"><a href="#cb53-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb53-34"><a href="#cb53-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"viridis"</span>, <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb53-35"><a href="#cb53-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb53-36"><a href="#cb53-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Diferença no</span><span class="sc">\n</span><span class="st">tempo até</span><span class="sc">\n</span><span class="st"> a escola</span><span class="sc">\n</span><span class="st">mais próxima</span><span class="sc">\n</span><span class="st">(em minutos)"</span></span>
+<span id="cb53-36"><a href="#cb53-36" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> <span class="st">"Diferença no</span><span class="sc">\n</span><span class="st">tempo até</span><span class="sc">\n</span><span class="st"> a escola</span><span class="sc">\n</span><span class="st">mais próxima</span><span class="sc">\n</span><span class="st">(em minutos)"</span></span>
 <span id="cb53-37"><a href="#cb53-37" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb53-38"><a href="#cb53-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> traj_corredores, <span class="fu">aes</span>(<span class="at">color =</span> corredor), <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
 <span id="cb53-39"><a href="#cb53-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#F8766D"</span>, <span class="st">"#7CAE00"</span>, <span class="st">"#00BFC4"</span>, <span class="st">"#C77CFF"</span>)) <span class="sc">+</span></span>
@@ -1360,11 +1360,11 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> acesso_a_empregos[populacao <span class="sc">&gt;</span> <span class="dv">0</span>]) <span class="sc">+</span></span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(</span>
 <span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">as.factor</span>(decil),</span>
-<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> acesso_a_empregos <span class="sc">/</span> <span class="dv">1000</span>,</span>
-<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="fu">as.factor</span>(decil),</span>
-<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">weight =</span> populacao,</span>
-<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">group =</span> decil</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="fu">as.factor</span>(decil),</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> acesso_a_empregos <span class="sc">/</span> <span class="dv">1000</span>,</span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="fu">as.factor</span>(decil),</span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">weight =</span> populacao,</span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">group =</span> decil</span>
 <span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>    ),</span>
 <span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">show.legend =</span> <span class="cn">FALSE</span></span>
 <span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
@@ -1372,7 +1372,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb54-13"><a href="#cb54-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_brewer</span>(<span class="at">palette =</span> <span class="st">"RdBu"</span>) <span class="sc">+</span></span>
 <span id="cb54-14"><a href="#cb54-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Decil de renda"</span>, <span class="at">y =</span> <span class="st">"Empregos acessíveis</span><span class="sc">\n</span><span class="st">(em milhares)"</span>) <span class="sc">+</span></span>
 <span id="cb54-15"><a href="#cb54-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
-<span id="cb54-16"><a href="#cb54-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"D1</span><span class="sc">\n</span><span class="st">mais</span><span class="sc">\n</span><span class="st">pobres"</span>, <span class="fu">paste0</span>(<span class="st">"D"</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>), <span class="st">"D10</span><span class="sc">\n</span><span class="st">mais</span><span class="sc">\n</span><span class="st">ricos"</span>)</span>
+<span id="cb54-16"><a href="#cb54-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"D1</span><span class="sc">\n</span><span class="st">mais</span><span class="sc">\n</span><span class="st">pobres"</span>, <span class="fu">paste0</span>(<span class="st">"D"</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>), <span class="st">"D10</span><span class="sc">\n</span><span class="st">mais</span><span class="sc">\n</span><span class="st">ricos"</span>)</span>
 <span id="cb54-17"><a href="#cb54-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb54-18"><a href="#cb54-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -1385,11 +1385,11 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">subset</span>(acesso_a_empregos, populacao <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(diferenca))) <span class="sc">+</span></span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(</span>
 <span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">as.factor</span>(decil),</span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> diferenca <span class="sc">/</span> <span class="dv">1000</span>,</span>
-<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="fu">as.factor</span>(decil),</span>
-<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">weight =</span> populacao,</span>
-<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">group =</span> decil</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">x =</span> <span class="fu">as.factor</span>(decil),</span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> diferenca <span class="sc">/</span> <span class="dv">1000</span>,</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="fu">as.factor</span>(decil),</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">weight =</span> populacao,</span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">group =</span> decil</span>
 <span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>    ),</span>
 <span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">show.legend =</span> <span class="cn">FALSE</span></span>
 <span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
