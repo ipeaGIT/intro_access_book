@@ -8,7 +8,7 @@ No exemplo abaixo, mostramos como baixar os dados populacionais e socioeconômic
 #| message: false
 #| warning: false
 # baixa os dados sociodemográficos do AOP
-for_data <- aopdata::read_population(
+dados_fortaleza <- aopdata::read_population(
   city = "Fortaleza",
   year = 2010,
   geometry = TRUE,
@@ -29,30 +29,30 @@ A @tbl-population_dictionary apresenta a descrição de cada uma das colunas da 
 #| label: tbl-population_dictionary
 #| tbl-cap: Descrição das colunas da tabela de dados populacionais e socioeconômicos
 tbl <- tibble::tribble(
-  ~Coluna,       ~Descrição,                                 ~Observação,
-  "year",        "Ano de referência",                        "",
-  "id_hex",      "Identificador único do hexágono",          "",
-  "abbrev_muni", "Sigla de 3 letras do município",           "",
-  "name_muni",   "Nome do município",                        "",
+  ~Coluna,   	~Descrição,                             	~Observação,
+  "year",    	"Ano de referência",                    	"",
+  "id_hex",  	"Identificador único do hexágono",      	"",
+  "abbrev_muni", "Sigla de 3 letras do município",       	"",
+  "name_muni",   "Nome do município",                    	"",
   "code_muni",   "Código de 7 dígitos do IBGE do município", "",
-  "P001",        "Quantidade total de pessoas",              "",
-  "P002",        "Quantidade de pessoas de cor branca",      "",
-  "P003",        "Quantidade de pessoas de cor negra",       "",
-  "P004",        "Quantidade de pessoas de cor indígena",    "",
-  "P005",        "Quantidade de pessoas de cor amarela",     "",
-  "P006",        "Quantidade de homens",                     "",
-  "P007",        "Quantidade de mulheres",                   "",
-  "P010",        "Quantidade de pessoas de 0 a 5 anos",      "",
-  "P011",        "Quantidade de pessoas de 6 a 14 anos",     "",
-  "P012",        "Quantidade de pessoas de 15 a 18 anos",    "",
-  "P013",        "Quantidade de pessoas de 19 a 24 anos",    "",
-  "P014",        "Quantidade de pessoas de 25 a 39 anos",    "",
-  "P015",        "Quantidade de pessoas de 40 a 69 anos",    "",
-  "P016",        "Quantidade de pessoas de 70 anos ou mais", "",
-  "R001",        "Renda domiciliar *per capita* média",      "Valores de 2010, em reais (R$)",
-  "R002",        "Quintil de renda",                         "Valores de 1 (mais pobres) a 5 (mais ricos)",
-  "R003",        "Decil de renda",                           "Valores de 1 (mais pobres) a 10 (mais ricos)",
-  "geometry",    "Geometria espacial",                       ""
+  "P001",    	"Quantidade total de pessoas",          	"",
+  "P002",    	"Quantidade de pessoas brancas",        	"",
+  "P003",    	"Quantidade de pessoas negras",         	"",
+  "P004",    	"Quantidade de pessoas indígenas",      	"",
+  "P005",    	"Quantidade de pessoas de cor amarela", 	"",
+  "P006",    	"Quantidade de homens",                 	"",
+  "P007",    	"Quantidade de mulheres",               	"",
+  "P010",    	"Quantidade de pessoas de 0 a 5 anos",  	"",
+  "P011",    	"Quantidade de pessoas de 6 a 14 anos", 	"",
+  "P012",    	"Quantidade de pessoas de 15 a 18 anos",	"",
+  "P013",    	"Quantidade de pessoas de 19 a 24 anos",	"",
+  "P014",    	"Quantidade de pessoas de 25 a 39 anos",	"",
+  "P015",    	"Quantidade de pessoas de 40 a 69 anos",	"",
+  "P016",    	"Quantidade de pessoas de 70 anos ou mais", "",
+  "R001",    	"Renda domiciliar *per capita* média",  	"Valores de 2010, em reais (R$)",
+  "R002",    	"Quintil de renda",                     	"Valores de 1 (mais pobres) a 5 (mais ricos)",
+  "R003",    	"Decil de renda",                       	"Valores de 1 (mais pobres) a 10 (mais ricos)",
+  "geometry",	"Geometria espacial",                   	""
 )
 
 knitr::kable(tbl)
@@ -70,13 +70,13 @@ No código abaixo, carregamos bibliotecas de visualização de dados e configura
 library(patchwork)
 library(ggplot2)
 
-ggplot(subset(for_data, P001 > 0)) +
+ggplot(subset(dados_fortaleza, P001 > 0)) +
   geom_sf(aes(fill = P001), color = NA, alpha = 0.8) +
   scale_fill_distiller(palette = "YlOrRd", direction = 1) +
   labs(
-    title = "Distribuição populacional",
-    subtitle = "Fortaleza",
-    fill = "Contagem populacional"
+	title = "Distribuição populacional",
+	subtitle = "Fortaleza",
+	fill = "Contagem populacional"
   ) +
   theme_void()
 ```
@@ -86,29 +86,29 @@ ggplot(subset(for_data, P001 > 0)) +
 Além da informação sobre a população total em cada célula, o dados também informam a contagem populacional por classificações de cor (variáveis `P002` a `P005`), sexo (variáveis `P006` e `P007`) e faixa etária (variáveis `P010` a `P016`) em cada unidade espacial. O código abaixo ilustra como é simples calcular a proporção de pessoas negras e brancas em cada hexágono e visualizar essas proporções em um mapa.
 
 ```{r}
-pop_n <- ggplot(subset(for_data, P001 > 0)) +
+pop_negra <- ggplot(subset(dados_fortaleza, P001 > 0)) +
   geom_sf(aes(fill = P003 / P001), color = NA, alpha = 0.8) +
   scale_fill_distiller(
-    palette = "RdPu",
-    direction = 1,
-    labels = scales::percent,
-    limits = c(0, 1)
+	palette = "RdPu",
+	direction = 1,
+	labels = scales::percent,
+	limits = c(0, 1)
   ) +
   labs(title = "Proporção de pessoas negras", fill = "Pop. negra") +
   theme_void()
 
-pop_b <- ggplot(subset(for_data, P001 > 0)) +
+pop_branca <- ggplot(subset(dados_fortaleza, P001 > 0)) +
   geom_sf(aes(fill = P002 / P001), color = NA, alpha = 0.8) +
   scale_fill_distiller(
-    palette = "YlGnBu",
-    direction = 1,
-    labels = scales::percent,
-    limits = c(0, 1)
+	palette = "YlGnBu",
+	direction = 1,
+	labels = scales::percent,
+	limits = c(0, 1)
   ) +
   labs(title = "Proporção de pessoas brancas", fill = "Pop. branca") +
   theme_void()
 
-pop_n + pop_b
+pop_negra + pop_branca
 ```
 
 ## Mapa de população por renda
@@ -116,18 +116,18 @@ pop_n + pop_b
 Por fim, os dados também trazem informações sobre a renda domiciliar *per capita* média de cada hexágono (`R001`) e sua classificação em termos de quintil (`R002`) e decil de renda (`R003`). Com esses dados, podemos visualizar a distribuição espacial dos níveis de renda na cidade.
 
 ```{r}
-renda <- ggplot(subset(for_data, P001 > 0)) +
+renda <- ggplot(subset(dados_fortaleza, P001 > 0)) +
   geom_sf(aes(fill = R001), color = NA, alpha = 0.8) +
   scale_fill_distiller(palette = "YlOrRd", direction = 1) +
   labs(title = "Renda domiciliar per capita média", fill = "Renda (R$)") +
   theme_void()
 
-decis <- ggplot(subset(for_data, !is.na(R002))) +
+decis <- ggplot(subset(dados_fortaleza, !is.na(R002))) +
   geom_sf(aes(fill = factor(R003)), color = NA, alpha = 0.8) +
   scale_fill_brewer(palette = "RdBu") +
   labs(
-    title = "Decis de renda domiciliar per capita",
-    fill = "Decil de renda"
+	title = "Decis de renda domiciliar per capita",
+	fill = "Decil de renda"
   ) +
   theme_void() +
   theme(legend.key.size = unit(0.3, "cm"))
