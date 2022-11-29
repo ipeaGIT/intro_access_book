@@ -24,6 +24,7 @@ book:
     tracking-id: "G-YVERJQF9PJ"
     anonymize-ip: true
 
+
   chapters:
     - index.qmd
     - part: s1_intro.qmd
@@ -46,6 +47,19 @@ book:
         - 8_aopdata_uso_solo.qmd
         - 9_aopdata_acessibilidade.qmd
     - references.qmd
+
+  downloads: [pdf, epub]
+  sidebar:
+    pinned: true
+    tools:
+      - icon: save
+        menu:
+          - text: ""
+            url:  "#"
+          - text: ""
+            url:  "#"
+          - text: ""
+            url:  "#"
 
   page-navigation: true
   page-footer: 
