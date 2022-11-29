@@ -9,7 +9,7 @@
 <meta name="author" content="Rafael H. M. Pereira">
 <meta name="author" content="Daniel Herszenhut">
 
-<title>Introdução à acessibilidade urbana - SEÇÃO 5: Dados do Projeto AOP</title>
+<title>Introdução à acessibilidade urbana - SEÇÃO 5: Dados do Projeto Acesso a Oportunidades</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -95,11 +95,11 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </script>
 
 
-<meta property="og:title" content="Introdução à acessibilidade urbana - SEÇÃO 5: Dados do Projeto AOP">
-<meta property="og:description" content="Os objetivos desta seção são (1) apresentar os dados de acessibilidade, de uso do solo e socioeconômicos disponibilizados pelo projeto Acesso a Oportunidades (AOP), bem como (2) ensinar a baixá-los…">
+<meta property="og:title" content="Introdução à acessibilidade urbana - SEÇÃO 5: Dados do Projeto Acesso a Oportunidades">
+<meta property="og:description" content="Os objetivos desta seção são (1) apresentar os dados de acessibilidade, de uso do solo e socioeconômicos disponibilizados pelo Projeto Acesso a Oportunidades (AOP), bem como (2) ensinar a baixá-los…">
 <meta property="og:site-name" content="Introdução à acessibilidade urbana">
-<meta name="twitter:title" content="Introdução à acessibilidade urbana - SEÇÃO 5: Dados do Projeto AOP">
-<meta name="twitter:description" content="Os objetivos desta seção são (1) apresentar os dados de acessibilidade, de uso do solo e socioeconômicos disponibilizados pelo projeto Acesso a Oportunidades (AOP), bem como (2) ensinar a baixá-los…">
+<meta name="twitter:title" content="Introdução à acessibilidade urbana - SEÇÃO 5: Dados do Projeto Acesso a Oportunidades">
+<meta name="twitter:description" content="Os objetivos desta seção são (1) apresentar os dados de acessibilidade, de uso do solo e socioeconômicos disponibilizados pelo Projeto Acesso a Oportunidades (AOP), bem como (2) ensinar a baixá-los…">
 <meta name="twitter:card" content="summary">
 <meta name="citation_title" content="Introdução à acessibilidade urbana: um guia prático em R">
 <meta name="citation_abstract" content="O objetivo deste livro é apresentar os conceitos e habilidades práticas necessárias para fazer estudos e avaliações de impacto de acessibilidade urbana. O livro começa dando uma visão geral sobre o conceito e os principais indicadores de acessibilidade. Em seguida, ensina como analisar dados espaciais e de redes de transporte para estimar níveis de acessibilidade por diferentes modos de transporte e como visualizar os resultados em forma de mapas e gráficos. O livro também familiariza o leitor com dados de redes de transporte público em formato GTFS e ensina como manipular e visualizar esse tipo de dado. Num dos seus principais capítulos, o livro ensina também como os dados e a metodologia apresentados nos capítulos anteriores podem ser utilizados para avaliar o impacto de projetos de transporte sobre as condições de acesso a oportunidades da população. Por fim, o livro apresenta como baixar, analisar e visualizar estimativas de acessibilidade já calculadas para cidades brasileiras e disponibilizadas pela equipe do Projeto Acesso a Oportunidades, do Ipea.">
@@ -175,7 +175,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">SEÇÃO 5: Dados do Projeto AOP</h1>
+      <h1 class="quarto-secondary-nav-title">SEÇÃO 5: Dados do Projeto Acesso a Oportunidades</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -300,7 +300,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./s5_dados_aop.html" class="sidebar-item-text sidebar-link active">SEÇÃO 5: Dados do Projeto AOP</a>
+            <a href="./s5_dados_aop.html" class="sidebar-item-text sidebar-link active">SEÇÃO 5: Dados do Projeto Acesso a Oportunidades</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -340,7 +340,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">SEÇÃO 5: Dados do Projeto AOP</h1>
+<h1 class="title d-none d-lg-block">SEÇÃO 5: Dados do Projeto Acesso a Oportunidades</h1>
 </div>
 
 
@@ -376,8 +376,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 
 </header>
 
-<p><strong>Os objetivos desta seção</strong> são (1) apresentar os dados de acessibilidade, de uso do solo e socioeconômicos disponibilizados pelo projeto Acesso a Oportunidades (AOP), bem como (2) ensinar a baixá-los e utilizá-los com o pacote de R <code>{aopdata}</code>.</p>
-<p>Nos capítulos anteriores, aprendemos sobre o conceito de acessibilidade, como traduzi-lo em medidas quantitativas e como calcular essas medidas usando R. No entanto, frequentemente nos deparamos com situações em que não podemos estimar os níveis de acessibilidade por conta própria por não termos o tempo ou os dados necessários para isso, ou não precisamos fazer este cálculo porque tais estimativas já foram realizadas por outras pessoas. Ao longo dos próximos capítulos, apresentaremos a base de dados com estimativas de acessibilidade criada e disponibilizada no âmbito do projeto <a href="https://www.ipea.gov.br/acessooportunidades/">Acesso a Oportunidades</a> (AOP).</p>
+<p><strong>Os objetivos desta seção</strong> são (1) apresentar os dados de acessibilidade, de uso do solo e socioeconômicos disponibilizados pelo Projeto Acesso a Oportunidades (AOP), bem como (2) ensinar a baixá-los e utilizá-los com o pacote de R <code>{aopdata}</code>.</p>
+<p>Nos capítulos anteriores, aprendemos sobre o conceito de acessibilidade, como traduzi-lo em medidas quantitativas e como calcular essas medidas usando R. No entanto, frequentemente nos deparamos com situações em que não podemos estimar os níveis de acessibilidade por conta própria, por não termos o tempo ou os dados necessários para isso, ou não precisamos fazer este cálculo, porque tais estimativas já foram realizadas por outras pessoas. Ao longo dos próximos capítulos, apresentaremos a base de dados com estimativas de acessibilidade criada e disponibilizada no âmbito do projeto <a href="https://www.ipea.gov.br/acessooportunidades/">Acesso a Oportunidades</a> (AOP).</p>
 <p>A base disponibilizada pelo AOP não apenas contém estimativas de acessibilidade urbana, mas também inclui informações sobre distribuição e contagem populacional e de atividades econômicas e serviços públicos. Os dados estão agregados espacialmente em uma grade hexagonal que segue o sistema de gradeamento <a href="https://h3geo.org/">H3</a>, desenvolvido pela Uber <span class="citation" data-cites="brodsky2018h3">(<a href="references.html#ref-brodsky2018h3" role="doc-biblioref">Brodsky 2018</a>)</span>. Cada célula espacial tem cerca de 0,11 km², área similar à coberta por um quarteirão, permitindo análises em alta resolução espacial. Como apresentado na <a href="#fig-data_scope">Figura&nbsp;<span>1</span></a>, as estimativas de acessibilidade estão disponíveis para os anos de 2017, 2018 e 2019 e para as 20 maiores cidades do Brasil, considerando diferentes modos de transporte (caminhada, bicicleta, transporte público e automóvel), horários do dia (pico e fora-pico), grupos populacionais (segundo níveis de renda, cor, sexo e idade) e tipos de atividade (empregos, escolas, serviços de saúde e centros de assistência social).</p>
 <div class="callout-note callout callout-style-simple">
 <div class="callout-body d-flex">
@@ -399,7 +399,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<p>Os níveis de acessibilidade por transporte público foram estimados apenas para as cidades que disponibilizaram ao projeto dados GTFS de qualidade considerada aceitável. São elas Belo Horizonte, Campinas, Curitiba, Fortaleza, Goiânia<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, Porto Alegre, Recife, Rio de Janeiro e São Paulo. Ainda assim, algumas dessas cidades disponibilizaram <em>feeds</em> apenas para determinados anos ou compartilharam arquivos considerados não representativos do sistema de transporte público operado na prática, resultando na exclusão das estimativas dessas cidades para alguns anos. A <a href="#fig-geo_scope">Figura&nbsp;<span>2</span></a> relaciona as cidades para as quais foram calculados os níveis de acessibilidade por transporte público e para as quais apenas os níveis por automóvel e por transporte ativo foram estimados, destacando cidades que não têm estimativas por transporte público para todos os anos.</p>
+<p>Os níveis de acessibilidade por transporte público foram estimados apenas para as cidades que disponibilizaram ao projeto dados GTFS de qualidade considerada aceitável. São elas Belo Horizonte, Campinas, Curitiba, Fortaleza, Goiânia<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, Porto Alegre, Recife, Rio de Janeiro e São Paulo. Ainda assim, algumas dessas cidades disponibilizaram <em>feeds</em> apenas para determinados anos ou compartilharam arquivos considerados não representativos do sistema de transporte público operado na prática, resultando na exclusão das estimativas dessas cidades para alguns anos. A <a href="#fig-geo_scope">Figura&nbsp;<span>2</span></a> indica as cidades para as quais foram calculados os níveis de acessibilidade por modo de transporte.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-geo_scope" class="quarto-figure quarto-figure-center anchored">
@@ -435,26 +435,26 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <td style="text-align: left;">Tempo mínimo de viagem (TMI)</td>
 <td style="text-align: left;">Tempo até a oportunidade mais próxima</td>
 <td style="text-align: left;">Saúde, Educação, CRAS</td>
-<td style="text-align: left;">A pé (60 mins); Bicicleta, Transporte público e carro (120 mins)</td>
+<td style="text-align: left;">A pé (60 mins); bicicleta, Transporte público e carro (120 mins)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Medida cumulativa ativa (CMA)</td>
 <td style="text-align: left;">Quantidade de oportunidades acessíveis em um determinado limite de tempo</td>
 <td style="text-align: left;">Trabalho, Saúde, Educação, CRAS</td>
-<td style="text-align: left;">A pé e bicicleta (15, 30, 45 e 60 mins); Transporte público e carro (15, 30, 60, 90 e 120 mins)</td>
+<td style="text-align: left;">A pé e bicicleta (15, 30, 45 e 60 mins); transporte público e carro (15, 30, 60, 90 e 120 mins)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Medida cumulativa passiva (CMP)</td>
 <td style="text-align: left;">Quantidade de pessoas que acessam a localidade em um determinado limite de tempo</td>
 <td style="text-align: left;">-</td>
-<td style="text-align: left;">A pé e bicicleta (15, 30, 45 e 60 mins); Transporte público e carro (15, 30, 60, 90 e 120 mins)</td>
+<td style="text-align: left;">A pé e bicicleta (15, 30, 45 e 60 mins); transporte público e carro (15, 30, 60, 90 e 120 mins)</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </div>
-<p>Já a <a href="#tbl-tabela_dados_pop">Tabela&nbsp;<span>2</span></a> apresenta os dados de característica socioeconômicas da população e de distribuição espacial de oportunidades:</p>
+<p>Já a <span class="quarto-unresolved-ref">?tbl-tabela_dados_aop</span> apresenta os dados de características socioeconômicas da população e de distribuição espacial de oportunidades:</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-tabela_dados_pop" class="anchored">
@@ -464,7 +464,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <col style="width: 18%">
 <col style="width: 46%">
 <col style="width: 6%">
-<col style="width: 29%">
+<col style="width: 28%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -483,19 +483,19 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </tr>
 <tr class="even">
 <td style="text-align: left;">Estabelecimentos de educação</td>
-<td style="text-align: left;">Quantidade de creches e escolas públicas segundo nível infantil, fundamental e médio</td>
+<td style="text-align: left;">Quantidade de creches e escolas públicas segundo nível de ensino (infantil, fundamental e médio)</td>
 <td style="text-align: left;">2017, 2018, 2019</td>
 <td style="text-align: left;">Censo Escolar, Inep</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Estabelecimentos de saúde</td>
-<td style="text-align: left;">Quantidade de estabelecimentos de saúde que atendem pelo SUS segundo nível de atenção baixa, média e alta complexidade</td>
+<td style="text-align: left;">Quantidade de estabelecimentos de saúde que atendem pelo SUS segundo nível de atenção (baixa, média e alta complexidade)</td>
 <td style="text-align: left;">2017, 2018, 2019</td>
 <td style="text-align: left;">Cadastro Nacional de Estabelecimentos de Saúde (CNES), Ministério da Saúde</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Atividade econômica</td>
-<td style="text-align: left;">Quantidade de empregos formais conforme o nível de instrução dos trabalhadores baixa, média e alta escolaridade</td>
+<td style="text-align: left;">Quantidade de empregos formais conforme o nível de instrução dos trabalhadores (baixa, média e alta escolaridade)</td>
 <td style="text-align: left;">2017, 2018, 2019</td>
 <td style="text-align: left;">Relação Anual de Informações Sociais (RAIS), Ministério da Economia</td>
 </tr>
@@ -510,7 +510,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<p>Todas as bases de dados criadas pelo AOP estão disponíveis para download no <a href="https://www.ipea.gov.br/acessooportunidades/dados/">site do projeto</a> ou pelo pacote de R <code>{aopdata}</code>. O dicionário de dados pode ser acessado <a href="https://ipeagit.github.io/aopdata/articles/data_dic_pt.html">neste link</a> ou, em uma sessão do R, com o comando <code>aopdata::aopdata_dictionary(lang = "pt")</code>. Os capítulos desta seção apresentam diversos exemplos de como baixar e visualizar esses dados em R.</p>
+<p>Todas as bases de dados criadas pelo AOP estão disponíveis para download no <a href="https://www.ipea.gov.br/acessooportunidades/dados/">site do projeto</a> ou pelo pacote de R <code>{aopdata}</code>. O dicionário de dados pode ser acessado <a href="https://ipeagit.github.io/aopdata/articles/data_dic_pt.html">neste link</a> ou, em uma sessão de R, com o comando <code>aopdata::aopdata_dictionary(lang = "pt")</code>. Os capítulos desta seção apresentam diversos exemplos de como baixar e visualizar esses dados em R.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
