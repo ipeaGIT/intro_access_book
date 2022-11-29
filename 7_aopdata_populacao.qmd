@@ -19,7 +19,7 @@ dados_fortaleza <- aopdata::read_population(
 A tabela inclui o ano de referência do censo demográfico, dados de identificação do hexágono e do município e dados socioeconômicos em colunas cujos nomes estão codificados:
 
 ```{r}
-names(for_data)
+names(dados_fortaleza)
 ```
 
 A @tbl-population_dictionary apresenta a descrição de cada uma das colunas da tabela, bem como observações sobre alguns de seus valores. Essa descrição também pode ser consultada na documentação da função, rodando em uma sessão do R o comando `?read_population`.
