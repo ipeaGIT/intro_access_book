@@ -38,24 +38,24 @@ A seguir, duas tabelas resumem os dados disponibilizados pelo projeto. A @tbl-ta
 #| tbl-cap: Indicadores de acessibilidade calculados no Projeto Acesso a Oportunidades
 tabela_dados_access <- data.table::data.table(
   `Indicador (código)` = c(
-	"Tempo mínimo de viagem (TMI)",
-	"Medida cumulativa ativa (CMA)",
-	"Medida cumulativa passiva (CMP)"
+  	"Tempo mínimo de viagem (TMI)",
+  	"Medida cumulativa ativa (CMA)",
+  	"Medida cumulativa passiva (CMP)"
   ),
   Descrição = c(
-	"Tempo até a oportunidade mais próxima",
-	"Quantidade de oportunidades acessíveis em um determinado limite de tempo",
-	"Quantidade de pessoas que acessam a localidade em um determinado limite de tempo"
+  	"Tempo até a oportunidade mais próxima",
+  	"Quantidade de oportunidades acessíveis em um determinado limite de tempo",
+  	"Quantidade de pessoas que acessam a localidade em um determinado limite de tempo"
   ),
   `Tipo de oportunidades` = c(
-	"Saúde, Educação, CRAS",
-	"Trabalho, Saúde, Educação, CRAS",
-	"-"
+  	"Saúde, Educação, CRAS",
+  	"Trabalho, Saúde, Educação, CRAS",
+	  "-"
   ),
   `Limites de tempo de viagem` = c(
-	"A pé (60 mins); bicicleta, Transporte público e carro (120 mins)",
-	"A pé e bicicleta (15, 30, 45 e 60 mins); transporte público e carro (15, 30, 60, 90 e 120 mins)",
-	"A pé e bicicleta (15, 30, 45 e 60 mins); transporte público e carro (15, 30, 60, 90 e 120 mins)"
+  	"A pé (60 mins); bicicleta, Transporte público e carro (120 mins)",
+  	"A pé e bicicleta (15, 30, 45 e 60 mins); transporte público e carro (15, 30, 60, 90 e 120 mins)",
+  	"A pé e bicicleta (15, 30, 45 e 60 mins); transporte público e carro (15, 30, 60, 90 e 120 mins)"
   )
 )
 
@@ -70,32 +70,32 @@ Já a @tbl-tabela_dados_aop apresenta os dados de características socioeconômi
 #| tbl-cap: Informações socioeconômicas da população e de distribuição espacial de atividades, segundo ano e fonte de dados
 tabela_dados_pop <- data.table::data.table(
   Dado = c(
-	"Características sociodemográficas da população",
-	"Estabelecimentos de educação",
-	"Estabelecimentos de saúde",
-	"Atividade econômica",
-	"Estabelecimentos de assistência social"
+  	"Características sociodemográficas da população",
+  	"Estabelecimentos de educação",
+  	"Estabelecimentos de saúde",
+  	"Atividade econômica",
+  	"Estabelecimentos de assistência social"
   ),
   Informações = c(
-	"Quantidade de pessoas segundo sexo, faixa de idade e cor/raça; média da renda domiciliar per capita",
-	"Quantidade de creches e escolas públicas segundo nível de ensino (infantil, fundamental e médio)",
-	"Quantidade de estabelecimentos de saúde que atendem pelo SUS segundo nível de atenção (baixa, média e alta complexidade)",
-	"Quantidade de empregos formais conforme o nível de instrução dos trabalhadores (baixa, média e alta escolaridade)",
-	"Quantidade de CRAS"
+  	"Quantidade de pessoas segundo sexo, faixa de idade e cor/raça; média da renda domiciliar per capita",
+  	"Quantidade de creches e escolas públicas segundo nível de ensino (infantil, fundamental e médio)",
+  	"Quantidade de estabelecimentos de saúde que atendem pelo SUS segundo nível de atenção (baixa, média e alta complexidade)",
+  	"Quantidade de empregos formais conforme o nível de instrução dos trabalhadores (baixa, média e alta escolaridade)",
+  	"Quantidade de CRAS"
   ),
   Anos = c(
-	"2010",
-	"2017, 2018, 2019",
-	"2017, 2018, 2019",
-	"2017, 2018, 2019",
-	"2017, 2018, 2019"
+  	"2010",
+  	"2017, 2018, 2019",
+  	"2017, 2018, 2019",
+  	"2017, 2018, 2019",
+  	"2017, 2018, 2019"
   ),
   Fonte = c(
-	"Censo Demográfico, IBGE",
-	"Censo Escolar, Inep",
-	"Cadastro Nacional de Estabelecimentos de Saúde (CNES), Ministério da Saúde",
-	"Relação Anual de Informações Sociais (RAIS), Ministério da Economia",
-	"Censo SUAS, Ministério da Cidadania"
+  	"Censo Demográfico, IBGE",
+  	"Censo Escolar, Inep",
+  	"Cadastro Nacional de Estabelecimentos de Saúde (CNES), Ministério da Saúde",
+  	"Relação Anual de Informações Sociais (RAIS), Ministério da Economia",
+  	"Censo SUAS, Ministério da Cidadania"
   )
 )
 
