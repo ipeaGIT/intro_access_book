@@ -263,24 +263,24 @@ A fim de facilitar nossa edição, vamos mudar o *id* das viagens, identificando
 gtfs_filtrado$stop_times[
   ,
   trip_id := data.table::fcase(
-	trip_id == "4", "metro_oeste_0",
-	trip_id == "19", "metro_oeste_1",
-	trip_id == "34", "metro_sul_0",
-	trip_id == "96", "metro_sul_1",
-	trip_id == "159", "vlt_0",
-	trip_id == "181", "vlt_1"
+  	trip_id == "4", "metro_oeste_0",
+  	trip_id == "19", "metro_oeste_1",
+  	trip_id == "34", "metro_sul_0",
+  	trip_id == "96", "metro_sul_1",
+  	trip_id == "159", "vlt_0",
+  	trip_id == "181", "vlt_1"
   )
 ]
 
 gtfs_filtrado$trips[
   ,
   trip_id := data.table::fcase(
-	trip_id == "4", "metro_oeste_0",
-	trip_id == "19", "metro_oeste_1",
-	trip_id == "34", "metro_sul_0",
-	trip_id == "96", "metro_sul_1",
-	trip_id == "159", "vlt_0",
-	trip_id == "181", "vlt_1"
+  	trip_id == "4", "metro_oeste_0",
+  	trip_id == "19", "metro_oeste_1",
+  	trip_id == "34", "metro_sul_0",
+  	trip_id == "96", "metro_sul_1",
+  	trip_id == "159", "vlt_0",
+  	trip_id == "181", "vlt_1"
   )
 ]
 
@@ -291,13 +291,13 @@ Precisamos agora adicionar uma tabela `frequencies` que descreva a frequência d
 
 ```{r}
 frequencias <- tibble::tribble(
-  ~trip_id,    	~start_time, ~end_time,  ~headway_secs, ~exact_times,
-  "metro_oeste_0", "06:00:00",  "09:00:00", 720L,       	1,
-  "metro_oeste_1", "06:00:00",  "09:00:00", 720L,       	1,
-  "metro_sul_0",   "06:00:00",  "09:00:00", 360L,       	1,
-  "metro_sul_1",   "06:00:00",  "09:00:00", 360L,       	1,
-  "vlt_0",     	"06:00:00",  "09:00:00", 450L,       	1,
-  "vlt_1",     	"06:00:00",  "09:00:00", 450L,       	1
+  ~trip_id,        ~start_time, ~end_time,  ~headway_secs, ~exact_times,
+  "metro_oeste_0", "06:00:00",  "09:00:00", 720L,       	 1,
+  "metro_oeste_1", "06:00:00",  "09:00:00", 720L,       	 1,
+  "metro_sul_0",   "06:00:00",  "09:00:00", 360L,       	 1,
+  "metro_sul_1",   "06:00:00",  "09:00:00", 360L,       	 1,
+  "vlt_0",     	   "06:00:00",  "09:00:00", 450L,       	 1,
+  "vlt_1",     	   "06:00:00",  "09:00:00", 450L,       	 1
 )
 
 # converte tabela para data.table
@@ -362,7 +362,6 @@ Temos, agora, quatro arquivos de GTFS distintos:
 - O *feed* da Linha Leste, que descreve a futura operação da Linha Leste do metrô.
 
 Esses quatro arquivos GTFS serão usados em conjunto para calcular as condições de acessibilidade de Fortaleza antes e depois da implementação da Linha Leste. No cenário pré Linha Leste, vamos calcular as matrizes de tempo de viagem com base apenas nos *feeds* de outubro de 2019 da Metrofor e da Etufor, que representam a típica operação de transporte público da cidade antes da implementação do novo corredor. No cenário pós implementação, consideraremos o *feed* da Etufor, o *feed modificado* da Metrofor, com as frequências do metrô e do VLT alteradas, e o GTFS da Linha Leste, incorporando à análise a operação planejada desta linha após sua finalização.
-
 
 ## Cálculo das matrizes de tempo de viagem
 
@@ -565,8 +564,8 @@ matriz_antes <- travel_time_matrix(
   destinations = pontos,
   mode = c("WALK", "TRANSIT"),
   departure_datetime = as.POSIXct(
-	"02-03-2020 07:00:00",
-	format = "%d-%m-%Y %H:%M:%S"
+  	"02-03-2020 07:00:00",
+  	format = "%d-%m-%Y %H:%M:%S"
   ),
   max_walk_dist = 800,
   max_trip_duration = 60,
@@ -581,8 +580,8 @@ matriz_depois <- travel_time_matrix(
   destinations = pontos,
   mode = c("WALK", "TRANSIT"),
   departure_datetime = as.POSIXct(
-	"02-03-2020 07:00:00",
-	format = "%d-%m-%Y %H:%M:%S"
+  	"02-03-2020 07:00:00",
+  	format = "%d-%m-%Y %H:%M:%S"
   ),
   max_walk_dist = 800,
   max_trip_duration = 60,
@@ -767,10 +766,10 @@ acesso_medio <- acesso_a_empregos[
 ggplot(data = acesso_medio, aes(x = cenario, y = acesso / 1000)) +
   geom_col(fill = "#0f3c53") +
   geom_text(
-	aes(label = round(acesso / 1000, digits = 1)),
-	vjust = 1.5,
-	color = "white",
-	size = 10
+  	aes(label = round(acesso / 1000, digits = 1)),
+  	vjust = 1.5,
+  	color = "white",
+  	size = 10
   ) +
   ylab("Empregos acessíveis\n(em milhares)") +
   theme_minimal()
@@ -822,10 +821,10 @@ tempo_medio <- tempo_a_escolas[
 ggplot(data = tempo_medio, aes(x = cenario, y = tempo)) +
   geom_col(fill = "#0d6556") +
   geom_text(
-	aes(label = round(tempo, digits = 2)),
-	vjust = 1.5,
-	color = "white",
-	size = 10
+  	aes(label = round(tempo, digits = 2)),
+  	vjust = 1.5,
+  	color = "white",
+  	size = 10
   ) +
   ylab("Média do tempo até a escola\nmais próxima (em minutos)") +
   theme_minimal()
@@ -907,21 +906,21 @@ acesso_a_empregos_sf <- sf::st_sf(acesso_a_empregos)
 # configura mapas da distribuição de acessibilidade nos cenários antes e depois
 dist_acesso <- ggplot() +
   geom_sf(
-	data = acesso_a_empregos_sf,
-	aes(fill = acesso_a_empregos),
-	color = NA
+  	data = acesso_a_empregos_sf,
+  	aes(fill = acesso_a_empregos),
+  	color = NA
   ) +
   facet_wrap(~ cenario, nrow = 1) +
   scale_fill_viridis_c(
-	option = "inferno",
-	label = scales::label_number(scale = 1 / 1000)
+  	option = "inferno",
+  	label = scales::label_number(scale = 1 / 1000)
   ) +
   labs(fill = "Empregos\nacessíveis\n(em milhares)", color = "Corredores") +
   geom_sf(
-	data = traj_corredores,
-	aes(color = corredor),
-	alpha = 0.8,
-	show.legend = FALSE
+  	data = traj_corredores,
+  	aes(color = corredor),
+  	alpha = 0.8,
+  	show.legend = FALSE
   ) +
   scale_color_manual(values = c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
   theme_void() +
@@ -930,17 +929,17 @@ dist_acesso <- ggplot() +
 # configura mapa de diferença entre cenários
 dist_diferenca <- ggplot() +
   geom_sf(
-	data = subset(acesso_a_empregos_sf, !is.na(diferenca)),
-	aes(fill = diferenca),
-	color = NA
+  	data = subset(acesso_a_empregos_sf, !is.na(diferenca)),
+  	aes(fill = diferenca),
+  	color = NA
   ) +
   scale_fill_viridis_c(
-	option = "cividis",
-	label = scales::label_number(scale = 1 / 1000)
+  	option = "cividis",
+  	label = scales::label_number(scale = 1 / 1000)
   ) +
   labs(
-	fill = "Diferença de\nempregos\nacessíveis\n(em milhares)",
-	color="Corredores"
+  	fill = "Diferença de\nempregos\nacessíveis\n(em milhares)",
+  	color="Corredores"
   ) +
   geom_sf(data = traj_corredores, aes(color = corredor), alpha = 0.8) +
   scale_color_manual(values = c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
@@ -973,10 +972,10 @@ dist_tempo <- ggplot() +
   scale_fill_viridis_c(option = "plasma", direction = -1) +
   labs(fill = "Tempo até\n a escola\nmais próxima\n(em minutos)") +
   geom_sf(
-	data = traj_corredores,
-	aes(color = corredor),
-	alpha = 0.8,
-	show.legend = FALSE
+  	data = traj_corredores,
+  	aes(color = corredor),
+  	alpha = 0.8,
+  	show.legend = FALSE
   ) +
   scale_color_manual(values = c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
   theme_void() +
@@ -985,13 +984,13 @@ dist_tempo <- ggplot() +
 # configura mapa de diferença entre cenários
 dist_dif_tempo <- ggplot() +
   geom_sf(
-	data = subset(tempo_a_escolas_sf, !is.na(diferenca)),
-	aes(fill = diferenca),
-	color = NA
+  	data = subset(tempo_a_escolas_sf, !is.na(diferenca)),
+  	aes(fill = diferenca),
+  	color = NA
   ) +
   scale_fill_viridis_c(option = "viridis", direction = -1) +
   labs(
-	fill = "Diferença no\ntempo até\n a escola\nmais próxima\n(em minutos)"
+	  fill = "Diferença no\ntempo até\n a escola\nmais próxima\n(em minutos)"
   ) +
   geom_sf(data = traj_corredores, aes(color = corredor), alpha = 0.8) +
   scale_color_manual(values = c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
@@ -1004,7 +1003,6 @@ dist_tempo / dist_dif_tempo + plot_layout(ncol = 1, heights = c(1, 1))
 
 A Linha Leste e as mudanças de frequências nas outras linhas do metrô e do VLT praticamente não alteram o panorama da acessibilidade a escolas de nível médio em Fortaleza, o que faz com que pouquíssimos hexágonos apresentem algum tipo de ganho de acessibilidade entre os dois cenários - apenas alguns poucos hexágonos na imediação de estações de metrô apresentam alguma redução no tempo de acesso a escolas. Como podemos ver, a distribuição da acessibilidade a escolas na cidade segue um padrão muito menos concêntrico do que o da distribuição da acessibilidade a empregos. Novamente, isto é uma consequência da distribuição de escolas públicas na cidade: ao contrário da distribuição de empregos, que tende a seguir critérios econômicos-financeiros, a distribuição de equipamentos públicos tende a seguir critérios equitativos, buscando priorizar regiões periféricas e de maior concentração de grupos populacionais vulneráveis. Mesmo antes da implementação das mudanças no sistema de transportes, áreas com baixíssima acessibilidade ao emprego, como a região no extremo sul da cidade, já possuíam boas condições de acessibilidade a escolas públicas de nível médio.
 
-
 ## Desigualdade de acessibilidade
 
 Uma dimensão-chave para a avaliação de políticas de transporte está relacionada aos seus aspectos distributivos. Quem são os principais beneficiados e prejudicados por essas políticas? Sob uma perspectiva de equidade, espera-se que políticas governamentais priorizem melhorar as condições de acessibilidade das pessoas em piores condições socioeconômicas e que mais dependem do transporte público [@pereira2017distributive; @vanwee2022accessibility].
@@ -1014,20 +1012,20 @@ Nesta seção, vamos examinar como os ganhos de acessibilidade ao emprego decorr
 ```{r}
 ggplot(data = acesso_a_empregos[populacao > 0]) +
   geom_boxplot(
-	aes(
-  	x = as.factor(decil),
-  	y = acesso_a_empregos / 1000,
-  	color = as.factor(decil),
-  	weight = populacao,
-  	group = decil
-	),
-	show.legend = FALSE
+  	aes(
+    	x = as.factor(decil),
+    	y = acesso_a_empregos / 1000,
+    	color = as.factor(decil),
+    	weight = populacao,
+    	group = decil
+  	),
+  	show.legend = FALSE
   ) +
   facet_wrap(~ cenario, nrow = 1) +
   scale_colour_brewer(palette = "RdBu") +
   labs(x = "Decil de renda", y = "Empregos acessíveis\n(em milhares)") +
   scale_x_discrete(
-	labels = c("D1\nmais\npobres", paste0("D", 2:9), "D10\nmais\nricos")
+	  labels = c("D1\nmais\npobres", paste0("D", 2:9), "D10\nmais\nricos")
   ) +
   theme_minimal()
 ```
@@ -1039,22 +1037,22 @@ No entanto, é difícil enxergar nos gráficos acima grandes mudanças nas condi
 ```{r}
 ggplot(subset(acesso_a_empregos, populacao > 0 & !is.na(diferenca))) +
   geom_boxplot(
-	aes(
-  	x = as.factor(decil),
-  	y = diferenca / 1000,
-  	color = as.factor(decil),
-  	weight = populacao,
-  	group = decil
-	),
-	show.legend = FALSE
+  	aes(
+    	x = as.factor(decil),
+    	y = diferenca / 1000,
+    	color = as.factor(decil),
+    	weight = populacao,
+    	group = decil
+  	),
+  	show.legend = FALSE
   ) +
   scale_colour_brewer(palette = "RdBu") +
   labs(
-	x = "Decil de renda",
-	y = "Diferença da quantidade de\nempregos acessíveis (em milhares)"
+  	x = "Decil de renda",
+  	y = "Diferença da quantidade de\nempregos acessíveis (em milhares)"
   ) +
   scale_x_discrete(
-	labels = c("D1\nmais\npobres", paste0("D", 2:9), "D10\nmais\nricos")
+  	labels = c("D1\nmais\npobres", paste0("D", 2:9), "D10\nmais\nricos")
   ) +
   theme_minimal()
 ```
@@ -1106,10 +1104,10 @@ razao_de_palma[, palma := acesso_mais_ricos / acesso_mais_pobres]
 ggplot(data = razao_de_palma, aes(x = cenario, y = palma)) +
   geom_col(fill = "#0d6556") +
   geom_text(
-	aes(label = round(palma, digits = 2)),
-	vjust = 1.5,
-	color = "white",
-	size = 10
+  	aes(label = round(palma, digits = 2)),
+  	vjust = 1.5,
+  	color = "white",
+  	size = 10
   ) +
   ylab("Razão de Palma") +
   theme_minimal()

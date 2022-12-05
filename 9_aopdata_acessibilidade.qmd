@@ -106,15 +106,15 @@ dados_sp$TMISA <- ifelse(dados_sp$TMISA > 60, 60, dados_sp$TMISA)
 ggplot(subset(dados_sp, !is.na(mode))) +
   geom_sf(aes(fill = TMISA), color = NA, alpha = 0.9) +
   scale_fill_viridis_c(
-	option = "cividis",
-	direction = -1,
-	breaks = seq(0, 60, 10),
-	labels = c(seq(0, 50, 10), "60+")
+  	option = "cividis",
+  	direction = -1,
+  	breaks = seq(0, 60, 10),
+  	labels = c(seq(0, 50, 10), "60+")
   ) +
   labs(
-	title = "Tempo de viagem até o hospital de alta complex. mais próximo",
-	subtitle = "São Paulo",
-	fill = "Tempo em\nminutos"
+  	title = "Tempo de viagem até o hospital de alta complex. mais próximo",
+  	subtitle = "São Paulo",
+  	fill = "Tempo em\nminutos"
   ) +
   facet_wrap(~ mode) +
   theme_void()
@@ -146,8 +146,8 @@ fig60 +
   fig90 +
   plot_layout(guides = "collect") +
   plot_annotation(
-	title = "Quantidade de empregos acessíveis por transporte público",
-	subtitle = "São Paulo"
+  	title = "Quantidade de empregos acessíveis por transporte público",
+  	subtitle = "São Paulo"
   )
 ```
 
@@ -179,13 +179,13 @@ desigualdade_tp <- subset(desigualdade_tp, !is.na(media))
 ggplot(desigualdade_tp) +
   geom_col(aes(y = media, x = factor(R003)), fill = "#2c9e9e", color = NA) +
   scale_x_discrete(
-	labels = c("D1\nmais\npobres", paste0("D", 2:9), "D10\nmais\nricos")
+	  labels = c("D1\nmais\npobres", paste0("D", 2:9), "D10\nmais\nricos")
   ) +
   labs(
-	title = "Média de tempo de viagem até o hospital mais proximo",
-	subtitle = "por transporte público em São Paulo",
-	x = "Decil de renda",
-	y = "Tempo de viagem\nem min."
+  	title = "Média de tempo de viagem até o hospital mais proximo",
+  	subtitle = "por transporte público em São Paulo",
+  	x = "Decil de renda",
+  	y = "Tempo de viagem\nem min."
   ) +
   theme_minimal()
 ```
@@ -197,18 +197,18 @@ Outra maneira de examinar a desigualdade de acesso a oportunidades é comparar a
 ```{r}
 ggplot(subset(acesso_tp, !is.na(R003))) +
   geom_boxplot(
-	aes(x = factor(R003), y = CMATT60 / 1000, color = factor(R003))
+	  aes(x = factor(R003), y = CMATT60 / 1000, color = factor(R003))
   ) +
   scale_color_brewer(palette = "RdBu") +
   labs(
-	title = "Distribução do número de empregos acessíveis em até 60 min.",
-	color = "Decil\nde renda",
-	subtitle = "por transporte público, São Paulo",
-	x = "Decil de renda",
-	y = "N. de empregos acessíveis\n(em milhares)"
+  	title = "Distribução do número de empregos acessíveis em até 60 min.",
+  	color = "Decil\nde renda",
+  	subtitle = "por transporte público, São Paulo",
+  	x = "Decil de renda",
+  	y = "N. de empregos acessíveis\n(em milhares)"
   ) +
-   scale_x_discrete(
-	labels = c("D1\nmais\npobres", paste0("D", 2:9), "D10\nmais\nricos")
+  scale_x_discrete(
+	  labels = c("D1\nmais\npobres", paste0("D", 2:9), "D10\nmais\nricos")
   ) +
   theme_minimal()
 ```
@@ -263,10 +263,10 @@ ggplot(media_acesso, aes(x = razao, y = reorder(name_muni, razao))) +
   geom_bar(stat = "identity") +
   geom_text(aes(x = razao + 4 , label = paste0(round(razao), "x"))) +
   labs(
-	title = "Diferença entre a quantidade de empregos acessiveis por\nautomóvel e por caminhada",
-	subtitle = "em até 30 min. de viagem",
-	y = "",
-	x = "Razão entre a acessibilidade de carro e a pé"
+  	title = "Diferença entre a quantidade de empregos acessiveis por\nautomóvel e por caminhada",
+  	subtitle = "em até 30 min. de viagem",
+  	y = "",
+  	x = "Razão entre a acessibilidade de carro e a pé"
   ) +
   theme_classic()
 ```

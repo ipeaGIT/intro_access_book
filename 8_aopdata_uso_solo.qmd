@@ -26,30 +26,30 @@ A @tbl-landuse_dictionary apresenta a descrição das colunas da tabela (excluin
 #| label: tbl-landuse_dictionary
 #| tbl-cap: Descrição das colunas da tabela de dados de distribuição espacial de oportunidades
 tbl <- tibble::tribble(
-  ~Coluna,   	~Descrição,
-  "year",    	"Ano de referência",
-  "id_hex",  	"Identificador único do hexágono",
+  ~Coluna,   	   ~Descrição,
+  "year",    	   "Ano de referência",
+  "id_hex",  	   "Identificador único do hexágono",
   "abbrev_muni", "Sigla de 3 letras do município",
   "name_muni",   "Nome do município",
   "code_muni",   "Código de 7 dígitos do IBGE do município",
-  "T001",    	"Quantidade total de empregos",
-  "T002",    	"Quantidade de empregos de baixa escolaridade",
-  "T003",    	"Quantidade de empregos de média escolaridade",
-  "T004",    	"Quantidade de empregos de alta escolaridade",
-  "E001",    	"Quantidade total de estabelecimentos públicos de ensino",
-  "E002",    	"Quantidade de estabelecimentos públicos de ensino infantil",
-  "E003",    	"Quantidade de estabelecimentos públicos de ensino fundamental",
-  "E004",    	"Quantidade de estabelecimentos públicos de ensino médio",
-  "M001",    	"Quantidade total de matrículas públicas de ensino",
-  "M002",    	"Quantidade de matrículas públicas de ensino infantil",
-  "M003",    	"Quantidade de matrículas públicas de ensino fundamental",
-  "M004",    	"Quantidade de matrículas públicas de ensino médio",
-  "S001",    	"Quantidade total de estabelecimentos de saúde",
-  "S002",    	"Quantidade de estabelecimentos públicos de saúde de baixa complexidade",
-  "S003",    	"Quantidade de estabelecimentos públicos de saúde de média complexidade",
-  "S004",    	"Quantidade de estabelecimentos públicos de saúde de alta complexidade",
-  "C001",    	"Quantidade total de Centros de Referência de Assistência Social (CRAS)",
-  "geometry",	"Geometria espacial"
+  "T001",    	   "Quantidade total de empregos",
+  "T002",    	   "Quantidade de empregos de baixa escolaridade",
+  "T003",    	   "Quantidade de empregos de média escolaridade",
+  "T004",    	   "Quantidade de empregos de alta escolaridade",
+  "E001",    	   "Quantidade total de estabelecimentos públicos de ensino",
+  "E002",    	   "Quantidade de estabelecimentos públicos de ensino infantil",
+  "E003",    	   "Quantidade de estabelecimentos públicos de ensino fundamental",
+  "E004",    	   "Quantidade de estabelecimentos públicos de ensino médio",
+  "M001",    	   "Quantidade total de matrículas públicas de ensino",
+  "M002",    	   "Quantidade de matrículas públicas de ensino infantil",
+  "M003",    	   "Quantidade de matrículas públicas de ensino fundamental",
+  "M004",    	   "Quantidade de matrículas públicas de ensino médio",
+  "S001",    	   "Quantidade total de estabelecimentos de saúde",
+  "S002",    	   "Quantidade de estabelecimentos públicos de saúde de baixa complexidade",
+  "S003",    	   "Quantidade de estabelecimentos públicos de saúde de média complexidade",
+  "S004",    	   "Quantidade de estabelecimentos públicos de saúde de alta complexidade",
+  "C001",    	   "Quantidade total de Centros de Referência de Assistência Social (CRAS)",
+  "geometry",	   "Geometria espacial"
 )
 
 knitr::kable(tbl)
@@ -71,9 +71,9 @@ ggplot(dados_bh) +
   geom_sf(aes(fill = T001), color = NA, alpha = 0.9) +
   scale_fill_distiller(palette = "YlGnBu", direction = 1) +
   labs(
-	title = "Distribuição espacial de empregos",
-	subtitle = "Belo Horizonte",
-	fill = "N. de empregos"
+  	title = "Distribuição espacial de empregos",
+  	subtitle = "Belo Horizonte",
+  	fill = "N. de empregos"
   ) +
   theme_void()
 ```
@@ -87,9 +87,9 @@ ggplot(dados_bh) +
   geom_sf(aes(fill = as.factor(E001)), color = NA, alpha = 0.9) +
   scale_fill_brewer(palette = "YlGnBu", direction = 1) +
   labs(
-	title = "Distribuição espacial de escolas",
-	subtitle = "Belo Horizonte",
-	fill = "N. de escolas"
+  	title = "Distribuição espacial de escolas",
+  	subtitle = "Belo Horizonte",
+  	fill = "N. de escolas"
   ) +
   theme_void()
 ```
@@ -103,9 +103,9 @@ saude_baixa <- ggplot(dados_bh) +
   geom_sf(aes(fill = as.factor(S002)), color = NA, alpha = 0.9) +
   scale_fill_brewer(palette = "YlGnBu", direction = 1, limits = factor(0:4)) +
   labs(
-	title = "Estabelecimentos de saúde",
-	subtitle = "Baixa complexidade",
-	fill = "N. de estabelecimentos"
+  	title = "Estabelecimentos de saúde",
+  	subtitle = "Baixa complexidade",
+  	fill = "N. de estabelecimentos"
   ) +
   theme_void()
 
@@ -113,9 +113,9 @@ saude_alta <- ggplot(dados_bh) +
   geom_sf(aes(fill = as.factor(S004)), color = NA, alpha = 0.9) +
   scale_fill_brewer(palette = "YlGnBu", direction = 1, limits = factor(0:4)) +
   labs(
-	title = "Estabelecimentos de saúde",
-	subtitle = "Alta complexidade",
-	fill = "N. de estabelecimentos"
+  	title = "Estabelecimentos de saúde",
+  	subtitle = "Alta complexidade",
+  	fill = "N. de estabelecimentos"
   ) +
   theme_void()
 
@@ -131,9 +131,9 @@ ggplot(dados_bh) +
   geom_sf(aes(fill = as.factor(C001)), color = NA, alpha = 0.9) +
   scale_fill_brewer(palette = "YlGnBu", direction = 1) +
   labs(
-	title = "Centros de Referência de Assistência Social (CRAS)",
-	subtitle = "Belo Horizonte",
-	fill = "N. de CRAS"
+  	title = "Centros de Referência de Assistência Social (CRAS)",
+  	subtitle = "Belo Horizonte",
+  	fill = "N. de CRAS"
   ) +
   theme_void()
 ```
