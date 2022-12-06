@@ -64,7 +64,7 @@ As seções a seguir mostram exemplos de visualizações desses dados em forma d
 
 No código abaixo, carregamos bibliotecas de visualização de dados e configuramos o mapa. Com um comando, podemos visualizar a distribuição espacial da população de Fortaleza. A figura mostra um mapa coroplético onde a cor de cada célula da grade espacial é preenchida com base na quantidade total de pessoas que ali residem (variável `P001`).
 
-```{r fig_1_pop}
+```{r fig_1}
 #| message: false
 #| warning: false
 library(patchwork)
@@ -85,7 +85,7 @@ ggplot(subset(dados_fortaleza, P001 > 0)) +
 
 Além da informação sobre a população total em cada célula, o dados também informam a contagem populacional por classificações de cor (variáveis `P002` a `P005`), sexo (variáveis `P006` e `P007`) e faixa etária (variáveis `P010` a `P016`) em cada unidade espacial. O código abaixo ilustra como é simples calcular a proporção de pessoas negras e brancas em cada hexágono e visualizar essas proporções em um mapa.
 
-```{r fig_2_cor}
+```{r fig_2}
 pop_negra <- ggplot(subset(dados_fortaleza, P001 > 0)) +
   geom_sf(aes(fill = P003 / P001), color = NA, alpha = 0.8) +
   scale_fill_distiller(
@@ -115,7 +115,7 @@ pop_negra + pop_branca
 
 Por fim, os dados também trazem informações sobre a renda domiciliar *per capita* média de cada hexágono (`R001`) e sua classificação em termos de quintil (`R002`) e decil de renda (`R003`). Com esses dados, podemos visualizar a distribuição espacial dos níveis de renda na cidade.
 
-```{r fig_3_renda}
+```{r fig_3}
 renda <- ggplot(subset(dados_fortaleza, P001 > 0)) +
   geom_sf(aes(fill = R001), color = NA, alpha = 0.8) +
   scale_fill_distiller(palette = "YlOrRd", direction = 1) +

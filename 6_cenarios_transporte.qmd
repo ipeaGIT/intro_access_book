@@ -94,7 +94,7 @@ traj_metrofor$trip_id <- NULL
 traj_corredores <- rbind(traj_metrofor, traj_linha_leste)
 ```
 
-```{r}
+```{r fig_3}
 #| echo: false
 #| results: false
 #| warning: false
@@ -736,7 +736,7 @@ tempo_a_escolas[
 
 Agora que calculamos os níveis de acessibilidade em cada cenário e a diferença entre eles, precisamos compreender como a futura implementação da Linha Leste e o aumento da frequência das linhas de metrô e VLT impactam as condições de acessibilidade em nossa área de estudo. Como primeira análise exploratória, podemos investigar o impacto dessas mudanças sobre a acessibilidade média da cidade. Olhando primeiro para a acessibilidade a oportunidades de emprego, vamos calcular a quantidade média de empregos acessíveis em cada cenário. Aqui, é importante calcular a média de acessibilidade ponderada pela população de cada hexágono, visto que hexágonos onde mais pessoas moram contribuem mais para o nível médio da população como um todo do que hexágonos com poucas pessoas.
 
-```{r}
+```{r fig_4}
 # carrega bibliotecas de visualização de dados
 library(ggplot2)
 library(patchwork)
@@ -802,7 +802,7 @@ Os resultados mostram que a população de Fortaleza conseguia acessar em média
 
 Analisando o tempo médio de acesso à escola pública de ensino médio mais próxima, notamos que as mudanças no sistema de transportes pouco alteram a acessibilidade a essas escolas. Em média, a população de Fortaleza demorava cerca de 13 minutos para chegar à escola pública de ensino médio mais próxima de sua casa em 2019. Após a conclusão da extensão do metrô e do aumento da frequência das linhas de metrô e VLT, esse resultado permanecerá praticamente inalterado.
 
-```{r}
+```{r fig_5}
 # une tabela de tempo a escolas com informações de pessoas residentes nos
 # hexágonos
 tempo_a_escolas <- merge(
@@ -834,7 +834,7 @@ Em síntese, os resultados mostram que a construção da Linha Leste do metrô e
 
 Esse fenômeno pode ser melhor compreendido quando observamos os resultados espacialmente. Antes de fazer isso, no entanto, vamos criar um objeto espacial que descreve o traçado dos corredores de transporte da cidade - o que torna ainda mais claro o impacto das mudanças no sistema de transportes sobre os níveis de acessibilidade.
 
-```{r}
+```{r fig_6}
 # lê arquivos gtfs necessários para gerar as geometrias de cada corredor
 gtfs_metrofor <- read_gtfs(end_metrofor)
 gtfs_linha_leste <- read_gtfs(end_linha_leste)
@@ -892,7 +892,7 @@ ggplot() +
 
 Podemos, então, analisar a distribuição espacial dos níveis de acessibilidade nos cenários antes e depois, bem como a diferença de acessibilidade entre os dois cenários. Para isso, temos que juntar as estimativas de acessibilidade com a grade espacial da nossa área de estudo. Primeiro, para a acessibilidade a empregos:
 
-```{r}
+```{r fig_7}
 # une os dados de acessibilidade com a grade espacial de fortaleza e os converte
 # em objetos espaciais
 acesso_a_empregos <- merge(
@@ -954,7 +954,7 @@ O mapa mostra que as regiões que mais se beneficiam das mudanças no sistema de
 
 Os mapas de distribuição no tempo de acesso a escolas de nível médio, no entanto, apresentam uma situação diferente:
 
-```{r}
+```{r fig_8}
 # une os dados de tempo de acesso com a grade espacial de fortaleza e os
 # converte em objetos espaciais
 tempo_a_escolas <- merge(
@@ -1009,7 +1009,7 @@ Uma dimensão-chave para a avaliação de políticas de transporte está relacio
 
 Nesta seção, vamos examinar como os ganhos de acessibilidade ao emprego decorrentes da construção da Linha Leste e do aumento das frequências das linhas do metrô e do VLT estão distribuídos entre pessoas de diferentes níveis de renda. Para isso, precisamos entender como era a distribuição do nível de acesso a empregos entre a população em 2019, antes das mudanças no sistema de transportes, e como ela passará a ser de implementadas essas mudanças. Com o código abaixo, utilizamos a informação do decil de renda *per capita* em que cada hexágono se encontra para entender a distribuição dos níveis de acessibilidade entre grupos socioeconômicos  antes e depois das mudanças.
 
-```{r}
+```{r fig_9}
 ggplot(data = acesso_a_empregos[populacao > 0]) +
   geom_boxplot(
   	aes(
@@ -1034,7 +1034,7 @@ Os dois gráficos mostram claramente que as pessoas mais ricas de Fortaleza poss
 
 No entanto, é difícil enxergar nos gráficos acima grandes mudanças nas condições de acessibilidade entre os dois cenários. Lançando mão do mesmo recurso que usamos anteriormente, apresentamos na próxima figura como os *ganhos* de acessibilidade entre os cenários se distribuem por decil de renda:
 
-```{r}
+```{r fig_10}
 ggplot(subset(acesso_a_empregos, populacao > 0 & !is.na(diferenca))) +
   geom_boxplot(
   	aes(
@@ -1075,7 +1075,7 @@ Uma das vantagens da Razão de Palma frente ao Índice de Gini é a sua facilida
 
 Ao calcularmos a Razão de Palma nos cenários antes e depois da implementação da Linha Leste e das mudanças de frequência das linhas de metrô e VLT, conseguimos entender o impacto dessas políticas na desigualdade de acesso a empregos em Fortaleza:
 
-```{r}
+```{r fig_11}
 # calcula a acessibilidade média dos mais ricos nos dois cenários
 acesso_mais_ricos <- acesso_a_empregos[
   decil == 10,

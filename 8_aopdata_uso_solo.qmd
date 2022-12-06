@@ -61,7 +61,7 @@ As seções a seguir mostram exemplos de visualizações desses dados em forma d
 
 No código abaixo, carregamos bibliotecas de visualização de dados e configuramos o mapa. As variáveis iniciadas com a letra `T` são as que descrevem a distribuição espacial de empregos em cada cidade. O código abaixo apresenta a distribuição espacial do total de empregos em cada hexágono (variável `T001`) em Belo Horizonte:
 
-```{r}
+```{r fig_1}
 #| message: false
 #| warning: false
 library(patchwork)
@@ -82,7 +82,7 @@ ggplot(dados_bh) +
 
 As variáveis que indicam o número de escolas públicas em cada célula, por sua vez, começam com a letra `E`. No exemplo abaixo, apresentamos a distribuição espacial de todas as escolas públicas de Belo Horizonte (variável `E001`).
 
-```{r}
+```{r fig_2}
 ggplot(dados_bh) +
   geom_sf(aes(fill = as.factor(E001)), color = NA, alpha = 0.9) +
   scale_fill_brewer(palette = "YlGnBu", direction = 1) +
@@ -98,7 +98,7 @@ ggplot(dados_bh) +
 
 As variáveis que contém os dados dos estabelecimentos públicos de saúde em cada célula começam com a letra `S`. A visualização abaixo compara a distribuição espacial de estabelecimentos públicos de saúde de baixa complexidade (`S002`) e de alta complexidade (`S004`).
 
-```{r}
+```{r fig_3}
 saude_baixa <- ggplot(dados_bh) +
   geom_sf(aes(fill = as.factor(S002)), color = NA, alpha = 0.9) +
   scale_fill_brewer(palette = "YlGnBu", direction = 1, limits = factor(0:4)) +
@@ -126,7 +126,7 @@ saude_baixa + saude_alta + plot_layout(guides = "collect")
 
 Por fim, a variável `C001` descreve a distribuição espacial de Centros de Referência de Assistência Social (CRAS) em cada cidade. O mapa abaixo apresenta esta distribuição em Belo Horizonte.
 
-```{r}
+```{r fig_4}
 ggplot(dados_bh) +
   geom_sf(aes(fill = as.factor(C001)), color = NA, alpha = 0.9) +
   scale_fill_brewer(palette = "YlGnBu", direction = 1) +

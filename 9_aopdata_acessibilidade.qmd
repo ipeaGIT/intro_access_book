@@ -94,7 +94,7 @@ A descrição completa das variáveis também pode ser consultada na documentaç
 
 Neste exemplo, comparamos o tempo de acesso por automóvel e por transporte público até o hospital mais próximo de cada hexágono. Para analisar o tempo mínimo de viagem (`TMI`) até hospitais de alta complexidade (`SA`), utilizamos a variável `TMISA`. Com o código abaixo, carregamos as bibliotecas de visualização de dados e apresentamos a distribuição espacial do tempo de acesso com os dois modos de transporte. Como os tempos de viagem por transporte público costumam ser muito mais longos do que por automóvel, truncamos a distribuição dos valores da variável em 60 minutos.
 
-```{r}
+```{r fig_1}
 #| warning: false
 #| message: false
 library(ggplot2)
@@ -124,7 +124,7 @@ ggplot(subset(dados_sp, !is.na(mode))) +
 
 Os dados do `{aopdata}` também tornam muito simples a comparação da quantidade de oportunidades acessíveis em diferentes tempos de viagem. Com o código abaixo, por exemplo, ilustramos como visualizar lado-a-lado as distribuições espaciais do número de empregos acessíveis em até 60 e 90 minutos de viagem por transporte público.
 
-```{r}
+```{r fig_2}
 # estabelece valores usados na legenda do mapa
 limites_legenda <- c(0, max(acesso_tp$CMATT90, na.rm = TRUE) / 1000)
 
@@ -161,7 +161,7 @@ Neste primeiro exemplo, vamos comparar os tempos médios de viagem até o hospit
 
 Antes de realizar o cálculo, cabe observar que alguns hexágonos da cidade não conseguem acessar nenhum hospital em até duas horas de viagem. Nesses casos, o valor das variáveis de tempo mínimo de viagem é infinito (`Inf`). Para lidar com isso, neste exemplo substituímos todos os valores `Inf` por um tempo de viagem de 120 minutos.
 
-```{r}
+```{r fig_3}
 # copia os dados de acesso em um novo dataframe
 desigualdade_tp <- data.table::as.data.table(acesso_tp)
 
@@ -194,7 +194,7 @@ ggplot(desigualdade_tp) +
 
 Outra maneira de examinar a desigualdade de acesso a oportunidades é comparar a quantidade de oportunidades acessíveis por diferentes grupos populacionais considerando os mesmos modos de transporte e limites de tempo de viagem. Neste caso, analisamos o indicador de acessibilidade cumulativa ativa, representado por variáveis cujos códigos começam com `CMA` na base de dados do `{aopdata}`. No exemplo abaixo, comparamos a quantidade de empregos acessíveis por pessoas de diferentes decis de renda, considerando viagens de transporte público limitadas em 60 minutos de viagem.
 
-```{r}
+```{r fig_4}
 ggplot(subset(acesso_tp, !is.na(R003))) +
   geom_boxplot(
 	  aes(x = factor(R003), y = CMATT60 / 1000, color = factor(R003))
@@ -258,7 +258,7 @@ head(media_acesso)
 
 Finalmente, podemos visualizar os resultados graficamente:
 
-```{r}
+```{r fig_5}
 ggplot(media_acesso, aes(x = razao, y = reorder(name_muni, razao))) +
   geom_bar(stat = "identity") +
   geom_text(aes(x = razao + 4 , label = paste0(round(razao), "x"))) +

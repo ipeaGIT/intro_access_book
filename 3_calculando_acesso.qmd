@@ -296,7 +296,7 @@ Calculados os níveis de acessibilidade, procedemos então para sua análise. Ex
 
 Para compreendermos a distribuição espacial da acessibilidade urbana de uma determinada cidade ou região, primeiro precisamos obter as informações espaciais dos pontos que foram utilizados como origens e destinos no cálculo da matriz. Os pontos que usamos nos exemplos anteriores, por exemplo, correspondem aos centróides de células de uma grade hexagonal baseadas no índice [H3](https://h3geo.org/), desenvolvido pela Uber [@brodsky2018h3]. A grade da cidade de Porto Alegre, bem como informações sociodemográficas e de uso do solo, é disponibilizada pela equipe do Projeto Acesso a Oportunidades através do pacote de R `{aopdata}` [@pereira2022aopdata]. O pacote e suas funções são apresentados em detalhes na [Seção 5](s5_dados_aop.qmd). Com o código abaixo, carregamos a biblioteca de visualização de dados, baixamos as informações espaciais da grade e as apresentamos em forma de mapa.
 
-```{r}
+```{r fig_1_grade}
 #| message: false
 library(ggplot2)
 
@@ -312,7 +312,7 @@ ggplot(grade_poa) + geom_sf() + theme_minimal()
 
 Para visualizarmos os nossos dados de acessibilidade espacialmente, precisamos unir a tabela de estimativas de acessibilidade (vamos usar os níveis calculados com a medida de oportunidades cumulativas) com a tabela que contém os dados espaciais da grade, usando as colunas de identificação dos hexágonos como colunas-chave. A operação usada para isso e o seu resultado em formato de mapa são apresentados a seguir.
 
-```{r}
+```{r fig_2_escolas}
 # junta as tabelas de dados espaciais e de niveis de acessibilidade
 acesso_espacial <- merge(
   grade_poa,
@@ -360,7 +360,7 @@ head(acesso_sociodemografico[, c("id_hex", "schools", "contagem_pop", "decil")])
 
 Tendo a informação do decil de renda em que cada hexágono se encontra, podemos calcular a distribuição da acessibilidade da população dentro de cada um desses níveis de renda. Para isso, precisamos ponderar o nível de acessibilidade de cada origem pela quantidade de pessoas que residem ali - daí o porquê de termos também trazido a informação da contagem populacional em cada hexágono. Fazendo a ponderação, obtemos a distribuição da acessibilidade das pessoas localizadas em origens de um determinado decil de renda. Caso não ponderássemos, no entanto, teríamos a distribuição de acessibilidade não das pessoas localizadas em cada hexágono, mas dos hexágonos em si. Como em nossa análise nos importamos com as pessoas, e não com as unidades espaciais em que elas estão agregadas, precisamos fazer a ponderação. Podemos visualizar a distribuição de acessibilidade de cada decil usando um *box plot*, como feito a seguir.
 
-```{r}
+```{r fig_3_box_plot}
 ggplot(subset(acesso_sociodemografico, !is.na(decil))) +
   geom_boxplot(
       aes(

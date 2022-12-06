@@ -288,7 +288,7 @@ head(
 
 Por fim, o `{gtfstools}` também disponibiliza uma função que permite filtrar o objeto GTFS usando um polígono espacial. A `filter_by_sf()` recebe um objeto do tipo `sf`/`sfc` (representação espacial criada pelo pacote [`{sf}`](https://r-spatial.github.io/sf/)), ou sua *bounding box*, e mantém os registros cujas viagens são selecionadas por uma operação espacial que também deve ser especificada. Embora aparentemente complicado, este processo de filtragem é facilmente compreendido quando apresentado visualmente. Para isso, vamos filtrar o GTFS da SPTrans pela *bouding box* da trajetória `68962`. Com o código abaixo, apresentamos a distribuição espacial dos dados não filtrados, com a *bounding box* destacada em vermelho:
 
-```{r}
+```{r fig_1}
 # carrega biblioteca ggplot2 para visualização de dados
 library(ggplot2)
 
@@ -308,7 +308,7 @@ ggplot() +
 
 Note que usamos a função `convert_shapes_to_sf()`, também disponibilizada pelo `{gtfstools}`, que converte uma determinada trajetória descrita no GTFS em um objeto espacial do tipo `sf`. Por padrão, a `filter_by_sf()` mantém os dados relacionados aos registros de viagens cujas trajetórias possuem alguma interseção com o polígono espacial selecionado:
 
-```{r}
+```{r fig_2}
 gtfs_filtrado <- filter_by_sf(gtfs, bbox)
 trajetorias_filtradas <- convert_shapes_to_sf(gtfs_filtrado)
 
@@ -320,7 +320,7 @@ ggplot() +
 
 Podemos, no entanto, controlar a operação espacial usada no processo de filtragem. Por exemplo, o código abaixo mostra como podemos manter os dados relacionados a viagens que estão *contidas* dentro do polígono espacial:
 
-```{r}
+```{r fig_3}
 gtfs_filtrado <- filter_by_sf(gtfs, bbox, spatial_operation = sf::st_contains)
 trajetorias_filtradas <- convert_shapes_to_sf(gtfs_filtrado)
 
@@ -442,7 +442,7 @@ head(trajetorias)
 
 Geradas as trajetórias espaciais de cada viagem, precisamos juntá-las à informação de *headway* médio e, em seguida, configurar o nosso mapa como desejado. No exemplo abaixo, usamos cores e espessuras de linhas que variam de acordo com o *headway* de cada viagem:
 
-```{r}
+```{r fig_5}
 #| message: false
 traj_com_headways <- merge(
   trajetorias,
