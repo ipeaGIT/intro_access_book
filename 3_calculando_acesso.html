@@ -498,7 +498,7 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 <p>Esses dados devem ser salvos em uma mesma pasta que, preferencialmente, não contenha nenhum outro arquivo. Como veremos adiante, o <code>{r5r}</code> combina todos os dados salvos nesta pasta para criar uma rede de transporte multimodal que é utilizada no roteamento de viagens entre pares origem-destino e, consequentemente, no cálculo das matrizes de tempo de viagem. Note que é possível ter mais de um arquivo GTFS na mesma pasta: nesse caso, o <code>{r5r}</code> considera as redes de transporte públicos de todos os <em>feeds</em> de forma conjunta. No entanto, a rede viária e a topografia da área de estudo devem ser descritas por um único arquivo cada. Assumindo que os <em>scripts</em> de R estejam em uma pasta chamada <code>R</code>, uma possível organização dos arquivos segue o esquema abaixo:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>/tmp/Rtmp5tU7Xs/projeto_acessibilidade
+<pre><code>/tmp/Rtmps2RdK1/projeto_acessibilidade
 ├── R
 │   ├── script1.R
 │   └── script2.R
@@ -814,7 +814,7 @@ Considerando outros tipos de custo de viagem no cálculo da acessibilidade
 <span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co"># visualizando o mapa</span></span>
 <span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(grade_poa) <span class="sc">+</span> <span class="fu">geom_sf</span>() <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="3_calculando_acesso_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<p><img src="3_calculando_acesso_files/figure-html/fig_1_grade-1.png" class="img-fluid" width="2100"></p>
 </div>
 </div>
 <p>Para visualizarmos os nossos dados de acessibilidade espacialmente, precisamos unir a tabela de estimativas de acessibilidade (vamos usar os níveis calculados com a medida de oportunidades cumulativas) com a tabela que contém os dados espaciais da grade, usando as colunas de identificação dos hexágonos como colunas-chave. A operação usada para isso e o seu resultado em formato de mapa são apresentados a seguir.</p>
@@ -834,7 +834,7 @@ Considerando outros tipos de custo de viagem no cálculo da acessibilidade
 <span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Núm. de escolas</span><span class="sc">\n</span><span class="st">acessíveis"</span>) <span class="sc">+</span></span>
 <span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="3_calculando_acesso_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+<p><img src="3_calculando_acesso_files/figure-html/fig_2_escolas-1.png" class="img-fluid" width="2100"></p>
 </div>
 </div>
 <p>Como podemos ver, os níveis de acessibilidade tendem a se concentrar de forma mais acentuada no centro da cidade, onde existe maior concentração de empregos, e próximos aos grandes corredores de transportes da cidade. Por terem fácil acesso a modos de alta capacidade e velocidade, pessoas que moram mais perto desses corredores tendem a acessar locais distantes relativamente rápido. Em contraste, pessoas que moram mais afastadas desses corredores, dependem de modos de menor menor frequência e velocidade operacional (como os ônibus municipais, por exemplo) e precisam gastar mais tempo para alcançar os corredores de média e alta capacidade. Como consequência, os níveis de acessibilidade de pessoas que moram afastadas do centro e de corredores de alta capacidade tendem a ser menores.</p>
@@ -896,7 +896,7 @@ Geodetic CRS:  WGS 84
 <span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="3_calculando_acesso_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+<p><img src="3_calculando_acesso_files/figure-html/fig_3_box_plot-1.png" class="img-fluid" width="2100"></p>
 </div>
 </div>
 <p>O gráfico é muito claro em seu conteúdo: pessoas de mais baixa renda tendem a ter níveis de acessibilidade consideravelmente menores do que as de alta renda. Este é um padrão comum em praticamente todas as cidades brasileiras <span class="citation" data-cites="pereira2019desigualdades">(<a href="references.html#ref-pereira2019desigualdades" role="doc-biblioref">Pereira et al. 2019</a>)</span> que ocorre, em larga medida, devido à localização espacial das comunidades de baixa e alta renda no território: os mais ricos costumam morar em áreas mais valorizadas, próximas das grandes concentração de empregos (e oportunidades de educação, saúde, lazer, <em>etc</em>) e com maior oferta de transporte público de média e alta capacidade. Os mais pobres, por sua vez, tendem a morar em locais mais afastados, onde o valor da terra é menor. Consequentemente, tendem também a se afastar das grandes concentrações de oportunidades. Junta-se a isso o fato de, na maior parte dos casos, a oferta de serviços de transporte público de média e alta capacidade ser pior em locais com maior concentração de pessoas de baixa renda. Como consequência, seus níveis de acessibilidade são, em média, muito menores do que os dos mais ricos, como o gráfico deixa claro.</p>

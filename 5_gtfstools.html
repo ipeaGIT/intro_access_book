@@ -484,14 +484,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>zip<span class="sc">::</span><span class="fu">zip_list</span>(endereco_destino)[, <span class="fu">c</span>(<span class="st">"filename"</span>, <span class="st">"compressed_size"</span>, <span class="st">"timestamp"</span>)]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         filename compressed_size           timestamp
-1      agency.txt             112 2022-11-29 15:46:04
-2    calendar.txt             129 2022-11-29 15:46:04
-3 frequencies.txt            2381 2022-11-29 15:46:04
-4      routes.txt             659 2022-11-29 15:46:04
-5      shapes.txt          160470 2022-11-29 15:46:04
-6  stop_times.txt            7907 2022-11-29 15:46:04
-7       stops.txt           18797 2022-11-29 15:46:04
-8       trips.txt             717 2022-11-29 15:46:04</code></pre>
+1      agency.txt             112 2022-12-06 01:06:32
+2    calendar.txt             129 2022-12-06 01:06:32
+3 frequencies.txt            2381 2022-12-06 01:06:32
+4      routes.txt             659 2022-12-06 01:06:32
+5      shapes.txt          160470 2022-12-06 01:06:32
+6  stop_times.txt            7907 2022-12-06 01:06:32
+7       stops.txt           18797 2022-12-06 01:06:32
+8       trips.txt             717 2022-12-06 01:06:32</code></pre>
 </div>
 </div>
 </section>
@@ -917,7 +917,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb73-14"><a href="#cb73-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> geometria_bbox, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
 <span id="cb73-15"><a href="#cb73-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="5_gtfstools_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<p><img src="5_gtfstools_files/figure-html/fig_1-1.png" class="img-fluid" width="2100"></p>
 </div>
 </div>
 <p>Note que usamos a função <code>convert_shapes_to_sf()</code>, também disponibilizada pelo <code>{gtfstools}</code>, que converte uma determinada trajetória descrita no GTFS em um objeto espacial do tipo <code>sf</code>. Por padrão, a <code>filter_by_sf()</code> mantém os dados relacionados aos registros de viagens cujas trajetórias possuem alguma interseção com o polígono espacial selecionado:</p>
@@ -930,7 +930,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> geometria_bbox, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
 <span id="cb74-7"><a href="#cb74-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="5_gtfstools_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+<p><img src="5_gtfstools_files/figure-html/fig_2-1.png" class="img-fluid" width="2100"></p>
 </div>
 </div>
 <p>Podemos, no entanto, controlar a operação espacial usada no processo de filtragem. Por exemplo, o código abaixo mostra como podemos manter os dados relacionados a viagens que estão <em>contidas</em> dentro do polígono espacial:</p>
@@ -943,7 +943,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> geometria_bbox, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
 <span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="5_gtfstools_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+<p><img src="5_gtfstools_files/figure-html/fig_3-1.png" class="img-fluid" width="2100"></p>
 </div>
 </div>
 </section>
@@ -958,7 +958,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>endereco_validador <span class="ot">&lt;-</span> <span class="fu">download_validator</span>(pasta_temporaria)</span>
 <span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>endereco_validador</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "/tmp/RtmpViJj6g/gtfs-validator-v4.0.0.jar"</code></pre>
+<pre><code>[1] "/tmp/RtmpJBFv2D/gtfs-validator-v4.0.0.jar"</code></pre>
 </div>
 </div>
 <p>A segunda (e última) etapa consiste em de fato rodar a função <code>validate_gtfs()</code>. Essa função aceita que os dados GTFS a serem validados sejam passados de diferentes formas: (a) como um objeto GTFS existente apenas no R, (b) como o endereço de um arquivo GTFS salvo localmente em formato <code>.zip</code>, (c) como a URL para um <em>feed</em> ou (d) como uma pasta que contém os dados GTFS não compactados. A função também recebe o endereço para uma pasta onde o resultado da validação deve ser salvo e o endereço para o validador que deve ser usado. Neste exemplo, vamos fazer a validação a partir do endereço do GTFS da SPTrans, lido anteriormente:</p>
@@ -1103,7 +1103,7 @@ Geodetic CRS:  WGS 84
 <span id="cb93-10"><a href="#cb93-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradient</span>(<span class="at">high =</span> <span class="st">"#132B43"</span>, <span class="at">low =</span> <span class="st">"#56B1F7"</span>) <span class="sc">+</span></span>
 <span id="cb93-11"><a href="#cb93-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="5_gtfstools_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+<p><img src="5_gtfstools_files/figure-html/fig_5-1.png" class="img-fluid" width="2100"></p>
 </div>
 </div>
 <p>Como podemos ver, o pacote <code>{gtfstools}</code> torna o desenvolvimento de análises de <em>feeds</em> de transporte público algo fácil e que requer apenas o conhecimento básico de pacotes de manipulação de tabelas (como o <code>{data.table}</code> e o <code>{dplyr}</code>). O exemplo apresentado nesta seção mostra como muitas de suas funções podem ser usadas conjuntamente para revelar aspectos importantes de sistemas de transporte público descritos no formato GTFS.</p>

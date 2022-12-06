@@ -478,7 +478,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="cell-output-display">
 <div id="fig-fortaleza_3" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="6_cenarios_transporte_files/figure-html/fig-fortaleza_3-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="6_cenarios_transporte_files/figure-html/fig-fortaleza_3-1.png" class="img-fluid figure-img" width="2100"></p>
 <p></p><figcaption class="figure-caption">Figura&nbsp;6.3: Distribuição sociodemográfica, de oportunidades de emprego e de educação e de corredores de transporte público em Fortaleza</figcaption><p></p>
 </figure>
 </div>
@@ -1117,7 +1117,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb49-35"><a href="#cb49-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Empregos acessíveis</span><span class="sc">\n</span><span class="st">(em milhares)"</span>) <span class="sc">+</span></span>
 <span id="cb49-36"><a href="#cb49-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid" width="672"></p>
+<p><img src="6_cenarios_transporte_files/figure-html/fig_4-1.png" class="img-fluid" width="2100"></p>
 </div>
 </div>
 <div class="cell">
@@ -1152,7 +1152,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb50-24"><a href="#cb50-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Média do tempo até a escola</span><span class="sc">\n</span><span class="st">mais próxima (em minutos)"</span>) <span class="sc">+</span></span>
 <span id="cb50-25"><a href="#cb50-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid" width="672"></p>
+<p><img src="6_cenarios_transporte_files/figure-html/fig_5-1.png" class="img-fluid" width="2100"></p>
 </div>
 </div>
 <p>Em síntese, os resultados mostram que a construção da Linha Leste do metrô e o ajuste das frequências de outros corredores de transporte público da cidade afetam mais significativamente a acessibilidade a oportunidades de emprego do que a acessibilidade a escolas públicas de nível médio. Isto se explica principalmente pela distribuição dos dois tipos de oportunidade na cidade de Fortaleza: enquanto os empregos se distribuem de forma muito mais concentrada no centro da cidade, as escolas estão muito mais bem distribuídas em todo o território. As mudanças no sistema de transporte público, portanto, fazem com que os moradores de regiões mais afastadas do centro passem a conseguir acessar os empregos localizados no centro. Por outro lado, a distribuição mais equitativa de escolas públicas resulta em condições relativamente boas de acesso a esses equipamentos mesmo antes das mudanças, explicando o baixo impacto no tempo médio de acesso a escolas.</p>
@@ -1212,7 +1212,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb51-52"><a href="#cb51-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> cenario, <span class="at">nrow =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb51-53"><a href="#cb51-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid" width="672"></p>
+<p><img src="6_cenarios_transporte_files/figure-html/fig_6-1.png" class="img-fluid" width="2100"></p>
 </div>
 </div>
 <p>Podemos, então, analisar a distribuição espacial dos níveis de acessibilidade nos cenários antes e depois, bem como a diferença de acessibilidade entre os dois cenários. Para isso, temos que juntar as estimativas de acessibilidade com a grade espacial da nossa área de estudo. Primeiro, para a acessibilidade a empregos:</p>
@@ -1273,7 +1273,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb52-54"><a href="#cb52-54" aria-hidden="true" tabindex="-1"></a><span class="co"># combina as duas figuras</span></span>
 <span id="cb52-55"><a href="#cb52-55" aria-hidden="true" tabindex="-1"></a>dist_acesso <span class="sc">/</span> dist_diferenca <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid" width="672"></p>
+<p><img src="6_cenarios_transporte_files/figure-html/fig_7-1.png" class="img-fluid" width="2100"></p>
 </div>
 </div>
 <p>O mapa mostra que as regiões que mais se beneficiam das mudanças no sistema de transportes são aquelas afastadas do centro da cidade, mas que ainda sim têm um acesso relativamente rápido a estações de média e alta capacidade. Os ganhos de acessibilidade ao emprego se concentram principalmente próximos às estações dos corredores da linha Sul e Oeste do metrô e, em menor medida, em torno de algumas estações do corredor de VLT Parangaba-Mucuripe. Mesmo regiões próximas a esses corredores, embora não imediatamente adjacentes a eles, mostram grandes ganhos de acessibilidade, ressaltando o papel da conectividade da rede na garantia de boas condições de acessibilidade na cidade. Por sua vez, a região no entorno da Linha Leste, que já concentrava os maiores níveis de acessibilidade da cidade mesmo antes da implementação do novo corredor, apresenta melhoras nas condições de acessibilidade muito menos expressivas.</p>
@@ -1324,7 +1324,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb53-43"><a href="#cb53-43" aria-hidden="true" tabindex="-1"></a><span class="co"># combina as duas figuras</span></span>
 <span id="cb53-44"><a href="#cb53-44" aria-hidden="true" tabindex="-1"></a>dist_tempo <span class="sc">/</span> dist_dif_tempo <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></p>
+<p><img src="6_cenarios_transporte_files/figure-html/fig_8-1.png" class="img-fluid" width="2100"></p>
 </div>
 </div>
 <p>A Linha Leste e as mudanças de frequências nas outras linhas do metrô e do VLT praticamente não alteram o panorama da acessibilidade a escolas de nível médio em Fortaleza, o que faz com que pouquíssimos hexágonos apresentem algum tipo de ganho de acessibilidade entre os dois cenários - apenas alguns poucos hexágonos na imediação de estações de metrô apresentam alguma redução no tempo de acesso a escolas. Como podemos ver, a distribuição da acessibilidade a escolas na cidade segue um padrão muito menos concêntrico do que o da distribuição da acessibilidade a empregos. Novamente, isto é uma consequência da distribuição de escolas públicas na cidade: ao contrário da distribuição de empregos, que tende a seguir critérios econômicos-financeiros, a distribuição de equipamentos públicos tende a seguir critérios equitativos, buscando priorizar regiões periféricas e de maior concentração de grupos populacionais vulneráveis. Mesmo antes da implementação das mudanças no sistema de transportes, áreas com baixíssima acessibilidade ao emprego, como a região no extremo sul da cidade, já possuíam boas condições de acessibilidade a escolas públicas de nível médio.</p>
@@ -1353,7 +1353,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb54-17"><a href="#cb54-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb54-18"><a href="#cb54-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid" width="672"></p>
+<p><img src="6_cenarios_transporte_files/figure-html/fig_9-1.png" class="img-fluid" width="2100"></p>
 </div>
 </div>
 <p>Os dois gráficos mostram claramente que as pessoas mais ricas de Fortaleza possuem maiores níveis de acesso a empregos do que seus pares mais pobres, tanto antes quanto depois das mudanças no sistema de transportes. Em Fortaleza, assim como na maior parte das grandes cidades brasileiras, os mais ricos tendem a morar próximos às grandes concentrações de emprego e do centro da cidade, enquanto os mais pobres tendem a ocupar regiões periféricas <span class="citation" data-cites="pereira2022estimativas">(<a href="references.html#ref-pereira2022estimativas" role="doc-biblioref">Pereira et al. 2022</a>)</span>. Consequentemente, os mais ricos costumam ter melhores condições de acessibilidade urbana do que os mais pobres - não apenas porque moram mais perto dos empregos, mas porque também, geralmente, moram em regiões centrais mais bem servidas de transporte público do que as periferias.</p>
@@ -1380,7 +1380,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb55-19"><a href="#cb55-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb55-20"><a href="#cb55-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid" width="672"></p>
+<p><img src="6_cenarios_transporte_files/figure-html/fig_10-1.png" class="img-fluid" width="2100"></p>
 </div>
 </div>
 <p>Como podemos ver, a distribuição de ganhos de acessibilidade segue o formato de U-invertido, com maiores ganhos entre as camadas médias da população e menores entre as camadas mais ricas e mais pobres. O hexágono no qual houve maior aumento de acessibilidade aparece como <em>outlier</em> do 8º decil, apresentando um ganho de quase 200.000 empregos em relação ao cenário antes das mudanças.</p>
@@ -1442,7 +1442,7 @@ Por que usar a Razão de Palma?
 <span id="cb56-34"><a href="#cb56-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Razão de Palma"</span>) <span class="sc">+</span></span>
 <span id="cb56-35"><a href="#cb56-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte_files/figure-html/unnamed-chunk-41-1.png" class="img-fluid" width="672"></p>
+<p><img src="6_cenarios_transporte_files/figure-html/fig_11-1.png" class="img-fluid" width="2100"></p>
 </div>
 </div>
 <p>A figura acima aponta que em 2019 a população mais rica de Fortaleza conseguia acessar em até 60 minutos de transporte público, em média, 2,19 vezes mais empregos do que a população mais pobre. O gráfico também mostra que a desigualdade medida pela Razão de Palma sofreu uma pequena queda entre os cenários pré e pós mudanças. Ou seja, podemos concluir que, neste nosso cenário simplificado de avaliação da Linha Leste, a política de expansão do metrô de Fortaleza e de aumento da frequência das linhas Sul e Oeste do metrô e Parangaba-Mucuripe do VLT seria progressiva. Em outras palavras, essas mudanças, quando analisadas sem considerar as demais intervenções previstas no Pasfor, contribuem positivamente para a redução da desigualdade de acesso a oportunidades de emprego em Fortaleza.</p>
