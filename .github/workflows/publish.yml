@@ -45,10 +45,32 @@ jobs:
           path: _freeze
           key: freeze-${{ runner.os }}-${{ github.run_id }}
           restore-keys: freeze-${{ runner.os }}-
-
-      - name: Render and Publish
-        uses: quarto-dev/quarto-actions/publish@v2
+          
+      - name: Create directory to render English book
+        run: |
+          dir.create("en_book")
+          fs::dir_copy(".", "en_book")
+          fs::file_delete(file.path("en_book", c("_freeze", "analise_de_impacto", "renv")))
+        shell: Rscript {0}
+        
+      - name: Restore English _freeze
+        uses: actions/cache@v3
         with:
-          target: gh-pages
+          path: en_book/_freeze
+          key: en-book-freeze-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: en-book-freeze-${{ runner.os }}-
+          
+      - name: Render book
+        run: Rscript bilingual_render.R
+        
+      - name: Publish
+        run: |
+          git config --global user.email quarto-github-actions-publish@example.com
+          git config --global user.name Quarto GHA Workflow Runner
+          git checkout gh-pages
+          cp -r _book/* .
+          git add -u
+          git add en
+          git commit -m "Built site for gh-pages"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
