@@ -65,8 +65,8 @@ jobs:
         
       - name: Publish
         run: |
-          git config --global user.email quarto-github-actions-publish@example.com
-          git config --global user.name Quarto GHA Workflow Runner
+          git config --global user.email "quarto-github-actions-publish@example.com"
+          git config --global user.name "Quarto GHA Workflow Runner"
           git checkout gh-pages
           cp -r _book/* .
           git add -u
