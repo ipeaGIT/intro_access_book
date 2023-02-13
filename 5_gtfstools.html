@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.2.269">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
-<title>Introdução à acessibilidade urbana - 5&nbsp; Manipulação e visualização de dados GTFS</title>
+<title>Introdução à acessibilidade urbana - 5  Manipulação e visualização de dados GTFS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -84,27 +82,14 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
-
-
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
 <link href="./s4_avaliacao_impacto.html" rel="next">
 <link href="./4_dados_gtfs.html" rel="prev">
 <link href="./images/favicon.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<script src="site_libs/quarto-html/quarto.js"></script><script src="site_libs/quarto-html/popper.min.js"></script><script src="site_libs/quarto-html/tippy.umd.min.js"></script><script src="site_libs/quarto-html/anchor.min.js"></script><link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script><link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
@@ -125,22 +110,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-detached-cancel-button-title": "Cancelar",
     "search-submit-button-title": "Enviar"
   }
-}</script>
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YVERJQF9PJ"></script>
-
-<script type="text/javascript">
+}</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YVERJQF9PJ"></script><script type="text/javascript">
 
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
-</script>
-
-
-<meta property="og:title" content="Introdução à acessibilidade urbana - 5&nbsp; Manipulação e visualização de dados GTFS">
+</script><meta property="og:title" content="Introdução à acessibilidade urbana - 5  Manipulação e visualização de dados GTFS">
 <meta property="og:description" content="Usualmente, arquivos GTFS provenientes de fontes oficiais são utilizados para desenvolver análises e pesquisas que possuem diversos elementos comuns.">
 <meta property="og:site-name" content="Introdução à acessibilidade urbana">
-<meta name="twitter:title" content="Introdução à acessibilidade urbana - 5&nbsp; Manipulação e visualização de dados GTFS">
+<meta name="twitter:title" content="Introdução à acessibilidade urbana - 5  Manipulação e visualização de dados GTFS">
 <meta name="twitter:description" content="Usualmente, arquivos GTFS provenientes de fontes oficiais são utilizados para desenvolver análises e pesquisas que possuem diversos elementos comuns.">
 <meta name="twitter:card" content="summary">
 <meta name="citation_title" content="Introdução à acessibilidade urbana: um guia prático em R">
@@ -210,51 +189,46 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <meta name="citation_reference" content="citation_title=Urban transport policies in Brazil: The creation of a discriminatory mobility system;,citation_author=Eduardo Alcantara Vasconcellos;,citation_publication_date=2018-02;,citation_cover_date=2018-02;,citation_year=2018;,citation_doi=10.1016/j.jtrangeo.2017.08.014;,citation_issn=0966-6923;,citation_volume=67;,citation_language=en-US;,citation_journal_title=Journal of Transport Geography;">
 <meta name="citation_reference" content="citation_title=Assessing the potential of bus rapid transit-led network restructuring for enhancing affordable access to employment  The case of Johannesburg’s Corridors of Freedom;,citation_author=Christoffel Venter;,citation_publication_date=2016-11;,citation_cover_date=2016-11;,citation_year=2016;,citation_doi=10.1016/j.retrec.2016.05.006;,citation_issn=07398859;,citation_volume=59;,citation_language=en-US;,citation_journal_title=Research in Transportation Economics;">
 </head>
-
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Manipulação e visualização de dados GTFS</span></h1>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">
+<span class="chapter-number">5</span>  <span class="chapter-title">Manipulação e visualização de dados GTFS</span>
+</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Introdução à acessibilidade urbana</a> 
         <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/ipeaGIT/aop_curso" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
     <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
     <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+<li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
             <i class="bi bi-bi-twitter pe-1"></i>
           Twitter
           </a>
         </li>
         <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
             <i class="bi bi-bi-facebook pe-1"></i>
           Facebook
           </a>
         </li>
         <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
             <i class="bi bi-bi-linkedin pe-1"></i>
           LinkedIn
           </a>
         </li>
     </ul>
-  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+<a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
       </div>
@@ -265,7 +239,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">Apresentação</a>
   </div>
@@ -277,19 +251,19 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1_conceito.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">O que é acessibilidade?</span></a>
+  <a href="./1_conceito.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>  <span class="chapter-title">O que é acessibilidade?</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2_indicadores.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Medidas de acessibilidade</span></a>
+  <a href="./2_indicadores.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>  <span class="chapter-title">Medidas de acessibilidade</span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./s2_calculo.html" class="sidebar-item-text sidebar-link">SEÇÃO 2: Como calcular acessibilidade urbana</a>
@@ -297,14 +271,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3_calculando_acesso.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculando estimativas de acessibilidade em R</span></a>
+  <a href="./3_calculando_acesso.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>  <span class="chapter-title">Calculando estimativas de acessibilidade em R</span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./s3_dados_tp.html" class="sidebar-item-text sidebar-link">SEÇÃO 3: Dados de transporte público</a>
@@ -312,19 +286,19 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4_dados_gtfs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Dados GTFS</span></a>
+  <a href="./4_dados_gtfs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>  <span class="chapter-title">Dados GTFS</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./5_gtfstools.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Manipulação e visualização de dados GTFS</span></a>
+  <a href="./5_gtfstools.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>  <span class="chapter-title">Manipulação e visualização de dados GTFS</span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./s4_avaliacao_impacto.html" class="sidebar-item-text sidebar-link">SEÇÃO 4: Avaliação de impacto de projetos de transporte</a>
@@ -332,14 +306,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./6_cenarios_transporte.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Comparando a acessibilidade entre dois cenários de transporte</span></a>
+  <a href="./6_cenarios_transporte.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>  <span class="chapter-title">Comparando a acessibilidade entre dois cenários de transporte</span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./s5_dados_aop.html" class="sidebar-item-text sidebar-link">SEÇÃO 5: Dados do Projeto Acesso a Oportunidades</a>
@@ -347,52 +321,52 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./7_aopdata_populacao.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Dados de população e socioeconômicos</span></a>
+  <a href="./7_aopdata_populacao.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>  <span class="chapter-title">Dados de população e socioeconômicos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./8_aopdata_uso_solo.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Dados de distribuição espacial de oportunidades</span></a>
+  <a href="./8_aopdata_uso_solo.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>  <span class="chapter-title">Dados de distribuição espacial de oportunidades</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./9_aopdata_acessibilidade.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Estimativas de acessibilidade</span></a>
+  <a href="./9_aopdata_acessibilidade.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>  <span class="chapter-title">Estimativas de acessibilidade</span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">Referências bibliográficas</a>
   </div>
 </li>
     </ul>
-    </div>
-</nav>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Índice</h2>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Índice</h2>
    
   <ul>
-  <li><a href="#leitura-e-manipulação-básica-de-arquivos-gtfs" id="toc-leitura-e-manipulação-básica-de-arquivos-gtfs" class="nav-link active" data-scroll-target="#leitura-e-manipulação-básica-de-arquivos-gtfs"><span class="toc-section-number">5.1</span>  Leitura e manipulação básica de arquivos GTFS</a></li>
-  <li><a href="#cálculo-de-velocidade-das-linhas" id="toc-cálculo-de-velocidade-das-linhas" class="nav-link" data-scroll-target="#cálculo-de-velocidade-das-linhas"><span class="toc-section-number">5.2</span>  Cálculo de velocidade das linhas</a></li>
+<li><a href="#leitura-e-manipula%C3%A7%C3%A3o-b%C3%A1sica-de-arquivos-gtfs" id="toc-leitura-e-manipulação-básica-de-arquivos-gtfs" class="nav-link active" data-scroll-target="#leitura-e-manipulação-básica-de-arquivos-gtfs"><span class="toc-section-number">5.1</span>  Leitura e manipulação básica de arquivos GTFS</a></li>
+  <li><a href="#c%C3%A1lculo-de-velocidade-das-linhas" id="toc-cálculo-de-velocidade-das-linhas" class="nav-link" data-scroll-target="#cálculo-de-velocidade-das-linhas"><span class="toc-section-number">5.2</span>  Cálculo de velocidade das linhas</a></li>
   <li><a href="#combinando-e-filtrando-feeds" id="toc-combinando-e-filtrando-feeds" class="nav-link" data-scroll-target="#combinando-e-filtrando-feeds"><span class="toc-section-number">5.3</span>  Combinando e filtrando <em>feeds</em></a></li>
-  <li><a href="#validação-de-arquivos-gtfs" id="toc-validação-de-arquivos-gtfs" class="nav-link" data-scroll-target="#validação-de-arquivos-gtfs"><span class="toc-section-number">5.4</span>  Validação de arquivos GTFS</a></li>
+  <li><a href="#valida%C3%A7%C3%A3o-de-arquivos-gtfs" id="toc-validação-de-arquivos-gtfs" class="nav-link" data-scroll-target="#validação-de-arquivos-gtfs"><span class="toc-section-number">5.4</span>  Validação de arquivos GTFS</a></li>
   <li><a href="#fluxo-de-trabalho-com-o-gtfstools-mapeando-o-headway-das-linhas" id="toc-fluxo-de-trabalho-com-o-gtfstools-mapeando-o-headway-das-linhas" class="nav-link" data-scroll-target="#fluxo-de-trabalho-com-o-gtfstools-mapeando-o-headway-das-linhas"><span class="toc-section-number">5.5</span>  Fluxo de trabalho com o <code>{gtfstools}</code>: mapeando o <em>headway</em> das linhas</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/5_gtfstools.qmd" class="toc-action">Editar essa página</a></p></div></div></nav>
-    </div>
+<div class="toc-actions">
+<div><i class="bi bi-github"></i></div>
+<div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/5_gtfstools.qmd" class="toc-action">Editar essa página</a></p></div>
+</div></nav><a href="en/5_gtfstools.en.html">Read in English</a>
+<a href="en/5_gtfstools.en.html" class="toc-action">Read in English</a>
+</div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Manipulação e visualização de dados GTFS</span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block">
+<span class="chapter-number">5</span>  <span class="chapter-title">Manipulação e visualização de dados GTFS</span>
+</h1>
 </div>
 
 
@@ -405,12 +379,10 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </div>
   
 
-</header>
-
-<p>Usualmente, arquivos GTFS provenientes de fontes oficiais são utilizados para desenvolver análises e pesquisas que possuem diversos elementos comuns. Visando facilitar a leitura, o processamento e a análise desses dados, a equipe do Projeto Acesso a Oportunidades vem desenvolvendo o pacote de R <a href="https://github.com/ipeaGIT/gtfstools"><code>{gtfstools}</code></a>, que disponibiliza diversas funções que facilitam a manipulação e a exploração de <em>feeds</em>.</p>
+</header><p>Usualmente, arquivos GTFS provenientes de fontes oficiais são utilizados para desenvolver análises e pesquisas que possuem diversos elementos comuns. Visando facilitar a leitura, o processamento e a análise desses dados, a equipe do Projeto Acesso a Oportunidades vem desenvolvendo o pacote de R <a href="https://github.com/ipeaGIT/gtfstools"><code>{gtfstools}</code></a>, que disponibiliza diversas funções que facilitam a manipulação e a exploração de <em>feeds</em>.</p>
 <p>Neste capítulo, passaremos por algumas das funcionalidades mais frequentemente utilizadas do pacote. Para isso, vamos utilizar uma amostra do <em>feed</em> da SPTrans apresentado no capítulo anterior, disponível dentro do <code>{gtfstools}</code>.</p>
-<section id="leitura-e-manipulação-básica-de-arquivos-gtfs" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="leitura-e-manipulação-básica-de-arquivos-gtfs"><span class="header-section-number">5.1</span> Leitura e manipulação básica de arquivos GTFS</h2>
+<section id="leitura-e-manipulação-básica-de-arquivos-gtfs" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="leitura-e-manipulação-básica-de-arquivos-gtfs">
+<span class="header-section-number">5.1</span> Leitura e manipulação básica de arquivos GTFS</h2>
 <p>A leitura de arquivos GTFS com o <code>{gtfstools}</code> é feita com a função <code>read_gtfs()</code>, que recebe uma <em>string</em> com o caminho do arquivo. Após sua leitura, o <em>feed</em> é representado como uma lista de <code>data.table</code>s, uma versão de alta performance da classe <code>data.frame</code>. Ao longo deste capítulo, vamos nos referir a esta lista de tabelas como um <strong>objeto GTFS</strong>. Por padrão, a função lê todas as tabelas <code>.txt</code> do <em>feed</em>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># carrega biblioteca</span></span>
@@ -484,19 +456,18 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>zip<span class="sc">::</span><span class="fu">zip_list</span>(endereco_destino)[, <span class="fu">c</span>(<span class="st">"filename"</span>, <span class="st">"compressed_size"</span>, <span class="st">"timestamp"</span>)]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         filename compressed_size           timestamp
-1      agency.txt             112 2022-12-06 01:06:32
-2    calendar.txt             129 2022-12-06 01:06:32
-3 frequencies.txt            2381 2022-12-06 01:06:32
-4      routes.txt             659 2022-12-06 01:06:32
-5      shapes.txt          160470 2022-12-06 01:06:32
-6  stop_times.txt            7907 2022-12-06 01:06:32
-7       stops.txt           18797 2022-12-06 01:06:32
-8       trips.txt             717 2022-12-06 01:06:32</code></pre>
+1      agency.txt             114 2023-02-10 20:01:16
+2    calendar.txt             131 2023-02-10 20:01:16
+3 frequencies.txt            2349 2023-02-10 20:01:16
+4      routes.txt             662 2023-02-10 20:01:16
+5      shapes.txt          160780 2023-02-10 20:01:16
+6  stop_times.txt            7910 2023-02-10 20:01:16
+7       stops.txt           18869 2023-02-10 20:01:16
+8       trips.txt             723 2023-02-10 20:01:16</code></pre>
 </div>
 </div>
-</section>
-<section id="cálculo-de-velocidade-das-linhas" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="cálculo-de-velocidade-das-linhas"><span class="header-section-number">5.2</span> Cálculo de velocidade das linhas</h2>
+</section><section id="cálculo-de-velocidade-das-linhas" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="cálculo-de-velocidade-das-linhas">
+<span class="header-section-number">5.2</span> Cálculo de velocidade das linhas</h2>
 <p>Arquivos GTFS são frequentemente utilizados em estimativas de roteamento de transporte público e para informar passageiros sobre a tabela de horários das diferentes rotas que operam em uma região. Dessa forma, é extremamente importante que o cronograma das viagens e a velocidade operacional de cada linha estejam adequadamente descritos no <em>feed</em>.</p>
 <p>O <code>{gtfstools}</code> disponibiliza a função <code>get_trip_speed()</code> para facilitar o cálculo da velocidade de cada viagem presente no <em>feed</em>. Por padrão, a função retorna a velocidade (em km/h) de todas as viagens do GTFS, mas viagens individuais também podem ser especificadas:</p>
 <div class="cell">
@@ -557,9 +528,9 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </div>
 <p>Assim como a <code>get_trip_speed()</code> retorna as velocidades em km/h por padrão, a <code>get_trip_length()</code> retorna os comprimentos em km e a <code>get_trip_duration()</code> retorna a duração em minutos. Essas unidades podem ser ajustadas com o argumento <code>unit</code>, presente em todas as funções.</p>
-</section>
-<section id="combinando-e-filtrando-feeds" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="combinando-e-filtrando-feeds"><span class="header-section-number">5.3</span> Combinando e filtrando <em>feeds</em></h2>
+</section><section id="combinando-e-filtrando-feeds" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="combinando-e-filtrando-feeds">
+<span class="header-section-number">5.3</span> Combinando e filtrando <em>feeds</em>
+</h2>
 <p>Muitas vezes o processamento e a edição de arquivos GTFS é realizado, em grande medida, manualmente. Consequentemente, pequenas inconsistências podem passar batidas pelos responsáveis por esse processamento. Um problema comumente observado em <em>feeds</em> é a presença de registros duplicados em uma mesma tabela. O <em>feed</em> da SPTrans, por exemplo, possui registros duplicados tanto no <em>agency.txt</em> quanto no <em>calendar.txt</em>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>gtfs<span class="sc">$</span>agency</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -640,10 +611,10 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>gtfs_poa<span class="sc">$</span>agency</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   agency_id                                 agency_name             agency_url
-1:      EPTC Empresa Publica de Transportes e Circulação http://www.eptc.com.br
-     agency_timezone agency_lang agency_phone
-1: America/Sao_Paulo          pt          156
+<pre><code>   agency_id                                   agency_name
+1:      EPTC Empresa Publica de Transportes e CirculaÃ§Ã£o
+               agency_url   agency_timezone agency_lang agency_phone
+1: http://www.eptc.com.br America/Sao_Paulo          pt          156
                                                   agency_fare_url
 1: http://www2.portoalegre.rs.gov.br/eptc/default.php?p_secao=155</code></pre>
 </div>
@@ -660,9 +631,9 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># checa resultados</span></span>
 <span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>gtfs_combinado<span class="sc">$</span>agency</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   agency_id                                 agency_name
-1:         1                                     SPTRANS
-2:      EPTC Empresa Publica de Transportes e Circulação
+<pre><code>   agency_id                                   agency_name
+1:         1                                       SPTRANS
+2:      EPTC Empresa Publica de Transportes e CirculaÃ§Ã£o
                                  agency_url   agency_timezone agency_lang
 1: http://www.sptrans.com.br/?versao=011019 America/Sao_Paulo          pt
 2:                   http://www.eptc.com.br America/Sao_Paulo          pt
@@ -765,7 +736,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 3: CPTM L09-0              GRAJAU    17850
 4: CPTM L09-1              OSASCO    17851
 5: CPTM L10-0 RIO GRANDE DA SERRA    17852
-6: CPTM L10-1                BRÁS    17853</code></pre>
+6: CPTM L10-1               BRÃ\201S    17853</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">unique</span>(gtfs_filtrado<span class="sc">$</span>shapes<span class="sc">$</span>shape_id))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -946,11 +917,10 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p><img src="5_gtfstools_files/figure-html/fig_3-1.png" class="img-fluid" width="2100"></p>
 </div>
 </div>
-</section>
-<section id="validação-de-arquivos-gtfs" class="level2" data-number="5.4">
-<h2 data-number="5.4" class="anchored" data-anchor-id="validação-de-arquivos-gtfs"><span class="header-section-number">5.4</span> Validação de arquivos GTFS</h2>
+</section><section id="validação-de-arquivos-gtfs" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="validação-de-arquivos-gtfs">
+<span class="header-section-number">5.4</span> Validação de arquivos GTFS</h2>
 <p>Planejadores e pesquisadores frequentemente querem avaliar a qualidade dos arquivos GTFS que estão utilizando em suas análises ou que estão produzindo. Os <em>feeds</em> estão estruturados conforme <a href="https://github.com/MobilityData/GTFS_Schedule_Best-Practices">boas práticas</a> adotadas pela comunidade que usa a especificação? As tabelas e colunas estão formatadas corretamente? A informação descrita pelo <em>feed</em> parece verossímil (velocidade das viagens, localização das paradas, etc)? Essas são algumas das perguntas que podem surgir ao lidar com dados no formato GTFS.</p>
-<p>Para responder a essas e outras perguntas, o <code>{gtfstools}</code> inclui a função <code>validate_gtfs()</code>. Esta função serve como interface entre o R e o <a href="https://github.com/MobilityData/gtfs-validator">Canonical GTFS Validator</a>, <em>software</em> desenvolvido pela MobilityData. O uso do validador requer que o Java versão 11 ou superior esteja instalado. Para informações de como checar a versão do Java instalado em seu computador e como instalar a versão correta, caso necessário, por favor veja o <a href="./3_calculando_acesso.html#instalação-do-r5r">Capítulo 3</a>.</p>
+<p>Para responder a essas e outras perguntas, o <code>{gtfstools}</code> inclui a função <code>validate_gtfs()</code>. Esta função serve como interface entre o R e o <a href="https://github.com/MobilityData/gtfs-validator">Canonical GTFS Validator</a>, <em>software</em> desenvolvido pela MobilityData. O uso do validador requer que o Java versão 11 ou superior esteja instalado. Para informações de como checar a versão do Java instalado em seu computador e como instalar a versão correta, caso necessário, por favor veja o <a href="./3_calculando_acesso.html#instala%C3%A7%C3%A3o-do-r5r">Capítulo 3</a>.</p>
 <p>Usar a <code>validate_gtfs()</code> é muito simples. Primeiro, precisamos baixar o <em>software</em> de validação. Para isso, podemos usar a função <code>download_validator()</code>, também disponível no pacote, que recebe o endereço de uma pasta na qual o validador deve ser salvo e a versão do validador desejada (por padrão, a mais recente). Como resultado, a função retorna o endereço do arquivo baixado:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>pasta_temporaria <span class="ot">&lt;-</span> <span class="fu">tempdir</span>()</span>
@@ -958,7 +928,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>endereco_validador <span class="ot">&lt;-</span> <span class="fu">download_validator</span>(pasta_temporaria)</span>
 <span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>endereco_validador</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "/tmp/RtmpJBFv2D/gtfs-validator-v4.0.0.jar"</code></pre>
+<pre><code>[1] "C:\\Users\\B14912846767\\AppData\\Local\\Temp\\6\\RtmpeWQnbg\\gtfs-validator-v4.0.0.jar"</code></pre>
 </div>
 </div>
 <p>A segunda (e última) etapa consiste em de fato rodar a função <code>validate_gtfs()</code>. Essa função aceita que os dados GTFS a serem validados sejam passados de diferentes formas: (a) como um objeto GTFS existente apenas no R, (b) como o endereço de um arquivo GTFS salvo localmente em formato <code>.zip</code>, (c) como a URL para um <em>feed</em> ou (d) como uma pasta que contém os dados GTFS não compactados. A função também recebe o endereço para uma pasta onde o resultado da validação deve ser salvo e o endereço para o validador que deve ser usado. Neste exemplo, vamos fazer a validação a partir do endereço do GTFS da SPTrans, lido anteriormente:</p>
@@ -979,24 +949,27 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 <p>Como podemos ver, a validação gera alguns arquivos como resultado:</p>
 <ul>
-<li><code>report.html</code>, mostrado na <a href="#fig-report">Figura&nbsp;<span>5.1</span></a>, que resume os resultados da validação em uma página HTML (apenas disponível quando utilizado o validador v3.1.0 ou superior);</li>
-<li><code>report.json</code>, que resume a mesma informação apresentada na página HTML, porém em formato JSON, que pode ser usado para processar e interpretar os resultados de forma programática;</li>
-<li><code>system_errors.json</code>, que apresenta eventuais erros de sistema que tenham ocorrido durante a validação e que podem comprometer os resultados;</li>
-<li><code>validation_stderr.txt</code>, que lista mensagens informativas enviadas pelo validador, incluindo uma lista dos testes realizados, eventuais mensagens de erro, etc<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>;</li>
+<li>
+<code>report.html</code>, mostrado na <a href="#fig-report">Figura <span>5.1</span></a>, que resume os resultados da validação em uma página HTML (apenas disponível quando utilizado o validador v3.1.0 ou superior);</li>
+<li>
+<code>report.json</code>, que resume a mesma informação apresentada na página HTML, porém em formato JSON, que pode ser usado para processar e interpretar os resultados de forma programática;</li>
+<li>
+<code>system_errors.json</code>, que apresenta eventuais erros de sistema que tenham ocorrido durante a validação e que podem comprometer os resultados;</li>
+<li>
+<code>validation_stderr.txt</code>, que lista mensagens informativas enviadas pelo validador, incluindo uma lista dos testes realizados, eventuais mensagens de erro, etc<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>;</li>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-report" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="images/validator_report.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Figura&nbsp;5.1: Exemplo de relatório gerado durante a validação</figcaption><p></p>
+<figure class="figure"><p><img src="images/validator_report.png" class="img-fluid figure-img"></p>
+<p></p>
+<figcaption class="figure-caption">Figura 5.1: Exemplo de relatório gerado durante a validação</figcaption><p></p>
 </figure>
 </div>
 </div>
 </div>
-</section>
-<section id="fluxo-de-trabalho-com-o-gtfstools-mapeando-o-headway-das-linhas" class="level2" data-number="5.5">
-<h2 data-number="5.5" class="anchored" data-anchor-id="fluxo-de-trabalho-com-o-gtfstools-mapeando-o-headway-das-linhas"><span class="header-section-number">5.5</span> Fluxo de trabalho com o <code>{gtfstools}</code>: mapeando o <em>headway</em> das linhas</h2>
+</section><section id="fluxo-de-trabalho-com-o-gtfstools-mapeando-o-headway-das-linhas" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="fluxo-de-trabalho-com-o-gtfstools-mapeando-o-headway-das-linhas">
+<span class="header-section-number">5.5</span> Fluxo de trabalho com o <code>{gtfstools}</code>: mapeando o <em>headway</em> das linhas</h2>
 <p>Como mostrado nas seções anteriores, o <code>{gtfstools}</code> disponibiliza uma grande caixa de ferramentas que podem ser usadas no processamento e na análise de arquivos GTFS. O pacote, no entanto, oferece diversas outras funções que não puderam ser apresentadas neste livro, por questões de espaço. A lista completa de funções disponíveis pode ser conferida no <a href="https://ipeagit.github.io/gtfstools/reference/index.html">site do pacote</a>.</p>
 <p>A apresentação das funções feitas até aqui tem um importante caráter demonstrativo, porém não mostra como elas podem ser usadas de forma conjunta no desenvolvimento de uma análise de um arquivo GTFS. Esta seção preenche esta lacuna, mostrando como o pacote pode ser usado, por exemplo, para responder a seguinte pergunta: como se distribuem espacialmente os tempos entre veículos de uma mesma linha (os <em>headways</em>) no GTFS da SPTrans?</p>
 <p>A primeira etapa é definir o escopo da nossa análise. A fim de exemplo, vamos considerar o <em>headway</em> no pico da manhã, entre 7h e 9h, em uma típica terça-feira de operação. Para isso, precisamos filtrar o nosso <em>feed</em>:</p>
@@ -1109,17 +1082,11 @@ Geodetic CRS:  WGS 84
 <p>Como podemos ver, o pacote <code>{gtfstools}</code> torna o desenvolvimento de análises de <em>feeds</em> de transporte público algo fácil e que requer apenas o conhecimento básico de pacotes de manipulação de tabelas (como o <code>{data.table}</code> e o <code>{dplyr}</code>). O exemplo apresentado nesta seção mostra como muitas de suas funções podem ser usadas conjuntamente para revelar aspectos importantes de sistemas de transporte público descritos no formato GTFS.</p>
 
 
-</section>
-<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
+</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1"><p>Mais detalhes sobre o uso e a sintaxe do <code>{data.table}</code> podem ser lidos em <a href="https://rdatatable.gitlab.io/data.table/index.html" class="uri">https://rdatatable.gitlab.io/data.table/index.html</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Mensagens informativas podem também ser listadas no arquivo <code>validation_stdout.txt</code>. As mensagens listadas no <code>validation_stderr.txt</code> e no <code>validation_stdout.txt</code> dependem da versão do validador utilizada.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1366,11 +1333,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./4_dados_gtfs.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Dados GTFS</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>  <span class="chapter-title">Dados GTFS</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
@@ -1380,22 +1345,19 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Ipea - Instituto de Pesquisa Econômica Aplicada</div>   
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
-    <li class="nav-item compact">
+<li class="nav-item compact">
     <a class="nav-link active" href="https://github.com/ipeaGIT/aop_curso" aria-current="page">
       <i class="bi bi-github" role="img">
 </i> 
     </a>
   </li>  
 </ul>
-    </div>
+</div>
   </div>
 </footer>
-
-
-
-</body></html>
+</body>
+</html>

@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt"><head>
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.2.269">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
-<title>Introdução à acessibilidade urbana - 8&nbsp; Dados de distribuição espacial de oportunidades</title>
+<title>Introdução à acessibilidade urbana - 8  Dados de distribuição espacial de oportunidades</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -84,27 +82,14 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
-
-
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
 <link href="./9_aopdata_acessibilidade.html" rel="next">
 <link href="./7_aopdata_populacao.html" rel="prev">
 <link href="./images/favicon.png" rel="icon" type="image/png">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<script src="site_libs/quarto-html/quarto.js"></script><script src="site_libs/quarto-html/popper.min.js"></script><script src="site_libs/quarto-html/tippy.umd.min.js"></script><script src="site_libs/quarto-html/anchor.min.js"></script><link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script><link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
@@ -125,22 +110,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-detached-cancel-button-title": "Cancelar",
     "search-submit-button-title": "Enviar"
   }
-}</script>
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YVERJQF9PJ"></script>
-
-<script type="text/javascript">
+}</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YVERJQF9PJ"></script><script type="text/javascript">
 
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
-</script>
-
-
-<meta property="og:title" content="Introdução à acessibilidade urbana - 8&nbsp; Dados de distribuição espacial de oportunidades">
+</script><meta property="og:title" content="Introdução à acessibilidade urbana - 8  Dados de distribuição espacial de oportunidades">
 <meta property="og:description" content="O pacote {aopdata} também permite baixar, para todas cidades incluídas no projeto, dados de 2017, 2018 e 2019 da distribuição espacial de empregos (de baixa, média e alta escolaridade), de…">
 <meta property="og:site-name" content="Introdução à acessibilidade urbana">
-<meta name="twitter:title" content="Introdução à acessibilidade urbana - 8&nbsp; Dados de distribuição espacial de oportunidades">
+<meta name="twitter:title" content="Introdução à acessibilidade urbana - 8  Dados de distribuição espacial de oportunidades">
 <meta name="twitter:description" content="O pacote {aopdata} também permite baixar, para todas cidades incluídas no projeto, dados de 2017, 2018 e 2019 da distribuição espacial de empregos (de baixa, média e alta escolaridade), de…">
 <meta name="twitter:card" content="summary">
 <meta name="citation_title" content="Introdução à acessibilidade urbana: um guia prático em R">
@@ -210,51 +189,46 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <meta name="citation_reference" content="citation_title=Urban transport policies in Brazil: The creation of a discriminatory mobility system;,citation_author=Eduardo Alcantara Vasconcellos;,citation_publication_date=2018-02;,citation_cover_date=2018-02;,citation_year=2018;,citation_doi=10.1016/j.jtrangeo.2017.08.014;,citation_issn=0966-6923;,citation_volume=67;,citation_language=en-US;,citation_journal_title=Journal of Transport Geography;">
 <meta name="citation_reference" content="citation_title=Assessing the potential of bus rapid transit-led network restructuring for enhancing affordable access to employment  The case of Johannesburg’s Corridors of Freedom;,citation_author=Christoffel Venter;,citation_publication_date=2016-11;,citation_cover_date=2016-11;,citation_year=2016;,citation_doi=10.1016/j.retrec.2016.05.006;,citation_issn=07398859;,citation_volume=59;,citation_language=en-US;,citation_journal_title=Research in Transportation Economics;">
 </head>
-
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Dados de distribuição espacial de oportunidades</span></h1>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">
+<span class="chapter-number">8</span>  <span class="chapter-title">Dados de distribuição espacial de oportunidades</span>
+</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Introdução à acessibilidade urbana</a> 
         <div class="sidebar-tools-main tools-wide">
     <a href="https://github.com/ipeaGIT/aop_curso" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
     <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
     <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
+<li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
             <i class="bi bi-bi-twitter pe-1"></i>
           Twitter
           </a>
         </li>
         <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
             <i class="bi bi-bi-facebook pe-1"></i>
           Facebook
           </a>
         </li>
         <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
             <i class="bi bi-bi-linkedin pe-1"></i>
           LinkedIn
           </a>
         </li>
     </ul>
-  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+<a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
       </div>
@@ -265,7 +239,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">Apresentação</a>
   </div>
@@ -277,19 +251,19 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1_conceito.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">O que é acessibilidade?</span></a>
+  <a href="./1_conceito.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>  <span class="chapter-title">O que é acessibilidade?</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2_indicadores.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Medidas de acessibilidade</span></a>
+  <a href="./2_indicadores.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>  <span class="chapter-title">Medidas de acessibilidade</span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./s2_calculo.html" class="sidebar-item-text sidebar-link">SEÇÃO 2: Como calcular acessibilidade urbana</a>
@@ -297,14 +271,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3_calculando_acesso.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Calculando estimativas de acessibilidade em R</span></a>
+  <a href="./3_calculando_acesso.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>  <span class="chapter-title">Calculando estimativas de acessibilidade em R</span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./s3_dados_tp.html" class="sidebar-item-text sidebar-link">SEÇÃO 3: Dados de transporte público</a>
@@ -312,19 +286,19 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4_dados_gtfs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Dados GTFS</span></a>
+  <a href="./4_dados_gtfs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>  <span class="chapter-title">Dados GTFS</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./5_gtfstools.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Manipulação e visualização de dados GTFS</span></a>
+  <a href="./5_gtfstools.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>  <span class="chapter-title">Manipulação e visualização de dados GTFS</span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./s4_avaliacao_impacto.html" class="sidebar-item-text sidebar-link">SEÇÃO 4: Avaliação de impacto de projetos de transporte</a>
@@ -332,14 +306,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./6_cenarios_transporte.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Comparando a acessibilidade entre dois cenários de transporte</span></a>
+  <a href="./6_cenarios_transporte.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>  <span class="chapter-title">Comparando a acessibilidade entre dois cenários de transporte</span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./s5_dados_aop.html" class="sidebar-item-text sidebar-link">SEÇÃO 5: Dados do Projeto Acesso a Oportunidades</a>
@@ -347,51 +321,51 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./7_aopdata_populacao.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Dados de população e socioeconômicos</span></a>
+  <a href="./7_aopdata_populacao.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>  <span class="chapter-title">Dados de população e socioeconômicos</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./8_aopdata_uso_solo.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Dados de distribuição espacial de oportunidades</span></a>
+  <a href="./8_aopdata_uso_solo.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">8</span>  <span class="chapter-title">Dados de distribuição espacial de oportunidades</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./9_aopdata_acessibilidade.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Estimativas de acessibilidade</span></a>
+  <a href="./9_aopdata_acessibilidade.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>  <span class="chapter-title">Estimativas de acessibilidade</span></a>
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">Referências bibliográficas</a>
   </div>
 </li>
     </ul>
-    </div>
-</nav>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">Índice</h2>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Índice</h2>
    
   <ul>
-  <li><a href="#mapa-de-empregos" id="toc-mapa-de-empregos" class="nav-link active" data-scroll-target="#mapa-de-empregos"><span class="toc-section-number">8.1</span>  Mapa de empregos</a></li>
+<li><a href="#mapa-de-empregos" id="toc-mapa-de-empregos" class="nav-link active" data-scroll-target="#mapa-de-empregos"><span class="toc-section-number">8.1</span>  Mapa de empregos</a></li>
   <li><a href="#mapa-de-escolas" id="toc-mapa-de-escolas" class="nav-link" data-scroll-target="#mapa-de-escolas"><span class="toc-section-number">8.2</span>  Mapa de escolas</a></li>
-  <li><a href="#mapa-de-estabelecimentos-de-saúde" id="toc-mapa-de-estabelecimentos-de-saúde" class="nav-link" data-scroll-target="#mapa-de-estabelecimentos-de-saúde"><span class="toc-section-number">8.3</span>  Mapa de estabelecimentos de saúde</a></li>
+  <li><a href="#mapa-de-estabelecimentos-de-sa%C3%BAde" id="toc-mapa-de-estabelecimentos-de-saúde" class="nav-link" data-scroll-target="#mapa-de-estabelecimentos-de-saúde"><span class="toc-section-number">8.3</span>  Mapa de estabelecimentos de saúde</a></li>
   <li><a href="#mapa-de-cras" id="toc-mapa-de-cras" class="nav-link" data-scroll-target="#mapa-de-cras"><span class="toc-section-number">8.4</span>  Mapa de CRAS</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/8_aopdata_uso_solo.qmd" class="toc-action">Editar essa página</a></p></div></div></nav>
-    </div>
+<div class="toc-actions">
+<div><i class="bi bi-github"></i></div>
+<div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/8_aopdata_uso_solo.qmd" class="toc-action">Editar essa página</a></p></div>
+</div></nav><a href="en/8_aopdata_uso_solo.en.html">Read in English</a>
+<a href="en/8_aopdata_uso_solo.en.html" class="toc-action">Read in English</a>
+</div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title d-none d-lg-block"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Dados de distribuição espacial de oportunidades</span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block">
+<span class="chapter-number">8</span>  <span class="chapter-title">Dados de distribuição espacial de oportunidades</span>
+</h1>
 </div>
 
 
@@ -404,9 +378,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </div>
   
 
-</header>
-
-<p>O pacote <code>{aopdata}</code> também permite baixar, para todas cidades incluídas no projeto, dados de 2017, 2018 e 2019 da distribuição espacial de empregos (de baixa, média e alta escolaridade), de estabelecimentos públicos de saúde (de baixa, média e alta complexidade), de escolas públicas (ensino infantil, fundamental e médio) e de Centros de Referência de Assistência Social (CRAS).</p>
+</header><p>O pacote <code>{aopdata}</code> também permite baixar, para todas cidades incluídas no projeto, dados de 2017, 2018 e 2019 da distribuição espacial de empregos (de baixa, média e alta escolaridade), de estabelecimentos públicos de saúde (de baixa, média e alta complexidade), de escolas públicas (ensino infantil, fundamental e médio) e de Centros de Referência de Assistência Social (CRAS).</p>
 <p>Esses dados podem ser baixados com a função <code>read_landuse()</code>, que funciona de forma análoga à <code>read_population()</code>. Para isso, basta indicar na chamada a cidade cujos dados são desejados (parâmetro <code>city</code>) e o ano de referência (<code>year</code>), além de apontar se deseja incluir as informações espaciais dos hexágonos (<code>geometry</code>).</p>
 <p>No exemplo abaixo, mostramos como baixar os dados de uso do solo do ano de 2019 para Belo Horizonte. Note que essa função resulta em uma tabela que também traz, automaticamente, os dados de população.</p>
 <div class="cell">
@@ -429,22 +401,20 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 [36] "S002"        "S003"        "S004"        "C001"        "geometry"   </code></pre>
 </div>
 </div>
-<p>A <a href="#tbl-landuse_dictionary">Tabela&nbsp;<span>8.1</span></a> apresenta a descrição das colunas da tabela (excluindo as previamente incluídas na tabela de dados sociodemográficos). Essa descrição também pode ser consultada na documentação da função, rodando em uma sessão do R o comando <code>?read_landuse</code>.</p>
+<p>A <a href="#tbl-landuse_dictionary">Tabela <span>8.1</span></a> apresenta a descrição das colunas da tabela (excluindo as previamente incluídas na tabela de dados sociodemográficos). Essa descrição também pode ser consultada na documentação da função, rodando em uma sessão do R o comando <code>?read_landuse</code>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-landuse_dictionary" class="anchored">
 <table class="table table-sm table-striped">
-<caption>Tabela&nbsp;8.1: Descrição das colunas da tabela de dados de distribuição espacial de oportunidades</caption>
+<caption>Tabela 8.1: Descrição das colunas da tabela de dados de distribuição espacial de oportunidades</caption>
 <colgroup>
 <col style="width: 14%">
 <col style="width: 85%">
 </colgroup>
-<thead>
-<tr class="header">
+<thead><tr class="header">
 <th style="text-align: left;">Coluna</th>
 <th style="text-align: left;">Descrição</th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">year</td>
@@ -544,8 +514,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </div>
 <p>As seções a seguir mostram exemplos de visualizações desses dados em forma de mapas.</p>
-<section id="mapa-de-empregos" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="mapa-de-empregos"><span class="header-section-number">8.1</span> Mapa de empregos</h2>
+<section id="mapa-de-empregos" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="mapa-de-empregos">
+<span class="header-section-number">8.1</span> Mapa de empregos</h2>
 <p>No código abaixo, carregamos bibliotecas de visualização de dados e configuramos o mapa. As variáveis iniciadas com a letra <code>T</code> são as que descrevem a distribuição espacial de empregos em cada cidade. O código abaixo apresenta a distribuição espacial do total de empregos em cada hexágono (variável <code>T001</code>) em Belo Horizonte:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
@@ -564,9 +534,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p><img src="8_aopdata_uso_solo_files/figure-html/fig_1-1.png" class="img-fluid" width="2100"></p>
 </div>
 </div>
-</section>
-<section id="mapa-de-escolas" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="mapa-de-escolas"><span class="header-section-number">8.2</span> Mapa de escolas</h2>
+</section><section id="mapa-de-escolas" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="mapa-de-escolas">
+<span class="header-section-number">8.2</span> Mapa de escolas</h2>
 <p>As variáveis que indicam o número de escolas públicas em cada célula, por sua vez, começam com a letra <code>E</code>. No exemplo abaixo, apresentamos a distribuição espacial de todas as escolas públicas de Belo Horizonte (variável <code>E001</code>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dados_bh) <span class="sc">+</span></span>
@@ -582,9 +551,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p><img src="8_aopdata_uso_solo_files/figure-html/fig_2-1.png" class="img-fluid" width="2100"></p>
 </div>
 </div>
-</section>
-<section id="mapa-de-estabelecimentos-de-saúde" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="mapa-de-estabelecimentos-de-saúde"><span class="header-section-number">8.3</span> Mapa de estabelecimentos de saúde</h2>
+</section><section id="mapa-de-estabelecimentos-de-saúde" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="mapa-de-estabelecimentos-de-saúde">
+<span class="header-section-number">8.3</span> Mapa de estabelecimentos de saúde</h2>
 <p>As variáveis que contém os dados dos estabelecimentos públicos de saúde em cada célula começam com a letra <code>S</code>. A visualização abaixo compara a distribuição espacial de estabelecimentos públicos de saúde de baixa complexidade (<code>S002</code>) e de alta complexidade (<code>S004</code>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>saude_baixa <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dados_bh) <span class="sc">+</span></span>
@@ -612,9 +580,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p><img src="8_aopdata_uso_solo_files/figure-html/fig_3-1.png" class="img-fluid" width="2100"></p>
 </div>
 </div>
-</section>
-<section id="mapa-de-cras" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="mapa-de-cras"><span class="header-section-number">8.4</span> Mapa de CRAS</h2>
+</section><section id="mapa-de-cras" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="mapa-de-cras">
+<span class="header-section-number">8.4</span> Mapa de CRAS</h2>
 <p>Por fim, a variável <code>C001</code> descreve a distribuição espacial de Centros de Referência de Assistência Social (CRAS) em cada cidade. O mapa abaixo apresenta esta distribuição em Belo Horizonte.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dados_bh) <span class="sc">+</span></span>
@@ -632,10 +599,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 
 
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -882,36 +846,31 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./7_aopdata_populacao.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Dados de população e socioeconômicos</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>  <span class="chapter-title">Dados de população e socioeconômicos</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./9_aopdata_acessibilidade.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Estimativas de acessibilidade</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">9</span>  <span class="chapter-title">Estimativas de acessibilidade</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Ipea - Instituto de Pesquisa Econômica Aplicada</div>   
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
-    <li class="nav-item compact">
+<li class="nav-item compact">
     <a class="nav-link active" href="https://github.com/ipeaGIT/aop_curso" aria-current="page">
       <i class="bi bi-github" role="img">
 </i> 
     </a>
   </li>  
 </ul>
-    </div>
+</div>
   </div>
 </footer>
-
-
-
-</body></html>
+</body>
+</html>
