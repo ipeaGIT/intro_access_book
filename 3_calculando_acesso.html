@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.335">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Introdução à acessibilidade urbana - 3  Calculando estimativas de acessibilidade em R</title>
 <style>
@@ -424,9 +424,9 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(processx<span class="sc">::</span><span class="fu">run</span>(<span class="st">"java"</span>, <span class="at">args =</span> <span class="st">"-version"</span>)<span class="sc">$</span>stderr)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>java version "11.0.17" 2022-10-18 LTS
-Java(TM) SE Runtime Environment 18.9 (build 11.0.17+10-LTS-269)
-Java HotSpot(TM) 64-Bit Server VM 18.9 (build 11.0.17+10-LTS-269, mixed mode)</code></pre>
+<pre><code>openjdk version "11.0.18" 2023-01-17 LTS
+OpenJDK Runtime Environment Zulu11.62+17-CA (build 11.0.18+10-LTS)
+OpenJDK 64-Bit Server VM Zulu11.62+17-CA (build 11.0.18+10-LTS, mixed mode)</code></pre>
 </div>
 </div>
 <p>Como podemos ver, a versão instalada no livro é compatível com o <code>{r5r}</code>. Caso a versão instalada na sua máquina não seja (resultado do código mencionando a versão 12 ou 1.8.0, por exemplo), por favor atualize o Java para a versão 11.</p>
@@ -484,14 +484,14 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 <p>Esses dados devem ser salvos em uma mesma pasta que, preferencialmente, não contenha nenhum outro arquivo. Como veremos adiante, o <code>{r5r}</code> combina todos os dados salvos nesta pasta para criar uma rede de transporte multimodal que é utilizada no roteamento de viagens entre pares origem-destino e, consequentemente, no cálculo das matrizes de tempo de viagem. Note que é possível ter mais de um arquivo GTFS na mesma pasta: nesse caso, o <code>{r5r}</code> considera as redes de transporte públicos de todos os <em>feeds</em> de forma conjunta. No entanto, a rede viária e a topografia da área de estudo devem ser descritas por um único arquivo cada. Assumindo que os <em>scripts</em> de R estejam em uma pasta chamada <code>R</code>, uma possível organização dos arquivos segue o esquema abaixo:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>C:\Users\B14912~1\AppData\Local\Temp\6\RtmpOUf19I/projeto_acessibilidade
-+-- R
-|   +-- script1.R
-|   \-- script2.R
-\-- r5
-    +-- rede_transporte_publico.zip
-    +-- rede_viaria.osm.pbf
-    \-- topografia.tif</code></pre>
+<pre><code>/tmp/RtmpD7dtlC/projeto_acessibilidade
+├── R
+│   ├── script1.R
+│   └── script2.R
+└── r5
+    ├── rede_transporte_publico.zip
+    ├── rede_viaria.osm.pbf
+    └── topografia.tif</code></pre>
 </div>
 </div>
 <p>Para ilustrar as funcionalidades do <code>{r5r}</code>, vamos usar uma pequena amostra de dados da cidade de Porto Alegre, Brasil. Esses dados estão disponíveis dentro do próprio pacote <code>{r5r}</code>, e seu endereço pode ser acessado com o comando <code>system.file("extdata/poa", package = "r5r")</code>:</p>
@@ -499,7 +499,7 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pasta <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/poa"</span>, <span class="at">package =</span> <span class="st">"r5r"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>pasta</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "C:/Users/B14912846767/Documents/repos/intro_access_book/renv/library/R-4.2/x86_64-w64-mingw32/r5r/extdata/poa"</code></pre>
+<pre><code>[1] "/home/runner/work/intro_access_book/intro_access_book/renv/library/R-4.2/x86_64-pc-linux-gnu/r5r/extdata/poa"</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -507,12 +507,12 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>C:/Users/B14912846767/Documents/repos/intro_access_book/renv/library/R-4.2/x86_64-w64-mingw32/r5r/extdata/poa
-+-- poa.zip
-+-- poa_elevation.tif
-+-- poa_hexgrid.csv
-+-- poa_osm.pbf
-\-- poa_points_of_interest.csv</code></pre>
+<pre><code>/home/runner/work/intro_access_book/intro_access_book/renv/library/R-4.2/x86_64-pc-linux-gnu/r5r/extdata/poa
+├── poa.zip
+├── poa_elevation.tif
+├── poa_hexgrid.csv
+├── poa_osm.pbf
+└── poa_points_of_interest.csv</code></pre>
 </div>
 </div>
 <p>Esta pasta possui quatro arquivos que vamos utilizar ao longo deste capítulo:</p>
@@ -535,15 +535,15 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>fs<span class="sc">::</span><span class="fu">dir_tree</span>(pasta)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>C:/Users/B14912846767/Documents/repos/intro_access_book/renv/library/R-4.2/x86_64-w64-mingw32/r5r/extdata/poa
-+-- network.dat
-+-- poa.zip
-+-- poa_elevation.tif
-+-- poa_hexgrid.csv
-+-- poa_osm.pbf
-+-- poa_osm.pbf.mapdb
-+-- poa_osm.pbf.mapdb.p
-\-- poa_points_of_interest.csv</code></pre>
+<pre><code>/home/runner/work/intro_access_book/intro_access_book/renv/library/R-4.2/x86_64-pc-linux-gnu/r5r/extdata/poa
+├── network.dat
+├── poa.zip
+├── poa_elevation.tif
+├── poa_hexgrid.csv
+├── poa_osm.pbf
+├── poa_osm.pbf.mapdb
+├── poa_osm.pbf.mapdb.p
+└── poa_points_of_interest.csv</code></pre>
 </div>
 </div>
 <p>O passo final consiste em calcular a matriz de tempo de viagem com a função <code>travel_time_matrix()</code>. Como <em>inputs</em> básicos, a função recebe a conexão com o R5 criada acima, pontos de origem e destino em formato de <code>data.frame</code> com as colunas <code>id</code>, <code>lon</code> e <code>lat</code>, o modo de transporte a ser utilizado, o horário de partida, o tempo máximo de caminhada permitido da origem até o embarque no transporte público e do desembarque até o destino, e o tempo máximo de viagem a ser considerado. Diversos outros <em>inputs</em> também podem ser usados, como a velocidade de caminhada e o número máximo de pernas de transporte público permitido, entre outros. Para mais informações sobre cada um dos parâmetros, por favor consulte a documentação da função em uma sessão de R (com os comandos <code>?travel_time_matrix()</code> ou <code>help(“travel_time_matrix”)</code>) ou no site do <code>{r5r}</code>, <a href="https://ipeagit.github.io/r5r/reference/travel_time_matrix.html">neste link</a>.</p>

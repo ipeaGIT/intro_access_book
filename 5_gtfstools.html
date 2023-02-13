@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.335">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Introdução à acessibilidade urbana - 5  Manipulação e visualização de dados GTFS</title>
 <style>
@@ -455,14 +455,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>zip<span class="sc">::</span><span class="fu">zip_list</span>(endereco_destino)[, <span class="fu">c</span>(<span class="st">"filename"</span>, <span class="st">"compressed_size"</span>, <span class="st">"timestamp"</span>)]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         filename compressed_size           timestamp
-1      agency.txt             114 2023-02-10 20:01:16
-2    calendar.txt             131 2023-02-10 20:01:16
-3 frequencies.txt            2349 2023-02-10 20:01:16
-4      routes.txt             662 2023-02-10 20:01:16
-5      shapes.txt          160780 2023-02-10 20:01:16
-6  stop_times.txt            7910 2023-02-10 20:01:16
-7       stops.txt           18869 2023-02-10 20:01:16
-8       trips.txt             723 2023-02-10 20:01:16</code></pre>
+1      agency.txt             112 2023-02-13 21:51:20
+2    calendar.txt             129 2023-02-13 21:51:20
+3 frequencies.txt            2381 2023-02-13 21:51:20
+4      routes.txt             659 2023-02-13 21:51:20
+5      shapes.txt          160470 2023-02-13 21:51:20
+6  stop_times.txt            7907 2023-02-13 21:51:20
+7       stops.txt           18797 2023-02-13 21:51:20
+8       trips.txt             717 2023-02-13 21:51:20</code></pre>
 </div>
 </div>
 </section><section id="cálculo-de-velocidade-das-linhas" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="cálculo-de-velocidade-das-linhas">
@@ -610,10 +610,10 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>gtfs_poa<span class="sc">$</span>agency</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   agency_id                                   agency_name
-1:      EPTC Empresa Publica de Transportes e CirculaÃ§Ã£o
-               agency_url   agency_timezone agency_lang agency_phone
-1: http://www.eptc.com.br America/Sao_Paulo          pt          156
+<pre><code>   agency_id                                 agency_name             agency_url
+1:      EPTC Empresa Publica de Transportes e Circulação http://www.eptc.com.br
+     agency_timezone agency_lang agency_phone
+1: America/Sao_Paulo          pt          156
                                                   agency_fare_url
 1: http://www2.portoalegre.rs.gov.br/eptc/default.php?p_secao=155</code></pre>
 </div>
@@ -630,9 +630,9 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># checa resultados</span></span>
 <span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>gtfs_combinado<span class="sc">$</span>agency</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   agency_id                                   agency_name
-1:         1                                       SPTRANS
-2:      EPTC Empresa Publica de Transportes e CirculaÃ§Ã£o
+<pre><code>   agency_id                                 agency_name
+1:         1                                     SPTRANS
+2:      EPTC Empresa Publica de Transportes e Circulação
                                  agency_url   agency_timezone agency_lang
 1: http://www.sptrans.com.br/?versao=011019 America/Sao_Paulo          pt
 2:                   http://www.eptc.com.br America/Sao_Paulo          pt
@@ -735,7 +735,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 3: CPTM L09-0              GRAJAU    17850
 4: CPTM L09-1              OSASCO    17851
 5: CPTM L10-0 RIO GRANDE DA SERRA    17852
-6: CPTM L10-1               BRÃ\201S    17853</code></pre>
+6: CPTM L10-1                BRÁS    17853</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">unique</span>(gtfs_filtrado<span class="sc">$</span>shapes<span class="sc">$</span>shape_id))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -927,7 +927,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>endereco_validador <span class="ot">&lt;-</span> <span class="fu">download_validator</span>(pasta_temporaria)</span>
 <span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>endereco_validador</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "C:\\Users\\B14912846767\\AppData\\Local\\Temp\\6\\RtmpeWQnbg\\gtfs-validator-v4.0.0.jar"</code></pre>
+<pre><code>[1] "/tmp/RtmpAMgFnJ/gtfs-validator-v4.0.0.jar"</code></pre>
 </div>
 </div>
 <p>A segunda (e última) etapa consiste em de fato rodar a função <code>validate_gtfs()</code>. Essa função aceita que os dados GTFS a serem validados sejam passados de diferentes formas: (a) como um objeto GTFS existente apenas no R, (b) como o endereço de um arquivo GTFS salvo localmente em formato <code>.zip</code>, (c) como a URL para um <em>feed</em> ou (d) como uma pasta que contém os dados GTFS não compactados. A função também recebe o endereço para uma pasta onde o resultado da validação deve ser salvo e o endereço para o validador que deve ser usado. Neste exemplo, vamos fazer a validação a partir do endereço do GTFS da SPTrans, lido anteriormente:</p>
