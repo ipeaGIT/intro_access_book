@@ -50,7 +50,7 @@ jobs:
         run: |
           dir.create("en_book")
           fs::dir_copy(".", "en_book")
-          fs::file_delete(file.path("en_book", c("_freeze", "analise_de_impacto", "renv")))
+          fs::file_delete(file.path("en_book", "renv"))
         shell: Rscript {0}
         
       - name: Restore English _freeze
