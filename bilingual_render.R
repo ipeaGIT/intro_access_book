@@ -1,3 +1,8 @@
+# # uncomment the following lines when running locally
+# fs::dir_delete(c("en_book", "_book"))
+# fs::dir_copy(".", "en_book")
+# fs::file_delete(file.path("en_book", "renv"))
+
 quarto::quarto_render(as_job = FALSE)
 
 # change some yml fields before rendering english book
