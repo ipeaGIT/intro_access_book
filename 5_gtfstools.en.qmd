@@ -1,1 +1,455 @@
-Under construction.
+# GTFS data manipulation and visualization
+
+GTFS data is frequently used to develop analyses and studies that have several common elements. The Access to Opportunities Project team has developed the [`{gtfstools}`](https://github.com/ipeaGIT/gtfstools) R package, which provides several functions that help running some of these common analyses and facilitate feed manipulation and exploration.
+
+In this chapter, we'll go through some of the most frequently used package features. To do this, we will use a sample of the SPTrans feed presented in the previous chapter, included in the package installation.
+
+## Reading and manipulating GTFS files
+
+Reading GTFS files with `{gtfstools}` is done with the `read_gtfs()` function, which receives a string with the file path. The package represents a feed as a list of `data.table`s, a high-performance version of `data.frame`s. Throughout this chapter, we will refer to this list of tables as a **GTFS object**. By default, the function reads all `.txt` tables in the feed:
+
+```{r}
+# loads the package
+library(gtfstools)
+
+# points to the sample gtfs data installed in {gtfstools}
+path <- system.file("extdata/spo_gtfs.zip", package = "gtfstools")
+
+# reads the gtfs
+gtfs <- read_gtfs(path)
+
+# checks the tables inside the gtfs object
+names(gtfs)
+```
+
+We can see that each `data.table` within the GTFS object is named according to the table it represents, without the `.txt` extension. This configuration allows us to select and manipulate each table individually. The code below, for example, lists the first 6 rows of the `trips` table:
+
+```{r}
+head(gtfs$trips)
+```
+
+Tables within a GTFS object can be easily manipulated using the `{data.table}` package syntax. This package offers several useful features, primarily for manipulating tables with a large number of records, such as updating columns by reference, very fast row subsets and efficient data aggregation[^1]. To add 100 seconds to all the headways listed in the `frequencies` table and to later reverse this change, for example, we can use the code below:
+
+[^1]: For more details on `{data.table}` usage and syntax please check <https://rdatatable.gitlab.io/data.table/index.html>.
+
+```{r}
+# saves original headways
+original_headway <- gtfs$frequencies$headway_secs
+head(gtfs$frequencies, 3)
+
+# updates the headways
+gtfs$frequencies[, headway_secs := headway_secs + 100]
+head(gtfs$frequencies, 3)
+
+# restores the original headway
+gtfs$frequencies[, headway_secs := original_headway]
+head(gtfs$frequencies, 3)
+```
+
+After editing a GTFS object in R, we often want to use the processed GTFS to perform different analyses. In order to do this, we frequently need the GTFS file in `.zip` format again, and not as  a list of tables in an R session. Looking to transform GTFS objects that exist only within R into GTFS files saved to disk, `{gtfstools}` includes the `write_gtfs()`. To use this function, we only need to list the object that should be written to disk and the file path where it should be written to:
+
+```{r}
+# points to the path where the GTFS should be written to
+export_path <- tempfile("new_gtfs", fileext = ".zip")
+
+# writes the GTFS to the path
+write_gtfs(gtfs, path = export_path)
+
+# lists files within the feed
+zip::zip_list(export_path)[, c("filename", "compressed_size", "timestamp")]
+```
+
+## Calculating trip speed
+
+GTFS files are often used in public transport routing applications and to inform the timetable of different routes in a given region to potential passengers. Feeds must, therefore, accurately describe the schedule of public transport trips.
+
+An useful way to validate the schedules described in the feed is to check the average speed of each trip. To do so, `{gtfstools}` includes the function `get_trip_speed()`. By default, the function returns the speed (in km/h) of all trips included in the feed, but one can choose to calculate the speed of selected trips with the `trip_id` parameter:
+
+```{r}
+# calculates the speeds of all trips
+speeds <- get_trip_speed(gtfs)
+
+head(speeds)
+
+nrow(speeds)
+
+# calculates the speeds of two specific trips
+speeds <- get_trip_speed(gtfs, trip_id = c("CPTM L07-0", "2002-10-0"))
+
+head(speeds)
+```
+
+To calculate the speed of a trip we need to know its length and how long it takes to travel from its first to its last stop. Behind the scenes, `get_trip_speed()` uses two other functions from `{gtfstools}` toolset: `get_trip_length()` and `get_trip_duration()`. The usage of both is very similar to what has been shown before, returning the length/duration of all trips by default, or of a few specified trips if desired. Below, we show their default behavior:
+
+```{r}
+# calculates the length of all trips
+lengths <- get_trip_length(gtfs, file = "shapes")
+
+head(lengths)
+
+# calculates the duration of all trips
+durations <- get_trip_duration(gtfs)
+
+head(durations)
+```
+
+Just as `get_trip_speed()` returns speeds in km/h by default, `get_trip_length()` returns lengths in km and `get_trip_duration()` returns the duration in minutes. These units can be adjusted with the `unit` argument, present in all three functions.
+
+## Combining and filtering feeds
+
+The tasks of processing and manipulating GTFS files are often performed manually. Consequently, minor inconsistencies can pass by those responsible for these tasks. A commonly observed issue is the presence of duplicate records in the same table. SPTrans' feed, for example, contains duplicate records both in `agency.txt` and in `calendar.txt`:
+
+```{r}
+gtfs$agency
+
+gtfs$calendar
+```
+
+`{gtfstools}` includes the `remove_duplicates()` function to keep only unique entries in the feed. This function takes a GTFS object as input and returns the same object without duplicate entries: 
+
+```{r}
+no_dups_gtfs <- remove_duplicates(gtfs)
+
+no_dups_gtfs$agency
+
+no_dups_gtfs$calendar
+```
+
+We often have to deal with multiple feeds describing the same study area - for example, when the bus and the rail systems of a single city are described in separate GTFS files. In such cases, we frequently benefit from merging both files into a single feed, reducing the data processing effort. To help us with that, `{gtfstools}` includes the `merge_gtfs()` function. The example below shows the output of merging SPtrans' feed (without duplicate entries) with EPTC's (Porto Alegre's Transport and Traffic Public Company):
+
+```{r}
+# reads Porto Alegre's GTFS
+poa_path <- system.file("extdata/poa_gtfs.zip", package = "gtfstools")
+poa_gtfs <- read_gtfs(poa_path)
+
+poa_gtfs$agency
+
+no_dups_gtfs$agency
+
+# combines Porto Alegre's and São Paulo's GTFS objects
+combined_gtfs <- merge_gtfs(no_dups_gtfs, poa_gtfs)
+
+# checa resultados
+combined_gtfs$agency
+```
+
+We can see that the tables of both feeds are combined into a single one. This is the case when two (or more, if desired) GTFS objects contain the same table (`agency`, in the example). When only one of the objects contains a given table, the function copies this table to the final result. That's the case of the `frequencies` table, in our example, which exists only in SPTrans' feed:
+
+```{r}
+names(poa_gtfs)
+
+names(no_dups_gtfs)
+
+names(combined_gtfs)
+
+identical(no_dups_gtfs$frequencies, combined_gtfs$frequencies)
+```
+
+Another frequently used operation when dealing with GTFS files is filtering the data. Feeds are often used to describe large-scale public transport networks, which may result in complex and slow data manipulation, analysis and sharing. Thus, planners and researchers often work with a feed subset. If we want to measure the performance of a transport network during the morning peak, for example, we can filter our GTFS data to keep only the observations that relate to trips that happen within this period. 
+
+`{gtfstools}` includes lots of functions to filter GTFS data. The currently available filtering functions are:
+
+- `filter_by_agency_id()`
+- `filter_by_route_id()`
+- `filter_by_service_id()`
+- `filter_by_shape_id()`
+- `filter_by_stop_id()`
+- `filter_by_trip_id()`
+- `filter_by_route_type()`
+- `filter_by_weekday()`
+- `filter_by_time_of_day()`
+- `filter_by_sf()`
+
+**Filtering by identifiers**
+
+The six first function from the above list (`filter_by_agency_id()`, `filter_by_route_id()`, `filter_by_service_id()`, `filter_by_shape_id()`, `filter_by_stop_id()` e `filter_by_trip_id()`) work very similarly. They take as input a vector of identifiers and return a GTFS object whose table entries are related to the specified ids. The example below demonstrates the functionality with `filter_by_trip_id()`:
+
+```{r}
+# checks pre-filter object size 
+utils::object.size(gtfs)
+
+head(gtfs$trips[, .(trip_id, trip_headsign, shape_id)])
+
+# keeps entries related to the two specified ids
+filtered_gtfs <- filter_by_trip_id(
+  gtfs,
+  trip_id = c("CPTM L07-0", "CPTM L07-1")
+)
+
+# checks post-filter object size
+utils::object.size(filtered_gtfs)
+
+head(filtered_gtfs$trips[, .(trip_id, trip_headsign, shape_id)])
+
+unique(filtered_gtfs$shapes$shape_id)
+```
+
+We can see from the code snippet above that the function not only filters `trips`, but all other tables containing a column that relates to `trip_id` in any way. The shapes of trips `CPTM L07-0` and `CPTM L07-1`, for example, are respectively described by `shape_id`s `17846` and `17847`. Therefore, these are the only shape identifiers kept in the filtered GTFS.
+
+The function also supports the opposite behavior: instead of keeping the entries related to the specified identifiers, we can drop them. To do this, we need to set the `keep` argument to `FALSE`:
+
+```{r}
+# removes entries related to two trips from the feed
+filtered_gtfs <- filter_by_trip_id(
+  gtfs,
+  trip_id = c("CPTM L07-0", "CPTM L07-1"),
+  keep = FALSE
+)
+
+head(filtered_gtfs$trips[, .(trip_id, trip_headsign, shape_id)])
+
+head(unique(filtered_gtfs$shapes$shape_id))
+```
+
+We can see that the specified trips, as well as their shapes, are not present in the filtered GTFS. The same logic, demonstrated here with `filter_by_trip_id()`, applies to the functions that filter GTFS objects by `agency_id`, `route_id`, `service_id`, `shape_id`, `stop_id` and `route_type`.
+
+**Filtering by day of the week and time of the day**
+
+Another recurrent operation when dealing with GTFS data is subsetting feeds to keep services that only happen during certain times of the day or days of the week. The package includes the `filter_by_weekday()` and `filter_by_time_of_day()` functions to be used for this.
+
+`filter_by_weekday()` takes as input the days of the week whose services that operate on them should be kept (or dropped). The function also includes a `combine` parameter, which defines how multi-days filters work. When this argument receives the value `"and"`, only services that operate on every single specified day are kept. When it receives the value `"or"`, services that operate on at least one of the days are kept: 
+
+```{r}
+# keeps services that operate on both on saturday AND sunday
+filtered_gtfs <- filter_by_weekday(
+  no_dups_gtfs,
+  weekday = c("saturday", "sunday"),
+  combine = "and"
+)
+
+filtered_gtfs$calendar[, c("service_id", "sunday", "saturday")]
+
+# keeps services that operate EITHER on saturday OR on sunday
+filtered_gtfs <- filter_by_weekday(
+  no_dups_gtfs,
+  weekday = c("sunday", "saturday"),
+  combine = "or"
+)
+
+filtered_gtfs$calendar[, c("service_id", "sunday", "saturday")]
+```
+
+`filter_by_time_of_day()`, on the other hand, takes the beginning and the end of a time window and keeps (or drops) the entries related to the trips that run within this window. The behavior of this function depends whether a `frequencies` table is included in the feed or not: the `stop_times` timetable of trips listed in `frequencies` must not be filtered, because, as [previously mentioned](4_gtfs_data.qmd#frequencies.txt), it works as a reference that describes the time between consecutive stops, and the departure and arrival times listed there should not be considered as is. If a trip is not listed in `frequencies`, however, its `stop_times` entries are filtered according to the specified time window. Let's see how the function works with some examples:
+
+```{r}
+# keeps trips that run within the 5am to 6am window
+filtered_gtfs <- filter_by_time_of_day(gtfs, from = "05:00:00", to = "06:00:00")
+
+head(filtered_gtfs$frequencies)
+
+head(filtered_gtfs$stop_times[, c("trip_id", "departure_time", "arrival_time")])
+
+# salva a tabela frequencies e a remove do objeto gtfs
+frequencies <- gtfs$frequencies
+gtfs$frequencies <- NULL
+
+filtered_gtfs <- filter_by_time_of_day(gtfs, from = "05:00:00", to = "06:00:00")
+
+head(filtered_gtfs$stop_times[, c("trip_id", "departure_time", "arrival_time")])
+```
+
+Filtering the `stop_times` table can work in two different ways. One is to keep entire trips that *cross* the specified time window. The other is to keep only the timetable entries that take place *inside* this window (default behavior). This behavior is controlled by the `full_trips` parameter, as shown below (please pay attention to the times and stops present in each example):
+
+```{r}
+# keeps any trips that cross the 5am to 6am window intact
+filtered_gtfs <- filter_by_time_of_day(
+  gtfs,
+  from = "05:00:00", 
+  to = "06:00:00",
+  full_trips = TRUE
+)
+
+head(
+  filtered_gtfs$stop_times[
+    ,
+    c("trip_id", "departure_time", "arrival_time", "stop_sequence")
+  ]
+)
+
+# keeps only the timetable entries that happen inside the 5am to 6am window
+filtered_gtfs <- filter_by_time_of_day(
+  gtfs,
+  from = "05:00:00",
+  to = "06:00:00",
+  full_trips = FALSE
+)
+
+head(
+  filtered_gtfs $stop_times[
+    ,
+    c("trip_id", "departure_time", "arrival_time", "stop_sequence")
+  ]
+)
+```
+
+**Filtering using a spatial extent**
+
+Finally, `{gtfstools}` also includes a function that allows us to filter a GTFS object using a spatial polygon. `filter_by_sf()` takes an `sf`/`sfc` object (spatial representation created by the [`{sf}`](https://r-spatial.github.io/sf/) package), or its bounding box, and keeps the entries related to trips that are selected by a specified spatial operation. Although seemingly complicated, this filtering process is fairly easy to grasp when shown. To demonstrate this function, we are going to filter SPTrans' feed using the bounding box of shape `68962`. With the code snippet below we show the spatial distribution of unfiltered data along with the bounding box in red:
+
+```{r}
+library(ggplot2)
+
+# creates a polygon with the bounding box of shape 68962
+shape_68962 <- convert_shapes_to_sf(gtfs, shape_id = "68962")
+bbox <- sf::st_bbox(shape_68962)
+bbox_geometry <- sf::st_as_sfc(bbox)
+
+# creates a geometry with all the shapes described in the gtfs
+all_shapes <- convert_shapes_to_sf(gtfs)
+
+ggplot() +
+  geom_sf(data = all_shapes) +
+  geom_sf(data = bbox_geometry, fill = NA, color = "red") +
+  theme_minimal()
+```
+
+Please note that we have used the `convert_shapes_to_sf()` function, also included in `{gtfstools}`, to convert the shapes described in the feed to a `sf` spatial object. By default, `filter_by_sf()` keeps all entries related to trips that intersect with the specified polygon:
+
+```{r}
+filtered_gtfs <- filter_by_sf(gtfs, bbox)
+filtered_shapes <- convert_shapes_to_sf(filtered_gtfs)
+
+ggplot() +
+  geom_sf(data = filtered_shapes) +
+  geom_sf(data = bbox_geometry, fill = NA, color = "red") +
+  theme_minimal()
+```
+
+We can, however, specify the spatial operation used when filtering the feed. The code below shows how we can keep the entries related to trips that are *contained by* the specified polygon:
+
+```{r}
+filtered_gtfs <- filter_by_sf(gtfs, bbox, spatial_operation = sf::st_contains)
+filtered_shapes <- convert_shapes_to_sf(filtered_gtfs)
+
+ggplot() +
+  geom_sf(data = filtered_shapes) +
+  geom_sf(data = bbox_geometry, fill = NA, color = "red") +
+  theme_minimal()
+```
+
+## Validating GTFS data
+
+Transport planners and researchers often want to assess the quality of the GTFS data which they are producing or using in their analyses. Are feeds structured according to the [best practices](https://github.com/MobilityData/GTFS_Schedule_Best-Practices) adopted by the larger GTFS community? Are tables and columns adequately formatted? Is the information described by the feed reasonable (trip speeds, stop locations, etc)? These are some of the questions that may arise when dealing with GTFS data.
+
+To answer these and other questions, `{gtfstools}` includes the `validate_gtfs()` function. This function works as a wrapper to MobilityData's [Canonical GTFS Validator](https://github.com/MobilityData/gtfs-validator). The validator requires Java version 11 or higher to run. For more information on how to check the installed version of Java in your computer and, if necessary, on how to install the required version, please check [Chapter 3](3_calculating_access.qmd#r5r-installation).
+
+Using `validate_gtfs()` is very simple. First, we need to download the validator. To do this, we use the `download_validator()` function, included in the package, which receives the path to the directory where the validator should be saved to and the version of the validator that should be downloaded (defaults to the latest available). The function returns the path to the downloaded validator:
+
+```{r}
+tmpdir <- tempdir()
+
+validator_path <- download_validator(tmpdir)
+validator_path
+```
+
+The second (and final) step consists in actually validating the GTFS data with `validate_gtfs()`. This function supports GTFS data in different formats: (a) as a GTFS object in an R session, (b) as a path to a local GTFS file in `.zip` format, (c) as an URL pointing to a feed or (d) as a directory containing unzipped GTFS tables. The function also takes a path to a directory where the validation result should be saved to and the path to the validator that should be used in the process. In the example below we validate SPTrans' feed from its path:
+
+```{r}
+output_dir <- tempfile("gtfs_validation")
+
+validate_gtfs(
+  path,
+  output_path = output_dir,
+  validator_path = validator_path
+)
+
+list.files(output_dir)
+```
+
+We can see that the validation process generates a few output files:
+
+- `report.html`, shown in @fig-report, which summarizes the validation result in a nicely formatted HTML page (only available with validator version 3.1.0 or higher);
+- `report.json`, which summarizes the same information, but in JSON format, which can be used to programatically parse and process the results;
+- `system_errors.json`, which summarizes eventual system errors that may have happened during the validation process and may compromise the results;
+- `validation_stderr.txt`, which lists informative messages sent by the validator tool, including a list of the tests in use, eventual error messages, etc[^2].
+
+[^2]: Informative messages may also be listed in the `validation_stdout.txt` file. Whether messages are listed in this file or in `validation_stderr.txt` depends on the validator version.
+
+```{r}
+#| echo: false
+#| label: fig-report
+#| fig-cap: Validation report example
+
+knitr::include_graphics("images/validator_report.png")
+```
+
+## `{gtfstools}` workflow example: headways spatial visualization
+
+We have shown in previous sections that `{gtfstools}` offers a large toolset to process and analyze GTFS files. The package also includes many other functions that could not be shown in this book due to space constraints. The complete functions list can be checked at the [package website](https://ipeagit.github.io/gtfstools/reference/index.html).
+
+Presenting the functions as we have done up until this point is important to demonstrate how to use each one of them, but does not show how they can be used together when analyzing a feed. This section fills this gap, showing how the package can be used to answer the following question: how are the times between vehicles operating the same route (the headways) spatially distributed in SPTrans' GTFS?
+
+First, we need to define the scope of our analysis. In this example, we are going to consider the morning peak headway, between 7am and 9am, on a typical tuesday. To do this, we need to filter our feed:
+
+```{r}
+gtfs <- read_gtfs(path)
+
+# filters the GTFS
+filtered_gtfs <- gtfs |>
+  remove_duplicates() |>
+  filter_by_weekday("tuesday") |>
+  filter_by_time_of_day(from = "07:00:00", to = "09:00:00")
+
+# cheking the result
+
+filtered_gtfs$frequencies[trip_id == "2105-10-0"]
+
+filtered_gtfs$calendar
+```
+
+Following up, we need to calculate the headways within this time interval. This information can be found at the `frequencies` table, though there is a factor we have to pay attention to: each trip is associated to more than one headway, as shown above (one entry for the 7am to 7:59am interval and another for the 8am to 8:59am interval). To solve this we are going to calculate the *average* headway from 7am to 9am.
+
+The first few `frequencies` rows in SPTrans' feed seem to suggest that the headways are always associated to one-hour intervals, but this is neither a rule set in the official specification nor necessarily a practice adopted by other feed producers. Thus, we have to calculate the headways' weighted mean within the morning peak, which we do by multiplying each headway by the time interval it is valid, summing the multiplication results for each trip and then dividing the total amount by the total time interval (two hours). To calculate the time intervals within which the headways are valid, we use the `convert_time_to_seconds()` function to calculate the interval start and end in seconds and subtract the latter by the former:
+
+```{r}
+filtered_gtfs <- convert_time_to_seconds(filtered_gtfs)
+
+filtered_gtfs$frequencies[trip_id == "2105-10-0"]
+
+filtered_gtfs$frequencies[, time_interval := end_time_secs - start_time_secs]
+```
+
+Then we calculate the average headway:
+
+```{r}
+average_headway <- filtered_gtfs$frequencies[,
+  .(average_headway = weighted.mean(x = headway_secs, w = time_interval)),
+  by = trip_id
+]
+
+average_headway[trip_id == "2105-10-0"]
+
+head(average_headway)
+```
+
+Now we need to calculate each trip geometry to later join this data to the average headways. To do this, we will use the `get_trip_geometry()` function, which returns the spatial geometries of the trips in the feed. This function allows us to specify the trips which we want to calculate the geometries of, so we are only going to apply the procedure to those present in the average headways table:
+
+```{r}
+selected_trips <- average_headway$trip_id
+
+geometries <- get_trip_geometry(
+  filtered_gtfs,
+  trip_id = selected_trips,
+  file = "shapes"
+)
+
+head(geometries)
+```
+
+Finally, we need to join the average headway data to the geometries. Having done so, the final step is only a matter of configuring the map as desired. In the example below, we use colors and lineweights that vary according to the headway of each trip:
+
+```{r}
+#| message: false
+geoms_with_headways <- merge(
+  geometries,
+  average_headway,
+  by = "trip_id"
+)
+
+ggplot(geoms_with_headways) +
+  geom_sf(aes(color = average_headway, size = average_headway), alpha = 0.8) +
+  scale_color_gradient(high = "#132B43", low = "#56B1F7") +
+  theme_minimal()
+```
+
+As we can see, `{gtfstools}` turns analyzing GTFS feeds into a simple task that requires only basic knowledge of table manipulation packages (such as `{data.table}` and `{dplyr}`). The example shown in this section shows how many of the package's functions can be used together to reveal important aspects of public transport systems specified in the GTFS format.
