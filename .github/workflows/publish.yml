@@ -74,5 +74,6 @@ jobs:
           git add en
           git commit -m "Built site for gh-pages"
           git push
+          git checkout main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
