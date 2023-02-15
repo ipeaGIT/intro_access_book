@@ -1,7 +1,16 @@
-# # uncomment the following lines when running locally
-# fs::dir_delete(c("en_book", "_book"))
-# fs::dir_copy(".", "en_book")
-# fs::file_delete(file.path("en_book", "renv"))
+# delete previous rendered book when running locally
+
+if (fs::dir_exists("en_book")) fs::dir_delete("en_book")
+if (fs::dir_exists("_book")) fs::dir_delete("_book")
+
+# copy book content to auxiliary directory
+
+fs::dir_copy(".", "en_book")
+fs::dir_delete("en_book/renv")
+if (fs::dir_exists("en_book/_freeze")) fs::dir_delete("en_book/_freeze")
+if (fs::dir_exists("en_book/en_freeze")) {
+  fs::dir_copy("en_book/en_freeze", "en_book/_freeze")
+}
 
 quarto::quarto_render(as_job = FALSE)
 
@@ -38,7 +47,13 @@ yaml::write_yaml(
 
 quarto::quarto_render("en_book", as_job = FALSE)
 
+# copy english book content to portuguese book and english book cache to top
+# level directory
+
 fs::dir_copy("en_book/_book", "_book/en")
+
+if (fs::dir_exists("en_freeze")) fs::dir_delete("en_freeze")
+fs::dir_copy("en_book/_freeze", "en_freeze")
 
 # add link to english version in portuguese chapters
 

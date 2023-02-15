@@ -46,19 +46,12 @@ jobs:
           key: freeze-${{ runner.os }}-${{ github.run_id }}
           restore-keys: freeze-${{ runner.os }}-
           
-      - name: Create directory to render English book
-        run: |
-          dir.create("en_book")
-          fs::dir_copy(".", "en_book")
-          fs::file_delete(file.path("en_book", "renv"))
-        shell: Rscript {0}
-        
       - name: Restore English _freeze
         uses: actions/cache@v3
         with:
-          path: en_book/_freeze
-          key: en-book-freeze-${{ runner.os }}-${{ github.run_id }}
-          restore-keys: en-book-freeze-${{ runner.os }}-
+          path: en_freeze
+          key: en-freeze-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: en-freeze-${{ runner.os }}-
           
       - name: Render book
         run: Rscript bilingual_render.R
