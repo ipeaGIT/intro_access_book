@@ -276,7 +276,7 @@ data.table::setnames(
   new = c("acesso_r5r", "acesso_accessibility")
 )
 
-head(comparacao_acessibilidade[, .(from_id, acesso_r5r, acesso_accessibility)])
+head(comparacao_acessibilidade[, .(id, acesso_r5r, acesso_accessibility)])
 ```
 
 Como podemos observar, fora a pequena diferença de comportamento, o resultado das duas funções é o mesmo. A principal diferença entre os dois métodos, no entanto, é que a informação “intermediária” do tempo de viagem entre origens e destinos não fica disponível ao usuário com o uso da função `accessibility()` do pacote `{r5r}`. Ainda assim, este fluxo de trabalho pode ser uma boa alternativa para pessoas que estejam interessadas unicamente nos níveis de acessibilidade, não dependendo do tempo de viagem em suas análises. Note também que o pacote `{accessibility}` tem uma gama mais ampla de indicadores de acessibilidade e dá mais flexibilidade aos usuários para definir qualquer função de decadência.
