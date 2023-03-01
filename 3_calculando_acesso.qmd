@@ -2,7 +2,7 @@
 
 ## Cálculo da matriz de tempo de viagem {#sec-matrix}
 
-A primeira etapa necessária para estimar os níveis de acessibilidade de uma área de estudo é calcular a matriz de custo de viagem entre as diversas origens e destinos que a compõem. Como comentado anteriormente, na literatura científica e na prática do planejamento de sistemas de transporte esse custo é mais frequentemente representado pelo tempo de viagem que separa dois pontos [@el-geneidy2016cost; @venter2016assessing], embora trabalhos recentes tenham considerado também outros fatores, como o dinheiro necessário para realizar uma viagem e o nível de conforto da viagem entre um ponto e outro [@arbex2020estimating; @herszenhut2022impact]. Pela prevalência deste tipo de matriz na literatura e na prática, porém, iremos nos focar em matrizes de tempo de viagem.
+A primeira etapa necessária para estimar os níveis de acessibilidade de uma área de estudo é calcular a matriz de custo de viagem entre as diversas origens e destinos que a compõem. Como comentado anteriormente, na literatura científica e na prática do planejamento de sistemas de transporte esse custo é mais frequentemente representado pelo tempo de viagem que separa dois pontos [@el-geneidy2016cost; @venter2016assessing], embora trabalhos recentes tenham considerado também outros fatores, como o dinheiro necessário para realizar uma viagem e o nível de conforto da viagem entre um ponto e outro [@arbex2020estimating; @herszenhut2022impact]. Neste livro, iremos nos focar em matrizes de tempo de viagem, pois são as mais utilizadas na literatura e na prática, mas iremos cobrir outros tipos de custos num futuro livro sobre análise avançada de acessibilidade em R.
 
 Atualmente, a forma mais fácil e rápida de gerar uma matriz de tempo de viagem em R é utilizando o pacote `{r5r}` [@pereira2021r5r], desenvolvido pela equipe do Projeto Acesso a Oportunidades, do Ipea. O pacote utiliza, por trás dos panos, o *software* de roteamento de transporte multimodal R5, desenvolvido pela Conveyal[^1].
 
@@ -158,9 +158,6 @@ A função `cumulative_cutoff()` é utilizada para calcular o número de oportun
 ```{r}
 library(accessibility)
 
-# renomeia colunas para usar o pacote {accessibility}
-data.table::setnames(matriz, c("fromId", "toId"), c("from_id", "to_id"))
-
 oportunidades_cumulativas <- cumulative_cutoff(
   travel_matrix = matriz,
   land_use_data = pontos,
@@ -280,7 +277,7 @@ data.table::setnames(
 head(comparacao_acessibilidade[, .(from_id, acesso_r5r, acesso_accessibility)])
 ```
 
-Como podemos observar, fora a pequena diferença de comportamento, o resultado das duas funções é o mesmo. A principal diferença entre os dois métodos, no entanto, é que a informação “intermediária” do tempo de viagem entre origens e destinos não fica disponível ao usuário com o uso da função `accessibility()` do pacote `{r5r}`. Ainda assim, este fluxo de trabalho pode ser uma boa alternativa para pessoas que estejam interessadas unicamente nos níveis de acessibilidade, não dependendo do tempo de viagem em suas análises.
+Como podemos observar, fora a pequena diferença de comportamento, o resultado das duas funções é o mesmo. A principal diferença entre os dois métodos, no entanto, é que a informação “intermediária” do tempo de viagem entre origens e destinos não fica disponível ao usuário com o uso da função `accessibility()` do pacote `{r5r}`. Ainda assim, este fluxo de trabalho pode ser uma boa alternativa para pessoas que estejam interessadas unicamente nos níveis de acessibilidade, não dependendo do tempo de viagem em suas análises. Note também que o pacote `{accessibility}` tem uma gama mais ampla de indicadores de acessibilidade e dá mais flexibilidade aos usuários para definir qualquer função de decadência.
 
 :::{.callout-caution} 
 ## Considerando outros tipos de custo de viagem no cálculo da acessibilidade

@@ -1,1 +1,106 @@
-Under construction.
+# SECTION 5: Data from the Access to Opportunity Project
+
+**The purpose of this section** is (1) to present the accessibility, land use and socioeconomic data provided by the Access to Opportunities Project (AOP), as well as (2) to teach how to download and use them with the R package `{aopdata}`.
+
+In the previous chapters, we learned about the concept of accessibility, and how to calculate accessibility measures using R. However, we often come across situations when we do not want to calculate accessibility levels on our own, either because we do not have the time or data necessary for this or simply because others have already calculated these estimates. Throughout the next chapters, we will present the database output of the [Access to Opportunities Project]( https://www.ipea.gov.br/acessooportunidades/en/) (AOP).
+
+The Access to Opportunities Project is a research initiative led by the Institute for Applied Economic Research (Ipea) with the aim to study transport accessibility and inequalities in access to opportunities in Brazilian cities. All of the data outputs produced by the AOP team are made publicly available. The AOP data includes not only urban accessibility estimates, but also information on the spatial distribution of the population, economic activities and public services. The data is spatially aggregated into a hexagonal grid that follows the [H3](https://h3geo.org/), originally developed by Uber [@brodsky2018h3]. Each hexagonal cell is about 0.11 km², an area similar to that covered by a city block, allowing analysis at a high spatial resolution. As shown in @fig-data_scope, accessibility estimates are available for the years 2017, 2018 and 2019 and for the 20 largest cities in Brazil, considering different modes of transport (walking, cycling, public transport and automobile), times of day (peak and off-peak), population groups (aggregated by income, race, sex and age) and types of activity (jobs,  schools, health services and social assistance centers).
+
+::: {.callout-note appearance="simple"}
+The methods used to generate these data are presented in detail in separate publications for population and land use data [@pereira2022distribuicao] and for accessibility data [@pereira2022estimativas].
+:::
+
+```{r}
+#| echo: false
+#| label: fig-data_scope
+#| fig-cap: Scope of the AOP data
+
+knitr::include_graphics("images/aop_data_scope.png")
+```
+
+Accessibility estimates by public transport were estimated only for the cities with good quality GTFS data shared with the AOP team. These cities are Belo Horizonte, Campinas, Curitiba, Fortaleza, Goiânia[^1], Porto Alegre, Recife, Rio de Janeiro and São Paulo. The GTFS feeds of a few cities were only available for a few years, or had quality issues and were not representative of public transportation operations. Accessibility estimates by public transport were not calculated for these cases. @fig-geo_scope shows the cities included in the project and the transport modes considered in each city.
+
+[^1]: The GTFS of Goiânia covers the public transport network of its entire metropolitan region, not only the municipality.
+
+```{r}
+#| echo: false
+#| label: fig-geo_scope
+#| fig-cap: Geographic scope of the AOP data (* indicates the cities that do not have accessibility estimates by public transport for all years)
+
+knitr::include_graphics("images/aop_geographical_scope.en.png")
+```
+
+
+The following tables summarize the data made available by the project. @tbl-tabela_dados_access presents the data on urban accessibility:
+
+```{r}
+#| echo: false
+#| label: tbl-tabela_dados_access
+#| tbl-cap: Accessibility indicators calculated in the Opportunity Access Project
+tabela_dados_access <- data.table::data.table(
+  `Indicator (code)` = c(
+      "Minimum travel time (TMI)",
+      "Active cumulative accessibility measure (CMA)",
+      "Passive cumulative accessibility measure (CMP)"
+  ),
+  Description = c(
+      "Time to nearest opportunity",
+      "Number of accessible opportunities in a given travel time threshold",
+      "Number of people that can access a given place in a given travel time threshold"
+  ),
+  `Type of opportunities` = c(
+      "Health, Education, reference centers for social assistance (CRAS)",
+      "Work, Health, Education, CRAS",
+      "-"
+  ),
+  `Travel time thresholds` = c(
+      "On foot (60 mins); bicycle, public transport and car (120 mins)",
+     "On foot and bicycle (15, 30, 45 and 60 mins); public transport and car (15, 30, 60, 90 and 120 mins)",
+     "On foot and bicycle (15, 30, 45 and 60 mins); public transport and car (15, 30, 60, 90 and 120 mins)"
+  )
+)
+
+knitr::kable(tabela_dados_access)
+```
+
+Meanwhile, @tbl-tabela_dados_aop presents data on socioeconomic characteristics of the population and spatial distribution of opportunities:
+
+```{r}
+#| echo: false
+#| label: tbl-tabela_dados_aop
+#| tbl-cap: Socioeconomic information of the population and spatial distribution of activities by year of reference and data source
+tabela_dados_pop <- data.table::data.table(
+  Data= c(
+      "Sociodemographic characteristics of the population",
+      "Education services",
+      "Health services",
+      "Economic activity",
+      "Social welfare services"
+  ),
+  Information = c(
+      "Number of people by sex, age and race; average household income per capita",
+      "Number of public schools by level of education (early childhood, primary and secondary education)",
+      "Number of health facilities that serve the SUS according to the level of care (low, medium and high complexity)",
+      "Number of formal jobs by to the level of education of workers (primary, secondary and tertiary education)",
+      "Number of reference centers for social assistance (CRAS)"
+  ),
+  Years = c(
+      "2010",
+      "2017, 2018, 2019",
+      "2017, 2018, 2019",
+      "2017, 2018, 2019",
+      "2017, 2018, 2019"
+  ),
+  Source = c(
+      "Demographic Census, IBGE",
+      "School Census, Inep",
+      "National Registry of Health Facilities (CNES), Ministry of Health",
+      "National register of firms and workers (RAIS), Ministry of Economy",
+      "Unified Social Assistance System Census (SUAS Census), Ministry of Citizenship"
+  )
+)
+
+knitr::kable(tabela_dados_pop)
+```
+
+All data sets created by AOP are available for download from the [project website](https://www.ipea.gov.br/acessooportunidades/en/dados/) or through the R package `{aopdata}`. The data dictionary can be accessed at this [link](https://ipeagit.github.io/aopdata/articles/data_dic_en.html) or, in an R session, with the command `aopdata::aopdata_dictionary(lang = "en")`. The chapters in this section provide several examples of how to download and visualize these data in R.

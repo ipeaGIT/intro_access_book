@@ -1,1 +1,6 @@
-Under construction.
+# SECTION 2: How to measure urban accessibility
+
+**The purpose of this section** is to show how to calculate urban accessibility estimates in R using the `{r5r}` and `{accessibility}` packages.
+
+Calculating accessibility levels in a study area involves two major steps: first, we need to calculate a travel cost matrix between the origins and destinations of this area; next, we calculate the accessibility from each origin, taking into consideration the transport costs between origin-destination pairs and the number of opportunities in each destination. In this section, we will learn how to execute both of these steps using the R programming language. We will also learn about the data required in each step and the pros and cons of the different methods that can be used to generate accessibility estimates.
+

@@ -1,6 +1,6 @@
 # Presentation {.unnumbered}
 
-Accessibility is the ease with which people can reach places and opportunities such as jobs, health and education services, cultural activities, green areas, etc. The accessibility conditions of  a city or neighborhood depend on the efficiency and connectivity of the transport network and on the proximity between people and activities. The topic of accessibility has been receiving increasing attention from transportation agencies, funding institutions, decision makers and researchers in the fields of urban and transport planning [@papa2015accessibility; @boisjoly2017how]. In the last few years, we have seen a growing number of scientific papers [@miller2018accessibility; @vanwee2021transport] and books [@levine2019mobility; @levinson2020transport] that deepens our understanding of urban accessibility issues. However, there are currently no books or articles that serve simultaneously as an introductory material to the subject and as a practical manual to teach computational methods to calculate and analyze accessibility data. The lack of this type of material helps explain, at least in part, why several transportation agencies and analysts still face challenges in incorporating accessibility issues and indicators into the day-to-day planning and research practice [@silva2017accessibility; @buttner2021accessibility].
+Accessibility is the ease with which people can reach places and opportunities such as jobs, health and education services, cultural activities, green areas, etc. The accessibility conditions of a city or neighborhood depend on the efficiency and connectivity of the transport network and on the proximity between people and activities. The topic of accessibility has been receiving increasing attention from transportation agencies, funding institutions, decision makers and researchers in the fields of urban and transport planning [@papa2015accessibility; @boisjoly2017how]. In the last few years, we have seen a growing number of scientific papers [@miller2018accessibility; @vanwee2021transport] and books [@levine2019mobility; @levinson2020transport] that that deepen our understanding of urban accessibility issues. However, there are currently no books or articles that serve simultaneously as introductory material to the subject and as a practical manual to teach computational methods to calculate and analyze accessibility data. The lack of this type of material helps explain, at least in part, why several transportation agencies and analysts still face challenges in incorporating accessibility issues and indicators into the day-to-day planning and research practice [@silva2017accessibility; @buttner2021accessibility].
 
 The aim of this book is to equip its readers with the fundamental concepts, the data analysis skills and processing tools needed to perform urban accessibility analyses and assess the impact of transportation projects and policies. The book was written keeping in mind some of the problems faced by public managers, policy makers, students and researchers working on urban and transportation planning. Hence, the book has a practical character. All the material in the book is presented with reproducible examples using open data sets and the R programming language.
 
@@ -9,7 +9,7 @@ This book assumes that the reader has a basic knowledge of R. If you want to fam
 
 - [R for Data Science](https://r4ds.had.co.nz/)
 - [Geocomputation with R](https://geocompr.robinlovelace.net/)
-- [Data Science in R](https://livro.curso-r.com/) [in Portuguese]
+- [Data Science in R](https://livro.curso-r.com/) [Portuguese]
 :::
 
 ## Book organization
@@ -40,15 +40,15 @@ knitr::kable(tbl, align = c("c", "l"))
 
 ## Reproducing the book in your computer locally
 
-To knit the book locally, you must first download its source-code . This can be done with [git](https://git-scm.com/) or manually by clicking on the following link: <https://github.com/ipeaGIT/intro_access_book/archive/refs/heads/main.zip>. In case you choose the second approach, you must also unzip  the contents of the ZIP file to a new folder.
+To knit the book locally, you must first download its source-code. This can be done with [git](https://git-scm.com/) or manually by clicking on the following link: <https://github.com/ipeaGIT/intro_access_book/archive/refs/heads/main.zip>. In chase you choose the second approach, you must also unzip the contents of the ZIP file to a new folder.
 
 ::: {.callout-note appearance="simple"}
-This book was written and published with the [Quarto](https://quarto.org/) publishing system. All of the code used in the preparation and publication of this book can be found in [this repository](https://github.com/ipeaGIT/intro_access_book).
+This book was written with the [Quarto](https://quarto.org/) publishing system. All of the code used in the preparation and publication of this book can be found in [this repository](https://github.com/ipeaGIT/intro_access_book).
 :::
 
-To render the book locally, you must have Quarto installed on your computer. Reproducing the code of chapters requires the use of the [`{renv}`](https://rstudio.github.io/renv/index.html) R package, which manages the book's dependencies.
+To render the book locally, you must have Quarto installed on your computer. Reproducing the code of chapters requires the use of the R package [`{renv}`](https://rstudio.github.io/renv/index.html), which manages the book's dependencies.
 
-After the book dependencies are installed, you can run the book source code. Chapters are numerically ordered in files in `.qmd` format.  To run all chapters at once, use one of the following commands:
+After the book dependencies are installed, you can run the book source code. Chapters are numerically ordered in files in `.qmd` format. To run all chapters at once, use one of the following commands:
 
 ```r
 quarto::quarto_preview()
@@ -59,17 +59,17 @@ quarto::quarto_render()
 For more details on how to install the book dependencies and run their content locally, please see the installation instructions in the [book repository](https://github.com/ipeaGIT/intro_access_book).
 
 ## Running the book examples in the cloud with binder
-
 A binder is a tool that allows one to run code in the cloud on a browser, such as Chrome and Firefox. The book code can be run using a server published by [mybinder](https://mybinder.org/). To run this book on Binder, click the icon below: after a few moments, an RStudio Cloud session will start running on your browser. This session includes all the files and data needed to run the book code.
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ipeaGIT/intro_access_book/HEAD?urlpath=rstudio)
 
 Please note that mybinder sessions are limited to 2 GB of RAM. This restriction can prevent Chapter 6 from running properly. If you use binder, we suggest that you do not attempt to render the entire book with the Quarto, as shown above.
 
+
 ## License
 
 <img align="right" src="images/ipea_logo.png" width="240">
-The material in this book may be reproduced and displayed for educational or informational purposes, provided credit is given to the original authors and the original work is cited. This book can be shared on websites and free and open online repositories only it is made clear to users the terms of use of this material and who the copyright holder is, the Institute for Applied Economic Research (Ipea). Any commercial or for-profit use is prohibited. The creation of derivative works is prohibited. This license is based on studies about the Brazilian Copyright Law (Law 9.610/1998).
+The material in this book may be reproduced and displayed for educational or informational purposes, provided credit is given to the original authors and the original work is cited. This book can be shared on websites and free and open online repositories only if it is made clear to users the terms of use of this material and who the copyright holder is, the Institute for Applied Economic Research (Ipea). Any commercial or for-profit use is prohibited. The creation of derivative works is prohibited. This license is based on studies about the Brazilian Copyright Law (Law 9.610/1998).
 
 ## How to cite the book
 
@@ -78,5 +78,4 @@ If you use the material in this book, please cite the book using the following r
 - Pereira, Rafael H. M. & Herszenhut, Daniel. (2023) Introduction to urban accessibility a practical guide in R. Ipea - Institute of Applied Economic Research.
 
 ## Acknowledgements
-
-This book was written under a partnership between the Institute for Applied Economic Research (Ipea) and the Secretariat of Mobility and Regional and Urban Development (SMDRU) of the Ministry of Regional Development (MDR) of the Brazilian federal government. The authors are grateful for the comments and suggestions from Lucas Mation. The authors would also like to thank the contributions of Anna Grigolon, Benjamin Büttner and Aaron Nichols for proofreading the English version of the book.
+This book was written under a partnership between the Institute for Applied Economic Research (Ipea) and the Secretariat of Mobility and Regional and Urban Development (SMDRU) of the Ministry of Regional Development (MDR) of the Brazilian federal government. The authors are grateful for the comments and suggestions from Lucas Mation. The authors would also like to thank the contributions of Anna Grigolon, Benjamin Büttner and Aaron Nichols for proofreading the English version of the book. Any remaining errors are the sole responsibility of the authors

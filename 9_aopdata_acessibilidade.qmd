@@ -133,13 +133,13 @@ limites_legenda <- c(0, max(acesso_tp$CMATT90, na.rm = TRUE) / 1000)
 fig60 <- ggplot(subset(acesso_tp, !is.na(mode))) +
   geom_sf(aes(fill = CMATT60 / 1000), color = NA, alpha = 0.9) +
   scale_fill_viridis_c(option = "inferno", limits = limites_legenda) +
-  labs(subtitle = "em até 60 min.", fill = "Empregos") +
+  labs(subtitle = "em até 60 min.", fill = "Empregos\nem milhares") +
   theme_void()
 
 fig90 <- ggplot(subset(acesso_tp, !is.na(mode))) +
   geom_sf(aes(fill = CMATT90 / 1000), color = NA, alpha = 0.9) +
   scale_fill_viridis_c(option = "inferno", limits = limites_legenda) +
-  labs(subtitle = "em até 90 min.", fill = "Empregos") +
+  labs(subtitle = "em até 90 min.", fill = "Empregos\nem milhares") +
   theme_void()
 
 fig60 +

@@ -28,7 +28,7 @@ Como podemos ver, cada `data.table` dentro do objeto GTFS é nomeado de acordo c
 head(gtfs$trips)
 ```
 
-As tabelas dentro de um objeto GTFS podem ser facilmente manipuladas usando a sintaxe do pacote  `{data.table}`. Este pacote oferece diversas funcionalidades úteis, principalmente para a manipulação de tabelas com uma grande quantidade de registros, como a edição de colunas por referência, filtros de linhas muito rápidos e agregação de dados eficiente[^1]. Para adicionar 100 segundos a todos os *headways* listados na tabela *frequencies* e reverter essa mudança em seguida, por exemplo, podemos usar o código abaixo:
+As tabelas dentro de um objeto GTFS podem ser facilmente manipuladas usando a sintaxe dos pacotes `{dplyr}` ou `{data.table}`. Neste livro, nós optamos por utilizar a sintaxe do `{data.table}` porque este pacote oferece diversas funcionalidades, principalmente para a manipulação de tabelas com uma grande quantidade de registros, como a edição de colunas por referência, filtros de linhas muito rápidos e agregação de dados eficiente[^1]. Para adicionar 100 segundos a todos os *headways* listados na tabela *frequencies* e reverter essa mudança em seguida, por exemplo, podemos usar o código abaixo:
 
 [^1]: Mais detalhes sobre o uso e a sintaxe do `{data.table}` podem ser lidos em <https://rdatatable.gitlab.io/data.table/index.html>.
 
@@ -117,7 +117,7 @@ gtfs_sem_dups$agency
 gtfs_sem_dups$calendar
 ```
 
-Frequentemente, também, lidamos com múltiplos *feeds* em uma mesma área de estudo. - por exemplo, quando os dados dos sistemas de ônibus e de trens de uma mesma cidade estão salvos em arquivos GTFS separados. Neste caso, muitas vezes gostaríamos de uni-los em um único arquivo, diminuindo assim o esforço de manipulação e processamento dos dados. Para isso, o `{gtfstools}` disponibiliza a função `merge_gtfs()`. O exemplo abaixo mostra o resultado da combinação de dois *feeds* distintos, o da SPTrans (sem duplicatas) e o da EMTU, de Porto Alegre:
+Frequentemente, também, lidamos com múltiplos *feeds* em uma mesma área de estudo. - por exemplo, quando os dados dos sistemas de ônibus e de trens de uma mesma cidade estão salvos em arquivos GTFS separados. Neste caso, muitas vezes gostaríamos de uni-los em um único arquivo, diminuindo assim o esforço de manipulação e processamento dos dados. Para isso, o `{gtfstools}` disponibiliza a função `merge_gtfs()`. O exemplo abaixo mostra o resultado da combinação de dois *feeds* distintos, o da SPTrans (sem duplicatas) e o da EPTC, de Porto Alegre:
 
 ```{r}
 # lê GTFS de Porto Alegre
@@ -135,7 +135,7 @@ gtfs_combinado <- merge_gtfs(gtfs_sem_dups, gtfs_poa)
 gtfs_combinado$agency
 ```
 
-Como podemos ver, os registros das tabelas de ambos os *feeds* foram combinados em uma única tabela. Este é o caso quando os dois (ou mais, caso desejado) objetos GTFS possuem registros de uma mesma tabela (a *agency*, no exemplo). Caso apenas um dos objetos possua uma das tabelas, o resultado da operação de combinação copia esta tabela para o resultado final. É o caso, por exemplo, da tabela *frequencies*, que existe apenas no *feed* da SPTrans, mas não no da EMTU: 
+Como podemos ver, os registros das tabelas de ambos os *feeds* foram combinados em uma única tabela. Este é o caso quando os dois (ou mais, caso desejado) objetos GTFS possuem registros de uma mesma tabela (a *agency*, no exemplo). Quando uma determinada tabela está presente em apenas uma dos  *feeds*, a função mantém essa tabela no *output*. É o caso, por exemplo, da tabela *frequencies*, que existe apenas no *feed* da SPTrans, mas não no da EPTC: 
 
 ```{r}
 names(gtfs_poa)

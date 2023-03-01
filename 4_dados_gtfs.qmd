@@ -18,7 +18,7 @@ Arquivos no formato GTFS *Schedule* (daqui em diante chamado apenas de GTFS) tam
 ```{r}
 #| echo: false
 #| label: fig-scheme
-#| fig-cap: Esquema do formato GTFS. Fonte - @pereira2022exploring
+#| fig-cap: Esquema do formato GTFS. Fonte - @pereira2022exploringa
 
 knitr::include_graphics("images/gtfs_scheme.png")
 ```
@@ -50,7 +50,7 @@ Arquivo utilizado para descrever as operadoras de transporte que atuam no sistem
 
 Por exemplo: múltiplas concessionárias de ônibus atuam em um determinado local, mas todo o planejamento de cronograma e de tarifa é realizado por uma única instituição, em geral uma secretaria de transporte ou empresa pública específica. Esta instituição é também entendida pelos usuários do sistema como a operadora, de fato. Neste caso, devemos listar a instituição responsável pelo planejamento na tabela.
 
-Agora, imagine um sistema em que a agência de transporte público local transfere a responsabilidade da operação de um sistema multimodal a diversas empresas, por meio de concessões. Cada uma dessas empresas é responsável pelo planejamento de cronogramas e tarifas dos modos que operam, desde que sejam seguidos determinados parâmetros pré-estabelecidos em contrato. Neste caso, devemos listar as operadoras (concessionárias) na tabela, e não a agência de transporte público em si.
+Agora, imagine um sistema em que a agência de transporte público local transfere a responsabilidade da operação de um sistema multimodal a diversas empresas, por meio de concessões. Cada uma dessas empresas é responsável pelo planejamento de cronogramas e tarifas dos modos que operam, desde que sejam seguidos determinados parâmetros pré-estabelecidos em contrato. Neste caso, podemos listar as operadoras (concessionárias) na tabela, e não a agência de transporte público em si.
 
 A @tbl-agency mostra o arquivo `agency.txt` do *feed* da SPTrans. Como podemos ver, os responsáveis pelo *feed* optaram por listar a própria empresa no arquivo, e não as concessionárias que operam os ônibus e o metrô da cidade.
 
@@ -178,7 +178,7 @@ knitr::kable(head(gtfs$stop_times))
 
 A viagem cuja tabela de horários está sendo descrita é identificada pela coluna `trip_id`. De forma análoga ao que acontece na tabela de trajetórias, um mesmo `trip_id` se repete em muitas observações da tabela. Isto porque, assim como uma trajetória é composta por uma sequência de pontos espaciais, uma tabela de horários é composta por uma sequência de diversos horários de partida/chegada em diversas paradas de transporte público.
 
-As colunas seguintes, `arrival_time`, `departure_time` e `stop_id`, são as responsáveis por descrever o cronograma de cada viagem, associando um horário de chegada e um horário de partida a cada uma das paradas visitadas na viagem. As colunas de horário são formatadas segundo a regra `HH:MM:SS` - ou seja, os dois primeiros números definem a hora, os dois subsequentes os minutos e os últimos dois, os segundos. Esta formatação aceita valores de hora maiores do que `24`: ou seja, uma viagem cuja última parada é visitada às 1h da manhã do dia seguinte ao que começou a rodar (digamos que ela tenha partido do ponto inicial às 23h) deve ter como horário de chegada `25:00:00`, e não `01:00:00`. A coluna `stop_id`, por sua vez, associa os horários de chegada e partida a uma parada descrita no arquivo `stops.txt`. Por fim, a coluna `stop_sequence` lista a sequência na qual cada parada se conecta às demais para formar o cronograma da viagem. Seus valores devem ser sempre ordenados de forma crescente.
+As colunas seguintes, `arrival_time`, `departure_time` e `stop_id`, são as responsáveis por descrever o cronograma de cada viagem, associando um horário de chegada e um horário de partida a cada uma das paradas visitadas na viagem. As colunas de horário são formatadas segundo a regra `HH:MM:SS` - ou seja, os dois primeiros números definem a hora, os dois subsequentes os minutos e os últimos dois, os segundos. Esta formatação aceita valores de hora maiores do que `24`, por exemplo, se uma viagem parte às 23h00, mas só chega a uma determinada estação à 1h00 do dia seguinte. Neste caso, a hora de chegada deve ser registrada como `"25:00:00"`, e não como `"01:00:00"`. A coluna `stop_id`, por sua vez, associa os horários de chegada e partida a uma parada descrita no arquivo `stops.txt`. Por fim, a coluna `stop_sequence` lista a sequência na qual cada parada se conecta às demais para formar o cronograma da viagem. Seus valores devem ser sempre ordenados de forma crescente.
 
 Vale destacar aqui a diferença entre os arquivos `shapes.txt` e `stop_times.txt`. Embora os dois descrevam uma viagem espacialmente, eles o fazem de forma diferente. O `stop_times.txt` descreve a sequência de paradas e horários que compõem um cronograma, mas nada diz sobre o trajeto percorrido pelo veículo entre cada uma das paradas. Já o `shapes.txt` traz a trajetória detalhada da viagem como um todo, mas não descreve em que ponto do espaço estão as paradas da viagem. Quando usamos os dois arquivos em conjunto, portanto, sabemos tanto o cronograma de cada viagem quanto a trajetória espacial da viagem entre paradas.
 
@@ -193,7 +193,7 @@ Arquivo opcional usado para descrever a frequência de cada viagem dentro de um 
 knitr::kable(head(gtfs$frequencies))
 ```
 
-A viagem cuja frequência está sendo descrita é identificada pela coluna `trip_id`. Novamente, um mesmo identificador pode aparecer em várias observações da tabela. Isto porque a especificação GTFS prevê que uma mesma viagem pode ter frequências diferentes ao longo do dia (como em horários de pico e fora-pico, por exemplo). Assim, cada linha da tabela descreve um período do dia que se inicia no horário descrito na coluna `start_time` e termina no horário assinalado na coluna `end_time`.
+A viagem cuja frequência está sendo descrita é identificada pela coluna `trip_id`. Novamente, um mesmo identificador pode aparecer em várias observações da tabela. Isto porque a especificação GTFS prevê que uma mesma viagem pode ter frequências diferentes ao longo do dia (como em horários de pico e fora-pico, por exemplo). Assim, cada linha da tabela se refere à frequência de um determinado `trip_id` entre um intervalo de tempo especificado pelas colunas `start_time` e `end_time`.
 
 Dentro do período especificado por essas duas colunas, a viagem possui um *headway* detalhado na coluna `headway_secs`. O *headway* é o tempo que separa a passagem de dois veículos que operam a mesma linha de transporte público. No caso desta tabela, esse tempo deve ser especificado em segundos. Um valor de `720` entre 04:00h e 05:00h, portanto, significa que a viagem `CPTM L07-0` ocorre de 12 em 12 minutos dentro deste período.
 

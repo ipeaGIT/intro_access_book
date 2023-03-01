@@ -1,1 +1,139 @@
-Under construction.
+# Data on the spatial distribution of opportunities
+
+The `{aopdata}` package also allows you the download data on the spatial distribution of jobs (of low, middle and high education), public health facilities (of low, medium and high complexity), public schools (at early childhood, primary and secondary school levels) and Social Assistance Reference Centers (CRAS). This data is available for all cities included in the project for the years 2017, 2018 and 2019.
+
+This data can be downloaded with the `read_landuse()` function, which works similarly to `read_population()`. To use it, simply indicate the desired city data using the `city` parameter, along with the reference year (`year`) and whether or not you would like to include the spatial information of hexagons (`geometry`).
+
+In the example below, we show how to download the land use data for the year 2019 for the city of Belo Horizonte. Note that this function results in a table that also automatically includes the sociodemographic data.
+
+```{r}
+#| message: false
+#| warning: false
+data_bh <- aopdata::read_landuse(
+  city = "Belo Horizonte",
+  year = 2019,
+  geometry = TRUE,
+  showProgress = FALSE
+)
+
+names(data_bh)
+```
+ 
+@tbl-landuse_dictionary shows the data dictionary with the description of the columns in the data (excluding those previously included in the sociodemographic data table). This description can also be found in the documentation of the function by running`?read_landuse` in R.
+
+```{r}
+#| echo: false
+#| label: tbl-landuse_dictionary
+#| tbl-cap: Description of the variables on spatial opportunity distribution data table
+tbl <- tibble::tribble(
+  ~Coluna,  		~Description,
+  "year",   		"Reference year",
+  "id_hex", 		"Unique hexagon identifier",
+  "abbrev_muni", "Abbreviation of 3 letters of the municipality",
+  "name_muni",   "Name of the municipality",
+  "code_muni",   "7-digit IBGE code of the municipality",
+  "T001",   		"Total number of jobs",
+  "T002",   		"Number of low-education jobs",
+  "T003",   		"Number of middle-education jobs",
+  "T004",   		"Number of high-education jobs",
+  "E001",   		"Total number of public schools",
+  "E002",   		"Number of public early childhood schools",
+  "E003",   		"Number of public primary schools",
+  "E004",   		"Number of public secondary schools",
+  "M001",   		"Total number of enrolled students public teaching enrolments",
+  "M002",   		"Number of enrolled students in public early childhood schools",
+  "M003",   		"Number of enrolled students in public primary schools",
+  "M004",   		"Number of enrolled students in public secondary schools",
+  "S001",   		"Total number of health facilities",
+  "S002",   		"Number of low-complexity public health facilities",
+  "S003",   		"Number of medium-complexity public health facilities",
+  "S004",   		"Number of high complexity public health facilities",
+  "C001",   		"Total Number of Social Assistance Reference Centers (CRAS)",
+  "geometry",   	"Spatial geometry"
+)
+
+knitr::kable(tbl)
+```
+
+The following sections show examples of how to visualize these data in the form of maps.
+
+## Map of employment
+
+In the code below, we load a couple data visualization libraries and create the map. The variables starting with the letter `T` are those that describe the spatial distribution of jobs in each city. The code below shows the spatial distribution of the total number of jobs in each hexagon (variable `T001`) in Belo Horizonte:
+
+```{r}
+#| message: false
+#| warning: false
+library(patchwork)
+library(ggplot2)
+
+ggplot(data_bh) +
+  geom_sf(aes(fill = T001), color = NA, alpha = 0.9) +
+  scale_fill_distiller(palette = "YlGnBu", direction = 1) +
+  labs(
+      title = "Spatial distribution of jobs",
+      subtitle = "Belo Horizonte",
+      fill = "N. of jobs"
+  ) +
+  theme_void()
+```
+
+## Map of schools
+
+Variables with information about the number of public schools in each cell, in turn, begin with the letter `E`. In the example below, we present the spatial distribution of all public schools in Belo Horizonte (variable `E001`).
+
+```{r}
+ggplot(data_bh) +
+  geom_sf(aes(fill = as.factor(E001)), color = NA, alpha = 0.9) +
+  scale_fill_brewer(palette = "YlGnBu", direction = 1) +
+  labs(
+      title = "Spatial distribution of schools",
+      subtitle = "Belo Horizonte",
+      fill = "N. of schools"
+  ) +
+  theme_void()
+```
+
+## Map of health facilities
+
+The variables related to the number of public health facilities in each cell begin with the letter `S`. The visualization below compares the spatial distribution of low complexity (`S002`) and high complexity (`S004`) public health facilities.
+
+```{r}
+low_complexity <- ggplot(data_bh) +
+  geom_sf(aes(fill = as.factor(S002)), color = NA, alpha = 0.9) +
+  scale_fill_brewer(palette = "YlGnBu", direction = 1, limits = factor(0:4)) +
+  labs(
+      title = "Health facilities",
+      subtitle = "Low complexity",
+      fill = "N. of facilities"
+  ) +
+  theme_void()
+
+high_complexity <- ggplot(data_bh) +
+  geom_sf(aes(fill = as.factor(S004)), color = NA, alpha = 0.9) +
+  scale_fill_brewer(palette = "YlGnBu", direction = 1, limits = factor(0:4)) +
+  labs(
+      title = "Health facilities",
+      subtitle = "High complexity",
+      fill = "N. of facilities"
+  ) +
+  theme_void()
+
+low_complexity + high_complexity + plot_layout(guides = "collect")
+```
+
+## CRAS map
+
+Finally, the variable `C001` describes the spatial distribution of Social Assistance Reference Centers (CRAS) in each city. The map below shows the spatial distribution of these services in Belo Horizonte.
+
+```{r}
+ggplot(data_bh) +
+  geom_sf(aes(fill = as.factor(C001)), color = NA, alpha = 0.9) +
+  scale_fill_brewer(palette = "YlGnBu", direction = 1) +
+  labs(
+      title = "Social Assistance Reference Centers (CRAS)",
+      subtitle = "Belo Horizonte",
+      fill = "N. of CRAS"
+  ) +
+  theme_void()
+```
