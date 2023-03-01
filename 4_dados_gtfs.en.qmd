@@ -57,7 +57,7 @@ Now imagine a scenario in which a local public transport agency transfers the re
 ```{r}
 #| echo: false
 #| label: tbl-agency
-#| tbl-cap: `agency.txt` example
+#| tbl-cap: Example of `agency.txt`
 knitr::kable(gtfs$agency)
 ```
 
@@ -82,7 +82,7 @@ File used to describe the stops in a public transport  system. The points listed
 ```{r}
 #| echo: false
 #| label: tbl-stops
-#| tbl-cap: `stops.txt` example
+#| tbl-cap: Example of `stops.txt`
 knitr::kable(head(gtfs$stops[stop_desc != ""]))
 ```
 
@@ -99,7 +99,7 @@ File used to describe the routes operated in a public transport  system and thei
 ```{r}
 #| echo: false
 #| label: tbl-routes
-#| tbl-cap: `routes.txt` example
+#| tbl-cap: Example of `routes.txt`
 knitr::kable(head(gtfs$routes[, -c("route_color", "route_text_color")]))
 ```
 
@@ -116,10 +116,8 @@ File used to describe the trips that compose the system. The trip is the basic u
 ```{r}
 #| echo: false
 #| label: tbl-trips
-#| tbl-cap: `trips.txt` example
-
+#| tbl-cap: Example of `trips.txt`
 data.table::setcolorder(gtfs$trips, "trip_id")
-
 knitr::kable(head(gtfs$trips))
 ```
 
@@ -134,7 +132,7 @@ File used to describe the different types of service calendars in a public trans
 ```{r}
 #| echo: false
 #| label: tbl-calendar
-#| tbl-cap: `calendar.txt` example
+#| tbl-cap: Example of `calendar.txt`
 gtfs$calendar[
   ,
   `:=`(
@@ -159,7 +157,7 @@ File used to describe the spatial path of each trip in the system. This file is 
 ```{r}
 #| echo: false
 #| label: tbl-shapes
-#| tbl-cap: `shapes.txt` example
+#| tbl-cap: Example of `shapes.txt`
 knitr::kable(head(gtfs$shapes[, -"shape_dist_traveled"]))
 ```
 
@@ -172,7 +170,7 @@ File used to describe the timetable of each trip, including the arrival and depa
 ```{r}
 #| echo: false
 #| label: tbl-stop_times
-#| tbl-cap: `stop_times.txt` example
+#| tbl-cap: Example of `stop_times.txt`
 knitr::kable(head(gtfs$stop_times))
 ```
 
@@ -189,7 +187,7 @@ Optional file used to describe the frequency of each trip within a certain time 
 ```{r}
 #| echo: false
 #| label: tbl-frequencies
-#| tbl-cap: `frequencies.txt` example
+#| tbl-cap: Example of `frequencies.txt`
 knitr::kable(head(gtfs$frequencies))
 ```
 

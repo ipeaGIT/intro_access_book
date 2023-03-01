@@ -777,19 +777,20 @@
     },
     "r5r": {
       "Package": "r5r",
-      "Version": "0.7.1",
+      "Version": "1.0.0",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "61db001154cd833466a25c4eb195c9b0",
+      "Hash": "7dbd9f5d9aaab6e486e65b553725b8cd",
       "Requirements": [
         "checkmate",
         "curl",
         "data.table",
         "httr",
+        "jsonlite",
         "rJava",
-        "raster",
         "sf",
-        "sfheaders"
+        "sfheaders",
+        "zip"
       ]
     },
     "rJava": {
@@ -807,18 +808,6 @@
       "Repository": "CRAN",
       "Hash": "5e3c5dc0b071b21fa128676560dbe94d",
       "Requirements": []
-    },
-    "raster": {
-      "Package": "raster",
-      "Version": "3.6-3",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "d550f9d6dbb4dce7cbd146b09d663343",
-      "Requirements": [
-        "Rcpp",
-        "sp",
-        "terra"
-      ]
     },
     "rbibutils": {
       "Package": "rbibutils",
@@ -1030,16 +1019,6 @@
       "Repository": "CRAN",
       "Hash": "b227d13e29222b4574486cfcbde077fa",
       "Requirements": []
-    },
-    "terra": {
-      "Package": "terra",
-      "Version": "1.6-17",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "3e264754dde87261bc7ccdb30d29d3b4",
-      "Requirements": [
-        "Rcpp"
-      ]
     },
     "testthat": {
       "Package": "testthat",

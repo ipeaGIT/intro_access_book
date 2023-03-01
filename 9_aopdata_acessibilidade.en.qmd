@@ -172,10 +172,10 @@ ineq_pt [, TMISA := ifelse(is.infinite(TMISA), 120, TMISA)]
 # calculates the average travel time by income decile
 ineq_pt <- ineq_pt[
   ,
-  ( avrg = weighted.mean(x = TMISA, w = P001, na.rm = TRUE)),
+  .( avrg = weighted.mean(x = TMISA, w = P001, na.rm = TRUE)),
   by = R003
 ]
-ineq_pt <- subset(ineq_pt, ! is.na(media))
+ineq_pt <- subset(ineq_pt, ! is.na(avrg))
 
 ggplot(ineq_pt) +
   geom_col(aes(y = avrg, x = factor(R003)), fill = "#2c9e9e", color = NA) +
@@ -197,7 +197,7 @@ ggplot(ineq_pt) +
 Another way to examine the inequality of access to opportunities is to compare the number of opportunities accessible by different population groups considering the same modes of transport and travel time limits. In this example, we analyze the active cumulative opportunity accessibility metric, available through the variables starting with `CMA` in the `{aopdata}` database. Using the code below, we compare the number of jobs accessible by people of different income deciles by public transport in up to 60 minutes.
 
 ```{r}
-ggplot(subset(acesso_tp, !is.na(R003))) +
+ggplot(subset(access_pt, !is.na(R003))) +
   geom_boxplot(
       aes(x = factor(R003), y = CMATT60 / 1000, color = factor(R003))
   ) +
@@ -241,7 +241,7 @@ Next, we calculate for each city and for each mode of transport the weighted ave
 
 avg_car <- data_car[
   ,
-  ( access_car = weighted.mean(CMATT30, w = P001, na.rm = TRUE)),
+  .( access_car = weighted.mean(CMATT30, w = P001, na.rm = TRUE)),
   by = name_muni
 ]
 

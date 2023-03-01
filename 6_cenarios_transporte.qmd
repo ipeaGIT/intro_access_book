@@ -537,8 +537,8 @@ options(java.parameters = "-Xmx4G")
 library(r5r)
 
 # cria a rede de transporte multimodal de cada cenário
-con_r5r_antes <- setup_r5(pasta_antes, use_elevation = TRUE, verbose = FALSE)
-con_r5r_depois <- setup_r5(pasta_depois, use_elevation = TRUE, verbose = FALSE)
+con_r5r_antes <- setup_r5(pasta_antes, verbose = FALSE)
+con_r5r_depois <- setup_r5(pasta_depois, verbose = FALSE)
 ```
 
 Criadas as redes de transporte de cada cenário, prosseguimos para o cálculo das matrizes de tempo de viagem. Nesta etapa, vamos utilizar como origens e destinos os centróides de uma grade espacial de hexágonos de Fortaleza, disponibilizada pelo pacote `{aopdata}` (mais detalhes sobre o pacote são apresentados na [Seção 5](s5_dados_aop.qmd)). Cada hexágono tem uma área de  0,11 km², aproximadamente um quarteirão, o que permite uma análise espacial bem detalhada.
@@ -567,7 +567,7 @@ matriz_antes <- travel_time_matrix(
   	"02-03-2020 07:00:00",
   	format = "%d-%m-%Y %H:%M:%S"
   ),
-  max_walk_dist = 800,
+  max_walk_time = 30,
   max_trip_duration = 60,
   verbose = FALSE,
   progress = FALSE
@@ -583,7 +583,7 @@ matriz_depois <- travel_time_matrix(
   	"02-03-2020 07:00:00",
   	format = "%d-%m-%Y %H:%M:%S"
   ),
-  max_walk_dist = 800,
+  max_walk_time = 30,
   max_trip_duration = 60,
   verbose = FALSE,
   progress = FALSE

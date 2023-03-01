@@ -46,7 +46,7 @@ OpenStreetMap (OSM) is a geographic database that provides information about str
 - **Public transport network** (optional): one or more GTFS files describing the public transport network of the study area. If absent, public transport trips are not considered in the travel time matrix. This type of data can be downloaded using:
   - [`{tidytransit}`](https://r-transit.github.io/tidytransit/), R package;
   - [Transitland](https://www.transit.land/), website;
-  - In [Chapter 4](4_dados_gtfs.en.qmd) (@tbl-gtfs_brasil) we also show where to download the GTFS files of Brazilian cities that share their data publicly.
+  - In [Chapter 4](4_dados_gtfs.en.qmd) (@tbl-gtfs_brazil) we also show where to download the GTFS files of Brazilian cities that share their data publicly.
 
 - **Topography** (optional): a raster file containing the Digital Elevation Model data of the study area in `.tif`/`.tiff` format. This data set is required if you wish to consider the effects of topography on walking and cycling travel times. It can be downloaded using:
   - [elevatr](https://github.com/jhollist/elevatr), R package;
@@ -111,7 +111,7 @@ We can then proceed with the travel time matrix calculation, which we carry out 
 #| message: false
 library(r5r)
 
-r5r_core <- setup_r5(data_path, use_elevation = TRUE, verbose = FALSE)
+r5r_core <- setup_r5(data_path, verbose = FALSE)
 
 fs::dir_tree(data_path)
 ```
@@ -131,7 +131,7 @@ ttm <- travel_time_matrix(
 	"13-05-2019 14:00:00",
 	format = "%d-%m-%Y %H:%M:%S"
   ),
-  max_walk_dist = 800,
+  max_walk_time = 30,
   max_trip_duration = 120,
   verbose = FALSE,
   progress = FALSE
@@ -158,6 +158,9 @@ The `cumulative_cutoff()` function is used to calculate cumulative opportunity a
 
 ```{r}
 library(accessibility)
+
+# rename column to use package {accessibility}
+data.table::setnames(ttm, "travel_time_p50", "travel_time")
 
 cum_opportunities <- cumulative_cutoff(
   ttm,
@@ -208,7 +211,7 @@ Finally, the `floating_catchment_area()` function calculates accessibility level
 ```{r}
 bfca_competition <- floating_catchment_area(
   ttm,
-  land_use_data = pontos,
+  land_use_data = points,
   opportunity = "schools",
   travel_cost = "travel_time",
   demand = "population",
@@ -240,7 +243,7 @@ r5r_access <- accessibility(
     "13-05-2019 14:00:00",
     format = "%d-%m-%Y %H:%M:%S"
   ),
-  max_walk_dist = 800,
+  max_walk_time = 30,
   max_trip_duration = 120,
   verbose = FALSE,
   progress = FALSE
@@ -263,8 +266,7 @@ cum_cutoff_29 <- cumulative_cutoff(
 access_comparison <- merge(
   r5r_access,
   cum_cutoff_29,
-  by.x = "from_id",
-  by.y = "id"
+  by = "id"
 )
 
 data.table::setnames(
@@ -273,7 +275,7 @@ data.table::setnames(
   new = c("r5r_access", "accessibility_access")
 )
 
-head(access_comparison[, .(from_id, r5r_access, accessibility_access)])
+head(access_comparison[, .(id, r5r_access, accessibility_access)])
 ```
 
 As we can see,  the results of the two functions are identical after this small adjustment. The main difference between the two methods, however, is that the "intermediate" information of travel time between origins and destinations is not available when using `r5r::accessibility()`. Still, this workflow can be a good alternative for people who are solely interested in the accessibility levels and do not require the travel time between points in their analyses. Also, note that the `{accessibility}` package has a wider range of accessibility indicators and it gives more flexibility for users to define any decay function.
@@ -311,7 +313,7 @@ To spatially visualize accessibility data, we need to combine the table of acces
 ```{r}
 spatial_access <- merge(
   poa_grid,
-  cum_cutoff,
+  cum_cutoff_29,
   by.x = "id_hex",
   by.y = "id"
 )

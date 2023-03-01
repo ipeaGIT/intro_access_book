@@ -111,7 +111,7 @@ Feito isso, podemos prosseguir com o cálculo da matriz de tempo de viagem, real
 #| message: false
 library(r5r)
 
-conexao_r5r <- setup_r5(pasta, use_elevation = TRUE, verbose = FALSE)
+conexao_r5r <- setup_r5(pasta, verbose = FALSE)
 
 fs::dir_tree(pasta)
 ```
@@ -130,7 +130,7 @@ matriz <- travel_time_matrix(
     "13-05-2019 14:00:00",
     format = "%d-%m-%Y %H:%M:%S"
   ),
-  max_walk_dist = 800,
+  max_walk_time = 30,
   max_trip_duration = 120,
   verbose = FALSE,
   progress = FALSE
@@ -157,6 +157,9 @@ A função `cumulative_cutoff()` é utilizada para calcular o número de oportun
 
 ```{r}
 library(accessibility)
+
+# renomeia coluna para usar o pacote {accessibility}
+data.table::setnames(matriz, "travel_time_p50", "travel_time")
 
 oportunidades_cumulativas <- cumulative_cutoff(
   travel_matrix = matriz,
@@ -239,7 +242,7 @@ acessibilidade_r5r <- accessibility(
 	"13-05-2019 14:00:00",
 	format = "%d-%m-%Y %H:%M:%S"
   ),
-  max_walk_dist = 800,
+  max_walk_time = 30,
   max_trip_duration = 120,
   verbose = FALSE,
   progress = FALSE
@@ -263,8 +266,7 @@ ops_cumulativas_29 <- cumulative_cutoff(
 comparacao_acessibilidade <- merge(
   acessibilidade_r5r,
   ops_cumulativas_29,
-  by.x = "from_id",
-  by.y = "id"
+  by = "id"
 )
 
 # renomeia colunas com niveis de acessibilidade
