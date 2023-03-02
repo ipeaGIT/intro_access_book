@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.2.335">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Introdução à acessibilidade urbana – aopdata_uso_solo.en</title>
+<title>Introdução à acessibilidade urbana - 8  Data on the spatial distribution of opportunities</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -18,6 +18,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 <script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
 <link href="./9_aopdata_acessibilidade.en.html" rel="next">
@@ -53,7 +116,13 @@ window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
-</script><meta name="citation_title" content="Introdução à acessibilidade urbana: um guia prático em R">
+</script><meta property="og:title" content="Introdução à acessibilidade urbana - 8  Data on the spatial distribution of opportunities">
+<meta property="og:description" content="The {aopdata} package also allows you the download data on the spatial distribution of jobs (of low, middle and high education), public health facilities (of low, medium and high complexity), public…">
+<meta property="og:site-name" content="Introdução à acessibilidade urbana">
+<meta name="twitter:title" content="Introdução à acessibilidade urbana - 8  Data on the spatial distribution of opportunities">
+<meta name="twitter:description" content="The {aopdata} package also allows you the download data on the spatial distribution of jobs (of low, middle and high education), public health facilities (of low, medium and high complexity), public…">
+<meta name="twitter:card" content="summary">
+<meta name="citation_title" content="Introdução à acessibilidade urbana: um guia prático em R">
 <meta name="citation_abstract" content="O objetivo deste livro é apresentar os conceitos e habilidades práticas necessárias para fazer estudos e avaliações de impacto de acessibilidade urbana. O livro começa dando uma visão geral sobre o conceito e os principais indicadores de acessibilidade. Em seguida, ensina como analisar dados espaciais e de redes de transporte para estimar níveis de acessibilidade por diferentes modos de transporte e como visualizar os resultados em forma de mapas e gráficos. O livro também familiariza o leitor com dados de redes de transporte público em formato GTFS e ensina como manipular e visualizar esse tipo de dado. Num dos seus principais capítulos, o livro ensina também como os dados e a metodologia apresentados nos capítulos anteriores podem ser utilizados para avaliar o impacto de projetos de transporte sobre as condições de acesso a oportunidades da população. Por fim, o livro apresenta como baixar, analisar e visualizar estimativas de acessibilidade já calculadas para cidades brasileiras e disponibilizadas pela equipe do Projeto Acesso a Oportunidades, do Ipea.">
 <meta name="citation_author" content="Rafael H. M. Pereira">
 <meta name="citation_author" content="Daniel Herszenhut">
@@ -102,7 +171,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <meta name="citation_reference" content="citation_title=Equity of Urban Service Delivery: A Comparison of Different Accessibility Measures;,citation_author=Tijs Neutens;,citation_author=Tim Schwanen;,citation_author=Frank Witlox;,citation_author=Philippe De Maeyer;,citation_publication_date=2010-07;,citation_cover_date=2010-07;,citation_year=2010;,citation_issue=7;,citation_doi=10.1068/a4230;,citation_issn=0308-518X, 1472-3409;,citation_volume=42;,citation_language=en-US;,citation_journal_title=Environment and Planning A: Economy and Space;">
 <meta name="citation_reference" content="citation_title=An analysis of day-to-day variations in individual spacetime accessibility;,citation_author=Tijs Neutens;,citation_author=Matthias Delafontaine;,citation_author=Darren M. Scott;,citation_author=Philippe De Maeyer;,citation_publication_date=2012-07;,citation_cover_date=2012-07;,citation_year=2012;,citation_doi=10.1016/j.jtrangeo.2012.04.001;,citation_issn=0966-6923;,citation_volume=23;,citation_language=en-US;,citation_journal_title=Journal of Transport Geography;,citation_series_title=Special Issue on Time Geography;">
 <meta name="citation_reference" content="citation_title=Measuring accessibility: Positive and normative implementations of various accessibility indicators;,citation_author=Antonio Páez;,citation_author=Darren M. Scott;,citation_author=Catherine Morency;,citation_publication_date=2012-11;,citation_cover_date=2012-11;,citation_year=2012;,citation_doi=10.1016/j.jtrangeo.2012.03.016;,citation_issn=09666923;,citation_volume=25;,citation_language=en-US;,citation_journal_title=Journal of Transport Geography;">
-<meta name="citation_reference" content="citation_title=Demand and level of service inflation in Floating Catchment Area (FCA) methods;,citation_author=Antonio Paez;,citation_author=Christopher D. Higgins;,citation_author=Salvatore F. Vivona;,citation_editor=Tayyab Ikram Shah;,citation_publication_date=2019-06;,citation_cover_date=2019-06;,citation_year=2019;,citation_issue=6;,citation_doi=10.1371/journal.pone.0218773;,citation_issn=1932-6203;,citation_volume=14;,citation_language=en-US;,citation_journal_title=PLOS ONE;,citation_publisher=Public Library of Science San Francisco, CA USA;">
+<meta name="citation_reference" content="citation_title=Demand and level of service inflation in Floating Catchment Area (FCA) methods;,citation_author=Antonio Paez;,citation_author=Christopher D. Higgins;,citation_author=Salvatore F. Vivona;,citation_editor=Tayyab Ikram Shah;,citation_publication_date=2019-06;,citation_cover_date=2019-06;,citation_year=2019;,citation_issue=6;,citation_doi=10.1371/journal.pone.0218773;,citation_issn=1932-6203;,citation_volume=14;,citation_language=en-US;,citation_journal_title=PLOS ONE;">
 <meta name="citation_reference" content="citation_title=Accessibility instruments for planning practice: A review of European experiences;,citation_author=Enrica Papa;,citation_author=Cecilia Silva;,citation_author=Marco Te Brömmelstroet;,citation_author=Angela Hull;,citation_publication_date=2015-06;,citation_cover_date=2015-06;,citation_year=2015;,citation_doi=10.5198/jtlu.2015.585;,citation_issn=1938-7849;,citation_journal_title=Journal of Transport and Land Use;">
 <meta name="citation_reference" content="citation_title=Distributive justice and equity in transportation;,citation_abstract=Over the past decades, transport researchers and policy-makers have devoted increasing attention to questions about justice and equity. Nonetheless, there is still little engagement with theories in political philosophy to frame what justice means in the context of transport policies. This paper reviews key theories of justice (utilitarianism, libertarianism, intuitionism, Rawls’ egalitarianism, and Capability Approaches (CAs)) and critically evaluates the insights they generate when applied to transport. Based on a combination of Rawlsian and CAs, we propose that distributive justice concerns over transport disadvantage and social exclusion should focus primarily on accessibility as a human capability. This means that, in policy evaluation, a detailed analysis of the distributional effects of transport policies should take account of the setting of minimum standards of accessibility to key destinations and the extent to which these policies respect individuals’ rights and prioritise disadvantaged groups, reduce inequalities of opportunities, and mitigate transport externalities. A full account of justice in transportation requires a more complete understanding of accessibility than traditional approaches have been able to deliver to date.;,citation_author=Rafael H. M. Pereira;,citation_author=Tim Schwanen;,citation_author=David Banister;,citation_publication_date=2017-03;,citation_cover_date=2017-03;,citation_year=2017;,citation_issue=2;,citation_doi=10.1080/01441647.2016.1257660;,citation_issn=0144-1647, 1464-5327;,citation_volume=37;,citation_language=en-US;,citation_journal_title=Transport Reviews;">
 <meta name="citation_reference" content="citation_title=Desigualdades socioespaciais de acesso a oportunidades nas cidades brasileiras, 2019;,citation_author=Rafael H. M. Pereira;,citation_author=Carlos Kaue Vieira Braga;,citation_author=Bernardo Serra;,citation_author=Vanessa Nadalin;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_language=pt-PT;,citation_technical_report_institution=Instituto de Pesquisa Econômica Aplicada (Ipea);,citation_technical_report_number=2535;">
@@ -112,7 +181,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <meta name="citation_reference" content="citation_title=Aopdata: Data from the Access to Opportunities Project;,citation_author=Rafael H. M. Pereira;,citation_author=Daniel Herszenhut;,citation_author=Carlos K. V. Braga;,citation_author=Diego B. Tomasiello;,citation_author=Marcus Saraiva;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;">
 <meta name="citation_reference" content="citation_title=Distribuição espacial de características sociodemográficas e localização de empregos e serviços públicos das vinte maiores cidades do Brasil;,citation_author=Rafael H. M. Pereira;,citation_author=Daniel Herszenhut;,citation_author=Carlos Kauê Vieira Braga;,citation_author=João Pedro Bazzo;,citation_author=João Lucas Albuquerque Oliveira;,citation_author=João Pedro Parga;,citation_author=Marcus Saraiva;,citation_author=Luiz Pedro Silva;,citation_author=Lucas Warwar;,citation_author=Diego Bogado Tomasiello;,citation_publication_date=2022-06;,citation_cover_date=2022-06;,citation_year=2022;,citation_doi=10.38116/td2772;,citation_issn=ISSN 1415-4765;,citation_volume=2772;,citation_language=pt-PT;,citation_journal_title=Texto para Discussão IPEA;,citation_publisher=Instituto de Pesquisa Econômica Aplicada (Ipea);">
 <meta name="citation_reference" content="citation_title=Estimativas de acessibilidade a empregos e serviços públicos via transporte ativo, público e privado nas 20 maiores cidades do Brasil em 2017, 2018, 2019;,citation_author=Rafael H. M. Pereira;,citation_author=Carlos Kauê Vieira Braga;,citation_author=Daniel Herszenhut;,citation_author=Marcus Saraiva;,citation_author=Diego Bogado Tomasiello;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_volume=2800;,citation_language=pt-PT;,citation_journal_title=Texto para Discussão IPEA;,citation_publisher=Instituto de Pesquisa Econômica Aplicada (Ipea);">
-<meta name="citation_reference" content="citation_title=Exploring the time geography of public transport networks with the Gtfs2gps package;,citation_abstract=The creation of the General Transit Feed Specification (GTFS) in the mid-2000s provided a new data format for cities to organize and share digital information on their public transport systems. GTFS feeds store geolocated data on public transport networks, including information on routes, stops, timetables, and service levels. The GTFS standard is now widely adopted by thousands of transport authorities and a wide variety of software applications for different purposes, including trip planning, timetable creation and accessibility analysis. Yet, there is still a lack of tools to parse GTFS data in a way that allows one to analyze the complex spatial and temporal patterns of public transport systems. This paper presents gtfs2gps, a new computational tool to easily process GTFS data that allows one to analyze the space-time trajectories of public transport vehicles at fine spatial and temporal resolutions. gtfs2gps is an open-source R package that employs parallel computing to convert GTFS feeds from relational text files into a data table format similar to GPS records with the timestamps of vehicles in every single trip. This paper explains the package functionalities and demonstrates how gtfs2gps can be used to articulate key concepts in time geography to explore and visualize the spatial and temporal patterns of public transport networks. The paper is accompanied by a computational notebook in R Markdown that allows one to easily reproduce the results in this paper or even replicate the analysis and data visualizations for other contexts where GTFS data is available. Given the widespread use of GTFS by transport agencies, gtfs2gps opens new possibilities for researchers to examine the time geography of public transport systems in urban areas across the globe.;,citation_author=Rafael H. M. Pereira;,citation_author=Pedro R. Andrade;,citation_author=João Pedro Bazzo Vieira;,citation_publication_date=2022-04;,citation_cover_date=2022-04;,citation_year=2022;,citation_doi=10.31235/osf.io/qydr6;,citation_language=en-US;,citation_publisher=SocArXiv;">
+<meta name="citation_reference" content="citation_title=Exploring the time geography of public transport networks with the Gtfs2gps package;,citation_abstract=The creation of the General Transit Feed Specification (GTFS) in the mid-2000s provided a new data format for cities to organize and share digital information on their public transport systems. GTFS feeds store geolocated data on public transport networks, including information on routes, stops, timetables, and service levels. The GTFS standard is now widely adopted by thousands of transport authorities and a wide variety of software applications for different purposes, including trip planning, timetable creation and accessibility analysis. Yet, there is still a lack of tools to parse GTFS data when the objective is to analyze the complex spatial and temporal patterns of public transport systems. This paper presents {gtfs2gps}, a new general-purpose computational tool to easily process static GTFS data that allows one to analyze the spacetime trajectories of public transport vehicles at fine spatial and temporal resolutions. {gtfs2gps} is an open-source R package that employs parallel computing to convert GTFS feeds from relational text files into a trajectory data table, similar to GPS records, with the timestamps of vehicles in every trip. This paper explains the package functionalities and demonstrates how {gtfs2gps} can be used to articulate key concepts in time geography to explore and visualize the spatial and temporal patterns of public transport networks. We also present a case study looking at how {gtfs2gps} can be used to examine socioeconomic and spatialtemporal inequalities in access to public transport, providing key information to monitor cities’ progress toward the Sustainable Development Goals. The paper is accompanied by a computational notebook in R Markdown to support reproducibility of the results in this paper and to replicate the analysis for other contexts where GTFS data are available. Given the widespread use of GTFS, {gtfs2gps} opens new possibilities for researchers to examine the time geography of public transport systems in urban areas across the globe.;,citation_author=Rafael H. M. Pereira;,citation_author=Pedro R. Andrade;,citation_author=João Pedro Bazzo Vieira;,citation_publication_date=2022-12;,citation_cover_date=2022-12;,citation_year=2022;,citation_doi=10.1007/s10109-022-00400-x;,citation_issn=1435-5949;,citation_language=en-US;,citation_journal_title=Journal of Geographical Systems;">
 <meta name="citation_reference" content="citation_title=An International Comparison of Equity in Accessibility to Jobs: London, São Paulo and the Randstad;,citation_abstract=We analyze the impact of different accessibility measures on the interpretation of associated equity analysis using the Gini Coefficient and the (pseudo) Palma Ratio, and the impact of the method of assigning zonal accessibility on Gini estimation results using four different alternatives. Two types of potential accessibility measures (zonal and person-based) and two ratios of potential jobs to potential population (intra-modal and multi-modal) are estimated for car and transit in the Netherlands’ Randstad region, Greater London, and São Paulo relying on network data, schedule-based data, and speed profiles. Gini results are heavily influenced by the accessibility indicator and the method of assignment. The Palma ratio is also influenced by the choice of accessibility indicator, with the person-based potential accessibility measure tending to show greater inequity.;,citation_author=John P. Pritchard;,citation_author=Diego Tomasiello;,citation_author=Mariana Giannotti;,citation_author=Karst Geurs;,citation_publication_date=2019-02;,citation_cover_date=2019-02;,citation_year=2019;,citation_doi=10.32866/7412;,citation_language=en-US;,citation_journal_title=Findings;,citation_publisher=Findings Press;">
 <meta name="citation_reference" content="citation_title=Accessibility instruments in planning practice: Bridging the implementation gap;,citation_author=Cecília Silva;,citation_author=Luca Bertolini;,citation_author=Marco Brömmelstroet;,citation_author=Dimitris Milakis;,citation_author=Enrica Papa;,citation_publication_date=2017-01;,citation_cover_date=2017-01;,citation_year=2017;,citation_doi=10.1016/j.tranpol.2016.09.006;,citation_issn=0967-070X;,citation_volume=53;,citation_language=en-US;,citation_journal_title=Transport Policy;">
 <meta name="citation_reference" content="citation_title=Transport Modes and Accessibility;,citation_abstract=Accessibility by distinguished transport modes is probably the most important concept in transport geography and transport planning: it expresses that the transport system aims to provide access to places where people want to carry out activities. But it is also a concept for which many definitions and indicators are available, each characterized by their own pros and cons. This contribution discusses types of indicators and how to choose between indicators for as specific case. In addition, it explains that information and communication technology (ICT) increasingly plays a dominant role in people’s life as far as (travel to) activities are concerned, and consequently the importance of ICT for accessibility analyses also increases. Finally, it presents several challenges for future research.;,citation_author=Bert Wee;,citation_editor=Roger Vickerman;,citation_publication_date=2021-01;,citation_cover_date=2021-01;,citation_year=2021;,citation_doi=10.1016/B978-0-08-102671-7.10402-6;,citation_isbn=978-0-08-102672-4;,citation_language=en-US;,citation_inbook_title=International Encyclopedia of Transportation;">
@@ -120,11 +189,13 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <meta name="citation_reference" content="citation_title=Urban transport policies in Brazil: The creation of a discriminatory mobility system;,citation_author=Eduardo Alcantara Vasconcellos;,citation_publication_date=2018-02;,citation_cover_date=2018-02;,citation_year=2018;,citation_doi=10.1016/j.jtrangeo.2017.08.014;,citation_issn=0966-6923;,citation_volume=67;,citation_language=en-US;,citation_journal_title=Journal of Transport Geography;">
 <meta name="citation_reference" content="citation_title=Assessing the potential of bus rapid transit-led network restructuring for enhancing affordable access to employment  The case of Johannesburg’s Corridors of Freedom;,citation_author=Christoffel Venter;,citation_publication_date=2016-11;,citation_cover_date=2016-11;,citation_year=2016;,citation_doi=10.1016/j.retrec.2016.05.006;,citation_issn=07398859;,citation_volume=59;,citation_language=en-US;,citation_journal_title=Research in Transportation Economics;">
 </head>
-<body class="nav-sidebar floating fullcontent">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Introdução à acessibilidade urbana</h1>
+      <h1 class="quarto-secondary-nav-title">
+<span class="chapter-number">8</span>  <span class="chapter-title">Data on the spatial distribution of opportunities</span>
+</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -183,19 +254,19 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1_conceito.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>  <span class="chapter-title">1_conceito.en.html</span></a>
+  <a href="./1_conceito.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>  <span class="chapter-title">What is accessibility?</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2_indicadores.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>  <span class="chapter-title">2_indicadores.en.html</span></a>
+  <a href="./2_indicadores.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>  <span class="chapter-title">Accessibility measures</span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./s2_calculo.en.html" class="sidebar-item-text sidebar-link">s2_calculo.en.html</a>
+            <a href="./s2_calculo.en.html" class="sidebar-item-text sidebar-link">SECTION 2: How to measure urban accessibility</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -203,14 +274,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3_calculando_acesso.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>  <span class="chapter-title">3_calculando_acesso.en.html</span></a>
+  <a href="./3_calculando_acesso.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>  <span class="chapter-title">Calculating accessibility estimates in R</span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./s3_dados_tp.en.html" class="sidebar-item-text sidebar-link">s3_dados_tp.en.html</a>
+            <a href="./s3_dados_tp.en.html" class="sidebar-item-text sidebar-link">SECTION 3: Public transport data</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -230,7 +301,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./s4_avaliacao_impacto.en.html" class="sidebar-item-text sidebar-link">s4_avaliacao_impacto.en.html</a>
+            <a href="./s4_avaliacao_impacto.en.html" class="sidebar-item-text sidebar-link">SECTION 4: Impact assessment of transportation projects</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -245,7 +316,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./s5_dados_aop.en.html" class="sidebar-item-text sidebar-link">s5_dados_aop.en.html</a>
+            <a href="./s5_dados_aop.en.html" class="sidebar-item-text sidebar-link">SECTION 5: Data from the Access to Opportunity Project</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -253,17 +324,17 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./7_aopdata_populacao.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>  <span class="chapter-title">7_aopdata_populacao.en.html</span></a>
+  <a href="./7_aopdata_populacao.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>  <span class="chapter-title">Population and socioeconomic data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./8_aopdata_uso_solo.en.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">8</span>  <span class="chapter-title">8_aopdata_uso_solo.en.html</span></a>
+  <a href="./8_aopdata_uso_solo.en.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">8</span>  <span class="chapter-title">Data on the spatial distribution of opportunities</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./9_aopdata_acessibilidade.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>  <span class="chapter-title">9_aopdata_acessibilidade.en.html</span></a>
+  <a href="./9_aopdata_acessibilidade.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>  <span class="chapter-title">Accessibility estimates</span></a>
   </div>
 </li>
       </ul>
@@ -275,11 +346,259 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </li>
     </ul>
 </div>
-</nav><!-- margin-sidebar --><!-- main --><main class="content" id="quarto-document-content"><p>Under construction.</p>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#map-of-employment" id="toc-map-of-employment" class="nav-link active" data-scroll-target="#map-of-employment"><span class="toc-section-number">8.1</span>  Map of employment</a></li>
+  <li><a href="#map-of-schools" id="toc-map-of-schools" class="nav-link" data-scroll-target="#map-of-schools"><span class="toc-section-number">8.2</span>  Map of schools</a></li>
+  <li><a href="#map-of-health-facilities" id="toc-map-of-health-facilities" class="nav-link" data-scroll-target="#map-of-health-facilities"><span class="toc-section-number">8.3</span>  Map of health facilities</a></li>
+  <li><a href="#cras-map" id="toc-cras-map" class="nav-link" data-scroll-target="#cras-map"><span class="toc-section-number">8.4</span>  CRAS map</a></li>
+  </ul>
+<div class="toc-actions">
+<div><i class="bi bi-github"></i></div>
+<div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/8_aopdata_uso_solo.en.qmd" class="toc-action">Edit this page</a></p></div>
+</div></nav><a href="../8_aopdata_uso_solo.html">Leia em português</a>
+</div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block">
+<span class="chapter-number">8</span>  <span class="chapter-title">Data on the spatial distribution of opportunities</span>
+</h1>
+</div>
 
 
 
-</main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><p>The <code>{aopdata}</code> package also allows you the download data on the spatial distribution of jobs (of low, middle and high education), public health facilities (of low, medium and high complexity), public schools (at early childhood, primary and secondary school levels) and Social Assistance Reference Centers (CRAS). This data is available for all cities included in the project for the years 2017, 2018 and 2019.</p>
+<p>This data can be downloaded with the <code>read_landuse()</code> function, which works similarly to <code>read_population()</code>. To use it, simply indicate the desired city data using the <code>city</code> parameter, along with the reference year (<code>year</code>) and whether or not you would like to include the spatial information of hexagons (<code>geometry</code>).</p>
+<p>In the example below, we show how to download the land use data for the year 2019 for the city of Belo Horizonte. Note that this function results in a table that also automatically includes the sociodemographic data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data_bh <span class="ot">&lt;-</span> aopdata<span class="sc">::</span><span class="fu">read_landuse</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">city =</span> <span class="st">"Belo Horizonte"</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">year =</span> <span class="dv">2019</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">geometry =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">showProgress =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(data_bh)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "id_hex"      "abbrev_muni" "name_muni"   "code_muni"   "P001"       
+ [6] "P002"        "P003"        "P004"        "P005"        "P006"       
+[11] "P007"        "P010"        "P011"        "P012"        "P013"       
+[16] "P014"        "P015"        "P016"        "R001"        "R002"       
+[21] "R003"        "year"        "T001"        "T002"        "T003"       
+[26] "T004"        "E001"        "E002"        "E003"        "E004"       
+[31] "M001"        "M002"        "M003"        "M004"        "S001"       
+[36] "S002"        "S003"        "S004"        "C001"        "geometry"   </code></pre>
+</div>
+</div>
+<p><a href="#tbl-landuse_dictionary">Table <span>8.1</span></a> shows the data dictionary with the description of the columns in the data (excluding those previously included in the sociodemographic data table). This description can also be found in the documentation of the function by running<code>?read_landuse</code> in R.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-landuse_dictionary" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Table 8.1: Description of the variables on spatial opportunity distribution data table</caption>
+<colgroup>
+<col style="width: 16%">
+<col style="width: 83%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">Coluna</th>
+<th style="text-align: left;">Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">year</td>
+<td style="text-align: left;">Reference year</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">id_hex</td>
+<td style="text-align: left;">Unique hexagon identifier</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">abbrev_muni</td>
+<td style="text-align: left;">Abbreviation of 3 letters of the municipality</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">name_muni</td>
+<td style="text-align: left;">Name of the municipality</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">code_muni</td>
+<td style="text-align: left;">7-digit IBGE code of the municipality</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">T001</td>
+<td style="text-align: left;">Total number of jobs</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">T002</td>
+<td style="text-align: left;">Number of low-education jobs</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">T003</td>
+<td style="text-align: left;">Number of middle-education jobs</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">T004</td>
+<td style="text-align: left;">Number of high-education jobs</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">E001</td>
+<td style="text-align: left;">Total number of public schools</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">E002</td>
+<td style="text-align: left;">Number of public early childhood schools</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">E003</td>
+<td style="text-align: left;">Number of public primary schools</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">E004</td>
+<td style="text-align: left;">Number of public secondary schools</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">M001</td>
+<td style="text-align: left;">Total number of enrolled students public teaching enrolments</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">M002</td>
+<td style="text-align: left;">Number of enrolled students in public early childhood schools</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">M003</td>
+<td style="text-align: left;">Number of enrolled students in public primary schools</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">M004</td>
+<td style="text-align: left;">Number of enrolled students in public secondary schools</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">S001</td>
+<td style="text-align: left;">Total number of health facilities</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">S002</td>
+<td style="text-align: left;">Number of low-complexity public health facilities</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">S003</td>
+<td style="text-align: left;">Number of medium-complexity public health facilities</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">S004</td>
+<td style="text-align: left;">Number of high complexity public health facilities</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">C001</td>
+<td style="text-align: left;">Total Number of Social Assistance Reference Centers (CRAS)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">geometry</td>
+<td style="text-align: left;">Spatial geometry</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>The following sections show examples of how to visualize these data in the form of maps.</p>
+<section id="map-of-employment" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="map-of-employment">
+<span class="header-section-number">8.1</span> Map of employment</h2>
+<p>In the code below, we load a couple data visualization libraries and create the map. The variables starting with the letter <code>T</code> are those that describe the spatial distribution of jobs in each city. The code below shows the spatial distribution of the total number of jobs in each hexagon (variable <code>T001</code>) in Belo Horizonte:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_bh) <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> T001), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_distiller</span>(<span class="at">palette =</span> <span class="st">"YlGnBu"</span>, <span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Spatial distribution of jobs"</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">"Belo Horizonte"</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> <span class="st">"N. of jobs"</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="8_aopdata_uso_solo.en_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="2100"></p>
+</div>
+</div>
+</section><section id="map-of-schools" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="map-of-schools">
+<span class="header-section-number">8.2</span> Map of schools</h2>
+<p>Variables with information about the number of public schools in each cell, in turn, begin with the letter <code>E</code>. In the example below, we present the spatial distribution of all public schools in Belo Horizonte (variable <code>E001</code>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_bh) <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">as.factor</span>(E001)), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"YlGnBu"</span>, <span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Spatial distribution of schools"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">"Belo Horizonte"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> <span class="st">"N. of schools"</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="8_aopdata_uso_solo.en_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="2100"></p>
+</div>
+</div>
+</section><section id="map-of-health-facilities" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="map-of-health-facilities">
+<span class="header-section-number">8.3</span> Map of health facilities</h2>
+<p>The variables related to the number of public health facilities in each cell begin with the letter <code>S</code>. The visualization below compares the spatial distribution of low complexity (<code>S002</code>) and high complexity (<code>S004</code>) public health facilities.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>low_complexity <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data_bh) <span class="sc">+</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">as.factor</span>(S002)), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"YlGnBu"</span>, <span class="at">direction =</span> <span class="dv">1</span>, <span class="at">limits =</span> <span class="fu">factor</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">4</span>)) <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Health facilities"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">"Low complexity"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> <span class="st">"N. of facilities"</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>high_complexity <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data_bh) <span class="sc">+</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">as.factor</span>(S004)), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"YlGnBu"</span>, <span class="at">direction =</span> <span class="dv">1</span>, <span class="at">limits =</span> <span class="fu">factor</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">4</span>)) <span class="sc">+</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Health facilities"</span>,</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">"High complexity"</span>,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> <span class="st">"N. of facilities"</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>low_complexity <span class="sc">+</span> high_complexity <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">guides =</span> <span class="st">"collect"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="8_aopdata_uso_solo.en_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="2100"></p>
+</div>
+</div>
+</section><section id="cras-map" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="cras-map">
+<span class="header-section-number">8.4</span> CRAS map</h2>
+<p>Finally, the variable <code>C001</code> describes the spatial distribution of Social Assistance Reference Centers (CRAS) in each city. The map below shows the spatial distribution of these services in Belo Horizonte.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_bh) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">as.factor</span>(C001)), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"YlGnBu"</span>, <span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Social Assistance Reference Centers (CRAS)"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">"Belo Horizonte"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> <span class="st">"N. of CRAS"</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="8_aopdata_uso_solo.en_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="2100"></p>
+</div>
+</div>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -528,12 +847,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./7_aopdata_populacao.en.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>  <span class="chapter-title">7_aopdata_populacao.en.html</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>  <span class="chapter-title">Population and socioeconomic data</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./9_aopdata_acessibilidade.en.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">9</span>  <span class="chapter-title">9_aopdata_acessibilidade.en.html</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">9</span>  <span class="chapter-title">Accessibility estimates</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

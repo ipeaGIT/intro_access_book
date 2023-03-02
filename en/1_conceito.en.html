@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.2.335">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Introdução à acessibilidade urbana – conceito.en</title>
+<title>Introdução à acessibilidade urbana - 1  What is accessibility?</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,6 +17,25 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
+}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
 }
 </style>
 <script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
@@ -53,7 +72,13 @@ window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
-</script><meta name="citation_title" content="Introdução à acessibilidade urbana: um guia prático em R">
+</script><meta property="og:title" content="Introdução à acessibilidade urbana - 1  What is accessibility?">
+<meta property="og:description" content="Accessibility is the ease with which people can reach places and opportunities – or, conversely, a characteristic of places and opportunities in terms of how easily they can be achieved by the…">
+<meta property="og:site-name" content="Introdução à acessibilidade urbana">
+<meta name="twitter:title" content="Introdução à acessibilidade urbana - 1  What is accessibility?">
+<meta name="twitter:description" content="Accessibility is the ease with which people can reach places and opportunities – or, conversely, a characteristic of places and opportunities in terms of how easily they can be achieved by the…">
+<meta name="twitter:card" content="summary">
+<meta name="citation_title" content="Introdução à acessibilidade urbana: um guia prático em R">
 <meta name="citation_abstract" content="O objetivo deste livro é apresentar os conceitos e habilidades práticas necessárias para fazer estudos e avaliações de impacto de acessibilidade urbana. O livro começa dando uma visão geral sobre o conceito e os principais indicadores de acessibilidade. Em seguida, ensina como analisar dados espaciais e de redes de transporte para estimar níveis de acessibilidade por diferentes modos de transporte e como visualizar os resultados em forma de mapas e gráficos. O livro também familiariza o leitor com dados de redes de transporte público em formato GTFS e ensina como manipular e visualizar esse tipo de dado. Num dos seus principais capítulos, o livro ensina também como os dados e a metodologia apresentados nos capítulos anteriores podem ser utilizados para avaliar o impacto de projetos de transporte sobre as condições de acesso a oportunidades da população. Por fim, o livro apresenta como baixar, analisar e visualizar estimativas de acessibilidade já calculadas para cidades brasileiras e disponibilizadas pela equipe do Projeto Acesso a Oportunidades, do Ipea.">
 <meta name="citation_author" content="Rafael H. M. Pereira">
 <meta name="citation_author" content="Daniel Herszenhut">
@@ -102,7 +127,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <meta name="citation_reference" content="citation_title=Equity of Urban Service Delivery: A Comparison of Different Accessibility Measures;,citation_author=Tijs Neutens;,citation_author=Tim Schwanen;,citation_author=Frank Witlox;,citation_author=Philippe De Maeyer;,citation_publication_date=2010-07;,citation_cover_date=2010-07;,citation_year=2010;,citation_issue=7;,citation_doi=10.1068/a4230;,citation_issn=0308-518X, 1472-3409;,citation_volume=42;,citation_language=en-US;,citation_journal_title=Environment and Planning A: Economy and Space;">
 <meta name="citation_reference" content="citation_title=An analysis of day-to-day variations in individual spacetime accessibility;,citation_author=Tijs Neutens;,citation_author=Matthias Delafontaine;,citation_author=Darren M. Scott;,citation_author=Philippe De Maeyer;,citation_publication_date=2012-07;,citation_cover_date=2012-07;,citation_year=2012;,citation_doi=10.1016/j.jtrangeo.2012.04.001;,citation_issn=0966-6923;,citation_volume=23;,citation_language=en-US;,citation_journal_title=Journal of Transport Geography;,citation_series_title=Special Issue on Time Geography;">
 <meta name="citation_reference" content="citation_title=Measuring accessibility: Positive and normative implementations of various accessibility indicators;,citation_author=Antonio Páez;,citation_author=Darren M. Scott;,citation_author=Catherine Morency;,citation_publication_date=2012-11;,citation_cover_date=2012-11;,citation_year=2012;,citation_doi=10.1016/j.jtrangeo.2012.03.016;,citation_issn=09666923;,citation_volume=25;,citation_language=en-US;,citation_journal_title=Journal of Transport Geography;">
-<meta name="citation_reference" content="citation_title=Demand and level of service inflation in Floating Catchment Area (FCA) methods;,citation_author=Antonio Paez;,citation_author=Christopher D. Higgins;,citation_author=Salvatore F. Vivona;,citation_editor=Tayyab Ikram Shah;,citation_publication_date=2019-06;,citation_cover_date=2019-06;,citation_year=2019;,citation_issue=6;,citation_doi=10.1371/journal.pone.0218773;,citation_issn=1932-6203;,citation_volume=14;,citation_language=en-US;,citation_journal_title=PLOS ONE;,citation_publisher=Public Library of Science San Francisco, CA USA;">
+<meta name="citation_reference" content="citation_title=Demand and level of service inflation in Floating Catchment Area (FCA) methods;,citation_author=Antonio Paez;,citation_author=Christopher D. Higgins;,citation_author=Salvatore F. Vivona;,citation_editor=Tayyab Ikram Shah;,citation_publication_date=2019-06;,citation_cover_date=2019-06;,citation_year=2019;,citation_issue=6;,citation_doi=10.1371/journal.pone.0218773;,citation_issn=1932-6203;,citation_volume=14;,citation_language=en-US;,citation_journal_title=PLOS ONE;">
 <meta name="citation_reference" content="citation_title=Accessibility instruments for planning practice: A review of European experiences;,citation_author=Enrica Papa;,citation_author=Cecilia Silva;,citation_author=Marco Te Brömmelstroet;,citation_author=Angela Hull;,citation_publication_date=2015-06;,citation_cover_date=2015-06;,citation_year=2015;,citation_doi=10.5198/jtlu.2015.585;,citation_issn=1938-7849;,citation_journal_title=Journal of Transport and Land Use;">
 <meta name="citation_reference" content="citation_title=Distributive justice and equity in transportation;,citation_abstract=Over the past decades, transport researchers and policy-makers have devoted increasing attention to questions about justice and equity. Nonetheless, there is still little engagement with theories in political philosophy to frame what justice means in the context of transport policies. This paper reviews key theories of justice (utilitarianism, libertarianism, intuitionism, Rawls’ egalitarianism, and Capability Approaches (CAs)) and critically evaluates the insights they generate when applied to transport. Based on a combination of Rawlsian and CAs, we propose that distributive justice concerns over transport disadvantage and social exclusion should focus primarily on accessibility as a human capability. This means that, in policy evaluation, a detailed analysis of the distributional effects of transport policies should take account of the setting of minimum standards of accessibility to key destinations and the extent to which these policies respect individuals’ rights and prioritise disadvantaged groups, reduce inequalities of opportunities, and mitigate transport externalities. A full account of justice in transportation requires a more complete understanding of accessibility than traditional approaches have been able to deliver to date.;,citation_author=Rafael H. M. Pereira;,citation_author=Tim Schwanen;,citation_author=David Banister;,citation_publication_date=2017-03;,citation_cover_date=2017-03;,citation_year=2017;,citation_issue=2;,citation_doi=10.1080/01441647.2016.1257660;,citation_issn=0144-1647, 1464-5327;,citation_volume=37;,citation_language=en-US;,citation_journal_title=Transport Reviews;">
 <meta name="citation_reference" content="citation_title=Desigualdades socioespaciais de acesso a oportunidades nas cidades brasileiras, 2019;,citation_author=Rafael H. M. Pereira;,citation_author=Carlos Kaue Vieira Braga;,citation_author=Bernardo Serra;,citation_author=Vanessa Nadalin;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_language=pt-PT;,citation_technical_report_institution=Instituto de Pesquisa Econômica Aplicada (Ipea);,citation_technical_report_number=2535;">
@@ -112,7 +137,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <meta name="citation_reference" content="citation_title=Aopdata: Data from the Access to Opportunities Project;,citation_author=Rafael H. M. Pereira;,citation_author=Daniel Herszenhut;,citation_author=Carlos K. V. Braga;,citation_author=Diego B. Tomasiello;,citation_author=Marcus Saraiva;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;">
 <meta name="citation_reference" content="citation_title=Distribuição espacial de características sociodemográficas e localização de empregos e serviços públicos das vinte maiores cidades do Brasil;,citation_author=Rafael H. M. Pereira;,citation_author=Daniel Herszenhut;,citation_author=Carlos Kauê Vieira Braga;,citation_author=João Pedro Bazzo;,citation_author=João Lucas Albuquerque Oliveira;,citation_author=João Pedro Parga;,citation_author=Marcus Saraiva;,citation_author=Luiz Pedro Silva;,citation_author=Lucas Warwar;,citation_author=Diego Bogado Tomasiello;,citation_publication_date=2022-06;,citation_cover_date=2022-06;,citation_year=2022;,citation_doi=10.38116/td2772;,citation_issn=ISSN 1415-4765;,citation_volume=2772;,citation_language=pt-PT;,citation_journal_title=Texto para Discussão IPEA;,citation_publisher=Instituto de Pesquisa Econômica Aplicada (Ipea);">
 <meta name="citation_reference" content="citation_title=Estimativas de acessibilidade a empregos e serviços públicos via transporte ativo, público e privado nas 20 maiores cidades do Brasil em 2017, 2018, 2019;,citation_author=Rafael H. M. Pereira;,citation_author=Carlos Kauê Vieira Braga;,citation_author=Daniel Herszenhut;,citation_author=Marcus Saraiva;,citation_author=Diego Bogado Tomasiello;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_volume=2800;,citation_language=pt-PT;,citation_journal_title=Texto para Discussão IPEA;,citation_publisher=Instituto de Pesquisa Econômica Aplicada (Ipea);">
-<meta name="citation_reference" content="citation_title=Exploring the time geography of public transport networks with the Gtfs2gps package;,citation_abstract=The creation of the General Transit Feed Specification (GTFS) in the mid-2000s provided a new data format for cities to organize and share digital information on their public transport systems. GTFS feeds store geolocated data on public transport networks, including information on routes, stops, timetables, and service levels. The GTFS standard is now widely adopted by thousands of transport authorities and a wide variety of software applications for different purposes, including trip planning, timetable creation and accessibility analysis. Yet, there is still a lack of tools to parse GTFS data in a way that allows one to analyze the complex spatial and temporal patterns of public transport systems. This paper presents gtfs2gps, a new computational tool to easily process GTFS data that allows one to analyze the space-time trajectories of public transport vehicles at fine spatial and temporal resolutions. gtfs2gps is an open-source R package that employs parallel computing to convert GTFS feeds from relational text files into a data table format similar to GPS records with the timestamps of vehicles in every single trip. This paper explains the package functionalities and demonstrates how gtfs2gps can be used to articulate key concepts in time geography to explore and visualize the spatial and temporal patterns of public transport networks. The paper is accompanied by a computational notebook in R Markdown that allows one to easily reproduce the results in this paper or even replicate the analysis and data visualizations for other contexts where GTFS data is available. Given the widespread use of GTFS by transport agencies, gtfs2gps opens new possibilities for researchers to examine the time geography of public transport systems in urban areas across the globe.;,citation_author=Rafael H. M. Pereira;,citation_author=Pedro R. Andrade;,citation_author=João Pedro Bazzo Vieira;,citation_publication_date=2022-04;,citation_cover_date=2022-04;,citation_year=2022;,citation_doi=10.31235/osf.io/qydr6;,citation_language=en-US;,citation_publisher=SocArXiv;">
+<meta name="citation_reference" content="citation_title=Exploring the time geography of public transport networks with the Gtfs2gps package;,citation_abstract=The creation of the General Transit Feed Specification (GTFS) in the mid-2000s provided a new data format for cities to organize and share digital information on their public transport systems. GTFS feeds store geolocated data on public transport networks, including information on routes, stops, timetables, and service levels. The GTFS standard is now widely adopted by thousands of transport authorities and a wide variety of software applications for different purposes, including trip planning, timetable creation and accessibility analysis. Yet, there is still a lack of tools to parse GTFS data when the objective is to analyze the complex spatial and temporal patterns of public transport systems. This paper presents {gtfs2gps}, a new general-purpose computational tool to easily process static GTFS data that allows one to analyze the spacetime trajectories of public transport vehicles at fine spatial and temporal resolutions. {gtfs2gps} is an open-source R package that employs parallel computing to convert GTFS feeds from relational text files into a trajectory data table, similar to GPS records, with the timestamps of vehicles in every trip. This paper explains the package functionalities and demonstrates how {gtfs2gps} can be used to articulate key concepts in time geography to explore and visualize the spatial and temporal patterns of public transport networks. We also present a case study looking at how {gtfs2gps} can be used to examine socioeconomic and spatialtemporal inequalities in access to public transport, providing key information to monitor cities’ progress toward the Sustainable Development Goals. The paper is accompanied by a computational notebook in R Markdown to support reproducibility of the results in this paper and to replicate the analysis for other contexts where GTFS data are available. Given the widespread use of GTFS, {gtfs2gps} opens new possibilities for researchers to examine the time geography of public transport systems in urban areas across the globe.;,citation_author=Rafael H. M. Pereira;,citation_author=Pedro R. Andrade;,citation_author=João Pedro Bazzo Vieira;,citation_publication_date=2022-12;,citation_cover_date=2022-12;,citation_year=2022;,citation_doi=10.1007/s10109-022-00400-x;,citation_issn=1435-5949;,citation_language=en-US;,citation_journal_title=Journal of Geographical Systems;">
 <meta name="citation_reference" content="citation_title=An International Comparison of Equity in Accessibility to Jobs: London, São Paulo and the Randstad;,citation_abstract=We analyze the impact of different accessibility measures on the interpretation of associated equity analysis using the Gini Coefficient and the (pseudo) Palma Ratio, and the impact of the method of assigning zonal accessibility on Gini estimation results using four different alternatives. Two types of potential accessibility measures (zonal and person-based) and two ratios of potential jobs to potential population (intra-modal and multi-modal) are estimated for car and transit in the Netherlands’ Randstad region, Greater London, and São Paulo relying on network data, schedule-based data, and speed profiles. Gini results are heavily influenced by the accessibility indicator and the method of assignment. The Palma ratio is also influenced by the choice of accessibility indicator, with the person-based potential accessibility measure tending to show greater inequity.;,citation_author=John P. Pritchard;,citation_author=Diego Tomasiello;,citation_author=Mariana Giannotti;,citation_author=Karst Geurs;,citation_publication_date=2019-02;,citation_cover_date=2019-02;,citation_year=2019;,citation_doi=10.32866/7412;,citation_language=en-US;,citation_journal_title=Findings;,citation_publisher=Findings Press;">
 <meta name="citation_reference" content="citation_title=Accessibility instruments in planning practice: Bridging the implementation gap;,citation_author=Cecília Silva;,citation_author=Luca Bertolini;,citation_author=Marco Brömmelstroet;,citation_author=Dimitris Milakis;,citation_author=Enrica Papa;,citation_publication_date=2017-01;,citation_cover_date=2017-01;,citation_year=2017;,citation_doi=10.1016/j.tranpol.2016.09.006;,citation_issn=0967-070X;,citation_volume=53;,citation_language=en-US;,citation_journal_title=Transport Policy;">
 <meta name="citation_reference" content="citation_title=Transport Modes and Accessibility;,citation_abstract=Accessibility by distinguished transport modes is probably the most important concept in transport geography and transport planning: it expresses that the transport system aims to provide access to places where people want to carry out activities. But it is also a concept for which many definitions and indicators are available, each characterized by their own pros and cons. This contribution discusses types of indicators and how to choose between indicators for as specific case. In addition, it explains that information and communication technology (ICT) increasingly plays a dominant role in people’s life as far as (travel to) activities are concerned, and consequently the importance of ICT for accessibility analyses also increases. Finally, it presents several challenges for future research.;,citation_author=Bert Wee;,citation_editor=Roger Vickerman;,citation_publication_date=2021-01;,citation_cover_date=2021-01;,citation_year=2021;,citation_doi=10.1016/B978-0-08-102671-7.10402-6;,citation_isbn=978-0-08-102672-4;,citation_language=en-US;,citation_inbook_title=International Encyclopedia of Transportation;">
@@ -120,11 +145,13 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <meta name="citation_reference" content="citation_title=Urban transport policies in Brazil: The creation of a discriminatory mobility system;,citation_author=Eduardo Alcantara Vasconcellos;,citation_publication_date=2018-02;,citation_cover_date=2018-02;,citation_year=2018;,citation_doi=10.1016/j.jtrangeo.2017.08.014;,citation_issn=0966-6923;,citation_volume=67;,citation_language=en-US;,citation_journal_title=Journal of Transport Geography;">
 <meta name="citation_reference" content="citation_title=Assessing the potential of bus rapid transit-led network restructuring for enhancing affordable access to employment  The case of Johannesburg’s Corridors of Freedom;,citation_author=Christoffel Venter;,citation_publication_date=2016-11;,citation_cover_date=2016-11;,citation_year=2016;,citation_doi=10.1016/j.retrec.2016.05.006;,citation_issn=07398859;,citation_volume=59;,citation_language=en-US;,citation_journal_title=Research in Transportation Economics;">
 </head>
-<body class="nav-sidebar floating fullcontent">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Introdução à acessibilidade urbana</h1>
+      <h1 class="quarto-secondary-nav-title">
+<span class="chapter-number">1</span>  <span class="chapter-title">What is accessibility?</span>
+</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -183,19 +210,19 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1_conceito.en.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>  <span class="chapter-title">1_conceito.en.html</span></a>
+  <a href="./1_conceito.en.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>  <span class="chapter-title">What is accessibility?</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2_indicadores.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>  <span class="chapter-title">2_indicadores.en.html</span></a>
+  <a href="./2_indicadores.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>  <span class="chapter-title">Accessibility measures</span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./s2_calculo.en.html" class="sidebar-item-text sidebar-link">s2_calculo.en.html</a>
+            <a href="./s2_calculo.en.html" class="sidebar-item-text sidebar-link">SECTION 2: How to measure urban accessibility</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -203,14 +230,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3_calculando_acesso.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>  <span class="chapter-title">3_calculando_acesso.en.html</span></a>
+  <a href="./3_calculando_acesso.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>  <span class="chapter-title">Calculating accessibility estimates in R</span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./s3_dados_tp.en.html" class="sidebar-item-text sidebar-link">s3_dados_tp.en.html</a>
+            <a href="./s3_dados_tp.en.html" class="sidebar-item-text sidebar-link">SECTION 3: Public transport data</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -230,7 +257,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./s4_avaliacao_impacto.en.html" class="sidebar-item-text sidebar-link">s4_avaliacao_impacto.en.html</a>
+            <a href="./s4_avaliacao_impacto.en.html" class="sidebar-item-text sidebar-link">SECTION 4: Impact assessment of transportation projects</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -245,7 +272,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./s5_dados_aop.en.html" class="sidebar-item-text sidebar-link">s5_dados_aop.en.html</a>
+            <a href="./s5_dados_aop.en.html" class="sidebar-item-text sidebar-link">SECTION 5: Data from the Access to Opportunity Project</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -253,17 +280,17 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./7_aopdata_populacao.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>  <span class="chapter-title">7_aopdata_populacao.en.html</span></a>
+  <a href="./7_aopdata_populacao.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>  <span class="chapter-title">Population and socioeconomic data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./8_aopdata_uso_solo.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>  <span class="chapter-title">8_aopdata_uso_solo.en.html</span></a>
+  <a href="./8_aopdata_uso_solo.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>  <span class="chapter-title">Data on the spatial distribution of opportunities</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./9_aopdata_acessibilidade.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>  <span class="chapter-title">9_aopdata_acessibilidade.en.html</span></a>
+  <a href="./9_aopdata_acessibilidade.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>  <span class="chapter-title">Accessibility estimates</span></a>
   </div>
 </li>
       </ul>
@@ -275,11 +302,132 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </li>
     </ul>
 </div>
-</nav><!-- margin-sidebar --><!-- main --><main class="content" id="quarto-document-content"><p>Under construction.</p>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#definition-of-urban-accessibility" id="toc-definition-of-urban-accessibility" class="nav-link active" data-scroll-target="#definition-of-urban-accessibility"><span class="toc-section-number">1.1</span>  Definition of urban accessibility</a></li>
+  <li><a href="#difference-between-micro-accessibility-and-urban-accessibility" id="toc-difference-between-micro-accessibility-and-urban-accessibility" class="nav-link" data-scroll-target="#difference-between-micro-accessibility-and-urban-accessibility"><span class="toc-section-number">1.2</span>  Difference between micro-accessibility and urban accessibility</a></li>
+  <li><a href="#why-does-urban-accessibility-matter" id="toc-why-does-urban-accessibility-matter" class="nav-link" data-scroll-target="#why-does-urban-accessibility-matter"><span class="toc-section-number">1.3</span>  Why does urban accessibility matter?</a></li>
+  <li><a href="#difference-between-accessibility-and-mobility" id="toc-difference-between-accessibility-and-mobility" class="nav-link" data-scroll-target="#difference-between-accessibility-and-mobility"><span class="toc-section-number">1.4</span>  Difference between accessibility and mobility</a></li>
+  </ul>
+<div class="toc-actions">
+<div><i class="bi bi-github"></i></div>
+<div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/1_conceito.en.qmd" class="toc-action">Edit this page</a></p></div>
+</div></nav><a href="../1_conceito.html">Leia em português</a>
+</div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block">
+<span class="chapter-number">1</span>  <span class="chapter-title">What is accessibility?</span>
+</h1>
+</div>
 
 
 
-</main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><section id="definition-of-urban-accessibility" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="definition-of-urban-accessibility">
+<span class="header-section-number">1.1</span> Definition of urban accessibility</h2>
+<p>Accessibility is the ease with which people can reach places and opportunities – or, conversely, a characteristic of places and opportunities in terms of how easily they can be achieved by the population <span class="citation" data-cites="geurs2004accessibility neutens2010equity">(<a href="references.en.html#ref-geurs2004accessibility" role="doc-biblioref">Geurs and van Wee 2004</a>; <a href="references.en.html#ref-neutens2010equity" role="doc-biblioref">Neutens et al. 2010</a>)</span>.</p>
+<p>Accessibility conditions are influenced both by the spatial co-distribution of the population, economic activities and public services, as well as by the configuration and performance of the transport network. In this sense, urban accessibility has a fundamental role in shaping people’s ability to move in order to access opportunities, such as jobs, schools, <em>etc</em>.</p>
+<p>Urban accessibility levels are determined by three distinct components: - <strong>Infrastructure</strong>: the ease of access to activities depends on existing infrastructure and transportation services. This includes, for example, the spatial coverage and connectivity of the public transport and road networks, the existence of high-capacity transport services such as trains and subways, etc. Here, both the efficiency and spatial and temporal connectivity of the transport network are of utmost importance.</p>
+<ul>
+<li><p><strong>Land use</strong>: how easily activities can be accessed also depends on the spatial co-distribution of people and activities such as schools, health services, leisure areas, etc. This component concerns the geographical proximity between people and opportunities: the further away an activity is, the more difficult it is to access it.</p></li>
+<li><p><strong>People</strong>: finally, it is important to note that the ease of accessing activities is also affected by individuals’ personal characteristics. Factors such as motor and cognitive difficulties, age, gender, race, and income, for example, can significantly influence people’s ability to get around, use certain modes of transportation, and move around the city without fear of some kind of violence or discrimination.</p></li>
+</ul>
+<p>This last component can be of critical importance for analyzes concerned with equity and social inclusion. However, the influence of people’s personal characteristics on accessibility conditions is usually better through qualitative analyses. Due to operational and computational difficulties, this dimension of accessibility usually receives little attention from impact assessments of large-scale transportation projects. In <a href="./2_indicadores.en.html">Capítulo 2</a>, we discuss more in depth the operational, theoretical, and communication advantages and disadvantages of different accessibility drivers.</p>
+</section><section id="difference-between-micro-accessibility-and-urban-accessibility" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="difference-between-micro-accessibility-and-urban-accessibility">
+<span class="header-section-number">1.2</span> Difference between micro-accessibility and urban accessibility</h2>
+<p>For the purpose of clarifying concepts, it is important to distinguish between what we call urban accessibility and what is the colloquial use of the term accessibility.</p>
+<p>The term <em>accessibility</em> is commonly used to refer to issues universal design standards and regulations, as well as construction and planning practices aimed at the inclusion of people with different degrees of motor and cognitive difficulties. This is what is usually meant by <strong>micro-accessibility</strong>, because it covers issues of access to services and activities at the micro scale. In other words, it relates to how the planning of public and private spaces, and the construction of vehicles, for example, affect the ability of individuals to be able to access places, services, products, etc. <em>Urban accessibility</em>, in turn, can be understood as <strong>macro-accessibility</strong>, because it deals with a broader understanding of access. When we talk about urban access, we focus on how structural issues of planning and urban development, such as the configuration of transport corridors and the spatial distribution of people and activities, affect people’s ability to access opportunities. Urban accessibility addresses how the ability to access activities is influenced by people’s ability to use transportation technologies, the spatial co-distribution of people and activities, and the spatial coverage and connectivity of transportation networks. Micro-accessibility and macro-accessibility are complementary elements of a broader notion of accessibility. Micro-accessibility conditions, for example, directly affect the ability of people to board and use different modes of transport, to move safely on sidewalks, to cross streets, etc. It is of little use for a person to live in a region served by various modes of transport if, for example, she has limited mobility and the transport network and vehicles are not adapted to these difficulties. In this book, we will focus only on analyses of urban accessibility and will often use the term accessibility as a synonym of macro-accessibility. It is important to recognize, however, that macro-accessibility in isolation provides only a limited account of one’s accessibility conditions, and a more nuanced understanding of accessibility requires a closer look at micro-accessibility conditions as well.</p>
+</section><section id="why-does-urban-accessibility-matter" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="why-does-urban-accessibility-matter">
+<span class="header-section-number">1.3</span> Why does urban accessibility matter?</h2>
+<p>The concept of accessibility is central in transport and planning studies for different reasons. First, this concept explicitly articulates how the interaction between transport, urban development and land use policies impact people’s ability to access opportunities in cities. Moreover, access to opportunities and activities, such as jobs, education, and health services plays a fundamental role for the satisfaction of individual and social needs and promotion of social inclusion <span class="citation" data-cites="pereira2021transportation luz2022understanding">(<a href="references.en.html#ref-pereira2021transportation" role="doc-biblioref">Pereira and Karner 2021</a>; <a href="references.en.html#ref-luz2022understanding" role="doc-biblioref">Luz and Portugal 2022</a>)</span>. Good accessibility is also a necessary condition, although not sufficient, for the expansion of people’s freedom of choice <span class="citation" data-cites="church2000transport lucas2016transport vanwee2022accessibility">(<a href="references.en.html#ref-church2000transport" role="doc-biblioref">Church, Frost, and Sullivan 2000</a>; <a href="references.en.html#ref-lucas2016transport" role="doc-biblioref">Lucas et al. 2016</a>; <a href="references.en.html#ref-vanwee2022accessibility" role="doc-biblioref">van Wee 2022</a>)</span>. The concept of accessibility helps us understand how transport and land use investments can have implications for issues related to social exclusion and wellbeing, such as the satisfaction of basic needs, freedom, and equity.</p>
+<p>Additionally, the idea of accessibility brings to the forefront the spatial dimension of inequality of opportunities, which is a central problem of social justice. Urban accessibility helps to explicitly incorporate the notion of space into policy design to address these injustices <span class="citation" data-cites="farrington2005rural pereira2017distributive">(<a href="references.en.html#ref-farrington2005rural" role="doc-biblioref">Farrington and Farrington 2005</a>; <a href="references.en.html#ref-pereira2017distributive" role="doc-biblioref">Pereira, Schwanen, and Banister 2017</a>)</span>. Thus, the notion of accessibility is fundamental for thinking about the equity implications of public policies and evaluating the distributive aspects of which social groups and which localities benefit from these policies.</p>
+<p>As mentioned before, the levels of access to opportunities in a city are a joint result of each person’s ability to use transportation technologies, the spatial co-distribution of activities and population in the city, and the spatial and temporal connectivity of the transport network <span class="citation" data-cites="miller2018accessibility paez2012measuring">(<a href="references.en.html#ref-miller2018accessibility" role="doc-biblioref">Miller 2018</a>; <a href="references.en.html#ref-paez2012measuring" role="doc-biblioref">Páez, Scott, and Morency 2012</a>)</span>. As such, an accessibility-oriented planning seeks to promote the integration between land use and the transport systems, increasing the proximity between people and activities and reducing the dependence on motorized modes of transport <span class="citation" data-cites="banister2011trilogy">(<a href="references.en.html#ref-banister2011trilogy" role="doc-biblioref">Banister 2011</a>)</span>. Planning cities and transport systems to improve accessibility conditions is therefore essential for the promotion of more inclusive and sustainable cities.</p>
+</section><section id="difference-between-accessibility-and-mobility" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="difference-between-accessibility-and-mobility">
+<span class="header-section-number">1.4</span> Difference between accessibility and mobility</h2>
+<p>It is important to clarify the difference between accessibility and another concept very present in our daily life: mobility. Unfortunately, the difference between these concepts is often ignored, even by researchers and planners who deal with these topics on a daily basis. After all, there is a great intersection between accessibility and what is meant by “urban mobility” as a broad field of research and public policy, and which deals with people’s daily mobility patterns, and the planning of public and individual transport systems, including the planning of cycling and pedestrian networks. In this context, it is not uncommon, for example, to hear that a given socioeconomic group “is less mobility” than another, when in fact one wants to say that this group has worse accessibility conditions. So, what is the difference between accessibility and mobility?</p>
+<p>In the scientific literature on urban and transport planning, the concept of mobility refers to people’s daily travel behavior patterns – for example, the number of trips conducted, what transport modes are used, the average distance of trips or how much time people spent commuting to work. Information on mobility patterns is commonly collected through household travel surveys. More recently, new approaches such as GPS sensors from mobile phones and smart cards have also been increasingly used to examine daily mobility patterns <span class="citation" data-cites="anda2017transport kandt2021smart">(<a href="references.en.html#ref-anda2017transport" role="doc-biblioref">Anda, Erath, and Fourie 2017</a>; <a href="references.en.html#ref-kandt2021smart" role="doc-biblioref">Kandt and Batty 2021</a>)</span>. Mobility data and analyses provide information about the travel patterns of different socioeconomic groups and how transport systems are used, which reflect important aspects of the economic and environmental performance of cities and population well-being.</p>
+<p>The concept of accessibility, in turn, refers to the <em>potential</em> capability of reaching activities and opportunities. While a mobility analysis would focus, for example, on the time people spend on their daily commute to work, an accessibility analysis would examine, for example, the quantity and variety of jobs one could potentially reach within a reasonable travel cost. Accessibility addresses how easy/feasible it is to reach a location, while mobility deals with the means of movement used to reach a location. Accessibility levels are therefore potential measures, while mobility data describe real, observed travel behavior.</p>
+<p>Traditionally, urban and transport planning focuses on mobility <span class="citation" data-cites="banister2011trilogy vasconcellos2018urban levinson2020transport">(<a href="references.en.html#ref-banister2011trilogy" role="doc-biblioref">Banister 2011</a>; <a href="references.en.html#ref-vasconcellos2018urban" role="doc-biblioref">Vasconcellos 2018</a>; <a href="references.en.html#ref-levinson2020transport" role="doc-biblioref">Levinson and King 2020</a>)</span>. Even today, the focus on mobility motivates policies to prioritize the movement of cars, and to increase the speed and flow of traffic as a means to tackle congestion and reduce travel times <span class="citation" data-cites="levine2019mobility">(<a href="references.en.html#ref-levine2019mobility" role="doc-biblioref">Levine, Grengs, and Merlin 2019</a>)</span>. These policies, however, tend to focus on mobility metrics: increasing the number of trips, increasing the average speed, decreasing congestion, etc. From this perspective, mobility is seen as an end in itself, and the solutions to “improve” mobility would depend purely on technical solutions that “optimize” traffic speed and flow.</p>
+<p>Mobility, however, cannot be seen as an end in itself. As a rule, people do not travel for the simple pleasure of traveling around. On the contrary, most of the time people travel as a means to access the activities or people they want to engage with. In this sense, there is a growing consensus among researchers and transportation agencies that the goal of a transport policy is to improve people’s access to opportunities <span class="citation" data-cites="pereira2017distributive martens2012justice bertolini2005sustainable">(<a href="references.en.html#ref-pereira2017distributive" role="doc-biblioref">Pereira, Schwanen, and Banister 2017</a>; <a href="references.en.html#ref-martens2012justice" role="doc-biblioref">Martens 2012</a>; <a href="references.en.html#ref-bertolini2005sustainable" role="doc-biblioref">Bertolini, le Clercq, and Kapoen 2005</a>)</span>. If what people want is to access activities, we need to rethink how urban, land use and transport planning practices could be redesigned to improve accessibility - without necessarily increasing traffic speeds or the dependence on motorized vehicles, which are known to cause negative economic, environmental, and public health externalities.</p>
+<p>There is a call for a paradigm shift in urban and transport planning where the pursuit for more sustainable travel patterns requires changing the focus from mobility to accessibility <span class="citation" data-cites="banister2008sustainable cervero2005accessible levine2019mobility">(<a href="references.en.html#ref-banister2008sustainable" role="doc-biblioref">Banister 2008</a>; <a href="references.en.html#ref-cervero2005accessible" role="doc-biblioref">Cervero 2005</a>; <a href="references.en.html#ref-levine2019mobility" role="doc-biblioref">Levine, Grengs, and Merlin 2019</a>)</span>. Policies that seek to increase traffic speed and road capacity, for example, could be replaced by policies that promote proximity between people and activities through greater land use mix or the integration between transport and land use planning. Thus, the shift from mobility to accessibility opens up a wider range of possible public policy instruments and actions to promote a more integrated urban development based on principles of sustainability and social inclusion <span class="citation" data-cites="banister2011trilogy levine2019mobility">(<a href="references.en.html#ref-banister2011trilogy" role="doc-biblioref">Banister 2011</a>; <a href="references.en.html#ref-levine2019mobility" role="doc-biblioref">Levine, Grengs, and Merlin 2019</a>)</span>.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-anda2017transport" class="csl-entry" role="doc-biblioentry">
+Anda, Cuauhtemoc, Alexander Erath, and Pieter Jacobus Fourie. 2017. <span>“Transport Modelling in the Age of Big Data.”</span> <em>International Journal of Urban Sciences</em> 21 (sup1): 19–42. <a href="https://doi.org/10.1080/12265934.2017.1281150">https://doi.org/10.1080/12265934.2017.1281150</a>.
+</div>
+<div id="ref-banister2008sustainable" class="csl-entry" role="doc-biblioentry">
+Banister, David. 2008. <span>“The Sustainable Mobility Paradigm.”</span> <em>Transport Policy</em> 15 (2): 73–80. <a href="https://doi.org/10.1016/j.tranpol.2007.10.005">https://doi.org/10.1016/j.tranpol.2007.10.005</a>.
+</div>
+<div id="ref-banister2011trilogy" class="csl-entry" role="doc-biblioentry">
+———. 2011. <span>“The Trilogy of Distance, Speed and Time.”</span> <em>Journal of Transport Geography</em> 19 (4): 950–59. <a href="https://doi.org/10.1016/j.jtrangeo.2010.12.004">https://doi.org/10.1016/j.jtrangeo.2010.12.004</a>.
+</div>
+<div id="ref-bertolini2005sustainable" class="csl-entry" role="doc-biblioentry">
+Bertolini, L., F. le Clercq, and L. Kapoen. 2005. <span>“Sustainable Accessibility: A Conceptual Framework to Integrate Transport and Land Use Plan-Making. <span>Two</span> Test-Applications in the <span>Netherlands</span> and a Reflection on the Way Forward.”</span> <em>Transport Policy</em> 12 (3): 207–20. <a href="https://doi.org/10.1016/j.tranpol.2005.01.006">https://doi.org/10.1016/j.tranpol.2005.01.006</a>.
+</div>
+<div id="ref-cervero2005accessible" class="csl-entry" role="doc-biblioentry">
+Cervero, Robert. 2005. <span>“Accessible <span>Cities</span> and <span>Regions</span>: <span>A Framework</span> for <span>Sustainable Transport</span> and <span>Urbanism</span> in the 21st <span>Century</span>.”</span> <em>Center for Future Urban Transport Working Paper</em>, no. UCB-ITS-VWP-2005-3 (August).
+</div>
+<div id="ref-church2000transport" class="csl-entry" role="doc-biblioentry">
+Church, A, M Frost, and K Sullivan. 2000. <span>“Transport and Social Exclusion in <span>London</span>.”</span> <em>Transport Policy</em> 7 (3): 195–205. <a href="https://doi.org/10.1016/S0967-070X(00)00024-X">https://doi.org/10.1016/S0967-070X(00)00024-X</a>.
+</div>
+<div id="ref-farrington2005rural" class="csl-entry" role="doc-biblioentry">
+Farrington, John, and Conor Farrington. 2005. <span>“Rural Accessibility, Social Inclusion and Social Justice: Towards Conceptualisation.”</span> <em>Journal of Transport Geography</em> 13 (1): 1–12. <a href="https://doi.org/10.1016/j.jtrangeo.2004.10.002">https://doi.org/10.1016/j.jtrangeo.2004.10.002</a>.
+</div>
+<div id="ref-geurs2004accessibility" class="csl-entry" role="doc-biblioentry">
+Geurs, Karst, and Bert van Wee. 2004. <span>“Accessibility Evaluation of Land-Use and Transport Strategies: Review and Research Directions.”</span> <em>Journal of Transport Geography</em> 12 (2): 127–40. <a href="https://doi.org/10.1016/j.jtrangeo.2003.10.005">https://doi.org/10.1016/j.jtrangeo.2003.10.005</a>.
+</div>
+<div id="ref-kandt2021smart" class="csl-entry" role="doc-biblioentry">
+Kandt, Jens, and Michael Batty. 2021. <span>“Smart Cities, Big Data and Urban Policy: <span>Towards</span> Urban Analytics for the Long Run.”</span> <em>Cities</em> 109 (February): 102992. <a href="https://doi.org/10.1016/j.cities.2020.102992">https://doi.org/10.1016/j.cities.2020.102992</a>.
+</div>
+<div id="ref-levine2019mobility" class="csl-entry" role="doc-biblioentry">
+Levine, Jonathan, Joe Grengs, and Louis A. Merlin. 2019. <em>From Mobility to Accessibility: <span>Transforming</span> Urban Transportation and Land-Use Planning</em>. <span>Cornell University Press</span>.
+</div>
+<div id="ref-levinson2020transport" class="csl-entry" role="doc-biblioentry">
+Levinson, David, and David King. 2020. <em>Transport Access Manual: <span>A</span> Guide for Measuring Connection Between People and Places</em>. <span>Committee of the Transport Access Manual, University of Sydney</span>.
+</div>
+<div id="ref-lucas2016transport" class="csl-entry" role="doc-biblioentry">
+Lucas, Karen, Giulio Mattioli, Ersilia Verlinghieri, and Alvaro Guzman. 2016. <span>“Transport Poverty and Its Adverse Social Consequences.”</span> <em>Proceedings of the Institution of Civil Engineers - Transport</em> 169 (6): 353–65. <a href="https://doi.org/10.1680/jtran.15.00073">https://doi.org/10.1680/jtran.15.00073</a>.
+</div>
+<div id="ref-luz2022understanding" class="csl-entry" role="doc-biblioentry">
+Luz, Gregório, and Licinio Portugal. 2022. <span>“Understanding Transport-Related Social Exclusion Through the Lens of Capabilities Approach.”</span> <em>Transport Reviews</em> 42 (4): 503–25. <a href="https://doi.org/10.1080/01441647.2021.2005183">https://doi.org/10.1080/01441647.2021.2005183</a>.
+</div>
+<div id="ref-martens2012justice" class="csl-entry" role="doc-biblioentry">
+Martens, Karel. 2012. <span>“Justice in Transport as Justice in Accessibility: Applying <span>Walzer</span>’s <span>‘<span>Spheres</span> of <span>Justice</span>’</span> to the Transport Sector.”</span> <em>Transportation</em> 39 (6): 1035–53. <a href="https://doi.org/10.1007/s11116-012-9388-7">https://doi.org/10.1007/s11116-012-9388-7</a>.
+</div>
+<div id="ref-miller2018accessibility" class="csl-entry" role="doc-biblioentry">
+Miller, Eric J. 2018. <span>“Accessibility: Measurement and Application in Transportation Planning.”</span> <em>Transport Reviews</em> 38 (5): 551–55. <a href="https://doi.org/10.1080/01441647.2018.1492778">https://doi.org/10.1080/01441647.2018.1492778</a>.
+</div>
+<div id="ref-neutens2010equity" class="csl-entry" role="doc-biblioentry">
+Neutens, Tijs, Tim Schwanen, Frank Witlox, and Philippe De Maeyer. 2010. <span>“Equity of <span>Urban Service Delivery</span>: <span>A Comparison</span> of <span>Different Accessibility Measures</span>.”</span> <em>Environment and Planning A: Economy and Space</em> 42 (7): 1613–35. <a href="https://doi.org/10.1068/a4230">https://doi.org/10.1068/a4230</a>.
+</div>
+<div id="ref-paez2012measuring" class="csl-entry" role="doc-biblioentry">
+Páez, Antonio, Darren M. Scott, and Catherine Morency. 2012. <span>“Measuring Accessibility: Positive and Normative Implementations of Various Accessibility Indicators.”</span> <em>Journal of Transport Geography</em> 25 (November): 141–53. <a href="https://doi.org/10.1016/j.jtrangeo.2012.03.016">https://doi.org/10.1016/j.jtrangeo.2012.03.016</a>.
+</div>
+<div id="ref-pereira2021transportation" class="csl-entry" role="doc-biblioentry">
+Pereira, Rafael H. M., and Alex Karner. 2021. <span>“Transportation <span>Equity</span>.”</span> In <em>International <span>Encyclopedia</span> of <span>Transportation</span></em>, edited by Roger Vickerman, 271–77. <span>Oxford</span>: <span>Elsevier</span>. <a href="https://doi.org/10.1016/B978-0-08-102671-7.10053-3">https://doi.org/10.1016/B978-0-08-102671-7.10053-3</a>.
+</div>
+<div id="ref-pereira2017distributive" class="csl-entry" role="doc-biblioentry">
+Pereira, Rafael H. M., Tim Schwanen, and David Banister. 2017. <span>“Distributive Justice and Equity in Transportation.”</span> <em>Transport Reviews</em> 37 (2): 170–91. <a href="https://doi.org/10.1080/01441647.2016.1257660">https://doi.org/10.1080/01441647.2016.1257660</a>.
+</div>
+<div id="ref-vanwee2022accessibility" class="csl-entry" role="doc-biblioentry">
+van Wee, Bert. 2022. <span>“Accessibility and Equity: <span>A</span> Conceptual Framework and Research Agenda.”</span> <em>Journal of Transport Geography</em> 104 (October): 103421. <a href="https://doi.org/10.1016/j.jtrangeo.2022.103421">https://doi.org/10.1016/j.jtrangeo.2022.103421</a>.
+</div>
+<div id="ref-vasconcellos2018urban" class="csl-entry" role="doc-biblioentry">
+Vasconcellos, Eduardo Alcantara. 2018. <span>“Urban Transport Policies in <span>Brazil</span>: <span>The</span> Creation of a Discriminatory Mobility System.”</span> <em>Journal of Transport Geography</em> 67 (February): 85–91. <a href="https://doi.org/10.1016/j.jtrangeo.2017.08.014">https://doi.org/10.1016/j.jtrangeo.2017.08.014</a>.
+</div>
+</div>
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -533,7 +681,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./2_indicadores.en.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">2</span>  <span class="chapter-title">2_indicadores.en.html</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">2</span>  <span class="chapter-title">Accessibility measures</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

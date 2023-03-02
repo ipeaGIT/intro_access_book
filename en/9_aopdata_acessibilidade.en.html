@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.2.335">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Introdução à acessibilidade urbana – aopdata_acessibilidade.en</title>
+<title>Introdução à acessibilidade urbana - 9  Accessibility estimates</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -18,6 +18,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 <script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
 <link href="./references.en.html" rel="next">
@@ -53,7 +116,13 @@ window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
-</script><meta name="citation_title" content="Introdução à acessibilidade urbana: um guia prático em R">
+</script><meta property="og:title" content="Introdução à acessibilidade urbana - 9  Accessibility estimates">
+<meta property="og:description" content="Finally, the {aopdata} package also allows you to download estimates of access to jobs, health, education and social assistance services for the years 2017, 2018 and 2019 for all cities included in…">
+<meta property="og:site-name" content="Introdução à acessibilidade urbana">
+<meta name="twitter:title" content="Introdução à acessibilidade urbana - 9  Accessibility estimates">
+<meta name="twitter:description" content="Finally, the {aopdata} package also allows you to download estimates of access to jobs, health, education and social assistance services for the years 2017, 2018 and 2019 for all cities included in…">
+<meta name="twitter:card" content="summary">
+<meta name="citation_title" content="Introdução à acessibilidade urbana: um guia prático em R">
 <meta name="citation_abstract" content="O objetivo deste livro é apresentar os conceitos e habilidades práticas necessárias para fazer estudos e avaliações de impacto de acessibilidade urbana. O livro começa dando uma visão geral sobre o conceito e os principais indicadores de acessibilidade. Em seguida, ensina como analisar dados espaciais e de redes de transporte para estimar níveis de acessibilidade por diferentes modos de transporte e como visualizar os resultados em forma de mapas e gráficos. O livro também familiariza o leitor com dados de redes de transporte público em formato GTFS e ensina como manipular e visualizar esse tipo de dado. Num dos seus principais capítulos, o livro ensina também como os dados e a metodologia apresentados nos capítulos anteriores podem ser utilizados para avaliar o impacto de projetos de transporte sobre as condições de acesso a oportunidades da população. Por fim, o livro apresenta como baixar, analisar e visualizar estimativas de acessibilidade já calculadas para cidades brasileiras e disponibilizadas pela equipe do Projeto Acesso a Oportunidades, do Ipea.">
 <meta name="citation_author" content="Rafael H. M. Pereira">
 <meta name="citation_author" content="Daniel Herszenhut">
@@ -102,7 +171,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <meta name="citation_reference" content="citation_title=Equity of Urban Service Delivery: A Comparison of Different Accessibility Measures;,citation_author=Tijs Neutens;,citation_author=Tim Schwanen;,citation_author=Frank Witlox;,citation_author=Philippe De Maeyer;,citation_publication_date=2010-07;,citation_cover_date=2010-07;,citation_year=2010;,citation_issue=7;,citation_doi=10.1068/a4230;,citation_issn=0308-518X, 1472-3409;,citation_volume=42;,citation_language=en-US;,citation_journal_title=Environment and Planning A: Economy and Space;">
 <meta name="citation_reference" content="citation_title=An analysis of day-to-day variations in individual spacetime accessibility;,citation_author=Tijs Neutens;,citation_author=Matthias Delafontaine;,citation_author=Darren M. Scott;,citation_author=Philippe De Maeyer;,citation_publication_date=2012-07;,citation_cover_date=2012-07;,citation_year=2012;,citation_doi=10.1016/j.jtrangeo.2012.04.001;,citation_issn=0966-6923;,citation_volume=23;,citation_language=en-US;,citation_journal_title=Journal of Transport Geography;,citation_series_title=Special Issue on Time Geography;">
 <meta name="citation_reference" content="citation_title=Measuring accessibility: Positive and normative implementations of various accessibility indicators;,citation_author=Antonio Páez;,citation_author=Darren M. Scott;,citation_author=Catherine Morency;,citation_publication_date=2012-11;,citation_cover_date=2012-11;,citation_year=2012;,citation_doi=10.1016/j.jtrangeo.2012.03.016;,citation_issn=09666923;,citation_volume=25;,citation_language=en-US;,citation_journal_title=Journal of Transport Geography;">
-<meta name="citation_reference" content="citation_title=Demand and level of service inflation in Floating Catchment Area (FCA) methods;,citation_author=Antonio Paez;,citation_author=Christopher D. Higgins;,citation_author=Salvatore F. Vivona;,citation_editor=Tayyab Ikram Shah;,citation_publication_date=2019-06;,citation_cover_date=2019-06;,citation_year=2019;,citation_issue=6;,citation_doi=10.1371/journal.pone.0218773;,citation_issn=1932-6203;,citation_volume=14;,citation_language=en-US;,citation_journal_title=PLOS ONE;,citation_publisher=Public Library of Science San Francisco, CA USA;">
+<meta name="citation_reference" content="citation_title=Demand and level of service inflation in Floating Catchment Area (FCA) methods;,citation_author=Antonio Paez;,citation_author=Christopher D. Higgins;,citation_author=Salvatore F. Vivona;,citation_editor=Tayyab Ikram Shah;,citation_publication_date=2019-06;,citation_cover_date=2019-06;,citation_year=2019;,citation_issue=6;,citation_doi=10.1371/journal.pone.0218773;,citation_issn=1932-6203;,citation_volume=14;,citation_language=en-US;,citation_journal_title=PLOS ONE;">
 <meta name="citation_reference" content="citation_title=Accessibility instruments for planning practice: A review of European experiences;,citation_author=Enrica Papa;,citation_author=Cecilia Silva;,citation_author=Marco Te Brömmelstroet;,citation_author=Angela Hull;,citation_publication_date=2015-06;,citation_cover_date=2015-06;,citation_year=2015;,citation_doi=10.5198/jtlu.2015.585;,citation_issn=1938-7849;,citation_journal_title=Journal of Transport and Land Use;">
 <meta name="citation_reference" content="citation_title=Distributive justice and equity in transportation;,citation_abstract=Over the past decades, transport researchers and policy-makers have devoted increasing attention to questions about justice and equity. Nonetheless, there is still little engagement with theories in political philosophy to frame what justice means in the context of transport policies. This paper reviews key theories of justice (utilitarianism, libertarianism, intuitionism, Rawls’ egalitarianism, and Capability Approaches (CAs)) and critically evaluates the insights they generate when applied to transport. Based on a combination of Rawlsian and CAs, we propose that distributive justice concerns over transport disadvantage and social exclusion should focus primarily on accessibility as a human capability. This means that, in policy evaluation, a detailed analysis of the distributional effects of transport policies should take account of the setting of minimum standards of accessibility to key destinations and the extent to which these policies respect individuals’ rights and prioritise disadvantaged groups, reduce inequalities of opportunities, and mitigate transport externalities. A full account of justice in transportation requires a more complete understanding of accessibility than traditional approaches have been able to deliver to date.;,citation_author=Rafael H. M. Pereira;,citation_author=Tim Schwanen;,citation_author=David Banister;,citation_publication_date=2017-03;,citation_cover_date=2017-03;,citation_year=2017;,citation_issue=2;,citation_doi=10.1080/01441647.2016.1257660;,citation_issn=0144-1647, 1464-5327;,citation_volume=37;,citation_language=en-US;,citation_journal_title=Transport Reviews;">
 <meta name="citation_reference" content="citation_title=Desigualdades socioespaciais de acesso a oportunidades nas cidades brasileiras, 2019;,citation_author=Rafael H. M. Pereira;,citation_author=Carlos Kaue Vieira Braga;,citation_author=Bernardo Serra;,citation_author=Vanessa Nadalin;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_language=pt-PT;,citation_technical_report_institution=Instituto de Pesquisa Econômica Aplicada (Ipea);,citation_technical_report_number=2535;">
@@ -112,7 +181,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <meta name="citation_reference" content="citation_title=Aopdata: Data from the Access to Opportunities Project;,citation_author=Rafael H. M. Pereira;,citation_author=Daniel Herszenhut;,citation_author=Carlos K. V. Braga;,citation_author=Diego B. Tomasiello;,citation_author=Marcus Saraiva;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;">
 <meta name="citation_reference" content="citation_title=Distribuição espacial de características sociodemográficas e localização de empregos e serviços públicos das vinte maiores cidades do Brasil;,citation_author=Rafael H. M. Pereira;,citation_author=Daniel Herszenhut;,citation_author=Carlos Kauê Vieira Braga;,citation_author=João Pedro Bazzo;,citation_author=João Lucas Albuquerque Oliveira;,citation_author=João Pedro Parga;,citation_author=Marcus Saraiva;,citation_author=Luiz Pedro Silva;,citation_author=Lucas Warwar;,citation_author=Diego Bogado Tomasiello;,citation_publication_date=2022-06;,citation_cover_date=2022-06;,citation_year=2022;,citation_doi=10.38116/td2772;,citation_issn=ISSN 1415-4765;,citation_volume=2772;,citation_language=pt-PT;,citation_journal_title=Texto para Discussão IPEA;,citation_publisher=Instituto de Pesquisa Econômica Aplicada (Ipea);">
 <meta name="citation_reference" content="citation_title=Estimativas de acessibilidade a empregos e serviços públicos via transporte ativo, público e privado nas 20 maiores cidades do Brasil em 2017, 2018, 2019;,citation_author=Rafael H. M. Pereira;,citation_author=Carlos Kauê Vieira Braga;,citation_author=Daniel Herszenhut;,citation_author=Marcus Saraiva;,citation_author=Diego Bogado Tomasiello;,citation_publication_date=2022;,citation_cover_date=2022;,citation_year=2022;,citation_volume=2800;,citation_language=pt-PT;,citation_journal_title=Texto para Discussão IPEA;,citation_publisher=Instituto de Pesquisa Econômica Aplicada (Ipea);">
-<meta name="citation_reference" content="citation_title=Exploring the time geography of public transport networks with the Gtfs2gps package;,citation_abstract=The creation of the General Transit Feed Specification (GTFS) in the mid-2000s provided a new data format for cities to organize and share digital information on their public transport systems. GTFS feeds store geolocated data on public transport networks, including information on routes, stops, timetables, and service levels. The GTFS standard is now widely adopted by thousands of transport authorities and a wide variety of software applications for different purposes, including trip planning, timetable creation and accessibility analysis. Yet, there is still a lack of tools to parse GTFS data in a way that allows one to analyze the complex spatial and temporal patterns of public transport systems. This paper presents gtfs2gps, a new computational tool to easily process GTFS data that allows one to analyze the space-time trajectories of public transport vehicles at fine spatial and temporal resolutions. gtfs2gps is an open-source R package that employs parallel computing to convert GTFS feeds from relational text files into a data table format similar to GPS records with the timestamps of vehicles in every single trip. This paper explains the package functionalities and demonstrates how gtfs2gps can be used to articulate key concepts in time geography to explore and visualize the spatial and temporal patterns of public transport networks. The paper is accompanied by a computational notebook in R Markdown that allows one to easily reproduce the results in this paper or even replicate the analysis and data visualizations for other contexts where GTFS data is available. Given the widespread use of GTFS by transport agencies, gtfs2gps opens new possibilities for researchers to examine the time geography of public transport systems in urban areas across the globe.;,citation_author=Rafael H. M. Pereira;,citation_author=Pedro R. Andrade;,citation_author=João Pedro Bazzo Vieira;,citation_publication_date=2022-04;,citation_cover_date=2022-04;,citation_year=2022;,citation_doi=10.31235/osf.io/qydr6;,citation_language=en-US;,citation_publisher=SocArXiv;">
+<meta name="citation_reference" content="citation_title=Exploring the time geography of public transport networks with the Gtfs2gps package;,citation_abstract=The creation of the General Transit Feed Specification (GTFS) in the mid-2000s provided a new data format for cities to organize and share digital information on their public transport systems. GTFS feeds store geolocated data on public transport networks, including information on routes, stops, timetables, and service levels. The GTFS standard is now widely adopted by thousands of transport authorities and a wide variety of software applications for different purposes, including trip planning, timetable creation and accessibility analysis. Yet, there is still a lack of tools to parse GTFS data when the objective is to analyze the complex spatial and temporal patterns of public transport systems. This paper presents {gtfs2gps}, a new general-purpose computational tool to easily process static GTFS data that allows one to analyze the spacetime trajectories of public transport vehicles at fine spatial and temporal resolutions. {gtfs2gps} is an open-source R package that employs parallel computing to convert GTFS feeds from relational text files into a trajectory data table, similar to GPS records, with the timestamps of vehicles in every trip. This paper explains the package functionalities and demonstrates how {gtfs2gps} can be used to articulate key concepts in time geography to explore and visualize the spatial and temporal patterns of public transport networks. We also present a case study looking at how {gtfs2gps} can be used to examine socioeconomic and spatialtemporal inequalities in access to public transport, providing key information to monitor cities’ progress toward the Sustainable Development Goals. The paper is accompanied by a computational notebook in R Markdown to support reproducibility of the results in this paper and to replicate the analysis for other contexts where GTFS data are available. Given the widespread use of GTFS, {gtfs2gps} opens new possibilities for researchers to examine the time geography of public transport systems in urban areas across the globe.;,citation_author=Rafael H. M. Pereira;,citation_author=Pedro R. Andrade;,citation_author=João Pedro Bazzo Vieira;,citation_publication_date=2022-12;,citation_cover_date=2022-12;,citation_year=2022;,citation_doi=10.1007/s10109-022-00400-x;,citation_issn=1435-5949;,citation_language=en-US;,citation_journal_title=Journal of Geographical Systems;">
 <meta name="citation_reference" content="citation_title=An International Comparison of Equity in Accessibility to Jobs: London, São Paulo and the Randstad;,citation_abstract=We analyze the impact of different accessibility measures on the interpretation of associated equity analysis using the Gini Coefficient and the (pseudo) Palma Ratio, and the impact of the method of assigning zonal accessibility on Gini estimation results using four different alternatives. Two types of potential accessibility measures (zonal and person-based) and two ratios of potential jobs to potential population (intra-modal and multi-modal) are estimated for car and transit in the Netherlands’ Randstad region, Greater London, and São Paulo relying on network data, schedule-based data, and speed profiles. Gini results are heavily influenced by the accessibility indicator and the method of assignment. The Palma ratio is also influenced by the choice of accessibility indicator, with the person-based potential accessibility measure tending to show greater inequity.;,citation_author=John P. Pritchard;,citation_author=Diego Tomasiello;,citation_author=Mariana Giannotti;,citation_author=Karst Geurs;,citation_publication_date=2019-02;,citation_cover_date=2019-02;,citation_year=2019;,citation_doi=10.32866/7412;,citation_language=en-US;,citation_journal_title=Findings;,citation_publisher=Findings Press;">
 <meta name="citation_reference" content="citation_title=Accessibility instruments in planning practice: Bridging the implementation gap;,citation_author=Cecília Silva;,citation_author=Luca Bertolini;,citation_author=Marco Brömmelstroet;,citation_author=Dimitris Milakis;,citation_author=Enrica Papa;,citation_publication_date=2017-01;,citation_cover_date=2017-01;,citation_year=2017;,citation_doi=10.1016/j.tranpol.2016.09.006;,citation_issn=0967-070X;,citation_volume=53;,citation_language=en-US;,citation_journal_title=Transport Policy;">
 <meta name="citation_reference" content="citation_title=Transport Modes and Accessibility;,citation_abstract=Accessibility by distinguished transport modes is probably the most important concept in transport geography and transport planning: it expresses that the transport system aims to provide access to places where people want to carry out activities. But it is also a concept for which many definitions and indicators are available, each characterized by their own pros and cons. This contribution discusses types of indicators and how to choose between indicators for as specific case. In addition, it explains that information and communication technology (ICT) increasingly plays a dominant role in people’s life as far as (travel to) activities are concerned, and consequently the importance of ICT for accessibility analyses also increases. Finally, it presents several challenges for future research.;,citation_author=Bert Wee;,citation_editor=Roger Vickerman;,citation_publication_date=2021-01;,citation_cover_date=2021-01;,citation_year=2021;,citation_doi=10.1016/B978-0-08-102671-7.10402-6;,citation_isbn=978-0-08-102672-4;,citation_language=en-US;,citation_inbook_title=International Encyclopedia of Transportation;">
@@ -120,11 +189,13 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <meta name="citation_reference" content="citation_title=Urban transport policies in Brazil: The creation of a discriminatory mobility system;,citation_author=Eduardo Alcantara Vasconcellos;,citation_publication_date=2018-02;,citation_cover_date=2018-02;,citation_year=2018;,citation_doi=10.1016/j.jtrangeo.2017.08.014;,citation_issn=0966-6923;,citation_volume=67;,citation_language=en-US;,citation_journal_title=Journal of Transport Geography;">
 <meta name="citation_reference" content="citation_title=Assessing the potential of bus rapid transit-led network restructuring for enhancing affordable access to employment  The case of Johannesburg’s Corridors of Freedom;,citation_author=Christoffel Venter;,citation_publication_date=2016-11;,citation_cover_date=2016-11;,citation_year=2016;,citation_doi=10.1016/j.retrec.2016.05.006;,citation_issn=07398859;,citation_volume=59;,citation_language=en-US;,citation_journal_title=Research in Transportation Economics;">
 </head>
-<body class="nav-sidebar floating fullcontent">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Introdução à acessibilidade urbana</h1>
+      <h1 class="quarto-secondary-nav-title">
+<span class="chapter-number">9</span>  <span class="chapter-title">Accessibility estimates</span>
+</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -183,19 +254,19 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1_conceito.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>  <span class="chapter-title">1_conceito.en.html</span></a>
+  <a href="./1_conceito.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>  <span class="chapter-title">What is accessibility?</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2_indicadores.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>  <span class="chapter-title">2_indicadores.en.html</span></a>
+  <a href="./2_indicadores.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>  <span class="chapter-title">Accessibility measures</span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./s2_calculo.en.html" class="sidebar-item-text sidebar-link">s2_calculo.en.html</a>
+            <a href="./s2_calculo.en.html" class="sidebar-item-text sidebar-link">SECTION 2: How to measure urban accessibility</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -203,14 +274,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3_calculando_acesso.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>  <span class="chapter-title">3_calculando_acesso.en.html</span></a>
+  <a href="./3_calculando_acesso.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>  <span class="chapter-title">Calculating accessibility estimates in R</span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./s3_dados_tp.en.html" class="sidebar-item-text sidebar-link">s3_dados_tp.en.html</a>
+            <a href="./s3_dados_tp.en.html" class="sidebar-item-text sidebar-link">SECTION 3: Public transport data</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -230,7 +301,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./s4_avaliacao_impacto.en.html" class="sidebar-item-text sidebar-link">s4_avaliacao_impacto.en.html</a>
+            <a href="./s4_avaliacao_impacto.en.html" class="sidebar-item-text sidebar-link">SECTION 4: Impact assessment of transportation projects</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -245,7 +316,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./s5_dados_aop.en.html" class="sidebar-item-text sidebar-link">s5_dados_aop.en.html</a>
+            <a href="./s5_dados_aop.en.html" class="sidebar-item-text sidebar-link">SECTION 5: Data from the Access to Opportunity Project</a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -253,17 +324,17 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./7_aopdata_populacao.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>  <span class="chapter-title">7_aopdata_populacao.en.html</span></a>
+  <a href="./7_aopdata_populacao.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>  <span class="chapter-title">Population and socioeconomic data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./8_aopdata_uso_solo.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>  <span class="chapter-title">8_aopdata_uso_solo.en.html</span></a>
+  <a href="./8_aopdata_uso_solo.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>  <span class="chapter-title">Data on the spatial distribution of opportunities</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./9_aopdata_acessibilidade.en.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">9</span>  <span class="chapter-title">9_aopdata_acessibilidade.en.html</span></a>
+  <a href="./9_aopdata_acessibilidade.en.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">9</span>  <span class="chapter-title">Accessibility estimates</span></a>
   </div>
 </li>
       </ul>
@@ -275,11 +346,394 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </li>
     </ul>
 </div>
-</nav><!-- margin-sidebar --><!-- main --><main class="content" id="quarto-document-content"><p>Under construction.</p>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#map-of-travel-time-to-access-the-nearest-hospital" id="toc-map-of-travel-time-to-access-the-nearest-hospital" class="nav-link active" data-scroll-target="#map-of-travel-time-to-access-the-nearest-hospital"><span class="toc-section-number">9.1</span>  Map of travel time to access the nearest hospital</a></li>
+  <li><a href="#map-of-employment-accessibility" id="toc-map-of-employment-accessibility" class="nav-link" data-scroll-target="#map-of-employment-accessibility"><span class="toc-section-number">9.2</span>  Map of employment accessibility</a></li>
+  <li><a href="#inequalities-in-access-to-opportunities" id="toc-inequalities-in-access-to-opportunities" class="nav-link" data-scroll-target="#inequalities-in-access-to-opportunities"><span class="toc-section-number">9.3</span>  Inequalities in access to opportunities</a></li>
+  </ul>
+<div class="toc-actions">
+<div><i class="bi bi-github"></i></div>
+<div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/9_aopdata_acessibilidade.en.qmd" class="toc-action">Edit this page</a></p></div>
+</div></nav><a href="../9_aopdata_acessibilidade.html">Leia em português</a>
+</div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block">
+<span class="chapter-number">9</span>  <span class="chapter-title">Accessibility estimates</span>
+</h1>
+</div>
 
 
 
-</main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header><p>Finally, the <code>{aopdata}</code> package also allows you to download estimates of access to jobs, health, education and social assistance services for the years 2017, 2018 and 2019 for all cities included in the project.</p>
+<p>This data can be downloaded with the <code>read_access()</code> function, which works similarly to the <code>read_population()</code> and <code>read_landuse()</code> functions presented earlier. Besides indicating the city (<code>city</code> parameter) and the reference year (<code>year</code>), though, it is also necessary to inform the mode of transport (<code>mode</code>) and the period of the day with th <code>peak</code> parameter (peak, between 6am and 8am, or off-peak, between 14h and 16h).</p>
+<p>In the example below, we show how to download accessibility estimates in the peak period in São Paulo for the year 2019. In this example, we downloaded both accessibility estimates by car and public transport and put them together in a single <code>data.frame</code>. Note that this function results in a table that also automatically includes sociodemographic and land use data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># low aop data of accessibility by public transport</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>access_pt <span class="ot">&lt;-</span> aopdata<span class="sc">::</span><span class="fu">read_access</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> <span class="at">city =</span> <span class="st">"São Paulo"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> <span class="at">mode =</span> <span class="st">"public_transport"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> <span class="at">year =</span> <span class="dv">2019</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> <span class="at">peak =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a> <span class="at">geometry =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a> <span class="at">showProgress =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># low aop data of accessibility by car</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>access_car <span class="ot">&lt;-</span> aopdata<span class="sc">::</span><span class="fu">read_access</span>(</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a> <span class="at">city =</span> <span class="st">"São Paulo"</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a> <span class="at">mode =</span> <span class="st">"car"</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a> <span class="at">year =</span> <span class="dv">2019</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a> <span class="at">peak =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a> <span class="at">geometry =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a> <span class="at">showProgress =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a> <span class="co"># joins the data into a single dataframe</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>data_sp <span class="ot">&lt;-</span><span class="fu">rbind</span>(access_pt, access_car)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(data_sp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] "id_hex"       "abbrev_muni"  "name_muni"    "code_muni"    "year"        
+  [6] "P001"         "P002"         "P003"         "P004"         "P005"        
+ [11] "P006"         "P007"         "P010"         "P011"         "P012"        
+ [16] "P013"         "P014"         "P015"         "P016"         "R001"        
+ [21] "R002"         "R003"         "T001"         "T002"         "T003"        
+ [26] "T004"         "E001"         "E002"         "E003"         "E004"        
+ [31] "M001"         "M002"         "M003"         "M004"         "S001"        
+ [36] "S002"         "S003"         "S004"         "C001"         "mode"        
+ [41] "peak"         "CMATT15"      "CMATB15"      "CMATM15"      "CMATA15"     
+ [46] "CMAST15"      "CMASB15"      "CMASM15"      "CMASA15"      "CMAET15"     
+ [51] "CMAEI15"      "CMAEF15"      "CMAEM15"      "CMAMT15"      "CMAMI15"     
+ [56] "CMAMF15"      "CMAMM15"      "CMACT15"      "CMPPT15"      "CMPPH15"     
+ [61] "CMPPM15"      "CMPPB15"      "CMPPA15"      "CMPPI15"      "CMPPN15"     
+ [66] "CMPP0005I15"  "CMPP0614I15"  "CMPP1518I15"  "CMPP1924I15"  "CMPP2539I15" 
+ [71] "CMPP4069I15"  "CMPP70I15"    "CMATT30"      "CMATB30"      "CMATM30"     
+ [76] "CMATA30"      "CMAST30"      "CMASB30"      "CMASM30"      "CMASA30"     
+ [81] "CMAET30"      "CMAEI30"      "CMAEF30"      "CMAEM30"      "CMAMT30"     
+ [86] "CMAMI30"      "CMAMF30"      "CMAMM30"      "CMACT30"      "CMPPT30"     
+ [91] "CMPPH30"      "CMPPM30"      "CMPPB30"      "CMPPA30"      "CMPPI30"     
+ [96] "CMPPN30"      "CMPP0005I30"  "CMPP0614I30"  "CMPP1518I30"  "CMPP1924I30" 
+[101] "CMPP2539I30"  "CMPP4069I30"  "CMPP70I30"    "CMATT60"      "CMATB60"     
+[106] "CMATM60"      "CMATA60"      "CMAST60"      "CMASB60"      "CMASM60"     
+[111] "CMASA60"      "CMAET60"      "CMAEI60"      "CMAEF60"      "CMAEM60"     
+[116] "CMAMT60"      "CMAMI60"      "CMAMF60"      "CMAMM60"      "CMACT60"     
+[121] "CMPPT60"      "CMPPH60"      "CMPPM60"      "CMPPB60"      "CMPPA60"     
+[126] "CMPPI60"      "CMPPN60"      "CMPP0005I60"  "CMPP0614I60"  "CMPP1518I60" 
+[131] "CMPP1924I60"  "CMPP2539I60"  "CMPP4069I60"  "CMPP70I60"    "CMATT90"     
+[136] "CMATB90"      "CMATM90"      "CMATA90"      "CMAST90"      "CMASB90"     
+[141] "CMASM90"      "CMASA90"      "CMAET90"      "CMAEI90"      "CMAEF90"     
+[146] "CMAEM90"      "CMAMT90"      "CMAMI90"      "CMAMF90"      "CMAMM90"     
+[151] "CMACT90"      "CMPPT90"      "CMPPH90"      "CMPPM90"      "CMPPB90"     
+[156] "CMPPA90"      "CMPPI90"      "CMPPN90"      "CMPP0005I90"  "CMPP0614I90" 
+[161] "CMPP1518I90"  "CMPP1924I90"  "CMPP2539I90"  "CMPP4069I90"  "CMPP70I90"   
+[166] "CMATT120"     "CMATB120"     "CMATM120"     "CMATA120"     "CMAST120"    
+[171] "CMASB120"     "CMASM120"     "CMASA120"     "CMAET120"     "CMAEI120"    
+[176] "CMAEF120"     "CMAEM120"     "CMAMT120"     "CMAMI120"     "CMAMF120"    
+[181] "CMAMM120"     "CMACT120"     "CMPPT120"     "CMPPH120"     "CMPPM120"    
+[186] "CMPPB120"     "CMPPA120"     "CMPPI120"     "CMPPN120"     "CMPP0005I120"
+[191] "CMPP0614I120" "CMPP1518I120" "CMPP1924I120" "CMPP2539I120" "CMPP4069I120"
+[196] "CMPP70I120"   "TMIST"        "TMISB"        "TMISM"        "TMISA"       
+[201] "TMIET"        "TMIEI"        "TMIEF"        "TMIEM"        "TMICT"       
+[206] "geometry"    </code></pre>
+</div>
+</div>
+<p>Just like with the sociodemographic and land use variables, the names of the variables related to accessibility estimates are also encoded with column names such as <code>CMAEF30</code>, <code>TMISB</code> and <code>CMPPM60</code>. These codes result from a combination of three components: the type of accessibility indicator; the type of opportunity for which accessibility levels were calculated or to which people the indicator refers to; and the time threshold used in the calculation of the indicator.</p>
+<ol type="1">
+<li>
+<p>The <strong>type of access indicator</strong> is indicated by the first 3 letters of the code. The data includes three types of indicators:</p>
+<ul>
+<li>
+<code>CMA</code> - Active cumulative accessibility;</li>
+<li>
+<code>CMP</code> - Passive cumulative accessibility;</li>
+<li>
+<code>TMI</code> - Minimum travel time to the nearest opportunity.</li>
+</ul>
+</li>
+<li>
+<p>The type of activity to which the accessibility variable refers to is indicated by the following two letters, in the middle of the variable name. The data includes accessibility estimates for various types of activities:</p>
+<ul>
+<li>
+<code>TT</code> - All jobs;</li>
+<li>
+<code>TB</code> - Jobs of low education;</li>
+<li>
+<code>TM</code> - Jobs of middle education;</li>
+<li>
+<code>TA</code> - Jobs of high education;</li>
+<li>
+<code>ST</code> - All public health facilities;</li>
+<li>
+<code>SB</code> - Public health facilities of low complexity;</li>
+<li>
+<code>SM</code> - Public health facilities of medium complexity;</li>
+<li>
+<code>SA</code> - Public health facilities of high complexity;</li>
+<li>
+<code>ET</code> - All public schools;</li>
+<li>
+<code>EI</code> - Public early childhood schools;</li>
+<li>
+<code>EF</code> - Public primary schools;</li>
+<li>
+<code>MS</code> -Public secondary schools;</li>
+<li>
+<code>MT</code> - All enrollment places in all public school;</li>
+<li>
+<code>MI</code> - Enrollment places at early childhood schools;</li>
+<li>
+<code>MF</code> - Enrollment places at primary schools;</li>
+<li>
+<code>MM</code> - Enrollment places at secondary schools;</li>
+<li>
+<code>CT</code> - All Social Assistance Reference Census.</li>
+</ul>
+</li>
+</ol>
+<p>In the case of the passive accessibility indicator (<code>CMP</code>), the letters in the middle of the variable name indicate which population group the accessibility estimates refer to:</p>
+<ul>
+<li>
+<code>PT</code> - The entire population;</li>
+<li>
+<code>PH</code> - Male population;</li>
+<li>
+<code>PM</code> - Female population;</li>
+<li>
+<code>PB</code> - White population;</li>
+<li>
+<code>PN</code> - Black population;</li>
+<li>
+<code>PA</code> - Yellow population;</li>
+<li>
+<code>PI</code> - Indigenous population;</li>
+<li>
+<code>P0005I</code> - Population from 0 to 5 years old;</li>
+<li>
+<code>P0614I</code> - Population from 6 to 14 years;</li>
+<li>
+<code>P1518I</code> - Population from 15 to 18 years;</li>
+<li>
+<code>P1924I</code> - Population from 19 to 24 years;</li>
+<li>
+<code>P2539I</code> - Population from 25 to 39 years;</li>
+<li>
+<code>P4069I</code> - Population from 40 to 69 years;</li>
+<li>
+<code>P70I</code> - Population aged 70 and older.</li>
+</ul>
+<ol start="3" type="1">
+<li>The <strong>travel time threshold</strong> used in the accessibility calculations is indicated by the two numbers at the end of the variable name. This only applies to active cumulative accessibility (<code>CMA</code>) and passive accessibility (<code>CMP</code>) indicators, and include the limits of 15, 30, 45, 60, 90, and 120 minutes, depending on the mode of transport.</li>
+</ol>
+<p><strong>Examples:</strong></p>
+<ul>
+<li>
+<span style="color: red;">CMA</span><span style="color: black;">EF</span><span style="color: blue;">30</span>: number of public primary schools accessible within 30 minutes of travel;</li>
+<li>
+<span style="color: red;">TMI</span><span style="color: black;">SB</span>: minimum travel time to the closest public health facility with services of lower complexity;</li>
+<li>
+<span style="color: red;">CMP</span><span style="color: black;">PM</span><span style="color: blue;">60</span>: number of of women who can access a certain hexagon within 60 minutes of travel time.</li>
+</ul>
+<p>The full description of the variables can also be found in the documentation of function by running the <code>?read_access</code>command in R. The following sections show examples of how to visualize these accessibility data in the form of maps and charts.</p>
+<section id="map-of-travel-time-to-access-the-nearest-hospital" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="map-of-travel-time-to-access-the-nearest-hospital">
+<span class="header-section-number">9.1</span> Map of travel time to access the nearest hospital</h2>
+<p>In this example, we compared the access time by car and public transport to the nearest hospital for each hexagon. To analyze the minimum travel time (<code>TMI</code>) to high complexity hospitals (<code>SA</code>), we used the variable <code>TMISA</code>. With the code below, we load the data visualization libraries and create the maps showing the spatial distribution of access time for both cars and public transport. Because travel times by public transport are usually much longer than by car, we truncate the distribution of values to 60 minutes or more.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># truncates travel times to 60 minutes</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>data_sp<span class="sc">$</span>TMISA <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data_sp<span class="sc">$</span>TMISA <span class="sc">&gt;</span> <span class="dv">60</span>, <span class="dv">60</span>, data_sp<span class="sc">$</span>TMISA)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">subset</span>(data_sp, <span class="sc">!</span><span class="fu">is.na</span>(mode))) <span class="sc">+</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> TMISA), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">option =</span> <span class="st">"cividis"</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">60</span>, <span class="dv">10</span>),</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">50</span>, <span class="dv">10</span>), <span class="st">"60+"</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Travel time to the nearest high complex hospital"</span>,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">"São Paulo"</span>,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> <span class="st">"Time in</span><span class="sc">\n</span><span class="st">minutes"</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> mode) <span class="sc">+</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="9_aopdata_acessibilidade.en_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="2100"></p>
+</div>
+</div>
+</section><section id="map-of-employment-accessibility" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="map-of-employment-accessibility">
+<span class="header-section-number">9.2</span> Map of employment accessibility</h2>
+<p><code>{aopdata}</code> data also makes it very easy to compare the number of opportunities accessible at different travel times. Using the code below, for example, we illustrate how to visualize side-by-side the spatial distribution of employment accessibility in up to 60 and 90 minutes of travel by public transport.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># determine min and max values for the legend</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>limit_values  <span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">max</span>(access_pt <span class="sc">$</span>CMATT90, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="dv">1000</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create maps</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>fig60 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">subset</span>(access_pt, <span class="sc">!</span> <span class="fu">is.na</span>(mode))) <span class="sc">+</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> CMATT60 <span class="sc">/</span> <span class="dv">1000</span>), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"inferno"</span>, <span class="at">limits =</span> limit_values) <span class="sc">+</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>( <span class="at">subtitle =</span> <span class="st">"in up to 60 min."</span> , <span class="at">fill =</span> <span class="st">"Jobs</span><span class="sc">\n</span><span class="st">(in thousands)"</span>) <span class="sc">+</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>fig90 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">subset</span>(access_pt, <span class="sc">!</span><span class="fu">is.na</span>(mode))) <span class="sc">+</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> CMATT90 <span class="sc">/</span> <span class="dv">1000</span>), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"inferno"</span>, <span class="at">limits =</span> limit_values) <span class="sc">+</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"up to 90 min."</span>, <span class="at">fill =</span> <span class="st">"Jobs</span><span class="sc">\n</span><span class="st">(in thousands)"</span>) <span class="sc">+</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>fig60 <span class="sc">+</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  fig90 <span class="sc">+</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_layout</span>(<span class="at">guides =</span> <span class="st">"collect"</span>) <span class="sc">+</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Number of jobs accessible by public transport"</span>,</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"São Paulo"</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="9_aopdata_acessibilidade.en_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="2100"></p>
+</div>
+</div>
+</section><section id="inequalities-in-access-to-opportunities" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="inequalities-in-access-to-opportunities">
+<span class="header-section-number">9.3</span> Inequalities in access to opportunities</h2>
+<p>Finally, the data from <code>{aopdata}</code> can be used in different ways to analyze the level of inequality in access to opportunities across different cities in Brazil. In this subsection, we present three examples of this type of analysis.</p>
+<p><strong>Inequality in travel time to access opportunities</strong></p>
+<p>In this first example, we will compare the average travel time to the nearest public hospital for people of different income levels. To do this, we first need to calculate for each income group the average travel time to reach the nearest high complexity health facility weighted by the population of each hexagon. This weighting is necessary because each hexagon has a different population size and thus contributes differently to the average accessibility of the population as a whole.</p>
+<p>Before performing the calculation, it should be noted that some hexagons in the city cannot access any hospital within two hours of travel. In these cases, the value of the minimum travel time variables is infinite (<code>Inf</code>). To deal with these cases, we will replace all <code>Inf</code> values with a travel time of 120 minutes for this example.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># copies access data into a new data.frame</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>ineq_pt <span class="ot">&lt;-</span>data.table<span class="sc">::</span><span class="fu">as.data.table</span>(access_pt)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># replaces Inf values with 120</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>ineq_pt [, TMISA <span class="sc">:</span><span class="er">=</span> <span class="fu">ifelse</span>(<span class="fu">is.infinite</span>(TMISA), <span class="dv">120</span>, TMISA)]</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># calculates the average travel time by income decile</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>ineq_pt <span class="ot">&lt;-</span> ineq_pt[</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  ,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  .( <span class="at">avrg =</span> <span class="fu">weighted.mean</span>(<span class="at">x =</span> TMISA, <span class="at">w =</span> P001, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)),</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  by <span class="ot">=</span> R003</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>ineq_pt <span class="ot">&lt;-</span> <span class="fu">subset</span>(ineq_pt, <span class="sc">!</span> <span class="fu">is.na</span>(avrg))</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ineq_pt) <span class="sc">+</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">y =</span> avrg, <span class="at">x =</span> <span class="fu">factor</span>(R003)), <span class="at">fill =</span> <span class="st">"#2c9e9e"</span>, <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"D1</span><span class="sc">\n</span><span class="st">poorest"</span>, <span class="fu">paste0</span>(<span class="st">"D"</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>), <span class="st">"D10</span><span class="sc">\n</span><span class="st">wealthiest"</span>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Average travel time to the nearest hospital"</span>,</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"by public transport in São Paulo "</span>,</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Income Decile"</span>,</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Travel time in min."</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="9_aopdata_acessibilidade.en_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="2100"></p>
+</div>
+</div>
+<p><strong>Inequality in the number of accessible opportunities</strong></p>
+<p>Another way to examine the inequality of access to opportunities is to compare the number of opportunities accessible by different population groups considering the same modes of transport and travel time limits. In this example, we analyze the active cumulative opportunity accessibility metric, available through the variables starting with <code>CMA</code> in the <code>{aopdata}</code> database. Using the code below, we compare the number of jobs accessible by people of different income deciles by public transport in up to 60 minutes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">subset</span>(access_pt, <span class="sc">!</span><span class="fu">is.na</span>(R003))) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(R003), <span class="at">y =</span> CMATT60 <span class="sc">/</span> <span class="dv">1000</span>, <span class="at">color =</span> <span class="fu">factor</span>(R003))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"RdBu"</span>) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Distribution of the number of jobs accessible within 60 min."</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> <span class="st">"Income</span><span class="sc">\n</span><span class="st">decile"</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">"by public transport, São Paulo"</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Income decile"</span>,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"N. of accessible jobs</span><span class="sc">\n</span><span class="st">(in thousands)"</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"D1</span><span class="sc">\n</span><span class="st">poorest"</span>, <span class="fu">paste0</span>(<span class="st">"D"</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>), <span class="st">"D10</span><span class="sc">\n</span><span class="st">wealthiest"</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="9_aopdata_acessibilidade.en_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="2100"></p>
+</div>
+</div>
+<p>Finally, we can also compare how different modes of transport can lead to different levels of accessibility and how this difference varies between cities. In the example below, we compare the number of jobs accessible in up to 30 minutes of walking and driving. To do this, we first need to download accessibility data by both transport modes for all cities in the AOP project.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data_car <span class="ot">&lt;-</span> aopdata<span class="sc">::</span><span class="fu">read_access</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">city =</span> <span class="st">"all"</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">mode =</span> <span class="st">"car"</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">year =</span> <span class="dv">2019</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">showProgress =</span> <span class="cn">FALSE</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>data_walk <span class="ot">&lt;-</span> aopdata<span class="sc">::</span><span class="fu">read_access</span>(</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">city =</span> <span class="st">"all"</span>,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">mode =</span> <span class="st">"walk"</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">year =</span> <span class="dv">2019</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">showProgress =</span> <span class="cn">FALSE</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, we calculate for each city and for each mode of transport the weighted average number of jobs accessible in up to 30 minutes (<code>CMATT30</code>). Once this is done, we put these estimates together into a single table and calculate the ratio between accessibility levels by car and walking.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculates the average of affordable jobs in 30</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>avg_car <span class="ot">&lt;-</span> data_car[</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  ,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  .( <span class="at">access_car =</span> <span class="fu">weighted.mean</span>(CMATT30, <span class="at">w =</span> P001, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)),</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  by <span class="ot">=</span> name_muni</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>avg_walk <span class="ot">&lt;-</span> data_walk[</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  ,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  .( <span class="at">access_walk =</span> <span class="fu">weighted.mean</span>(CMATT30, <span class="at">w =</span> P001, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)),</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  by <span class="ot">=</span> name_muni</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># merges the data and calculates the ratio between access by car and on foot</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>avg_access <span class="ot">&lt;-</span> <span class="fu">merge</span>(avg_car, avg_walk)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>avg_access[, ratio <span class="sc">:</span><span class="er">=</span> access_car <span class="sc">/</span> access_walk]</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(avg_access)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        name_muni access_car access_walk    ratio
+1:          Belem   155270.4    9392.235 16.53179
+2: Belo Horizonte   529890.0   12464.233 42.51284
+3:       Brasilia   220575.9    4110.703 53.65892
+4:       Campinas   256333.1    6748.923 37.98133
+5:   Campo Grande   172680.5    4181.209 41.29919
+6:       Curitiba   494376.9   10471.135 47.21331</code></pre>
+</div>
+</div>
+<p>Finally, we can visualize the results in a chart:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(avg_access, <span class="fu">aes</span>(<span class="at">x =</span> ratio, <span class="at">y =</span> <span class="fu">reorder</span>(name_muni, ratio))) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> ratio <span class="sc">+</span> <span class="dv">4</span> , <span class="at">label =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(ratio), <span class="st">"x"</span>))) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Difference between the number of jobs accessible by </span><span class="sc">\n</span><span class="st">automobile and by foot"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">"in up to 30 min."</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">""</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Ratio between accessibility by car and walking"</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="9_aopdata_acessibilidade.en_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="2100"></p>
+</div>
+</div>
+<p>As expected, the figure shows that it is possible to access many more jobs in 30 minutes by car than on walking trips. This difference, however, varies greatly across cities. In São Paulo and Brasília, a 30-minute car trip allows one to access, on average, 54 times more jobs than what it would be possible to access with walking trips. In Belém, the city with the smallest difference, one can access 17 times more jobs by car than walking - still a substantial difference but much smaller than those in the other cities.</p>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -528,7 +982,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./8_aopdata_uso_solo.en.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>  <span class="chapter-title">8_aopdata_uso_solo.en.html</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>  <span class="chapter-title">Data on the spatial distribution of opportunities</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
