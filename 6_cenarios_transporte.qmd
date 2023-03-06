@@ -175,7 +175,6 @@ rm(dados_fortaleza)
 rm(list = c("traj_corredores", "traj_linha_leste", "traj_metrofor"))
 ```
 
-
 ## Dados GTFS usados na análise
 
 Nesta análise, usaremos os arquivos GTFS disponibilizados pela Empresa de Transporte Urbano de Fortaleza (Etufor) e a Empresa do Metrô de Fortaleza (Metrofor). Esses dados descrevem o sistema de transporte público operante na cidade de Fortaleza em outubro de 2019. Para ter acesso a esses dados,usamos o código abaixo, que baixa os *feeds* usando o pacote `{httr}`:
@@ -199,8 +198,6 @@ httr::GET(
   httr::write_disk(end_etufor)
 )
 ```
-
-
 
 ```{r}
 #| results: false
@@ -467,7 +464,7 @@ end_tif <- tempfile("topografia", fileext = ".tif")
 
 # download dos dados de OSM
 httr::GET(
-  "https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/for_2020.osm.pbf",
+  "https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/fortaleza.osm.pbf",
   httr::write_disk(end_pbf)
 )
 
@@ -613,17 +610,15 @@ gc()
 comparacao <- merge(
   matriz_antes,
   matriz_depois,
-  by = c("fromId", "toId"),
+  by = c("from_id", "to_id"),
   suffixes = c("_antes", "_depois")
 )
 
 # mostra apenas os pares OD que cujo tempo que os distanciam diminuiu
-comparacao[travel_time_antes < travel_time_depois]
+comparacao[travel_time_p50_antes < travel_time_p50_depois]
 ```
 
-
 ## Cálculo da acessibilidade nos cenários antes e depois
-
 
 O cálculo dos níveis de acessibilidade nos dois cenários é muito simples, exigindo apenas um processamento básico dos dados e a aplicação de uma das funções de cálculo de acessibilidade do pacote `{accessibility}`. Para facilitar o tratamento dos dados, vamos empilhar as matrizes de tempo de viagem dos dois cenários em uma única tabela, identificando cada cenário com a coluna `cenario`:
 
@@ -674,19 +669,12 @@ Como mostrado anteriormente no [Capítulo 3](3_calculando_acesso.qmd#sec-accessi
 # carrega a biblioteca
 library(accessibility)
 
-# renomeia colunas, necessário para usar as funções do pacote accessibility
-data.table::setnames(
-  matriz,
-  old = c("fromId", "toId"),
-  new = c("from_id", "to_id")
-)
-
 # calcula a medida de oportunidades cumulativas
 acesso_a_empregos <- cumulative_cutoff(
-  travel_matrix = matriz,
+  matriz,
   land_use_data = dados_fortaleza,
   opportunity = "empregos",
-  travel_cost = "travel_time",
+  travel_cost = "travel_time_p50",
   cutoff = 60,
   group_by = "cenario"
 )
@@ -695,10 +683,10 @@ acesso_a_empregos
 
 # calcula a medida de tempo mínimo de viagem
 tempo_a_escolas <- cost_to_closest(
-  travel_matrix = matriz,
+  matriz,
   land_use_data = dados_fortaleza,
   opportunity = "escolas",
-  travel_cost = "travel_time",
+  travel_cost = "travel_time_p50",
   group_by = "cenario"
 )
 
@@ -711,7 +699,7 @@ Como podemos ver, o resultado da função de custo mínimo de viagem inclui algu
 # substitui valores Inf por tempos de viagem de 80 minutos
 tempo_a_escolas[
   ,
-  travel_time := ifelse(is.infinite(travel_time), 80, travel_time)
+  travel_time_p50 := ifelse(is.infinite(travel_time_p50), 80, travel_time_p50)
 ]
 ```
 
@@ -726,11 +714,11 @@ acesso_a_empregos[
 
 tempo_a_escolas[
   ,
-  diferenca := data.table::shift(travel_time, type = "lead") - travel_time,
+  diferenca := data.table::shift(travel_time_p50, type = "lead") -
+    travel_time_p50,
   by = id
 ]
 ```
-
 
 ## Análise dos níveis de acessibilidade antes e depois
 
@@ -759,7 +747,7 @@ data.table::setnames(
 # calcula a média ponderada de acessibilidade em cada cenário
 acesso_medio <- acesso_a_empregos[
   ,
-  .(acesso  = weighted.mean(x = acesso_a_empregos, w = as.numeric(populacao))),
+  .(acesso  = weighted.mean(acesso_a_empregos, w = as.numeric(populacao))),
   by = cenario
 ]
 
@@ -814,7 +802,7 @@ tempo_a_escolas <- merge(
 # calcula a média ponderada de acessibilidade em cada cenário
 tempo_medio <- tempo_a_escolas[
   ,
-  .(tempo  = weighted.mean(x = travel_time, w = as.numeric(populacao))),
+  .(tempo  = weighted.mean(travel_time_p50, w = as.numeric(populacao))),
   by = cenario
 ]
 
@@ -967,7 +955,7 @@ tempo_a_escolas_sf <- sf::st_sf(tempo_a_escolas)
 
 # configura mapas da distribuição de tempo a escolas nos cenários antes e depois
 dist_tempo <- ggplot() +
-  geom_sf(data = tempo_a_escolas_sf, aes(fill = travel_time), color = NA) +
+  geom_sf(data = tempo_a_escolas_sf, aes(fill = travel_time_p50), color = NA) +
   facet_wrap(~ cenario, nrow = 1) +
   scale_fill_viridis_c(option = "plasma", direction = -1) +
   labs(fill = "Tempo até\n a escola\nmais próxima\n(em minutos)") +
