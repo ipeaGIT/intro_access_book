@@ -19,6 +19,11 @@ quarto::quarto_render(as_job = FALSE)
 en_yml <- yaml::read_yaml("_quarto.yml")
 en_yml$lang <- "en"
 en_yml$crossref <- NULL
+en_yml$book$title <- "Introduction to urban accessibility"
+en_yml$book$subtitle <- "a practical guide in R"
+en_yml$book$language <- "en"
+en_yml$book$`cover-image` <- "images/cover.en.jpg"
+en_yml$book$`site-url` <- "https://ipeagit.github.io/aop_curso/en"
 en_yml$book$chapters <- lapply(
   en_yml$book$chapters,
   function(x) {
