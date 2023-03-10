@@ -374,7 +374,7 @@ dir.create(after_dir)
 
 # copy relevant files to "before" scenario directory
 file.copy(from = etufor_path, to = file.path(before_dir, "etufor.zip"))
-file.copy(from = metrofor_path, to = file.path(after_dir, "metrofor.zip"))
+file.copy(from = metrofor_path, to = file.path(before_dir, "metrofor.zip"))
 
 # copy relevant files to "after" scenario directory
 file.copy(from = etufor_path, to = file.path(after_dir, "etufor.zip"))
