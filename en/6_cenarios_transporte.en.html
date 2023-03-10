@@ -633,7 +633,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="co"># copy relevant files to "before" scenario directory</span></span>
 <span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="fu">file.copy</span>(<span class="at">from =</span> etufor_path, <span class="at">to =</span> <span class="fu">file.path</span>(before_dir, <span class="st">"etufor.zip"</span>))</span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="fu">file.copy</span>(<span class="at">from =</span> metrofor_path, <span class="at">to =</span> <span class="fu">file.path</span>(after_dir, <span class="st">"metrofor.zip"</span>))</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="fu">file.copy</span>(<span class="at">from =</span> metrofor_path, <span class="at">to =</span> <span class="fu">file.path</span>(before_dir, <span class="st">"metrofor.zip"</span>))</span>
 <span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a><span class="co"># copy relevant files to "after" scenario directory</span></span>
 <span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a><span class="fu">file.copy</span>(<span class="at">from =</span> etufor_path, <span class="at">to =</span> <span class="fu">file.path</span>(after_dir, <span class="st">"etufor.zip"</span>))</span>
@@ -658,10 +658,10 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 ├── after
 │   ├── east_line.zip
 │   ├── etufor.zip
-│   ├── metrofor.zip
 │   └── modified_metrofor.zip
 └── before
-    └── etufor.zip</code></pre>
+    ├── etufor.zip
+    └── metrofor.zip</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -700,12 +700,12 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 ├── after
 │   ├── east_line.zip
 │   ├── etufor.zip
-│   ├── metrofor.zip
 │   ├── modified_metrofor.zip
 │   ├── street_network.osm.pbf
 │   └── topography.tif
 └── before
     ├── etufor.zip
+    ├── metrofor.zip
     ├── street_network.osm.pbf
     └── topography.tif</code></pre>
 </div>
@@ -804,16 +804,30 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="co"># shows the OD pairs whose travel times got faster</span></span>
 <span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>comparison[travel_time_p50_before <span class="sc">&lt;</span> travel_time_p50_after]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>           from_id           to_id travel_time_p50_before travel_time_p50_after
-1: 8980104c053ffff 8980104c2b7ffff                     31                    35
-2: 8980104e92bffff 8980107b683ffff                     19                    20
-3: 8980104e96fffff 8980107b683ffff                     19                    20
-4: 8980107b613ffff 8980107b683ffff                     13                    14
-5: 8980107b683ffff 8980104e96fffff                     19                    20
-6: 8980107b683ffff 8980107b613ffff                     13                    14
-7: 8980107b683ffff 8980107b61bffff                     20                    21
-8: 8980107b683ffff 8980107b6d7ffff                     16                    17
-9: 8980107b69bffff 8980107b683ffff                     10                    11</code></pre>
+<pre><code>               from_id           to_id travel_time_p50_before
+    1: 8980104096fffff 8980104e803ffff                     48
+    2: 8980104096fffff 8980104e807ffff                     57
+    3: 8980104096fffff 8980104e80bffff                     53
+    4: 8980104096fffff 8980104e80fffff                     55
+    5: 8980104096fffff 8980104e863ffff                     56
+   ---                                                       
+12889: 8980104eecbffff 8980104ea5bffff                     52
+12890: 8980104eecbffff 8980104eac3ffff                     49
+12891: 8980104eecbffff 8980104ead3ffff                     44
+12892: 8980104eecbffff 8980104eadbffff                     49
+12893: 8980104eecbffff 8980104ee6bffff                     41
+       travel_time_p50_after
+    1:                    50
+    2:                    59
+    3:                    55
+    4:                    57
+    5:                    57
+   ---                      
+12889:                    57
+12890:                    53
+12891:                    47
+12892:                    50
+12893:                    42</code></pre>
 </div>
 </div>
 </section><section id="calculating-the-accessibility-levels-in-both-scenarios" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="calculating-the-accessibility-levels-in-both-scenarios">
@@ -832,11 +846,11 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       4:   before 89801040323ffff 8980104032fffff              15
       5:   before 89801040323ffff 89801040333ffff              10
      ---                                                         
-3710531:    after 8980107b6dbffff 8980107b6cbffff               9
-3710532:    after 8980107b6dbffff 8980107b6cfffff              15
-3710533:    after 8980107b6dbffff 8980107b6d3ffff               9
-3710534:    after 8980107b6dbffff 8980107b6d7ffff              15
-3710535:    after 8980107b6dbffff 8980107b6dbffff               0</code></pre>
+3739271:    after 8980107b6dbffff 8980107b6cbffff               9
+3739272:    after 8980107b6dbffff 8980107b6cfffff              15
+3739273:    after 8980107b6dbffff 8980107b6d3ffff               9
+3739274:    after 8980107b6dbffff 8980107b6d7ffff              15
+3739275:    after 8980107b6dbffff 8980107b6dbffff               0</code></pre>
 </div>
 </div>
 <p>To calculate the accessibility levels, we need a table with some of Fortaleza’s land use data. We can download such data using the <code>read_landuse()</code> function from the <code>{aopdata}</code> package, which brings the population and opportunities count in each one of the hexagons that composes the previously downloaded spatial grid.</p>
@@ -1000,7 +1014,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="cell">
 
 </div>
-<p>The results show that Fortaleza’s population could reach on average 238,269 jobs by public transport in up to 60 minutes of travel before the subway expansion, in 2019. East Line’s implementation and the subway and light rail frequencies changes led to an increase of 0.0812317%, to 257,624 jobs, on average.</p>
+<p>The results show that Fortaleza’s population could reach on average 244,137 jobs by public transport in up to 60 minutes of travel before the subway expansion, in 2019. East Line’s implementation and the subway and light rail frequencies changes led to an increase of 0.0534126%, to 257,177 jobs, on average.</p>
 <p>When we look at the average time to reach the closest public highschool, we see that the changes to the transport system barely affect the accessibility to these schools. On average, Fortaleza’s population took approximately 13 minutes to reach the closest public highschool to their home in 2019. After the subway extension and the increase to the subway and light rail frequencies, this value remains virtually unchanged.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># merges time to schools table with land use data</span></span>
@@ -1320,7 +1334,7 @@ Why use the Palma Ratio?
 <p><img src="6_cenarios_transporte.en_files/figure-html/fig_11-1.png" class="img-fluid" width="2100"></p>
 </div>
 </div>
-<p>The figure above shows that in 2019 the wealthiest groups in Fortaleza could access in up to 60 minutes of public transport, on average, 2.20 times more jobs than the poorest population. The chart also shows that the inequality, as measured by the Palma Ratio, slightly decreased between the pre- and post-changes scenarios. Thus, we can say that, in our simplified East Line assessment, the subway expansion and the changes to the subway and light rail frequencies would be progressive. In other words, these changes, when assessed without taking other changes foreseen in the Pasfor into account, reduce the job accessibility inequality in Fortaleza.</p>
+<p>The figure above shows that in 2019 the wealthiest groups in Fortaleza could access in up to 60 minutes of public transport, on average, 2.17 times more jobs than the poorest population. The chart also shows that the inequality, as measured by the Palma Ratio, slightly decreased between the pre- and post-changes scenarios. Thus, we can say that, in our simplified East Line assessment, the subway expansion and the changes to the subway and light rail frequencies would be progressive. In other words, these changes, when assessed without taking other changes foreseen in the Pasfor into account, reduce the job accessibility inequality in Fortaleza.</p>
 <div class="callout-important callout callout-style-simple">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
