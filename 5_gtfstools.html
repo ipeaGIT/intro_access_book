@@ -389,14 +389,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>zip<span class="sc">::</span><span class="fu">zip_list</span>(endereco_destino)[, <span class="fu">c</span>(<span class="st">"filename"</span>, <span class="st">"compressed_size"</span>, <span class="st">"timestamp"</span>)]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         filename compressed_size           timestamp
-1      agency.txt             112 2023-03-02 19:13:06
-2    calendar.txt             129 2023-03-02 19:13:06
-3 frequencies.txt            2381 2023-03-02 19:13:06
-4      routes.txt             659 2023-03-02 19:13:06
-5      shapes.txt          160470 2023-03-02 19:13:06
-6  stop_times.txt            7907 2023-03-02 19:13:06
-7       stops.txt           18797 2023-03-02 19:13:06
-8       trips.txt             717 2023-03-02 19:13:06</code></pre>
+1      agency.txt             112 2023-03-10 18:08:40
+2    calendar.txt             129 2023-03-10 18:08:40
+3 frequencies.txt            2381 2023-03-10 18:08:40
+4      routes.txt             659 2023-03-10 18:08:40
+5      shapes.txt          160470 2023-03-10 18:08:40
+6  stop_times.txt            7907 2023-03-10 18:08:40
+7       stops.txt           18797 2023-03-10 18:08:40
+8       trips.txt             717 2023-03-10 18:08:40</code></pre>
 </div>
 </div>
 </section><section id="cálculo-de-velocidade-das-linhas" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="cálculo-de-velocidade-das-linhas">
@@ -446,8 +446,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 5: CPTM L09-0 31.88906      shapes
 6: CPTM L09-1 31.88906      shapes</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calcula a duração de todas viagens, em minutos</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>duracao <span class="ot">&lt;-</span> <span class="fu">get_trip_duration</span>(gtfs, <span class="at">unit =</span> <span class="st">'min'</span>)</span>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calcula a duração de todas viagens</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>duracao <span class="ot">&lt;-</span> <span class="fu">get_trip_duration</span>(gtfs)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(duracao)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -460,7 +460,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 6: 4491-10-0       69</code></pre>
 </div>
 </div>
-<p>Assim como a <code>get_trip_speed()</code> retorna as velocidades em km/h por padrão, a <code>get_trip_length()</code> retorna os comprimentos em km e a <code>get_trip_duration()</code> retorna a duração em minutos. Essas unidades podem ser ajustadas com o argumento <code>unit</code>, presente em todas as funções.</p>
+<p>Assim como a <code>get_trip_speed()</code> retorna as velocidades em km/h por padrão, a <code>get_trip_length()</code> retorna os comprimentos em km e a <code>get_trip_duration()</code> retorna a duração em minutos. Essas unidades podem ser ajustadas com o argumento <code>unit</code>, presente em todas as três funções.</p>
 </section><section id="combinando-e-filtrando-feeds" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="combinando-e-filtrando-feeds">
 <span class="header-section-number">5.3</span> Combinando e filtrando <em>feeds</em>
 </h2>
@@ -861,10 +861,10 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>endereco_validador <span class="ot">&lt;-</span> <span class="fu">download_validator</span>(pasta_temporaria)</span>
 <span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>endereco_validador</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "/tmp/RtmpA6uqdd/gtfs-validator-v4.0.0.jar"</code></pre>
+<pre><code>[1] "/tmp/RtmpC4ckZj/gtfs-validator-v4.0.0.jar"</code></pre>
 </div>
 </div>
-<p>A segunda (e última) etapa consiste em de fato rodar a função <code>validate_gtfs()</code>. Essa função aceita que os dados GTFS a serem validados sejam passados de diferentes formas: (a) como um objeto GTFS existente apenas no R, (b) como o endereço de um arquivo GTFS salvo localmente em formato <code>.zip</code>, (c) como a URL para um <em>feed</em> ou (d) como uma pasta que contém os dados GTFS não compactados. A função também recebe o endereço para uma pasta onde o resultado da validação deve ser salvo e o endereço para o validador que deve ser usado. Neste exemplo, vamos fazer a validação a partir do endereço do GTFS da SPTrans, lido anteriormente:</p>
+<p>A segunda (e última) etapa consiste em de fato rodar a função <code>validate_gtfs()</code>. Essa função aceita que os dados GTFS a serem validados sejam passados de diferentes formas: (a) como um objeto GTFS existente apenas no R, (b) como o endereço de um arquivo GTFS salvo localmente em formato <code>.zip</code>, (c) como uma URL apontando para um <em>feed</em> ou (d) como uma pasta que contém os dados GTFS não compactados. A função também recebe o endereço para uma pasta onde o resultado da validação deve ser salvo e o endereço para o validador que deve ser usado. Neste exemplo, vamos fazer a validação a partir do endereço do GTFS da SPTrans, lido anteriormente:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>pasta_resultado <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="st">"validacao_com_endereco"</span>)</span>
 <span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -889,7 +889,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <li>
 <code>system_errors.json</code>, que apresenta eventuais erros de sistema que tenham ocorrido durante a validação e que podem comprometer os resultados;</li>
 <li>
-<code>validation_stderr.txt</code>, que lista mensagens informativas enviadas pelo validador, incluindo uma lista dos testes realizados, eventuais mensagens de erro, etc<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>;</li>
+<code>validation_stderr.txt</code>, que lista mensagens informativas enviadas pelo validador, incluindo uma lista dos testes realizados, eventuais mensagens de erro, etc<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</li>
 </ul>
 <div class="cell">
 <div class="cell-output-display">

@@ -411,14 +411,15 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 <ul>
 <li>
 <a href="https://github.com/jhollist/elevatr">elevatr</a>, pacote de R;</li>
-<li>Nasa’s <a href="https://lpdaac.usgs.gov/products/srtmgl1v003/">SRTMGL1</a>, <em>website</em>.</li>
+<li>
+<a href="https://lpdaac.usgs.gov/products/srtmgl1v003/">SRTMGL1</a>, <em>website</em>.</li>
 </ul>
 </li>
 </ul>
 <p>Esses dados devem ser salvos em uma mesma pasta que, preferencialmente, não contenha nenhum outro arquivo. Como veremos adiante, o <code>{r5r}</code> combina todos os dados salvos nesta pasta para criar uma rede de transporte multimodal que é utilizada no roteamento de viagens entre pares origem-destino e, consequentemente, no cálculo das matrizes de tempo de viagem. Note que é possível ter mais de um arquivo GTFS na mesma pasta: nesse caso, o <code>{r5r}</code> considera as redes de transporte públicos de todos os <em>feeds</em> de forma conjunta. No entanto, a rede viária e a topografia da área de estudo devem ser descritas por um único arquivo cada. Assumindo que os <em>scripts</em> de R estejam em uma pasta chamada <code>R</code>, uma possível organização dos arquivos segue o esquema abaixo:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>/tmp/RtmpOwvdvz/projeto_acessibilidade
+<pre><code>/tmp/RtmpEaRiMY/projeto_acessibilidade
 ├── R
 │   ├── script1.R
 │   └── script2.R
@@ -528,7 +529,7 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 </div>
 </section></section><section id="sec-accessibility" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="sec-accessibility">
 <span class="header-section-number">3.2</span> Cálculo de acessibilidade</h2>
-<p>Calculada a matriz de tempo de viagem entre as origens e os destinos da área de estudo, precisamos utilizá-la para calcular os níveis de acessibilidade do local. Para isso, utilizaremos o pacote <code>{accessibility}</code> <span class="citation" data-cites="pereira2022accessibility">(<a href="references.html#ref-pereira2022accessibility" role="doc-biblioref">Pereira e Herszenhut 2022</a>)</span> <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, também desenvolvido pela equipe do Projeto Acesso a Oportunidades, Ipea, e que disponibiliza funções para o cálculo de vários indicadores de acessibilidade. Como <em>input</em> básico, todas as funções requerem uma matriz de custo pré-calculada (no nosso caso, a matriz de tempo de viagem calculada na seção anterior) e dados de uso do solo, como, por exemplo, o número de determinados tipos de oportunidades em cada célula da grade que cobre a área de estudo.</p>
+<p>Calculada a matriz de tempo de viagem entre as origens e os destinos da área de estudo, precisamos utilizá-la para calcular os níveis de acessibilidade do local. Para isso, utilizaremos o pacote <code>{accessibility}</code><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, também desenvolvido pela equipe do Projeto Acesso a Oportunidades, Ipea, e que disponibiliza funções para o cálculo de vários indicadores de acessibilidade. Como <em>input</em> básico, todas as funções requerem uma matriz de custo pré-calculada (no nosso caso, a matriz de tempo de viagem calculada na seção anterior) e dados de uso do solo, como, por exemplo, o número de determinados tipos de oportunidades em cada célula da grade que cobre a área de estudo.</p>
 <section id="medida-de-oportunidades-cumulativas" class="level3" data-number="3.2.1"><h3 data-number="3.2.1" class="anchored" data-anchor-id="medida-de-oportunidades-cumulativas">
 <span class="header-section-number">3.2.1</span> Medida de oportunidades cumulativas</h3>
 <p>A função <code>cumulative_cutoff()</code> é utilizada para calcular o número de oportunidades que podem ser alcançadas em um determinado limite de custo de viagem. No exemplo abaixo, primeiro carregamos a biblioteca <code>{accessibility}</code> e adequamos a nossa matriz para que ela possa ser utilizada no cálculo da acessibilidade. Em seguida, calculamos o número de escolas que podem ser alcançadas em até 30 minutos de viagem a partir de cada origem presente em nossa matriz de tempo de viagem.</p>
@@ -663,7 +664,7 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 6: 89a901285cfffff     schools         50     30            78</code></pre>
 </div>
 </div>
-<p>Uma pequena diferença entre o comportamento desta função <code>r5r::accessibility()</code>e o da <code>cumulative_access()</code> do pacote <code>{accessibility}</code> está no fato de que, nesta, pares origem-destino cujos tempos de viagem são iguais ao valor definido como limite são excluídos do cálculo da acessibilidade, enquanto na função do pacote <code>{accessibility}</code> eles são incluídos. Ou seja, para simularmos o cálculo acima com a <code>cumulative_access()</code> precisamos estabelecer um tempo de viagem limite de 29 minutos, e não 30. No código abaixo, comparamos os resultados das duas funções.</p>
+<p>Uma pequena diferença entre o comportamento desta função <code>r5r::accessibility()</code>e o da <code>cumulative_cutoff()</code> do pacote <code>{accessibility}</code> está no fato de que, nesta, pares origem-destino cujos tempos de viagem são iguais ao valor definido como limite são excluídos do cálculo da acessibilidade, enquanto na função do pacote <code>{accessibility}</code> eles são incluídos. Ou seja, para simularmos o cálculo acima com a <code>cumulative_cutoff()</code> precisamos estabelecer um tempo de viagem limite de 29 minutos, e não 30. No código abaixo, comparamos os resultados das duas funções.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>ops_cumulativas_29 <span class="ot">&lt;-</span> <span class="fu">cumulative_cutoff</span>(</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">travel_matrix =</span> matriz,</span>
@@ -752,7 +753,7 @@ Considerando outros tipos de custo de viagem no cálculo da acessibilidade
 <p><img src="3_calculando_acesso_files/figure-html/fig_2_escolas-1.png" class="img-fluid" width="2100"></p>
 </div>
 </div>
-<p>Como podemos ver, os níveis de acessibilidade tendem a se concentrar de forma mais acentuada no centro da cidade, onde existe maior concentração de empregos, e próximos aos grandes corredores de transportes da cidade. Por terem fácil acesso a modos de alta capacidade e velocidade, pessoas que moram mais perto desses corredores tendem a acessar locais distantes relativamente rápido. Em contraste, pessoas que moram mais afastadas desses corredores, dependem de modos de menor menor frequência e velocidade operacional (como os ônibus municipais, por exemplo) e precisam gastar mais tempo para alcançar os corredores de média e alta capacidade. Como consequência, os níveis de acessibilidade de pessoas que moram afastadas do centro e de corredores de alta capacidade tendem a ser menores.</p>
+<p>Como podemos ver, os níveis de acessibilidade tendem a se concentrar de forma mais acentuada no centro da cidade, onde existe maior concentração de escolas, e próximos aos grandes corredores de transportes da cidade. Por terem fácil acesso a modos de alta capacidade e velocidade, pessoas que moram mais perto desses corredores tendem a acessar locais distantes de forma relativamente rápida. Em contraste, pessoas que moram mais afastadas desses corredores, dependem de modos de menor menor frequência e velocidade operacional (como os ônibus municipais, por exemplo) e precisam gastar mais tempo para alcançar os corredores de média e alta capacidade. Como consequência, os níveis de acessibilidade de pessoas que moram afastadas do centro e de corredores de alta capacidade tendem a ser menores.</p>
 <p><strong>Distribuição socioeconômica de acessibilidade urbana</strong></p>
 <p>O mapa acima, embora revelador quanto aos locais em que estão dispostas as maiores concentrações de acessibilidade, nada diz sobre quais são os grupos socioeconômicos que possuem os maiores potenciais de acesso a oportunidades na região. Para isso, precisamos cruzar informações demográficas e econômicas das pessoas que moram em cada um dos pontos de origem com os dados de acessibilidade previamente calculados.</p>
 <p>No exemplo abaixo, juntamos aos dados de acessibilidade a informação do decil de renda de cada uma das origens, considerando a renda média de cada uma das pessoas que as habitam (dado também proveniente do pacote <code>{aopdata}</code>). Assim, conseguimos identificar se um hexágono é de baixa, média ou alta renda.</p>
@@ -847,9 +848,6 @@ Paez, Antonio, Christopher D. Higgins, e Salvatore F. Vivona. 2019. <span>"Deman
 </div>
 <div id="ref-pereira2019desigualdades" class="csl-entry" role="doc-biblioentry">
 Pereira, Rafael H. M., Carlos Kaue Vieira Braga, Bernardo Serra, e Vanessa Nadalin. 2019. <span>"<span>Desigualdades socioespaciais de acesso a oportunidades nas cidades brasileiras, 2019</span>"</span>. {Texto para Discuss\~ao} 2535. <span>Instituto de Pesquisa Econômica Aplicada (Ipea)</span>.
-</div>
-<div id="ref-pereira2022accessibility" class="csl-entry" role="doc-biblioentry">
-Pereira, Rafael H. M., e Daniel Herszenhut. 2022. <span>"Accessibility: <span>Transport Accessibility Measures</span>"</span>. <span>CRAN</span>.
 </div>
 <div id="ref-pereira2022aopdata" class="csl-entry" role="doc-biblioentry">
 Pereira, Rafael H. M., Daniel Herszenhut, Carlos K. V. Braga, Diego B. Tomasiello, e Marcus Saraiva. 2022. <span>"Aopdata: <span>Data</span> from the <span>Access</span> to <span>Opportunities Project</span>"</span>. <span>CRAN</span>.
