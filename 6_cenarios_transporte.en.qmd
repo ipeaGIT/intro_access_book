@@ -1,17 +1,17 @@
 #  Comparing accessibility between two transport scenarios
 
-In this chapter, we will illustrate how to use the material taught in previous chapters together to measure the impact of a transport infrastructure project on urban accessibility. To measure the impact of a transport project, we need to compare the accessibility levels both before and after the project implementation. We need, therefore:
+In this chapter, we will illustrate how to combine the material taught in previous chapters to assess the impact of a transport infrastructure project on urban accessibility. To measure the impact of a transport project, we need to compare the accessibility levels both before and after the project implementation. We need, therefore:
 
 1. To use different sets of GTFS feeds and to edit them to represent the scenarios before and after the project implementation;
-2. To calculate two travel time matrices, one before and one after the investment;
-3. To measure the accessibility levels both before and after the investment;
+2. To calculate two travel time matrices, one before and one after the project;
+3. To measure the accessibility levels both before and after the project;
 4. To compare the accessibility conditions in both scenarios, investigating how the impacts are distributed both spatially and between socioeconomic groups.
 
 In this chapter, we will look at each one of these steps in detail. First, a brief presentation of our case study.
 
 ## Case study presentation
 
-As a case study, we will assess Fortaleza's subway East Line project (@fig-fortaleza_1). The city of Fortaleza is the capital of Ceará state, located in Northeast Brazil. With an estimated population of 2.7 million inhabitants, Fortaleza is the fifth most populous city in the country.
+As a case study, we will assess Fortaleza's subway East Line project (@fig-fortaleza_1). The city of Fortaleza is the capital of Ceará state, located in Northeast of Brazil. With an estimated population of 2.7 million inhabitants, Fortaleza is the fifth most populous city in the country.
 
 ```{r}
 #| echo: false
@@ -21,7 +21,7 @@ As a case study, we will assess Fortaleza's subway East Line project (@fig-forta
 knitr::include_graphics("images/fortaleza_1.png")
 ```
 
-The East Line is one of the biggest recent investments in Fortaleza's transport system. The line extends for 7.3 km and connects the city center to the Papicu neighborhood, connecting the South and West subway lines to the Light Rail and Papicu's bus terminal (@fig-fortaleza_2). The East Line is still under construction as of this book's publication date, so we will be conducting an *ex-ante* analysis in this chapter - i.e. one in which we assess the future impacts of a project on urban accessibility conditions. This type of analysis opposes to *ex-post* analyses, which are used to assess the impact of projects that have already been implemented.
+The East Line is one of the biggest recent investments in Fortaleza's transport system. The line extends for 7.3 km and connects the city center to the Papicu neighborhood, connecting the South and West subway lines to the Light Rail and Papicu's bus terminal (@fig-fortaleza_2). The East Line is still under construction as of this book's publication date, so we will be conducting an *ex-ante* analysis in this chapter - i.e. one in which we assess the future impacts of a project on urban accessibility conditions. This type of analysis differs from *ex-post* analyses, which are used to assess the impact of projects that have already been implemented.
 
 ```{r}
 #| echo: false
@@ -32,12 +32,12 @@ knitr::include_graphics("images/fortaleza_2.png")
 ```
 
 ::: {.callout-important appearance="simple"}
-It's important to note that East Line's implementation will also be followed by changes to the frequency of subway's South and West lines and of Parangaba-Mucuripe light rail, in addition to cuts and adjustments on the municipal bus system, as detailed in Fortaleza's Sustainable Accessibility Plan (Pasfor)[^1]. For didactic purposes, however, the bus system's changes were not incorporated into our analyses. Therefore, the case study showcased in this chapter looks at simplified scenarios, in which only East Line's implementation and the changes to other subway and light rail corridors are considered. For a more complete assessment that considers all changes foreseen in Pasfor, please check @braga2022impactos (in Portuguese).
+It's important to note that East Line's implementation will also be followed by changes to the frequency of subway's South and West lines and of Parangaba-Mucuripe light rail, in addition to cuts and adjustments on the municipal bus system, as detailed in Fortaleza's Sustainable Accessibility Plan (Pasfor)[^1]. For didactic purposes, however, the bus system's changes were not incorporated into our analyses in this book. Therefore, the case study showcased in this chapter looks at simplified scenarios, in which only East Line's implementation and the changes to other subway and light rail corridors are considered. For a more complete assessment that considers all the changes foreseen in Pasfor, please check @braga2022impactos (in Portuguese).
 :::
 
 [^1]: Available at <https://www.pasfor.com.br/>.
 
-@fig-fortaleza_3 shows that Fortaleza's population is mainly distributed in the central and western parts of the city, although some relatively high density neighborhoods can also be seen in the southeastern region. Generally, wealthier groups (shown in blue in the income decile distribution map) tend to reside in the expanded city center, extending towards the southeast, while low-income groups (in red) are mainly located in the western and southern peripheries. Most of the formal jobs are distributed along key avenues, with higher concentrations in the city center. In contrast, public highschools are more equally distributed throughout the territory.
+@fig-fortaleza_3 shows that Fortaleza's population is mainly distributed in the central and western parts of the city, although some relatively high density neighborhoods can also be seen in the southeastern region. Generally, wealthier groups (shown in blue in the income decile distribution map) tend to reside in the expanded city center, extending towards the southeast, while low-income groups (in red) are mainly located in the western and southern peripheries. Most of the formal jobs are distributed along key avenues, with higher concentrations in the city center. In contrast, public highschools are more equally distributed throughout the city.
 
 ```{r}
 #| echo: false
@@ -195,7 +195,7 @@ httr::GET(
 )
 ```
 
-To simulate the implementation of the subway's East Line, we also need a feed that describes its operation. This feed must contain some key information, such as the shape of the corridor, the stop locations, the travel time between stations and the frequency of trips. In this example, we will use a GTFS file previously created by the Access to Opportunities team and used in a more detailed assessment of the accessibility impacts caused by this project [@braga2022impactos]. Just like Etufor's and Metrofor's feeds, this feed has been published in the book GitHub repository and can be downloaded with the code below:
+To simulate the implementation of the subway's East Line, we also need a feed that describes its operation. This feed must contain some key information, such as the shape of the corridor, the stop locations, the travel time between stations and the frequency of trips. In this example, we will use a GTFS file previously created by the Access to Opportunities team for a more detailed assessment of the accessibility impacts caused by this project [@braga2022impactos]. Just like Etufor's and Metrofor's feeds, this feed has been published in the book GitHub repository and can be downloaded with the code below:
 
 ```{r}
 #| results: false
@@ -207,9 +207,9 @@ httr::GET(
 )
 ```
 
-Etufor's and Metrofor's feeds, however, do not include the changes to the public transport system foreseen in the Pasfor. To take them into consideration in the post-implementation scenario, therefore, we have to edit these feeds using the `{gtfstools}` package.
+Etufor's and Metrofor's feeds, however, do not include the changes to the public transport system foreseen in the Pasfor. Therefore, we have to edit these feeds using the `{gtfstools}` package to take those changes into consideration in the post-implementation scenario.
 
-In our simplified scenario, we will consider the changes to subway and light rail services' frequencies outlined in @braga2022impactos, based on Pasfor: an increase in subway's South Line frequency from four to ten trips per hour, an increase in subway's West Line frequency from two to five trips per hour and an increase in Parangaba-Mucuripe light rail frequency from two to eight trips per hour. As we are only considering changes to the subway and light rail services, we only need to edit Metrofor's GTFS. First, we need to read this feed with `read_gtfs()` and understand how the trips are described. To do so, we are going to look at how the `routes`, `trips` and `calendar` tables are structured.
+In our case study, we will consider the changes to frequencies of the subway and light rail services based on Pasfor: an increase in the South Line subway frequency from four to ten trips per hour, an increase in the West Line subway frequency from two to five trips per hour and an increase in the Parangaba-Mucuripe light rail frequency from two to eight trips per hour. As we are only considering changes to the subway and light rail services, we only need to edit Metrofor's GTFS. First, we need to read this feed with `read_gtfs()` and understand how the trips are described. To do so, we are going to look at how the `routes`, `trips` and `calendar` tables are structured.
 
 ```{r}
 library(gtfstools)
@@ -223,15 +223,15 @@ metrofor_gtfs$trips[, .N, by = .(route_id, direction_id, service_id)]
 metrofor_gtfs$calendar
 ```
 
-The feed describes three distinct routes: the two subway corridors and the light rail corridor. Since the feed does not include a `frequencies` table, each route is described by many trips that depart at different times of the day. The trips are described in both directions, and they are all associated with the same service that operates on business days and saturdays.
+The feed describes three distinct routes: the two subway corridors and the light rail corridor. Since the feed does not include a `frequencies` table, each route is described by many trips that depart at different times of the day. There is information for trips in both trip directions, and they are all associated with the same service that operates on business days and saturdays.
 
-The strategy we are going to use to make the necessary changes to the feed include three steps:
+The strategy we are going to adopt to make the necessary changes to the feed include three steps:
 
-1. First, we are going to filter the feed to keep only one trip per direction for each route. This trip will tell us the time each trip takes between its stops.
-2. Then we are going to add a `frequencies` table to the GTFS object, in which we will describe the frequency of each trip.
-3. Finally, we are going to "convert" the recently-added `frequencies` entries to timetables described in `stop_times`. This conversion will be used to keep intact the original feed characteristic of describing trips using only the `stop_times` table.
+1. First, we are going to filter the Metrofor feed to keep only one trip per direction for each route. This trip will tell us the travel time each trip takes between its stops.
+2. Then we are going to add a `frequencies` table to the GTFS object, in which we are going to describe the frequency of each trip.
+3. Finally, we are going to "convert" the recently-added `frequencies` entries to the timetables described in `stop_times`. This conversion will be used to keep intact the original feed, which describes trips using only the `stop_times` table.
 
-To keep only one trip per direction for each route, we need to filter the feed using `filter_by_trip_id()`. To do so, we are going to identify the first trip entry per route and per direction and use the function to keep only these trips.
+**Step 1:** To keep only one trip per direction for each route, we need to filter the feed using `filter_by_trip_id()`. To do so, we are going to identify the first trip entry per route and per direction and use the function to keep only these trips.
 
 ```{r}
 # identifies the table index in which the first entries per route and per
@@ -250,7 +250,7 @@ filtered_gtfs <- filter_by_trip_id(
 filtered_gtfs$trips
 ```
 
-To facilitate the data manipulation, we are going to change the trip ids, identifying the corridor and the direction in which they operate. We need to make this change both in the `trips` and the `stop_times` table.
+To facilitate the data manipulation, we are going to change the trip ids, identifying the corridor and the direction in which they operate. We need to make this change both in the `trips` and the `stop_times` tables.
 
 ```{r}
 filtered_gtfs$stop_times[
@@ -280,7 +280,7 @@ filtered_gtfs$trips[
 filtered_gtfs$trips
 ```
 
-Now we need to add a `frequencies` table describing the frequency of each trip. The specification requires us, however, to list the headway of each trip, and not its frequency. The headway is the inverse of the frequency, so we need to divide the interval of one hour (3600 seconds) by the frequency of each route (10 trips/hour for the South Line, 5 trips/hours for the West Line and 8 trips/hours for the light rail). As a result, we have that the headway of the South Line, West Line and the light rail will be, respectively, 360, 720 and 450 seconds. With the code below, we create a `frequencies` table using the `{tibble}` and `{data.table}` packages.
+**Step 2:** Now we need to add a `frequencies` table describing the frequency of each trip. Note however that the GTFS specification requires us to list the *headway* of each trip, and not its *frequency*. The headway is the inverse of the frequency, so we need to divide the interval of one hour (3600 seconds) by the frequency of each route (10 trips/hour for the South Line, 5 trips/hours for the West Line and 8 trips/hours for the light rail). As a result, we have that the headway of the South Line, West Line and the light rail will be, respectively, 360, 720 and 450 seconds. With the code below, we create a `frequencies` table using the `{tibble}` and `{data.table}` packages.
 
 ```{r}
 frequencies <- tibble::tribble(
@@ -300,9 +300,9 @@ data.table::setDT(frequencies)
 filtered_gtfs$frequencies <- frequencies
 ```
 
-To simplify this case study, we assume that these headways are valid between 06:00h and 09:00h. This assumption works in our case because we are only going to calculate the travel time matrix during the morning peak. If we wanted to calculate travel times in other periods of the day or to use this GTFS in the daily operation of these corridors, however, we would have to list the headways for the rest of the day as well, such as during off-peak hours, during the dawn, etc. The value `1` in the `exact_times` column determines that the trips' timetables during the specified period must follow the headway exactly, not approximately (for more details, please refer to the `frequencies` table description in [Chapter 4](4_dados_gtfs.qmd#frequencies.txt)).
+To keep things simple in this case study, we assume that these headways are valid between 06:00h and 09:00h. This assumption works in our case because we are only going to calculate the travel time matrix during the morning peak. If we wanted to calculate travel times in other periods of the day or to use this GTFS to examine operation of these corridors throughout the day, however, we would have to list the headways for the rest of the day as well. The value `1` in the `exact_times` column determines that the trips' timetables during the specified period must follow the headway exactly, not approximately (for more details, please refer to the `frequencies` table description in [Chapter 4](4_dados_gtfs.qmd#frequencies.txt)).
 
-The GTFS object that results from the modifications done up until this stage can already be used to calculate travel time matrices. In order to restore the original feed's characteristic of not having a `frequencies` table, however, we "convert" this table's entries into timetables described in `stop_times`. To do so, we use the `frequencies_to_stop_times()` function. As all trips in the feed are converted, the `frequencies` table is removed from the GTFS object.
+**Step 3:** The GTFS object that results from the modifications done up until this stage can already be used to calculate travel time matrices. However, in order to restore the original feed's characteristic of not having a `frequencies` table, we "convert" this table's entries into timetables described in `stop_times`. To do so, we use the `frequencies_to_stop_times()` function. As all trips in the feed are converted, the `frequencies` table is removed from the GTFS object.
 
 ```{r}
 filtered_gtfs <- frequencies_to_stop_times(filtered_gtfs)
@@ -310,7 +310,7 @@ filtered_gtfs <- frequencies_to_stop_times(filtered_gtfs)
 filtered_gtfs$frequencies
 ```
 
-To check if the operation succeeded, we look at the West Line trips that head towards Caucaia (whose `direction_id` is `0`). With a frequency of 5 trips/hour between 06:00h and 09:00h, the `trips` table must contain exactly 16 entries related to this route (5 trips/hour during 3 hours plus a trip starting at 09:00h).
+To check if the data manipulation worked as intended, we look at the West Line trips that head towards Caucaia (whose `direction_id` is `0`). With a frequency of 5 trips/hour between 06:00h and 09:00h, the `trips` table must contain exactly 16 entries related to this route (5 trips/hour during 3 hours plus a trip starting at 09:00h).
 
 ```{r}
 west_line_subway <- filtered_gtfs$trips[grepl("west_subway_0", trip_id)]
@@ -320,7 +320,7 @@ nrow(west_line_subway)
 west_line_subway$trip_id
 ```
 
-The `stop_times` table, in its turn, must list each one of these trips departing every 12 minutes (equivalent to a 450 seconds headway). Thus, we need to check the first entry of the timetable of each one of the trips listed above.
+The `stop_times` table, in turn, must list each one of these trips departing every 12 minutes (equivalent to a 450 seconds headway). Thus, we need to check the first entry of the timetable of each one of the trips listed above.
 
 ```{r}
 west_subway_trips <- west_line_subway$trip_id
@@ -335,7 +335,7 @@ trip_indices <- filtered_gtfs$stop_times[
 filtered_gtfs$stop_times[trip_indices, .(trip_id, departure_time)]
 ```
 
-We can see that the "conversion" from `frequencies` to `stop_times` worked correctly, allowing us to use this modified feed to calculate the post-implementation scenario travel time matrix. To do this, we need to save this GTFS object to disk in `.zip` format, just like the rest of feeds we are going to use. We use the `write_gtfs()` function for that.
+We can see that the "conversion" from `frequencies` to `stop_times` worked correctly, allowing us to use this modified feed to calculate the travel time matrix in the post-implementation scenario. To do this, we need to save this GTFS object to disk in `.zip` format, just like the rest of the feeds we are going to use. We use the `write_gtfs()` function for that.
 
 ```{r}
 modified_metrofor_path <- tempfile("modified_metrofor", fileext = ".zip")
@@ -346,17 +346,18 @@ write_gtfs(filtered_gtfs, modified_metrofor_path)
 Now, we have four distinct GTFS files:
 
 - Etufor's feed, describing the bus system that operated in October 2019;
-- Metrofor's feed, describing the operation in October 2019 of subway's South and West lines and of Parangaba-Mucuripe light rail;
-- Metrofor's modified feed, describing the future operation of subway's South and West lines and of Parangaba-Mucuripe light rail, as foreseen in Pasfor;
-- East Line's feed, describing the future operation of the subway's East Line.
+- Metrofor's feed, describing the operation in October 2019 of the subway (South and West lines) and of the light rail;
+- Metrofor's modified feed, describing the future operation of  South and West subway lines and of the light rail, as foreseen in Pasfor;
+- East Line's feed, describing the future operation of the subway East Line.
 
-These four GTFS files will be used to calculate the accessibility conditions in Fortaleza before and after the implementation of the East Line. In the pre-implementation scenario, we are going to calculate the travel time matrices using only the October 2019 feeds from Metrofor and Etufor. In the post-implementation scenario, we are going to use Etufor's feed, Metrofor's modified feed with updated frequencies and East Line's feed.
+These four GTFS files will be used to calculate the accessibility conditions in Fortaleza before and after the implementation of the East Line. In the pre-implementation scenario, we are going to calculate the travel time matrices using only the October 2019 feeds from Metrofor and Etufor. In the post-implementation scenario, we are going to use Etufor's feed, Metrofor's modified feed with updated frequencies and the feed of the new East Line.
+
 
 ## Calculating the travel time matrices
 
-After making the necessary changes to the GTFS files and defining which feeds we are going to use in each scenario we need to calculate the travel time matrices, which will later be used to estimate the accessibility levels. To do this, we are going to use the `travel_time_matrix()` function from `{r5r}`, previously presented in [Chapter 3](3_calculando_acesso.qmd#sec-matrix).
+After making the necessary changes to the GTFS files and defining which feeds we are going to use in each scenario, we need to calculate the travel time matrices that we are going to use later to estimate the accessibility levels. To do this, we are going to use the `travel_time_matrix()` function from `{r5r}`, previously presented in [Chapter 3](3_calculando_acesso.qmd#sec-matrix).
 
-Before calculating the matrices, however, we need to organize our data as `{r5r}` requires. With the code below, we create a separate directory for each scenario (before and after implementation) in which we save the files used in the routing process in each case:
+Before calculating the travel matrices, however, we need to organize our data to use them in `{r5r}. With the code below, we create a separate directory for each scenario (before and after implementation) in which we save the files used in the routing process in each case:
 
 ```{r}
 #| results: false
@@ -445,7 +446,7 @@ file.rename(
 )
 ```
 
-To estimate the travel times in our study area, we also need a file representing the local street network extracted from OpenStreetMap in `.pbf` format. Optionally, we will also use a file representing the local topography, in `.tif` format. These data sets, just like the GTFS files, can also be downloaded from the book repository. Assuming that East Line's implementation will not affect the street network, the pedestrian infrastructure and the topography in the region, we can use the same files to calculate both travel time matrices. With the code below, we download these data sets and copy the files to both scenarios' directories.
+To estimate the travel times in our study area, we also need a file representing the local street network extracted from OpenStreetMap in `.pbf` format. Optionally, we are also going to use a file representing the local topography, in `.tif` format. These data sets, just like the GTFS files, can also be downloaded from the book repository. Assuming that the implementation  of the East Line will not affect the street network, the pedestrian infrastructure and the topography in the region, we can use the same files to calculate both travel time matrices. With the code below, we download these data sets and copy the files to both scenarios' directories.
 
 ```{r}
 #| results: false
@@ -527,9 +528,9 @@ r5r_core_before <- setup_r5(before_dir, verbose = FALSE)
 r5r_core_after <- setup_r5(after_dir, verbose = FALSE)
 ```
 
-Having built the transport networks, we can now proceed to the actual travel time matrices calculation. In this step, we are going to use the centroids of a hexagonal grid covering Fortaleza, made available by `{aopdata}` (more details on the package are presented in [Section 5](s5_dados_aop.en.qmd)), as our origins and destinations. Each grid hexagon covers an area of 0.11 km², similar to a city block, rendering a very spatially detailed analysis.
+Having built the transport networks, we can now proceed to the actual travel time matrices calculation. In this step, we are going to use the centroids of a hexagonal grid covering Fortaleza as our origins and destinations. We are going to use the hexagonal grid made available by `{aopdata}` (more details on the package are presented in [Section 5](s5_dados_aop.en.qmd)). Each grid hexagon covers an area of 0.11 km², similar to a city block, which allows for results at a fine spatial resolution.
 
-To compare both scenarios adequately, we need to calculate the two matrices using the same parameters. We consider trips by foot or by public transport, allow walking trips of at most 30 minutes to access or egress from public transport stops and limit the maximum trip duration to 60 minutes. We also consider a departure time of 7am, during the morning peak of a typical monday:
+For a proper comparison between both scenarios, we need to calculate the two travel matrices using the same parameters. We consider trips by foot or by public transport, allow walking trips of at most 30 minutes to access or egress from public transport stops and limit the maximum trip duration to 60 minutes. We also consider a departure time of 7am, during the morning peak of a typical monday:
 
 ```{r}
 #| message: false
@@ -592,7 +593,7 @@ rJava::.jgc()
 gc()
 ```
 
-On first sight, our matrices look exactly the same: all travel times shown in the samples above are identical. This happens because the subway expansion project is restricted to a relatively small area, in Fortaleza's city center, and the changes to the frequencies of the other subway and light rail corridors mainly affect these corridors' immediate surroundings. Thus, many trips that take place in the city are not affected by the implementation of the new corridor and the frequencies' changes. The travel time between many origin-destination pairs, however, are impacted:
+On first sight, our matrices look exactly the same: all travel times shown in the samples above are identical. This happens because the subway expansion project is limited to a relatively small area near Fortaleza's city center, and the changes to the frequencies of the other subway and light rail corridors mainly affect these corridors' immediate surroundings. Thus, many trips that take place in the city are not affected by those transport interventions. The travel time between many origin-destination pairs, however, are impacted:
 
 ```{r}
 # joins both scenarios' travel times in the same data set
@@ -607,9 +608,9 @@ comparison <- merge(
 comparison[travel_time_p50_before < travel_time_p50_after]
 ```
 
-## Calculating the accessibility levels in both scenarios
+## Calculating accessibility levels in both scenarios
 
-Calculating the accessibility levels in both scenarios is really simple, requiring only some basic data processing before applying an accessibility-calculation function from the `{accessibility}` package. To facilitate the data manipulation, we merge both scenarios' travel time matrices into a single table, identifying each scenario with the `scenario` column:
+Calculating the accessibility levels in both scenarios is really simple, requiring only some basic data processing before we apply one of the functions from the `{accessibility}` package to estimate accessibility. To facilitate the data manipulation, we merge the travel time matrices of both scenarios into a single table, and identify each scenario with the `scenario` column:
 
 ```{r}
 ttm <- rbind(ttm_before, ttm_after, idcol = "scenario")
@@ -618,7 +619,7 @@ ttm[, scenario := factor(scenario, labels = c("before", "after"))]
 ttm
 ```
 
-To calculate the accessibility levels, we need a table with some of Fortaleza's land use data. We can download such data using the `read_landuse()` function from the `{aopdata}` package, which brings the population and opportunities count in each one of the hexagons that composes the previously downloaded spatial grid.
+To calculate the accessibility levels, we need a table with some land used data for Fortaleza. We can download such data using the `read_landuse()` function from the `{aopdata}` package, which brings the population and opportunities count in each one of the hexagons that composes the previously downloaded spatial grid.
 
 ```{r}
 #| message: false
@@ -628,7 +629,7 @@ fortaleza_data <- aopdata::read_landuse(
 )
 ```
 
-For demonstration purposes, we calculate the accessibility to jobs and public highschools in our study area. The information on the total number of jobs and public highschools in each hexagon is listed in the columns `T001` and `E004`, respectively. We rename them to facilitate their identification and to keep only the columns we use in this analysis in the land use data table. We also keep the columns `P001`, listing the total population in each hexagon, and `R003`, classifying the hexagons in income deciles based on their average income per capita, that will be useful later on:
+For demonstration purposes, we calculate the accessibility to jobs and public highschools in our study area. The information on the total number of jobs and public highschools in each hexagon is listed in the columns `T001` and `E004`, respectively. We rename them to facilitate their identification. We also keep in the land use data only the few columns that we are going to use latter, including the column `P001`, which  lists the total population in each hexagon, and column `R003`, which tells the income decile classification of each hexagon:
 
 ```{r}
 cols_to_keep <- c("id", "jobs", "schools", "population", "decile")
@@ -646,7 +647,7 @@ fortaleza_data
 
 A key decision in any accessibility analysis is which accessibility measure to use. It's extremely important to weigh the pros and cons of each measure and to comprehend which metrics are more adequate for the type of opportunities we are looking at. In this example, we use two distinct measures:
 
-- To calculate accessibility to jobs, we use a cumulative opportunities measure. This metric allows us to understand how many jobs are accessible within a given time frame, thus representing the jobs supply for the inhabitants of each of our grid cells. This measure does not take the effect of competition for jobs into account, but it is widely recognized as one of the measures whose results are the easiest to communicate and interpret. In this example, we set a travel time threshold of 60 minutes, which is close to average public transport commuting time in Fortaleza (approximately 58 minutes, according to the Pasfor).
+- To calculate accessibility to jobs, we use a cumulative opportunities measure. This metric allows us to understand how many jobs are accessible within a given time frame. Despite its limitations discussed in [Chapter 2](2_indicadores.en.qmd#cumulative-opportunity-measures), this measure is one of the most commonly used metrics. This is to a large extent because the results from this accessibility indicator are extremely easy to communicate and interpret. In this example, we set a travel time threshold of 60 minutes, which is close to average commuting time by public transport in Fortaleza (approximately 58 minutes, according to Pasfor).
 
 - To calculate accessibility to public highschools, we use a minimum travel cost measure. This metric is particularly useful to assess the coverage of essential public services, such as basic health and education facilities. We can use this measure, for example, to identify population groups that are farther from these opportunities than a time/distance limit deemed reasonable.
 
@@ -677,10 +678,10 @@ time_to_schools <- cost_to_closest(
 time_to_schools
 ```
 
-We can see that the minimum travel cost function output includes some `Inf` values. The origins listed with this value cannot reach any public highschools within 60 minutes (the travel time limit imposed when calculating the matrix). The `Inf` value, therefore, is used to signal this condition. To simplify the calculation from this point onward, we consider that these regions are 80 minutes away from a school:
+Having done that, we can calculate the accessibility difference between the two scenarios. This information is useful to clearly communicate how the accessibility conditions in the city would be impacted by the future implementation of the East subway line and the changes to service frequency foreseen in Pasfor. To do so, we use the code below:
 
 ```{r}
-# substitutes Inf values by 80 minutes travel times
+# substitutes Inf values by 80 minutes
 time_to_schools[
   ,
   travel_time_p50 := ifelse(is.infinite(travel_time_p50), 80, travel_time_p50)
@@ -706,7 +707,7 @@ time_to_schools[
 
 ## Analyzing accessibility levels before and after
 
-Now that we have calculated the accessibility levels in both scenarios and the difference between them, we need to understand how the future East Line implementation and the subway and light rail frequencies changes impact the accessibility conditions in our study area. As a first exploratory analysis, we can investigate how these changes affect the average accessibility in the city. Looking at the accessibility to jobs first, we calculate the average number of accessible jobs in each scenario. Here, it's important to weigh the accessibility levels by the population of each grid cell, since hexagons with higher population contribute more to the city's average than hexagons where few people reside in.
+Now that we have calculated the accessibility levels in both scenarios and the difference between them, we can examine how the future implementation of the East Line coupled with the changes to the frequencies of the subway and light rail services will impact the accessibility conditions in our study area. As a first exploratory analysis, we can investigate how these changes affect the average accessibility in the city. Looking at the accessibility to jobs first, we calculate the average number of accessible jobs in each scenario. Here, it's important to weigh the accessibility levels by the population of each grid cell, since hexagons with larger populations contribute more to the city's average than hexagons with fewer residents.
 
 ```{r fig_4}
 library(ggplot2)
@@ -720,7 +721,7 @@ access_to_jobs <- merge(
   by = "id"
 )
 
-# renames columns with ambiguous names
+# renames columns with duplicated names
 data.table::setnames(
   access_to_jobs,
   old = c("jobs.x", "jobs.y"),
@@ -769,9 +770,9 @@ access_after_string <- formatC(
 increase <- (access_after - access_before) / access_before
 ```
 
-The results show that Fortaleza's population could reach on average `r access_before_string` jobs by public transport in up to 60 minutes of travel before the subway expansion, in 2019. East Line's implementation and the subway and light rail frequencies changes led to an increase of `r increase`%, to `r access_after_string` jobs, on average.
+The results show that Fortaleza's population could reach on average `r access_before_string` jobs in up to 60 minutes by public transport before the subway expansion, in 2019. The East Line's implementation and the changes to the frequencies of subway and light rail services led to an increase of `r increase`%, to `r access_after_string` jobs, on average.
 
-When we look at the average time to reach the closest public highschool, we see that the changes to the transport system barely affect the accessibility to these schools. On average, Fortaleza's population took approximately 13 minutes to reach the closest public highschool to their home in 2019. After the subway extension and the increase to the subway and light rail frequencies, this value remains virtually unchanged.
+When we look at the average time to reach the closest public highschool, we see that the changes to the transport system barely affect the accessibility to these schools. On average, Fortaleza's population took approximately 13 minutes to reach the nearest public highschool to their home in 2019. After the subway extension and the increase to the subway and light rail frequencies, this value remains virtually unchanged.
 
 ```{r fig_5}
 # merges time to schools table with land use data
@@ -800,9 +801,9 @@ ggplot(data = avg_time, aes(x = scenario, y = time)) +
   theme_minimal()
 ```
 
-In summary, the results show that East Line's construction and frequency adjustment on other public transport corridors affect the accessibility to jobs much more significantly than the accessibility to public highschools. This is mainly a result of the distribution of these two types of opportunities in Fortaleza: while jobs are much more concentrated in the city center, schools are better distributed throughout the territory. The changes to the public transport system, therefore, allow the residents of regions far from the city center to reach the jobs located there. On the other hand, the more equitable distribution of public highschools results in relatively good accessibility conditions even before the changes, which explains the lower impact on the time to reach schools.
+In summary, the results show that the planned construction of the East Line and the frequency adjustment of the other rail services in Fortaleza would affect accessibility to jobs much more significantly than the accessibility to public highschools. This is mainly a result of how these two types of opportunities are spatially distributed in Fortaleza: while jobs are much more concentrated in the city center, schools are better distributed throughout the city. The changes to the public transport system, therefore, could help the residents of regions far from the city center to reach the jobs located there. On the other hand, public highschools are much more evenly distributed across the city, which results in relatively good accessibility conditions even before the changes to the public transport network. This helps us explain why those transport interventions would have such a low impact on the travel time necessary to reach the nearest schools.
 
-This phenomenon can be better understood when we observe the results spatially. Before doing so, however, we create a spatial object outlining the shape of the public transport corridors in the city, which helps making the impact of the changes to the transport network even clearer.
+These results can be better understood when we observe their spatial distribution. Before doing so, however, we create a spatial object outlining the shape of the public transport corridors in the city, which helps making the impact of the changes to the transport network even clearer.
 
 ```{r fig_6}
 # reads the gtfs files required to create the geometries of each corridor
@@ -860,7 +861,7 @@ ggplot() +
   theme_void()
 ```
 
-Now we can analyze the spatial distribution of accessibility levels in both scenarios, as well as the accessibility difference between them. To do this, we need to merge the accessibility estimates with the spatial grid of our study area. We first look at accessibility to jobs:
+Now we can analyze the spatial distribution of accessibility levels in both scenarios, as well as the accessibility difference between them. To do this, we need to merge the accessibility estimates with the spatial grid of our study area. We first look at access to jobs:
 
 ```{r fig_7}
 # merges accessibility data with fortaleza's spatial grid and convert the result into a
@@ -920,12 +921,12 @@ difference_dist <- ggplot() +
 access_dist / difference_dist + plot_layout(ncol = 1, heights = c(1, 1))
 ```
 
-The map shows that the regions that benefit the most from the changes to the transport system are those distant from the city center, but whose still access to rapid transit stations is relatively fast. The job accessibility gains concentrate mainly around the South and West subway corridors, and, to a smaller extent, around some of the light rail stations. Even regions close to these corridors, although not immediately adjacent to them, show big accessibility gains, highlighting the importance of the transport network connectivity to guarantee good accessibility conditions in the city. The region around the new East Line, on the other hand, which already concentrated some of the highest accessibility levels in the city even before the implementation of the new corridor, shows much less expressive accessibility gains. 
+The map shows that the regions that benefit the most from the changes to the transport system are those distant from the city center, but which are still close to rapid transit stations. The job accessibility gains concentrate mainly around the South and West subway corridors, and, to a smaller extent, around some of the light rail stations. Even regions close to these corridors, although not immediately adjacent to them, have large accessibility gains, highlighting the importance of the transport network connectivity to guarantee good accessibility conditions. The region around the new East Line, on the other hand, which already concentrated some of the highest accessibility levels in the city even before the implementation of the new corridor, shows only modest accessibility gains. 
 
-The time to schools distribution maps, however, depict a different scenario:
+The maps of travel time to the nearest school, however, depict a different story:
 
 ```{r fig_8}
-# merges time to schools data with fortaleza's spatial grid and convert the result
+# merges time to schools data with Fortaleza's spatial grid and converts the result
 # into a spatial object
 time_to_schools <- merge(
   time_to_schools,
@@ -971,11 +972,11 @@ time_diff_dist <- ggplot() +
 time_dist / time_diff_dist + plot_layout(ncol = 1, heights = c(1, 1))
 ```
 
-The East Line and the changes to the subway and light rail frequencies barely affect the accessibility to public highschools panorama in Fortaleza. Very few hexagons present any accessibility gain between scenarios, with the exception of a small number of grid cells very close to subway stations. As we can see, the distribution to schools pattern in the city is much less concentric than the job accessibility distribution pattern. Again, this is a consequence of the public highschools distribution in the city: unlike the jobs distribution, which tends to follow economic criteria, the distribution of public amenities tends to follow equity criteria, prioritizing peripheral regions and areas with higher concentrations of vulnerable population groups. Even before the changes to the public transport system, areas with very low job accessibility levels, such as in the extreme south of the city, already had good accessibility conditions to public highschools.
+The East Line and the changes to the subway and light rail frequencies barely affect the accessibility to public highschools in Fortaleza. Very few hexagons present any accessibility gain between scenarios, with the exception of a small number of grid cells very close to subway stations. As we can see, the spatial distribution of access to schools presents a much more evenly distributed pattern than the job accessibility distribution pattern. Again, this is a consequence of how public highschools are distributed in the city: unlike the jobs distribution, which tends to follow economic criteria, the spatial planning of public schools in Brazil are guided by proximity and equity guidelines aiming to increase the proximity between schools and vulnerable population groups. Nonetheless, the degree of success of education policies in promoting equitable accessibility can greatly vary between cities and for different education levels such as early childhood and primary education [@saraiva2023transporte]. 
 
 ## Accessibility inequality
 
-A key dimension to assess transport policies is related to their distributive aspects. Who are the most benefited and harmed by these policies? Under an equity perspective, we expect public policies to prioritize improvements on the accessibility conditions of those with worse socioeconomic conditions and who depend on public transport the most [@pereira2017distributive; @vanwee2022accessibility].
+A key dimension to assess transport policies is related to their distributive aspects. Who are the winners and losers? From an equity perspective, we expect public policies to prioritize improvements on the accessibility conditions of those with worse socioeconomic conditions and who depend on public transport the most [@pereira2017distributive; @vanwee2022accessibility].
 
 In this section, we look at how the job accessibility gains that result from the East Line implementation and the subway and light rail frequencies changes are distributed between different income groups. To do this, we need to understand how the accessibility levels were distributed among the population in 2019, before the changes, and after the implementation of such changes. With the code below, we use the information of in which income per capita decile each hexagon is located at to investigate the accessibility distribution between income per groups, before and after the changes.
 
