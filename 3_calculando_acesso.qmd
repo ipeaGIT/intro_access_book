@@ -50,7 +50,7 @@ O *OpenStreetMap* (OSM) é uma base de dados geográfica que traz informações 
 
 - **Topografia** (opcional): um arquivo de dados *raster* contendo o modelo digital de elevação da área de estudo em formato `.tif`/`.tiff`. Utilizado caso deseje-se levar em consideração os efeitos da topografia do local sobre os tempos de caminhada e de viagens de bicicleta.  Pode ser baixado com:
   - [elevatr](https://github.com/jhollist/elevatr), pacote de R;
-  - Nasa's [SRTMGL1](https://lpdaac.usgs.gov/products/srtmgl1v003/), *website*.
+  - [SRTMGL1](https://lpdaac.usgs.gov/products/srtmgl1v003/), *website*.
   
 Esses dados devem ser salvos em uma mesma pasta que, preferencialmente, não contenha nenhum outro arquivo. Como veremos adiante, o `{r5r}` combina todos os dados salvos nesta pasta para criar uma rede de transporte multimodal que é utilizada no roteamento de viagens entre pares origem-destino e, consequentemente, no cálculo das matrizes de tempo de viagem. Note que é possível ter mais de um arquivo GTFS na mesma pasta: nesse caso, o `{r5r}` considera as redes de transporte públicos de todos os *feeds* de forma conjunta. No entanto, a rede viária e a topografia da área de estudo devem ser descritas por um único arquivo cada. Assumindo que os *scripts* de R estejam em uma pasta chamada `R`, uma possível organização dos arquivos segue o esquema abaixo:
 
@@ -147,7 +147,7 @@ A função `travel_time_matrix()` utiliza uma extensão do algoritmo de roteamen
 
 ## Cálculo de acessibilidade {#sec-accessibility}
 
-Calculada a matriz de tempo de viagem entre as origens e os destinos da área de estudo, precisamos utilizá-la para calcular os níveis de acessibilidade do local. Para isso, utilizaremos o pacote `{accessibility}` [@pereira2022accessibility] [^3], também desenvolvido pela equipe do Projeto Acesso a Oportunidades, Ipea, e que disponibiliza funções para o cálculo de vários indicadores de acessibilidade. Como *input* básico, todas as funções requerem uma matriz de custo pré-calculada (no nosso caso, a matriz de tempo de viagem calculada na seção anterior) e dados de uso do solo, como, por exemplo, o número de determinados tipos de oportunidades em cada célula da grade que cobre a área de estudo.
+Calculada a matriz de tempo de viagem entre as origens e os destinos da área de estudo, precisamos utilizá-la para calcular os níveis de acessibilidade do local. Para isso, utilizaremos o pacote `{accessibility}`[^3], também desenvolvido pela equipe do Projeto Acesso a Oportunidades, Ipea, e que disponibiliza funções para o cálculo de vários indicadores de acessibilidade. Como *input* básico, todas as funções requerem uma matriz de custo pré-calculada (no nosso caso, a matriz de tempo de viagem calculada na seção anterior) e dados de uso do solo, como, por exemplo, o número de determinados tipos de oportunidades em cada célula da grade que cobre a área de estudo.
 
 [^3]: Disponível em <https://github.com/ipeaGIT/accessibility>.
 
@@ -251,7 +251,7 @@ acessibilidade_r5r <- accessibility(
 head(acessibilidade_r5r)
 ```
 
-Uma pequena diferença entre o comportamento desta função `r5r::accessibility()`e o da `cumulative_access()` do pacote `{accessibility}` está no fato de que, nesta, pares origem-destino cujos tempos de viagem são iguais ao valor definido como limite são excluídos do cálculo da acessibilidade, enquanto na função do pacote `{accessibility}` eles são incluídos. Ou seja, para simularmos o cálculo acima com a `cumulative_access()` precisamos estabelecer um tempo de viagem limite de 29 minutos, e não 30. No código abaixo, comparamos os resultados das duas funções.
+Uma pequena diferença entre o comportamento desta função `r5r::accessibility()`e o da `cumulative_cutoff()` do pacote `{accessibility}` está no fato de que, nesta, pares origem-destino cujos tempos de viagem são iguais ao valor definido como limite são excluídos do cálculo da acessibilidade, enquanto na função do pacote `{accessibility}` eles são incluídos. Ou seja, para simularmos o cálculo acima com a `cumulative_cutoff()` precisamos estabelecer um tempo de viagem limite de 29 minutos, e não 30. No código abaixo, comparamos os resultados das duas funções.
 
 ```{r}
 ops_cumulativas_29 <- cumulative_cutoff(
@@ -328,7 +328,7 @@ ggplot(acesso_espacial) +
   theme_minimal()
 ```
 
-Como podemos ver, os níveis de acessibilidade tendem a se concentrar de forma mais acentuada no centro da cidade, onde existe maior concentração de empregos, e próximos aos grandes corredores de transportes da cidade. Por terem fácil acesso a modos de alta capacidade e velocidade, pessoas que moram mais perto desses corredores tendem a acessar locais distantes relativamente rápido. Em contraste, pessoas que moram mais afastadas desses corredores, dependem de modos de menor menor frequência e velocidade operacional (como os ônibus municipais, por exemplo) e precisam gastar mais tempo para alcançar os corredores de média e alta capacidade. Como consequência, os níveis de acessibilidade de pessoas que moram afastadas do centro e de corredores de alta capacidade tendem a ser menores.
+Como podemos ver, os níveis de acessibilidade tendem a se concentrar de forma mais acentuada no centro da cidade, onde existe maior concentração de escolas, e próximos aos grandes corredores de transportes da cidade. Por terem fácil acesso a modos de alta capacidade e velocidade, pessoas que moram mais perto desses corredores tendem a acessar locais distantes de forma relativamente rápida. Em contraste, pessoas que moram mais afastadas desses corredores, dependem de modos de menor menor frequência e velocidade operacional (como os ônibus municipais, por exemplo) e precisam gastar mais tempo para alcançar os corredores de média e alta capacidade. Como consequência, os níveis de acessibilidade de pessoas que moram afastadas do centro e de corredores de alta capacidade tendem a ser menores.
 
 **Distribuição socioeconômica de acessibilidade urbana**
 

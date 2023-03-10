@@ -87,13 +87,13 @@ distancias <- get_trip_length(gtfs, file = "shapes")
 
 head(distancias)
 
-# calcula a duração de todas viagens, em minutos
-duracao <- get_trip_duration(gtfs, unit = 'min')
+# calcula a duração de todas viagens
+duracao <- get_trip_duration(gtfs)
 
 head(duracao)
 ```
 
-Assim como a `get_trip_speed()` retorna as velocidades em km/h por padrão, a `get_trip_length()` retorna os comprimentos em km e a `get_trip_duration()` retorna a duração em minutos. Essas unidades podem ser ajustadas com o argumento `unit`, presente em todas as funções.
+Assim como a `get_trip_speed()` retorna as velocidades em km/h por padrão, a `get_trip_length()` retorna os comprimentos em km e a `get_trip_duration()` retorna a duração em minutos. Essas unidades podem ser ajustadas com o argumento `unit`, presente em todas as três funções.
 
 ## Combinando e filtrando *feeds*
 
@@ -135,7 +135,7 @@ gtfs_combinado <- merge_gtfs(gtfs_sem_dups, gtfs_poa)
 gtfs_combinado$agency
 ```
 
-Como podemos ver, os registros das tabelas de ambos os *feeds* foram combinados em uma única tabela. Este é o caso quando os dois (ou mais, caso desejado) objetos GTFS possuem registros de uma mesma tabela (a *agency*, no exemplo). Quando uma determinada tabela está presente em apenas uma dos  *feeds*, a função mantém essa tabela no *output*. É o caso, por exemplo, da tabela *frequencies*, que existe apenas no *feed* da SPTrans, mas não no da EPTC: 
+Como podemos ver, os registros das tabelas de ambos os *feeds* foram combinados em uma única tabela. Este é o caso quando os dois (ou mais, caso desejado) objetos GTFS possuem registros de uma mesma tabela (a *agency*, no exemplo). Quando uma determinada tabela está presente em apenas uma dos *feeds*, a função mantém essa tabela no *output*. É o caso, por exemplo, da tabela *frequencies*, que existe apenas no *feed* da SPTrans, mas não no da EPTC: 
 
 ```{r}
 names(gtfs_poa)
@@ -345,7 +345,7 @@ endereco_validador <- download_validator(pasta_temporaria)
 endereco_validador
 ```
 
-A segunda (e última) etapa consiste em de fato rodar a função `validate_gtfs()`. Essa função aceita que os dados GTFS a serem validados sejam passados de diferentes formas: (a) como um objeto GTFS existente apenas no R, (b) como o endereço de um arquivo GTFS salvo localmente em formato `.zip`, (c) como a URL para um *feed* ou (d) como uma pasta que contém os dados GTFS não compactados. A função também recebe o endereço para uma pasta onde o resultado da validação deve ser salvo e o endereço para o validador que deve ser usado. Neste exemplo, vamos fazer a validação a partir do endereço do GTFS da SPTrans, lido anteriormente:
+A segunda (e última) etapa consiste em de fato rodar a função `validate_gtfs()`. Essa função aceita que os dados GTFS a serem validados sejam passados de diferentes formas: (a) como um objeto GTFS existente apenas no R, (b) como o endereço de um arquivo GTFS salvo localmente em formato `.zip`, (c) como uma URL apontando para um *feed* ou (d) como uma pasta que contém os dados GTFS não compactados. A função também recebe o endereço para uma pasta onde o resultado da validação deve ser salvo e o endereço para o validador que deve ser usado. Neste exemplo, vamos fazer a validação a partir do endereço do GTFS da SPTrans, lido anteriormente:
 
 ```{r}
 pasta_resultado <- tempfile("validacao_com_endereco")
@@ -364,7 +364,7 @@ Como podemos ver, a validação gera alguns arquivos como resultado:
 - `report.html`, mostrado na @fig-report, que resume os resultados da validação em uma página HTML (apenas disponível quando utilizado o validador v3.1.0 ou superior);
 - `report.json`, que resume a mesma informação apresentada na página HTML, porém em formato JSON, que pode ser usado para processar e interpretar os resultados de forma programática;
 - `system_errors.json`, que apresenta eventuais erros de sistema que tenham ocorrido durante a validação e que podem comprometer os resultados;
-- `validation_stderr.txt`, que lista mensagens informativas enviadas pelo validador, incluindo uma lista dos testes realizados, eventuais mensagens de erro, etc[^2];
+- `validation_stderr.txt`, que lista mensagens informativas enviadas pelo validador, incluindo uma lista dos testes realizados, eventuais mensagens de erro, etc[^2].
 
 [^2]: Mensagens informativas podem também ser listadas no arquivo `validation_stdout.txt`. As mensagens listadas no `validation_stderr.txt` e no `validation_stdout.txt` dependem da versão do validador utilizada.
 
@@ -396,7 +396,6 @@ gtfs_filtrado <- gtfs |>
 
 # checa resultado do filtro
 gtfs_filtrado$frequencies[trip_id == "2105-10-0"]
-
 
 gtfs_filtrado$calendar
 ```
