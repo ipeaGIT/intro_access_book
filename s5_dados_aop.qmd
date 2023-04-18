@@ -1,13 +1,13 @@
 # SEÇÃO 5: Dados do Projeto Acesso a Oportunidades
 
-**Os objetivos desta seção** são (1) apresentar os dados de acessibilidade, de uso do solo e socioeconômicos disponibilizados pelo Projeto Acesso a Oportunidades (AOP), bem como (2) ensinar a baixá-los e utilizá-los com o pacote de R `{aopdata}`.
+**Os objetivos desta seção** são: i) apresentar os dados de acessibilidade, de uso do solo e socioeconômicos disponibilizados pelo projeto Acesso a Oportunidades (AOP); e ii) ensinar a baixá-los e utilizá-los com o pacote de R `{aopdata}`.
 
-Nos capítulos anteriores, aprendemos sobre o conceito de acessibilidade, como traduzi-lo em medidas quantitativas e como calcular essas medidas usando R. No entanto, frequentemente nos deparamos com situações em que não podemos estimar os níveis de acessibilidade por conta própria, por não termos o tempo ou os dados necessários para isso, ou não precisamos fazer este cálculo, porque tais estimativas já foram realizadas por outras pessoas. Ao longo dos próximos capítulos, apresentaremos a base de dados com estimativas de acessibilidade criada e disponibilizada no âmbito do projeto [Acesso a Oportunidades](https://www.ipea.gov.br/acessooportunidades/) (AOP).
+Nos capítulos anteriores, aprendemos sobre o conceito de acessibilidade, como traduzi-lo em medidas quantitativas e como calcular essas medidas usando R. No entanto, frequentemente nos deparamos com situações em que não podemos estimar os níveis de acessibilidade por conta própria, por não termos o tempo ou os dados necessários para isso, ou em que não precisamos fazer esse cálculo, porque tais estimativas já foram realizadas por outras pessoas. Ao longo dos próximos capítulos, apresentaremos a base de dados com estimativas de acessibilidade criada e disponibilizada no âmbito do projeto [Acesso a Oportunidades](https://www.ipea.gov.br/acessooportunidades/) (AOP).
 
-O Projeto Acesso a Oportunidades (AOP) é um projeto de pesquisa liderado pelo Instituto de Investigação Econômica Aplicada (Ipea) com o objetivo de compreender as condições de transporte e as desigualdades de acesso a oportunidades nas cidades brasileiras. Todos os resultados dos dados produzidos pela equipa do AOP são disponibilizados publicamente. A base disponibilizada pelo AOP não apenas contém estimativas de acessibilidade urbana, mas também inclui informações sobre distribuição e contagem populacional e de atividades econômicas e serviços públicos. Os dados estão agregados espacialmente em uma grade hexagonal que segue o sistema de gradeamento [H3](https://h3geo.org/), desenvolvido pela Uber [@brodsky2018h3]. Cada célula espacial tem cerca de 0,11 km², área similar à coberta por um quarteirão, permitindo análises em alta resolução espacial. Como apresentado na @fig-data_scope, as estimativas de acessibilidade estão disponíveis para os anos de 2017, 2018 e 2019 e para as 20 maiores cidades do Brasil, considerando diferentes modos de transporte (caminhada, bicicleta, transporte público e automóvel), horários do dia (pico e fora-pico), grupos populacionais (segundo níveis de renda, cor, sexo e idade) e tipos de atividade (empregos, escolas, serviços de saúde e centros de assistência social).
+O AOP é um projeto de pesquisa liderado pelo Instituto de Pesquisa Econômica Aplicada (Ipea) com o objetivo de compreender as condições de transporte e as desigualdades de acesso a oportunidades nas cidades brasileiras. Todos os resultados dos dados produzidos pela equipe do AOP são disponibilizados publicamente. A base disponibilizada contém não apenas estimativas de acessibilidade urbana, mas também informações sobre distribuição e contagem populacional e de atividades econômicas e serviços públicos. Os dados estão agregados espacialmente em uma grade hexagonal que segue o sistema de gradeamento [H3](https://h3geo.org/), desenvolvido pela Uber [@brodsky2018h3]. Cada célula espacial tem cerca de 0,11 km², área similar à coberta por um quarteirão, permitindo análises em alta resolução espacial. Como apresentado na @fig-data_scope, as estimativas de acessibilidade estão disponíveis para os anos de 2017, 2018 e 2019 e para as vinte maiores cidades do Brasil, considerando diferentes modos de transporte (caminhada, bicicleta, transporte público e automóvel), horários do dia (pico e fora-pico), grupos populacionais (segundo níveis de renda, cor, sexo e idade) e tipos de atividade (empregos, escolas, serviços de saúde e centros de assistência social).
 
 ::: {.callout-note appearance="simple"}
-As metodologias utilizadas para gerar estes dados são apresentadas em detalhe em publicações separadas para os dados populacionais e de uso do solo [@pereira2022distribuicao] e para os dados de acessibilidade [@pereira2022estimativas].
+As metodologias utilizadas para gerar esses dados são apresentadas em detalhe em publicações separadas para os dados populacionais e de uso do solo [@pereira2022distribuicao] e para os dados de acessibilidade [@pereira2022estimativas].
 :::
 
 ```{r}
@@ -18,14 +18,14 @@ As metodologias utilizadas para gerar estes dados são apresentadas em detalhe e
 knitr::include_graphics("images/aop_data_scope.png")
 ```
 
-Os níveis de acessibilidade por transporte público foram estimados apenas para as cidades que disponibilizaram ao projeto dados GTFS de qualidade considerada aceitável. São elas Belo Horizonte, Campinas, Curitiba, Fortaleza, Goiânia[^1], Porto Alegre, Recife, Rio de Janeiro e São Paulo. Ainda assim, algumas dessas cidades disponibilizaram *feeds* apenas para determinados anos ou compartilharam arquivos considerados não representativos do sistema de transporte público operado na prática, resultando na exclusão das estimativas dessas cidades para alguns anos. A @fig-geo_scope indica as cidades para as quais foram calculados os níveis de acessibilidade por modo de transporte.
+Os níveis de acessibilidade por transporte público foram estimados apenas para as cidades que disponibilizaram ao projeto dados GTFS de qualidade considerada aceitável. São elas: Belo Horizonte, Campinas, Curitiba, Fortaleza, Goiânia[^1], Porto Alegre, Recife, Rio de Janeiro e São Paulo. Ainda assim, algumas dessas cidades disponibilizaram *feeds* apenas para determinados anos ou compartilharam arquivos considerados não representativos do sistema de transporte público operado na prática, resultando na exclusão das estimativas dessas cidades para alguns anos. A @fig-geo_scope indica as cidades para as quais foram calculados os níveis de acessibilidade por modo de transporte.
 
-[^1]: O GTFS de Goiânia descreve a rede de transporte público não apenas do município, mas de toda a sua Região Metropolitana.
+[^1]: O GTFS de Goiânia descreve a rede de transporte público não apenas do município, mas de toda a sua região metropolitana.
 
 ```{r}
 #| echo: false
 #| label: fig-geo_scope
-#| fig-cap: Escopo geográfico dos dados do AOP (destacadas cidades que não têm estimativas por transporte público para todos os anos)
+#| fig-cap: Escopo geográfico dos dados do AOP (destacadas com um asterisco cidades que não têm estimativas por transporte público para todos os anos)
 
 knitr::include_graphics("images/aop_geographical_scope.png")
 ```
@@ -35,27 +35,27 @@ A seguir, duas tabelas resumem os dados disponibilizados pelo projeto. A @tbl-ta
 ```{r}
 #| echo: false
 #| label: tbl-tabela_dados_access
-#| tbl-cap: Indicadores de acessibilidade calculados no Projeto Acesso a Oportunidades
+#| tbl-cap: Indicadores de acessibilidade calculados pelo AOP
 tabela_dados_access <- data.table::data.table(
   `Indicador (código)` = c(
-  	"Tempo mínimo de viagem (TMI)",
-  	"Medida cumulativa ativa (CMA)",
-  	"Medida cumulativa passiva (CMP)"
+    "Tempo mínimo de viagem (TMI)",
+    "Medida cumulativa ativa (CMA)",
+    "Medida cumulativa passiva (CMP)"
   ),
   Descrição = c(
-  	"Tempo até a oportunidade mais próxima",
-  	"Quantidade de oportunidades acessíveis em um determinado limite de tempo",
-  	"Quantidade de pessoas que acessam a localidade em um determinado limite de tempo"
+    "Tempo até a oportunidade mais próxima",
+    "Quantidade de oportunidades acessíveis em um determinado limite de tempo",
+    "Quantidade de pessoas que acessam a localidade em um determinado limite de tempo"
   ),
   `Tipo de oportunidades` = c(
-  	"Saúde, Educação, CRAS",
-  	"Trabalho, Saúde, Educação, CRAS",
-	  "-"
+    "Saúde, educação, Centros de Referência de Assistência Social (CRAS)",
+    "Trabalho, saúde, educação, CRAS",
+    "-"
   ),
   `Limites de tempo de viagem` = c(
-  	"A pé (60 mins); bicicleta, Transporte público e carro (120 mins)",
-  	"A pé e bicicleta (15, 30, 45 e 60 mins); transporte público e carro (15, 30, 60, 90 e 120 mins)",
-  	"A pé e bicicleta (15, 30, 45 e 60 mins); transporte público e carro (15, 30, 60, 90 e 120 mins)"
+    "A pé (60 min.); bicicleta, transporte público e carro (120 min.)",
+    "A pé e bicicleta (15, 30, 45 e 60 min.); transporte público e carro (15, 30, 60, 90 e 120 min.)",
+    "A pé e bicicleta (15, 30, 45 e 60 min.); transporte público e carro (15, 30, 60, 90 e 120 min.)"
   )
 )
 
@@ -70,36 +70,36 @@ Já a @tbl-tabela_dados_aop apresenta os dados de características socioeconômi
 #| tbl-cap: Informações socioeconômicas da população e de distribuição espacial de atividades, segundo ano e fonte de dados
 tabela_dados_pop <- data.table::data.table(
   Dado = c(
-  	"Características sociodemográficas da população",
-  	"Estabelecimentos de educação",
-  	"Estabelecimentos de saúde",
-  	"Atividade econômica",
-  	"Estabelecimentos de assistência social"
+    "Características sociodemográficas da população",
+    "Estabelecimentos de educação",
+    "Estabelecimentos de saúde",
+    "Atividade econômica",
+    "Estabelecimentos de assistência social"
   ),
   Informações = c(
-  	"Quantidade de pessoas segundo sexo, faixa de idade e cor/raça; média da renda domiciliar per capita",
-  	"Quantidade de creches e escolas públicas segundo nível de ensino (infantil, fundamental e médio)",
-  	"Quantidade de estabelecimentos de saúde que atendem pelo SUS segundo nível de atenção (baixa, média e alta complexidade)",
-  	"Quantidade de empregos formais conforme o nível de instrução dos trabalhadores (baixa, média e alta escolaridade)",
-  	"Quantidade de CRAS"
+    "Quantidade de pessoas segundo sexo, faixa de idade e cor/raça; média da renda domiciliar per capita",
+    "Quantidade de creches e escolas públicas segundo nível de ensino (infantil, fundamental e médio)",
+    "Quantidade de estabelecimentos de saúde que atendem pelo SUS segundo nível de atenção (baixa, média e alta complexidade)",
+    "Quantidade de empregos formais conforme o nível de instrução dos trabalhadores (baixa, média e alta escolaridade)",
+    "Quantidade de CRAS"
   ),
   Anos = c(
-  	"2010",
-  	"2017, 2018, 2019",
-  	"2017, 2018, 2019",
-  	"2017, 2018, 2019",
-  	"2017, 2018, 2019"
+    "2010",
+    "2017, 2018, 2019",
+    "2017, 2018, 2019",
+    "2017, 2018, 2019",
+    "2017, 2018, 2019"
   ),
   Fonte = c(
-  	"Censo Demográfico, IBGE",
-  	"Censo Escolar, Inep",
-  	"Cadastro Nacional de Estabelecimentos de Saúde (CNES), Ministério da Saúde",
-  	"Relação Anual de Informações Sociais (RAIS), Ministério da Economia",
-  	"Censo SUAS, Ministério da Cidadania"
+    "Censo Demográfico, Instituto Brasileiro de Geografia e Estatística (IBGE)",
+    "Censo Escolar, Inep",
+    "Cadastro Nacional de Estabelecimentos de Saúde (CNES), Ministério da Saúde",
+    "Relação Anual de Informações Sociais (RAIS), Ministério da Economia",
+    "Censo SUAS, Ministério da Cidadania"
   )
 )
 
 knitr::kable(tabela_dados_pop)
 ```
 
-Todas as bases de dados criadas pelo AOP estão disponíveis para download no [site do projeto](https://www.ipea.gov.br/acessooportunidades/dados/) ou pelo pacote de R `{aopdata}`. O dicionário de dados pode ser acessado [neste link](https://ipeagit.github.io/aopdata/articles/data_dic_pt.html) ou, em uma sessão de R, com o comando `aopdata::aopdata_dictionary(lang = "pt")`. Os capítulos desta seção apresentam diversos exemplos de como baixar e visualizar esses dados em R.
+Todas as bases de dados criadas pelo AOP estão disponíveis para *download* no [*site* do projeto](https://www.ipea.gov.br/acessooportunidades/dados/) ou pelo pacote de R `{aopdata}`. O dicionário de dados pode ser acessado [neste *link*](https://ipeagit.github.io/aopdata/articles/data_dic_pt.html) ou, em uma sessão de R, com o comando `aopdata::aopdata_dictionary(lang = "pt")`. Os capítulos desta seção apresentam diversos exemplos de como baixar e visualizar esses dados em R.
