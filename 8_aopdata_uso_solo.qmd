@@ -1,10 +1,10 @@
 #  Dados de distribuição espacial de oportunidades
 
-O pacote `{aopdata}` também permite baixar, para todas cidades incluídas no projeto, dados de 2017, 2018 e 2019 da distribuição espacial de empregos (de baixa, média e alta escolaridade), de estabelecimentos públicos de saúde (de baixa, média e alta complexidade), de escolas públicas (ensino infantil, fundamental e médio) e de Centros de Referência de Assistência Social (CRAS).
+O pacote `{aopdata}` permite baixar, para todas cidades incluídas no projeto, dados de 2017, 2018 e 2019 sobre a distribuição espacial de empregos (de baixa, média e alta escolaridade), estabelecimentos públicos de saúde (de baixa, média e alta complexidade), escolas públicas (ensino infantil, fundamental e médio) e Centros de Referência de Assistência Social (CRAS).
 
 Esses dados podem ser baixados com a função `read_landuse()`, que funciona de forma análoga à `read_population()`. Para isso, basta indicar na chamada a cidade cujos dados são desejados (parâmetro `city`) e o ano de referência (`year`), além de apontar se deseja incluir as informações espaciais dos hexágonos  (`geometry`).
 
-No exemplo abaixo, mostramos como baixar os dados de uso do solo do ano de 2019 para Belo Horizonte. Note que essa função resulta em uma tabela que também traz, automaticamente, os dados de população.
+No exemplo a seguir, mostramos como baixar os dados de uso do solo do ano de 2019 para Belo Horizonte. Note que essa função resulta em uma tabela que também traz, automaticamente, os dados de população.
 
 ```{r}
 #| message: false
@@ -19,37 +19,37 @@ dados_bh <- aopdata::read_landuse(
 names(dados_bh)
 ```
 
-A @tbl-landuse_dictionary apresenta a descrição das colunas da tabela (excluindo as previamente incluídas na tabela de dados sociodemográficos). Essa descrição também pode ser consultada na documentação da função, rodando em uma sessão do R o comando `?read_landuse`.
+A @tbl-landuse_dictionary apresenta a descrição das colunas da tabela (excluindo as previamente incluídas na tabela de dados sociodemográficos). Essa descrição também pode ser consultada na documentação da função, rodando em uma sessão de R o comando `?read_landuse`.
 
 ```{r}
 #| echo: false
 #| label: tbl-landuse_dictionary
 #| tbl-cap: Descrição das colunas da tabela de dados de distribuição espacial de oportunidades
 tbl <- tibble::tribble(
-  ~Coluna,   	   ~Descrição,
-  "year",    	   "Ano de referência",
-  "id_hex",  	   "Identificador único do hexágono",
-  "abbrev_muni", "Sigla de 3 letras do município",
+  ~Coluna,  		 ~Descrição,
+  "year",   		 "Ano de referência",
+  "id_hex", 		 "Identificador único do hexágono",
+  "abbrev_muni", "Sigla de três letras do município",
   "name_muni",   "Nome do município",
-  "code_muni",   "Código de 7 dígitos do IBGE do município",
-  "T001",    	   "Quantidade total de empregos",
-  "T002",    	   "Quantidade de empregos de baixa escolaridade",
-  "T003",    	   "Quantidade de empregos de média escolaridade",
-  "T004",    	   "Quantidade de empregos de alta escolaridade",
-  "E001",    	   "Quantidade total de estabelecimentos públicos de ensino",
-  "E002",    	   "Quantidade de estabelecimentos públicos de ensino infantil",
-  "E003",    	   "Quantidade de estabelecimentos públicos de ensino fundamental",
-  "E004",    	   "Quantidade de estabelecimentos públicos de ensino médio",
-  "M001",    	   "Quantidade total de matrículas públicas de ensino",
-  "M002",    	   "Quantidade de matrículas públicas de ensino infantil",
-  "M003",    	   "Quantidade de matrículas públicas de ensino fundamental",
-  "M004",    	   "Quantidade de matrículas públicas de ensino médio",
-  "S001",    	   "Quantidade total de estabelecimentos de saúde",
-  "S002",    	   "Quantidade de estabelecimentos públicos de saúde de baixa complexidade",
-  "S003",    	   "Quantidade de estabelecimentos públicos de saúde de média complexidade",
-  "S004",    	   "Quantidade de estabelecimentos públicos de saúde de alta complexidade",
-  "C001",    	   "Quantidade total de Centros de Referência de Assistência Social (CRAS)",
-  "geometry",	   "Geometria espacial"
+  "code_muni",   "Código de sete dígitos do IBGE do município",
+  "T001",   		 "Quantidade total de empregos",
+  "T002",   		 "Quantidade de empregos de baixa escolaridade",
+  "T003",   		 "Quantidade de empregos de média escolaridade",
+  "T004",   		 "Quantidade de empregos de alta escolaridade",
+  "E001",   		 "Quantidade total de estabelecimentos públicos de ensino",
+  "E002",   		 "Quantidade de estabelecimentos públicos de ensino infantil",
+  "E003",   		 "Quantidade de estabelecimentos públicos de ensino fundamental",
+  "E004",   		 "Quantidade de estabelecimentos públicos de ensino médio",
+  "M001",   		 "Quantidade total de matrículas públicas de ensino",
+  "M002",   		 "Quantidade de matrículas públicas de ensino infantil",
+  "M003",   		 "Quantidade de matrículas públicas de ensino fundamental",
+  "M004",   		 "Quantidade de matrículas públicas de ensino médio",
+  "S001",   		 "Quantidade total de estabelecimentos de saúde",
+  "S002",   		 "Quantidade de estabelecimentos públicos de saúde de baixa complexidade",
+  "S003",   		 "Quantidade de estabelecimentos públicos de saúde de média complexidade",
+  "S004",   		 "Quantidade de estabelecimentos públicos de saúde de alta complexidade",
+  "C001",   		 "Quantidade total de CRAS",
+  "geometry",    "Geometria espacial"
 )
 
 knitr::kable(tbl)
@@ -59,9 +59,11 @@ As seções a seguir mostram exemplos de visualizações desses dados em forma d
 
 ## Mapa de empregos
 
-No código abaixo, carregamos bibliotecas de visualização de dados e configuramos o mapa. As variáveis iniciadas com a letra `T` são as que descrevem a distribuição espacial de empregos em cada cidade. O código abaixo apresenta a distribuição espacial do total de empregos em cada hexágono (variável `T001`) em Belo Horizonte:
+No código adiante, carregamos bibliotecas de visualização de dados e configuramos o mapa. As variáveis iniciadas com a letra `T` são as que descrevem a distribuição espacial de empregos em cada cidade. A seguir, apresentamos a distribuição espacial do total de empregos em cada hexágono (variável `T001`) em Belo Horizonte:
 
-```{r fig_1}
+```{r}
+#| label: fig-jobs_dist
+#| fig-cap: Distribuição espacial de empregos em Belo Horizonte
 #| message: false
 #| warning: false
 library(patchwork)
@@ -71,41 +73,45 @@ ggplot(dados_bh) +
   geom_sf(aes(fill = T001), color = NA, alpha = 0.9) +
   scale_fill_distiller(palette = "YlGnBu", direction = 1) +
   labs(
-  	title = "Distribuição espacial de empregos",
-  	subtitle = "Belo Horizonte",
-  	fill = "N. de empregos"
+    title = "Distribuição espacial de empregos",
+    subtitle = "Belo Horizonte",
+    fill = "N. de empregos"
   ) +
   theme_void()
 ```
 
 ## Mapa de escolas
 
-As variáveis que indicam o número de escolas públicas em cada célula, por sua vez, começam com a letra `E`. No exemplo abaixo, apresentamos a distribuição espacial de todas as escolas públicas de Belo Horizonte (variável `E001`).
+As variáveis que indicam o número de escolas públicas em cada célula, por sua vez, começam com a letra `E`. No exemplo a seguir, apresentamos a distribuição espacial de todas as escolas públicas de Belo Horizonte (variável `E001`).
 
-```{r fig_2}
+```{r}
+#| label: fig-schools_dist
+#| fig-cap: Distribuição espacial de escolas em Belo Horizonte
 ggplot(dados_bh) +
   geom_sf(aes(fill = as.factor(E001)), color = NA, alpha = 0.9) +
   scale_fill_brewer(palette = "YlGnBu", direction = 1) +
   labs(
-  	title = "Distribuição espacial de escolas",
-  	subtitle = "Belo Horizonte",
-  	fill = "N. de escolas"
+    title = "Distribuição espacial de escolas",
+    subtitle = "Belo Horizonte",
+    fill = "N. de escolas"
   ) +
   theme_void()
 ```
 
 ## Mapa de estabelecimentos de saúde
 
-As variáveis que contém os dados dos estabelecimentos públicos de saúde em cada célula começam com a letra `S`. A visualização abaixo compara a distribuição espacial de estabelecimentos públicos de saúde de baixa complexidade (`S002`) e de alta complexidade (`S004`).
+As variáveis que contêm os dados dos estabelecimentos públicos de saúde em cada célula começam com a letra `S`. A visualização a seguir compara a distribuição espacial de estabelecimentos públicos de saúde de baixa complexidade (`S002`) e de alta complexidade (`S004`).
 
-```{r fig_3}
+```{r}
+#| label: fig-hospitals_dist
+#| fig-cap: Distribuição espacial de estabelecimentos de saúde de baixa e alta complexidade em Belo Horizonte
 saude_baixa <- ggplot(dados_bh) +
   geom_sf(aes(fill = as.factor(S002)), color = NA, alpha = 0.9) +
   scale_fill_brewer(palette = "YlGnBu", direction = 1, limits = factor(0:4)) +
   labs(
-  	title = "Estabelecimentos de saúde",
-  	subtitle = "Baixa complexidade",
-  	fill = "N. de estabelecimentos"
+    title = "Estabelecimentos de saúde",
+    subtitle = "Baixa complexidade",
+    fill = "N. de estabelecimentos"
   ) +
   theme_void()
 
@@ -113,9 +119,9 @@ saude_alta <- ggplot(dados_bh) +
   geom_sf(aes(fill = as.factor(S004)), color = NA, alpha = 0.9) +
   scale_fill_brewer(palette = "YlGnBu", direction = 1, limits = factor(0:4)) +
   labs(
-  	title = "Estabelecimentos de saúde",
-  	subtitle = "Alta complexidade",
-  	fill = "N. de estabelecimentos"
+    title = "Estabelecimentos de saúde",
+    subtitle = "Alta complexidade",
+    fill = "N. de estabelecimentos"
   ) +
   theme_void()
 
@@ -124,16 +130,18 @@ saude_baixa + saude_alta + plot_layout(guides = "collect")
 
 ## Mapa de CRAS
 
-Por fim, a variável `C001` descreve a distribuição espacial de Centros de Referência de Assistência Social (CRAS) em cada cidade. O mapa abaixo apresenta esta distribuição em Belo Horizonte.
+Por fim, a variável `C001` descreve a distribuição espacial de CRAS em cada cidade. O mapa a seguir apresenta essa distribuição em Belo Horizonte.
 
-```{r fig_4}
+```{r}
+#| label: fig-cras_dist
+#| fig-cap: Distribuição espacial de CRAS em Belo Horizonte
 ggplot(dados_bh) +
   geom_sf(aes(fill = as.factor(C001)), color = NA, alpha = 0.9) +
   scale_fill_brewer(palette = "YlGnBu", direction = 1) +
   labs(
-  	title = "Centros de Referência de Assistência Social (CRAS)",
-  	subtitle = "Belo Horizonte",
-  	fill = "N. de CRAS"
+    title = "Centros de Referência de Assistência Social (CRAS)",
+    subtitle = "Belo Horizonte",
+    fill = "N. de CRAS"
   ) +
   theme_void()
 ```
