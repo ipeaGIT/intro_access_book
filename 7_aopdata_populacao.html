@@ -117,10 +117,10 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </script><meta property="og:title" content="Introdução à acessibilidade urbana - 7  Dados de população e socioeconômicos">
-<meta property="og:description" content="Os dados de distribuição espacial da população e de suas características em termos de renda domiciliar per capita, cor, sexo e idade, provenientes do Censo 2010 e agregadas no projeto Acesso a…">
+<meta property="og:description" content="Os dados de distribuição espacial da população e de suas características em termos de renda domiciliar per capita, cor, sexo e idade, provenientes do Censo 2010 e agregadas pelo projeto Acesso a…">
 <meta property="og:site-name" content="Introdução à acessibilidade urbana">
 <meta name="twitter:title" content="Introdução à acessibilidade urbana - 7  Dados de população e socioeconômicos">
-<meta name="twitter:description" content="Os dados de distribuição espacial da população e de suas características em termos de renda domiciliar per capita, cor, sexo e idade, provenientes do Censo 2010 e agregadas no projeto Acesso a…">
+<meta name="twitter:description" content="Os dados de distribuição espacial da população e de suas características em termos de renda domiciliar per capita, cor, sexo e idade, provenientes do Censo 2010 e agregadas pelo projeto Acesso a…">
 <meta name="twitter:card" content="summary">
 </head>
 <body class="nav-sidebar floating">
@@ -310,8 +310,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </div>
   
 
-</header><p>Os dados de distribuição espacial da população e de suas características em termos de renda domiciliar <em>per capita</em>, cor, sexo e idade, provenientes do Censo 2010 e agregadas no projeto Acesso a Oportunidades, podem ser baixados com a função <code>read_population()</code>. A função requer que um valor seja passado para o parâmetro <code>city</code>, utilizado para indicar a cidade cujos dados devem ser baixados. Para baixar os dados com as informações espaciais de cada célula da grade, o parâmetro <code>geometry</code> deve receber o valor <code>TRUE</code> (por padrão, este valor é <code>FALSE</code>, fazendo com que a geometria das células não seja baixada).</p>
-<p>No exemplo abaixo, mostramos como baixar os dados populacionais e socioeconômicos de Fortaleza:</p>
+</header><p>Os dados de distribuição espacial da população e de suas características em termos de renda domiciliar <em>per capita</em>, cor, sexo e idade, provenientes do Censo 2010 e agregadas pelo projeto Acesso a Oportunidades, podem ser baixados com a função <code>read_population()</code>. A função requer que um valor seja passado para o parâmetro <code>city</code>, utilizado para indicar a cidade cujos dados devem ser baixados. Para baixar os dados com as informações espaciais de cada célula da grade, o parâmetro <code>geometry</code> deve receber o valor <code>TRUE</code> (por padrão, esse valor é <code>FALSE</code>, fazendo com que a geometria das células não seja baixada).</p>
+<p>No exemplo a seguir, mostramos como baixar os dados populacionais e socioeconômicos de Fortaleza:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># baixa os dados sociodemográficos do AOP</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>dados_fortaleza <span class="ot">&lt;-</span> aopdata<span class="sc">::</span><span class="fu">read_population</span>(</span>
@@ -321,7 +321,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">showProgress =</span> <span class="cn">FALSE</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>A tabela inclui o ano de referência do censo demográfico, dados de identificação do hexágono e do município e dados socioeconômicos em colunas cujos nomes estão codificados:</p>
+<p>A tabela baixada inclui o ano de referência do censo demográfico, dados de identificação do hexágono e do município e dados socioeconômicos em colunas cujos nomes estão codificados:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dados_fortaleza)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -339,9 +339,9 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <table class="table table-sm table-striped">
 <caption>Tabela 7.1: Descrição das colunas da tabela de dados populacionais e socioeconômicos</caption>
 <colgroup>
-<col style="width: 12%">
-<col style="width: 41%">
-<col style="width: 45%">
+<col style="width: 11%">
+<col style="width: 43%">
+<col style="width: 44%">
 </colgroup>
 <thead><tr class="header">
 <th style="text-align: left;">Coluna</th>
@@ -361,7 +361,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </tr>
 <tr class="odd">
 <td style="text-align: left;">abbrev_muni</td>
-<td style="text-align: left;">Sigla de 3 letras do município</td>
+<td style="text-align: left;">Sigla de três letras do município</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
@@ -371,7 +371,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </tr>
 <tr class="odd">
 <td style="text-align: left;">code_muni</td>
-<td style="text-align: left;">Código de 7 dígitos do IBGE do município</td>
+<td style="text-align: left;">Código de sete dígitos do IBGE do município</td>
 <td style="text-align: left;"></td>
 </tr>
 <tr class="even">
@@ -447,7 +447,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <tr class="even">
 <td style="text-align: left;">R001</td>
 <td style="text-align: left;">Renda domiciliar <em>per capita</em> média</td>
-<td style="text-align: left;">Valores de 2010, em reais (R$)</td>
+<td style="text-align: left;">Valores de 2010 (em R$)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">R002</td>
@@ -472,7 +472,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p>As seções a seguir mostram exemplos de visualizações desses dados em forma de mapas.</p>
 <section id="mapa-de-população-total" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="mapa-de-população-total">
 <span class="header-section-number">7.1</span> Mapa de população total</h2>
-<p>No código abaixo, carregamos bibliotecas de visualização de dados e configuramos o mapa. Com um comando, podemos visualizar a distribuição espacial da população de Fortaleza. A figura mostra um mapa coroplético onde a cor de cada célula da grade espacial é preenchida com base na quantidade total de pessoas que ali residem (variável <code>P001</code>).</p>
+<p>No código a seguir, carregamos bibliotecas de visualização de dados e configuramos o mapa. Com um comando, podemos visualizar a distribuição espacial da população de Fortaleza. A figura mostra um mapa coroplético no qual a cor de cada célula da grade espacial é preenchida com base na quantidade total de pessoas que ali residem (variável <code>P001</code>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -487,12 +487,17 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="7_aopdata_populacao_files/figure-html/fig_1-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-pop_dist" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="7_aopdata_populacao_files/figure-html/fig-pop_dist-1.png" class="img-fluid figure-img" width="2100"></p>
+<p></p>
+<figcaption class="figure-caption">Figura 7.1: Distribuição populacional em Fortaleza</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="mapa-de-população-por-cor" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="mapa-de-população-por-cor">
 <span class="header-section-number">7.2</span> Mapa de população por cor</h2>
-<p>Além da informação sobre a população total em cada célula, o dados também informam a contagem populacional por classificações de cor (variáveis <code>P002</code> a <code>P005</code>), sexo (variáveis <code>P006</code> e <code>P007</code>) e faixa etária (variáveis <code>P010</code> a <code>P016</code>) em cada unidade espacial. O código abaixo ilustra como é simples calcular a proporção de pessoas negras e brancas em cada hexágono e visualizar essas proporções em um mapa.</p>
+<p>Além da informação sobre a população total em cada célula, os dados também informam a contagem populacional por classificações de cor (variáveis <code>P002</code> a <code>P005</code>), sexo (variáveis <code>P006</code> e <code>P007</code>) e faixa etária (variáveis <code>P010</code> a <code>P016</code>) em cada unidade espacial. O código a seguir ilustra como é simples calcular a proporção de pessoas negras e brancas em cada hexágono e visualizar essas proporções em um mapa.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pop_negra <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">subset</span>(dados_fortaleza, P001 <span class="sc">&gt;</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> P003 <span class="sc">/</span> P001), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
@@ -518,7 +523,12 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>pop_negra <span class="sc">+</span> pop_branca</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="7_aopdata_populacao_files/figure-html/fig_2-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-pop_dist_by_color" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="7_aopdata_populacao_files/figure-html/fig-pop_dist_by_color-1.png" class="img-fluid figure-img" width="2100"></p>
+<p></p>
+<figcaption class="figure-caption">Figura 7.2: Proporção de pessoas negras e brancas em Fortaleza</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="mapa-de-população-por-renda" class="level2" data-number="7.3"><h2 data-number="7.3" class="anchored" data-anchor-id="mapa-de-população-por-renda">
@@ -543,7 +553,12 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>renda <span class="sc">+</span> decis</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="7_aopdata_populacao_files/figure-html/fig_3-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-income_dist" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="7_aopdata_populacao_files/figure-html/fig-income_dist-1.png" class="img-fluid figure-img" width="2100"></p>
+<p></p>
+<figcaption class="figure-caption">Figura 7.3: Distribuição de renda em Fortaleza</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 

@@ -117,10 +117,10 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </script><meta property="og:title" content="Introdução à acessibilidade urbana - 8  Dados de distribuição espacial de oportunidades">
-<meta property="og:description" content="O pacote {aopdata} também permite baixar, para todas cidades incluídas no projeto, dados de 2017, 2018 e 2019 da distribuição espacial de empregos (de baixa, média e alta escolaridade), de…">
+<meta property="og:description" content="O pacote {aopdata} permite baixar, para todas cidades incluídas no projeto, dados de 2017, 2018 e 2019 sobre a distribuição espacial de empregos (de baixa, média e alta escolaridade)…">
 <meta property="og:site-name" content="Introdução à acessibilidade urbana">
 <meta name="twitter:title" content="Introdução à acessibilidade urbana - 8  Dados de distribuição espacial de oportunidades">
-<meta name="twitter:description" content="O pacote {aopdata} também permite baixar, para todas cidades incluídas no projeto, dados de 2017, 2018 e 2019 da distribuição espacial de empregos (de baixa, média e alta escolaridade), de…">
+<meta name="twitter:description" content="O pacote {aopdata} permite baixar, para todas cidades incluídas no projeto, dados de 2017, 2018 e 2019 sobre a distribuição espacial de empregos (de baixa, média e alta escolaridade)…">
 <meta name="twitter:card" content="summary">
 </head>
 <body class="nav-sidebar floating">
@@ -311,9 +311,9 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </div>
   
 
-</header><p>O pacote <code>{aopdata}</code> também permite baixar, para todas cidades incluídas no projeto, dados de 2017, 2018 e 2019 da distribuição espacial de empregos (de baixa, média e alta escolaridade), de estabelecimentos públicos de saúde (de baixa, média e alta complexidade), de escolas públicas (ensino infantil, fundamental e médio) e de Centros de Referência de Assistência Social (CRAS).</p>
+</header><p>O pacote <code>{aopdata}</code> permite baixar, para todas cidades incluídas no projeto, dados de 2017, 2018 e 2019 sobre a distribuição espacial de empregos (de baixa, média e alta escolaridade), estabelecimentos públicos de saúde (de baixa, média e alta complexidade), escolas públicas (ensino infantil, fundamental e médio) e Centros de Referência de Assistência Social (CRAS).</p>
 <p>Esses dados podem ser baixados com a função <code>read_landuse()</code>, que funciona de forma análoga à <code>read_population()</code>. Para isso, basta indicar na chamada a cidade cujos dados são desejados (parâmetro <code>city</code>) e o ano de referência (<code>year</code>), além de apontar se deseja incluir as informações espaciais dos hexágonos (<code>geometry</code>).</p>
-<p>No exemplo abaixo, mostramos como baixar os dados de uso do solo do ano de 2019 para Belo Horizonte. Note que essa função resulta em uma tabela que também traz, automaticamente, os dados de população.</p>
+<p>No exemplo a seguir, mostramos como baixar os dados de uso do solo do ano de 2019 para Belo Horizonte. Note que essa função resulta em uma tabela que também traz, automaticamente, os dados de população.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dados_bh <span class="ot">&lt;-</span> aopdata<span class="sc">::</span><span class="fu">read_landuse</span>(</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">city =</span> <span class="st">"Belo Horizonte"</span>,</span>
@@ -334,7 +334,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 [36] "S002"        "S003"        "S004"        "C001"        "geometry"   </code></pre>
 </div>
 </div>
-<p>A <a href="#tbl-landuse_dictionary">Tabela <span>8.1</span></a> apresenta a descrição das colunas da tabela (excluindo as previamente incluídas na tabela de dados sociodemográficos). Essa descrição também pode ser consultada na documentação da função, rodando em uma sessão do R o comando <code>?read_landuse</code>.</p>
+<p>A <a href="#tbl-landuse_dictionary">Tabela <span>8.1</span></a> apresenta a descrição das colunas da tabela (excluindo as previamente incluídas na tabela de dados sociodemográficos). Essa descrição também pode ser consultada na documentação da função, rodando em uma sessão de R o comando <code>?read_landuse</code>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-landuse_dictionary" class="anchored">
@@ -359,7 +359,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </tr>
 <tr class="odd">
 <td style="text-align: left;">abbrev_muni</td>
-<td style="text-align: left;">Sigla de 3 letras do município</td>
+<td style="text-align: left;">Sigla de três letras do município</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">name_muni</td>
@@ -367,7 +367,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </tr>
 <tr class="odd">
 <td style="text-align: left;">code_muni</td>
-<td style="text-align: left;">Código de 7 dígitos do IBGE do município</td>
+<td style="text-align: left;">Código de sete dígitos do IBGE do município</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">T001</td>
@@ -435,7 +435,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </tr>
 <tr class="even">
 <td style="text-align: left;">C001</td>
-<td style="text-align: left;">Quantidade total de Centros de Referência de Assistência Social (CRAS)</td>
+<td style="text-align: left;">Quantidade total de CRAS</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">geometry</td>
@@ -449,7 +449,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p>As seções a seguir mostram exemplos de visualizações desses dados em forma de mapas.</p>
 <section id="mapa-de-empregos" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="mapa-de-empregos">
 <span class="header-section-number">8.1</span> Mapa de empregos</h2>
-<p>No código abaixo, carregamos bibliotecas de visualização de dados e configuramos o mapa. As variáveis iniciadas com a letra <code>T</code> são as que descrevem a distribuição espacial de empregos em cada cidade. O código abaixo apresenta a distribuição espacial do total de empregos em cada hexágono (variável <code>T001</code>) em Belo Horizonte:</p>
+<p>No código adiante, carregamos bibliotecas de visualização de dados e configuramos o mapa. As variáveis iniciadas com a letra <code>T</code> são as que descrevem a distribuição espacial de empregos em cada cidade. A seguir, apresentamos a distribuição espacial do total de empregos em cada hexágono (variável <code>T001</code>) em Belo Horizonte:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -464,12 +464,17 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="8_aopdata_uso_solo_files/figure-html/fig_1-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-jobs_dist" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="8_aopdata_uso_solo_files/figure-html/fig-jobs_dist-1.png" class="img-fluid figure-img" width="2100"></p>
+<p></p>
+<figcaption class="figure-caption">Figura 8.1: Distribuição espacial de empregos em Belo Horizonte</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="mapa-de-escolas" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="mapa-de-escolas">
 <span class="header-section-number">8.2</span> Mapa de escolas</h2>
-<p>As variáveis que indicam o número de escolas públicas em cada célula, por sua vez, começam com a letra <code>E</code>. No exemplo abaixo, apresentamos a distribuição espacial de todas as escolas públicas de Belo Horizonte (variável <code>E001</code>).</p>
+<p>As variáveis que indicam o número de escolas públicas em cada célula, por sua vez, começam com a letra <code>E</code>. No exemplo a seguir, apresentamos a distribuição espacial de todas as escolas públicas de Belo Horizonte (variável <code>E001</code>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dados_bh) <span class="sc">+</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">as.factor</span>(E001)), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
@@ -481,12 +486,17 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="8_aopdata_uso_solo_files/figure-html/fig_2-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-schools_dist" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="8_aopdata_uso_solo_files/figure-html/fig-schools_dist-1.png" class="img-fluid figure-img" width="2100"></p>
+<p></p>
+<figcaption class="figure-caption">Figura 8.2: Distribuição espacial de escolas em Belo Horizonte</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="mapa-de-estabelecimentos-de-saúde" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="mapa-de-estabelecimentos-de-saúde">
 <span class="header-section-number">8.3</span> Mapa de estabelecimentos de saúde</h2>
-<p>As variáveis que contém os dados dos estabelecimentos públicos de saúde em cada célula começam com a letra <code>S</code>. A visualização abaixo compara a distribuição espacial de estabelecimentos públicos de saúde de baixa complexidade (<code>S002</code>) e de alta complexidade (<code>S004</code>).</p>
+<p>As variáveis que contêm os dados dos estabelecimentos públicos de saúde em cada célula começam com a letra <code>S</code>. A visualização a seguir compara a distribuição espacial de estabelecimentos públicos de saúde de baixa complexidade (<code>S002</code>) e de alta complexidade (<code>S004</code>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>saude_baixa <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dados_bh) <span class="sc">+</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">as.factor</span>(S002)), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
@@ -510,12 +520,17 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>saude_baixa <span class="sc">+</span> saude_alta <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">guides =</span> <span class="st">"collect"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="8_aopdata_uso_solo_files/figure-html/fig_3-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-hospitals_dist" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="8_aopdata_uso_solo_files/figure-html/fig-hospitals_dist-1.png" class="img-fluid figure-img" width="2100"></p>
+<p></p>
+<figcaption class="figure-caption">Figura 8.3: Distribuição espacial de estabelecimentos de saúde de baixa e alta complexidade em Belo Horizonte</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="mapa-de-cras" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="mapa-de-cras">
 <span class="header-section-number">8.4</span> Mapa de CRAS</h2>
-<p>Por fim, a variável <code>C001</code> descreve a distribuição espacial de Centros de Referência de Assistência Social (CRAS) em cada cidade. O mapa abaixo apresenta esta distribuição em Belo Horizonte.</p>
+<p>Por fim, a variável <code>C001</code> descreve a distribuição espacial de CRAS em cada cidade. O mapa a seguir apresenta essa distribuição em Belo Horizonte.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dados_bh) <span class="sc">+</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">as.factor</span>(C001)), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
@@ -527,7 +542,12 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="8_aopdata_uso_solo_files/figure-html/fig_4-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-cras_dist" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="8_aopdata_uso_solo_files/figure-html/fig-cras_dist-1.png" class="img-fluid figure-img" width="2100"></p>
+<p></p>
+<figcaption class="figure-caption">Figura 8.4: Distribuição espacial de CRAS em Belo Horizonte</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 

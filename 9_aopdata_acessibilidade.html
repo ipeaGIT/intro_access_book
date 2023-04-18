@@ -286,7 +286,13 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   <ul>
 <li><a href="#mapa-do-tempo-para-acessar-o-hospital-mais-pr%C3%B3ximo" id="toc-mapa-do-tempo-para-acessar-o-hospital-mais-próximo" class="nav-link active" data-scroll-target="#mapa-do-tempo-para-acessar-o-hospital-mais-próximo"><span class="toc-section-number">9.1</span>  Mapa do tempo para acessar o hospital mais próximo</a></li>
   <li><a href="#mapa-da-quantidade-de-empregos-acess%C3%ADveis" id="toc-mapa-da-quantidade-de-empregos-acessíveis" class="nav-link" data-scroll-target="#mapa-da-quantidade-de-empregos-acessíveis"><span class="toc-section-number">9.2</span>  Mapa da quantidade de empregos acessíveis</a></li>
-  <li><a href="#desigualdades-de-acesso-a-oportunidades" id="toc-desigualdades-de-acesso-a-oportunidades" class="nav-link" data-scroll-target="#desigualdades-de-acesso-a-oportunidades"><span class="toc-section-number">9.3</span>  Desigualdades de acesso a oportunidades</a></li>
+  <li>
+<a href="#desigualdades-de-acesso-a-oportunidades" id="toc-desigualdades-de-acesso-a-oportunidades" class="nav-link" data-scroll-target="#desigualdades-de-acesso-a-oportunidades"><span class="toc-section-number">9.3</span>  Desigualdades de acesso a oportunidades</a>
+  <ul class="collapse">
+<li><a href="#desigualdade-no-tempo-de-acesso-a-oportunidades" id="toc-desigualdade-no-tempo-de-acesso-a-oportunidades" class="nav-link" data-scroll-target="#desigualdade-no-tempo-de-acesso-a-oportunidades"><span class="toc-section-number">9.3.1</span>  Desigualdade no tempo de acesso a oportunidades</a></li>
+  <li><a href="#desigualdade-no-n%C3%BAmero-de-oportunidades-acess%C3%ADveis" id="toc-desigualdade-no-número-de-oportunidades-acessíveis" class="nav-link" data-scroll-target="#desigualdade-no-número-de-oportunidades-acessíveis"><span class="toc-section-number">9.3.2</span>  Desigualdade no número de oportunidades acessíveis</a></li>
+  </ul>
+</li>
   </ul>
 <div class="toc-actions">
 <div><i class="bi bi-github"></i></div>
@@ -312,7 +318,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 
 </header><p>Finalmente, o pacote <code>{aopdata}</code> também permite baixar, para todas as cidades incluídas no projeto, estimativas de acesso a empregos e a serviços de saúde, de educação e de assistência social para os anos de 2017, 2018 e 2019.</p>
 <p>Esses dados podem ser baixados com a função <code>read_access()</code>, que funciona de maneira análoga às funções <code>read_population()</code> e <code>read_landuse()</code>, apresentadas anteriormente. Além de indicar a cidade (parâmetro <code>city</code>) e o ano de referência (<code>year</code>), no entanto, é necessário também informar o modo de transporte (<code>mode</code>) e o intervalo do dia (pico, entre 6h e 8h, ou fora-pico, entre 14h e 16h, controlado pelo parâmetro <code>peak</code>).</p>
-<p>No exemplo abaixo, mostramos como baixar estimativas de acessibilidade no período de pico em São Paulo referentes ao ano de 2019. Neste exemplo, baixamos tanto as estimativas de acessibilidade por automóvel quanto por transporte público e as unimos em um único <code>data.frame</code>. Note que essa função resulta em uma tabela que traz também, automaticamente, os dados de população e de uso do solo.</p>
+<p>No exemplo a seguir, mostramos como baixar estimativas de acessibilidade no período de pico em São Paulo referentes ao ano de 2019. Nesse exemplo, baixamos as estimativas de acessibilidade tanto por automóvel quanto por transporte público e as unimos em um único <code>data.frame</code>. Note que essa função resulta em uma tabela que traz também, automaticamente, os dados de população e de uso do solo.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># baixa dados do AOP de acessibilidade por transporte público</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>acesso_tp <span class="ot">&lt;-</span> aopdata<span class="sc">::</span><span class="fu">read_access</span>(</span>
@@ -383,21 +389,21 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 [206] "geometry"    </code></pre>
 </div>
 </div>
-<p>Como podemos ver, assim como nos casos das tabelas de dados sociodemográficos e de uso do solo, os nomes das variáveis de estimativas de acessibilidade estão organizadas em códigos, como <code>CMAEF30</code>, <code>TMISB</code> e <code>CMPPM60</code>. Esses códigos são resultado da combinação de três componentes: o tipo de indicador de acessibilidade; o tipo de oportunidade para qual os níveis de acessibilidade foram calculados ou a que pessoas o indicador se refere; e o tempo limite usado no cálculo do indicador.</p>
+<p>Como podemos ver, assim como nos casos das tabelas de dados sociodemográficos e de uso do solo, os nomes das variáveis de estimativas de acessibilidade estão organizados em códigos, como <code>CMAEF30</code>, <code>TMISB</code> e <code>CMPPM60</code>. Esses códigos são resultado da combinação de três componentes:</p>
 <ol type="1">
 <li>
-<p>O <strong>tipo de indicador</strong> de acessibilidade é indicado pelas primeiras 3 letras do código. Os dados incluem três tipos de indicadores:</p>
+<p>O <strong>tipo de indicador</strong> de acessibilidade: é indicado pelas três primeiras letras do código. Os dados incluem três categorias de indicadores:</p>
 <ul>
 <li>
 <code>CMA</code> - Indicador de acessibilidade cumulativa ativa;</li>
 <li>
-<code>CMP</code> - Indicador de acessibilidade cumulativa passiva;</li>
+<code>CMP</code> - Indicador de acessibilidade cumulativa passiva; e</li>
 <li>
 <code>TMI</code> - Indicador de tempo mínimo até a oportunidade mais próxima.</li>
 </ul>
 </li>
 <li>
-<p>O <strong>tipo de atividade</strong> para qual os níveis de acessibilidade foram calculados é indicado pelas letras seguintes, no meio do código. Os dados incluem estimativas de acessibilidade para diversos tipos de atividades:</p>
+<p>O <strong>tipo de atividade</strong> para a qual os níveis de acessibilidade foram calculados ou a que pessoas o indicador se refere: é descrito pelas letras seguintes, que estão no meio do código. Os dados incluem estimativas de acessibilidade para diversos tipos de atividades:</p>
 <ul>
 <li>
 <code>TT</code> - Todos os empregos;</li>
@@ -416,7 +422,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <li>
 <code>SA</code> - Estabelecimentos públicos de saúde de alta complexidade;</li>
 <li>
-<code>ET</code> - Todos as escolas públicas;</li>
+<code>ET</code> - Todas as escolas públicas;</li>
 <li>
 <code>EI</code> - Escolas públicas de ensino infantil;</li>
 <li>
@@ -430,11 +436,11 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <li>
 <code>MF</code> - Matrículas de escolas públicas de ensino fundamental;</li>
 <li>
-<code>MM</code> - Matrículas de escolas públicas de ensino médio;</li>
+<code>MM</code> - Matrículas de escolas públicas de ensino médio; e</li>
 <li>
-<code>CT</code> - Todos os Centros de Referência de Assistência Social.</li>
+<code>CT</code> - Todos os CRAS.</li>
 </ul>
-<p>No caso do indicador de acessibilidade passiva (<code>CMP</code>), as letras do meio do nome da variável indicam <strong>a qual grupo populacional</strong> os níveis de acessibilidade se referem:</p>
+<p>No caso do indicador de acessibilidade passiva, as letras do meio do nome da variável indicam <strong>a qual grupo populacional</strong> os níveis de acessibilidade se referem:</p>
 <ul>
 <li>
 <code>PT</code> - Toda a população;</li>
@@ -461,26 +467,26 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <li>
 <code>P2539I</code> - População de 25 a 39 anos;</li>
 <li>
-<code>P4069I</code> - População de 40 a 69 anos;</li>
+<code>P4069I</code> - População de 40 a 69 anos; e</li>
 <li>
 <code>P70I</code> - População de 70 anos ou mais.</li>
 </ul>
 </li>
-<li><p>O <strong>tempo limite de viagem</strong> utilizado no cálculo do indicador é descrito pelos números ao final do código. Esses números somente se aplicam aos indicadores de acessibilidade cumulativa ativa (<code>CMA</code>) e passiva (<code>CMP</code>) e incluem os limites de 15, 30, 45, 60, 90 e 120 minutos, dependendo do modo de transporte.</p></li>
+<li><p>O <strong>tempo limite de viagem</strong> utilizado no cálculo do indicador: é descrito pelos números ao final do código. Esses números somente se aplicam aos indicadores de acessibilidade cumulativa ativa e passiva e incluem os limites de 15, 30, 45, 60, 90 e 120 minutos, dependendo do modo de transporte.</p></li>
 </ol>
 <p><strong>Exemplos:</strong></p>
 <ul>
 <li>
 <span style="color: red;">CMA</span><span style="color: black;">EF</span><span style="color: blue;">30</span>: número de escolas públicas de ensino fundamental acessíveis em até 30 minutos de viagem;</li>
 <li>
-<span style="color: red;">TMI</span><span style="color: black;">SB</span>: tempo de viagem até o estabelecimento público de saúde com serviços de baixa complexidade mais próximo;</li>
+<span style="color: red;">TMI</span><span style="color: black;">SB</span>: tempo de viagem até o estabelecimento público de saúde com serviços de baixa complexidade mais próximo; e</li>
 <li>
-<span style="color: red;">CMP</span><span style="color: black;">PM</span><span style="color: blue;">60</span>: quantidade de mulheres que conseguem acessar determinado hexágono em até 60 minutos de viagem.</li>
+<span style="color: red;">CMP</span><span style="color: black;">PM</span><span style="color: blue;">60</span>: quantidade de mulheres que conseguem acessar determinada célula da grade espacial em até 60 minutos de viagem.</li>
 </ul>
 <p>A descrição completa das variáveis também pode ser consultada na documentação da função, rodando em uma sessão de R o comando <code>?read_access</code>. As seções a seguir mostram exemplos de visualizações desses dados em forma de mapas e gráficos.</p>
 <section id="mapa-do-tempo-para-acessar-o-hospital-mais-próximo" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="mapa-do-tempo-para-acessar-o-hospital-mais-próximo">
 <span class="header-section-number">9.1</span> Mapa do tempo para acessar o hospital mais próximo</h2>
-<p>Neste exemplo, comparamos o tempo de acesso por automóvel e por transporte público até o hospital mais próximo de cada hexágono. Para analisar o tempo mínimo de viagem (<code>TMI</code>) até hospitais de alta complexidade (<code>SA</code>), utilizamos a variável <code>TMISA</code>. Com o código abaixo, carregamos as bibliotecas de visualização de dados e apresentamos a distribuição espacial do tempo de acesso com os dois modos de transporte. Como os tempos de viagem por transporte público costumam ser muito mais longos do que por automóvel, truncamos a distribuição dos valores da variável em 60 minutos.</p>
+<p>Neste exemplo, comparamos o tempo de acesso por automóvel e por transporte público até o hospital mais próximo de cada hexágono. Para analisar o tempo mínimo de viagem (<code>TMI</code>) até hospitais de alta complexidade (<code>SA</code>), utilizamos a variável <code>TMISA</code>. Com o código a seguir, carregamos as bibliotecas de visualização de dados e apresentamos a distribuição espacial do tempo de acesso com os dois modos de transporte. Como os tempos de viagem por transporte público costumam ser muito mais longos do que por automóvel, truncamos a distribuição dos valores da variável em 60 minutos.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
@@ -504,12 +510,17 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> mode) <span class="sc">+</span></span>
 <span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="9_aopdata_acessibilidade_files/figure-html/fig_1-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-time_to_hospital" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="9_aopdata_acessibilidade_files/figure-html/fig-time_to_hospital-1.png" class="img-fluid figure-img" width="2100"></p>
+<p></p>
+<figcaption class="figure-caption">Figura 9.1: Tempo de viagem até o hospital de alta complexidade mais próximo em São Paulo</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="mapa-da-quantidade-de-empregos-acessíveis" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="mapa-da-quantidade-de-empregos-acessíveis">
 <span class="header-section-number">9.2</span> Mapa da quantidade de empregos acessíveis</h2>
-<p>Os dados do <code>{aopdata}</code> também tornam muito simples a comparação da quantidade de oportunidades acessíveis em diferentes tempos de viagem. Com o código abaixo, por exemplo, ilustramos como visualizar lado-a-lado as distribuições espaciais do número de empregos acessíveis em até 60 e 90 minutos de viagem por transporte público.</p>
+<p>Os dados do <code>{aopdata}</code> também tornam muito simples a comparação da quantidade de oportunidades acessíveis em diferentes tempos de viagem. Com o código a seguir, por exemplo, ilustramos como visualizar lado a lado as distribuições espaciais do número de empregos acessíveis em até 60 e 90 minutos de viagem, respectivamente, por transporte público.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># estabelece valores usados na legenda do mapa</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>limites_legenda <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">max</span>(acesso_tp<span class="sc">$</span>CMATT90, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="dv">1000</span>)</span>
@@ -536,15 +547,21 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"São Paulo"</span></span>
 <span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="9_aopdata_acessibilidade_files/figure-html/fig_2-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-accessible_jobs" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="9_aopdata_acessibilidade_files/figure-html/fig-accessible_jobs-1.png" class="img-fluid figure-img" width="2100"></p>
+<p></p>
+<figcaption class="figure-caption">Figura 9.2: Quantidade de empregos acessíveis por transporte público em São Paulo</figcaption><p></p>
+</figure>
+</div>
 </div>
 </div>
 </section><section id="desigualdades-de-acesso-a-oportunidades" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="desigualdades-de-acesso-a-oportunidades">
 <span class="header-section-number">9.3</span> Desigualdades de acesso a oportunidades</h2>
 <p>Existem diversas maneiras de analisar quão desiguais são as condições de acesso a oportunidades nas cidades brasileiras a partir dos dados do <code>{aopdata}</code>. Nesta subseção, apresentamos três exemplos deste tipo de análise.</p>
-<p><strong>Desigualdade no tempo de acesso a oportunidades</strong></p>
-<p>Neste primeiro exemplo, vamos comparar os tempos médios de viagem até o hospital público mais próximo de pessoas de diferentes níveis de renda. Para isso, calculamos o tempo médio de acesso a estabelecimentos de saúde de alta complexidade ponderado pela população de cada hexágono. Esta ponderação é necessária porque cada hexágono, por abrigar um número de pessoas diferentes dos demais, contribui de forma diferente para a média da população como um todo.</p>
-<p>Antes de realizar o cálculo, cabe observar que alguns hexágonos da cidade não conseguem acessar nenhum hospital em até duas horas de viagem. Nesses casos, o valor das variáveis de tempo mínimo de viagem é infinito (<code>Inf</code>). Para lidar com isso, neste exemplo substituímos todos os valores <code>Inf</code> por um tempo de viagem de 120 minutos.</p>
+<section id="desigualdade-no-tempo-de-acesso-a-oportunidades" class="level3" data-number="9.3.1"><h3 data-number="9.3.1" class="anchored" data-anchor-id="desigualdade-no-tempo-de-acesso-a-oportunidades">
+<span class="header-section-number">9.3.1</span> Desigualdade no tempo de acesso a oportunidades</h3>
+<p>Neste primeiro exemplo, vamos comparar o tempo médio de viagem até o hospital público mais próximo de pessoas de diferentes níveis de renda. Para isso, calculamos o tempo médio de acesso a estabelecimentos de saúde de alta complexidade ponderado pela população de cada célula da nossa grade espacial. Essa ponderação é necessária porque cada célula, por abrigar um número de pessoas diferentes das demais, contribui de forma diferente para a média da população como um todo.</p>
+<p>Antes de realizar o cálculo, cabe observar que algumas células da cidade não conseguem acessar nenhum hospital em até duas horas de viagem. Nesses casos, o valor das variáveis de tempo mínimo de viagem é infinito (<code>Inf</code>). Para lidar com isso, neste exemplo substituímos todos os valores <code>Inf</code> por um tempo de viagem de 120 minutos.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># copia os dados de acesso em um novo dataframe</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>desigualdade_tp <span class="ot">&lt;-</span> data.table<span class="sc">::</span><span class="fu">as.data.table</span>(acesso_tp)</span>
@@ -563,7 +580,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(desigualdade_tp) <span class="sc">+</span></span>
 <span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">y =</span> media, <span class="at">x =</span> <span class="fu">factor</span>(R003)), <span class="at">fill =</span> <span class="st">"#2c9e9e"</span>, <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
 <span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"D1</span><span class="sc">\n</span><span class="st">mais</span><span class="sc">\n</span><span class="st">pobres"</span>, <span class="fu">paste0</span>(<span class="st">"D"</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>), <span class="st">"D10</span><span class="sc">\n</span><span class="st">mais</span><span class="sc">\n</span><span class="st">ricos"</span>)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"D1</span><span class="sc">\n</span><span class="st">mais</span><span class="sc">\n</span><span class="st">pobres"</span>, <span class="fu">paste0</span>(<span class="st">"D"</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>), <span class="st">"D10</span><span class="sc">\n</span><span class="st">mais</span><span class="sc">\n</span><span class="st">ricos"</span>)</span>
 <span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Média de tempo de viagem até o hospital mais proximo"</span>,</span>
@@ -573,15 +590,21 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="9_aopdata_acessibilidade_files/figure-html/fig_3-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-time_to_hospital_by_income" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="9_aopdata_acessibilidade_files/figure-html/fig-time_to_hospital_by_income-1.png" class="img-fluid figure-img" width="2100"></p>
+<p></p>
+<figcaption class="figure-caption">Figura 9.3: Média de tempo de viagem por transporte público em São Paulo até o hospital mais próximo</figcaption><p></p>
+</figure>
 </div>
 </div>
-<p><strong>Desigualdade no número de oportunidades acessíveis</strong></p>
-<p>Outra maneira de examinar a desigualdade de acesso a oportunidades é comparar a quantidade de oportunidades acessíveis por diferentes grupos populacionais considerando os mesmos modos de transporte e limites de tempo de viagem. Neste caso, analisamos o indicador de acessibilidade cumulativa ativa, representado por variáveis cujos códigos começam com <code>CMA</code> na base de dados do <code>{aopdata}</code>. No exemplo abaixo, comparamos a quantidade de empregos acessíveis por pessoas de diferentes decis de renda, considerando viagens de transporte público limitadas em 60 minutos de viagem.</p>
+</div>
+</section><section id="desigualdade-no-número-de-oportunidades-acessíveis" class="level3" data-number="9.3.2"><h3 data-number="9.3.2" class="anchored" data-anchor-id="desigualdade-no-número-de-oportunidades-acessíveis">
+<span class="header-section-number">9.3.2</span> Desigualdade no número de oportunidades acessíveis</h3>
+<p>Outra maneira de examinar a desigualdade de acesso a oportunidades é comparar a quantidade de oportunidades acessíveis por diferentes grupos populacionais considerando os mesmos modos de transporte e limites de tempo de viagem. Nesse caso, analisamos o indicador de acessibilidade cumulativa ativa, representado por variáveis cujos códigos começam com <code>CMA</code> na base de dados do <code>{aopdata}</code>. No exemplo a seguir, comparamos a quantidade de empregos acessíveis por pessoas de diferentes decis de renda, considerando viagens de transporte público limitadas em 60 minutos de viagem.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">subset</span>(acesso_tp, <span class="sc">!</span><span class="fu">is.na</span>(R003))) <span class="sc">+</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(R003), <span class="at">y =</span> CMATT60 <span class="sc">/</span> <span class="dv">1000</span>, <span class="at">color =</span> <span class="fu">factor</span>(R003))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(R003), <span class="at">y =</span> CMATT60 <span class="sc">/</span> <span class="dv">1000</span>, <span class="at">color =</span> <span class="fu">factor</span>(R003))</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"RdBu"</span>) <span class="sc">+</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
@@ -592,14 +615,19 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"N. de empregos acessíveis</span><span class="sc">\n</span><span class="st">(em milhares)"</span></span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"D1</span><span class="sc">\n</span><span class="st">mais</span><span class="sc">\n</span><span class="st">pobres"</span>, <span class="fu">paste0</span>(<span class="st">"D"</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>), <span class="st">"D10</span><span class="sc">\n</span><span class="st">mais</span><span class="sc">\n</span><span class="st">ricos"</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"D1</span><span class="sc">\n</span><span class="st">mais</span><span class="sc">\n</span><span class="st">pobres"</span>, <span class="fu">paste0</span>(<span class="st">"D"</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>), <span class="st">"D10</span><span class="sc">\n</span><span class="st">mais</span><span class="sc">\n</span><span class="st">ricos"</span>)</span>
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="9_aopdata_acessibilidade_files/figure-html/fig_4-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-accessible_jobs_by_income" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="9_aopdata_acessibilidade_files/figure-html/fig-accessible_jobs_by_income-1.png" class="img-fluid figure-img" width="2100"></p>
+<p></p>
+<figcaption class="figure-caption">Figura 9.4: Distribuição do número de empregos acessíveis por transporte público em São Paulo</figcaption><p></p>
+</figure>
 </div>
 </div>
-<p>Por fim, podemos também comparar como o uso de diferentes modos de transporte resulta em diferentes níveis de acessibilidade para a população e como essa diferença varia entre cidades. No exemplo abaixo, comparamos a quantidade de empregos acessíveis em até 30 minutos de viagem a pé e de carro. Para isso, precisamos primeiro baixar os dados de acessibilidade por ambos os modos para todas as cidades do projeto.</p>
+</div>
+<p>Por fim, podemos também comparar como o uso de diferentes modos de transporte resulta em diferentes níveis de acessibilidade para a população e como essa diferença varia entre cidades. No exemplo a seguir, comparamos a quantidade de empregos acessíveis em até 30 minutos de viagem a pé e de carro. Para isso, precisamos primeiro baixar os dados de acessibilidade por ambos os modos para todas as cidades do projeto.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dados_carro <span class="ot">&lt;-</span> aopdata<span class="sc">::</span><span class="fu">read_access</span>(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">city =</span> <span class="st">"all"</span>,</span>
@@ -659,13 +687,18 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="9_aopdata_acessibilidade_files/figure-html/fig_5-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-car_walk_ratio" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="9_aopdata_acessibilidade_files/figure-html/fig-car_walk_ratio-1.png" class="img-fluid figure-img" width="2100"></p>
+<p></p>
+<figcaption class="figure-caption">Figura 9.5: Diferença entre a quantidade de empregos acessíveis por automóvel e por caminhada em até 30 minutos de viagem nas 20 maiores cidades do Brasil</figcaption><p></p>
+</figure>
 </div>
 </div>
-<p>Como esperado, a figura mostra que é possível acessar muito mais empregos em viagens de até 30 minutos de carro do que em viagens a pé. Essa diferença, porém, varia muito entre cidades. Em São Paulo e em Brasília, viagens de automóvel de até 30 minutos permitem acessar, em média, um número de empregos 54 vezes maior do que viagens a pé. Em Belém, onde observamos a menor diferença, o automóvel permite acessar 17 vezes mais empregos do que a caminhada - razão ainda considerável, porém menor do que as das demais cidades.</p>
+</div>
+<p>Como esperado, a <a href="#fig-car_walk_ratio">Figura <span>9.5</span></a> mostra que é possível acessar muito mais empregos em até 30 minutos com viagens de carro do que com viagens a pé. Essa diferença, porém, varia muito entre cidades. Em São Paulo e em Brasília, viagens de automóvel de até 30 minutos permitem acessar, em média, um número de empregos 54 vezes maior do que viagens a pé de mesma duração. Em Belém, onde observamos a menor diferença, o automóvel permite acessar 17 vezes mais empregos do que a caminhada - razão ainda considerável, porém menor do que a das demais cidades.</p>
 
 
-</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
