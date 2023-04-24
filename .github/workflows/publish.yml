@@ -66,6 +66,7 @@ jobs:
           cp -r _book/* .
           git add -u
           git add en
+          git add *_files/figure-html
           git commit -m "Built site for gh-pages"
           git push
           git checkout main
