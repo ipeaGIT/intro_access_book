@@ -3,21 +3,27 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.38">
+<meta name="generator" content="quarto-1.3.340">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Introduction to urban accessibility - 4  GTFS data</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -31,8 +37,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 <script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
 <link href="./5_gtfstools.en.html" rel="next">
 <link href="./s3_dados_tp.en.html" rel="prev">
@@ -68,187 +73,218 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </script><meta property="og:title" content="Introduction to urban accessibility - 4  GTFS data">
-<meta property="og:description" content="The GTFS format is an open and collaborative specification that aims to describe the main components of a public transport network.">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://ipeagit.github.io/aop_curso/en/images/gtfs_scheme.png">
 <meta property="og:site-name" content="Introduction to urban accessibility">
+<meta property="og:image:height" content="1950">
+<meta property="og:image:width" content="2475">
 <meta name="twitter:title" content="Introduction to urban accessibility - 4  GTFS data">
-<meta name="twitter:description" content="The GTFS format is an open and collaborative specification that aims to describe the main components of a public transport network.">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://ipeagit.github.io/aop_curso/en/images/gtfs_scheme.png">
+<meta name="twitter:image-height" content="1950">
+<meta name="twitter:image-width" content="2475">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">
-<span class="chapter-number">4</span>  <span class="chapter-title">GTFS data</span>
-</h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="./s3_dados_tp.en.html">SECTION 3: Public transport data</a></li>
+<li class="breadcrumb-item"><a href="./4_dados_gtfs.en.html"><span class="chapter-number">4</span>  <span class="chapter-title">GTFS data</span></a></li>
+</ol></nav><a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Introduction to urban accessibility</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/ipeaGIT/aop_curso" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-    <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
-    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+    <a href="https://github.com/ipeaGIT/aop_curso" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
 <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
-            <i class="bi bi-bi-twitter pe-1"></i>
-          Twitter
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
-            <i class="bi bi-bi-facebook pe-1"></i>
-          Facebook
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
-            <i class="bi bi-bi-linkedin pe-1"></i>
-          LinkedIn
-          </a>
-        </li>
-    </ul>
-<a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
+              <i class="bi bi-bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+</div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.en.html" class="sidebar-item-text sidebar-link">Preface</a>
+  <a href="./index.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./s1_intro.en.html" class="sidebar-item-text sidebar-link">SECTION 1: Introduction to urban accessibility</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a href="./s1_intro.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SECTION 1: Introduction to urban accessibility</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1_conceito.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>  <span class="chapter-title">What is accessibility?</span></a>
+  <a href="./1_conceito.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>  <span class="chapter-title">What is accessibility?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2_indicadores.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>  <span class="chapter-title">Accessibility measures</span></a>
+  <a href="./2_indicadores.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>  <span class="chapter-title">Accessibility measures</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./s2_calculo.en.html" class="sidebar-item-text sidebar-link">SECTION 2: How to measure urban accessibility</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a href="./s2_calculo.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SECTION 2: How to measure urban accessibility</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3_calculando_acesso.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>  <span class="chapter-title">Calculating accessibility estimates in R</span></a>
+  <a href="./3_calculando_acesso.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>  <span class="chapter-title">Calculating accessibility estimates in R</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./s3_dados_tp.en.html" class="sidebar-item-text sidebar-link">SECTION 3: Public transport data</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a href="./s3_dados_tp.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SECTION 3: Public transport data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4_dados_gtfs.en.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>  <span class="chapter-title">GTFS data</span></a>
+  <a href="./4_dados_gtfs.en.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>  <span class="chapter-title">GTFS data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./5_gtfstools.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>  <span class="chapter-title">GTFS data manipulation and visualization</span></a>
+  <a href="./5_gtfstools.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>  <span class="chapter-title">GTFS data manipulation and visualization</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./s4_avaliacao_impacto.en.html" class="sidebar-item-text sidebar-link">SECTION 4: Impact assessment of transportation projects</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a href="./s4_avaliacao_impacto.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SECTION 4: Impact assessment of transportation projects</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./6_cenarios_transporte.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>  <span class="chapter-title">Comparing accessibility between two transport scenarios</span></a>
+  <a href="./6_cenarios_transporte.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>  <span class="chapter-title">Comparing accessibility between two transport scenarios</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./s5_dados_aop.en.html" class="sidebar-item-text sidebar-link">SECTION 5: Data from the Access to Opportunity Project</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a href="./s5_dados_aop.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SECTION 5: Data from the Access to Opportunity Project</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./7_aopdata_populacao.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>  <span class="chapter-title">Population and socioeconomic data</span></a>
+  <a href="./7_aopdata_populacao.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>  <span class="chapter-title">Population and socioeconomic data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./8_aopdata_uso_solo.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>  <span class="chapter-title">Data on the spatial distribution of opportunities</span></a>
+  <a href="./8_aopdata_uso_solo.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>  <span class="chapter-title">Data on the spatial distribution of opportunities</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./9_aopdata_acessibilidade.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>  <span class="chapter-title">Accessibility estimates</span></a>
+  <a href="./9_aopdata_acessibilidade.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>  <span class="chapter-title">Accessibility estimates</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.en.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="./references.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
 </div>
-</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
 <li>
-<a href="#gtfs-structure" id="toc-gtfs-structure" class="nav-link active" data-scroll-target="#gtfs-structure"> <span class="header-section-number">4.1</span> GTFS structure</a>
+<a href="#gtfs-structure" id="toc-gtfs-structure" class="nav-link active" data-scroll-target="#gtfs-structure"><span class="header-section-number">4.1</span> GTFS structure</a>
   <ul class="collapse">
-<li><a href="#agency.txt" id="toc-agency.txt" class="nav-link" data-scroll-target="#agency.txt"> <span class="header-section-number">4.1.1</span> agency.txt</a></li>
-  <li><a href="#stops.txt" id="toc-stops.txt" class="nav-link" data-scroll-target="#stops.txt"> <span class="header-section-number">4.1.2</span> stops.txt</a></li>
-  <li><a href="#routes.txt" id="toc-routes.txt" class="nav-link" data-scroll-target="#routes.txt"> <span class="header-section-number">4.1.3</span> routes.txt</a></li>
-  <li><a href="#trips.txt" id="toc-trips.txt" class="nav-link" data-scroll-target="#trips.txt"> <span class="header-section-number">4.1.4</span> trips.txt</a></li>
-  <li><a href="#calendar.txt" id="toc-calendar.txt" class="nav-link" data-scroll-target="#calendar.txt"> <span class="header-section-number">4.1.5</span> calendar.txt</a></li>
-  <li><a href="#shapes.txt" id="toc-shapes.txt" class="nav-link" data-scroll-target="#shapes.txt"> <span class="header-section-number">4.1.6</span> shapes.txt</a></li>
-  <li><a href="#stop_times.txt" id="toc-stop_times.txt" class="nav-link" data-scroll-target="#stop_times.txt"> <span class="header-section-number">4.1.7</span> stop_times.txt</a></li>
-  <li><a href="#frequencies.txt" id="toc-frequencies.txt" class="nav-link" data-scroll-target="#frequencies.txt"> <span class="header-section-number">4.1.8</span> frequencies.txt</a></li>
+<li><a href="#agency.txt" id="toc-agency.txt" class="nav-link" data-scroll-target="#agency.txt"><span class="header-section-number">4.1.1</span> agency.txt</a></li>
+  <li><a href="#stops.txt" id="toc-stops.txt" class="nav-link" data-scroll-target="#stops.txt"><span class="header-section-number">4.1.2</span> stops.txt</a></li>
+  <li><a href="#routes.txt" id="toc-routes.txt" class="nav-link" data-scroll-target="#routes.txt"><span class="header-section-number">4.1.3</span> routes.txt</a></li>
+  <li><a href="#trips.txt" id="toc-trips.txt" class="nav-link" data-scroll-target="#trips.txt"><span class="header-section-number">4.1.4</span> trips.txt</a></li>
+  <li><a href="#calendar.txt" id="toc-calendar.txt" class="nav-link" data-scroll-target="#calendar.txt"><span class="header-section-number">4.1.5</span> calendar.txt</a></li>
+  <li><a href="#shapes.txt" id="toc-shapes.txt" class="nav-link" data-scroll-target="#shapes.txt"><span class="header-section-number">4.1.6</span> shapes.txt</a></li>
+  <li><a href="#stop_times.txt" id="toc-stop_times.txt" class="nav-link" data-scroll-target="#stop_times.txt"><span class="header-section-number">4.1.7</span> stop_times.txt</a></li>
+  <li><a href="#frequencies.txt" id="toc-frequencies.txt" class="nav-link" data-scroll-target="#frequencies.txt"><span class="header-section-number">4.1.8</span> frequencies.txt</a></li>
   </ul>
 </li>
-  <li><a href="#finding-gtfs-data-for-brazilian-cities" id="toc-finding-gtfs-data-for-brazilian-cities" class="nav-link" data-scroll-target="#finding-gtfs-data-for-brazilian-cities"> <span class="header-section-number">4.2</span> Finding GTFS data for Brazilian cities</a></li>
+  <li><a href="#finding-gtfs-data-for-brazilian-cities" id="toc-finding-gtfs-data-for-brazilian-cities" class="nav-link" data-scroll-target="#finding-gtfs-data-for-brazilian-cities"><span class="header-section-number">4.2</span> Finding GTFS data for Brazilian cities</a></li>
   </ul>
 <div class="toc-actions">
 <div><i class="bi bi-github"></i></div>
@@ -257,7 +293,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title d-none d-lg-block">
+<h1 class="title">
 <span class="chapter-number">4</span>  <span class="chapter-title">GTFS data</span>
 </h1>
 </div>
@@ -267,6 +303,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="quarto-title-meta">
 
     
+  
     
   </div>
   
@@ -285,9 +322,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="cell-output-display">
 <div id="fig-scheme" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="images/gtfs_scheme.png" class="img-fluid figure-img"></p>
-<p></p>
-<figcaption class="figure-caption">Figure 4.1: GTFS format scheme. Source - <span class="citation" data-cites="pereira2022exploringa">Pereira, Andrade, and Vieira (<a href="references.en.html#ref-pereira2022exploringa" role="doc-biblioref">2022</a>)</span></figcaption><p></p>
-</figure>
+<figcaption class="figure-caption">Figure 4.1: GTFS format scheme. Source - <span class="citation" data-cites="pereira2022exploringa">Pereira, Andrade, and Vieira (<a href="references.en.html#ref-pereira2022exploringa" role="doc-biblioref">2022</a>)</span></figcaption></figure>
 </div>
 </div>
 </div>
@@ -300,9 +335,6 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </ul>
 <p>Throughout this chapter, we’ll learn about the basic structure of a GTFS file and its tables. We will focus only on the required tables and the optional tables most often used by producers and consumers of these files. For more information on the tables and columns not covered in this section, please check the <a href="https://gtfs.org/schedule/reference/">official specification</a>.</p>
 <p>In this demonstration, we use a subset of a feed describing the public transport network of São Paulo, Brazil, produced by SPTrans<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> and downloaded in October 2019. The feed contains the six required tables plus two widely used optional tables, <code>shapes.txt</code> and <code>frequencies.txt</code>, which gives a good overview of the GTFS format.</p>
-<div class="cell">
-
-</div>
 <section id="agency.txt" class="level3" data-number="4.1.1"><h3 data-number="4.1.1" class="anchored" data-anchor-id="agency.txt">
 <span class="header-section-number">4.1.1</span> agency.txt</h3>
 <p>File used to list the transport operators/agencies running the system described by the GTFS file. Although the term agency is used instead of operators, it is up to the feed producer to choose which institutions will be listed in the table.</p>
@@ -312,8 +344,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-agency" class="anchored">
-<table class="table table-sm table-striped">
-<caption>Table 4.1: Example of <code>agency.txt</code>
+<table class="table table-sm table-striped small">
+<caption>Table 4.1: Example of <code>agency.txt</code>
 </caption>
 <colgroup>
 <col style="width: 10%">
@@ -354,8 +386,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-stops" class="anchored">
-<table class="table table-sm table-striped">
-<caption>Table 4.2: Example of <code>stops.txt</code>
+<table class="table table-sm table-striped small">
+<caption>Table 4.2: Example of <code>stops.txt</code>
 </caption>
 <colgroup>
 <col style="width: 6%">
@@ -428,8 +460,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-routes" class="anchored">
-<table class="table table-sm table-striped">
-<caption>Table 4.3: Example of <code>routes.txt</code>
+<table class="table table-sm table-striped small">
+<caption>Table 4.3: Example of <code>routes.txt</code>
 </caption>
 <colgroup>
 <col style="width: 11%">
@@ -502,8 +534,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-trips" class="anchored">
-<table class="table table-sm table-striped">
-<caption>Table 4.4: Example of <code>trips.txt</code>
+<table class="table table-sm table-striped small">
+<caption>Table 4.4: Example of <code>trips.txt</code>
 </caption>
 <colgroup>
 <col style="width: 16%">
@@ -583,8 +615,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-calendar" class="anchored">
-<table class="table table-sm table-striped">
-<caption>Table 4.5: Example of <code>calendar.txt</code>
+<table class="table table-sm table-striped small">
+<caption>Table 4.5: Example of <code>calendar.txt</code>
 </caption>
 <colgroup>
 <col style="width: 12%">
@@ -697,8 +729,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-shapes" class="anchored">
-<table class="table table-sm table-striped">
-<caption>Table 4.6: Example of <code>shapes.txt</code>
+<table class="table table-sm table-striped small">
+<caption>Table 4.6: Example of <code>shapes.txt</code>
 </caption>
 <thead><tr class="header">
 <th style="text-align: left;">shape_id</th>
@@ -755,8 +787,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-stop_times" class="anchored">
-<table class="table table-sm table-striped">
-<caption>Table 4.7: Example of <code>stop_times.txt</code>
+<table class="table table-sm table-striped small">
+<caption>Table 4.7: Example of <code>stop_times.txt</code>
 </caption>
 <thead><tr class="header">
 <th style="text-align: left;">trip_id</th>
@@ -822,8 +854,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-frequencies" class="anchored">
-<table class="table table-sm table-striped">
-<caption>Table 4.8: Example of <code>frequencies.txt</code>
+<table class="table table-sm table-striped small">
+<caption>Table 4.8: Example of <code>frequencies.txt</code>
 </caption>
 <thead><tr class="header">
 <th style="text-align: left;">trip_id</th>
@@ -886,8 +918,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-gtfs_brazil" class="anchored">
-<table class="table table-sm table-striped">
-<caption>Table 4.9: Openly available GTFS data in Brazil</caption>
+<table class="table table-sm table-striped small">
+<caption>Table 4.9: Openly available GTFS data in Brazil</caption>
 <thead><tr class="header">
 <th style="text-align: left;">City</th>
 <th style="text-align: left;">Source</th>
@@ -943,20 +975,20 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p>Note: The GTFS data provided by Rio de Janeiro Municipal Department of Transport (SMTR) only includes the bus system, and it does not include train and subway data.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
-<div id="ref-mchugh2013pioneering" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-mchugh2013pioneering" class="csl-entry" role="listitem">
 McHugh, Bibiana. 2013. <span>“Pioneering <span>Open Data Standards</span>: <span>The GTFS Story</span>.”</span> In <em>Beyond <span>Transparency</span>: <span>Open Data</span> and the <span>Future</span> of <span>Civic Innovation</span></em>, edited by Brett Goldstein and Lauren Dyson, First, 125–35. <span>San Francisco, CA</span>: <span>Code for America Press</span>.
 </div>
-<div id="ref-pereira2022exploringa" class="csl-entry" role="doc-biblioentry">
+<div id="ref-pereira2022exploringa" class="csl-entry" role="listitem">
 Pereira, Rafael H. M., Pedro R. Andrade, and João Pedro Bazzo Vieira. 2022. <span>“Exploring the Time Geography of Public Transport Networks with the Gtfs2gps Package.”</span> <em>Journal of Geographical Systems</em>, December. <a href="https://doi.org/10.1007/s10109-022-00400-x">https://doi.org/10.1007/s10109-022-00400-x</a>.
 </div>
 </div>
-</section><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
-<li id="fn1" role="doc-endnote"><p>In this book, we will use the terms feed, GTFS file and GTFS data as synonyms.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2" role="doc-endnote"><p>As defined by the <a href="https://gtfs.org/schedule/reference/">official specification</a> as of May 9th 2022.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3" role="doc-endnote"><p>Available at <a href="https://www.sptrans.com.br/desenvolvedores/" class="uri">https://www.sptrans.com.br/desenvolvedores/</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4" role="doc-endnote"><p>As of the publication date of this book.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>In this book, we will use the terms feed, GTFS file and GTFS data as synonyms.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>As defined by the <a href="https://gtfs.org/schedule/reference/">official specification</a> as of May 9th 2022.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Available at <a href="https://www.sptrans.com.br/desenvolvedores/" class="uri">https://www.sptrans.com.br/desenvolvedores/</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>As of the publication date of this book.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1028,6 +1060,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         }
       }
     }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
   }
   const isFileUrl = () => { 
     return window.location.protocol === 'file:';
@@ -1079,7 +1121,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   // Switch to dark mode if need be
   if (hasAlternateSentinel()) {
     toggleColorMode(true);
-  } 
+  } else {
+    toggleColorMode(false);
+  }
   const icon = "";
   const anchorJS = new window.AnchorJS();
   anchorJS.options = {
@@ -1087,9 +1131,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1101,7 +1159,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
@@ -1129,31 +1204,136 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
@@ -1170,6 +1350,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2023, Ipea - Instituto de Pesquisa Econômica Aplicada</div>   
+    <div class="nav-footer-center">
+       
+    </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
 <li class="nav-item compact">
