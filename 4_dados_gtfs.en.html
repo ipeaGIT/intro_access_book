@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Introduction to urban accessibility - 4  GTFS data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
+<link href="./5_gtfstools.en.html" rel="next">
+<link href="./s3_dados_tp.en.html" rel="prev">
+<link href="./images/favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script><script src="site_libs/quarto-html/popper.min.js"></script><script src="site_libs/quarto-html/tippy.umd.min.js"></script><script src="site_libs/quarto-html/anchor.min.js"></script><link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script><link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YVERJQF9PJ"></script><script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
+</script><meta property="og:title" content="Introduction to urban accessibility - 4  GTFS data">
+<meta property="og:description" content="The GTFS format is an open and collaborative specification that aims to describe the main components of a public transport network.">
+<meta property="og:site-name" content="Introduction to urban accessibility">
+<meta name="twitter:title" content="Introduction to urban accessibility - 4  GTFS data">
+<meta name="twitter:description" content="The GTFS format is an open and collaborative specification that aims to describe the main components of a public transport network.">
+<meta name="twitter:card" content="summary">
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">
+<span class="chapter-number">4</span>  <span class="chapter-title">GTFS data</span>
+</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction to urban accessibility</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/ipeaGIT/aop_curso" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+<li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
+            <i class="bi bi-bi-twitter pe-1"></i>
+          Twitter
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
+            <i class="bi bi-bi-facebook pe-1"></i>
+          Facebook
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
+            <i class="bi bi-bi-linkedin pe-1"></i>
+          LinkedIn
+          </a>
+        </li>
+    </ul>
+<a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.en.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./s1_intro.en.html" class="sidebar-item-text sidebar-link">SECTION 1: Introduction to urban accessibility</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1_conceito.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>  <span class="chapter-title">What is accessibility?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2_indicadores.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>  <span class="chapter-title">Accessibility measures</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./s2_calculo.en.html" class="sidebar-item-text sidebar-link">SECTION 2: How to measure urban accessibility</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3_calculando_acesso.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>  <span class="chapter-title">Calculating accessibility estimates in R</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./s3_dados_tp.en.html" class="sidebar-item-text sidebar-link">SECTION 3: Public transport data</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4_dados_gtfs.en.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>  <span class="chapter-title">GTFS data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./5_gtfstools.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>  <span class="chapter-title">GTFS data manipulation and visualization</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./s4_avaliacao_impacto.en.html" class="sidebar-item-text sidebar-link">SECTION 4: Impact assessment of transportation projects</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./6_cenarios_transporte.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>  <span class="chapter-title">Comparing accessibility between two transport scenarios</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./s5_dados_aop.en.html" class="sidebar-item-text sidebar-link">SECTION 5: Data from the Access to Opportunity Project</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./7_aopdata_populacao.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>  <span class="chapter-title">Population and socioeconomic data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8_aopdata_uso_solo.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>  <span class="chapter-title">Data on the spatial distribution of opportunities</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9_aopdata_acessibilidade.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>  <span class="chapter-title">Accessibility estimates</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.en.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li>
+<a href="#gtfs-structure" id="toc-gtfs-structure" class="nav-link active" data-scroll-target="#gtfs-structure"> <span class="header-section-number">4.1</span> GTFS structure</a>
+  <ul class="collapse">
+<li><a href="#agency.txt" id="toc-agency.txt" class="nav-link" data-scroll-target="#agency.txt"> <span class="header-section-number">4.1.1</span> agency.txt</a></li>
+  <li><a href="#stops.txt" id="toc-stops.txt" class="nav-link" data-scroll-target="#stops.txt"> <span class="header-section-number">4.1.2</span> stops.txt</a></li>
+  <li><a href="#routes.txt" id="toc-routes.txt" class="nav-link" data-scroll-target="#routes.txt"> <span class="header-section-number">4.1.3</span> routes.txt</a></li>
+  <li><a href="#trips.txt" id="toc-trips.txt" class="nav-link" data-scroll-target="#trips.txt"> <span class="header-section-number">4.1.4</span> trips.txt</a></li>
+  <li><a href="#calendar.txt" id="toc-calendar.txt" class="nav-link" data-scroll-target="#calendar.txt"> <span class="header-section-number">4.1.5</span> calendar.txt</a></li>
+  <li><a href="#shapes.txt" id="toc-shapes.txt" class="nav-link" data-scroll-target="#shapes.txt"> <span class="header-section-number">4.1.6</span> shapes.txt</a></li>
+  <li><a href="#stop_times.txt" id="toc-stop_times.txt" class="nav-link" data-scroll-target="#stop_times.txt"> <span class="header-section-number">4.1.7</span> stop_times.txt</a></li>
+  <li><a href="#frequencies.txt" id="toc-frequencies.txt" class="nav-link" data-scroll-target="#frequencies.txt"> <span class="header-section-number">4.1.8</span> frequencies.txt</a></li>
+  </ul>
+</li>
+  <li><a href="#finding-gtfs-data-for-brazilian-cities" id="toc-finding-gtfs-data-for-brazilian-cities" class="nav-link" data-scroll-target="#finding-gtfs-data-for-brazilian-cities"> <span class="header-section-number">4.2</span> Finding GTFS data for Brazilian cities</a></li>
+  </ul>
+<div class="toc-actions">
+<div><i class="bi bi-github"></i></div>
+<div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/4_dados_gtfs.en.qmd" class="toc-action">Edit this page</a></p></div>
+</div></nav><a href="pt/4_dados_gtfs.html">Leia em português</a>
+</div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block">
+<span class="chapter-number">4</span>  <span class="chapter-title">GTFS data</span>
+</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header><p>The GTFS format is an open and collaborative specification that aims to describe the main components of a public transport network. Originally created in the mid-2000s by a partnership between Google and TriMet, the transport agency of Portland, Oregon, in the United States, the GTFS specification is now used by transport agencies in thousands of cities, spread across all continents of the globe <span class="citation" data-cites="mchugh2013pioneering">(<a href="references.en.html#ref-mchugh2013pioneering" role="doc-biblioref">McHugh 2013</a>)</span>. Currently, the specification is divided in two distinct components:</p>
+<ul>
+<li>The GTFS Schedule, or GTFS Static, which contains the planned schedule of public transport trips, information about their fares and spatial information about their itineraries;</li>
+<li>The GTFS Realtime, which is used to inform, in real-time, vehicle location information, alerts for possible delays, itinerary changes and events that may interfere with the planned schedule.</li>
+</ul>
+<p>Throughout this section, we will focus on <strong>GTFS Schedule</strong>, the most widely used GTFS format in accessibility analyses and by transport agencies. Click <a href="https://gtfs.org/realtime/">here</a> for more information on GTFS Realtime.</p>
+<p>Being an open and collaborative specification, the GTFS format attempts to enable several distinct uses that transport agencies and tool developers might find for it. However, agencies and applications may still depend on information that is not included in the official specification. As a result, different specification extensions have been created. Some of these <a href="https://gtfs.org/extensions/">extensions</a> may eventually be incorporated into the official specification if this is agreed upon by the GTFS community. In this section, we will focus on a subset of information available in the basic/official GTFS Schedule format.</p>
+<section id="gtfs-structure" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="gtfs-structure">
+<span class="header-section-number">4.1</span> GTFS structure</h2>
+<p>Files in the GTFS Schedule format (from this point onwards referred to as GTFS) are also known as feeds<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. A feed is nothing more than a compressed <code>.zip</code> file that contains a set of tables, saved in separate <code>.txt</code> files, describing some aspects of the public transport network (stops/stations location, trip frequency, itineraries paths, etc). Just like in a relational database, tables in a feed have key columns that allow one to link information described in one table to the data described in another one. An example of the GTFS scheme is presented in <a href="#fig-scheme">Figure <span>4.1</span></a>, which shows some of the the most important tables that make up the specification and highlights the key columns that link the tables to each other.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-scheme" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="images/gtfs_scheme.png" class="img-fluid figure-img"></p>
+<p></p>
+<figcaption class="figure-caption">Figure 4.1: GTFS format scheme. Source - <span class="citation" data-cites="pereira2022exploringa">Pereira, Andrade, and Vieira (<a href="references.en.html#ref-pereira2022exploringa" role="doc-biblioref">2022</a>)</span></figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In total, the GTFS format can be made of up to 22 tables<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Some of them, however, are optional, i.e. they don’t need to be present for the feed to be considered valid. The specification classifies the presence of a table into the following categories: required, optional and conditionally required (when the requirement of the table depends on the existence of another particular table, column or value). For simplicity, in this book we will consider only the first two categories and we will indicate whether a table is required whenever appropriate. Using our simplified convention, tables are classified as follows:</p>
+<ul>
+<li>
+<strong>Required</strong>: <code>agency.txt</code>, <code>stops.txt</code>, <code>routes.txt</code>, <code>trips.txt</code>, <code>stop_times.txt</code>, <code>calendar.txt</code>.</li>
+<li>
+<strong>Optional</strong>: <code>calendar_dates.txt</code>, <code>fare_attributes.txt</code>, <code>fare_rules.txt</code>, <code>fare_products.txt</code>, <code>fare_leg_rules.txt</code>, <code>fare_transfer_rules.txt</code>, <code>areas.txt</code>, <code>stop_areas.txt</code>, <code>shapes.txt</code>, <code>frequencies.txt</code>, <code>transfers.txt</code>, <code>pathways.txt</code>, <code>levels.txt</code>, <code>translations.txt</code>, <code>feed_info.txt</code>, <code>attributions.txt</code>.</li>
+</ul>
+<p>Throughout this chapter, we’ll learn about the basic structure of a GTFS file and its tables. We will focus only on the required tables and the optional tables most often used by producers and consumers of these files. For more information on the tables and columns not covered in this section, please check the <a href="https://gtfs.org/schedule/reference/">official specification</a>.</p>
+<p>In this demonstration, we use a subset of a feed describing the public transport network of São Paulo, Brazil, produced by SPTrans<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> and downloaded in October 2019. The feed contains the six required tables plus two widely used optional tables, <code>shapes.txt</code> and <code>frequencies.txt</code>, which gives a good overview of the GTFS format.</p>
+<div class="cell">
+
+</div>
+<section id="agency.txt" class="level3" data-number="4.1.1"><h3 data-number="4.1.1" class="anchored" data-anchor-id="agency.txt">
+<span class="header-section-number">4.1.1</span> agency.txt</h3>
+<p>File used to list the transport operators/agencies running the system described by the GTFS file. Although the term agency is used instead of operators, it is up to the feed producer to choose which institutions will be listed in the table.</p>
+<p>For example, multiple bus companies operate in a given location, but all schedule and fare planning is carried out by a single institution, usually a transport agency or a specific public entity. Oftentime, this institution is also recognized by public transport users as the system operator. In this case, we should list the institution responsible for planning the system in the table.</p>
+<p>Now imagine a scenario in which a local public transport agency transfers the responsibility of operating a multimodal system to several companies (through concessions, for example). Each one of these companies is responsible for planning the schedules and fares of trips/routes they operate, provided that certain pre-established parameters are followed. In this case, we could list all operators in the table instead of listing the public transport agency.</p>
+<p><a href="#tbl-agency">Table <span>4.1</span></a> shows the <code>agency.txt</code> file of SPTrans’ feed. We can see that the feed producers decided to list the company itself in the table, not the operators of the buses and the subway in the city.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-agency" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Table 4.1: Example of <code>agency.txt</code>
+</caption>
+<colgroup>
+<col style="width: 10%">
+<col style="width: 12%">
+<col style="width: 44%">
+<col style="width: 19%">
+<col style="width: 12%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">agency_id</th>
+<th style="text-align: left;">agency_name</th>
+<th style="text-align: left;">agency_url</th>
+<th style="text-align: left;">agency_timezone</th>
+<th style="text-align: left;">agency_lang</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">SPTRANS</td>
+<td style="text-align: left;">http://www.sptrans.com.br/?versao=011019</td>
+<td style="text-align: left;">America/Sao_Paulo</td>
+<td style="text-align: left;">pt</td>
+</tr></tbody>
+</table>
+</div>
+</div>
+</div>
+<p>It’s important to note that, although we are presenting <code>agency.txt</code> in table format, the information should be formatted as a <code>.csv</code> file. That is, the values of each cell must be separated by commas, and the contents of each table row must be listed in a different row of the <code>.csv</code> file. The table above, for example, is formatted as follows inside the <code>GTFS.zip</code>:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>agency_id,agency_name,agency_url,agency_timezone,agency_lang
+1,SPTRANS,http://www.sptrans.com.br/?versao=011019,America/Sao_Paulo,pt </code></pre>
+</div>
+</div>
+<p>For the sake of communicability and interpretability, next examples in this chapter are presented as tables. It is important to keep in mind, however, that these tables are structured as shown above inside the feeds.</p>
+</section><section id="stops.txt" class="level3" data-number="4.1.2"><h3 data-number="4.1.2" class="anchored" data-anchor-id="stops.txt">
+<span class="header-section-number">4.1.2</span> stops.txt</h3>
+<p>File used to describe the stops in a public transport system. The points listed in this file may reference simple stops (such as bus stops), stations, platforms, station entrances and exits, etc. <a href="#tbl-stops">Table <span>4.2</span></a> shows the <code>stops.txt</code> of SPTrans’ feed.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-stops" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Table 4.2: Example of <code>stops.txt</code>
+</caption>
+<colgroup>
+<col style="width: 6%">
+<col style="width: 16%">
+<col style="width: 61%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">stop_id</th>
+<th style="text-align: left;">stop_name</th>
+<th style="text-align: left;">stop_desc</th>
+<th style="text-align: right;">stop_lat</th>
+<th style="text-align: right;">stop_lon</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">706325</td>
+<td style="text-align: left;">Parada 14 Bis B/C</td>
+<td style="text-align: left;">Viad. Dr. Plínio De Queiroz, 901</td>
+<td style="text-align: right;">-23.55593</td>
+<td style="text-align: right;">-46.65011</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">810602</td>
+<td style="text-align: left;">R. Sta. Rita, 56</td>
+<td style="text-align: left;">Ref.: R. Bresser / R. João Boemer</td>
+<td style="text-align: right;">-23.53337</td>
+<td style="text-align: right;">-46.61229</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">910776</td>
+<td style="text-align: left;">Av. Do Estado, 5854</td>
+<td style="text-align: left;">Ref.: Rua Dona Ana Néri</td>
+<td style="text-align: right;">-23.55896</td>
+<td style="text-align: right;">-46.61520</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1010092</td>
+<td style="text-align: left;">Parada Caetano Pinto</td>
+<td style="text-align: left;">Av. Rangel Pestana, 1249 Ref.: Rua Caetano Pinto/rua Prof. Batista De Andrade</td>
+<td style="text-align: right;">-23.54615</td>
+<td style="text-align: right;">-46.62218</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">1010093</td>
+<td style="text-align: left;">Parada Piratininga</td>
+<td style="text-align: left;">Av. Rangel Pestana, 1479 Ref.: Rua Monsenhor Andrade</td>
+<td style="text-align: right;">-23.54509</td>
+<td style="text-align: right;">-46.62006</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1010099</td>
+<td style="text-align: left;">R. Xavantes, 612</td>
+<td style="text-align: left;">Ref.: Rua Joli</td>
+<td style="text-align: right;">-23.53545</td>
+<td style="text-align: right;">-46.61368</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>The columns <code>stop_id</code> and <code>stop_name</code> identify each stop, but fulfill different roles. The purpose of <code>stop_id</code> is to identify relationships between this table and others in the GTFS feed (as we will later see in the <code>stop_times.txt</code> file, for example). Meanwhile, the column <code>stop_name</code> serves as an identifier that should be easily recognized by the passengers, thus usually assuming values of station names, points of interest names or addresses (as in the case of SPTrans’ feed).</p>
+<p>The <code>stop_desc</code> column, present in SPTrans’ feed, is optional and allows feed producers to add a description of each stop and its surroundings. Finally, <code>stop_lat</code> and <code>stop_lon</code> associate each stop to a point in space with its latitude and longitude geographic coordinates.</p>
+<p>Two of the optional columns not present in this <code>stops.txt</code> table are <code>location_type</code> and <code>parent_station</code>. The <code>location_type</code> column is used to indicate the type of location that each point refers to. When not explicitly set, all points are interpreted as public transport stops, but distinct values can be used to distinguish a stop (<code>location_type = 0</code>) from a station (<code>location_type = 1</code>) or a boarding area (<code>location_type = 2</code>), for example. The <code>parent_station</code> column, on the other hand, is used to describe hierarchical relationships between two points. When describing a boarding area, for example, the feed producer must list the stop/platform that this area refers to, and when describing a stop/platform the producer can optionally list the station that it belongs to.</p>
+</section><section id="routes.txt" class="level3" data-number="4.1.3"><h3 data-number="4.1.3" class="anchored" data-anchor-id="routes.txt">
+<span class="header-section-number">4.1.3</span> routes.txt</h3>
+<p>File used to describe the routes operated in a public transport system and their respective transport modes. <a href="#tbl-routes">Table <span>4.3</span></a> shows the <code>routes.txt</code> of SPTrans’ feed.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-routes" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Table 4.3: Example of <code>routes.txt</code>
+</caption>
+<colgroup>
+<col style="width: 11%">
+<col style="width: 13%">
+<col style="width: 22%">
+<col style="width: 38%">
+<col style="width: 14%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">route_id</th>
+<th style="text-align: left;">agency_id</th>
+<th style="text-align: left;">route_short_name</th>
+<th style="text-align: left;">route_long_name</th>
+<th style="text-align: right;">route_type</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">CPTM L07</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">CPTM L07</td>
+<td style="text-align: left;">JUNDIAI - LUZ</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CPTM L08</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">CPTM L08</td>
+<td style="text-align: left;">AMADOR BUENO - JULIO PRESTES</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CPTM L09</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">CPTM L09</td>
+<td style="text-align: left;">GRAJAU - OSASCO</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CPTM L10</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">CPTM L10</td>
+<td style="text-align: left;">RIO GRANDE DA SERRA - BRÁS</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CPTM L11</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">CPTM L11</td>
+<td style="text-align: left;">ESTUDANTES - LUZ</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CPTM L12</td>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">CPTM L12</td>
+<td style="text-align: left;">CALMON VIANA - BRAS</td>
+<td style="text-align: right;">2</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>As in the case of <code>stops.txt</code>, the <code>routes.txt</code> table also includes different columns to distinguish between the identifier of each route (<code>route_id</code>) and their names. In this case, however, there are two distinct name columns: <code>route_short_name</code> and <code>route_long_name</code>. The first refers to the name of the route commonly recognized by passengers, while the second tends to be a more descriptive name. SPTrans, for example, has chosen to highlight the start and endpoints of each route in the latter column. We can also note that the same values are repeated in both <code>route_id</code> and <code>route_short_name</code>, which is neither required nor forbidden - in this case, the feed producer decided that the route names could satisfactorily work as identifiers because they are reasonably short and unique.</p>
+<p>The <code>agency_id</code> column works as the key column that links the routes to the data described in <code>agency.txt</code>, and it indicates the agency responsible for each route - in this case the agency with id <code>1</code> (SPTrans itself). This column is optional in the case of feeds containing a single agency, but is mandatory otherwise. Using a feed describing a multimodal system with a subway corridor and several bus lines as an example, a possible configuration of <code>routes.txt</code> could associate the subway routes to the subway operator and the bus routes to the agency/company responsible for planning the bus schedules.</p>
+<p>The <code>route_type</code> column is used to describe the transport mode of each route. The above example lists rail lines, whose corresponding numeric value is <code>2</code>. The corresponding values of other transport modes are listed in the <a href="https://gtfs.org/schedule/reference/#routestxt">specification</a>.</p>
+</section><section id="trips.txt" class="level3" data-number="4.1.4"><h3 data-number="4.1.4" class="anchored" data-anchor-id="trips.txt">
+<span class="header-section-number">4.1.4</span> trips.txt</h3>
+<p>File used to describe the trips that compose the system. The trip is the basic unit of movement in the GTFS format: each trip is associated with a public transport route (<code>route_id</code>), with a service that operates on certain days of the week (as we will later cover in <code>calendar.txt</code>) and with a spatial trajectory (as we will later cover in <code>shapes.txt</code>). <a href="#tbl-trips">Table <span>4.4</span></a> shows the <code>trips.txt</code> of SPTrans’ feed.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-trips" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Table 4.4: Example of <code>trips.txt</code>
+</caption>
+<colgroup>
+<col style="width: 16%">
+<col style="width: 13%">
+<col style="width: 16%">
+<col style="width: 20%">
+<col style="width: 19%">
+<col style="width: 13%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">trip_id</th>
+<th style="text-align: left;">route_id</th>
+<th style="text-align: left;">service_id</th>
+<th style="text-align: left;">trip_headsign</th>
+<th style="text-align: right;">direction_id</th>
+<th style="text-align: left;">shape_id</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">CPTM L07-0</td>
+<td style="text-align: left;">CPTM L07</td>
+<td style="text-align: left;">USD</td>
+<td style="text-align: left;">JUNDIAI</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">17846</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CPTM L07-1</td>
+<td style="text-align: left;">CPTM L07</td>
+<td style="text-align: left;">USD</td>
+<td style="text-align: left;">LUZ</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">17847</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CPTM L08-0</td>
+<td style="text-align: left;">CPTM L08</td>
+<td style="text-align: left;">USD</td>
+<td style="text-align: left;">AMADOR BUENO</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">17848</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CPTM L08-1</td>
+<td style="text-align: left;">CPTM L08</td>
+<td style="text-align: left;">USD</td>
+<td style="text-align: left;">JULIO PRESTES</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">17849</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CPTM L09-0</td>
+<td style="text-align: left;">CPTM L09</td>
+<td style="text-align: left;">USD</td>
+<td style="text-align: left;">GRAJAU</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">17850</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CPTM L09-1</td>
+<td style="text-align: left;">CPTM L09</td>
+<td style="text-align: left;">USD</td>
+<td style="text-align: left;">OSASCO</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">17851</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>The <code>trip_id</code> column identifies the trips described in the table, just as the <code>route_id</code> references a route described in <code>routes.txt</code>. The <code>service_id</code> column identifies the services that determine the days of the week that each trip runs on (weekdays, weekends, a mix of both, etc), described in detail in <code>calendar.txt</code>. The rightmost column in the example above is <code>shape_id</code>, which identifies the spatial trajectory of each trip, described in detail in the <code>shapes.txt</code> file.</p>
+<p>The two remaining columns, <code>trip_headsign</code> and <code>direction_id</code>, are optional and should be used to describe the direction/destination of the trip. The first, <code>trip_headsign</code>, is used to report the text that appears on the vehicle headsign (in the case of buses, for example) or on information panels (such as in subway and rail stations) highlighting the destination of the trip. The <code>direction_id</code> column is often used in conjunction with <code>trip_headsign</code> to distinguish the direction of each trip, where <code>0</code> represents one direction and <code>1</code> the opposite one . In our example, the first two rows describe trips that refer to the same public transport route (<code>CPTM L07</code>), but in opposite directions: one runs towards Jundiaí, and the other towards Luz.</p>
+</section><section id="calendar.txt" class="level3" data-number="4.1.5"><h3 data-number="4.1.5" class="anchored" data-anchor-id="calendar.txt">
+<span class="header-section-number">4.1.5</span> calendar.txt</h3>
+<p>File used to describe the different types of service calendars in a public transport system. A service, in this context, denotes a set of days of the week in which trips may occur. Each service is also defined by an interval, with a start and an end date, within which the service operates. <a href="#tbl-calendar">Table <span>4.5</span></a> shows the <code>calendar.txt</code> of SPTrans’ feed.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-calendar" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Table 4.5: Example of <code>calendar.txt</code>
+</caption>
+<colgroup>
+<col style="width: 12%">
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 11%">
+<col style="width: 10%">
+<col style="width: 7%">
+<col style="width: 10%">
+<col style="width: 7%">
+<col style="width: 12%">
+<col style="width: 10%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">service_id</th>
+<th style="text-align: right;">monday</th>
+<th style="text-align: right;">tuesday</th>
+<th style="text-align: right;">wednesday</th>
+<th style="text-align: right;">thursday</th>
+<th style="text-align: right;">friday</th>
+<th style="text-align: right;">saturday</th>
+<th style="text-align: right;">sunday</th>
+<th style="text-align: right;">start_date</th>
+<th style="text-align: right;">end_date</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">USD</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">20080101</td>
+<td style="text-align: right;">20200501</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">U__</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">20080101</td>
+<td style="text-align: right;">20200501</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">US_</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">20080101</td>
+<td style="text-align: right;">20200501</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">_SD</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">20080101</td>
+<td style="text-align: right;">20200501</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">__D</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">20080101</td>
+<td style="text-align: right;">20200501</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>S</em></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">20080101</td>
+<td style="text-align: right;">20200501</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>The column <code>service_id</code> identifies each service described in the table. As shown earlier, this identifier is also used in the <code>trips.txt</code>, where it associates each trip to a particular service.</p>
+<p>The <code>monday</code>, <code>tuesday</code>, <code>wednesday</code>, <code>thursday</code>, <code>friday</code>, <code>saturday</code> and <code>sunday</code> columns are used to set the days of the week in which each service operates. A value of <code>1</code> means that the service operates on that day, while a value of <code>0</code> means that it does not. In the example above, the <code>USD</code> service operates every day of the week and the service <code>U__</code> operates only on business days.</p>
+<p>Finally, the columns <code>start_date</code> and <code>end_date</code> delimit the calendar interval. Dates in GTFS files must always be organized using the <code>YYYYMMDD</code> format: the first four numbers define the year, the subsequent two define the month and the last two, the day. The value <code>20220428</code>, for example, represents the 28th of April 2022.</p>
+</section><section id="shapes.txt" class="level3" data-number="4.1.6"><h3 data-number="4.1.6" class="anchored" data-anchor-id="shapes.txt">
+<span class="header-section-number">4.1.6</span> shapes.txt</h3>
+<p>File used to describe the spatial path of each trip in the system. This file is optional, but feed producers are strongly encouraged to include it in their GTFS files. <a href="#tbl-shapes">Table <span>4.6</span></a> shows the <code>shapes.txt</code> of SPTrans’ feed.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-shapes" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Table 4.6: Example of <code>shapes.txt</code>
+</caption>
+<thead><tr class="header">
+<th style="text-align: left;">shape_id</th>
+<th style="text-align: right;">shape_pt_lat</th>
+<th style="text-align: right;">shape_pt_lon</th>
+<th style="text-align: right;">shape_pt_sequence</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">17846</td>
+<td style="text-align: right;">-23.53517</td>
+<td style="text-align: right;">-46.63535</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">17846</td>
+<td style="text-align: right;">-23.53513</td>
+<td style="text-align: right;">-46.63548</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">17846</td>
+<td style="text-align: right;">-23.53494</td>
+<td style="text-align: right;">-46.63626</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">17846</td>
+<td style="text-align: right;">-23.53473</td>
+<td style="text-align: right;">-46.63710</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">17846</td>
+<td style="text-align: right;">-23.53466</td>
+<td style="text-align: right;">-46.63735</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">17846</td>
+<td style="text-align: right;">-23.53416</td>
+<td style="text-align: right;">-46.63866</td>
+<td style="text-align: right;">6</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>The column <code>shape_id</code> identifies each shape, and it links each trip to its spatial trajectory in the <code>trips.txt</code> file. Unlike all the other identifiers we have seen so far, however, <code>shape_id</code> is repeated in several table rows. This is because each <code>shape_id</code> is defined by a sequence of spatial points, whose geographic coordinates are described with the <code>shape_pt_lat</code> and <code>shape_pt_lon</code> columns. The <code>shape_pt_sequence</code> column lists the sequence in which the points connect to form the shape - values listed in this column should increase along the path.</p>
+</section><section id="stop_times.txt" class="level3" data-number="4.1.7"><h3 data-number="4.1.7" class="anchored" data-anchor-id="stop_times.txt">
+<span class="header-section-number">4.1.7</span> stop_times.txt</h3>
+<p>File used to describe the timetable of each trip, including the arrival and departure times at each stop. How this table should be formatted depends on whether the GTFS file contains a <code>frequencies.txt</code> table or not, a detail that we will cover later. For now, we will look at the <code>stop_times.txt</code> of SPTrans’ feed, which also includes a <code>frequencies.txt</code>, in <a href="#tbl-stop_times">Table <span>4.7</span></a>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-stop_times" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Table 4.7: Example of <code>stop_times.txt</code>
+</caption>
+<thead><tr class="header">
+<th style="text-align: left;">trip_id</th>
+<th style="text-align: left;">arrival_time</th>
+<th style="text-align: left;">departure_time</th>
+<th style="text-align: left;">stop_id</th>
+<th style="text-align: right;">stop_sequence</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">CPTM L07-0</td>
+<td style="text-align: left;">04:00:00</td>
+<td style="text-align: left;">04:00:00</td>
+<td style="text-align: left;">18940</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CPTM L07-0</td>
+<td style="text-align: left;">04:08:00</td>
+<td style="text-align: left;">04:08:00</td>
+<td style="text-align: left;">18920</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CPTM L07-0</td>
+<td style="text-align: left;">04:16:00</td>
+<td style="text-align: left;">04:16:00</td>
+<td style="text-align: left;">18919</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CPTM L07-0</td>
+<td style="text-align: left;">04:24:00</td>
+<td style="text-align: left;">04:24:00</td>
+<td style="text-align: left;">18917</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CPTM L07-0</td>
+<td style="text-align: left;">04:32:00</td>
+<td style="text-align: left;">04:32:00</td>
+<td style="text-align: left;">18916</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CPTM L07-0</td>
+<td style="text-align: left;">04:40:00</td>
+<td style="text-align: left;">04:40:00</td>
+<td style="text-align: left;">18965</td>
+<td style="text-align: right;">6</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>The trip whose timetable is being described is identified by the <code>trip_id</code> column. Similarly to what happens in <code>shapes.txt</code>, the same <code>trip_id</code> is found in many rows of the table. This is because, just as a trip trajectory is composed of a sequence of spatial points, a timetable consists of a sequence of several departure/arrival times at various public transport stops.</p>
+<p>The following columns, <code>arrival_time</code>, <code>departure_time</code> and <code>stop_id</code>, describe the schedule of each trip, associating an arrival and a departure time at each visited stop. The time columns must be organized using the <code>HH:MM:SS</code> format, with the first two numbers defining the hour, the subsequent two the minutes and the last two, the seconds. This format also accepts hour values greater than <code>24</code>, for example if a trip departs at 11:00 p.m. but it only arrives at a given station at 1:00 a.m. of the next day. In this case, the arrival time should be recorded as <code>25:00:00</code>, not <code>01:00:00</code>. The <code>stop_id</code> column associates the arrival and departure times with a stop described in the <code>stops.txt</code>, and the <code>stop_sequence</code> column lists the sequence in which the stops connect to form the trip schedule. The values of this last column must always increase along the trip.</p>
+<p>It is worth highlighting here the difference between <code>shapes.txt</code> and <code>stop_times.txt</code>. Although both tables present some spatial information of the trips, they do it in different ways. The <code>stop_times.txt</code> file lists the sequence of stops and times that make up a schedule, but says nothing about the trajectory traveled between the stops. <code>shapes.txt</code>, on the other hand, describes the detailed trajectory of a trip, but does not specify where the public transport stops are located. Combined, the information from the two tables allows us to know both the schedule of each trip and the spatial trajectory between stops.</p>
+</section><section id="frequencies.txt" class="level3" data-number="4.1.8"><h3 data-number="4.1.8" class="anchored" data-anchor-id="frequencies.txt">
+<span class="header-section-number">4.1.8</span> frequencies.txt</h3>
+<p>Optional file used to describe the frequency of each trip within a certain time interval of a day. <a href="#tbl-frequencies">Table <span>4.8</span></a> shows the <code>frequency.txt</code> of SPTrans’ feed.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-frequencies" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Table 4.8: Example of <code>frequencies.txt</code>
+</caption>
+<thead><tr class="header">
+<th style="text-align: left;">trip_id</th>
+<th style="text-align: left;">start_time</th>
+<th style="text-align: left;">end_time</th>
+<th style="text-align: right;">headway_secs</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">CPTM L07-0</td>
+<td style="text-align: left;">04:00:00</td>
+<td style="text-align: left;">04:59:00</td>
+<td style="text-align: right;">720</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CPTM L07-0</td>
+<td style="text-align: left;">05:00:00</td>
+<td style="text-align: left;">05:59:00</td>
+<td style="text-align: right;">360</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CPTM L07-0</td>
+<td style="text-align: left;">06:00:00</td>
+<td style="text-align: left;">06:59:00</td>
+<td style="text-align: right;">360</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CPTM L07-0</td>
+<td style="text-align: left;">07:00:00</td>
+<td style="text-align: left;">07:59:00</td>
+<td style="text-align: right;">360</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">CPTM L07-0</td>
+<td style="text-align: left;">08:00:00</td>
+<td style="text-align: left;">08:59:00</td>
+<td style="text-align: right;">360</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CPTM L07-0</td>
+<td style="text-align: left;">09:00:00</td>
+<td style="text-align: left;">09:59:00</td>
+<td style="text-align: right;">480</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>The trip whose frequency is being described is identified by the <code>trip_id</code> column. Again, the same identifier may appear in multiple observations. This is because the specification allows the same trip to have different frequencies throughout the day, such as at peak and off-peak hours, for example. Each row refers to the frequency of a given <code>trip_id</code> between a time interval specified in the <code>start_time</code> and <code>end_time</code> columns.</p>
+<p>Within the time interval specified by these two columns, the trip operates on regular headways specified in <code>headway_secs</code>. The headway is the time between trips performed by vehicles in the same route. This time must be specified in seconds. In the example above, we see a headway of <code>720</code> between 4 and 5am, which indicates that the <code>CPTM L07-0</code> trip departs every 12 minutes within this interval.</p>
+<p><strong>Using <code>frequencies.txt</code> and <code>stop_times.txt</code> together</strong></p>
+<p>It is important to understand how the presence of a <code>frequencies.txt</code> table changes the specification of <code>stop_times.txt</code>. As we can see in the <code>stop_times.txt</code> example, the <code>CPTM L07-0</code> trip departs from the first stop at 04:00 am and arrives at the second at 04:08 am. The arrival and departure times at a given stop, however, cannot be specified more than once for each trip, even though the headway set in <code>frequencies.txt</code> defines that this trip departs every 12 minutes from 4 am to 5 am. If that’s the case, how can we set the schedule of trips departing at 04:12 am, 04:24 am, 04:36 am, etc?</p>
+<p>If the frequency of a trip is specified in <code>frequencies.txt</code>, the timetable of this trip defined in <code>stop_times.txt</code> should be understood as a reference that describes the time between stops. In other words, the times defined in the <code>stop_times.txt</code> file should not be interpreted rigorously. For example, the timetable of trip <code>CPTM L07-0</code> establishes that the journey between the first and second stop takes 8 minutes to complete, which is the same travel time between the second and third stops as well. Thus, a trip departing from the first stop at 04:00 am arrives at the second at 04:08 am and at the third at 04:16 am. The next trip, which on the other hand departs from the first stop at 04:12 am, arrives at the second stop at 04:20 am, and the third at 04:28 am.</p>
+<p>To describe the same trips in <code>stop_times.txt</code> without making a <code>frequencies.txt</code> table, one could add a suffix that would identify each trip of route <code>CPTM L07</code> in direction <code>0</code> throughout the day. The trip with id <code>CPTM L07-0_1</code>, for example, would be the first trip 0 of the day heading towards direction <code>0</code> and it would depart from the first stop at 04:00 am and arrive at the second at 04:08 am. The <code>CPTM L07-0_2</code> trip, on the other hand, would be the second trip of the day and would depart from the first stop at 04:12 am and arrive at the second at 04:20 am. The rest of the trips would follow the same pattern. Each one of these trips would also need to be added to <code>trips.txt</code>, as well as to any other tables that would refer to the <code>trip_id</code>.</p>
+<p>Another variable that changes how <code>frequencies.txt</code> affects the timetables in <code>stop_times.txt</code> is the optional column <code>exact_times</code>. When it assumes the value of <code>0</code> (or when it is missing from the feed, as in the case of the SPTrans’ GTFS file) it indicates that the trip does not necessarily follow a fixed schedule over the time interval. Instead, operators try to maintain a predetermined headway during the interval. Using the same example of a trip whose headway is 12 minutes between 4:00 am and 5:00 am, this would mean that the first departure does not necessarily happen at 4:00 am, the second at 04:12 am, and so on. The first trip can, for example, leave at 4:02 am. The second, at 4:14 am or 4:13 am, etc. Meanwhile, one should use <code>exact_times</code> with value <code>1</code> to define a schedule that always follows with the exact same headway. This would be equivalent to defining several similar trips departing at different times in <code>stop_times.txt</code> (as shown in the previous paragraph).</p>
+</section></section><section id="finding-gtfs-data-for-brazilian-cities" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="finding-gtfs-data-for-brazilian-cities">
+<span class="header-section-number">4.2</span> Finding GTFS data for Brazilian cities</h2>
+<p>GTFS data from cities all over the world can be downloaded with the <a href="https://r-transit.github.io/tidytransit/"><code>{tidytransit}</code></a> R package or on the <a href="https://www.transit.land/">Transitland</a> website. In Brazil, several cities use GTFS data to plan and operate their transport systems. In many cases, however, the data is owned by private companies and operators and may not be publicly available. As a result, GTFS data in Brazil is seldom openly available, which goes against the public interest and against good practices of government transparency and data management. <a href="#tbl-gtfs_brazil">Table <span>4.9</span></a> lists some of the few Brazilian cities that make their GTFS feeds openly available to the public<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-gtfs_brazil" class="anchored">
+<table class="table table-sm table-striped">
+<caption>Table 4.9: Openly available GTFS data in Brazil</caption>
+<thead><tr class="header">
+<th style="text-align: left;">City</th>
+<th style="text-align: left;">Source</th>
+<th style="text-align: left;">Info</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Belo Horizonte</td>
+<td style="text-align: left;">BHTrans</td>
+<td style="text-align: left;">Open data: <a href="https://dados.pbh.gov.br/dataset/gtfs-estatico-do-sistema-convencional">conventional transport network</a>; <a href="https://dados.pbh.gov.br/dataset/feed-gtfs-estatico-do-sistema-suplementar">supplementary network</a>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Fortaleza</td>
+<td style="text-align: left;">ETUFOR</td>
+<td style="text-align: left;">
+<a href="https://dados.fortaleza.ce.gov.br/dataset/gtfs">Open data</a>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fortaleza</td>
+<td style="text-align: left;">Metrofor</td>
+<td style="text-align: left;">
+<a href="https://www.metrofor.ce.gov.br/gtfs/">Open data</a>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Porto Alegre</td>
+<td style="text-align: left;">EPTC</td>
+<td style="text-align: left;">
+<a href="https://dados.portoalegre.rs.gov.br/dataset/gtfs">Open data</a>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Rio de Janeiro</td>
+<td style="text-align: left;">SMTR</td>
+<td style="text-align: left;">
+<a href="https://www.data.rio/datasets/gtfs-do-rio-de-janeiro/about">Open data</a>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">São Paulo</td>
+<td style="text-align: left;">EMTU</td>
+<td style="text-align: left;">
+<a href="https://www.emtu.sp.gov.br/emtu/dados-abertos/dados-abertos-principal/gtfs.fss">Download link</a>. Registration required.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">São Paulo</td>
+<td style="text-align: left;">SPTrans</td>
+<td style="text-align: left;">
+<a href="https://www.sptrans.com.br/desenvolvedores/">Download link</a>. Registration required.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Note: The GTFS data provided by Rio de Janeiro Municipal Department of Transport (SMTR) only includes the bus system, and it does not include train and subway data.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-mchugh2013pioneering" class="csl-entry" role="doc-biblioentry">
+McHugh, Bibiana. 2013. <span>“Pioneering <span>Open Data Standards</span>: <span>The GTFS Story</span>.”</span> In <em>Beyond <span>Transparency</span>: <span>Open Data</span> and the <span>Future</span> of <span>Civic Innovation</span></em>, edited by Brett Goldstein and Lauren Dyson, First, 125–35. <span>San Francisco, CA</span>: <span>Code for America Press</span>.
+</div>
+<div id="ref-pereira2022exploringa" class="csl-entry" role="doc-biblioentry">
+Pereira, Rafael H. M., Pedro R. Andrade, and João Pedro Bazzo Vieira. 2022. <span>“Exploring the Time Geography of Public Transport Networks with the Gtfs2gps Package.”</span> <em>Journal of Geographical Systems</em>, December. <a href="https://doi.org/10.1007/s10109-022-00400-x">https://doi.org/10.1007/s10109-022-00400-x</a>.
+</div>
+</div>
+</section><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1" role="doc-endnote"><p>In this book, we will use the terms feed, GTFS file and GTFS data as synonyms.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>As defined by the <a href="https://gtfs.org/schedule/reference/">official specification</a> as of May 9th 2022.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p>Available at <a href="https://www.sptrans.com.br/desenvolvedores/" class="uri">https://www.sptrans.com.br/desenvolvedores/</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4" role="doc-endnote"><p>As of the publication date of this book.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./s3_dados_tp.en.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">SECTION 3: Public transport data</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./5_gtfstools.en.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>  <span class="chapter-title">GTFS data manipulation and visualization</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">Copyright 2023, Ipea - Instituto de Pesquisa Econômica Aplicada</div>   
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+<li class="nav-item compact">
+    <a class="nav-link active" href="https://github.com/ipeaGIT/aop_curso" aria-current="page">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+</div>
+  </div>
+</footer>
+</body>
+</html>

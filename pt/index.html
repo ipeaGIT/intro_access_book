@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt" xml:lang="pt">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Introdução à acessibilidade urbana</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
+<link href="./s1_intro.html" rel="next">
+<link href="./images/favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script><script src="site_libs/quarto-html/popper.min.js"></script><script src="site_libs/quarto-html/tippy.umd.min.js"></script><script src="site_libs/quarto-html/anchor.min.js"></script><link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script><link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar"
+  }
+}</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YVERJQF9PJ"></script><script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
+</script><meta property="og:title" content="Introdução à acessibilidade urbana">
+<meta property="og:description" content="um guia prático em R">
+<meta property="og:image" content="https://ipeagit.github.io/aop_curso/images/cover.jpg">
+<meta property="og:site-name" content="Introdução à acessibilidade urbana">
+<meta name="twitter:title" content="Introdução à acessibilidade urbana">
+<meta name="twitter:description" content="um guia prático em R">
+<meta name="twitter:image" content="https://ipeagit.github.io/aop_curso/images/cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="citation_title" content="Introdução à acessibilidade urbana: um guia prático em R">
+<meta name="citation_author" content="Rafael H. M. Pereira">
+<meta name="citation_author" content="Daniel Herszenhut">
+<meta name="citation_online_date" content="2023-04-26">
+<meta name="citation_fulltext_html_url" content="https://ipeagit.github.io/intro_access_book/">
+<meta name="citation_publication_date" content="2023">
+<meta name="citation_journal_title" content="Introdução à acessibilidade urbana: um guia prático em R">
+<meta name="citation_reference" content="citation_title=Transport modelling in the age of big data;,citation_author=Cuauhtemoc Anda;,citation_author=Alexander Erath;,citation_author=Pieter Jacobus Fourie;,citation_publication_date=2017-08;,citation_issue=sup1;,citation_issn=1226-5934;,citation_volume=21;,citation_journal_title=International Journal of Urban Sciences;">
+<meta name="citation_reference" content="citation_title=Estimating the influence of crowding and travel time variability on accessibility to jobs in a large public transport network using smart card big data;,citation_author=Renato Arbex;,citation_author=Claudio B. Cunha;,citation_publication_date=2020-05;,citation_issn=09666923;,citation_volume=85;,citation_journal_title=Journal of Transport Geography;">
+<meta name="citation_reference" content="citation_title=The sustainable mobility paradigm;,citation_author=David Banister;,citation_publication_date=2008-03;,citation_issue=2;,citation_issn=0967070X;,citation_volume=15;,citation_journal_title=Transport Policy;">
+<meta name="citation_reference" content="citation_title=The trilogy of distance, speed and time;,citation_author=David Banister;,citation_publication_date=2011-07;,citation_issue=4;,citation_issn=09666923;,citation_volume=19;,citation_journal_title=Journal of Transport Geography;">
+<meta name="citation_reference" content="citation_title=The world’s user-generated road map is more than 80% complete;,citation_author=Christopher Barrington-Leigh;,citation_author=Adam Millard-Ball;,citation_publication_date=2017-08;,citation_issue=8;,citation_issn=1932-6203;,citation_volume=12;,citation_journal_title=PLOS ONE;">
+<meta name="citation_reference" content="citation_title=Sustainable accessibility: A conceptual framework to integrate transport and land use plan-making. Two test-applications in the Netherlands and a reflection on the way forward;,citation_author=L. Bertolini;,citation_author=F. Clercq;,citation_author=L. Kapoen;,citation_publication_date=2005-05;,citation_issue=3;,citation_issn=0967070X;,citation_volume=12;,citation_journal_title=Transport Policy;">
+<meta name="citation_reference" content="citation_title=How to get there? A critical assessment of accessibility objectives and indicators in metropolitan transportation plans;,citation_author=Geneviève Boisjoly;,citation_author=Ahmed M. El-Geneidy;,citation_publication_date=2017-04;,citation_issn=0967070X;,citation_volume=55;,citation_journal_title=Transport Policy;">
+<meta name="citation_reference" content="citation_title=Impactos da expansão do metrô de Fortaleza sobre o acesso a oportunidades de emprego, saúde e educação;,citation_author=Carlos Kaue Vieira Braga;,citation_author=Diego Bogado Tomasiello;,citation_author=Daniel Herszenhut;,citation_author=João Lucas Albuquerque Oliveira;,citation_author=Rafael H. M. Pereira;,citation_publication_date=2022-05;,citation_technical_report_institution=Instituto de Pesquisa Econômica Aplicada (Ipea);,citation_technical_report_number=2767;">
+<meta name="citation_reference" content="citation_title=H3: Uber’s Hexagonal Hierarchical Spatial Index;,citation_author=Isaac Brodsky;,citation_publication_date=2018-06;,citation_journal_title=Uber Engineering Blog;">
+<meta name="citation_reference" content="citation_title=More than just a bus trip: School busing, disability and access to education in Toronto, Canada;,citation_author=Ron Buliung;,citation_author=Patrick Bilas;,citation_author=Timothy Ross;,citation_author=Cosmin Marmureanu;,citation_author=Ahmed El-Geneidy;,citation_publication_date=2021-06;,citation_issn=0965-8564;,citation_volume=148;,citation_journal_title=Transportation Research Part A: Policy and Practice;">
+<meta name="citation_reference" content="citation_title=Accessibility Tools for Transport Policy and Planning;,citation_author=Benjamin Büttner;,citation_publication_date=2021-01;,citation_isbn=978-0-08-102672-4;,citation_journal_title=International Encyclopedia of Transportation;">
+<meta name="citation_reference" content="citation_title=An Investigation into the Completeness of, and the Updates to, OpenStreetMap Data in a Heterogeneous Area in Brazil;,citation_author=Silvana Philippi Camboim;,citation_author=João Vitor Meza Bravo;,citation_author=Claudia Robbi Sluter;,citation_publication_date=2015-09;,citation_issue=3;,citation_issn=2220-9964;,citation_volume=4;,citation_journal_title=ISPRS International Journal of Geo-Information;">
+<meta name="citation_reference" content="citation_title=Accessible Cities and Regions: A Framework for Sustainable Transport and Urbanism in the 21st Century;,citation_author=Robert Cervero;,citation_publication_date=2005-08;,citation_issue=UCB-ITS-VWP-2005-3;,citation_journal_title=Center for Future Urban Transport Working Paper;">
+<meta name="citation_reference" content="citation_title=Transport and social exclusion in London;,citation_author=A Church;,citation_author=M Frost;,citation_author=K Sullivan;,citation_publication_date=2000-07;,citation_issue=3;,citation_issn=0967070X;,citation_volume=7;,citation_journal_title=Transport Policy;">
+<meta name="citation_reference" content="citation_title=Evidence-Based Transit and Land Use Sketch Planning Using Interactive Accessibility Methods on Combined Schedule and Headway-Based Networks;,citation_author=Matthew Wigginton Conway;,citation_author=Andrew Byrd;,citation_author=Marco Linden;,citation_publication_date=2017-01;,citation_issue=1;,citation_issn=0361-1981, 2169-4052;,citation_volume=2653;,citation_journal_title=Transportation Research Record: Journal of the Transportation Research Board;">
+<meta name="citation_reference" content="citation_title=Opportunities for Transport Mode Change: An Exploration of a Disaggregated Approach;,citation_author=Martin Dijst;,citation_author=Tom Jong;,citation_author=Jan Ritsema Eck;,citation_publication_date=2002-06;,citation_issue=3;,citation_issn=0265-8135, 1472-3417;,citation_volume=29;,citation_journal_title=Environment and Planning B: Planning and Design;">
+<meta name="citation_reference" content="citation_title=Moving from trip-based to activity-based measures of accessibility;,citation_author=Xiaojing Dong;,citation_author=Moshe E. Ben-Akiva;,citation_author=John L. Bowman;,citation_author=Joan L. Walker;,citation_publication_date=2006-02;,citation_issue=2;,citation_issn=09658564;,citation_volume=40;,citation_journal_title=Transportation Research Part A: Policy and Practice;">
+<meta name="citation_reference" content="citation_title=The cost of equity: Assessing transit accessibility and social disparity using total travel cost;,citation_author=Ahmed El-Geneidy;,citation_author=David Levinson;,citation_author=Ehab Diab;,citation_author=Genevieve Boisjoly;,citation_author=David Verbich;,citation_author=Charis Loong;,citation_publication_date=2016-09;,citation_issn=09658564;,citation_volume=91;,citation_journal_title=Transportation Research Part A: Policy and Practice;">
+<meta name="citation_reference" content="citation_title=Rural accessibility, social inclusion and social justice: Towards conceptualisation;,citation_author=John Farrington;,citation_author=Conor Farrington;,citation_publication_date=2005-03;,citation_issue=1;,citation_issn=09666923;,citation_volume=13;,citation_journal_title=Journal of Transport Geography;">
+<meta name="citation_reference" content="citation_title=Accessibility evaluation of land-use and transport strategies: Review and research directions;,citation_author=Karst Geurs;,citation_author=Bert Wee;,citation_publication_date=2004-06;,citation_issue=2;,citation_issn=09666923;,citation_volume=12;,citation_journal_title=Journal of Transport Geography;">
+<meta name="citation_reference" content="citation_title=Elevating access: Comparing accessibility to jobs by public transport for individuals with and without a physical disability;,citation_author=Emily Grisé;,citation_author=Geneviève Boisjoly;,citation_author=Meadhbh Maguire;,citation_author=Ahmed El-Geneidy;,citation_publication_date=2019-07;,citation_issn=0965-8564;,citation_volume=125;,citation_journal_title=Transportation Research Part A: Policy and Practice;">
+<meta name="citation_reference" content="citation_title=Accessibility, affordability and equity: Assessing “pro-poor” public transport subsidies in Bogotá;,citation_author=Luis A. Guzman;,citation_author=Daniel Oviedo;,citation_publication_date=2018-09;,citation_issn=0967-070X;,citation_volume=68;,citation_journal_title=Transport Policy;">
+<meta name="citation_reference" content="citation_title=Gtfstools: General Transit Feed Specification (GTFS) Editing and Analysing Tools;,citation_author=Daniel Herszenhut;,citation_author=Rafael H. M. Pereira;,citation_author=Pedro R. Andrade;,citation_author=João Bazzo;,citation_publication_date=2022-05;,citation_journal_title=undefined;">
+<meta name="citation_reference" content="citation_title=The impact of transit monetary costs on transport inequality;,citation_author=Daniel Herszenhut;,citation_author=Rafael H. M. Pereira;,citation_author=Licinio da Silva Portugal;,citation_author=Matheus Henrique de Sousa Oliveira;,citation_publication_date=2022-02;,citation_issn=09666923;,citation_volume=99;,citation_journal_title=Journal of Transport Geography;">
+<meta name="citation_reference" content="citation_title=Calculating place-based transit accessibility: Methods, tools and algorithmic dependence;,citation_author=Christopher Higgins;,citation_author=Matthew Palm;,citation_author=Amber DeJohn;,citation_author=Luna Xi;,citation_author=James Vaughan;,citation_author=Steven Farber;,citation_author=Michael Widener;,citation_author=Eric Miller;,citation_publication_date=2022-02;,citation_issue=1;,citation_issn=1938-7849;,citation_volume=15;,citation_journal_title=Journal of Transport and Land Use;">
+<meta name="citation_reference" content="citation_title=Smart cities, big data and urban policy: Towards urban analytics for the long run;,citation_author=Jens Kandt;,citation_author=Michael Batty;,citation_publication_date=2021-02;,citation_issn=0264-2751;,citation_volume=109;,citation_journal_title=Cities;">
+<meta name="citation_reference" content="citation_title=Space-time accessibility measures: A geocomputational algorithm with a focus on the feasible opportunity set and possible activity duration;,citation_author=Hyun-Mi Kim;,citation_author=Mei-Po Kwan;,citation_publication_date=2003-05;,citation_issue=1;,citation_issn=1435-5930, 1435-5949;,citation_volume=5;,citation_journal_title=Journal of Geographical Systems;">
+<meta name="citation_reference" content="citation_title=From mobility to accessibility: Transforming urban transportation and land-use planning;,citation_author=Jonathan Levine;,citation_author=Joe Grengs;,citation_author=Louis A. Merlin;,citation_publication_date=2019;,citation_journal_title=undefined;">
+<meta name="citation_reference" content="citation_title=Towards a general theory of access;,citation_author=David M. Levinson;,citation_author=Hao Wu;,citation_publication_date=2020-06;,citation_issue=1;,citation_issn=1938-7849;,citation_volume=13;,citation_journal_title=Journal of Transport and Land Use;">
+<meta name="citation_reference" content="citation_title=Transport access manual: A guide for measuring connection between people and places;,citation_author=David Levinson;,citation_author=David King;,citation_publication_date=2020;,citation_journal_title=undefined;">
+<meta name="citation_reference" content="citation_title=A method to evaluate equitable accessibility: Combining ethical theories and accessibility-based approaches;,citation_author=Karen Lucas;,citation_author=Bert Wee;,citation_author=Kees Maat;,citation_publication_date=2016-05;,citation_issue=3;,citation_issn=1572-9435;,citation_volume=43;,citation_journal_title=Transportation;">
+<meta name="citation_reference" content="citation_title=Transport poverty and its adverse social consequences;,citation_author=Karen Lucas;,citation_author=Giulio Mattioli;,citation_author=Ersilia Verlinghieri;,citation_author=Alvaro Guzman;,citation_publication_date=2016-12;,citation_issue=6;,citation_issn=0965-092X, 1751-7710;,citation_volume=169;,citation_journal_title=Proceedings of the Institution of Civil Engineers - Transport;">
+<meta name="citation_reference" content="citation_title=Measures of Spatial Accessibility to Health Care in a GIS Environment: Synthesis and a Case Study in the Chicago Region;,citation_author=Wei Luo;,citation_author=Fahui Wang;,citation_publication_date=2003-12;,citation_issue=6;,citation_issn=0265-8135, 1472-3417;,citation_volume=30;,citation_journal_title=Environment and Planning B: Planning and Design;">
+<meta name="citation_reference" content="citation_title=Understanding transport-related social exclusion through the lens of capabilities approach;,citation_author=Gregório Luz;,citation_author=Licinio Portugal;,citation_publication_date=2022-07;,citation_issue=4;,citation_issn=0144-1647;,citation_volume=42;,citation_journal_title=Transport Reviews;">
+<meta name="citation_reference" content="citation_title=Justice in transport as justice in accessibility: Applying Walzer’s “Spheres of Justice” to the transport sector;,citation_author=Karel Martens;,citation_publication_date=2012-11;,citation_issue=6;,citation_issn=0049-4488, 1572-9435;,citation_volume=39;,citation_journal_title=Transportation;">
+<meta name="citation_reference" content="citation_title=Pioneering Open Data Standards: The GTFS Story;,citation_author=Bibiana McHugh;,citation_publication_date=2013;,citation_isbn=978-0-615-88908-5;,citation_journal_title=Beyond Transparency: Open Data and the Future of Civic Innovation;">
+<meta name="citation_reference" content="citation_title=Accessibility: Measurement and application in transportation planning;,citation_author=Eric J. Miller;,citation_publication_date=2018-09;,citation_issue=5;,citation_issn=0144-1647;,citation_volume=38;,citation_journal_title=Transport Reviews;">
+<meta name="citation_reference" content="citation_title=A utility-based travel impedance measure for public transit network accessibility;,citation_author=Neema Nassir;,citation_author=Mark Hickman;,citation_author=Ali Malekzadeh;,citation_author=Elnaz Irannezhad;,citation_publication_date=2016-06;,citation_issn=09658564;,citation_volume=88;,citation_journal_title=Transportation Research Part A: Policy and Practice;">
+<meta name="citation_reference" content="citation_title=Equity of Urban Service Delivery: A Comparison of Different Accessibility Measures;,citation_author=Tijs Neutens;,citation_author=Tim Schwanen;,citation_author=Frank Witlox;,citation_author=Philippe De Maeyer;,citation_publication_date=2010-07;,citation_issue=7;,citation_issn=0308-518X, 1472-3409;,citation_volume=42;,citation_journal_title=Environment and Planning A: Economy and Space;">
+<meta name="citation_reference" content="citation_title=An analysis of day-to-day variations in individual spacetime accessibility;,citation_author=Tijs Neutens;,citation_author=Matthias Delafontaine;,citation_author=Darren M. Scott;,citation_author=Philippe De Maeyer;,citation_publication_date=2012-07;,citation_issn=0966-6923;,citation_volume=23;,citation_journal_title=Journal of Transport Geography;">
+<meta name="citation_reference" content="citation_title=Measuring accessibility: Positive and normative implementations of various accessibility indicators;,citation_author=Antonio Páez;,citation_author=Darren M. Scott;,citation_author=Catherine Morency;,citation_publication_date=2012-11;,citation_issn=09666923;,citation_volume=25;,citation_journal_title=Journal of Transport Geography;">
+<meta name="citation_reference" content="citation_title=Demand and level of service inflation in Floating Catchment Area (FCA) methods;,citation_author=Antonio Paez;,citation_author=Christopher D. Higgins;,citation_author=Salvatore F. Vivona;,citation_publication_date=2019-06;,citation_issue=6;,citation_issn=1932-6203;,citation_volume=14;,citation_journal_title=PLOS ONE;">
+<meta name="citation_reference" content="citation_title=Accessibility instruments for planning practice: A review of European experiences;,citation_author=Enrica Papa;,citation_author=Cecilia Silva;,citation_author=Marco Te Brömmelstroet;,citation_author=Angela Hull;,citation_publication_date=2015-06;,citation_issn=1938-7849;,citation_journal_title=Journal of Transport and Land Use;">
+<meta name="citation_reference" content="citation_title=Distributive justice and equity in transportation;,citation_author=Rafael H. M. Pereira;,citation_author=Tim Schwanen;,citation_author=David Banister;,citation_publication_date=2017-03;,citation_issue=2;,citation_issn=0144-1647, 1464-5327;,citation_volume=37;,citation_journal_title=Transport Reviews;">
+<meta name="citation_reference" content="citation_title=Desigualdades socioespaciais de acesso a oportunidades nas cidades brasileiras, 2019;,citation_author=Rafael H. M. Pereira;,citation_author=Carlos Kaue Vieira Braga;,citation_author=Bernardo Serra;,citation_author=Vanessa Nadalin;,citation_publication_date=2019;,citation_technical_report_institution=Instituto de Pesquisa Econômica Aplicada (Ipea);,citation_technical_report_number=2535;">
+<meta name="citation_reference" content="citation_title=R5r: Rapid Realistic Routing on Multimodal Transport Networks with R&amp;amp;amp;lt;sup&amp;gt;5&amp;lt;/sup&amp;gt; in R;,citation_author=Rafael H. M. Pereira;,citation_author=Marcus Saraiva;,citation_author=Daniel Herszenhut;,citation_author=Carlos Kaue Vieira Braga;,citation_author=Matthew Wigginton Conway;,citation_publication_date=2021-03;,citation_journal_title=Transport Findings;">
+<meta name="citation_reference" content="citation_title=Transportation Equity;,citation_author=Rafael H. M. Pereira;,citation_author=Alex Karner;,citation_publication_date=2021-01;,citation_isbn=978-0-08-102672-4;,citation_journal_title=International Encyclopedia of Transportation;">
+<meta name="citation_reference" content="citation_title=Accessibility: Transport Accessibility Measures;,citation_author=Rafael H. M. Pereira;,citation_author=Daniel Herszenhut;,citation_publication_date=2022;,citation_journal_title=undefined;">
+<meta name="citation_reference" content="citation_title=Aopdata: Data from the Access to Opportunities Project;,citation_author=Rafael H. M. Pereira;,citation_author=Daniel Herszenhut;,citation_author=Carlos K. V. Braga;,citation_author=Diego B. Tomasiello;,citation_author=Marcus Saraiva;,citation_publication_date=2022;,citation_journal_title=undefined;">
+<meta name="citation_reference" content="citation_title=Distribuição espacial de características sociodemográficas e localização de empregos e serviços públicos das vinte maiores cidades do Brasil;,citation_author=Rafael H. M. Pereira;,citation_author=Daniel Herszenhut;,citation_author=Carlos Kauê Vieira Braga;,citation_author=João Pedro Bazzo;,citation_author=João Lucas Albuquerque Oliveira;,citation_author=João Pedro Parga;,citation_author=Marcus Saraiva;,citation_author=Luiz Pedro Silva;,citation_author=Lucas Warwar;,citation_author=Diego Bogado Tomasiello;,citation_publication_date=2022-06;,citation_issn=ISSN 1415-4765;,citation_volume=2772;,citation_journal_title=Texto para Discussão IPEA;">
+<meta name="citation_reference" content="citation_title=Estimativas de acessibilidade a empregos e serviços públicos via transporte ativo, público e privado nas 20 maiores cidades do Brasil em 2017, 2018, 2019;,citation_author=Rafael H. M. Pereira;,citation_author=Carlos Kauê Vieira Braga;,citation_author=Daniel Herszenhut;,citation_author=Marcus Saraiva;,citation_author=Diego Bogado Tomasiello;,citation_publication_date=2022;,citation_volume=2800;,citation_journal_title=Texto para Discussão IPEA;">
+<meta name="citation_reference" content="citation_title=Exploring the time geography of public transport networks with the Gtfs2gps package;,citation_author=Rafael H. M. Pereira;,citation_author=Pedro R. Andrade;,citation_author=João Pedro Bazzo Vieira;,citation_publication_date=2022-12;,citation_issn=1435-5949;,citation_journal_title=Journal of Geographical Systems;">
+<meta name="citation_reference" content="citation_title=An International Comparison of Equity in Accessibility to Jobs: London, São Paulo and the Randstad;,citation_author=John P. Pritchard;,citation_author=Diego Tomasiello;,citation_author=Mariana Giannotti;,citation_author=Karst Geurs;,citation_publication_date=2019-02;,citation_journal_title=Findings;">
+<meta name="citation_reference" content="citation_title=Transporte urbano e insuficiência de acesso a escolas no Brasil;,citation_author=Marcus Saraiva;,citation_author=Luiz Pedro Silva;,citation_author=Carlos Kauê Vieira Braga;,citation_author=Rafael Henrique Moraes Pereira;,citation_publication_date=2023;,citation_technical_report_institution=Instituto de Pesquisa Econômica Aplicada (Ipea);,citation_technical_report_number=2854;">
+<meta name="citation_reference" content="citation_title=Accessibility instruments in planning practice: Bridging the implementation gap;,citation_author=Cecília Silva;,citation_author=Luca Bertolini;,citation_author=Marco Brömmelstroet;,citation_author=Dimitris Milakis;,citation_author=Enrica Papa;,citation_publication_date=2017-01;,citation_issn=0967-070X;,citation_volume=53;,citation_journal_title=Transport Policy;">
+<meta name="citation_reference" content="citation_title=Transport Modes and Accessibility;,citation_author=Bert Wee;,citation_publication_date=2021-01;,citation_isbn=978-0-08-102672-4;,citation_journal_title=International Encyclopedia of Transportation;">
+<meta name="citation_reference" content="citation_title=Accessibility and equity: A conceptual framework and research agenda;,citation_author=Bert Wee;,citation_publication_date=2022-10;,citation_issn=09666923;,citation_volume=104;,citation_journal_title=Journal of Transport Geography;">
+<meta name="citation_reference" content="citation_title=Urban transport policies in Brazil: The creation of a discriminatory mobility system;,citation_author=Eduardo Alcantara Vasconcellos;,citation_publication_date=2018-02;,citation_issn=0966-6923;,citation_volume=67;,citation_journal_title=Journal of Transport Geography;">
+<meta name="citation_reference" content="citation_title=Assessing the potential of bus rapid transit-led network restructuring for enhancing affordable access to employment  The case of Johannesburg’s Corridors of Freedom;,citation_author=Christoffel Venter;,citation_publication_date=2016-11;,citation_issn=07398859;,citation_volume=59;,citation_journal_title=Research in Transportation Economics;">
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Introdução à acessibilidade urbana</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introdução à acessibilidade urbana</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/ipeaGIT/aop_curso" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+<li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
+            <i class="bi bi-bi-twitter pe-1"></i>
+          Twitter
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
+            <i class="bi bi-bi-facebook pe-1"></i>
+          Facebook
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
+            <i class="bi bi-bi-linkedin pe-1"></i>
+          LinkedIn
+          </a>
+        </li>
+    </ul>
+<a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link active">Apresentação</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./s1_intro.html" class="sidebar-item-text sidebar-link">SEÇÃO 1: Introdução à acessibilidade urbana</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1_conceito.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>  <span class="chapter-title">O que é acessibilidade?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2_indicadores.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>  <span class="chapter-title">Medidas de acessibilidade</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./s2_calculo.html" class="sidebar-item-text sidebar-link">SEÇÃO 2: Como calcular acessibilidade urbana</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3_calculando_acesso.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>  <span class="chapter-title">Calculando estimativas de acessibilidade em R</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./s3_dados_tp.html" class="sidebar-item-text sidebar-link">SEÇÃO 3: Dados de transporte público</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4_dados_gtfs.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>  <span class="chapter-title">Dados GTFS</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./5_gtfstools.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>  <span class="chapter-title">Manipulação e visualização de dados GTFS</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./s4_avaliacao_impacto.html" class="sidebar-item-text sidebar-link">SEÇÃO 4: Avaliação de impacto de projetos de transporte</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./6_cenarios_transporte.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>  <span class="chapter-title">Comparando a acessibilidade entre dois cenários de transporte</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./s5_dados_aop.html" class="sidebar-item-text sidebar-link">SEÇÃO 5: Dados do Projeto Acesso a Oportunidades</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./7_aopdata_populacao.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>  <span class="chapter-title">Dados de população e socioeconômicos</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8_aopdata_uso_solo.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>  <span class="chapter-title">Dados de distribuição espacial de oportunidades</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9_aopdata_acessibilidade.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>  <span class="chapter-title">Estimativas de acessibilidade</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">Referências bibliográficas</a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc"><h2 id="toc-title">Índice</h2>
+   
+  <ul>
+<li>
+<a href="#apresenta%C3%A7%C3%A3o" id="toc-apresentação" class="nav-link active" data-scroll-target="#apresentação">Apresentação</a>
+  <ul class="collapse">
+<li><a href="#organiza%C3%A7%C3%A3o-do-livro" id="toc-organização-do-livro" class="nav-link" data-scroll-target="#organização-do-livro">Organização do livro</a></li>
+  <li><a href="#reproduzindo-o-livro-localmente" id="toc-reproduzindo-o-livro-localmente" class="nav-link" data-scroll-target="#reproduzindo-o-livro-localmente">Reproduzindo o livro localmente</a></li>
+  <li><a href="#reproduzindo-o-livro-na-nuvem-com-um-binder" id="toc-reproduzindo-o-livro-na-nuvem-com-um-binder" class="nav-link" data-scroll-target="#reproduzindo-o-livro-na-nuvem-com-um-binder">Reproduzindo o livro na nuvem com um <em>binder</em></a></li>
+  <li><a href="#licen%C3%A7a-de-uso" id="toc-licença-de-uso" class="nav-link" data-scroll-target="#licença-de-uso">Licença de uso</a></li>
+  <li><a href="#como-citar-o-livro" id="toc-como-citar-o-livro" class="nav-link" data-scroll-target="#como-citar-o-livro">Como citar o livro</a></li>
+  <li><a href="#agradecimentos" id="toc-agradecimentos" class="nav-link" data-scroll-target="#agradecimentos">Agradecimentos</a></li>
+  </ul>
+</li>
+  </ul>
+<div class="toc-actions">
+<div><i class="bi bi-github"></i></div>
+<div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/index.qmd" class="toc-action">Editar essa página</a></p></div>
+</div></nav><a href="../index.en.html">Read in English</a>
+</div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block">Introdução à acessibilidade urbana</h1>
+<p class="subtitle lead">um guia prático em R</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Autores</div>
+  <div class="quarto-title-meta-heading">Afiliação</div>
+  
+    <div class="quarto-title-meta-contents">
+    <a href="https://www.urbandemographics.org/about/">Rafael H. M. Pereira</a> <a href="https://orcid.org/0000-0003-2125-7465" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Ipea - Instituto de Pesquisa Econômica Aplicada
+          </p>
+      </div>
+      <div class="quarto-title-meta-contents">
+    <a href="https://dhersz.netlify.app/">Daniel Herszenhut</a> <a href="https://orcid.org/0000-0001-8066-1105" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Ipea - Instituto de Pesquisa Econômica Aplicada
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Data de Publicação</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">26 de abril de 2023</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header><section id="apresentação" class="level1 unnumbered"><p><img src="images/cover.jpg" title="Introdução à acessibilidade urbana" class="quarto-cover-image img-fluid"></p>
+<h1 class="unnumbered">Apresentação</h1>
+<p>Acessibilidade é a facilidade com que as pessoas conseguem alcançar lugares e oportunidades como empregos, serviços de saúde e educação, atividades culturais, áreas verdes etc. As condições de acessibilidade em uma cidade ou bairro dependem da eficiência e conectividade da rede de transportes e da proximidade entre pessoas e atividades. O tema da acessibilidade tem recebido cada vez mais atenção de agências de transporte, instituições de financiamento, tomadores de decisão e pesquisadores da área de planejamento urbano e de transportes <span class="citation" data-cites="papa2015accessibility boisjoly2017how">(<a href="references.html#ref-papa2015accessibility" role="doc-biblioref">Papa et al. 2015</a>; <a href="references.html#ref-boisjoly2017how" role="doc-biblioref">Boisjoly e El-Geneidy 2017</a>)</span>. Com isso, existe um crescente número de artigos científicos <span class="citation" data-cites="miller2018accessibility vanwee2021transport">(<a href="references.html#ref-miller2018accessibility" role="doc-biblioref">Miller 2018</a>; <a href="references.html#ref-vanwee2021transport" role="doc-biblioref">van Wee 2021</a>)</span> e livros <span class="citation" data-cites="levine2019mobility levinson2020transport">(<a href="references.html#ref-levine2019mobility" role="doc-biblioref">Levine, Grengs, e Merlin 2019</a>; <a href="references.html#ref-levinson2020transport" role="doc-biblioref">Levinson e King 2020</a>)</span> que trazem rico material para discussão e aprofundamento sobre questões relacionadas à acessibilidade urbana. No entanto, atualmente não existem livros ou artigos que sirvam simultaneamente de material didático introdutório sobre o tema e de manual prático de metodologia para calcular e analisar dados de acessibilidade. A ausência desse tipo de material explica, ao menos em parte, por que diversas agências de transporte e analistas ainda enfrentam desafios para incorporar questões e indicadores de acessibilidade no dia a dia do planejamento e da pesquisa <span class="citation" data-cites="silva2017accessibility buttner2021accessibility">(<a href="references.html#ref-silva2017accessibility" role="doc-biblioref">Silva et al. 2017</a>; <a href="references.html#ref-buttner2021accessibility" role="doc-biblioref">Büttner 2021</a>)</span>.</p>
+<p>O objetivo deste livro é equipar seus leitores com os conceitos fundamentais e as ferramentas de análise e processamento de dados necessários para realizar análises de acessibilidade urbana e conduzir avaliações de impacto de projetos e políticas de transporte. O livro foi escrito pensando nas necessidades de trabalho de gestores públicos, analistas, alunos e pesquisadores de planejamento e transporte urbano, e, por isso, possui caráter prático. Todo o material do livro é apresentado com exemplos reproduzíveis e dados abertos, utilizando para isso a linguagem de programação <a href="https://www.r-project.org/">R</a>.</p>
+<div class="callout-important callout callout-style-simple">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Este livro pressupõe que o leitor tenha um conhecimento básico de R. Caso queira se familiarizar com essa linguagem de programação, recomendamos os livros a seguir:</p>
+<ul>
+<li><a href="https://livro.curso-r.com/">Ciência de Dados em R</a></li>
+<li>
+<a href="https://r4ds.had.co.nz/">R for Data Science</a> (em inglês)</li>
+<li>
+<a href="https://geocompr.robinlovelace.net/">Geocomputation with R</a> (em inglês)</li>
+</ul>
+</div>
+</div>
+</div>
+<section id="organização-do-livro" class="level2"><h2 class="anchored" data-anchor-id="organização-do-livro">Organização do livro</h2>
+<p>Este livro está dividido em 5 seções, descritas a seguir.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead><tr class="header">
+<th style="text-align: center;">Seção</th>
+<th style="text-align: left;">Descrição</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><a href="./s1_intro.html">1: Introdução à acessibilidade urbana</a></td>
+<td style="text-align: left;">Apresenta o conceito de acessibilidade urbana, esclarece as diferenças entre acessibilidade e mobilidade e apresenta os principais indicadores usados para medir a acessibilidade urbana.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><a href="./s2_calculo.html">2: Como calcular acessibilidade urbana</a></td>
+<td style="text-align: left;">Ensina como calcular estimativas de acessibilidade urbana em R usando os pacotes <code>{r5r}</code> e <code>{accessibility}</code> a partir de dados públicos abertos e como visualizar os resultados com mapas e gráficos.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><a href="./s3_dados_tp.html">3: Dados de transporte público</a></td>
+<td style="text-align: left;">Apresenta o que é a especificação GTFS de dados de transporte público e mostra como trabalhar e analisar dados de GTFS usando o pacote <code>{gtfstools}</code>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><a href="./s4_avaliacao_impacto.html">4: Avaliação de impacto de projetos de transporte</a></td>
+<td style="text-align: left;">Traz um estudo de caso para mostrar como o conhecimento dos capítulos anteriores pode ser utilizado para avaliar o impacto de políticas públicas sobre as condições de acessibilidade urbana.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><a href="./s5_dados_aop.html">5: Dados do Projeto Acesso a Oportunidades</a></td>
+<td style="text-align: left;">Mostra como baixar e visualizar os dados produzidos pelo projeto Acesso a Oportunidades, que incluem dados detalhados sobre padrões de uso do solo e acessibilidade nas vinte maiores cidades brasileiras.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section><section id="reproduzindo-o-livro-localmente" class="level2"><h2 class="anchored" data-anchor-id="reproduzindo-o-livro-localmente">Reproduzindo o livro localmente</h2>
+<p>Este livro foi escrito e publicado com o sistema de publicação <a href="https://quarto.org">Quarto</a>. Todo o código utilizado em seu preparo e na sua publicação pode ser encontrado <a href="https://github.com/ipeaGIT/intro_access_book">neste repositório</a>. Para reproduzir o livro localmente, você deve primeiro baixar o seu código-fonte. Isso pode ser feito com o <em>software</em> <a href="https://git-scm.com/">git</a> ou manualmente<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Caso o segundo método seja utilizado, é necessário também extrair o conteúdo do arquivo <code>.zip</code> baixado para uma nova pasta.</p>
+<p>A renderização do livro requer que o programa <a href="https://quarto.org/">Quarto</a> esteja instalado. A reprodução dos seus capítulos, por sua vez, requer o uso do pacote de R <a href="https://rstudio.github.io/renv/index.html"><code>{renv}</code></a>, que faz a gestão de dependências do livro.</p>
+<p>Depois de instaladas as dependências do livro, seu código-fonte poderá ser executado normalmente. Os capítulos estão ordenados numericamente em arquivos no formato <code>.qmd</code>. Para rodar todos os capítulos de uma vez, utilize um dos seguintes comandos:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>quarto<span class="sc">::</span><span class="fu">quarto_preview</span>()</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>quarto<span class="sc">::</span><span class="fu">quarto_render</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Para mais detalhes de como instalar as dependências do livro e rodar seu conteúdo localmente, veja as instruções completas de instalação no <a href="https://github.com/ipeaGIT/intro_access_book">repositório do livro</a>.</p>
+</section><section id="reproduzindo-o-livro-na-nuvem-com-um-binder" class="level2"><h2 class="anchored" data-anchor-id="reproduzindo-o-livro-na-nuvem-com-um-binder">Reproduzindo o livro na nuvem com um <em>binder</em>
+</h2>
+<p>Um <em>binder</em> é uma ferramenta que permite rodar códigos na nuvem em um navegador, como o Chrome e o Firefox. O código do livro pode ser rodado usando um servidor publicado pelo <a href="https://mybinder.org/">mybinder</a>. Para isso, acesse <a href="https://mybinder.org/v2/gh/ipeaGIT/intro_access_book/HEAD?urlpath=rstudio">esse <em>link</em></a>. Uma sessão do RStudio Cloud, que inclui todos os arquivos e dados necessários para rodar o código do livro, começará a rodar no seu navegador.</p>
+<p>Note que as sessões do mybinder estão limitadas a 2 GB de memória RAM. Essa restrição pode impedir que capítulos de processamento um pouco mais pesado, em particular o Capítulo 6, sejam executados adequadamente. Em caso de uso do <em>binder</em>, sugerimos que não tente renderizar o livro todo com o Quarto, como mostrado anteriormente.</p>
+</section><section id="licença-de-uso" class="level2"><h2 class="anchored" data-anchor-id="licença-de-uso">Licença de uso</h2>
+<p><img align="right" src="images/ipea_logo.png" width="240"> É permitida a reprodução e a exibição para uso educacional ou informativo, desde que respeitado o crédito ao autor original e citada a fonte. Permitida a inclusão da obra em Repositórios ou Portais de Acesso Aberto, desde que fique claro para os usuários os termos de uso da obra e quem é o detentor dos direitos autorais, o Instituto de Pesquisa Econômica Aplicada (Ipea). Proibido o uso comercial ou com finalidades lucrativas em qualquer hipótese. Proibida a criação de obras derivadas. Para imagens estáticas e em movimento (vídeos e audiovisuais), ATENÇÃO: os direitos de imagem foram cedidos apenas para a obra original, formato de distribuição e repositório. Esta licença está baseada em estudos sobre a Lei Brasileira de Direitos Autorais (Lei 9.610/1998).</p>
+</section><section id="como-citar-o-livro" class="level2"><h2 class="anchored" data-anchor-id="como-citar-o-livro">Como citar o livro</h2>
+<p>Caso use o material deste livro, pedimos por gentileza que cite o livro utilizando a seguinte referência:</p>
+<ul>
+<li>Pereira, Rafael H. M. &amp; Herszenhut, Daniel. (2023) Introdução à acessibilidade urbana: um guia prático em R. Ipea - Instituto de Pesquisa Econômica Aplicada.</li>
+</ul></section><section id="agradecimentos" class="level2"><h2 class="anchored" data-anchor-id="agradecimentos">Agradecimentos</h2>
+<p>Este livro foi elaborado pelo Instituto de Pesquisa Econômica Aplicada (Ipea) no âmbito da parceria entre Ipea e a Secretaria de Mobilidade e Desenvolvimento Regional e Urbano (SMDRU) do Ministério do Desenvolvimento Regional (MDR). Os autores agradecem aos comentários e sugestões de Lucas Mation.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-boisjoly2017how" class="csl-entry" role="doc-biblioentry">
+Boisjoly, Geneviève, e Ahmed M. El-Geneidy. 2017. <span>«How to Get There? <span>A</span> Critical Assessment of Accessibility Objectives and Indicators in Metropolitan Transportation Plans»</span>. <em>Transport Policy</em> 55 (abril): 38–50. <a href="https://doi.org/10.1016/j.tranpol.2016.12.011">https://doi.org/10.1016/j.tranpol.2016.12.011</a>.
+</div>
+<div id="ref-buttner2021accessibility" class="csl-entry" role="doc-biblioentry">
+Büttner, Benjamin. 2021. <span>«Accessibility <span>Tools</span> for <span>Transport Policy</span> and <span>Planning</span>»</span>. Em <em>International <span>Encyclopedia</span> of <span>Transportation</span></em>, editado por Roger Vickerman, 83–86. <span>Oxford</span>: <span>Elsevier</span>. <a href="https://doi.org/10.1016/B978-0-08-102671-7.10618-9">https://doi.org/10.1016/B978-0-08-102671-7.10618-9</a>.
+</div>
+<div id="ref-levine2019mobility" class="csl-entry" role="doc-biblioentry">
+Levine, Jonathan, Joe Grengs, e Louis A. Merlin. 2019. <em>From Mobility to Accessibility: <span>Transforming</span> Urban Transportation and Land-Use Planning</em>. <span>Cornell University Press</span>.
+</div>
+<div id="ref-levinson2020transport" class="csl-entry" role="doc-biblioentry">
+Levinson, David, e David King. 2020. <em>Transport Access Manual: <span>A</span> Guide for Measuring Connection between People and Places</em>. <span>Committee of the Transport Access Manual, University of Sydney</span>.
+</div>
+<div id="ref-miller2018accessibility" class="csl-entry" role="doc-biblioentry">
+Miller, Eric J. 2018. <span>«Accessibility: Measurement and Application in Transportation Planning»</span>. <em>Transport Reviews</em> 38 (5): 551–55. <a href="https://doi.org/10.1080/01441647.2018.1492778">https://doi.org/10.1080/01441647.2018.1492778</a>.
+</div>
+<div id="ref-papa2015accessibility" class="csl-entry" role="doc-biblioentry">
+Papa, Enrica, Cecilia Silva, Marco Te Brömmelstroet, e Angela Hull. 2015. <span>«Accessibility Instruments for Planning Practice: A Review of <span>European</span> Experiences»</span>. <em>Journal of Transport and Land Use</em>, junho. <a href="https://doi.org/10.5198/jtlu.2015.585">https://doi.org/10.5198/jtlu.2015.585</a>.
+</div>
+<div id="ref-silva2017accessibility" class="csl-entry" role="doc-biblioentry">
+Silva, Cecília, Luca Bertolini, Marco te Brömmelstroet, Dimitris Milakis, e Enrica Papa. 2017. <span>«Accessibility Instruments in Planning Practice: <span>Bridging</span> the Implementation Gap»</span>. <em>Transport Policy</em> 53 (janeiro): 135–45. <a href="https://doi.org/10.1016/j.tranpol.2016.09.006">https://doi.org/10.1016/j.tranpol.2016.09.006</a>.
+</div>
+<div id="ref-vanwee2021transport" class="csl-entry" role="doc-biblioentry">
+van Wee, Bert. 2021. <span>«Transport <span>Modes</span> and <span>Accessibility</span>»</span>. Em <em>International <span>Encyclopedia</span> of <span>Transportation</span></em>, editado por Roger Vickerman, 32–37. <span>Oxford</span>: <span>Elsevier</span>. <a href="https://doi.org/10.1016/B978-0-08-102671-7.10402-6">https://doi.org/10.1016/B978-0-08-102671-7.10402-6</a>.
+</div>
+</div>
+</section></section><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1" role="doc-endnote"><p>Para baixar o código-fonte manualmente, use o <em>link</em> a seguir: <a href="https://github.com/ipeaGIT/intro_access_book/archive/refs/heads/main.zip" class="uri">https://github.com/ipeaGIT/intro_access_book/archive/refs/heads/main.zip</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiada");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./s1_intro.html" class="pagination-link">
+        <span class="nav-page-text">SEÇÃO 1: Introdução à acessibilidade urbana</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">Copyright 2023, Ipea - Instituto de Pesquisa Econômica Aplicada</div>   
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+<li class="nav-item compact">
+    <a class="nav-link active" href="https://github.com/ipeaGIT/aop_curso" aria-current="page">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+</div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Introduction to urban accessibility - 3  Calculating accessibility estimates in R</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
+<link href="./s3_dados_tp.en.html" rel="next">
+<link href="./s2_calculo.en.html" rel="prev">
+<link href="./images/favicon.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script><script src="site_libs/quarto-html/popper.min.js"></script><script src="site_libs/quarto-html/tippy.umd.min.js"></script><script src="site_libs/quarto-html/anchor.min.js"></script><link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script><link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YVERJQF9PJ"></script><script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
+</script><meta property="og:title" content="Introduction to urban accessibility - 3  Calculating accessibility estimates in R">
+<meta property="og:description" content="The first step to estimate the accessibility levels in a study area is to calculate the travel cost matrix between the various origins and destinations that make up this area.">
+<meta property="og:site-name" content="Introduction to urban accessibility">
+<meta name="twitter:title" content="Introduction to urban accessibility - 3  Calculating accessibility estimates in R">
+<meta name="twitter:description" content="The first step to estimate the accessibility levels in a study area is to calculate the travel cost matrix between the various origins and destinations that make up this area.">
+<meta name="twitter:card" content="summary">
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">
+<span class="chapter-number">3</span>  <span class="chapter-title">Calculating accessibility estimates in R</span>
+</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction to urban accessibility</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://github.com/ipeaGIT/aop_curso" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+    <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
+    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+<li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
+            <i class="bi bi-bi-twitter pe-1"></i>
+          Twitter
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
+            <i class="bi bi-bi-facebook pe-1"></i>
+          Facebook
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
+            <i class="bi bi-bi-linkedin pe-1"></i>
+          LinkedIn
+          </a>
+        </li>
+    </ul>
+<a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.en.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./s1_intro.en.html" class="sidebar-item-text sidebar-link">SECTION 1: Introduction to urban accessibility</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1_conceito.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>  <span class="chapter-title">What is accessibility?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2_indicadores.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>  <span class="chapter-title">Accessibility measures</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./s2_calculo.en.html" class="sidebar-item-text sidebar-link">SECTION 2: How to measure urban accessibility</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3_calculando_acesso.en.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>  <span class="chapter-title">Calculating accessibility estimates in R</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./s3_dados_tp.en.html" class="sidebar-item-text sidebar-link">SECTION 3: Public transport data</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4_dados_gtfs.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>  <span class="chapter-title">GTFS data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./5_gtfstools.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>  <span class="chapter-title">GTFS data manipulation and visualization</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./s4_avaliacao_impacto.en.html" class="sidebar-item-text sidebar-link">SECTION 4: Impact assessment of transportation projects</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./6_cenarios_transporte.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>  <span class="chapter-title">Comparing accessibility between two transport scenarios</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./s5_dados_aop.en.html" class="sidebar-item-text sidebar-link">SECTION 5: Data from the Access to Opportunity Project</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./7_aopdata_populacao.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>  <span class="chapter-title">Population and socioeconomic data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./8_aopdata_uso_solo.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>  <span class="chapter-title">Data on the spatial distribution of opportunities</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./9_aopdata_acessibilidade.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>  <span class="chapter-title">Accessibility estimates</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.en.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li>
+<a href="#calculating-a-travel-time-matrix" id="toc-calculating-a-travel-time-matrix" class="nav-link active" data-scroll-target="#calculating-a-travel-time-matrix"> <span class="header-section-number">3.1</span> Calculating a travel time matrix</a>
+  <ul class="collapse">
+<li><a href="#installing-r5r" id="toc-installing-r5r" class="nav-link" data-scroll-target="#installing-r5r"> <span class="header-section-number">3.1.1</span> Installing <code>{r5r}</code></a></li>
+  <li><a href="#required-data" id="toc-required-data" class="nav-link" data-scroll-target="#required-data"> <span class="header-section-number">3.1.2</span> Required data</a></li>
+  <li><a href="#computing-the-travel-time-matrix" id="toc-computing-the-travel-time-matrix" class="nav-link" data-scroll-target="#computing-the-travel-time-matrix"> <span class="header-section-number">3.1.3</span> Computing the travel time matrix</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#calculating-accessibility" id="toc-calculating-accessibility" class="nav-link" data-scroll-target="#calculating-accessibility"> <span class="header-section-number">3.2</span> Calculating accessibility</a>
+  <ul class="collapse">
+<li><a href="#cumulative-opportunities-measure" id="toc-cumulative-opportunities-measure" class="nav-link" data-scroll-target="#cumulative-opportunities-measure"> <span class="header-section-number">3.2.1</span> Cumulative opportunities measure</a></li>
+  <li><a href="#minimum-travel-cost" id="toc-minimum-travel-cost" class="nav-link" data-scroll-target="#minimum-travel-cost"> <span class="header-section-number">3.2.2</span> Minimum travel cost</a></li>
+  <li><a href="#gravity-measures" id="toc-gravity-measures" class="nav-link" data-scroll-target="#gravity-measures"> <span class="header-section-number">3.2.3</span> Gravity measures</a></li>
+  <li><a href="#competitive-measures" id="toc-competitive-measures" class="nav-link" data-scroll-target="#competitive-measures"> <span class="header-section-number">3.2.4</span> Competitive measures</a></li>
+  <li><a href="#calculating-accessibility-with-r5r" id="toc-calculating-accessibility-with-r5r" class="nav-link" data-scroll-target="#calculating-accessibility-with-r5r"> <span class="header-section-number">3.2.5</span> Calculating accessibility with <code>{r5r}</code></a></li>
+  </ul>
+</li>
+  <li><a href="#accessibility-analyses" id="toc-accessibility-analyses" class="nav-link" data-scroll-target="#accessibility-analyses"> <span class="header-section-number">3.3</span> Accessibility analyses</a></li>
+  </ul>
+<div class="toc-actions">
+<div><i class="bi bi-github"></i></div>
+<div class="action-links"><p><a href="https://github.com/ipeaGIT/aop_curso/edit/main/3_calculando_acesso.en.qmd" class="toc-action">Edit this page</a></p></div>
+</div></nav><a href="pt/3_calculando_acesso.html">Leia em português</a>
+</div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title d-none d-lg-block">
+<span class="chapter-number">3</span>  <span class="chapter-title">Calculating accessibility estimates in R</span>
+</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header><section id="calculating-a-travel-time-matrix" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="calculating-a-travel-time-matrix">
+<span class="header-section-number">3.1</span> Calculating a travel time matrix</h2>
+<p>The first step to estimate the accessibility levels in a study area is to calculate the travel cost matrix between the various origins and destinations that make up this area. As previously mentioned, this cost is generally represented by the travel time between two points in the scientific literature and in transport planning practice <span class="citation" data-cites="el-geneidy2016cost venter2016assessing">(<a href="references.en.html#ref-el-geneidy2016cost" role="doc-biblioref">El-Geneidy et al. 2016</a>; <a href="references.en.html#ref-venter2016assessing" role="doc-biblioref">Venter 2016</a>)</span>, although recent studies have also considered other factors, such as trip monetary costs and the comfort of a trip between origins and destinations <span class="citation" data-cites="arbex2020estimating herszenhut2022impact">(<a href="references.en.html#ref-arbex2020estimating" role="doc-biblioref">Arbex and Cunha 2020</a>; <a href="references.en.html#ref-herszenhut2022impact" role="doc-biblioref">Herszenhut et al. 2022</a>)</span>. In this book, we will focus on travel time matrices as they are the most widely used in the literature and in practice, and we will cover other types of costs in a future book on advanced accessibility analysis in R.</p>
+<p>Currently, the easiest and fastest way to generate a travel time matrix in R is using the <code>{r5r}</code> package <span class="citation" data-cites="pereira2021r5r">(<a href="references.en.html#ref-pereira2021r5r" role="doc-biblioref">Pereira et al. 2021</a>)</span>, developed by the Access to Opportunities Project team. The package provides a simple and friendly interface to the R5 multimodal transport routing engine, developed by Conveyal<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<section id="installing-r5r" class="level3" data-number="3.1.1"><h3 data-number="3.1.1" class="anchored" data-anchor-id="installing-r5r">
+<span class="header-section-number">3.1.1</span> Installing <code>{r5r}</code>
+</h3>
+<p>Installing <code>{r5r}</code> works the same as installing any other R package (all code snippets from this point onward must be run in an R session).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"r5r"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In addition to R, <code>{r5r}</code> also requires installing Java 11<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Use the command below to check the version of Java installed in your computer.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(processx<span class="sc">::</span><span class="fu">run</span>(<span class="st">"java"</span>, <span class="at">args =</span> <span class="st">"-version"</span>)<span class="sc">$</span>stderr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>openjdk version "11.0.18" 2023-01-17
+OpenJDK Runtime Environment (build 11.0.18+10-post-Ubuntu-0ubuntu120.04.1)
+OpenJDK 64-Bit Server VM (build 11.0.18+10-post-Ubuntu-0ubuntu120.04.1, mixed mode, sharing)</code></pre>
+</div>
+</div>
+<p>As we can see, the version installed in the book is compatible with <code>{r5r}</code>. If the version installed in your machine is not compatible (i.e. if running the code above results in an output mentioning version 12 or 1.8.0, for example), please install Java 11.</p>
+</section><section id="required-data" class="level3" data-number="3.1.2"><h3 data-number="3.1.2" class="anchored" data-anchor-id="required-data">
+<span class="header-section-number">3.1.2</span> Required data</h3>
+<p>Using <code>{r5r}</code> requires different types of data. The list below describes the required and optional data sets and indicates where you could obtain these data:</p>
+<ul>
+<li>
+<strong>Street network</strong> (required): a file in <code>.pbf</code> format containing the street network and pedestrian infrastructure as described by OpenStreetMap. It can be downloaded using:
+<ul>
+<li>
+<a href="https://docs.ropensci.org/osmextract/">osmextract</a>, R package;</li>
+<li>
+<a href="https://download.geofabrik.de/">Geofabrik</a>, website;</li>
+<li>
+<a href="https://export.hotosm.org/">HOT Export Tool</a>, website;</li>
+<li>
+<a href="https://extract.bbbike.org/">BBBike Extract Service</a>, website.</li>
+</ul>
+</li>
+</ul>
+<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+OpenStreetMap data quality
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>OpenStreetMap (OSM) is a geographic database that provides information about street networks, buildings, parks, etc. OSM is maintained by a community of volunteers, so the coverage and quality of its data can widely vary between regions <span class="citation" data-cites="barrington-leigh2017world">(<a href="references.en.html#ref-barrington-leigh2017world" role="doc-biblioref">Barrington-Leigh and Millard-Ball 2017</a>)</span>. OSM data tend to have better coverage and quality in more developed regions and in urban areas with large populations <span class="citation" data-cites="barrington-leigh2017world camboim2015investigation">(<a href="references.en.html#ref-barrington-leigh2017world" role="doc-biblioref">Barrington-Leigh and Millard-Ball 2017</a>; <a href="references.en.html#ref-camboim2015investigation" role="doc-biblioref">Camboim, Bravo, and Sluter 2015</a>)</span>.</p>
+</div>
+</div>
+<ul>
+<li>
+<strong>Public transport network</strong> (optional): one or more GTFS files describing the public transport network of the study area. If absent, public transport trips are not considered in the travel time matrix. This type of data can be downloaded using:
+<ul>
+<li>
+<a href="https://r-transit.github.io/tidytransit/"><code>{tidytransit}</code></a>, R package;</li>
+<li>
+<a href="https://www.transit.land/">Transitland</a>, website;</li>
+<li>In <a href="./4_dados_gtfs.en.html">Chapter 4</a> (<a href="4_dados_gtfs.en.html#tbl-gtfs_brazil">Table <span>4.9</span></a>) we also show where to download the GTFS files of Brazilian cities that share their data publicly.</li>
+</ul>
+</li>
+<li>
+<strong>Topography</strong> (optional): a raster file containing the Digital Elevation Model data of the study area in <code>.tif</code>/<code>.tiff</code> format. This data set is required if you wish to consider the effects of topography on walking and cycling travel times. It can be downloaded using:
+<ul>
+<li>
+<a href="https://github.com/jhollist/elevatr">elevatr</a>, R package;</li>
+<li>Nasa’s <a href="https://lpdaac.usgs.gov/products/srtmgl1v003/">SRTMGL1</a>, website.</li>
+</ul>
+</li>
+</ul>
+<p>These data sets should be saved in a single directory, which should preferably not contain any other files. As we will see below, <code>{r5r}</code> combines all the data saved in this directory to create a multimodal transport network that is used for routing trips between origin-destination pairs and, consequently, for calculating travel time matrices. Please note that you can have more than one GTFS file in the same directory, in which case <code>{r5r}</code> considers the public transport networks of all feeds together. The street network and the topography of the study area, however, must be each one described by a single file. Assuming that R scripts are saved in a directory called <code>R</code>, a possible file structure is shown below:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>/tmp/RtmpGtdk2w/accessibility_project
+├── R
+│   ├── script1.R
+│   └── script2.R
+└── r5
+    ├── public_transport_network.zip
+    ├── street_network.osm.pbf
+    └── topography.tif</code></pre>
+</div>
+</div>
+<p>To illustrate the features of <code>{r5r}</code>, we will use a small data sample from the city of Porto Alegre, Brazil. These data are available within <code>{r5r}</code> itself, and its path can be accessed with the following command:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data_path <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/poa"</span>, <span class="at">package =</span> <span class="st">"r5r"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>data_path</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "/home/dhersz/Documents/repos/intro_access_book/renv/library/R-4.3/x86_64-pc-linux-gnu/r5r/extdata/poa"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fs<span class="sc">::</span><span class="fu">dir_tree</span>(data_path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>/home/dhersz/Documents/repos/intro_access_book/renv/library/R-4.3/x86_64-pc-linux-gnu/r5r/extdata/poa
+├── poa_elevation.tif
+├── poa_eptc.zip
+├── poa_hexgrid.csv
+├── poa_osm.pbf
+├── poa_points_of_interest.csv
+└── poa_trensurb.zip</code></pre>
+</div>
+</div>
+<p>This directory contains four files that we will use throughout this chapter: - An OpenStreetMap’s street network: <code>poa_osm.pbf</code>; - A GTFS feed describing some of the city’s bus routes: <code>poa_eptc.zip</code>; - A GTFS feed describing some of the city’s train route: <code>poa_trensurb.zip</code>; - The digital elevation model of the city: <code>poa_elevation.tif</code>; - The <code>poa_hexgrid.csv</code> file, containing the geographic coordinates of the centroids of a regular hexagonal grid covering the entire study area and information about the number of residents, jobs, health care facilities and schools in each grid cell. These points will be used as the origins and destinations when calculating the travel time matrix.</p>
+</section><section id="computing-the-travel-time-matrix" class="level3" data-number="3.1.3"><h3 data-number="3.1.3" class="anchored" data-anchor-id="computing-the-travel-time-matrix">
+<span class="header-section-number">3.1.3</span> Computing the travel time matrix</h3>
+<p>Before calculating the travel time matrix, we need to increase the memory available to run Java processes, used by the underlying R5 routing engine. This is necessary because R allocates only 512 MB of memory to Java processes by default, which is often not enough to calculate large matrices with <code>{r5r}</code>. To increase the available memory to 2 GB, for example, we use the following command at the beginning of the script, even before loading the R packages that will be used in our analysis:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">java.parameters =</span> <span class="st">"-Xmx2G"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can then proceed with the travel time matrix calculation, which we carry out in two steps. First, we need to generate a multimodal transport network that will be used to route trips between origin-destination pairs. To do this, we load <code>{r5r}</code> and use the <code>setup_r5()</code> function, which downloads the R5 routing engine and uses it to build the network. This function receives the path to the directory where the input data is saved. The function saves to this directory some files describing the routing network, and it outputs a connection to R5, which we named <code>r5r_core</code> in this example. This connection is responsible for linking the function calls with the transport network and is used to calculate the travel time matrix.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(r5r)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>r5r_core <span class="ot">&lt;-</span> <span class="fu">setup_r5</span>(data_path, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>fs<span class="sc">::</span><span class="fu">dir_tree</span>(data_path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/home/dhersz/Documents/repos/intro_access_book/renv/library/R-4.3/x86_64-pc-linux-gnu/r5r/extdata/poa
+├── fares
+│   └── fares_poa.zip
+├── network.dat
+├── network_settings.json
+├── poa_elevation.tif
+├── poa_eptc.zip
+├── poa_hexgrid.csv
+├── poa_osm.pbf
+├── poa_osm.pbf.mapdb
+├── poa_osm.pbf.mapdb.p
+├── poa_points_of_interest.csv
+└── poa_trensurb.zip</code></pre>
+</div>
+</div>
+<p>The second and final step is to actually calculate the travel time matrix with the <code>travel_time_matrix()</code> function. As basic inputs, the function receives the connection with R5 created above, origin and destination points as <code>data.frame</code>s with columns <code>id</code>, <code>lon</code> and <code>lat</code>, the mode of transport considered, the departure time, the maximum walking time allowed when accessing public transport stations from the origin and when egressing from the last stop to the destination, and the maximum travel time allowed for trips. The function also accepts several other inputs, such as the walking speed and the maximum number of public transport legs allowed, among others. For more information on each parameter, please refer to the function documentation in an R session (with the commands <code>?travel_time_matrix</code> or <code>help("travel_time_matrix”)</code>) or on <code>{r5r}</code> <a href="https://ipeagit.github.io/r5r/reference/travel_time_matrix.html">website</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read data.frame with grid centroids</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>points <span class="ot">&lt;-</span> data.table<span class="sc">::</span><span class="fu">fread</span>(<span class="fu">file.path</span>(data_path, <span class="st">"poa_hexgrid.csv"</span>))</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>ttm <span class="ot">&lt;-</span> <span class="fu">travel_time_matrix</span>(</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  r5r_core,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">origins =</span> points,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">destinations =</span> points,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">mode =</span> <span class="fu">c</span>(<span class="st">"WALK"</span>, <span class="st">"TRANSIT"</span>),</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">departure_datetime =</span> <span class="fu">as.POSIXct</span>(</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"13-05-2019 14:00:00"</span>,</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">format =</span> <span class="st">"%d-%m-%Y %H:%M:%S"</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_walk_time =</span> <span class="dv">30</span>,</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_trip_duration =</span> <span class="dv">120</span>,</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">progress =</span> <span class="cn">FALSE</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ttm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           from_id           to_id travel_time_p50
+1: 89a901291abffff 89a901291abffff               1
+2: 89a901291abffff 89a9012a3cfffff              71
+3: 89a901291abffff 89a901295b7ffff              41
+4: 89a901291abffff 89a901284a3ffff              57
+5: 89a901291abffff 89a9012809bffff              43
+6: 89a901291abffff 89a901285cfffff              35</code></pre>
+</div>
+</div>
+<p>In practice, <code>travel_time_matrix()</code> finds the fastest route from each origin to all possible destinations taking into account the transport mode, the departure time and the other inputs set by the user. For this, <code>{r5r}</code> considers door-to-door travel times: in the case of a trip by public transport, for example, the total travel time includes a) the walking time from the origin to the public transport stop; (b) the waiting time at the stop; c) the in-vehicle time; and d) the walking time from the last public transport stop to the destination. When more than one public transport route is used, <code>{r5r}</code> also considers the time spent on transfers, which consist of walking between stops and waiting for the next vehicle.</p>
+<div class="callout-note callout callout-style-simple">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>The <code>travel_time_matrix()</code> function uses an extension of the RAPTOR routing algorithm <span class="citation" data-cites="conway2017evidencebased">(<a href="references.en.html#ref-conway2017evidencebased" role="doc-biblioref">Conway, Byrd, and van der Linden 2017</a>)</span>, making R5 extremely fast. Depending on the number of origin-destination pairs, <code>{r5r}</code> can calculate travel time matrices between 6 and 200 times faster than other multimodal routing softwares <span class="citation" data-cites="higgins2022calculating">(<a href="references.en.html#ref-higgins2022calculating" role="doc-biblioref">Higgins et al. 2022</a>)</span>.</p>
+</div>
+</div>
+</div>
+</section></section><section id="calculating-accessibility" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="calculating-accessibility">
+<span class="header-section-number">3.2</span> Calculating accessibility</h2>
+<p>Having calculated the travel time matrix between the origins and destinations, we need to use this travel matrix to calculate accessibility levels in the study area. For this, we will use the <code>{accessibility}</code><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> package, also developed by the Access to Opportunities Project team, which provides several functions to calculate many accessibility measures. As basic inputs, all functions require a pre-calculated cost matrix (in our case, the travel time matrix calculated in the previous section) and some land use data, such as the number of opportunities in each cell that covers the study area.</p>
+<section id="cumulative-opportunities-measure" class="level3" data-number="3.2.1"><h3 data-number="3.2.1" class="anchored" data-anchor-id="cumulative-opportunities-measure">
+<span class="header-section-number">3.2.1</span> Cumulative opportunities measure</h3>
+<p>The <code>cumulative_cutoff()</code> function is used to calculate cumulative opportunity accessibility metrics, and it indicates the number of opportunities that can be reached within a given travel cost limit. In the example below, we first load the <code>{accessibility}</code> package and then calculate the number of schools that can be reached in 30 minutes from each origin.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(accessibility)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># rename column to use package {accessibility}</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">setnames</span>(ttm, <span class="st">"travel_time_p50"</span>, <span class="st">"travel_time"</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>cum_opportunities <span class="ot">&lt;-</span> <span class="fu">cumulative_cutoff</span>(</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  ttm,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">land_use_data =</span> points,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">opportunity =</span> <span class="st">"schools"</span>,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">travel_cost =</span> <span class="st">"travel_time"</span>,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">cutoff =</span> <span class="dv">30</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cum_opportunities)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                id schools
+1: 89a901291abffff      23
+2: 89a9012a3cfffff       0
+3: 89a901295b7ffff      18
+4: 89a901284a3ffff       4
+5: 89a9012809bffff      20
+6: 89a901285cfffff      84</code></pre>
+</div>
+</div>
+</section><section id="minimum-travel-cost" class="level3" data-number="3.2.2"><h3 data-number="3.2.2" class="anchored" data-anchor-id="minimum-travel-cost">
+<span class="header-section-number">3.2.2</span> Minimum travel cost</h3>
+<p>The <code>cost_to_closest()</code> function, on the other hand, calculates the minimum travel cost required to reach a certain number of opportunities. With the code below, for example, we calculate the minimum travel time to reach the nearest hospital from each origin.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>min_time <span class="ot">&lt;-</span> <span class="fu">cost_to_closest</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  ttm,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">land_use_data =</span> points,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">opportunity =</span> <span class="st">"healthcare"</span>,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">travel_cost =</span> <span class="st">"travel_time"</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(min_time)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                id travel_time
+1: 89a9012124fffff         Inf
+2: 89a9012126bffff          19
+3: 89a9012127bffff          16
+4: 89a90128003ffff          14
+5: 89a90128007ffff          11
+6: 89a9012800bffff          13</code></pre>
+</div>
+</div>
+</section><section id="gravity-measures" class="level3" data-number="3.2.3"><h3 data-number="3.2.3" class="anchored" data-anchor-id="gravity-measures">
+<span class="header-section-number">3.2.3</span> Gravity measures</h3>
+<p>The <code>gravity()</code> function calculates gravity measures of accessibility - those in which the weight of each opportunity gradually decreases with the increase of travel cost. As many different decay functions can be used to calculate gravity measures, such as negative exponential, inverse power, etc, this function receives an additional input: the decay function that should be considered. The example below calculates accessibility to schools using a negative exponential gravity measure with a decay parameter of 0.2.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>negative_exp_grav <span class="ot">&lt;-</span> <span class="fu">gravity</span>(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  ttm,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">land_use_data =</span> points,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">opportunity =</span> <span class="st">"schools"</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">travel_cost =</span> <span class="st">"travel_time"</span>,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">decay_function =</span> <span class="fu">decay_exponential</span>(<span class="fl">0.2</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(negative_exp_grav)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                id     schools
+1: 89a901291abffff 0.428108826
+2: 89a9012a3cfffff 0.003987477
+3: 89a901295b7ffff 0.606786304
+4: 89a901284a3ffff 0.079661746
+5: 89a9012809bffff 0.494632773
+6: 89a901285cfffff 1.987657134</code></pre>
+</div>
+</div>
+</section><section id="competitive-measures" class="level3" data-number="3.2.4"><h3 data-number="3.2.4" class="anchored" data-anchor-id="competitive-measures">
+<span class="header-section-number">3.2.4</span> Competitive measures</h3>
+<p>Finally, the <code>floating_catchment_area()</code> function calculates accessibility levels considering the competition for opportunities using different floating catchment area (FCA) methods. Because several FCA methods can be used, the function requires users to indicate which method should be used. In addition, just like the <code>gravity()</code> function, the decay function must also be defined by the user. The following code shows an example of how to calculate accessibility to health facilities using the Balanced Floating Catchment Area (BFCA) method <span class="citation" data-cites="paez2019demand">(<a href="references.en.html#ref-paez2019demand" role="doc-biblioref">Paez, Higgins, and Vivona 2019</a>)</span> and an exponential decay function with a decay parameter of 0.05.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>bfca_competition <span class="ot">&lt;-</span> <span class="fu">floating_catchment_area</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  ttm,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">land_use_data =</span> points,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">opportunity =</span> <span class="st">"schools"</span>,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">travel_cost =</span> <span class="st">"travel_time"</span>,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">demand =</span> <span class="st">"population"</span>,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"bfca"</span>,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">decay_function =</span> <span class="fu">decay_exponential</span>(<span class="fl">0.05</span>)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bfca_competition)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                id      schools
+1: 89a901291abffff 2.628973e-04
+2: 89a9012a3cfffff 5.875302e-05
+3: 89a901295b7ffff 2.123543e-04
+4: 89a901284a3ffff 1.414356e-04
+5: 89a9012809bffff 2.254543e-04
+6: 89a901285cfffff 3.901031e-04</code></pre>
+</div>
+</div>
+<p>The functions presented in this section can also receive other inputs not explicitly mentioned here. For more information on each parameter, please refer to the documentation of the <code>{accessibility}</code> package on its <a href="https://ipeagit.github.io/accessibility/">website</a>.</p>
+</section><section id="calculating-accessibility-with-r5r" class="level3" data-number="3.2.5"><h3 data-number="3.2.5" class="anchored" data-anchor-id="calculating-accessibility-with-r5r">
+<span class="header-section-number">3.2.5</span> Calculating accessibility with <code>{r5r}</code>
+</h3>
+<p>In the previous two sections, we learned how to calculate accessibility levels step-by-step. For didactic purposes, it is important to understand that calculating accessibility first requires calculating a travel cost matrix which is then used to estimate accessibility levels. However, <code>{r5r}</code> also includes an <code>accessibility()</code> function that calculates accessibility levels in a single call, which is much faster and does not require intermediate steps.</p>
+<p>Similar to the travel time matrix function, <code>accessibility()</code> receives as inputs a connection to R5, origins, destinations, transport mode, departure time, among other arguments. Additionally, it also requires that users list which opportunities and decay function should be considered, as well as the value of the cost threshold/decay parameter, depending on the decay function. The example below shows how to use this function to calculate a cumulative opportunity metric (<code>decay_function = "step"</code>). In this example, we calculate the number of schools accessible by walking and public transport in 30 minutes (<code>cutoffs = 30</code>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>r5r_access <span class="ot">&lt;-</span> <span class="fu">accessibility</span>(</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  r5r_core,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">origins =</span> points,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">destinations =</span> points,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">opportunities_colname =</span> <span class="st">"schools"</span>,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">decay_function =</span> <span class="st">"step"</span>,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">cutoffs =</span> <span class="dv">30</span>,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">mode =</span> <span class="fu">c</span>(<span class="st">"WALK"</span>, <span class="st">"TRANSIT"</span>),</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">departure_datetime =</span> <span class="fu">as.POSIXct</span>(</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"13-05-2019 14:00:00"</span>,</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">format =</span> <span class="st">"%d-%m-%Y %H:%M:%S"</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_walk_time =</span> <span class="dv">30</span>,</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_trip_duration =</span> <span class="dv">120</span>,</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">progress =</span> <span class="cn">FALSE</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(r5r_access)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                id opportunity percentile cutoff accessibility
+1: 89a901291abffff     schools         50     30            21
+2: 89a9012a3cfffff     schools         50     30             0
+3: 89a901295b7ffff     schools         50     30            16
+4: 89a901284a3ffff     schools         50     30             4
+5: 89a9012809bffff     schools         50     30            17
+6: 89a901285cfffff     schools         50     30            78</code></pre>
+</div>
+</div>
+<p>There is one small difference between <code>r5r::accessibility()</code> and <code>accessibility::cumulative_cutoff()</code>. In <code>r5r::accessibility()</code>, the function only considers trips below the travel time threshold, while <code>accessibility::cumulative_cutoff()</code> considers trips with costs equal or below the maximum threshold. That is, to perform the same operation above but with <code>cumulative_cutoff()</code> we need to set a cutoff of 29 minutes, not 30. We compare the results of the two functions with the code below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>cum_cutoff_29 <span class="ot">&lt;-</span> <span class="fu">cumulative_cutoff</span>(</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    ttm,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">land_use_data =</span> points,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">opportunity =</span> <span class="st">"schools"</span>,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">travel_cost =</span> <span class="st">"travel_time"</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">cutoff =</span> <span class="dv">29</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>access_comparison <span class="ot">&lt;-</span> <span class="fu">merge</span>(</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  r5r_access,</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  cum_cutoff_29,</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">"id"</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">setnames</span>(</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>  access_comparison,</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">old =</span> <span class="fu">c</span>(<span class="st">"accessibility"</span>, <span class="st">"schools"</span>),</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">new =</span> <span class="fu">c</span>(<span class="st">"r5r_access"</span>, <span class="st">"accessibility_access"</span>)</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(access_comparison[, .(id, r5r_access, accessibility_access)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                id r5r_access accessibility_access
+1: 89a9012124fffff          1                    1
+2: 89a9012126bffff         12                   12
+3: 89a9012127bffff         14                   14
+4: 89a90128003ffff         30                   30
+5: 89a90128007ffff         21                   21
+6: 89a9012800bffff         29                   29</code></pre>
+</div>
+</div>
+<p>As we can see, the results of the two functions are identical after this small adjustment. The main difference between the two methods, however, is that the “intermediate” information of travel time between origins and destinations is not available when using <code>r5r::accessibility()</code>. Still, this workflow can be a good alternative for people who are solely interested in the accessibility levels and do not require the travel time between points in their analyses. Also, note that the <code>{accessibility}</code> package has a wider range of accessibility indicators and it gives more flexibility for users to define any decay function.</p>
+<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Considering other types of travel costs when calculating accessibility
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Another difference between <code>{r5r}</code> accessibility function and <code>{accessibility}</code> functions is the fact that the latter can work with various types of travel costs, such as time, monetary cost, comfort, etc. <code>{r5r}</code> function, however, is less flexible, and only considers travel time constraints.</p>
+</div>
+</div>
+</section></section><section id="accessibility-analyses" class="level2" data-number="3.3"><h2 data-number="3.3" class="anchored" data-anchor-id="accessibility-analyses">
+<span class="header-section-number">3.3</span> Accessibility analyses</h2>
+<p>Having calculated accessibility levels, we can now analyze them. There is a wide variety of analyses that can be performed using this data: diagnosis of urban accessibility conditions in different neighborhoods, analyses of inequalities in access to opportunities between different social groups, analyses of social exclusion and accessibility poverty, etc. In this section, however, we will present only two relatively simple and easy-to-communicate analyses: the spatial distribution of accessibility and its distribution among different income groups.</p>
+<p><strong>The spatial distribution of urban accessibility</strong></p>
+<p>To understand how urban accessibility is spatially distributed in a given city or region, we first need to obtain the spatial information of the points we have used as origins and destinations in our travel cost matrix. The points we used in the previous examples correspond to the centroids of a hexagonal grid based on the <a href="https://h3geo.org/">H3</a> index, developed by Uber <span class="citation" data-cites="brodsky2018h3">(<a href="references.en.html#ref-brodsky2018h3" role="doc-biblioref">Brodsky 2018</a>)</span>. The grid of Porto Alegre, as well as some sociodemographic and land use data aggregated to it, is made available by the Access to Opportunities Project team through the <code>{aopdata}</code> R package <span class="citation" data-cites="pereira2022aopdata">(<a href="references.en.html#ref-pereira2022aopdata" role="doc-biblioref">Pereira et al. 2022</a>)</span>. The package and its functions are presented in detail in <a href="./s5_dados_aop.en.html">Section 5</a>. With the code below, we load the data visualization package, download the grid, and present it in a map.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co"># download spatial grid</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>poa_grid <span class="ot">&lt;-</span> aopdata<span class="sc">::</span><span class="fu">read_grid</span>(<span class="st">"Porto Alegre"</span>)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co"># keeps only the cells used in the travel time matrix</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>poa_grid <span class="ot">&lt;-</span> <span class="fu">subset</span>(poa_grid, id_hex <span class="sc">%in%</span> points<span class="sc">$</span>id)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co"># plot map</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(poa_grid) <span class="sc">+</span> <span class="fu">geom_sf</span>() <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="3_calculando_acesso.en_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="2100"></p>
+</div>
+</div>
+<p>To spatially visualize accessibility data, we need to combine the table of accessibility estimates with the table that contains the spatial grid, using the hexagon identification columns as key columns. The code below shows how to merge the two tables and plot the map. In this example we are going to use the cumulative access to schools in 30 minutes that we had previously calculated.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>spatial_access <span class="ot">&lt;-</span> <span class="fu">merge</span>(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  poa_grid,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  cum_cutoff_29,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">by.x =</span> <span class="st">"id_hex"</span>,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">by.y =</span> <span class="st">"id"</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(spatial_access) <span class="sc">+</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> schools), <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"inferno"</span>) <span class="sc">+</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Accessible</span><span class="sc">\n</span><span class="st">schools"</span>) <span class="sc">+</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="3_calculando_acesso.en_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="2100"></p>
+</div>
+</div>
+<p>As the map above shows, accessibility levels tend to be higher in the city center, where there is a greater concentration of schools, and close to the major transport corridors, as the people who live closer to these high- capacity and speed corridors tend to access distant locations relatively fast. In contrast, people who live farther away from these corridors depend on lower frequency and operational speed modes (such as municipal buses, for example) and need to spend more time to reach the medium/high-capacity corridors. As a result, the accessibility levels of those living far from the city center and from high-capacity corridors tend to be relatively lower.</p>
+<p><strong>The distribution of urban accessibility across socioeconomic groups</strong></p>
+<p>The map above, although useful to reveal the places with the highest and lowest levels of accessibility, says nothing about the socioeconomic conditions of the people who have better or worse accessibility conditions in the region. To understand this, we need to join the previously calculated accessibility data with the demographic and economic information of the people living in each grid cell.</p>
+<p>In the example below, we merge the accessibility estimates with the information of average income decile of the population in each cell (data also made available through the <code>{aopdata}</code> package).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># download population and socioeconomic data</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>poa_population <span class="ot">&lt;-</span> aopdata<span class="sc">::</span><span class="fu">read_population</span>(<span class="st">"Porto Alegre"</span>, <span class="at">showProgress =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># renames the columns with population count and income decile data</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">setnames</span>(</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  poa_population,</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">old =</span> <span class="fu">c</span>(<span class="st">"P001"</span>, <span class="st">"R003"</span>),</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">new =</span> <span class="fu">c</span>(<span class="st">"pop_count"</span>, <span class="st">"decile"</span>)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="co"># merge accessibility and population tables</span></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>sociodemographic_access <span class="ot">&lt;-</span> <span class="fu">merge</span>(</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>  spatial_access,</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>  poa_population,</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">"id_hex"</span></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sociodemographic_access[, <span class="fu">c</span>(<span class="st">"id_hex"</span>, <span class="st">"schools"</span>, <span class="st">"pop_count"</span>, <span class="st">"decile"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 6 features and 4 fields
+Geometry type: POLYGON
+Dimension:     XY
+Bounding box:  xmin: -51.25678 ymin: -30.1111 xmax: -51.19031 ymax: -30.06699
+Geodetic CRS:  WGS 84
+           id_hex schools pop_count decile                       geometry
+1 89a9012124fffff       1       733      9 POLYGON ((-51.25083 -30.111...
+2 89a9012126bffff      12       355      9 POLYGON ((-51.25369 -30.106...
+3 89a9012127bffff      14       996     10 POLYGON ((-51.2538 -30.1094...
+4 89a90128003ffff      30      1742      4 POLYGON ((-51.19446 -30.071...
+5 89a90128007ffff      21       477      5 POLYGON ((-51.19744 -30.069...
+6 89a9012800bffff      29       501      4 POLYGON ((-51.19137 -30.070...</code></pre>
+</div>
+</div>
+<p>With the information on the income decile of each hexagon, we can analyze the distribution of accessibility levels by income groups. For this, we need to weigh the accessibility level of each origin by the number of people who reside there. This will tell us the accessibility distribution of the people located in cells with a given income decile. If we do not weigh the accessibility estimate by the population, we would have the accessibility distribution of the cells per se, and not of the people located in each cell. Since our analysis focuses on people, and not on the spatial units in which they are aggregated, weighting the accessibility levels by the population count is an essential part of it. The accessibility distribution of each decile is shown below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">subset</span>(sociodemographic_access, <span class="sc">!</span><span class="fu">is.na</span>(decile))) <span class="sc">+</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="fu">as.factor</span>(decile),</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> schools,</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">color =</span> <span class="fu">as.factor</span>(decile),</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">weight =</span> pop_count</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Income</span><span class="sc">\n</span><span class="st">decile"</span>,</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Income decile"</span>,</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of schools accessible"</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"RdBu"</span>) <span class="sc">+</span></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"D1</span><span class="sc">\n</span><span class="st">poorest"</span>, <span class="fu">paste0</span>(<span class="st">"D"</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>), <span class="st">"D10</span><span class="sc">\n</span><span class="st">wealthiest"</span>)</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="3_calculando_acesso.en_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="2100"></p>
+</div>
+</div>
+<p>The chart is very clear: lower-income residents tend to have considerably lower accessibility levels than high-income residents. This is a common pattern in virtually all Brazilian cities <span class="citation" data-cites="pereira2019desigualdades">(<a href="references.en.html#ref-pereira2019desigualdades" role="doc-biblioref">Pereira et al. 2019</a>)</span> and which results, to a large extent, from the spatial distribution patterns of low- and high-income communities: the wealthiest usually live in high-valued areas, close to large employment hubs (and opportunities for education, health, leisure, etc) and with relatively better supply of public transport. The poorest, on the other hand, tend to live in cities’ outskirts, where the land value is lower. Consequently, they also tend to live farther away from large concentrations of opportunities. Additionally, in most cases the provision of mid- and high-capacity public transport services is worse in regions with high concentrations of low-income residents. As a result, low-income communities have on average much lower accessibility than wealthier communities, as the chart illustrates.</p>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-arbex2020estimating" class="csl-entry" role="doc-biblioentry">
+Arbex, Renato, and Claudio B. Cunha. 2020. <span>“Estimating the Influence of Crowding and Travel Time Variability on Accessibility to Jobs in a Large Public Transport Network Using Smart Card Big Data.”</span> <em>Journal of Transport Geography</em> 85 (May): 102671. <a href="https://doi.org/10.1016/j.jtrangeo.2020.102671">https://doi.org/10.1016/j.jtrangeo.2020.102671</a>.
+</div>
+<div id="ref-barrington-leigh2017world" class="csl-entry" role="doc-biblioentry">
+Barrington-Leigh, Christopher, and Adam Millard-Ball. 2017. <span>“The World’s User-Generated Road Map Is More Than 80% Complete.”</span> <em>PLOS ONE</em> 12 (8): e0180698. <a href="https://doi.org/10.1371/journal.pone.0180698">https://doi.org/10.1371/journal.pone.0180698</a>.
+</div>
+<div id="ref-brodsky2018h3" class="csl-entry" role="doc-biblioentry">
+Brodsky, Isaac. 2018. <span>“H3: <span>Uber</span>’s <span>Hexagonal Hierarchical Spatial Index</span>.”</span> <em>Uber Engineering Blog</em>. https://eng.uber.com/h3/.
+</div>
+<div id="ref-camboim2015investigation" class="csl-entry" role="doc-biblioentry">
+Camboim, Silvana Philippi, João Vitor Meza Bravo, and Claudia Robbi Sluter. 2015. <span>“An <span>Investigation</span> into the <span>Completeness</span> of, and the <span>Updates</span> to, <span>OpenStreetMap Data</span> in a <span>Heterogeneous Area</span> in <span>Brazil</span>.”</span> <em>ISPRS International Journal of Geo-Information</em> 4 (3): 1366–88. <a href="https://doi.org/10.3390/ijgi4031366">https://doi.org/10.3390/ijgi4031366</a>.
+</div>
+<div id="ref-conway2017evidencebased" class="csl-entry" role="doc-biblioentry">
+Conway, Matthew Wigginton, Andrew Byrd, and Marco van der Linden. 2017. <span>“Evidence-<span>Based Transit</span> and <span>Land Use Sketch Planning Using Interactive Accessibility Methods</span> on <span>Combined Schedule</span> and <span>Headway-Based Networks</span>.”</span> <em>Transportation Research Record: Journal of the Transportation Research Board</em> 2653 (1): 45–53. <a href="https://doi.org/10.3141/2653-06">https://doi.org/10.3141/2653-06</a>.
+</div>
+<div id="ref-el-geneidy2016cost" class="csl-entry" role="doc-biblioentry">
+El-Geneidy, Ahmed, David Levinson, Ehab Diab, Genevieve Boisjoly, David Verbich, and Charis Loong. 2016. <span>“The Cost of Equity: <span>Assessing</span> Transit Accessibility and Social Disparity Using Total Travel Cost.”</span> <em>Transportation Research Part A: Policy and Practice</em> 91 (September): 302–16. <a href="https://doi.org/10.1016/j.tra.2016.07.003">https://doi.org/10.1016/j.tra.2016.07.003</a>.
+</div>
+<div id="ref-herszenhut2022impact" class="csl-entry" role="doc-biblioentry">
+Herszenhut, Daniel, Rafael H. M. Pereira, Licinio da Silva Portugal, and Matheus Henrique de Sousa Oliveira. 2022. <span>“The Impact of Transit Monetary Costs on Transport Inequality.”</span> <em>Journal of Transport Geography</em> 99 (February): 103309. <a href="https://doi.org/10.1016/j.jtrangeo.2022.103309">https://doi.org/10.1016/j.jtrangeo.2022.103309</a>.
+</div>
+<div id="ref-higgins2022calculating" class="csl-entry" role="doc-biblioentry">
+Higgins, Christopher, Matthew Palm, Amber DeJohn, Luna Xi, James Vaughan, Steven Farber, Michael Widener, and Eric Miller. 2022. <span>“Calculating Place-Based Transit Accessibility: <span>Methods</span>, Tools and Algorithmic Dependence.”</span> <em>Journal of Transport and Land Use</em> 15 (1). <a href="https://doi.org/10.5198/jtlu.2022.2012">https://doi.org/10.5198/jtlu.2022.2012</a>.
+</div>
+<div id="ref-paez2019demand" class="csl-entry" role="doc-biblioentry">
+Paez, Antonio, Christopher D. Higgins, and Salvatore F. Vivona. 2019. <span>“Demand and Level of Service Inflation in <span>Floating Catchment Area</span> (<span>FCA</span>) Methods.”</span> Edited by Tayyab Ikram Shah. <em>PLOS ONE</em> 14 (6): e0218773. <a href="https://doi.org/10.1371/journal.pone.0218773">https://doi.org/10.1371/journal.pone.0218773</a>.
+</div>
+<div id="ref-pereira2019desigualdades" class="csl-entry" role="doc-biblioentry">
+Pereira, Rafael H. M., Carlos Kaue Vieira Braga, Bernardo Serra, and Vanessa Nadalin. 2019. <span>“<span>Desigualdades socioespaciais de acesso a oportunidades nas cidades brasileiras, 2019</span>.”</span> {Texto para Discuss\~ao} 2535. <span>Instituto de Pesquisa Econômica Aplicada (Ipea)</span>.
+</div>
+<div id="ref-pereira2022aopdata" class="csl-entry" role="doc-biblioentry">
+Pereira, Rafael H. M., Daniel Herszenhut, Carlos K. V. Braga, Diego B. Tomasiello, and Marcus Saraiva. 2022. <span>“Aopdata: <span>Data</span> from the <span>Access</span> to <span>Opportunities Project</span>.”</span> <span>CRAN</span>.
+</div>
+<div id="ref-pereira2021r5r" class="csl-entry" role="doc-biblioentry">
+Pereira, Rafael H. M., Marcus Saraiva, Daniel Herszenhut, Carlos Kaue Vieira Braga, and Matthew Wigginton Conway. 2021. <span>“R5r: <span>Rapid Realistic Routing</span> on <span>Multimodal Transport Networks</span> with <span>R</span><span><sup>5</sup></span> in <span>R</span>.”</span> <em>Transport Findings</em>, March, 21262. <a href="https://doi.org/10.32866/001c.21262">https://doi.org/10.32866/001c.21262</a>.
+</div>
+<div id="ref-venter2016assessing" class="csl-entry" role="doc-biblioentry">
+Venter, Christoffel. 2016. <span>“Assessing the Potential of Bus Rapid Transit-Led Network Restructuring for Enhancing Affordable Access to Employment <span>The</span> Case of <span>Johannesburg</span>’s <span>Corridors</span> of <span>Freedom</span>.”</span> <em>Research in Transportation Economics</em> 59 (November): 441–49. <a href="https://doi.org/10.1016/j.retrec.2016.05.006">https://doi.org/10.1016/j.retrec.2016.05.006</a>.
+</div>
+</div>
+</section><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1" role="doc-endnote"><p>Available at <a href="https://github.com/conveyal/r5" class="uri">https://github.com/conveyal/r5</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>Java 11 can be downloaded either from <a href="https://www.oracle.com/java/technologies/downloads/#java11" class="uri">https://www.oracle.com/java/technologies/downloads/#java11</a> or from <a href="https://jdk.java.net/java-se-ri/11" class="uri">https://jdk.java.net/java-se-ri/11</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p>Available at <a href="https://github.com/ipeaGIT/accessibility" class="uri">https://github.com/ipeaGIT/accessibility</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./s2_calculo.en.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">SECTION 2: How to measure urban accessibility</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./s3_dados_tp.en.html" class="pagination-link">
+        <span class="nav-page-text">SECTION 3: Public transport data</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">Copyright 2023, Ipea - Instituto de Pesquisa Econômica Aplicada</div>   
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+<li class="nav-item compact">
+    <a class="nav-link active" href="https://github.com/ipeaGIT/aop_curso" aria-current="page">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+</div>
+  </div>
+</footer>
+</body>
+</html>
