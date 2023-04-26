@@ -1,3 +1,5 @@
+New Note 1
+
 # delete previous rendered book when running locally
 
 if (fs::dir_exists("en_book")) fs::dir_delete("en_book")
@@ -12,7 +14,10 @@ if (fs::dir_exists("en_book/en_freeze")) {
   fs::dir_copy("en_book/en_freeze", "en_book/_freeze")
 }
 
+# render pt book
+
 quarto::quarto_render(as_job = FALSE)
+fs::file_move("_book", "pt")
 
 # change some yml fields before rendering english book
 
@@ -48,21 +53,24 @@ yaml::write_yaml(
       return(result)
     }
   )
- )
+)
 
 quarto::quarto_render("en_book", as_job = FALSE)
 
-# copy english book content to portuguese book and english book cache to top
-# level directory
+# copy english book content to _book (to be the default book) and move
+# portuguese book content to this directory as well
 
-fs::dir_copy("en_book/_book", "_book/en")
+fs::dir_copy("en_book/_book", "_book")
+fs::file_move("pt", "_book/pt")
+
+# move english book cache to top level directory
 
 if (fs::dir_exists("en_freeze")) fs::dir_delete("en_freeze")
 fs::dir_copy("en_book/_freeze", "en_freeze")
 
 # add link to english version in portuguese chapters
 
-pt_html <- fs::dir_ls("_book", glob = "*.html")
+pt_html <- fs::dir_ls("_book/pt", glob = "*.html")
 
 invisible(lapply(
   pt_html,
@@ -74,7 +82,7 @@ invisible(lapply(
       sidebar,
       "a",
       "Read in English",
-      href = paste0("en/", sub("\\.html", ".en.html", basename(html_page)))
+      href = paste0("../", sub("\\.html", ".en.html", basename(html_page)))
     )
     
     xml2::write_html(content, html_page)
@@ -83,7 +91,7 @@ invisible(lapply(
 
 # add link to portuguese version in english chapters
 
-en_html <- fs::dir_ls("_book/en", glob = "*.html")
+en_html <- fs::dir_ls("_book", glob = "*.html")
 
 invisible(lapply(
   en_html,
@@ -95,9 +103,13 @@ invisible(lapply(
       sidebar,
       "a",
       "Leia em português",
-      href = paste0("../", sub("\\.en\\.html", ".html", basename(html_page)))
+      href = paste0("pt/", sub("\\.en\\.html", ".html", basename(html_page)))
     )
     
     xml2::write_html(content, html_page)
   }
 ))
+
+# copy index.en.html to index.html in english book to tidy up "homepage"
+
+fs::file_copy("_book/index.en.html", "_book/index.html", overwrite = TRUE)
