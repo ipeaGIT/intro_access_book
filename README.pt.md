@@ -5,9 +5,9 @@
 
 Este repositório contém o código-fonte do livro [Introdução à acessibilidade urbana: um guia prático em R](https://ipeagit.github.io/intro_access_book/), escrito por [Rafael H. M. Pereira](https://www.urbandemographics.org/) e [Daniel Herszenhut](https://dhersz.netlify.app/pt/). Caso use o material deste livro, pedimos por gentileza que cite-o utilizando a seguinte referência:
 
-> Pereira, Rafael H. M. & Herszenhut, Daniel. (2022) Introdução à acessibilidade urbana: um guia prático em R. Instituto de Pesquisa Econômica Aplicada (Ipea).
+> Pereira, Rafael H. M. & Herszenhut, Daniel. (2023) Introdução à acessibilidade urbana: um guia prático em R. Instituto de Pesquisa Econômica Aplicada (Ipea).
 
-**Nota:** Este livro é um trabalho em construção e, portanto, não se encontra finalizado. Ainda assim, acreditamos que seu conteúdo já pode ser útil para interessados pelos temas de planejamento de transporte urbano e ciência de dados. Sua versão online pode ser acessada em <https://ipeagit.github.io/intro_access_book/>. Em breve o livro contará também com versão em PDF e EPUB.
+**Nota:** Este livro está em constante processo de modificação, o que signfica que seu conteúdo pode ser alterado ao longo do tempo. No entanto, esse conteúdo tem estado estável desde o começo de 2023, com apenas algumas pequenas correções e revisões gramaticais. 
 
 ## Baixando o código-fonte
 
