@@ -1,7 +1,9 @@
-# Introdução à acessibilidade urbana: um guia prático em R
+# Introduction to urban accessibility: a practical guide in R
 
 [![Quarto build](https://github.com/ipeaGIT/aop_curso/actions/workflows/publish.yml/badge.svg)](https://github.com/ipeaGIT/aop_curso/actions)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ipeaGIT/intro_access_book/HEAD?urlpath=rstudio)
+
+[*Clique aqui para ler a versão em português desta página*](./README.pt.md)
 
 This book contains the source code used in the book [Introduction to urban accessibility: a practical guide in R](https://ipeagit.github.io/intro_access_book/), written by [Rafael H. M. Pereira](https://www.urbandemographics.org/) and [Daniel Herszenhut](https://dhersz.netlify.app/en/). If you use the material in this book, please cite it using the following reference:
 
