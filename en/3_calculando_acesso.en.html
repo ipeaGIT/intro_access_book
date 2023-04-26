@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.475">
+<meta name="generator" content="quarto-1.3.340">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Introduction to urban accessibility - 3  Calculating accessibility estimates in R</title>
 <style>
@@ -15,9 +15,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -44,48 +45,19 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -99,8 +71,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 <script src="site_libs/quarto-nav/quarto-nav.js"></script><script src="site_libs/quarto-nav/headroom.min.js"></script><script src="site_libs/clipboard/clipboard.min.js"></script><script src="site_libs/quarto-search/autocomplete.umd.js"></script><script src="site_libs/quarto-search/fuse.min.js"></script><script src="site_libs/quarto-search/quarto-search.js"></script><meta name="quarto:offset" content="./">
 <link href="./s3_dados_tp.en.html" rel="next">
 <link href="./s2_calculo.en.html" rel="prev">
@@ -136,192 +107,223 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </script><meta property="og:title" content="Introduction to urban accessibility - 3  Calculating accessibility estimates in R">
-<meta property="og:description" content="The first step to estimate the accessibility levels in a study area is to calculate the travel cost matrix between the various origins and destinations that make up this area.">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://ipeagit.github.io/aop_curso/en/3_calculando_acesso.en_files/figure-html/unnamed-chunk-16-1.png">
 <meta property="og:site-name" content="Introduction to urban accessibility">
+<meta property="og:image:height" content="3000">
+<meta property="og:image:width" content="4200">
 <meta name="twitter:title" content="Introduction to urban accessibility - 3  Calculating accessibility estimates in R">
-<meta name="twitter:description" content="The first step to estimate the accessibility levels in a study area is to calculate the travel cost matrix between the various origins and destinations that make up this area.">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://ipeagit.github.io/aop_curso/en/3_calculando_acesso.en_files/figure-html/unnamed-chunk-16-1.png">
+<meta name="twitter:image-height" content="3000">
+<meta name="twitter:image-width" content="4200">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">
-<span class="chapter-number">3</span>  <span class="chapter-title">Calculating accessibility estimates in R</span>
-</h1>
-      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
-        <i class="bi bi-chevron-right"></i>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="./s2_calculo.en.html">SECTION 2: How to measure urban accessibility</a></li>
+<li class="breadcrumb-item"><a href="./3_calculando_acesso.en.html"><span class="chapter-number">3</span>  <span class="chapter-title">Calculating accessibility estimates in R</span></a></li>
+</ol></nav><a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Introduction to urban accessibility</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://github.com/ipeaGIT/aop_curso" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
-    <a href="" title="Share" id="sidebar-tool-dropdown-0" class="sidebar-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-share"></i></a>
-    <ul class="dropdown-menu" aria-labelledby="sidebar-tool-dropdown-0">
+    <a href="https://github.com/ipeaGIT/aop_curso" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <div class="dropdown">
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
 <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
-            <i class="bi bi-bi-twitter pe-1"></i>
-          Twitter
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
-            <i class="bi bi-bi-facebook pe-1"></i>
-          Facebook
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
-            <i class="bi bi-bi-linkedin pe-1"></i>
-          LinkedIn
-          </a>
-        </li>
-    </ul>
-<a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
+              <i class="bi bi-bi-twitter pe-1"></i>
+            Twitter
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
+              <i class="bi bi-bi-facebook pe-1"></i>
+            Facebook
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
+              <i class="bi bi-bi-linkedin pe-1"></i>
+            LinkedIn
+            </a>
+          </li>
+      </ul>
+</div>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
       </div>
-      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="Search"></div>
         </div>
-      </div>
+        </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.en.html" class="sidebar-item-text sidebar-link">Preface</a>
+  <a href="./index.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./s1_intro.en.html" class="sidebar-item-text sidebar-link">SECTION 1: Introduction to urban accessibility</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a href="./s1_intro.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SECTION 1: Introduction to urban accessibility</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./1_conceito.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>  <span class="chapter-title">What is accessibility?</span></a>
+  <a href="./1_conceito.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>  <span class="chapter-title">What is accessibility?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./2_indicadores.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>  <span class="chapter-title">Accessibility measures</span></a>
+  <a href="./2_indicadores.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>  <span class="chapter-title">Accessibility measures</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./s2_calculo.en.html" class="sidebar-item-text sidebar-link">SECTION 2: How to measure urban accessibility</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a href="./s2_calculo.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SECTION 2: How to measure urban accessibility</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./3_calculando_acesso.en.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">3</span>  <span class="chapter-title">Calculating accessibility estimates in R</span></a>
+  <a href="./3_calculando_acesso.en.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>  <span class="chapter-title">Calculating accessibility estimates in R</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./s3_dados_tp.en.html" class="sidebar-item-text sidebar-link">SECTION 3: Public transport data</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a href="./s3_dados_tp.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SECTION 3: Public transport data</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./4_dados_gtfs.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>  <span class="chapter-title">GTFS data</span></a>
+  <a href="./4_dados_gtfs.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>  <span class="chapter-title">GTFS data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./5_gtfstools.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>  <span class="chapter-title">GTFS data manipulation and visualization</span></a>
+  <a href="./5_gtfstools.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>  <span class="chapter-title">GTFS data manipulation and visualization</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./s4_avaliacao_impacto.en.html" class="sidebar-item-text sidebar-link">SECTION 4: Impact assessment of transportation projects</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <a href="./s4_avaliacao_impacto.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SECTION 4: Impact assessment of transportation projects</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./6_cenarios_transporte.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>  <span class="chapter-title">Comparing accessibility between two transport scenarios</span></a>
+  <a href="./6_cenarios_transporte.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>  <span class="chapter-title">Comparing accessibility between two transport scenarios</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./s5_dados_aop.en.html" class="sidebar-item-text sidebar-link">SECTION 5: Data from the Access to Opportunity Project</a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <a href="./s5_dados_aop.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SECTION 5: Data from the Access to Opportunity Project</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./7_aopdata_populacao.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>  <span class="chapter-title">Population and socioeconomic data</span></a>
+  <a href="./7_aopdata_populacao.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>  <span class="chapter-title">Population and socioeconomic data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./8_aopdata_uso_solo.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>  <span class="chapter-title">Data on the spatial distribution of opportunities</span></a>
+  <a href="./8_aopdata_uso_solo.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>  <span class="chapter-title">Data on the spatial distribution of opportunities</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./9_aopdata_acessibilidade.en.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>  <span class="chapter-title">Accessibility estimates</span></a>
+  <a href="./9_aopdata_acessibilidade.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>  <span class="chapter-title">Accessibility estimates</span></span></a>
   </div>
 </li>
       </ul>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./references.en.html" class="sidebar-item-text sidebar-link">References</a>
+  <a href="./references.en.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
   </div>
 </li>
     </ul>
 </div>
-</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
 <li>
-<a href="#calculating-a-travel-time-matrix" id="toc-calculating-a-travel-time-matrix" class="nav-link active" data-scroll-target="#calculating-a-travel-time-matrix"><span class="toc-section-number">3.1</span>  Calculating a travel time matrix</a>
+<a href="#calculating-a-travel-time-matrix" id="toc-calculating-a-travel-time-matrix" class="nav-link active" data-scroll-target="#calculating-a-travel-time-matrix"><span class="header-section-number">3.1</span> Calculating a travel time matrix</a>
   <ul class="collapse">
-<li><a href="#installing-r5r" id="toc-installing-r5r" class="nav-link" data-scroll-target="#installing-r5r"><span class="toc-section-number">3.1.1</span>  Installing <code>{r5r}</code></a></li>
-  <li><a href="#required-data" id="toc-required-data" class="nav-link" data-scroll-target="#required-data"><span class="toc-section-number">3.1.2</span>  Required data</a></li>
-  <li><a href="#computing-the-travel-time-matrix" id="toc-computing-the-travel-time-matrix" class="nav-link" data-scroll-target="#computing-the-travel-time-matrix"><span class="toc-section-number">3.1.3</span>  Computing the travel time matrix</a></li>
+<li><a href="#installing-r5r" id="toc-installing-r5r" class="nav-link" data-scroll-target="#installing-r5r"><span class="header-section-number">3.1.1</span> Installing <code>{r5r}</code></a></li>
+  <li><a href="#required-data" id="toc-required-data" class="nav-link" data-scroll-target="#required-data"><span class="header-section-number">3.1.2</span> Required data</a></li>
+  <li><a href="#computing-the-travel-time-matrix" id="toc-computing-the-travel-time-matrix" class="nav-link" data-scroll-target="#computing-the-travel-time-matrix"><span class="header-section-number">3.1.3</span> Computing the travel time matrix</a></li>
   </ul>
 </li>
   <li>
-<a href="#calculating-accessibility" id="toc-calculating-accessibility" class="nav-link" data-scroll-target="#calculating-accessibility"><span class="toc-section-number">3.2</span>  Calculating accessibility</a>
+<a href="#calculating-accessibility" id="toc-calculating-accessibility" class="nav-link" data-scroll-target="#calculating-accessibility"><span class="header-section-number">3.2</span> Calculating accessibility</a>
   <ul class="collapse">
-<li><a href="#cumulative-opportunities-measure" id="toc-cumulative-opportunities-measure" class="nav-link" data-scroll-target="#cumulative-opportunities-measure"><span class="toc-section-number">3.2.1</span>  Cumulative opportunities measure</a></li>
-  <li><a href="#minimum-travel-cost" id="toc-minimum-travel-cost" class="nav-link" data-scroll-target="#minimum-travel-cost"><span class="toc-section-number">3.2.2</span>  Minimum travel cost</a></li>
-  <li><a href="#gravity-measures" id="toc-gravity-measures" class="nav-link" data-scroll-target="#gravity-measures"><span class="toc-section-number">3.2.3</span>  Gravity measures</a></li>
-  <li><a href="#competitive-measures" id="toc-competitive-measures" class="nav-link" data-scroll-target="#competitive-measures"><span class="toc-section-number">3.2.4</span>  Competitive measures</a></li>
-  <li><a href="#calculating-accessibility-with-r5r" id="toc-calculating-accessibility-with-r5r" class="nav-link" data-scroll-target="#calculating-accessibility-with-r5r"><span class="toc-section-number">3.2.5</span>  Calculating accessibility with <code>{r5r}</code></a></li>
+<li><a href="#cumulative-opportunities-measure" id="toc-cumulative-opportunities-measure" class="nav-link" data-scroll-target="#cumulative-opportunities-measure"><span class="header-section-number">3.2.1</span> Cumulative opportunities measure</a></li>
+  <li><a href="#minimum-travel-cost" id="toc-minimum-travel-cost" class="nav-link" data-scroll-target="#minimum-travel-cost"><span class="header-section-number">3.2.2</span> Minimum travel cost</a></li>
+  <li><a href="#gravity-measures" id="toc-gravity-measures" class="nav-link" data-scroll-target="#gravity-measures"><span class="header-section-number">3.2.3</span> Gravity measures</a></li>
+  <li><a href="#competitive-measures" id="toc-competitive-measures" class="nav-link" data-scroll-target="#competitive-measures"><span class="header-section-number">3.2.4</span> Competitive measures</a></li>
+  <li><a href="#calculating-accessibility-with-r5r" id="toc-calculating-accessibility-with-r5r" class="nav-link" data-scroll-target="#calculating-accessibility-with-r5r"><span class="header-section-number">3.2.5</span> Calculating accessibility with <code>{r5r}</code></a></li>
   </ul>
 </li>
-  <li><a href="#accessibility-analyses" id="toc-accessibility-analyses" class="nav-link" data-scroll-target="#accessibility-analyses"><span class="toc-section-number">3.3</span>  Accessibility analyses</a></li>
+  <li><a href="#accessibility-analyses" id="toc-accessibility-analyses" class="nav-link" data-scroll-target="#accessibility-analyses"><span class="header-section-number">3.3</span> Accessibility analyses</a></li>
   </ul>
 <div class="toc-actions">
 <div><i class="bi bi-github"></i></div>
@@ -330,7 +332,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title d-none d-lg-block">
+<h1 class="title">
 <span class="chapter-number">3</span>  <span class="chapter-title">Calculating accessibility estimates in R</span>
 </h1>
 </div>
@@ -384,12 +386,12 @@ OpenJDK 64-Bit Server VM Zulu11.62+17-CA (build 11.0.18+10-LTS, mixed mode)</cod
 </ul>
 </li>
 </ul>
-<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 OpenStreetMap data quality
 </div>
 </div>
@@ -514,7 +516,7 @@ OpenStreetMap data quality
 </div>
 </div>
 <p>In practice, <code>travel_time_matrix()</code> finds the fastest route from each origin to all possible destinations taking into account the transport mode, the departure time and the other inputs set by the user. For this, <code>{r5r}</code> considers door-to-door travel times: in the case of a trip by public transport, for example, the total travel time includes a) the walking time from the origin to the public transport stop; (b) the waiting time at the stop; c) the in-vehicle time; and d) the walking time from the last public transport stop to the destination. When more than one public transport route is used, <code>{r5r}</code> also considers the time spent on transfers, which consist of walking between stops and waiting for the next vehicle.</p>
-<div class="callout-note callout callout-style-simple">
+<div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -695,12 +697,12 @@ OpenStreetMap data quality
 </div>
 </div>
 <p>As we can see, the results of the two functions are identical after this small adjustment. The main difference between the two methods, however, is that the “intermediate” information of travel time between origins and destinations is not available when using <code>r5r::accessibility()</code>. Still, this workflow can be a good alternative for people who are solely interested in the accessibility levels and do not require the travel time between points in their analyses. Also, note that the <code>{accessibility}</code> package has a wider range of accessibility indicators and it gives more flexibility for users to define any decay function.</p>
-<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Considering other types of travel costs when calculating accessibility
 </div>
 </div>
@@ -812,44 +814,44 @@ Geodetic CRS:  WGS 84
 <p>The chart is very clear: lower-income residents tend to have considerably lower accessibility levels than high-income residents. This is a common pattern in virtually all Brazilian cities <span class="citation" data-cites="pereira2019desigualdades">(<a href="references.en.html#ref-pereira2019desigualdades" role="doc-biblioref">Pereira et al. 2019</a>)</span> and which results, to a large extent, from the spatial distribution patterns of low- and high-income communities: the wealthiest usually live in high-valued areas, close to large employment hubs (and opportunities for education, health, leisure, etc) and with relatively better supply of public transport. The poorest, on the other hand, tend to live in cities’ outskirts, where the land value is lower. Consequently, they also tend to live farther away from large concentrations of opportunities. Additionally, in most cases the provision of mid- and high-capacity public transport services is worse in regions with high concentrations of low-income residents. As a result, low-income communities have on average much lower accessibility than wealthier communities, as the chart illustrates.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
-<div id="ref-arbex2020estimating" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-arbex2020estimating" class="csl-entry" role="listitem">
 Arbex, Renato, and Claudio B. Cunha. 2020. <span>“Estimating the Influence of Crowding and Travel Time Variability on Accessibility to Jobs in a Large Public Transport Network Using Smart Card Big Data.”</span> <em>Journal of Transport Geography</em> 85 (May): 102671. <a href="https://doi.org/10.1016/j.jtrangeo.2020.102671">https://doi.org/10.1016/j.jtrangeo.2020.102671</a>.
 </div>
-<div id="ref-barrington-leigh2017world" class="csl-entry" role="doc-biblioentry">
+<div id="ref-barrington-leigh2017world" class="csl-entry" role="listitem">
 Barrington-Leigh, Christopher, and Adam Millard-Ball. 2017. <span>“The World’s User-Generated Road Map Is More Than 80% Complete.”</span> <em>PLOS ONE</em> 12 (8): e0180698. <a href="https://doi.org/10.1371/journal.pone.0180698">https://doi.org/10.1371/journal.pone.0180698</a>.
 </div>
-<div id="ref-brodsky2018h3" class="csl-entry" role="doc-biblioentry">
+<div id="ref-brodsky2018h3" class="csl-entry" role="listitem">
 Brodsky, Isaac. 2018. <span>“H3: <span>Uber</span>’s <span>Hexagonal Hierarchical Spatial Index</span>.”</span> <em>Uber Engineering Blog</em>. https://eng.uber.com/h3/.
 </div>
-<div id="ref-camboim2015investigation" class="csl-entry" role="doc-biblioentry">
+<div id="ref-camboim2015investigation" class="csl-entry" role="listitem">
 Camboim, Silvana Philippi, João Vitor Meza Bravo, and Claudia Robbi Sluter. 2015. <span>“An <span>Investigation</span> into the <span>Completeness</span> of, and the <span>Updates</span> to, <span>OpenStreetMap Data</span> in a <span>Heterogeneous Area</span> in <span>Brazil</span>.”</span> <em>ISPRS International Journal of Geo-Information</em> 4 (3): 1366–88. <a href="https://doi.org/10.3390/ijgi4031366">https://doi.org/10.3390/ijgi4031366</a>.
 </div>
-<div id="ref-conway2017evidencebased" class="csl-entry" role="doc-biblioentry">
+<div id="ref-conway2017evidencebased" class="csl-entry" role="listitem">
 Conway, Matthew Wigginton, Andrew Byrd, and Marco van der Linden. 2017. <span>“Evidence-<span>Based Transit</span> and <span>Land Use Sketch Planning Using Interactive Accessibility Methods</span> on <span>Combined Schedule</span> and <span>Headway-Based Networks</span>.”</span> <em>Transportation Research Record: Journal of the Transportation Research Board</em> 2653 (1): 45–53. <a href="https://doi.org/10.3141/2653-06">https://doi.org/10.3141/2653-06</a>.
 </div>
-<div id="ref-el-geneidy2016cost" class="csl-entry" role="doc-biblioentry">
+<div id="ref-el-geneidy2016cost" class="csl-entry" role="listitem">
 El-Geneidy, Ahmed, David Levinson, Ehab Diab, Genevieve Boisjoly, David Verbich, and Charis Loong. 2016. <span>“The Cost of Equity: <span>Assessing</span> Transit Accessibility and Social Disparity Using Total Travel Cost.”</span> <em>Transportation Research Part A: Policy and Practice</em> 91 (September): 302–16. <a href="https://doi.org/10.1016/j.tra.2016.07.003">https://doi.org/10.1016/j.tra.2016.07.003</a>.
 </div>
-<div id="ref-herszenhut2022impact" class="csl-entry" role="doc-biblioentry">
+<div id="ref-herszenhut2022impact" class="csl-entry" role="listitem">
 Herszenhut, Daniel, Rafael H. M. Pereira, Licinio da Silva Portugal, and Matheus Henrique de Sousa Oliveira. 2022. <span>“The Impact of Transit Monetary Costs on Transport Inequality.”</span> <em>Journal of Transport Geography</em> 99 (February): 103309. <a href="https://doi.org/10.1016/j.jtrangeo.2022.103309">https://doi.org/10.1016/j.jtrangeo.2022.103309</a>.
 </div>
-<div id="ref-higgins2022calculating" class="csl-entry" role="doc-biblioentry">
+<div id="ref-higgins2022calculating" class="csl-entry" role="listitem">
 Higgins, Christopher, Matthew Palm, Amber DeJohn, Luna Xi, James Vaughan, Steven Farber, Michael Widener, and Eric Miller. 2022. <span>“Calculating Place-Based Transit Accessibility: <span>Methods</span>, Tools and Algorithmic Dependence.”</span> <em>Journal of Transport and Land Use</em> 15 (1). <a href="https://doi.org/10.5198/jtlu.2022.2012">https://doi.org/10.5198/jtlu.2022.2012</a>.
 </div>
-<div id="ref-paez2019demand" class="csl-entry" role="doc-biblioentry">
+<div id="ref-paez2019demand" class="csl-entry" role="listitem">
 Paez, Antonio, Christopher D. Higgins, and Salvatore F. Vivona. 2019. <span>“Demand and Level of Service Inflation in <span>Floating Catchment Area</span> (<span>FCA</span>) Methods.”</span> Edited by Tayyab Ikram Shah. <em>PLOS ONE</em> 14 (6): e0218773. <a href="https://doi.org/10.1371/journal.pone.0218773">https://doi.org/10.1371/journal.pone.0218773</a>.
 </div>
-<div id="ref-pereira2019desigualdades" class="csl-entry" role="doc-biblioentry">
+<div id="ref-pereira2019desigualdades" class="csl-entry" role="listitem">
 Pereira, Rafael H. M., Carlos Kaue Vieira Braga, Bernardo Serra, and Vanessa Nadalin. 2019. <span>“<span>Desigualdades socioespaciais de acesso a oportunidades nas cidades brasileiras, 2019</span>.”</span> {Texto para Discuss\~ao} 2535. <span>Instituto de Pesquisa Econômica Aplicada (Ipea)</span>.
 </div>
-<div id="ref-pereira2022aopdata" class="csl-entry" role="doc-biblioentry">
+<div id="ref-pereira2022aopdata" class="csl-entry" role="listitem">
 Pereira, Rafael H. M., Daniel Herszenhut, Carlos K. V. Braga, Diego B. Tomasiello, and Marcus Saraiva. 2022. <span>“Aopdata: <span>Data</span> from the <span>Access</span> to <span>Opportunities Project</span>.”</span> <span>CRAN</span>.
 </div>
-<div id="ref-pereira2021r5r" class="csl-entry" role="doc-biblioentry">
+<div id="ref-pereira2021r5r" class="csl-entry" role="listitem">
 Pereira, Rafael H. M., Marcus Saraiva, Daniel Herszenhut, Carlos Kaue Vieira Braga, and Matthew Wigginton Conway. 2021. <span>“R5r: <span>Rapid Realistic Routing</span> on <span>Multimodal Transport Networks</span> with <span>R</span><span><sup>5</sup></span> in <span>R</span>.”</span> <em>Transport Findings</em>, March, 21262. <a href="https://doi.org/10.32866/001c.21262">https://doi.org/10.32866/001c.21262</a>.
 </div>
-<div id="ref-venter2016assessing" class="csl-entry" role="doc-biblioentry">
+<div id="ref-venter2016assessing" class="csl-entry" role="listitem">
 Venter, Christoffel. 2016. <span>“Assessing the Potential of Bus Rapid Transit-Led Network Restructuring for Enhancing Affordable Access to Employment <span>The</span> Case of <span>Johannesburg</span>’s <span>Corridors</span> of <span>Freedom</span>.”</span> <em>Research in Transportation Economics</em> 59 (November): 441–49. <a href="https://doi.org/10.1016/j.retrec.2016.05.006">https://doi.org/10.1016/j.retrec.2016.05.006</a>.
 </div>
 </div>
@@ -1000,9 +1002,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -1067,6 +1083,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -1119,6 +1221,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2023, Ipea - Instituto de Pesquisa Econômica Aplicada</div>   
+    <div class="nav-footer-center">
+       
+    </div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
 <li class="nav-item compact">
