@@ -1,5 +1,3 @@
-New Note 1
-
 # delete previous rendered book when running locally
 
 if (fs::dir_exists("en_book")) fs::dir_delete("en_book")
