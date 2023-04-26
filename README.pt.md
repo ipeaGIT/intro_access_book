@@ -21,18 +21,18 @@ Alternativamente, o código pode ser baixado manualmente no *link* a seguir: <ht
 
 ## Reproduzindo o livro localmente
 
-Este livro foi escrito com o sistema de publicação [Quarto](https://quarto.org/). A renderização de arquivos `.qmd` em HTML/PDF/*etc* requer que o programa Quarto esteja instalado. Por favor veja as instruções de instalação deste programa [neste link](https://quarto.org/docs/get-started/).
+Este livro foi escrito com o sistema de publicação [Quarto](https://quarto.org/). A renderização de arquivos `.qmd` em HTML/PDF/*etc* requer que o programa Quarto esteja instalado. Confira as instruções de instalação desse programa [neste link](https://quarto.org/docs/get-started/).
 
-Buscando facilitar a reprodução do livro localmente, este projeto utiliza o pacote de R [`{renv}`](https://rstudio.github.io/renv/index.html). Este pacote faz a gestão de dependências do livro, garantindo que os mesmos pacotes utilizados em seu desenvolvimento sejam utilizados na cópia a ser reproduzida em seu computador.
+Buscando facilitar a reprodução do livro localmente, este projeto utiliza o pacote de R [`{renv}`](https://rstudio.github.io/renv/index.html). Esse pacote faz a gestão de dependências do livro, garantindo que os mesmos pacotes utilizados em seu desenvolvimento sejam utilizados na cópia a ser reproduzida em seu computador.
 
-Para isso, primeiro abra o projeto do livro. Usuários do RStudio devem abrir o arquivo `intro_access_book.Rproj`, localizado dentro da pasta criada ao baixar o código-fonte. Usuários de outros editores de texto (neovim, VS Code, *etc*) devem iniciar a sessão do R dentro desta pasta. Você irá se deparar com mensagens similiares às seguintes:
+Para baixar as dependências, primeiro abra o projeto do livro. Usuários do RStudio devem abrir o arquivo `intro_access_book.Rproj`, localizado dentro da pasta criada ao baixar o código-fonte. Usuários de outros editores de texto (neovim, VS Code, *etc*) devem iniciar a sessão do R dentro dessa pasta. Você irá se deparar com mensagens similiares às seguintes:
 
 ```
 # Bootstrapping renv 0.16.0 --------------------------------------------------
 * Downloading renv 0.16.0 ... OK (downloaded binary)
 * Installing renv 0.16.0 ... Done!
 * Successfully installed and loaded renv 0.16.0.
-* Project '~/repos/teste/intro_access_book' loaded. [renv 0.16.0]
+* Project '~/repos/intro_access_book' loaded. [renv 0.16.0]
 * The project library is out of sync with the lockfile.
 * Use `renv::restore()` to install packages recorded in the lockfile.
 ```
@@ -43,11 +43,11 @@ Após isso, rode o seguinte comando para instalar as dependências usadas no liv
 renv::restore()
 ```
 
-Neste momento, uma série de pacotes serão listados e o `{renv}` pedirá para confirmar se você deseja instalá-los. Após esta confirmação, os pacotes serão instalados.
+Nesse momento, uma série de pacotes serão listados e o `{renv}` pedirá para confirmar se você deseja instalá-los. Após essa confirmação, os pacotes serão instalados.
 
-**Nota:** Este processo pode tomar um longo tempo. A instalação de todos os pacotes, caso você nunca tenha usado o `{renv}` antes, pode levar de 5 a 30 minutos, dependendo das configurações da sua máquina.
+**Nota:** Esse processo pode tomar um longo tempo. A instalação de todos os pacotes, caso você nunca tenha usado o `{renv}` antes, pode levar de 5 a 30 minutos, dependendo das configurações da sua máquina.
 
-**Nota 2:** Este livro depende do pacote `{sf}`. Caso você esteja tentando reproduzir o livro em uma distribuição do Linux, a instalação deste pacote requer a instalação de algumas dependências a nível de sistema. Por favor veja as [instruções de instalação](https://github.com/r-spatial/sf#linux) do `{sf}` para mais detalhes sobre como proceder neste caso. As dependências de sistema devem ser instaladas **antes** de rodar o comando `renv::restore()`.
+**Nota 2:** Este livro depende do pacote `{sf}`. Caso você esteja tentando reproduzir o livro em uma distribuição do Linux, a instalação desse pacote requer algumas dependências a nível de sistema. Por favor veja as [instruções de instalação](https://github.com/r-spatial/sf#linux) do `{sf}` para mais detalhes sobre como proceder nesse caso. As dependências de sistema devem ser instaladas **antes** de rodar o comando `renv::restore()`.
 
 Depois de instaladas as dependências do livro, seu código-fonte poderá ser executado normalmente. Os capítulos do livro estão ordenados numericamente em arquivos no formato `.qmd`. Para rodar o livro todo de uma vez, utilize um dos seguintes comandos:
 
@@ -59,7 +59,7 @@ quarto::quarto_render()
 
 **Nota:** A renderização do livro pode tomar algum tempo. Em nossa experiência, o processo como um todo pode levar de 5 a 15 minutos, dependendo das especificações do seu computador.
 
-**Nota 2:** A renderização do livro, em particular do Capítulo 6, requer cerca de **4 GB de memória RAM**. Certifique-se de que o seu computador consiga cumprir com este requisito, caso contrário os comandos provavelmente retornarão uma mensagem de erro e o seu computador ficará muito lento.
+**Nota 2:** A renderização do livro, em particular do Capítulo 6, requer cerca de **4 GB de memória RAM**. Certifique-se de que o seu computador consiga cumprir com esse requisito, caso contrário os comandos provavelmente retornarão uma mensagem de erro e o seu computador ficará muito lento.
 
 O primeiro comando (`quarto::quarto_preview()`) renderiza os capítulo e abre o livro gerado localmente em uma aba do seu navegador. O segundo apenas renderiza os capítulos. Ao final de sua execução, os arquivos renderizados ficam salvos na pasta `_book`, criada pelos comandos.
 
