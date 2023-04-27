@@ -108,13 +108,13 @@ gtag('js', new Date());
 gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </script><meta property="og:title" content="Introduction to urban accessibility - 3  Calculating accessibility estimates in R">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://ipeagit.github.io/aop_curso/en/3_calculando_acesso.en_files/figure-html/unnamed-chunk-16-1.png">
+<meta property="og:image" content="https://ipeagit.github.io/aop_curso/en/3_calculando_acesso.en_files/figure-html/fig-poa_grid-1.png">
 <meta property="og:site-name" content="Introduction to urban accessibility">
 <meta property="og:image:height" content="3000">
 <meta property="og:image:width" content="4200">
 <meta name="twitter:title" content="Introduction to urban accessibility - 3  Calculating accessibility estimates in R">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://ipeagit.github.io/aop_curso/en/3_calculando_acesso.en_files/figure-html/unnamed-chunk-16-1.png">
+<meta name="twitter:image" content="https://ipeagit.github.io/aop_curso/en/3_calculando_acesso.en_files/figure-html/fig-poa_grid-1.png">
 <meta name="twitter:image-height" content="3000">
 <meta name="twitter:image-width" content="4200">
 <meta name="twitter:card" content="summary_large_image">
@@ -323,7 +323,13 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   <li><a href="#calculating-accessibility-with-r5r" id="toc-calculating-accessibility-with-r5r" class="nav-link" data-scroll-target="#calculating-accessibility-with-r5r"><span class="header-section-number">3.2.5</span> Calculating accessibility with <code>{r5r}</code></a></li>
   </ul>
 </li>
-  <li><a href="#accessibility-analyses" id="toc-accessibility-analyses" class="nav-link" data-scroll-target="#accessibility-analyses"><span class="header-section-number">3.3</span> Accessibility analyses</a></li>
+  <li>
+<a href="#accessibility-analyses" id="toc-accessibility-analyses" class="nav-link" data-scroll-target="#accessibility-analyses"><span class="header-section-number">3.3</span> Accessibility analyses</a>
+  <ul class="collapse">
+<li><a href="#the-spatial-distribution-of-urban-accessibility" id="toc-the-spatial-distribution-of-urban-accessibility" class="nav-link" data-scroll-target="#the-spatial-distribution-of-urban-accessibility"><span class="header-section-number">3.3.1</span> The spatial distribution of urban accessibility</a></li>
+  <li><a href="#the-distribution-of-urban-accessibility-across-socioeconomic-groups" id="toc-the-distribution-of-urban-accessibility-across-socioeconomic-groups" class="nav-link" data-scroll-target="#the-distribution-of-urban-accessibility-across-socioeconomic-groups"><span class="header-section-number">3.3.2</span> The distribution of urban accessibility across socioeconomic groups</a></li>
+  </ul>
+</li>
   </ul>
 <div class="toc-actions">
 <div><i class="bi bi-github"></i></div>
@@ -349,7 +355,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 
 </header><section id="calculating-a-travel-time-matrix" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="calculating-a-travel-time-matrix">
 <span class="header-section-number">3.1</span> Calculating a travel time matrix</h2>
-<p>The first step to estimate the accessibility levels in a study area is to calculate the travel cost matrix between the various origins and destinations that make up this area. As previously mentioned, this cost is generally represented by the travel time between two points in the scientific literature and in transport planning practice <span class="citation" data-cites="el-geneidy2016cost venter2016assessing">(<a href="references.en.html#ref-el-geneidy2016cost" role="doc-biblioref">El-Geneidy et al. 2016</a>; <a href="references.en.html#ref-venter2016assessing" role="doc-biblioref">Venter 2016</a>)</span>, although recent studies have also considered other factors, such as trip monetary costs and the comfort of a trip between origins and destinations <span class="citation" data-cites="arbex2020estimating herszenhut2022impact">(<a href="references.en.html#ref-arbex2020estimating" role="doc-biblioref">Arbex and Cunha 2020</a>; <a href="references.en.html#ref-herszenhut2022impact" role="doc-biblioref">Herszenhut et al. 2022</a>)</span>. In this book, we will focus on travel time matrices as they are the most widely used in the literature and in practice, and we will cover other types of costs in a future book on advanced accessibility analysis in R.</p>
+<p>The first step to estimate the accessibility levels in a study area is to calculate the travel cost matrix between the various origins and destinations that make up this area. As previously mentioned, in the scientific literature and in transport planning practice this cost is generally represented by the travel time between two points <span class="citation" data-cites="el-geneidy2016cost venter2016assessing">(<a href="references.en.html#ref-el-geneidy2016cost" role="doc-biblioref">El-Geneidy et al. 2016</a>; <a href="references.en.html#ref-venter2016assessing" role="doc-biblioref">Venter 2016</a>)</span>, although recent studies have also considered other factors, such as trip monetary costs and the comfort of a trip between origins and destinations <span class="citation" data-cites="arbex2020estimating herszenhut2022impact">(<a href="references.en.html#ref-arbex2020estimating" role="doc-biblioref">Arbex and Cunha 2020</a>; <a href="references.en.html#ref-herszenhut2022impact" role="doc-biblioref">Herszenhut et al. 2022</a>)</span>. In this book, we will focus on travel time matrices as they are the most widely used in the literature and in practice, and we will cover other types of costs in a future book on advanced accessibility analysis in R.</p>
 <p>Currently, the easiest and fastest way to generate a travel time matrix in R is using the <code>{r5r}</code> package <span class="citation" data-cites="pereira2021r5r">(<a href="references.en.html#ref-pereira2021r5r" role="doc-biblioref">Pereira et al. 2021</a>)</span>, developed by the Access to Opportunities Project team. The package provides a simple and friendly interface to the R5 multimodal transport routing engine, developed by Conveyal<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <section id="installing-r5r" class="level3" data-number="3.1.1"><h3 data-number="3.1.1" class="anchored" data-anchor-id="installing-r5r">
 <span class="header-section-number">3.1.1</span> Installing <code>{r5r}</code>
@@ -362,9 +368,9 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(processx<span class="sc">::</span><span class="fu">run</span>(<span class="st">"java"</span>, <span class="at">args =</span> <span class="st">"-version"</span>)<span class="sc">$</span>stderr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>openjdk version "11.0.18" 2023-01-17 LTS
-OpenJDK Runtime Environment Zulu11.62+17-CA (build 11.0.18+10-LTS)
-OpenJDK 64-Bit Server VM Zulu11.62+17-CA (build 11.0.18+10-LTS, mixed mode)</code></pre>
+<pre><code>openjdk version "11.0.19" 2023-04-18 LTS
+OpenJDK Runtime Environment Zulu11.64+19-CA (build 11.0.19+7-LTS)
+OpenJDK 64-Bit Server VM Zulu11.64+19-CA (build 11.0.19+7-LTS, mixed mode)</code></pre>
 </div>
 </div>
 <p>As we can see, the version installed in the book is compatible with <code>{r5r}</code>. If the version installed in your machine is not compatible (i.e. if running the code above results in an output mentioning version 12 or 1.8.0, for example), please install Java 11.</p>
@@ -376,7 +382,7 @@ OpenJDK 64-Bit Server VM Zulu11.62+17-CA (build 11.0.18+10-LTS, mixed mode)</cod
 <strong>Street network</strong> (required): a file in <code>.pbf</code> format containing the street network and pedestrian infrastructure as described by OpenStreetMap. It can be downloaded using:
 <ul>
 <li>
-<a href="https://docs.ropensci.org/osmextract/">osmextract</a>, R package;</li>
+<a href="https://docs.ropensci.org/osmextract/"><code>{osmextract}</code></a>, R package;</li>
 <li>
 <a href="https://download.geofabrik.de/">Geofabrik</a>, website;</li>
 <li>
@@ -414,7 +420,7 @@ OpenStreetMap data quality
 <strong>Topography</strong> (optional): a raster file containing the Digital Elevation Model data of the study area in <code>.tif</code>/<code>.tiff</code> format. This data set is required if you wish to consider the effects of topography on walking and cycling travel times. It can be downloaded using:
 <ul>
 <li>
-<a href="https://github.com/jhollist/elevatr">elevatr</a>, R package;</li>
+<a href="https://github.com/jhollist/elevatr"><code>{elevatr}</code></a>, R package;</li>
 <li>Nasa’s <a href="https://lpdaac.usgs.gov/products/srtmgl1v003/">SRTMGL1</a>, website.</li>
 </ul>
 </li>
@@ -422,7 +428,7 @@ OpenStreetMap data quality
 <p>These data sets should be saved in a single directory, which should preferably not contain any other files. As we will see below, <code>{r5r}</code> combines all the data saved in this directory to create a multimodal transport network that is used for routing trips between origin-destination pairs and, consequently, for calculating travel time matrices. Please note that you can have more than one GTFS file in the same directory, in which case <code>{r5r}</code> considers the public transport networks of all feeds together. The street network and the topography of the study area, however, must be each one described by a single file. Assuming that R scripts are saved in a directory called <code>R</code>, a possible file structure is shown below:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>/tmp/RtmpurjDcJ/accessibility_project
+<pre><code>/tmp/RtmpQbCrvW/accessibility_project
 ├── R
 │   ├── script1.R
 │   └── script2.R
@@ -432,12 +438,12 @@ OpenStreetMap data quality
     └── topography.tif</code></pre>
 </div>
 </div>
-<p>To illustrate the features of <code>{r5r}</code>, we will use a small data sample from the city of Porto Alegre, Brazil. These data are available within <code>{r5r}</code> itself, and its path can be accessed with the following command:</p>
+<p>To illustrate the features of <code>{r5r}</code>, we will use a small data sample from the city of Porto Alegre, Brazil. This data is available within <code>{r5r}</code> itself, and its path can be accessed with the following command:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data_path <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/poa"</span>, <span class="at">package =</span> <span class="st">"r5r"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>data_path</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "/home/runner/work/intro_access_book/intro_access_book/renv/library/R-4.2/x86_64-pc-linux-gnu/r5r/extdata/poa"</code></pre>
+<pre><code>[1] "/home/runner/work/intro_access_book/intro_access_book/renv/library/R-4.3/x86_64-pc-linux-gnu/r5r/extdata/poa"</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -445,7 +451,7 @@ OpenStreetMap data quality
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>/home/runner/work/intro_access_book/intro_access_book/renv/library/R-4.2/x86_64-pc-linux-gnu/r5r/extdata/poa
+<pre><code>/home/runner/work/intro_access_book/intro_access_book/renv/library/R-4.3/x86_64-pc-linux-gnu/r5r/extdata/poa
 ├── poa_elevation.tif
 ├── poa_eptc.zip
 ├── poa_hexgrid.csv
@@ -454,14 +460,20 @@ OpenStreetMap data quality
 └── poa_trensurb.zip</code></pre>
 </div>
 </div>
-<p>This directory contains four files that we will use throughout this chapter: - An OpenStreetMap’s street network: <code>poa_osm.pbf</code>; - A GTFS feed describing some of the city’s bus routes: <code>poa_eptc.zip</code>; - A GTFS feed describing some of the city’s train route: <code>poa_trensurb.zip</code>; - The digital elevation model of the city: <code>poa_elevation.tif</code>; - The <code>poa_hexgrid.csv</code> file, containing the geographic coordinates of the centroids of a regular hexagonal grid covering the entire study area and information about the number of residents, jobs, health care facilities and schools in each grid cell. These points will be used as the origins and destinations when calculating the travel time matrix.</p>
-</section><section id="computing-the-travel-time-matrix" class="level3" data-number="3.1.3"><h3 data-number="3.1.3" class="anchored" data-anchor-id="computing-the-travel-time-matrix">
+<p>This directory contains five files that we will use throughout this chapter:</p>
+<ul>
+<li>An OSM street network: <code>poa_osm.pbf</code>;</li>
+<li>A GTFS feed describing some of the city’s bus routes: <code>poa_eptc.zip</code>;</li>
+<li>A GTFS feed describing some of the city’s train routes: <code>poa_trensurb.zip</code>;</li>
+<li>The digital elevation model of the city: <code>poa_elevation.tif</code>; and</li>
+<li>The <code>poa_hexgrid.csv</code> file, containing the geographic coordinates of the centroids of a regular hexagonal grid covering the entire study area and information about the number of residents, jobs, hospitals and schools in each grid cell. These points will be used as the origins and destinations when calculating the travel time matrix.</li>
+</ul></section><section id="computing-the-travel-time-matrix" class="level3" data-number="3.1.3"><h3 data-number="3.1.3" class="anchored" data-anchor-id="computing-the-travel-time-matrix">
 <span class="header-section-number">3.1.3</span> Computing the travel time matrix</h3>
 <p>Before calculating the travel time matrix, we need to increase the memory available to run Java processes, used by the underlying R5 routing engine. This is necessary because R allocates only 512 MB of memory to Java processes by default, which is often not enough to calculate large matrices with <code>{r5r}</code>. To increase the available memory to 2 GB, for example, we use the following command at the beginning of the script, even before loading the R packages that will be used in our analysis:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">java.parameters =</span> <span class="st">"-Xmx2G"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We can then proceed with the travel time matrix calculation, which we carry out in two steps. First, we need to generate a multimodal transport network that will be used to route trips between origin-destination pairs. To do this, we load <code>{r5r}</code> and use the <code>setup_r5()</code> function, which downloads the R5 routing engine and uses it to build the network. This function receives the path to the directory where the input data is saved. The function saves to this directory some files describing the routing network, and it outputs a connection to R5, which we named <code>r5r_core</code> in this example. This connection is responsible for linking the function calls with the transport network and is used to calculate the travel time matrix.</p>
+<p>We can then proceed with the travel time matrix calculation, which we carry out in two steps. First, we need to generate a multimodal transport network that will be used to route trips between origin-destination pairs. To do this, we load <code>{r5r}</code> and use the <code>setup_r5()</code> function, which downloads the R5 routing engine and uses it to build the network. This function receives the path to the directory where the input data is saved and saves some files describing the routing network to this directory. It also outputs a connection to R5, which we named <code>r5r_core</code> in this example. This connection is responsible for linking the function calls with the transport network and is used to calculate the travel time matrix.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(r5r)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -469,7 +481,7 @@ OpenStreetMap data quality
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>fs<span class="sc">::</span><span class="fu">dir_tree</span>(data_path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>/home/runner/work/intro_access_book/intro_access_book/renv/library/R-4.2/x86_64-pc-linux-gnu/r5r/extdata/poa
+<pre><code>/home/runner/work/intro_access_book/intro_access_book/renv/library/R-4.3/x86_64-pc-linux-gnu/r5r/extdata/poa
 ├── fares
 │   └── fares_poa.zip
 ├── network.dat
@@ -484,7 +496,7 @@ OpenStreetMap data quality
 └── poa_trensurb.zip</code></pre>
 </div>
 </div>
-<p>The second and final step is to actually calculate the travel time matrix with the <code>travel_time_matrix()</code> function. As basic inputs, the function receives the connection with R5 created above, origin and destination points as <code>data.frame</code>s with columns <code>id</code>, <code>lon</code> and <code>lat</code>, the mode of transport considered, the departure time, the maximum walking time allowed when accessing public transport stations from the origin and when egressing from the last stop to the destination, and the maximum travel time allowed for trips. The function also accepts several other inputs, such as the walking speed and the maximum number of public transport legs allowed, among others. For more information on each parameter, please refer to the function documentation in an R session (with the commands <code>?travel_time_matrix</code> or <code>help("travel_time_matrix”)</code>) or on <code>{r5r}</code> <a href="https://ipeagit.github.io/r5r/reference/travel_time_matrix.html">website</a>.</p>
+<p>The second and final step is to actually calculate the travel time matrix with the <code>travel_time_matrix()</code> function. As basic inputs, the function receives the connection with R5 created above, origin and destination points as <code>data.frame</code>s with columns <code>id</code>, <code>lon</code> and <code>lat</code>, the mode of transport considered, the departure time, the maximum walking time allowed when accessing public transport stations from the origin and when egressing from the last stop to the destination, and the maximum travel time allowed for trips. The function also accepts several other inputs, such as the walking speed and the maximum number of public transport legs allowed, among others<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read data.frame with grid centroids</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>points <span class="ot">&lt;-</span> data.table<span class="sc">::</span><span class="fu">fread</span>(<span class="fu">file.path</span>(data_path, <span class="st">"poa_hexgrid.csv"</span>))</span>
@@ -515,7 +527,7 @@ OpenStreetMap data quality
 6: 89a901291abffff 89a901285cfffff              35</code></pre>
 </div>
 </div>
-<p>In practice, <code>travel_time_matrix()</code> finds the fastest route from each origin to all possible destinations taking into account the transport mode, the departure time and the other inputs set by the user. For this, <code>{r5r}</code> considers door-to-door travel times: in the case of a trip by public transport, for example, the total travel time includes a) the walking time from the origin to the public transport stop; (b) the waiting time at the stop; c) the in-vehicle time; and d) the walking time from the last public transport stop to the destination. When more than one public transport route is used, <code>{r5r}</code> also considers the time spent on transfers, which consist of walking between stops and waiting for the next vehicle.</p>
+<p>In practice, <code>travel_time_matrix()</code> finds the fastest route from each origin to all possible destinations taking into account the transport mode, the departure time and the other inputs set by the user. For this, <code>{r5r}</code> considers door-to-door travel times: in the case of a public transport trip, for example, the total travel time includes: i) the walking time from the origin to the public transport stop; ii) the waiting time at the stop; iii) the in-vehicle time; and iv) the walking time from the last public transport stop to the destination. When more than one public transport route is used, <code>{r5r}</code> also considers the time spent on transfers, which consists of walking between stops and waiting for the next vehicle.</p>
 <div class="callout callout-style-simple callout-note">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -528,14 +540,14 @@ OpenStreetMap data quality
 </div>
 </section></section><section id="calculating-accessibility" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="calculating-accessibility">
 <span class="header-section-number">3.2</span> Calculating accessibility</h2>
-<p>Having calculated the travel time matrix between the origins and destinations, we need to use this travel matrix to calculate accessibility levels in the study area. For this, we will use the <code>{accessibility}</code><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> package, also developed by the Access to Opportunities Project team, which provides several functions to calculate many accessibility measures. As basic inputs, all functions require a pre-calculated cost matrix (in our case, the travel time matrix calculated in the previous section) and some land use data, such as the number of opportunities in each cell that covers the study area.</p>
+<p>Having calculated the travel time matrix between the origins and destinations, we need to use it to calculate accessibility levels in the study area. For this, we will use the <code>{accessibility}</code><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> package, also developed by the Access to Opportunities Project/Ipea team, which provides several functions to calculate many accessibility measures. As basic inputs, all functions require a pre-calculated cost matrix (in our case, the travel time matrix calculated in the previous section) and some land use data, such as the number of opportunities in each cell that covers the study area.</p>
 <section id="cumulative-opportunities-measure" class="level3" data-number="3.2.1"><h3 data-number="3.2.1" class="anchored" data-anchor-id="cumulative-opportunities-measure">
 <span class="header-section-number">3.2.1</span> Cumulative opportunities measure</h3>
-<p>The <code>cumulative_cutoff()</code> function is used to calculate cumulative opportunity accessibility metrics, and it indicates the number of opportunities that can be reached within a given travel cost limit. In the example below, we first load the <code>{accessibility}</code> package and then calculate the number of schools that can be reached in 30 minutes from each origin.</p>
+<p>The <code>cumulative_cutoff()</code> function is used to calculate the number of opportunities that can be reached within a given travel cost limit. In the example below, we first load the <code>{accessibility}</code> package and then calculate the number of schools that can be reached in 30 minutes from each origin.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(accessibility)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># rename column to use package {accessibility}</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># rename column to use {accessibility} package</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">setnames</span>(ttm, <span class="st">"travel_time_p50"</span>, <span class="st">"travel_time"</span>)</span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>cum_opportunities <span class="ot">&lt;-</span> <span class="fu">cumulative_cutoff</span>(</span>
@@ -581,7 +593,7 @@ OpenStreetMap data quality
 </div>
 </section><section id="gravity-measures" class="level3" data-number="3.2.3"><h3 data-number="3.2.3" class="anchored" data-anchor-id="gravity-measures">
 <span class="header-section-number">3.2.3</span> Gravity measures</h3>
-<p>The <code>gravity()</code> function calculates gravity measures of accessibility - those in which the weight of each opportunity gradually decreases with the increase of travel cost. As many different decay functions can be used to calculate gravity measures, such as negative exponential, inverse power, etc, this function receives an additional input: the decay function that should be considered. The example below calculates accessibility to schools using a negative exponential gravity measure with a decay parameter of 0.2.</p>
+<p>The <code>gravity()</code> function calculates gravity-based accessibility measures, those in which the weight of each opportunity gradually decreases as the travel cost increases. Since many different decay functions can be used to calculate gravity measures, such as the negative exponential, inverse power, etc, this function receives an additional input: the decay function that should be used to calculate the opportunity weights. The example below calculates accessibility to schools using a negative exponential gravity measure with a decay parameter of 0.2.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>negative_exp_grav <span class="ot">&lt;-</span> <span class="fu">gravity</span>(</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  ttm,</span>
@@ -604,7 +616,7 @@ OpenStreetMap data quality
 </div>
 </section><section id="competitive-measures" class="level3" data-number="3.2.4"><h3 data-number="3.2.4" class="anchored" data-anchor-id="competitive-measures">
 <span class="header-section-number">3.2.4</span> Competitive measures</h3>
-<p>Finally, the <code>floating_catchment_area()</code> function calculates accessibility levels considering the competition for opportunities using different floating catchment area (FCA) methods. Because several FCA methods can be used, the function requires users to indicate which method should be used. In addition, just like the <code>gravity()</code> function, the decay function must also be defined by the user. The following code shows an example of how to calculate accessibility to health facilities using the Balanced Floating Catchment Area (BFCA) method <span class="citation" data-cites="paez2019demand">(<a href="references.en.html#ref-paez2019demand" role="doc-biblioref">Paez, Higgins, and Vivona 2019</a>)</span> and an exponential decay function with a decay parameter of 0.05.</p>
+<p>Finally, the <code>floating_catchment_area()</code> function calculates accessibility levels considering the competition for opportunities using different floating catchment area (FCA) methods. Because several FCA methods can be used, the function requires users to indicate which method to use. In addition, just like the <code>gravity()</code> function, the decay function must also be defined by the user. The following code shows an example of how to calculate accessibility to schools using the Balanced Floating Catchment Area (BFCA) method <span class="citation" data-cites="paez2019demand">(<a href="references.en.html#ref-paez2019demand" role="doc-biblioref">Paez, Higgins, and Vivona 2019</a>)</span> and an exponential decay function with a decay parameter of 0.05.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>bfca_competition <span class="ot">&lt;-</span> <span class="fu">floating_catchment_area</span>(</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  ttm,</span>
@@ -632,7 +644,7 @@ OpenStreetMap data quality
 <span class="header-section-number">3.2.5</span> Calculating accessibility with <code>{r5r}</code>
 </h3>
 <p>In the previous two sections, we learned how to calculate accessibility levels step-by-step. For didactic purposes, it is important to understand that calculating accessibility first requires calculating a travel cost matrix which is then used to estimate accessibility levels. However, <code>{r5r}</code> also includes an <code>accessibility()</code> function that calculates accessibility levels in a single call, which is much faster and does not require intermediate steps.</p>
-<p>Similar to the travel time matrix function, <code>accessibility()</code> receives as inputs a connection to R5, origins, destinations, transport mode, departure time, among other arguments. Additionally, it also requires that users list which opportunities and decay function should be considered, as well as the value of the cost threshold/decay parameter, depending on the decay function. The example below shows how to use this function to calculate a cumulative opportunity metric (<code>decay_function = "step"</code>). In this example, we calculate the number of schools accessible by walking and public transport in 30 minutes (<code>cutoffs = 30</code>).</p>
+<p>Similar to the travel time matrix function, <code>accessibility()</code> receives as inputs a connection to R5, origins, destinations, transport mode, departure time, among other arguments. Additionally, it also requires users to list which opportunities and which decay function should be considered, as well as the value of the cost threshold/decay parameter, depending on the decay function. The example below shows how to use this function to calculate a cumulative opportunity metric (<code>decay_function = "step"</code>). In this example, we calculate the number of schools accessible by walk and public transport in 30 minutes (<code>cutoffs = 30</code>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>r5r_access <span class="ot">&lt;-</span> <span class="fu">accessibility</span>(</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  r5r_core,</span>
@@ -666,11 +678,11 @@ OpenStreetMap data quality
 <p>There is one small difference between <code>r5r::accessibility()</code> and <code>accessibility::cumulative_cutoff()</code>. In <code>r5r::accessibility()</code>, the function only considers trips below the travel time threshold, while <code>accessibility::cumulative_cutoff()</code> considers trips with costs equal or below the maximum threshold. That is, to perform the same operation above but with <code>cumulative_cutoff()</code> we need to set a cutoff of 29 minutes, not 30. We compare the results of the two functions with the code below.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>cum_cutoff_29 <span class="ot">&lt;-</span> <span class="fu">cumulative_cutoff</span>(</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    ttm,</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">land_use_data =</span> points,</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">opportunity =</span> <span class="st">"schools"</span>,</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">travel_cost =</span> <span class="st">"travel_time"</span>,</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">cutoff =</span> <span class="dv">29</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  ttm,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">land_use_data =</span> points,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">opportunity =</span> <span class="st">"schools"</span>,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">travel_cost =</span> <span class="st">"travel_time"</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">cutoff =</span> <span class="dv">29</span></span>
 <span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>access_comparison <span class="ot">&lt;-</span> <span class="fu">merge</span>(</span>
@@ -696,7 +708,7 @@ OpenStreetMap data quality
 6: 89a9012800bffff         29                   29</code></pre>
 </div>
 </div>
-<p>As we can see, the results of the two functions are identical after this small adjustment. The main difference between the two methods, however, is that the “intermediate” information of travel time between origins and destinations is not available when using <code>r5r::accessibility()</code>. Still, this workflow can be a good alternative for people who are solely interested in the accessibility levels and do not require the travel time between points in their analyses. Also, note that the <code>{accessibility}</code> package has a wider range of accessibility indicators and it gives more flexibility for users to define any decay function.</p>
+<p>As we can see, the results of the two functions are identical after this small adjustment. The main difference between the two methods, however, is that the “intermediate” information of travel time between origins and destinations is not available when using <code>r5r::accessibility()</code>. Still, this workflow can be a good alternative for people who are solely interested in the accessibility levels and do not require the travel time between points in their analyses. Also, note that the <code>{accessibility}</code> package has a wider range of accessibility indicators and provides more flexibility for users to define custom decay functions.</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -713,8 +725,9 @@ Considering other types of travel costs when calculating accessibility
 </section></section><section id="accessibility-analyses" class="level2" data-number="3.3"><h2 data-number="3.3" class="anchored" data-anchor-id="accessibility-analyses">
 <span class="header-section-number">3.3</span> Accessibility analyses</h2>
 <p>Having calculated accessibility levels, we can now analyze them. There is a wide variety of analyses that can be performed using this data: diagnosis of urban accessibility conditions in different neighborhoods, analyses of inequalities in access to opportunities between different social groups, analyses of social exclusion and accessibility poverty, etc. In this section, however, we will present only two relatively simple and easy-to-communicate analyses: the spatial distribution of accessibility and its distribution among different income groups.</p>
-<p><strong>The spatial distribution of urban accessibility</strong></p>
-<p>To understand how urban accessibility is spatially distributed in a given city or region, we first need to obtain the spatial information of the points we have used as origins and destinations in our travel cost matrix. The points we used in the previous examples correspond to the centroids of a hexagonal grid based on the <a href="https://h3geo.org/">H3</a> index, developed by Uber <span class="citation" data-cites="brodsky2018h3">(<a href="references.en.html#ref-brodsky2018h3" role="doc-biblioref">Brodsky 2018</a>)</span>. The grid of Porto Alegre, as well as some sociodemographic and land use data aggregated to it, is made available by the Access to Opportunities Project team through the <code>{aopdata}</code> R package <span class="citation" data-cites="pereira2022aopdata">(<a href="references.en.html#ref-pereira2022aopdata" role="doc-biblioref">Pereira et al. 2022</a>)</span>. The package and its functions are presented in detail in <a href="./s5_dados_aop.en.html">Section 5</a>. With the code below, we load the data visualization package, download the grid, and present it in a map.</p>
+<section id="the-spatial-distribution-of-urban-accessibility" class="level3" data-number="3.3.1"><h3 data-number="3.3.1" class="anchored" data-anchor-id="the-spatial-distribution-of-urban-accessibility">
+<span class="header-section-number">3.3.1</span> The spatial distribution of urban accessibility</h3>
+<p>To understand how urban accessibility is spatially distributed in a given city or region, we first need to obtain the spatial information of the points we have used as origins and destinations in our travel cost matrix. The points we used in the previous examples correspond to the centroids of a hexagonal grid based on the <a href="https://h3geo.org/">H3</a> index, developed by Uber <span class="citation" data-cites="brodsky2018h3">(<a href="references.en.html#ref-brodsky2018h3" role="doc-biblioref">Brodsky 2018</a>)</span>. The grid of Porto Alegre, as well as some sociodemographic and land use data aggregated to it, is made available by the Access to Opportunities Project team through the <code>{aopdata}</code> R package <span class="citation" data-cites="pereira2022aopdata">(<a href="references.en.html#ref-pereira2022aopdata" role="doc-biblioref">Pereira et al. 2022</a>)</span>. The package and its functions are presented in detail in <a href="./s5_dados_aop.en.html">Section 5</a>. With the code below, we load the data visualization package, download the grid and present it in a map.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -727,14 +740,17 @@ Considering other types of travel costs when calculating accessibility
 <span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co"># plot map</span></span>
 <span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(poa_grid) <span class="sc">+</span> <span class="fu">geom_sf</span>() <span class="sc">+</span> <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="3_calculando_acesso.en_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-poa_grid" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="3_calculando_acesso.en_files/figure-html/fig-poa_grid-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption class="figure-caption">Figure 3.1: Hexagonal grid covering central Porto Alegre.</figcaption></figure>
 </div>
 </div>
-<p>To spatially visualize accessibility data, we need to combine the table of accessibility estimates with the table that contains the spatial grid, using the hexagon identification columns as key columns. The code below shows how to merge the two tables and plot the map. In this example we are going to use the cumulative access to schools in 30 minutes that we had previously calculated.</p>
+</div>
+<p>To spatially visualize accessibility data, we need to combine the table of accessibility estimates with the table that contains the spatial grid, using the hexagon identification columns as key columns. The code below shows how to merge the two tables and plot the map. In this example, we are going to use the cumulative access to schools in 30 minutes that we have calculated previously.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>spatial_access <span class="ot">&lt;-</span> <span class="fu">merge</span>(</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  poa_grid,</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  cum_cutoff_29,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  cum_opportunities,</span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">by.x =</span> <span class="st">"id_hex"</span>,</span>
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">by.y =</span> <span class="st">"id"</span></span>
 <span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -745,12 +761,16 @@ Considering other types of travel costs when calculating accessibility
 <span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Accessible</span><span class="sc">\n</span><span class="st">schools"</span>) <span class="sc">+</span></span>
 <span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="3_calculando_acesso.en_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-access_schools" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="3_calculando_acesso.en_files/figure-html/fig-access_schools-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption class="figure-caption">Figure 3.2: Spatial distribution of accessibility to schools in central Porto Alegre.</figcaption></figure>
 </div>
 </div>
-<p>As the map above shows, accessibility levels tend to be higher in the city center, where there is a greater concentration of schools, and close to the major transport corridors, as the people who live closer to these high- capacity and speed corridors tend to access distant locations relatively fast. In contrast, people who live farther away from these corridors depend on lower frequency and operational speed modes (such as municipal buses, for example) and need to spend more time to reach the medium/high-capacity corridors. As a result, the accessibility levels of those living far from the city center and from high-capacity corridors tend to be relatively lower.</p>
-<p><strong>The distribution of urban accessibility across socioeconomic groups</strong></p>
-<p>The map above, although useful to reveal the places with the highest and lowest levels of accessibility, says nothing about the socioeconomic conditions of the people who have better or worse accessibility conditions in the region. To understand this, we need to join the previously calculated accessibility data with the demographic and economic information of the people living in each grid cell.</p>
+</div>
+<p>As the map above shows, accessibility levels tend to be higher in the city center, where there is a greater concentration of schools, and close to the major transport corridors, as the people who live closer to these high- capacity and speed corridors tend to access distant locations relatively fast. In contrast, people who live farther away from these corridors depend on lower- frequency and speed modes (such as municipal buses, for example) and need to spend more time to reach the medium/high-capacity corridors. As a result, the accessibility levels of those living far from the city center and from high-capacity corridors tend to be relatively lower.</p>
+</section><section id="the-distribution-of-urban-accessibility-across-socioeconomic-groups" class="level3" data-number="3.3.2"><h3 data-number="3.3.2" class="anchored" data-anchor-id="the-distribution-of-urban-accessibility-across-socioeconomic-groups">
+<span class="header-section-number">3.3.2</span> The distribution of urban accessibility across socioeconomic groups</h3>
+<p><a href="#fig-access_schools">Figure <span>3.2</span></a>, although useful to reveal the places with the highest and lowest levels of accessibility, says nothing about the socioeconomic conditions of the people who have better or worse accessibility conditions in the region. To understand this, we need to join the previously calculated accessibility data with the demographic and economic information of the people living in each grid cell.</p>
 <p>In the example below, we merge the accessibility estimates with the information of average income decile of the population in each cell (data also made available through the <code>{aopdata}</code> package).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># download population and socioeconomic data</span></span>
@@ -779,14 +799,14 @@ Bounding box:  xmin: -51.25678 ymin: -30.1111 xmax: -51.19031 ymax: -30.06699
 Geodetic CRS:  WGS 84
            id_hex schools pop_count decile                       geometry
 1 89a9012124fffff       1       733      9 POLYGON ((-51.25083 -30.111...
-2 89a9012126bffff      12       355      9 POLYGON ((-51.25369 -30.106...
+2 89a9012126bffff      13       355      9 POLYGON ((-51.25369 -30.106...
 3 89a9012127bffff      14       996     10 POLYGON ((-51.2538 -30.1094...
-4 89a90128003ffff      30      1742      4 POLYGON ((-51.19446 -30.071...
-5 89a90128007ffff      21       477      5 POLYGON ((-51.19744 -30.069...
-6 89a9012800bffff      29       501      4 POLYGON ((-51.19137 -30.070...</code></pre>
+4 89a90128003ffff      34      1742      4 POLYGON ((-51.19446 -30.071...
+5 89a90128007ffff      23       477      5 POLYGON ((-51.19744 -30.069...
+6 89a9012800bffff      34       501      4 POLYGON ((-51.19137 -30.070...</code></pre>
 </div>
 </div>
-<p>With the information on the income decile of each hexagon, we can analyze the distribution of accessibility levels by income groups. For this, we need to weigh the accessibility level of each origin by the number of people who reside there. This will tell us the accessibility distribution of the people located in cells with a given income decile. If we do not weigh the accessibility estimate by the population, we would have the accessibility distribution of the cells per se, and not of the people located in each cell. Since our analysis focuses on people, and not on the spatial units in which they are aggregated, weighting the accessibility levels by the population count is an essential part of it. The accessibility distribution of each decile is shown below.</p>
+<p>With the information on the income decile of each hexagon, we can analyze the distribution of accessibility levels by income groups. For this, we need to weigh the accessibility level of each origin by the number of people who reside there. This will tell us the accessibility distribution of the people located in cells with a given income decile. If we do not weigh the accessibility estimate by the population, we will have the accessibility distribution of the cells per se, and not of the people located in each cell. Since our analysis focuses on people, and not on the spatial units in which they are aggregated, weighting the accessibility levels by the population count is an essential part of it. The accessibility distribution of each decile is shown below.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">subset</span>(sociodemographic_access, <span class="sc">!</span><span class="fu">is.na</span>(decile))) <span class="sc">+</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(</span>
@@ -808,10 +828,13 @@ Geodetic CRS:  WGS 84
 <span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="3_calculando_acesso.en_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-access_boxplot" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="3_calculando_acesso.en_files/figure-html/fig-access_boxplot-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption class="figure-caption">Figure 3.3: Distribution of accessibility to schools in central Porto Alegre by income decile.</figcaption></figure>
 </div>
 </div>
-<p>The chart is very clear: lower-income residents tend to have considerably lower accessibility levels than high-income residents. This is a common pattern in virtually all Brazilian cities <span class="citation" data-cites="pereira2019desigualdades">(<a href="references.en.html#ref-pereira2019desigualdades" role="doc-biblioref">Pereira et al. 2019</a>)</span> and which results, to a large extent, from the spatial distribution patterns of low- and high-income communities: the wealthiest usually live in high-valued areas, close to large employment hubs (and opportunities for education, health, leisure, etc) and with relatively better supply of public transport. The poorest, on the other hand, tend to live in cities’ outskirts, where the land value is lower. Consequently, they also tend to live farther away from large concentrations of opportunities. Additionally, in most cases the provision of mid- and high-capacity public transport services is worse in regions with high concentrations of low-income residents. As a result, low-income communities have on average much lower accessibility than wealthier communities, as the chart illustrates.</p>
+</div>
+<p><a href="#fig-access_boxplot">Figure <span>3.3</span></a> is very clear: lower-income residents tend to have considerably lower accessibility levels than high-income residents. This is a common pattern in virtually all Brazilian cities <span class="citation" data-cites="pereira2019desigualdades">(<a href="references.en.html#ref-pereira2019desigualdades" role="doc-biblioref">Pereira et al. 2019</a>)</span> and which results, to a large extent, from the spatial distribution patterns of low- and high-income communities: the wealthiest usually live in high-valued areas, close to large employment hubs (and opportunities for education, health, leisure, etc) and with relatively better public transport services. The poorest, on the other hand, tend to live in the cities’ outskirts, where the land value is lower and the distances from the large concentrations of opportunities are larger. Additionally, in most cases the provision of mid- and high-capacity public transport services is worse in regions with high concentrations of low-income residents. As a result, low-income communities have, on average, much lower accessibility levels than wealthier communities, as the chart illustrates.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
@@ -855,11 +878,12 @@ Pereira, Rafael H. M., Marcus Saraiva, Daniel Herszenhut, Carlos Kaue Vieira Bra
 Venter, Christoffel. 2016. <span>“Assessing the Potential of Bus Rapid Transit-Led Network Restructuring for Enhancing Affordable Access to Employment <span>The</span> Case of <span>Johannesburg</span>’s <span>Corridors</span> of <span>Freedom</span>.”</span> <em>Research in Transportation Economics</em> 59 (November): 441–49. <a href="https://doi.org/10.1016/j.retrec.2016.05.006">https://doi.org/10.1016/j.retrec.2016.05.006</a>.
 </div>
 </div>
-</section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+</section></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1"><p>Available at <a href="https://github.com/conveyal/r5" class="uri">https://github.com/conveyal/r5</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Java 11 can be downloaded either from <a href="https://www.oracle.com/java/technologies/downloads/#java11" class="uri">https://www.oracle.com/java/technologies/downloads/#java11</a> or from <a href="https://jdk.java.net/java-se-ri/11" class="uri">https://jdk.java.net/java-se-ri/11</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Available at <a href="https://github.com/ipeaGIT/accessibility" class="uri">https://github.com/ipeaGIT/accessibility</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>For more information on each parameter, please refer to the function documentation in an R session (with the commands <code>?travel_time_matrix</code> or <code>help("travel_time_matrix”)</code>) or on <code>{r5r}</code> <a href="https://ipeagit.github.io/r5r/reference/travel_time_matrix.html">website</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Available at <a href="https://github.com/ipeaGIT/accessibility" class="uri">https://github.com/ipeaGIT/accessibility</a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
