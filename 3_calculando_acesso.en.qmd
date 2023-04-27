@@ -2,7 +2,7 @@
 
 ## Calculating a travel time matrix
 
-The first step to estimate the accessibility levels in a study area is to calculate the travel cost matrix between the various origins and destinations that make up this area. As previously mentioned, this cost is generally represented by the travel time between two points in the scientific literature and in transport planning practice [@el-geneidy2016cost; @venter2016assessing], although recent studies have also considered other factors, such as trip monetary costs and the comfort of a trip between origins and destinations [@arbex2020estimating; @herszenhut2022impact]. In this book, we will focus on travel time matrices as they are the most widely used in the literature and in practice, and we will cover other types of costs in a future book on advanced accessibility analysis in R.
+The first step to estimate the accessibility levels in a study area is to calculate the travel cost matrix between the various origins and destinations that make up this area. As previously mentioned, in the scientific literature and in transport planning practice this cost is generally represented by the travel time between two points [@el-geneidy2016cost; @venter2016assessing], although recent studies have also considered other factors, such as trip monetary costs and the comfort of a trip between origins and destinations [@arbex2020estimating; @herszenhut2022impact]. In this book, we will focus on travel time matrices as they are the most widely used in the literature and in practice, and we will cover other types of costs in a future book on advanced accessibility analysis in R.
 
 Currently, the easiest and fastest way to generate a travel time matrix in R is using the `{r5r}` package [@pereira2021r5r], developed by the Access to Opportunities Project team. The package provides a simple and friendly interface to the R5 multimodal transport routing engine, developed by Conveyal[^1].
 
@@ -32,7 +32,7 @@ As we can see, the version installed in the book is compatible with `{r5r}`. If 
 Using `{r5r}` requires different types of data. The list below describes the required and optional data sets and indicates where you could obtain these data:
 
 - **Street network** (required): a file in `.pbf` format containing the street network and pedestrian infrastructure as described by OpenStreetMap. It can be downloaded using:
-  - [osmextract](https://docs.ropensci.org/osmextract/), R package;
+  - [`{osmextract}`](https://docs.ropensci.org/osmextract/), R package;
   - [Geofabrik](https://download.geofabrik.de/), website;
   - [HOT Export Tool](https://export.hotosm.org/), website;
   - [BBBike Extract Service](https://extract.bbbike.org/), website.
@@ -49,7 +49,7 @@ OpenStreetMap (OSM) is a geographic database that provides information about str
   - In [Chapter 4](4_dados_gtfs.en.qmd) (@tbl-gtfs_brazil) we also show where to download the GTFS files of Brazilian cities that share their data publicly.
 
 - **Topography** (optional): a raster file containing the Digital Elevation Model data of the study area in `.tif`/`.tiff` format. This data set is required if you wish to consider the effects of topography on walking and cycling travel times. It can be downloaded using:
-  - [elevatr](https://github.com/jhollist/elevatr), R package;
+  - [`{elevatr}`](https://github.com/jhollist/elevatr), R package;
   - Nasa's [SRTMGL1](https://lpdaac.usgs.gov/products/srtmgl1v003/), website.
 
 These data sets should be saved in a single directory, which should preferably not contain any other files. As we will see below, `{r5r}` combines all the data saved in this directory to create a multimodal transport network that is used for routing trips between origin-destination pairs and, consequently, for calculating travel time matrices. Please note that you can have more than one GTFS file in the same directory, in which case `{r5r}` considers the public transport networks of all feeds together. The street network and the topography of the study area, however, must be each one described by a single file. Assuming that R scripts are saved in a directory called `R`, a possible file structure is shown below:
@@ -73,7 +73,7 @@ invisible({
 fs::dir_tree(tmp)
 ```
 
-To illustrate the features of `{r5r}`, we will use a small data sample from the city of Porto Alegre, Brazil. These data are available within `{r5r}` itself, and its path can be accessed with the following command:
+To illustrate the features of `{r5r}`, we will use a small data sample from the city of Porto Alegre, Brazil. This data is available within `{r5r}` itself, and its path can be accessed with the following command:
 
 ```{r}
 data_path <- system.file("extdata/poa", package = "r5r")
@@ -90,12 +90,13 @@ fs::dir_tree(data_path)
 fs::dir_tree(data_path, regexp = "\\.zip$|\\.csv$|\\.pbf$|\\.tif$")
 ```
 
-This directory contains four files that we will use throughout this chapter:
-- An OpenStreetMap's street network: `poa_osm.pbf`;
+This directory contains five files that we will use throughout this chapter:
+
+- An OSM street network: `poa_osm.pbf`;
 - A GTFS feed describing some of the city's bus routes: `poa_eptc.zip`;
-- A GTFS feed describing some of the city's train route: `poa_trensurb.zip`;
-- The digital elevation model of the city: `poa_elevation.tif`;
-- The `poa_hexgrid.csv` file, containing the geographic coordinates of the centroids of a regular hexagonal grid covering the entire study area and information about the number of residents, jobs, health care facilities and schools in each grid cell. These points will be used as the origins and destinations when calculating the travel time matrix.
+- A GTFS feed describing some of the city's train routes: `poa_trensurb.zip`;
+- The digital elevation model of the city: `poa_elevation.tif`; and
+- The `poa_hexgrid.csv` file, containing the geographic coordinates of the centroids of a regular hexagonal grid covering the entire study area and information about the number of residents, jobs, hospitals and schools in each grid cell. These points will be used as the origins and destinations when calculating the travel time matrix.
 
 ### Computing the travel time matrix
 
@@ -105,7 +106,7 @@ Before calculating the travel time matrix, we need to increase the memory availa
 options(java.parameters = "-Xmx2G")
 ```
 
-We can then proceed with the travel time matrix calculation, which we carry out in two steps. First, we need to generate a multimodal transport network that will be used to route trips between origin-destination pairs. To do this, we load `{r5r}` and use the `setup_r5()` function, which downloads the R5 routing engine and uses it to build the network. This function receives the path to the directory where the input data is saved. The function saves to this directory some files describing the routing network, and it outputs a connection to R5, which we named `r5r_core` in this example. This connection is responsible for linking the function calls with the transport network and is used to calculate the travel time matrix.
+We can then proceed with the travel time matrix calculation, which we carry out in two steps. First, we need to generate a multimodal transport network that will be used to route trips between origin-destination pairs. To do this, we load `{r5r}` and use the `setup_r5()` function, which downloads the R5 routing engine and uses it to build the network. This function receives the path to the directory where the input data is saved and saves some files describing the routing network to this directory. It also outputs a connection to R5, which we named `r5r_core` in this example. This connection is responsible for linking the function calls with the transport network and is used to calculate the travel time matrix.
 
 ```{r}
 #| message: false
@@ -116,7 +117,9 @@ r5r_core <- setup_r5(data_path, verbose = FALSE)
 fs::dir_tree(data_path)
 ```
 
-The second and final step is to actually calculate the travel time matrix with the `travel_time_matrix()` function. As basic inputs, the function receives the connection with R5 created above, origin and destination points as `data.frame`s with columns `id`, `lon` and `lat`, the mode of transport considered, the departure time, the maximum walking time allowed when accessing public transport stations from the origin and when egressing from the last stop to the destination, and the maximum travel time allowed for trips. The function also accepts several other inputs, such as the walking speed and the maximum number of public transport legs allowed, among others. For more information on each parameter, please refer to the function documentation in an R session (with the commands `?travel_time_matrix` or `help("travel_time_matrix”)`) or on `{r5r}` [website](https://ipeagit.github.io/r5r/reference/travel_time_matrix.html).
+The second and final step is to actually calculate the travel time matrix with the `travel_time_matrix()` function. As basic inputs, the function receives the connection with R5 created above, origin and destination points as `data.frame`s with columns `id`, `lon` and `lat`, the mode of transport considered, the departure time, the maximum walking time allowed when accessing public transport stations from the origin and when egressing from the last stop to the destination, and the maximum travel time allowed for trips. The function also accepts several other inputs, such as the walking speed and the maximum number of public transport legs allowed, among others[^3].
+
+[^3]: For more information on each parameter, please refer to the function documentation in an R session (with the commands `?travel_time_matrix` or `help("travel_time_matrix”)`) or on `{r5r}` [website](https://ipeagit.github.io/r5r/reference/travel_time_matrix.html).
 
 ```{r}
 # read data.frame with grid centroids
@@ -128,8 +131,8 @@ ttm <- travel_time_matrix(
   destinations = points,
   mode = c("WALK", "TRANSIT"),
   departure_datetime = as.POSIXct(
-	"13-05-2019 14:00:00",
-	format = "%d-%m-%Y %H:%M:%S"
+    "13-05-2019 14:00:00",
+    format = "%d-%m-%Y %H:%M:%S"
   ),
   max_walk_time = 30,
   max_trip_duration = 120,
@@ -140,7 +143,7 @@ ttm <- travel_time_matrix(
 head(ttm)
 ```
 
-In practice, `travel_time_matrix()` finds the fastest route from each origin to all possible destinations taking into account the transport mode, the departure time and the other inputs set by the user. For this, `{r5r}` considers door-to-door travel times: in the case of a trip by public transport, for example, the total travel time includes a) the walking time from the origin to the public transport stop; (b) the waiting time at the stop; c) the in-vehicle time; and d) the walking time from the last public transport stop to the destination. When more than one public transport route is used, `{r5r}` also considers the time spent on transfers, which consist of walking between stops and waiting for the next vehicle.
+In practice, `travel_time_matrix()` finds the fastest route from each origin to all possible destinations taking into account the transport mode, the departure time and the other inputs set by the user. For this, `{r5r}` considers door-to-door travel times: in the case of a public transport trip, for example, the total travel time includes: i) the walking time from the origin to the public transport stop; ii) the waiting time at the stop; iii) the in-vehicle time; and iv) the walking time from the last public transport stop to the destination. When more than one public transport route is used, `{r5r}` also considers the time spent on transfers, which consists of walking between stops and waiting for the next vehicle.
 
 ::: {.callout-note appearance="simple"}
 The `travel_time_matrix()` function uses an extension of the RAPTOR routing algorithm [@conway2017evidencebased], making R5 extremely fast. Depending on the number of origin-destination pairs, `{r5r}` can calculate travel time matrices between 6 and 200 times faster than other multimodal routing softwares [@higgins2022calculating].
@@ -148,18 +151,18 @@ The `travel_time_matrix()` function uses an extension of the RAPTOR routing algo
 
 ## Calculating accessibility
 
-Having calculated the travel time matrix between the origins and destinations, we need to use this travel matrix to calculate accessibility levels in the study area. For this, we will use the `{accessibility}`[^3] package, also developed by the Access to Opportunities Project team, which provides several functions to calculate many accessibility measures. As basic inputs, all functions require a pre-calculated cost matrix (in our case, the travel time matrix calculated in the previous section) and some land use data, such as the number of opportunities in each cell that covers the study area.
+Having calculated the travel time matrix between the origins and destinations, we need to use it to calculate accessibility levels in the study area. For this, we will use the `{accessibility}`[^4] package, also developed by the Access to Opportunities Project/Ipea team, which provides several functions to calculate many accessibility measures. As basic inputs, all functions require a pre-calculated cost matrix (in our case, the travel time matrix calculated in the previous section) and some land use data, such as the number of opportunities in each cell that covers the study area.
 
-[^3]: Available at <https://github.com/ipeaGIT/accessibility>.
+[^4]: Available at <https://github.com/ipeaGIT/accessibility>.
 
 ### Cumulative opportunities measure
 
-The `cumulative_cutoff()` function is used to calculate cumulative opportunity accessibility metrics, and it indicates the number of opportunities that can be reached within a given travel cost limit. In the example below, we first load the `{accessibility}` package and then calculate the number of schools that can be reached in 30 minutes from each origin.
+The `cumulative_cutoff()` function is used to calculate the number of opportunities that can be reached within a given travel cost limit. In the example below, we first load the `{accessibility}` package and then calculate the number of schools that can be reached in 30 minutes from each origin.
 
 ```{r}
 library(accessibility)
 
-# rename column to use package {accessibility}
+# rename column to use {accessibility} package
 data.table::setnames(ttm, "travel_time_p50", "travel_time")
 
 cum_opportunities <- cumulative_cutoff(
@@ -190,7 +193,7 @@ head(min_time)
 
 ### Gravity measures
 
-The `gravity()` function calculates gravity measures of accessibility - those in which the weight of each opportunity gradually decreases with the increase of travel cost. As many different decay functions can be used to calculate gravity measures, such as negative exponential, inverse power, etc, this function receives an additional input: the decay function that should be considered. The example below calculates accessibility to schools using a negative exponential gravity measure with a decay parameter of 0.2.
+The `gravity()` function calculates gravity-based accessibility measures, those in which the weight of each opportunity gradually decreases as the travel cost increases. Since many different decay functions can be used to calculate gravity measures, such as the negative exponential, inverse power, etc, this function receives an additional input: the decay function that should be used to calculate the opportunity weights. The example below calculates accessibility to schools using a negative exponential gravity measure with a decay parameter of 0.2.
 
 ```{r}
 negative_exp_grav <- gravity(
@@ -206,7 +209,7 @@ head(negative_exp_grav)
 
 ### Competitive measures
 
-Finally, the `floating_catchment_area()` function calculates accessibility levels considering the competition for opportunities using different floating catchment area (FCA) methods. Because several FCA methods can be used, the function requires users to indicate which method should be used. In addition, just like the `gravity()` function, the decay function must also be defined by the user. The following code shows an example of how to calculate accessibility to health facilities using the Balanced Floating Catchment Area (BFCA) method [@paez2019demand] and an exponential decay function with a decay parameter of 0.05.
+Finally, the `floating_catchment_area()` function calculates accessibility levels considering the competition for opportunities using different floating catchment area (FCA) methods. Because several FCA methods can be used, the function requires users to indicate which method to use. In addition, just like the `gravity()` function, the decay function must also be defined by the user. The following code shows an example of how to calculate accessibility to schools using the Balanced Floating Catchment Area (BFCA) method [@paez2019demand] and an exponential decay function with a decay parameter of 0.05.
 
 ```{r}
 bfca_competition <- floating_catchment_area(
@@ -228,7 +231,7 @@ The functions presented in this section can also receive other inputs not explic
 
 In the previous two sections, we learned how to calculate accessibility levels step-by-step. For didactic purposes, it is important to understand that calculating accessibility first requires calculating a travel cost matrix which is then used to estimate accessibility levels. However, `{r5r}` also includes an `accessibility()` function that calculates accessibility levels in a single call, which is much faster and does not require intermediate steps.
 
-Similar to the travel time matrix function, `accessibility()` receives as inputs a connection to R5, origins, destinations, transport mode, departure time, among other arguments. Additionally, it also requires that users list which opportunities and decay function should be considered, as well as the value of the cost threshold/decay parameter, depending on the decay function. The example below shows how to use this function to calculate a cumulative opportunity metric (`decay_function = "step"`). In this example, we calculate the number of schools accessible by walking and public transport in 30 minutes (`cutoffs = 30`).
+Similar to the travel time matrix function, `accessibility()` receives as inputs a connection to R5, origins, destinations, transport mode, departure time, among other arguments. Additionally, it also requires users to list which opportunities and which decay function should be considered, as well as the value of the cost threshold/decay parameter, depending on the decay function. The example below shows how to use this function to calculate a cumulative opportunity metric (`decay_function = "step"`). In this example, we calculate the number of schools accessible by walk and public transport in 30 minutes (`cutoffs = 30`).
 
 ```{r}
 r5r_access <- accessibility(
@@ -256,11 +259,11 @@ There is one small difference between `r5r::accessibility()` and `accessibility:
 
 ```{r}
 cum_cutoff_29 <- cumulative_cutoff(
-    ttm,
-    land_use_data = points,
-    opportunity = "schools",
-    travel_cost = "travel_time",
-    cutoff = 29
+  ttm,
+  land_use_data = points,
+  opportunity = "schools",
+  travel_cost = "travel_time",
+  cutoff = 29
 )
 
 access_comparison <- merge(
@@ -278,7 +281,7 @@ data.table::setnames(
 head(access_comparison[, .(id, r5r_access, accessibility_access)])
 ```
 
-As we can see,  the results of the two functions are identical after this small adjustment. The main difference between the two methods, however, is that the "intermediate" information of travel time between origins and destinations is not available when using `r5r::accessibility()`. Still, this workflow can be a good alternative for people who are solely interested in the accessibility levels and do not require the travel time between points in their analyses. Also, note that the `{accessibility}` package has a wider range of accessibility indicators and it gives more flexibility for users to define any decay function.
+As we can see, the results of the two functions are identical after this small adjustment. The main difference between the two methods, however, is that the "intermediate" information of travel time between origins and destinations is not available when using `r5r::accessibility()`. Still, this workflow can be a good alternative for people who are solely interested in the accessibility levels and do not require the travel time between points in their analyses. Also, note that the `{accessibility}` package has a wider range of accessibility indicators and provides more flexibility for users to define custom decay functions.
 
 :::{.callout-caution}
 ## Considering other types of travel costs when calculating accessibility
@@ -290,12 +293,15 @@ Another difference between `{r5r}` accessibility function and `{accessibility}` 
 
 Having calculated accessibility levels, we can now analyze them. There is a wide variety of analyses that can be performed using this data: diagnosis of urban accessibility conditions in different neighborhoods, analyses of inequalities in access to opportunities between different social groups, analyses of social exclusion and accessibility poverty, etc. In this section, however, we will present only two relatively simple and easy-to-communicate analyses: the spatial distribution of accessibility and its distribution among different income groups.
 
-**The spatial distribution of urban accessibility**
+### The spatial distribution of urban accessibility
 
-To understand how urban accessibility is spatially distributed in a given city or region, we first need to obtain the spatial information of the points we have used as origins and destinations in our travel cost matrix. The points we used in the previous examples correspond to the centroids of a hexagonal grid based on the [H3](https://h3geo.org/) index, developed by Uber [@brodsky2018h3]. The grid of Porto Alegre, as well as some sociodemographic and land use data aggregated to it, is made available by the Access to Opportunities Project team through the `{aopdata}` R package [@pereira2022aopdata]. The package and its functions are presented in detail in [Section 5](s5_dados_aop.en.qmd). With the code below, we load the data visualization package, download the grid, and present it in a map.
+To understand how urban accessibility is spatially distributed in a given city or region, we first need to obtain the spatial information of the points we have used as origins and destinations in our travel cost matrix. The points we used in the previous examples correspond to the centroids of a hexagonal grid based on the [H3](https://h3geo.org/) index, developed by Uber [@brodsky2018h3]. The grid of Porto Alegre, as well as some sociodemographic and land use data aggregated to it, is made available by the Access to Opportunities Project team through the `{aopdata}` R package [@pereira2022aopdata]. The package and its functions are presented in detail in [Section 5](s5_dados_aop.en.qmd). With the code below, we load the data visualization package, download the grid and present it in a map.
 
 ```{r}
 #| message: false
+#| label: fig-poa_grid
+#| fig-cap: Hexagonal grid covering central Porto Alegre.
+
 library(ggplot2)
 
 # download spatial grid
@@ -308,12 +314,14 @@ poa_grid <- subset(poa_grid, id_hex %in% points$id)
 ggplot(poa_grid) + geom_sf() + theme_minimal()
 ```
 
-To spatially visualize accessibility data, we need to combine the table of accessibility estimates with the table that contains the spatial grid, using the hexagon identification columns as key columns. The code below shows how to merge the two tables and plot the map. In this example we are going to use the cumulative access to schools in 30 minutes that we had previously calculated.
+To spatially visualize accessibility data, we need to combine the table of accessibility estimates with the table that contains the spatial grid, using the hexagon identification columns as key columns. The code below shows how to merge the two tables and plot the map. In this example, we are going to use the cumulative access to schools in 30 minutes that we have calculated previously.
 
 ```{r}
+#| label: fig-access_schools
+#| fig-cap: Spatial distribution of accessibility to schools in central Porto Alegre.
 spatial_access <- merge(
   poa_grid,
-  cum_cutoff_29,
+  cum_opportunities,
   by.x = "id_hex",
   by.y = "id"
 )
@@ -325,11 +333,11 @@ ggplot(spatial_access) +
   theme_minimal()
 ```
 
-As the map above shows, accessibility levels tend to be higher in the city center, where there is a greater concentration of schools, and close to the major transport corridors, as the people who live closer to these high- capacity and speed corridors tend to access distant locations relatively fast. In contrast, people who live farther away from these corridors depend on lower frequency and operational speed modes (such as municipal buses, for example) and need to spend more time to reach the medium/high-capacity corridors. As a result, the accessibility levels of those living far from the city center and from high-capacity corridors tend to be relatively lower.
+As the map above shows, accessibility levels tend to be higher in the city center, where there is a greater concentration of schools, and close to the major transport corridors, as the people who live closer to these high- capacity and speed corridors tend to access distant locations relatively fast. In contrast, people who live farther away from these corridors depend on lower- frequency and speed modes (such as municipal buses, for example) and need to spend more time to reach the medium/high-capacity corridors. As a result, the accessibility levels of those living far from the city center and from high-capacity corridors tend to be relatively lower.
 
-**The distribution of urban accessibility across socioeconomic groups**
+### The distribution of urban accessibility across socioeconomic groups
 
-The map above, although useful to reveal the places with the highest and lowest levels of accessibility, says nothing about the socioeconomic conditions of the people who have better or worse accessibility conditions in the region. To understand this, we need to join the previously calculated accessibility data with the demographic and economic information of the people living in each grid cell.
+@fig-access_schools, although useful to reveal the places with the highest and lowest levels of accessibility, says nothing about the socioeconomic conditions of the people who have better or worse accessibility conditions in the region. To understand this, we need to join the previously calculated accessibility data with the demographic and economic information of the people living in each grid cell.
 
 In the example below, we merge the accessibility estimates with the information of average income decile of the population in each cell (data also made available through the `{aopdata}` package).
 
@@ -355,9 +363,11 @@ sociodemographic_access <- merge(
 head(sociodemographic_access[, c("id_hex", "schools", "pop_count", "decile")])
 ```
 
-With the information on the income decile of each hexagon, we can analyze the distribution of accessibility levels by income groups. For this, we need to weigh the accessibility level of each origin by the number of people who reside there. This will tell us the accessibility distribution of the people located in cells with a given income decile. If we do not weigh the accessibility estimate by the population, we would have the accessibility distribution of the cells per se, and not of the people located in each cell. Since our analysis focuses on people, and not on the spatial units in which they are aggregated, weighting the accessibility levels by the population count is an essential part of it. The accessibility distribution of each decile is shown below.
+With the information on the income decile of each hexagon, we can analyze the distribution of accessibility levels by income groups. For this, we need to weigh the accessibility level of each origin by the number of people who reside there. This will tell us the accessibility distribution of the people located in cells with a given income decile. If we do not weigh the accessibility estimate by the population, we will have the accessibility distribution of the cells per se, and not of the people located in each cell. Since our analysis focuses on people, and not on the spatial units in which they are aggregated, weighting the accessibility levels by the population count is an essential part of it. The accessibility distribution of each decile is shown below.
 
 ```{r}
+#| label: fig-access_boxplot
+#| fig-cap: Distribution of accessibility to schools in central Porto Alegre by income decile.
 ggplot(subset(sociodemographic_access, !is.na(decile))) +
   geom_boxplot(
   	aes(
@@ -379,4 +389,4 @@ ggplot(subset(sociodemographic_access, !is.na(decile))) +
   theme_minimal()
 ```
 
-The chart is very clear: lower-income residents tend to have considerably lower accessibility levels than high-income residents. This is a common pattern in virtually all Brazilian cities [@pereira2019desigualdades] and which results, to a large extent, from the spatial distribution patterns of low- and high-income communities: the wealthiest usually live in high-valued areas, close to large employment hubs (and opportunities for education, health, leisure, etc) and with relatively better supply of public transport. The poorest, on the other hand, tend to live in cities' outskirts, where the land value is lower. Consequently, they also tend to live farther away from large concentrations of opportunities. Additionally, in most cases the provision of mid- and high-capacity public transport services is worse in regions with high concentrations of low-income residents. As a result, low-income communities have on average much lower accessibility than wealthier communities, as the chart illustrates.
+@fig-access_boxplot is very clear: lower-income residents tend to have considerably lower accessibility levels than high-income residents. This is a common pattern in virtually all Brazilian cities [@pereira2019desigualdades] and which results, to a large extent, from the spatial distribution patterns of low- and high-income communities: the wealthiest usually live in high-valued areas, close to large employment hubs (and opportunities for education, health, leisure, etc) and with relatively better public transport services. The poorest, on the other hand, tend to live in the cities' outskirts, where the land value is lower and the distances from the large concentrations of opportunities are larger. Additionally, in most cases the provision of mid- and high-capacity public transport services is worse in regions with high concentrations of low-income residents. As a result, low-income communities have, on average, much lower accessibility levels than wealthier communities, as the chart illustrates.
