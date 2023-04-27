@@ -366,9 +366,9 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(processx<span class="sc">::</span><span class="fu">run</span>(<span class="st">"java"</span>, <span class="at">args =</span> <span class="st">"-version"</span>)<span class="sc">$</span>stderr)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>openjdk version "11.0.18" 2023-01-17 LTS
-OpenJDK Runtime Environment Zulu11.62+17-CA (build 11.0.18+10-LTS)
-OpenJDK 64-Bit Server VM Zulu11.62+17-CA (build 11.0.18+10-LTS, mixed mode)</code></pre>
+<pre><code>openjdk version "11.0.19" 2023-04-18 LTS
+OpenJDK Runtime Environment Zulu11.64+19-CA (build 11.0.19+7-LTS)
+OpenJDK 64-Bit Server VM Zulu11.64+19-CA (build 11.0.19+7-LTS, mixed mode)</code></pre>
 </div>
 </div>
 <p>Como podemos ver, a versão instalada no livro é compatível com o <code>{r5r}</code>. Caso a versão instalada na sua máquina não seja (resultado do código mencionando a versão 12 ou 1.8.0, por exemplo), será necessário atualizar o Java para a versão 11.</p>
@@ -427,7 +427,7 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 <p>Esses dados devem ser salvos em uma mesma pasta que, preferencialmente, não contenha nenhum outro arquivo. Como veremos adiante, o <code>{r5r}</code> combina todos os dados salvos nessa pasta para criar uma rede de transporte multimodal que é utilizada no roteamento de viagens entre pares origem-destino e, consequentemente, no cálculo das matrizes de tempo de viagem. Note que é possível ter mais de um arquivo GTFS na mesma pasta: nesse caso, o <code>{r5r}</code> considera as redes de transporte público de todos os <em>feeds</em> de forma conjunta. No entanto, a rede viária e a topografia da área de estudo devem ser descritas por um único arquivo cada. Assumindo que os <em>scripts</em> de R estejam em uma pasta chamada <code>R</code>, uma possível organização dos arquivos segue o esquema a seguir:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>/tmp/RtmplnuFZs/projeto_acessibilidade
+<pre><code>/tmp/RtmpcTb8hE/projeto_acessibilidade
 ├── R
 │   ├── script1.R
 │   └── script2.R
@@ -442,7 +442,7 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pasta <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/poa"</span>, <span class="at">package =</span> <span class="st">"r5r"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>pasta</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "/home/runner/work/intro_access_book/intro_access_book/renv/library/R-4.2/x86_64-pc-linux-gnu/r5r/extdata/poa"</code></pre>
+<pre><code>[1] "/home/runner/work/intro_access_book/intro_access_book/renv/library/R-4.3/x86_64-pc-linux-gnu/r5r/extdata/poa"</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -450,7 +450,7 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>/home/runner/work/intro_access_book/intro_access_book/renv/library/R-4.2/x86_64-pc-linux-gnu/r5r/extdata/poa
+<pre><code>/home/runner/work/intro_access_book/intro_access_book/renv/library/R-4.3/x86_64-pc-linux-gnu/r5r/extdata/poa
 ├── poa_elevation.tif
 ├── poa_eptc.zip
 ├── poa_hexgrid.csv
@@ -480,7 +480,7 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>fs<span class="sc">::</span><span class="fu">dir_tree</span>(pasta)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>/home/runner/work/intro_access_book/intro_access_book/renv/library/R-4.2/x86_64-pc-linux-gnu/r5r/extdata/poa
+<pre><code>/home/runner/work/intro_access_book/intro_access_book/renv/library/R-4.3/x86_64-pc-linux-gnu/r5r/extdata/poa
 ├── fares
 │   └── fares_poa.zip
 ├── network.dat
@@ -569,7 +569,7 @@ Qualidade dos dados do <em>OpenStreetMap</em>
 </div>
 </section><section id="custo-mínimo-de-viagem" class="level3" data-number="3.2.2"><h3 data-number="3.2.2" class="anchored" data-anchor-id="custo-mínimo-de-viagem">
 <span class="header-section-number">3.2.2</span> Custo mínimo de viagem</h3>
-<p>A função <code>cost_to_closest()</code>, por sua vez, calcula o custo mínimo de viagem necessário para alcançar um determinado número de oportunidades. Com o código a seguir, por exemplo, calculamos o tempo de viagem mínimo para alcançar o hospital mais próximo a partir de cada origem.</p>
+<p>A função <code>cost_to_closest()</code>, por sua vez, calcula o custo mínimo de viagem necessário para alcançar um determinado número de oportunidades. Com o código a seguir, por exemplo, calculamos o tempo de viagem mínimo para alcançar a escola mais próxima a partir de cada origem.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>custo_minimo <span class="ot">&lt;-</span> <span class="fu">cost_to_closest</span>(</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">travel_matrix =</span> matriz,</span>
