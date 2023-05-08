@@ -198,7 +198,7 @@ Arquivo opcional usado para descrever a frequência de cada viagem dentro de um 
 knitr::kable(head(gtfs$frequencies))
 ```
 
-A viagem cuja frequência está sendo descrita é identificada pela coluna `trip_id`. Novamente, um mesmo identificador pode aparecer em várias observações da tabela, pois a especificação GTFS prevê que uma mesma viagem pode ter frequências diferentes ao longo do dia (como em horários de pico e fora-pico, por exemplo). Assim, cada linha da tabela se refere à frequência de um determinado `trip_id` entre um intervalo de tempo especificado pelas colunas `start_time` e `end_time`.
+A viagem cuja frequência está sendo descrita é identificada pela coluna `trip_id`. Novamente, um mesmo identificador pode aparecer em várias observações da tabela, pois a especificação GTFS prevê que uma mesma viagem pode ter frequências diferentes ao longo do dia (como em horários de pico e fora-pico, por exemplo). Assim, cada linha da tabela se refere à frequência de uma determinada viagem dentro de um intervalo de tempo especificado pelas colunas `start_time` e `end_time`.
 
 Dentro do período especificado por essas duas colunas, a viagem possui um *headway* detalhado na coluna `headway_secs`. O *headway* é o tempo que separa a passagem de dois veículos que operam a mesma linha de transporte público. No caso desse arquivo, esse tempo deve ser especificado em segundos. Um valor de `720` entre 4h e 5h, portanto, significa que a viagem `CPTM L07-0` ocorre de 12 em 12 minutos dentro desse período.
 
