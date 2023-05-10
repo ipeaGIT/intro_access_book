@@ -76,7 +76,7 @@ nrow(velocidades)
 # calcula as velocidade de duas viagens específicas
 velocidades <- get_trip_speed(gtfs, trip_id = c("CPTM L07-0", "2002-10-0"))
 
-head(velocidades)
+velocidades
 ```
 
 Calcular a velocidade de uma viagem requer que saibamos o seu comprimento e em quanto tempo ela foi realizada. Para isso, a `get_trip_speed()` utiliza duas outras funções do `{gtfstools}` por trás dos panos: a `get_trip_length()` e a `get_trip_duration()`. O funcionamento das duas é muito parecido com o mostrado anteriormente, calculando o comprimento/duração de todas as viagens por padrão, ou de apenas algumas selecionadas, caso desejado. A seguir, mostramos seus comportamentos padrões:
@@ -161,7 +161,7 @@ O pacote `{gtfstools}` traz diversas funções para facilitar a filtragem de arq
 - `filter_by_time_of_day()`; e
 - `filter_by_sf()`.
 
-**Filtro por identificadores**
+### Filtro por identificadores
 
 As sete primeiras funções mencionadas anteriormente são utilizadas de forma muito similar. Devemos especificar um vetor de identificadores que é usado para manter no objeto GTFS apenas os registros relacionados a esses identificadores. O exemplo a seguir demonstra essa funcionalidade com a `filter_by_trip_id()`:
 
@@ -204,7 +204,7 @@ head(unique(gtfs_filtrado$shapes$shape_id))
 
 Como podemos ver, as viagens especificadas, bem como suas trajetórias, não estão presentes no GTFS filtrado. A mesma lógica aqui demonstrada com a `filter_by_trip_id()` é válida para as funções que filtram objetos GTFS pelos identificadores `agency_id`, `route_id`, `service_id`, `shape_id`, `stop_id` e `route_type`.
 
-**Filtro por dia e hora**
+### Filtro por dia e hora
 
 Outra operação que recorrentemente aparece em análises que envolvem dados GTFS é a de manter serviços que funcionem apenas em determinados horários do dia ou dias da semana. Para isso, o pacote disponibiliza as funções `filter_by_weekday()` e `filter_by_time_of_day()`.
 
@@ -283,7 +283,7 @@ head(
 )
 ```
 
-**Filtro espacial**
+### Filtro espacial
 
 Por fim, o `{gtfstools}` também disponibiliza uma função que permite filtrar o objeto GTFS usando um polígono espacial. A `filter_by_sf()` recebe um objeto do tipo `sf`/`sfc` (representação espacial criada pelo pacote [`{sf}`](https://r-spatial.github.io/sf/)), ou sua *bounding box*, e mantém os registros cujas viagens são selecionadas por uma operação espacial que também deve ser especificada. Embora aparentemente complicado, esse processo de filtragem é compreendido com facilidade quando apresentado visualmente. Para isso, vamos filtrar o GTFS da SPTrans pela *bounding box* da trajetória `68962`. Com o código a seguir, apresentamos a distribuição espacial dos dados não filtrados, com a *bounding box* destacada em vermelho (@fig-shapes_distribution):
 
