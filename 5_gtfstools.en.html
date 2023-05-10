@@ -89,13 +89,13 @@ gtag('js', new Date());
 gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </script><meta property="og:title" content="Introduction to urban accessibility - 5  GTFS data manipulation and visualization">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://ipeagit.github.io/aop_curso/en/5_gtfstools.en_files/figure-html/unnamed-chunk-16-1.png">
+<meta property="og:image" content="https://ipeagit.github.io/aop_curso/en/5_gtfstools.en_files/figure-html/fig-shapes_distribution-1.png">
 <meta property="og:site-name" content="Introduction to urban accessibility">
 <meta property="og:image:height" content="3000">
 <meta property="og:image:width" content="4200">
 <meta name="twitter:title" content="Introduction to urban accessibility - 5  GTFS data manipulation and visualization">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://ipeagit.github.io/aop_curso/en/5_gtfstools.en_files/figure-html/unnamed-chunk-16-1.png">
+<meta name="twitter:image" content="https://ipeagit.github.io/aop_curso/en/5_gtfstools.en_files/figure-html/fig-shapes_distribution-1.png">
 <meta name="twitter:image-height" content="3000">
 <meta name="twitter:image-width" content="4200">
 <meta name="twitter:card" content="summary_large_image">
@@ -288,7 +288,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   <ul>
 <li><a href="#reading-and-manipulating-gtfs-files" id="toc-reading-and-manipulating-gtfs-files" class="nav-link active" data-scroll-target="#reading-and-manipulating-gtfs-files"><span class="header-section-number">5.1</span> Reading and manipulating GTFS files</a></li>
   <li><a href="#calculating-trip-speed" id="toc-calculating-trip-speed" class="nav-link" data-scroll-target="#calculating-trip-speed"><span class="header-section-number">5.2</span> Calculating trip speed</a></li>
-  <li><a href="#combining-and-filtering-feeds" id="toc-combining-and-filtering-feeds" class="nav-link" data-scroll-target="#combining-and-filtering-feeds"><span class="header-section-number">5.3</span> Combining and filtering feeds</a></li>
+  <li>
+<a href="#combining-and-filtering-feeds" id="toc-combining-and-filtering-feeds" class="nav-link" data-scroll-target="#combining-and-filtering-feeds"><span class="header-section-number">5.3</span> Combining and filtering feeds</a>
+  <ul class="collapse">
+<li><a href="#filtering-by-identifiers" id="toc-filtering-by-identifiers" class="nav-link" data-scroll-target="#filtering-by-identifiers"><span class="header-section-number">5.3.1</span> Filtering by identifiers</a></li>
+  <li><a href="#filtering-by-day-of-the-week-and-time-of-the-day" id="toc-filtering-by-day-of-the-week-and-time-of-the-day" class="nav-link" data-scroll-target="#filtering-by-day-of-the-week-and-time-of-the-day"><span class="header-section-number">5.3.2</span> Filtering by day of the week and time of the day</a></li>
+  <li><a href="#filtering-using-a-spatial-extent" id="toc-filtering-using-a-spatial-extent" class="nav-link" data-scroll-target="#filtering-using-a-spatial-extent"><span class="header-section-number">5.3.3</span> Filtering using a spatial extent</a></li>
+  </ul>
+</li>
   <li><a href="#validating-gtfs-data" id="toc-validating-gtfs-data" class="nav-link" data-scroll-target="#validating-gtfs-data"><span class="header-section-number">5.4</span> Validating GTFS data</a></li>
   <li><a href="#gtfstools-workflow-example-spatial-visualization-of-headways" id="toc-gtfstools-workflow-example-spatial-visualization-of-headways" class="nav-link" data-scroll-target="#gtfstools-workflow-example-spatial-visualization-of-headways"><span class="header-section-number">5.5</span> <code>{gtfstools}</code> workflow example: spatial visualization of headways</a></li>
   </ul>
@@ -314,7 +321,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </div>
   
 
-</header><p>GTFS data is frequently used in various types of analyses that involve public transport systems and which involve a few common operations. The Access to Opportunities Project team has developed the <a href="https://github.com/ipeaGIT/gtfstools"><code>{gtfstools}</code></a> R package, which provides several functions that help running some of these operations to facilitate feed manipulation and exploration.</p>
+</header><p>GTFS data is frequently used in various types of analyses that involve a few common elements. The Access to Opportunities Project team has developed the <a href="https://github.com/ipeaGIT/gtfstools"><code>{gtfstools}</code></a> R package, which provides several functions that help tackling repetitive tasks and operations and facilitate feed manipulation and exploration.</p>
 <p>In this chapter, we’ll go through some of the most frequently used package features. To do this, we will use a sample of the SPTrans feed presented in the previous chapter, and which is included in the package installation.</p>
 <section id="reading-and-manipulating-gtfs-files" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="reading-and-manipulating-gtfs-files">
 <span class="header-section-number">5.1</span> Reading and manipulating GTFS files</h2>
@@ -349,7 +356,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 6: CPTM L09        USD CPTM L09-1        OSASCO            1    17851</code></pre>
 </div>
 </div>
-<p>Tables within a GTFS object can be easily manipulated using the <code>{dplyr}</code> or <code>{data.table}</code> packages, for example. In this book, we opted to show how to do this using the <code>{data.table}</code> package syntax. This package offers several useful features, primarily for manipulating tables with a large number of records, such as updating columns by reference, very fast row subsets and efficient data aggregation<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. For example, we can use the code below to add 100 seconds to all the headways listed in the <code>frequencies</code> table and later reverse this change:</p>
+<p>Tables within a GTFS object can be easily manipulated using the <code>{dplyr}</code> or <code>{data.table}</code> packages, for example. In this book, we opted to use the <code>{data.table}</code> syntax. This package offers several useful features, primarily for manipulating tables with a large number of records, such as updating columns by reference, very fast row subsets and efficient data aggregation<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. For example, we can use the code below to add 100 seconds to all the headways listed in the <code>frequencies</code> table and later reverse this change:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># saves original headways</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>original_headway <span class="ot">&lt;-</span> gtfs<span class="sc">$</span>frequencies<span class="sc">$</span>headway_secs</span>
@@ -379,7 +386,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 3: CPTM L07-0   06:00:00 06:59:00          360</code></pre>
 </div>
 </div>
-<p>After editing a GTFS object in R, we often want to use the processed GTFS to perform different analyses. In order to do this, we frequently need the GTFS file in <code>.zip</code> format again, and not as a list of tables in an R session. To do this, <code>{gtfstools}</code> includes the <code>write_gtfs()</code> function to transform GTFS objects that exist in an R session into GTFS files saved to disk. To use this function, we only need to list the object that should be written to disk and the file path where it should be written to:</p>
+<p>After editing a GTFS object in R, we often want to use the processed GTFS to perform different analyses. In order to do this, we frequently need the GTFS file in <code>.zip</code> format again, and not as a list of tables in an R session. To transform GTFS objects that exist in an R session into GTFS files saved to disk, <code>{gtfstools}</code> includes the <code>write_gtfs()</code> function. To use this function, we only need to pass the object that should be written to disk and the file path where it should be written to:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># points to the path where the GTFS should be written to</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>export_path <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="st">"new_gtfs"</span>, <span class="at">fileext =</span> <span class="st">".zip"</span>)</span>
@@ -391,20 +398,20 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>zip<span class="sc">::</span><span class="fu">zip_list</span>(export_path)[, <span class="fu">c</span>(<span class="st">"filename"</span>, <span class="st">"compressed_size"</span>, <span class="st">"timestamp"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         filename compressed_size           timestamp
-1      agency.txt             112 2023-05-08 20:58:10
-2    calendar.txt             129 2023-05-08 20:58:10
-3 frequencies.txt            2381 2023-05-08 20:58:10
-4      routes.txt             659 2023-05-08 20:58:10
-5      shapes.txt          160470 2023-05-08 20:58:10
-6  stop_times.txt            7907 2023-05-08 20:58:10
-7       stops.txt           18797 2023-05-08 20:58:10
-8       trips.txt             717 2023-05-08 20:58:10</code></pre>
+1      agency.txt             112 2023-05-10 20:32:24
+2    calendar.txt             129 2023-05-10 20:32:24
+3 frequencies.txt            2381 2023-05-10 20:32:24
+4      routes.txt             659 2023-05-10 20:32:24
+5      shapes.txt          160470 2023-05-10 20:32:24
+6  stop_times.txt            7907 2023-05-10 20:32:24
+7       stops.txt           18797 2023-05-10 20:32:24
+8       trips.txt             717 2023-05-10 20:32:24</code></pre>
 </div>
 </div>
 </section><section id="calculating-trip-speed" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="calculating-trip-speed">
 <span class="header-section-number">5.2</span> Calculating trip speed</h2>
-<p>GTFS files are often used in public transport routing applications and to inform the timetable of different routes in a given region to potential passengers. Feeds must, therefore, accurately describe the schedule of public transport trips.</p>
-<p>One key piece of information of a GTFS quality is the average speed of its trips. To check this information <code>{gtfstools}</code> package includes the function <code>get_trip_speed()</code>. By default, the function returns the speed (in km/h) of all trips included in the feed, but one can choose to calculate the speed of selected trips with the <code>trip_id</code> parameter:</p>
+<p>GTFS files are often used in public transport routing applications and to inform the timetable of different routes in a given region to potential passengers. Feeds must, therefore, accurately describe the schedule and the operational speed of public transport trips.</p>
+<p>To calculate the average speed of the trips described in a feed, <code>{gtfstools}</code> package includes the function <code>get_trip_speed()</code>. By default, the function returns the speed (in km/h) of all trips included in the feed, but one can choose to calculate the speed of selected trips with the <code>trip_id</code> parameter:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculates the speeds of all trips</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>speeds <span class="ot">&lt;-</span> <span class="fu">get_trip_speed</span>(gtfs)</span>
@@ -426,14 +433,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculates the speeds of two specific trips</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>speeds <span class="ot">&lt;-</span> <span class="fu">get_trip_speed</span>(gtfs, <span class="at">trip_id =</span> <span class="fu">c</span>(<span class="st">"CPTM L07-0"</span>, <span class="st">"2002-10-0"</span>))</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(speeds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>speeds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      trip_id origin_file     speed
 1:  2002-10-0      shapes  8.952511
 2: CPTM L07-0      shapes 26.787768</code></pre>
 </div>
 </div>
-<p>To calculate the speed of a trip we need to know its length and how long it takes to travel from its first to its last stop. Behind the scenes, <code>get_trip_speed()</code> uses two other functions from <code>{gtfstools}</code> toolset: <code>get_trip_length()</code> and <code>get_trip_duration()</code>. The usage of both is very similar to what has been shown before, returning the length/duration of all trips by default, or of for a few specified trips. Below, we show their default behavior:</p>
+<p>To calculate the speed of a trip, we need to know its length and how long it takes to travel from its first to its last stop. Behind the scenes, <code>get_trip_speed()</code> uses two other functions from <code>{gtfstools}</code> toolset: <code>get_trip_length()</code> and <code>get_trip_duration()</code>. The usage of both is very similar to what has been shown before, returning the length/duration of all trips by default or of a few selected trips if desired. Below, we show their default behavior:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculates the length of all trips</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>lengths <span class="ot">&lt;-</span> <span class="fu">get_trip_length</span>(gtfs, <span class="at">file =</span> <span class="st">"shapes"</span>)</span>
@@ -462,7 +469,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 6: 4491-10-0       69</code></pre>
 </div>
 </div>
-<p>Just as <code>get_trip_speed()</code> returns speeds in km/h by default, <code>get_trip_length()</code> returns lengths in km and <code>get_trip_duration()</code> returns the duration in minutes. These units can be adjusted with the <code>unit</code> argument, present in all three functions.</p>
+<p>Just as <code>get_trip_speed()</code> returns speeds in km/h by default, <code>get_trip_length()</code> returns lengths in km and <code>get_trip_duration()</code> returns the duration in minutes. These units can be adjusted with the <code>unit</code> parameter, present in all three functions.</p>
 </section><section id="combining-and-filtering-feeds" class="level2" data-number="5.3"><h2 data-number="5.3" class="anchored" data-anchor-id="combining-and-filtering-feeds">
 <span class="header-section-number">5.3</span> Combining and filtering feeds</h2>
 <p>The tasks of processing and manipulating GTFS files are often performed manually, which may increase the chances of leaving minor inconsistencies or errors in the data. A common issue in some GTFS feeds is the presence of duplicate records in the same table. SPTrans’ feed, for example, contains duplicate records both in <code>agency.txt</code> and in <code>calendar.txt</code>:</p>
@@ -506,7 +513,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 12: 2008-01-01 2020-05-01</code></pre>
 </div>
 </div>
-<p><code>{gtfstools}</code> includes the <code>remove_duplicates()</code> function to keep only unique entries in all tables of the feed. This function takes a GTFS object as input and returns the same object without duplicate entries:</p>
+<p><code>{gtfstools}</code> includes the <code>remove_duplicates()</code> function to keep only unique entries in all tables of the feed. This function takes a GTFS object as input and returns the same object without duplicates:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>no_dups_gtfs <span class="ot">&lt;-</span> <span class="fu">remove_duplicates</span>(gtfs)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -535,7 +542,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 6: 2008-01-01 2020-05-01</code></pre>
 </div>
 </div>
-<p>We often have to deal with multiple feeds describing the same study area - for example, when the bus and the rail systems of a single city are described in separate GTFS files. In such cases, we may want to merge both files into a single feed to reduce the data processing effort. To help us with that, <code>{gtfstools}</code> includes the <code>merge_gtfs()</code> function. The example below shows the output of merging SPtrans’ feed (without duplicate entries) with EPTC’s (Porto Alegre’s Transport and Traffic Public Company):</p>
+<p>We often have to deal with multiple feeds describing the same study area. For example, when the bus and the rail systems of a single city are described in separate GTFS files. In such cases, we may want to merge both files into a single feed to reduce the data processing effort. To help us with that, <code>{gtfstools}</code> includes the <code>merge_gtfs()</code> function. The example below shows the output of merging SPtrans’ feed (without duplicate entries) with EPTC’s feed:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reads Porto Alegre's GTFS</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>poa_path <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata/poa_gtfs.zip"</span>, <span class="at">package =</span> <span class="st">"gtfstools"</span>)</span>
@@ -574,7 +581,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 2:          156 http://www2.portoalegre.rs.gov.br/eptc/default.php?p_secao=155</code></pre>
 </div>
 </div>
-<p>We can see that the tables of both feeds are combined into a single one. This is the case when two (or more) GTFS objects contain the same table (<code>agency</code>, in the example). When a particular table is present in only one of the feeds, the function keeps this table in the output. That’s the case of the <code>frequencies</code> table, in our example, which exists only in SPTrans’ feed:</p>
+<p>We can see that the tables of both feeds are combined into a single one. This is the case when two (or more) GTFS objects contain the same table (<code>agency</code>, in the example). When a particular table is present in only one of the feeds, the function copies this table to the output. That’s the case of the <code>frequencies</code> table, in our example, which exists only in SPTrans’ feed:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(poa_gtfs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -596,22 +603,33 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
-<p>Another frequently used operation when dealing with GTFS files is filtering the data. Feeds are often used to describe large-scale public transport networks, which may result in complex and slow data manipulation, analysis and sharing. Thus, planners and researchers often work with a feed subset. If we want to measure the performance of a transport network during the morning peak, for example, we can filter our GTFS data to keep only the observations that relate to trips that run within this period.</p>
-<p><code>{gtfstools}</code> includes lots of functions to filter GTFS data. The currently available filtering functions are:</p>
+<p>Filtering feeds to keep only a few entries within each table is another operation that frequently comes up when dealing with GTFS data. Feeds are often used to describe large-scale public transport networks, which may result in complex and slow data manipulation, analysis and sharing. Thus, planners and researchers often work with feeds’ subsets. If we want to measure the performance of a transport network during the morning peak, for example, we can filter our GTFS data to keep only the observations related to trips that run within this period.</p>
+<p><code>{gtfstools}</code> includes lots of functions to filter GTFS data. They are:</p>
 <ul>
-<li><code>filter_by_agency_id()</code></li>
-<li><code>filter_by_route_id()</code></li>
-<li><code>filter_by_service_id()</code></li>
-<li><code>filter_by_shape_id()</code></li>
-<li><code>filter_by_stop_id()</code></li>
-<li><code>filter_by_trip_id()</code></li>
-<li><code>filter_by_route_type()</code></li>
-<li><code>filter_by_weekday()</code></li>
-<li><code>filter_by_time_of_day()</code></li>
-<li><code>filter_by_sf()</code></li>
+<li>
+<code>filter_by_agency_id()</code>;</li>
+<li>
+<code>filter_by_route_id()</code>;</li>
+<li>
+<code>filter_by_service_id()</code>;</li>
+<li>
+<code>filter_by_shape_id()</code>;</li>
+<li>
+<code>filter_by_stop_id()</code>;</li>
+<li>
+<code>filter_by_trip_id()</code>;</li>
+<li>
+<code>filter_by_route_type()</code>;</li>
+<li>
+<code>filter_by_weekday()</code>;</li>
+<li>
+<code>filter_by_time_of_day()</code>;</li>
+<li>
+<code>filter_by_sf()</code>.</li>
 </ul>
-<p><strong>Filtering by identifiers</strong></p>
-<p>The six first function from the above list (<code>filter_by_agency_id()</code>, <code>filter_by_route_id()</code>, <code>filter_by_service_id()</code>, <code>filter_by_shape_id()</code>, <code>filter_by_stop_id()</code> e <code>filter_by_trip_id()</code>) work very similarly. They take as input a vector of identifiers and return a GTFS object whose table entries are related to the specified ids. The example below demonstrates the functionality with <code>filter_by_trip_id()</code>:</p>
+<section id="filtering-by-identifiers" class="level3" data-number="5.3.1"><h3 data-number="5.3.1" class="anchored" data-anchor-id="filtering-by-identifiers">
+<span class="header-section-number">5.3.1</span> Filtering by identifiers</h3>
+<p>The seven first functions from the above list work very similarly. They take as input a vector of identifiers and return a GTFS object whose table entries are related to the specified ids. The example below demonstrates this functionality with <code>filter_by_trip_id()</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># checks pre-filter object size </span></span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>utils<span class="sc">::</span><span class="fu">object.size</span>(gtfs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -676,11 +694,12 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </div>
 <p>We can see that the specified trips, as well as their shapes, are not present in the filtered GTFS anymore. The same logic, demonstrated here with <code>filter_by_trip_id()</code>, applies to the functions that filter GTFS objects by <code>agency_id</code>, <code>route_id</code>, <code>service_id</code>, <code>shape_id</code>, <code>stop_id</code> and <code>route_type</code>.</p>
-<p><strong>Filtering by day of the week and time of the day</strong></p>
-<p>Another common operation when dealing with GTFS data is subsetting feeds to keep services that only happen during certain times of the day or days of the week. The package includes the <code>filter_by_weekday()</code> and <code>filter_by_time_of_day()</code> functions to perform these filters.</p>
-<p><code>filter_by_weekday()</code> takes as input the days of the week whose services that operate on them should be kept (or dropped). The function also includes a <code>combine</code> parameter, which defines how filters for multi-days should work. When this argument receives the value <code>"and"</code>, only services that operate on every single specified day are kept. When it receives the value <code>"or"</code>, services that operate on at least one of the days are kept:</p>
+</section><section id="filtering-by-day-of-the-week-and-time-of-the-day" class="level3" data-number="5.3.2"><h3 data-number="5.3.2" class="anchored" data-anchor-id="filtering-by-day-of-the-week-and-time-of-the-day">
+<span class="header-section-number">5.3.2</span> Filtering by day of the week and time of the day</h3>
+<p>Another common operation when dealing with GTFS data is subsetting feeds to keep services that only happen during certain times of the day or days of the week. To do this, the package includes the <code>filter_by_weekday()</code> and <code>filter_by_time_of_day()</code> functions.</p>
+<p><code>filter_by_weekday()</code> takes as input the days of the week whose services that operate on them should be kept (or dropped). The function also includes a <code>combine</code> parameter, which defines how multi-days filters should work. When this argument receives the value <code>"and"</code>, only services that operate on every single specified day are kept. When it receives the value <code>"or"</code>, services that operate on at least one of the days are kept:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># keeps services that operate on both on saturday AND sunday</span></span>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># keeps services that operate on both saturday AND sunday</span></span>
 <span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>filtered_gtfs <span class="ot">&lt;-</span> <span class="fu">filter_by_weekday</span>(</span>
 <span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>  no_dups_gtfs,</span>
 <span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">weekday =</span> <span class="fu">c</span>(<span class="st">"saturday"</span>, <span class="st">"sunday"</span>),</span>
@@ -752,7 +771,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 6: CPTM L07-0       05:44:00     05:44:00</code></pre>
 </div>
 </div>
-<p>Filtering the <code>stop_times</code> table can work in two different ways. One is to keep entire trips that <em>cross</em> the specified time window. The other is to keep only the timetable entries that take place <em>inside</em> this window (default behavior). This behavior is controlled by the <code>full_trips</code> parameter, as shown below (please pay attention to the times and stops present in each example):</p>
+<p>Filtering the <code>stop_times</code> table can work in two different ways. One is to keep trips that <em>cross</em> the specified time window intact. The other is to keep only the timetable entries that take place <em>inside</em> this window (default behavior). This behavior is controlled by the <code>full_trips</code> parameter, as shown below (please pay attention to the times and stops present in each example):</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># keeps any trips that cross the 5am to 6am window intact</span></span>
 <span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>filtered_gtfs <span class="ot">&lt;-</span> <span class="fu">filter_by_time_of_day</span>(</span>
@@ -801,8 +820,9 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 6: CPTM L07-0       05:44:00     05:44:00            14</code></pre>
 </div>
 </div>
-<p><strong>Filtering using a spatial extent</strong></p>
-<p>Finally, <code>{gtfstools}</code> also includes a function that allows one to filter a GTFS object using a spatial polygon. <code>filter_by_sf()</code> takes an <code>sf</code>/<code>sfc</code> object (spatial representation created by the <a href="https://r-spatial.github.io/sf/"><code>{sf}</code></a> package), or its bounding box, and keeps the entries related to trips depending on their position in relation to that spatial polygon. Although this might seem complicated, this filtering process is fairly easy to grasp once we illustrate it with an example. To demonstrate this function, we are going to filter SPTrans’ feed using the bounding box of shape <code>68962</code>. With the code snippet below we show the spatial distribution of unfiltered data along with the bounding box in red:</p>
+</section><section id="filtering-using-a-spatial-extent" class="level3" data-number="5.3.3"><h3 data-number="5.3.3" class="anchored" data-anchor-id="filtering-using-a-spatial-extent">
+<span class="header-section-number">5.3.3</span> Filtering using a spatial extent</h3>
+<p>Finally, <code>{gtfstools}</code> also includes a function that allows one to filter a GTFS object using a spatial polygon. <code>filter_by_sf()</code> takes an <code>sf</code>/<code>sfc</code> object (spatial representation created by the <a href="https://r-spatial.github.io/sf/"><code>{sf}</code></a> package), or its bounding box, and keeps the entries related to trips selected by their position in relation to that spatial polygon. Although this might seem complicated, this filtering process is fairly easy to grasp once we illustrate it with an example. To demonstrate this function, we are going to filter SPTrans’ feed using the bounding box of shape <code>68962</code>. With the code snippet below we show the spatial distribution of unfiltered data along with the bounding box in red:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -819,7 +839,10 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb73-13"><a href="#cb73-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> bbox_geometry, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
 <span id="cb73-14"><a href="#cb73-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="5_gtfstools.en_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-shapes_distribution" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="5_gtfstools.en_files/figure-html/fig-shapes_distribution-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption class="figure-caption">Figure 5.1: Shapes spatial distribution overlayed by the bounding box of shape <code>68962</code></figcaption></figure>
+</div>
 </div>
 </div>
 <p>Please note that we have used the <code>convert_shapes_to_sf()</code> function, also included in <code>{gtfstools}</code>, to convert the shapes described in the feed into a <code>sf</code> spatial object. By default, <code>filter_by_sf()</code> keeps all entries related to trips that intersect with the specified polygon:</p>
@@ -832,7 +855,10 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb74-6"><a href="#cb74-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> bbox_geometry, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
 <span id="cb74-7"><a href="#cb74-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="5_gtfstools.en_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-intersect_distribution" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="5_gtfstools.en_files/figure-html/fig-intersect_distribution-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption class="figure-caption">Figure 5.2: Spatial distribution of shapes that intersect with the bounding box of shape <code>68962</code></figcaption></figure>
+</div>
 </div>
 </div>
 <p>We can, however, specify different spatial operations to filter the feed. The code below shows how we can keep the entries related to trips that are <em>contained by</em> the specified polygon:</p>
@@ -845,24 +871,27 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb75-6"><a href="#cb75-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> bbox_geometry, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
 <span id="cb75-7"><a href="#cb75-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="5_gtfstools.en_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-contained_distribution" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="5_gtfstools.en_files/figure-html/fig-contained_distribution-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption class="figure-caption">Figure 5.3: Spatial distribution of shapes contained by the bounding box of shape <code>68962</code></figcaption></figure>
 </div>
 </div>
-</section><section id="validating-gtfs-data" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="validating-gtfs-data">
+</div>
+</section></section><section id="validating-gtfs-data" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="validating-gtfs-data">
 <span class="header-section-number">5.4</span> Validating GTFS data</h2>
 <p>Transport planners and researchers often want to assess the quality of the GTFS data they are producing or using in their analyses. Are feeds structured following the <a href="https://github.com/MobilityData/GTFS_Schedule_Best-Practices">best practices</a> adopted by the larger GTFS community? Are tables and columns adequately formatted? Is the information described by the feed reasonable (trip speeds, stop locations, etc)? These are some of the questions that may arise when dealing with GTFS data.</p>
-<p>To answer these and other questions, <code>{gtfstools}</code> includes the <code>validate_gtfs()</code> function. This function works as a wrapper to MobilityData’s <a href="https://github.com/MobilityData/gtfs-validator">Canonical GTFS Validator</a>. The validator requires Java version 11 or higher to run. For more information on how to check the installed version of Java in your computer or on how to install the required version, please check <a href="3_calculating_access.en.qmd#r5r-installation">Chapter 3</a>.</p>
-<p>Using <code>validate_gtfs()</code> is very simple. First, we need to download the validator. To do this, we use the <code>download_validator()</code> function, included in the package, which receives the path to the directory where the validator should be saved to, and the version of the validator that should be downloaded (defaults to the latest available). The function returns the path to the downloaded validator:</p>
+<p>To answer these and other questions, <code>{gtfstools}</code> includes the <code>validate_gtfs()</code> function. This function works as a wrapper to MobilityData’s <a href="https://github.com/MobilityData/gtfs-validator">Canonical GTFS Validator</a>, which requires Java version 11 or higher to run<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<p>Using <code>validate_gtfs()</code> is very simple. First, we need to download the validator. To do this, we use the <code>download_validator()</code> function, included in the package, which receives the path to the directory where the validator should be saved to and the version of the validator that should be downloaded (defaults to the latest available). The function returns the path to the downloaded validator:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>tmpdir <span class="ot">&lt;-</span> <span class="fu">tempdir</span>()</span>
 <span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>validator_path <span class="ot">&lt;-</span> <span class="fu">download_validator</span>(tmpdir)</span>
 <span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>validator_path</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "/tmp/RtmpOqHzLI/gtfs-validator-v4.0.0.jar"</code></pre>
+<pre><code>[1] "/tmp/RtmpaWZtT7/gtfs-validator-v4.0.0.jar"</code></pre>
 </div>
 </div>
-<p>The second (and final) step consists in actually validating the GTFS data with <code>validate_gtfs()</code>. This function supports GTFS data in different formats: (a) as a GTFS object in an R session, (b) as a path to a local GTFS file in <code>.zip</code> format, (c) as an URL pointing to a feed or (d) as a directory containing unzipped GTFS tables. The function also takes a path to a directory where the validation result should be saved to, and the path to the validator that should be used in the process. In the example below we validate SPTrans’ feed from its path:</p>
+<p>The second (and final) step consists in actually validating the GTFS data with <code>validate_gtfs()</code>. This function supports GTFS data in different formats: i) as a GTFS object in an R session; ii) as a path to a local GTFS file in <code>.zip</code> format; iii) as an URL pointing to a feed; or iv) as a directory containing unzipped GTFS tables. The function also takes a path to a directory where the validation result should be saved to and the path to the validator that should be used in the process. In the example below, we validate SPTrans’ feed from its path:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>output_dir <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="st">"gtfs_validation"</span>)</span>
 <span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -881,27 +910,27 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p>We can see that the validation process generates a few output files:</p>
 <ul>
 <li>
-<code>report.html</code>, shown in <a href="#fig-report">Figure <span>5.1</span></a>, which summarizes the validation result in a nicely formatted HTML page (only available with validator version 3.1.0 or higher);</li>
+<code>report.html</code>, shown in <a href="#fig-report">Figure <span>5.4</span></a>, which summarizes the validation result in a nicely formatted HTML page (only available with validator version 3.1.0 or higher);</li>
 <li>
 <code>report.json</code>, which summarizes the same information, but in JSON format, which can be used to programatically parse and process the results;</li>
 <li>
 <code>system_errors.json</code>, which summarizes eventual system errors that may have happened during the validation process and may compromise the results;</li>
 <li>
-<code>validation_stderr.txt</code>, which lists informative messages sent by the validator tool, including a list of the tests conducted, eventual error messages, etc<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</li>
+<code>validation_stderr.txt</code>, which lists informative messages sent by the validator tool, including a list of the tests conducted, eventual error messages, etc<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</li>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-report" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="images/validator_report.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure 5.1: Validation report example</figcaption></figure>
+<figcaption class="figure-caption">Figure 5.4: Validation report example</figcaption></figure>
 </div>
 </div>
 </div>
 </section><section id="gtfstools-workflow-example-spatial-visualization-of-headways" class="level2" data-number="5.5"><h2 data-number="5.5" class="anchored" data-anchor-id="gtfstools-workflow-example-spatial-visualization-of-headways">
 <span class="header-section-number">5.5</span> <code>{gtfstools}</code> workflow example: spatial visualization of headways</h2>
-<p>We have shown in previous sections that <code>{gtfstools}</code> offers a large toolset to process and analyze GTFS files. The package also includes many other functions that could not be shown in this book due to space constraints. The complete list of functions available in <code>{gtfstools}</code> can be checked at the <a href="https://ipeagit.github.io/gtfstools/reference/index.html">package website</a>.</p>
-<p>In this final section of the chapter, we illustrates a workflow that combines various functions of <code>{gtfstools}</code> together to answer the following question: how are the times between vehicles operating the same route (the headways) spatially distributed in SPTrans’ GTFS?</p>
-<p>First, we need to define the scope of our analysis. In this example, we are only going to consider the services operating during the morning peak, between 7am and 9am, on a typical tuesday. To do this, we need to filter our feed:</p>
+<p>We have shown in previous sections that <code>{gtfstools}</code> offers a large toolset to process and analyze GTFS files. The package, however, also includes many other functions that could not be shown in this book due to space constraints<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</p>
+<p>In this final section of the chapter, we illustrate how to use the package to make more complex analyses. To do this, we present a workflow that combines various functions of <code>{gtfstools}</code> together to answer the following question: how are the times between vehicles operating the same route (the headways) spatially distributed in SPTrans’ GTFS?</p>
+<p>First, we need to define the scope of our analysis. In this example, we are only going to consider the services operating during the morning peak, between 7am and 9am, on a typical tuesday. Thus, we need to filter our feed:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>gtfs <span class="ot">&lt;-</span> <span class="fu">read_gtfs</span>(path)</span>
 <span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -911,7 +940,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter_by_weekday</span>(<span class="st">"tuesday"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb80-7"><a href="#cb80-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter_by_time_of_day</span>(<span class="at">from =</span> <span class="st">"07:00:00"</span>, <span class="at">to =</span> <span class="st">"09:00:00"</span>)</span>
 <span id="cb80-8"><a href="#cb80-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb80-9"><a href="#cb80-9" aria-hidden="true" tabindex="-1"></a><span class="co"># cheking the result</span></span>
+<span id="cb80-9"><a href="#cb80-9" aria-hidden="true" tabindex="-1"></a><span class="co"># checking the result</span></span>
 <span id="cb80-10"><a href="#cb80-10" aria-hidden="true" tabindex="-1"></a>filtered_gtfs<span class="sc">$</span>frequencies[trip_id <span class="sc">==</span> <span class="st">"2105-10-0"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     trip_id start_time end_time headway_secs
@@ -928,8 +957,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 2: 2008-01-01 2020-05-01</code></pre>
 </div>
 </div>
-<p>Next, we need to calculate the headways within this time interval. This information can be found at the <code>frequencies</code> table, though there is a factor we have to pay attention to: each trip is associated to more than one headway, as shown above (one entry for the 7am to 7:59am interval and another for the 8am to 8:59am interval). To solve this we are going to calculate the <em>average</em> headway from 7am to 9am.</p>
-<p>The first few <code>frequencies</code> rows in SPTrans’ feed seem to suggest that the headways are always associated to one-hour intervals, but this is neither a rule set in the official specification nor necessarily a practice adopted by other feed producers. Thus, we have to calculate the average headways weighted by the time duration of each headway. To do this, we need to multiply each headway by the size of the time interval during which it is valid, sum these multiplication results for each trip, and then divide the total amount by the total time interval (two hours in our case). To calculate the time intervals within which the headways are valid, we use the <code>convert_time_to_seconds()</code> function to calculate the start and end time of the time interval in seconds and subtract the latter by the former:</p>
+<p>Next, we need to calculate the headways within this time interval. This information can be found at the <code>frequencies</code> table, though there is a factor we have to pay attention to: each trip is associated to more than one headway, as shown above (one entry for the 7am to 7:59am interval and another for the 8am to 8:59am interval). To solve this, we are going to calculate the <em>average</em> headway from 7am to 9am.</p>
+<p>The first few <code>frequencies</code> rows in SPTrans’ feed seem to suggest that the headways are always associated to one-hour intervals, but this is neither a rule set in the official specification nor necessarily a practice adopted by other feed producers. Thus, we have to calculate the average headways weighted by the time duration of each headway. To do this, we need to multiply each headway by the size of the time interval during which it is valid, sum these multiplication results for each trip, and then divide this amount by the total time interval (two hours, in our case). To calculate the time intervals within which the headways are valid, we first use the <code>convert_time_to_seconds()</code> function to calculate the start and end time of the time interval in seconds and then subtract the latter by the former:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>filtered_gtfs <span class="ot">&lt;-</span> <span class="fu">convert_time_to_seconds</span>(filtered_gtfs)</span>
 <span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -965,7 +994,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 6: CPTM L09-1             240</code></pre>
 </div>
 </div>
-<p>Now we need to retrieve each trip geometry to later join this data to the average headways. To do this, we will use the <code>get_trip_geometry()</code> function, which returns the spatial geometries of the trips in the feed. This function allows us to retrieve the geometries for selected trip ids, so we are only going to apply the procedure to those trip ids present in the average headways table:</p>
+<p>Now we need to generate each trip geometry and join this data to the average headways. To do this, we will use the <code>get_trip_geometry()</code> function, which returns the spatial geometries of the trips in the feed. This function allows us to specify which trips we want to generate the geometries of, so we are only going to apply the procedure to the trips present in the average headways table:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>selected_trips <span class="ot">&lt;-</span> average_headway<span class="sc">$</span>trip_id</span>
 <span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -991,7 +1020,7 @@ Geodetic CRS:  WGS 84
 6 CPTM L09-1      shapes LINESTRING (-46.69711 -23.7...</code></pre>
 </div>
 </div>
-<p>Finally, we need to join the average headway data to the geometries before plotting a map. In the example below, we plot the trips on a map where the headway of each trip is represented by the variations in colors and line widths:</p>
+<p>Finally, we need to join the average headway data to the geometries and then configure the map as wished. In the example below, the color and line width of each trip geometry varies with its headway:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>geoms_with_headways <span class="ot">&lt;-</span> <span class="fu">merge</span>(</span>
 <span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>  geometries,</span>
@@ -1004,16 +1033,21 @@ Geodetic CRS:  WGS 84
 <span id="cb93-9"><a href="#cb93-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradient</span>(<span class="at">high =</span> <span class="st">"#132B43"</span>, <span class="at">low =</span> <span class="st">"#56B1F7"</span>) <span class="sc">+</span></span>
 <span id="cb93-10"><a href="#cb93-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="5_gtfstools.en_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-headways_spatial_dist" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="5_gtfstools.en_files/figure-html/fig-headways_spatial_dist-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption class="figure-caption">Figure 5.5: Headways spatial distribution in SPTrans’ GTFS</figcaption></figure>
 </div>
 </div>
-<p>As we can see, <code>{gtfstools}</code> turns analyzing GTFS feeds into a simple task that requires only basic knowledge of table manipulation packages (such as <code>{data.table}</code> or <code>{dplyr}</code>). The example shown in this section illustrates how one could use many of the package’s functions together to reveal important aspects of public transport systems specified in the GTFS format.</p>
+</div>
+<p>As we can see, <code>{gtfstools}</code> makes the analysis of GTFS feeds a simple task that requires only basic knowledge of table manipulation packages (such as <code>{data.table}</code> or <code>{dplyr}</code>). The example shown in this section illustrates how one could use many of the package’s functions together to reveal important aspects of public transport systems specified in the GTFS format.</p>
 
 
 </section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
-<li id="fn1"><p>For more details on <code>{data.table}</code> usage and syntax please check <a href="https://rdatatable.gitlab.io/data.table/index.html" class="uri">https://rdatatable.gitlab.io/data.table/index.html</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Informative messages may also be listed in the <code>validation_stdout.txt</code> file. Whether messages are listed in this file or in <code>validation_stderr.txt</code> depends on the validator version.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>For more details on <code>{data.table}</code> usage and syntax, please check <a href="https://rdatatable.gitlab.io/data.table/index.html" class="uri">https://rdatatable.gitlab.io/data.table/index.html</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>For more information on how to check the installed version of Java in your computer and on how to install the required version, please check <a href="3_calculating_access.en.qmd#r5r-installation">Chapter 3</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Informative messages may also be listed in the <code>validation_stdout.txt</code> file. Whether messages are listed in this file or in <code>validation_stderr.txt</code> depends on the validator version.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>The complete list of functions available in <code>{gtfstools}</code> can be checked at the <a href="https://ipeagit.github.io/gtfstools/reference/index.html">package website</a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

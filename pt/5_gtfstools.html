@@ -288,7 +288,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   <ul>
 <li><a href="#leitura-e-manipula%C3%A7%C3%A3o-b%C3%A1sica-de-arquivos-gtfs" id="toc-leitura-e-manipulação-básica-de-arquivos-gtfs" class="nav-link active" data-scroll-target="#leitura-e-manipulação-básica-de-arquivos-gtfs"><span class="header-section-number">5.1</span> Leitura e manipulação básica de arquivos GTFS</a></li>
   <li><a href="#c%C3%A1lculo-de-velocidade-das-linhas" id="toc-cálculo-de-velocidade-das-linhas" class="nav-link" data-scroll-target="#cálculo-de-velocidade-das-linhas"><span class="header-section-number">5.2</span> Cálculo de velocidade das linhas</a></li>
-  <li><a href="#combinando-e-filtrando-feeds" id="toc-combinando-e-filtrando-feeds" class="nav-link" data-scroll-target="#combinando-e-filtrando-feeds"><span class="header-section-number">5.3</span> Combinando e filtrando <em>feeds</em></a></li>
+  <li>
+<a href="#combinando-e-filtrando-feeds" id="toc-combinando-e-filtrando-feeds" class="nav-link" data-scroll-target="#combinando-e-filtrando-feeds"><span class="header-section-number">5.3</span> Combinando e filtrando <em>feeds</em></a>
+  <ul class="collapse">
+<li><a href="#filtro-por-identificadores" id="toc-filtro-por-identificadores" class="nav-link" data-scroll-target="#filtro-por-identificadores"><span class="header-section-number">5.3.1</span> Filtro por identificadores</a></li>
+  <li><a href="#filtro-por-dia-e-hora" id="toc-filtro-por-dia-e-hora" class="nav-link" data-scroll-target="#filtro-por-dia-e-hora"><span class="header-section-number">5.3.2</span> Filtro por dia e hora</a></li>
+  <li><a href="#filtro-espacial" id="toc-filtro-espacial" class="nav-link" data-scroll-target="#filtro-espacial"><span class="header-section-number">5.3.3</span> Filtro espacial</a></li>
+  </ul>
+</li>
   <li><a href="#valida%C3%A7%C3%A3o-de-arquivos-gtfs" id="toc-validação-de-arquivos-gtfs" class="nav-link" data-scroll-target="#validação-de-arquivos-gtfs"><span class="header-section-number">5.4</span> Validação de arquivos GTFS</a></li>
   <li><a href="#fluxo-de-trabalho-com-o-gtfstools-mapeando-o-headway-das-linhas" id="toc-fluxo-de-trabalho-com-o-gtfstools-mapeando-o-headway-das-linhas" class="nav-link" data-scroll-target="#fluxo-de-trabalho-com-o-gtfstools-mapeando-o-headway-das-linhas"><span class="header-section-number">5.5</span> Fluxo de trabalho com o <code>{gtfstools}</code>: mapeando o <em>headway</em> das linhas</a></li>
   </ul>
@@ -391,14 +398,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>zip<span class="sc">::</span><span class="fu">zip_list</span>(endereco_destino)[, <span class="fu">c</span>(<span class="st">"filename"</span>, <span class="st">"compressed_size"</span>, <span class="st">"timestamp"</span>)]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         filename compressed_size           timestamp
-1      agency.txt             112 2023-05-08 20:49:24
-2    calendar.txt             129 2023-05-08 20:49:24
-3 frequencies.txt            2381 2023-05-08 20:49:24
-4      routes.txt             659 2023-05-08 20:49:24
-5      shapes.txt          160470 2023-05-08 20:49:24
-6  stop_times.txt            7907 2023-05-08 20:49:24
-7       stops.txt           18797 2023-05-08 20:49:24
-8       trips.txt             717 2023-05-08 20:49:24</code></pre>
+1      agency.txt             112 2023-05-10 20:31:42
+2    calendar.txt             129 2023-05-10 20:31:42
+3 frequencies.txt            2381 2023-05-10 20:31:42
+4      routes.txt             659 2023-05-10 20:31:42
+5      shapes.txt          160470 2023-05-10 20:31:42
+6  stop_times.txt            7907 2023-05-10 20:31:42
+7       stops.txt           18797 2023-05-10 20:31:42
+8       trips.txt             717 2023-05-10 20:31:42</code></pre>
 </div>
 </div>
 </section><section id="cálculo-de-velocidade-das-linhas" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="cálculo-de-velocidade-das-linhas">
@@ -426,7 +433,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calcula as velocidade de duas viagens específicas</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>velocidades <span class="ot">&lt;-</span> <span class="fu">get_trip_speed</span>(gtfs, <span class="at">trip_id =</span> <span class="fu">c</span>(<span class="st">"CPTM L07-0"</span>, <span class="st">"2002-10-0"</span>))</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(velocidades)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>velocidades</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      trip_id origin_file     speed
 1:  2002-10-0      shapes  8.952511
@@ -622,7 +629,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <li>
 <code>filter_by_sf()</code>.</li>
 </ul>
-<p><strong>Filtro por identificadores</strong></p>
+<section id="filtro-por-identificadores" class="level3" data-number="5.3.1"><h3 data-number="5.3.1" class="anchored" data-anchor-id="filtro-por-identificadores">
+<span class="header-section-number">5.3.1</span> Filtro por identificadores</h3>
 <p>As sete primeiras funções mencionadas anteriormente são utilizadas de forma muito similar. Devemos especificar um vetor de identificadores que é usado para manter no objeto GTFS apenas os registros relacionados a esses identificadores. O exemplo a seguir demonstra essa funcionalidade com a <code>filter_by_trip_id()</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># checa tamanho do feed antes do filtro</span></span>
@@ -688,7 +696,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </div>
 <p>Como podemos ver, as viagens especificadas, bem como suas trajetórias, não estão presentes no GTFS filtrado. A mesma lógica aqui demonstrada com a <code>filter_by_trip_id()</code> é válida para as funções que filtram objetos GTFS pelos identificadores <code>agency_id</code>, <code>route_id</code>, <code>service_id</code>, <code>shape_id</code>, <code>stop_id</code> e <code>route_type</code>.</p>
-<p><strong>Filtro por dia e hora</strong></p>
+</section><section id="filtro-por-dia-e-hora" class="level3" data-number="5.3.2"><h3 data-number="5.3.2" class="anchored" data-anchor-id="filtro-por-dia-e-hora">
+<span class="header-section-number">5.3.2</span> Filtro por dia e hora</h3>
 <p>Outra operação que recorrentemente aparece em análises que envolvem dados GTFS é a de manter serviços que funcionem apenas em determinados horários do dia ou dias da semana. Para isso, o pacote disponibiliza as funções <code>filter_by_weekday()</code> e <code>filter_by_time_of_day()</code>.</p>
 <p>A <code>filter_by_weekday()</code> recebe os dias da semana (em inglês) cujos serviços que neles operam devem ser mantidos. Adicionalmente, a função também inclui o argumento <code>combine</code>, que define como filtros de dois ou mais dias funcionam. Quando este recebe o valor <code>”and”</code>, apenas serviços que operam em todos os dias especificados são mantidos. Quando recebe o valor <code>”or”</code>, serviços que operam em pelo menos um dos dias são mantidos:</p>
 <div class="cell">
@@ -813,7 +822,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 6: CPTM L07-0       05:44:00     05:44:00            14</code></pre>
 </div>
 </div>
-<p><strong>Filtro espacial</strong></p>
+</section><section id="filtro-espacial" class="level3" data-number="5.3.3"><h3 data-number="5.3.3" class="anchored" data-anchor-id="filtro-espacial">
+<span class="header-section-number">5.3.3</span> Filtro espacial</h3>
 <p>Por fim, o <code>{gtfstools}</code> também disponibiliza uma função que permite filtrar o objeto GTFS usando um polígono espacial. A <code>filter_by_sf()</code> recebe um objeto do tipo <code>sf</code>/<code>sfc</code> (representação espacial criada pelo pacote <a href="https://r-spatial.github.io/sf/"><code>{sf}</code></a>), ou sua <em>bounding box</em>, e mantém os registros cujas viagens são selecionadas por uma operação espacial que também deve ser especificada. Embora aparentemente complicado, esse processo de filtragem é compreendido com facilidade quando apresentado visualmente. Para isso, vamos filtrar o GTFS da SPTrans pela <em>bounding box</em> da trajetória <code>68962</code>. Com o código a seguir, apresentamos a distribuição espacial dos dados não filtrados, com a <em>bounding box</em> destacada em vermelho (<a href="#fig-shapes_distribution">Figura <span>5.1</span></a>):</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># carrega biblioteca ggplot2 para visualização de dados</span></span>
@@ -870,7 +880,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-</section><section id="validação-de-arquivos-gtfs" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="validação-de-arquivos-gtfs">
+</section></section><section id="validação-de-arquivos-gtfs" class="level2" data-number="5.4"><h2 data-number="5.4" class="anchored" data-anchor-id="validação-de-arquivos-gtfs">
 <span class="header-section-number">5.4</span> Validação de arquivos GTFS</h2>
 <p>Planejadores e pesquisadores frequentemente querem avaliar a qualidade dos arquivos GTFS que estão utilizando em suas análises ou que estão produzindo. Os <em>feeds</em> estão estruturados conforme <a href="https://github.com/MobilityData/GTFS_Schedule_Best-Practices">boas práticas</a> adotadas pela comunidade que usa a especificação? As tabelas e colunas estão formatadas corretamente? A informação descrita pelo <em>feed</em> parece verossímil (velocidade das viagens, localização das paradas etc)? Essas são algumas das perguntas que podem surgir ao lidar com dados no formato GTFS.</p>
 <p>Para responder a essas e outras perguntas, o <code>{gtfstools}</code> inclui a função <code>validate_gtfs()</code>, que serve como interface entre o R e o <a href="https://github.com/MobilityData/gtfs-validator">Canonical GTFS Validator</a>, <em>software</em> desenvolvido pela MobilityData. O uso do validador requer que o Java versão 11 ou superior esteja instalado<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
@@ -881,7 +891,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>endereco_validador <span class="ot">&lt;-</span> <span class="fu">download_validator</span>(pasta_temporaria)</span>
 <span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>endereco_validador</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "/tmp/RtmpoObDX1/gtfs-validator-v4.0.0.jar"</code></pre>
+<pre><code>[1] "/tmp/Rtmp74G5yN/gtfs-validator-v4.0.0.jar"</code></pre>
 </div>
 </div>
 <p>A segunda (e última) etapa consiste em de fato rodar a função <code>validate_gtfs()</code>. Essa função aceita que os dados GTFS a serem validados sejam passados de diferentes formas: i) como um objeto GTFS existente apenas no R; ii) como o endereço de um arquivo GTFS salvo localmente em formato <code>.zip</code>; iii) como uma URL apontando para um <em>feed</em>; ou iv) como uma pasta que contém os dados GTFS não compactados. A função também recebe o endereço para uma pasta onde o resultado da validação deve ser salvo e o endereço para o validador que deve ser usado. Nesse exemplo, vamos fazer a validação a partir do endereço do GTFS da SPTrans, lido anteriormente:</p>
