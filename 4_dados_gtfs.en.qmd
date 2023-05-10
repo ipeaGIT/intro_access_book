@@ -220,17 +220,18 @@ GTFS data from cities all over the world can be downloaded with the [`{tidytrans
 #| label: tbl-gtfs_brazil
 #| tbl-cap: Openly available GTFS data in Brazil
 gtfs_brazil_df <- tibble::tribble(
-  ~City,            ~Source,                                                   ~Info,
-  "Belo Horizonte", "Belo Horizonte Transport and Traffic Company (BHTrans)",  "Open data: [conventional transport network](https://dados.pbh.gov.br/dataset/gtfs-estatico-do-sistema-convencional); [supplementary network](https://dados.pbh.gov.br/dataset/feed-gtfs-estatico-do-sistema-suplementar).",
-  "Fortaleza",      "Fortaleza Urban Transport Company (ETUFOR)",              "[Open data](https://dados.fortaleza.ce.gov.br/dataset/gtfs).",
-  "Fortaleza",      "Fortaleza Subway (Metrofor)",                             "[Open data](https://www.metrofor.ce.gov.br/gtfs/).",
-  "Porto Alegre",   "Porto Alegre Public Company of Transport (EPTC)",         "[Open data](https://dados.portoalegre.rs.gov.br/dataset/gtfs).",
-  "Rio de Janeiro", "Municipal Department of Transport (SMTR)",                "[Open data](https://www.data.rio/datasets/gtfs-do-rio-de-janeiro/about).",
-  "São Paulo",      "São Paulo Metropolitan Urban Transport Company (EMTU)",   "[Download link](https://www.emtu.sp.gov.br/emtu/dados-abertos/dados-abertos-principal/gtfs.fss). Registration required.",
-  "São Paulo",      "SPTrans",                                                 "[Download link](https://www.sptrans.com.br/desenvolvedores/). Registration required."
+  ~City,            ~Source,                                                      ~Info,
+  "Belo Horizonte", "Belo Horizonte's Transport and Traffic Company (BHTrans)",   "Open data: [conventional transport network](https://dados.pbh.gov.br/dataset/gtfs-estatico-do-sistema-convencional); [supplementary network](https://dados.pbh.gov.br/dataset/feed-gtfs-estatico-do-sistema-suplementar).",
+  "Fortaleza",  	  "Fortaleza's Urban Transport Company (ETUFOR)",          	    "[Open data](https://dados.fortaleza.ce.gov.br/dataset/gtfs).",
+  "Fortaleza",  	  "Fortaleza's Subway (Metrofor)",                         	    "[Open data](https://www.metrofor.ce.gov.br/gtfs/).",
+  "Porto Alegre",   "Porto Alegre's Transport and Traffic Public Company (EPTC)", "[Open data](https://dados.portoalegre.rs.gov.br/dataset/gtfs).",
+  "Rio de Janeiro", "Municipal Department of Transport (SMTR)",            	      "[Open data](https://www.data.rio/datasets/gtfs-do-rio-de-janeiro/about).",
+  "São Paulo",  	  "São Paulo's Metropolitan Urban Transport Company (EMTU)",    "[Download link](https://www.emtu.sp.gov.br/emtu/dados-abertos/dados-abertos-principal/gtfs.fss). Registration required.",
+  "São Paulo",  	  "SPTrans",                                             	      "[Download link](https://www.sptrans.com.br/desenvolvedores/). Registration required."
 )
 
 knitr::kable(gtfs_brazil_df)
 ```
+
 
 Note: The GTFS data provided by SMTR does not include train and subway data.
