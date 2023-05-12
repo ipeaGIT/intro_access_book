@@ -196,12 +196,11 @@ httr::GET(
 # baixa dados da etufor
 httr::GET(
   "https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/gtfs_for_etufor_2019-10.zip",
-  httr::progress(),
   httr::write_disk(end_etufor)
 )
 ```
 
-Para simularmos a implementação da nova linha Leste do metrô, precisamos também de um *feed* que descreva como deverá ser a sua operação. Este *feed* deve conter algumas informações-chave, como, por exemplo, o traçado da linha, a localização de suas estações, o tempo de viagem entre elas e a frequência planejada dos serviços. Neste exemplo, vamos utilizar o GTFS do projeto da linha Leste criado anteriormente por @braga2022impactos. Assim como os *feeds* da Etufor e da Metrofor, este arquivo GTFS está disponível para *download* no repositório do livro no GitHub e pode ser baixado com o código a seguir:
+Para simularmos a implementação da nova linha Leste do metrô, precisamos também de um *feed* que descreva como deverá ser a sua operação. Este *feed* deve conter algumas informações-chave, como, por exemplo, o traçado da linha, a localização de suas estações, o tempo de viagem entre elas e a frequência planejada dos serviços. Neste exemplo, vamos utilizar o GTFS do projeto da linha Leste criado anteriormente por @braga2022impactos. Assim como os *feeds* da ETUFOR e da Metrofor, este arquivo GTFS está disponível para *download* no repositório do livro no GitHub e pode ser baixado com o código a seguir:
 
 ```{r}
 #| results: false
@@ -368,7 +367,7 @@ Esses quatro arquivos GTFS serão usados em conjunto para calcular as condiçõe
 
 ## Cálculo das matrizes de tempo de viagem
 
-Feitas as edições necessárias ao GTFS da Metrofor e definidos os dados GTFS que vamos usar em cada um dos cenários de transporte público, o próximo passo é calcular as matrizes de tempo de viagem, que posteriormente serão utilizadas para estimar os níveis de acessibilidade. Para isso, vamos utilizar a função `travel_time_matrix()` do pacote `{r5r}`, como apresentado anteriormente no [Capítulo 3](3_calculando_acesso.qmd#sec-matrix)..
+Feitas as edições necessárias ao GTFS da Metrofor e definidos os dados GTFS que vamos usar em cada um dos cenários de transporte público, o próximo passo é calcular as matrizes de tempo de viagem, que posteriormente serão utilizadas para estimar os níveis de acessibilidade. Para isso, vamos utilizar a função `travel_time_matrix()` do pacote `{r5r}`, como apresentado anteriormente no [Capítulo 3](3_calculando_acesso.qmd#sec-matrix).
 
 Antes de calcular as matrizes, no entanto, precisamos organizar os nossos arquivos na estrutura que o `{r5r}` requer. Com o código a seguir, criamos uma pasta separada para cada um dos nossos cenários (antes e depois) e salvamos nelas os dados necessários para o roteamento:
 
@@ -528,7 +527,7 @@ file.rename(
 )
 ```
 
-Com os dados organizados nas pastas, podemos começar o cálculo das matrizes de tempo de viagem. A primeira etapa é construir a rede de transporte multimodal usada pelo `{r5r}` no roteamento a partir dos dados da rede viária, do sistema de transporte público e de topografia. Isso é feito com o comando `setup_r5()`, que também retorna uma  conexão com o R5. Com o código abaixo, criamos duas redes, uma para cada cenário:
+Com os dados organizados nas pastas, podemos começar o cálculo das matrizes de tempo de viagem. A primeira etapa é construir a rede de transporte multimodal usada pelo `{r5r}` no roteamento a partir dos dados da rede viária, do sistema de transporte público e de topografia. Isso é feito com o comando `setup_r5()`, que também retorna uma conexão com o R5. Com o código abaixo, criamos duas redes, uma para cada cenário:
 
 ```{r}
 #| message: false
@@ -544,11 +543,11 @@ con_r5r_antes <- setup_r5(pasta_antes, verbose = FALSE)
 con_r5r_depois <- setup_r5(pasta_depois, verbose = FALSE)
 ```
 
-Criadas as redes de transporte de cada cenário, prosseguimos para o cálculo das matrizes de tempo de viagem. Nesta etapa, vamos utilizar como origens e destinos os centroides de uma grade espacial de hexágonos de Fortaleza, disponibilizada pelo pacote `{aopdata}`[^4]. Cada hexágono tem uma área de  0,11 km², aproximadamente um quarteirão, o que permite uma análise espacial bem detalhada.
+Criadas as redes de transporte de cada cenário, prosseguimos para o cálculo das matrizes de tempo de viagem. Nesta etapa, vamos utilizar como origens e destinos os centroides de uma grade espacial de hexágonos de Fortaleza, disponibilizada pelo pacote `{aopdata}`[^4]. Cada hexágono tem uma área de 0,11 km², aproximadamente um quarteirão, o que permite uma análise espacial bem detalhada.
 
 [^4]: Mais detalhes sobre o pacote são apresentados na [Seção 5](s5_dados_aop.qmd).
 
-Para comparar adequadamente os dois cenários, precisamos calcular as duas matrizes considerando os mesmos parâmetros de viagem. Aqui, vamos considerar viagens a pé ou por transporte público, permitir distâncias de caminhada de no máximo 800 metros nas pernas de acesso e egresso das paradas de transporte público e limitar o tempo máximo de viagem em até 60 minutos. Vamos considerar o horário de partida de 7h, durante o horário de pico de uma típica segunda-feira de operação:
+Para comparar adequadamente os dois cenários, precisamos calcular as duas matrizes considerando os mesmos parâmetros de viagem. Aqui, vamos considerar viagens a pé ou por transporte público, permitir caminhadas de até 30 minutos nas pernas de acesso e egresso das paradas de transporte público e limitar o tempo máximo de viagem em até 60 minutos. Vamos considerar o horário de partida de 7h, durante o horário de pico de uma típica segunda-feira de operação:
 
 ```{r}
 #| message: false
