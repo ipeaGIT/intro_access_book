@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.340">
+<meta name="generator" content="quarto-1.3.353">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Introdução à acessibilidade urbana - 6  Comparando a acessibilidade entre dois cenários de transporte</title>
 <style>
@@ -395,11 +395,10 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># baixa dados da etufor</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>httr<span class="sc">::</span><span class="fu">GET</span>(</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/gtfs_for_etufor_2019-10.zip"</span>,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  httr<span class="sc">::</span><span class="fu">progress</span>(),</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  httr<span class="sc">::</span><span class="fu">write_disk</span>(end_etufor)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  httr<span class="sc">::</span><span class="fu">write_disk</span>(end_etufor)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Para simularmos a implementação da nova linha Leste do metrô, precisamos também de um <em>feed</em> que descreva como deverá ser a sua operação. Este <em>feed</em> deve conter algumas informações-chave, como, por exemplo, o traçado da linha, a localização de suas estações, o tempo de viagem entre elas e a frequência planejada dos serviços. Neste exemplo, vamos utilizar o GTFS do projeto da linha Leste criado anteriormente por <span class="citation" data-cites="braga2022impactos">Braga et al. (<a href="references.html#ref-braga2022impactos" role="doc-biblioref">2022</a>)</span>. Assim como os <em>feeds</em> da Etufor e da Metrofor, este arquivo GTFS está disponível para <em>download</em> no repositório do livro no GitHub e pode ser baixado com o código a seguir:</p>
+<p>Para simularmos a implementação da nova linha Leste do metrô, precisamos também de um <em>feed</em> que descreva como deverá ser a sua operação. Este <em>feed</em> deve conter algumas informações-chave, como, por exemplo, o traçado da linha, a localização de suas estações, o tempo de viagem entre elas e a frequência planejada dos serviços. Neste exemplo, vamos utilizar o GTFS do projeto da linha Leste criado anteriormente por <span class="citation" data-cites="braga2022impactos">Braga et al. (<a href="references.html#ref-braga2022impactos" role="doc-biblioref">2022</a>)</span>. Assim como os <em>feeds</em> da ETUFOR e da Metrofor, este arquivo GTFS está disponível para <em>download</em> no repositório do livro no GitHub e pode ser baixado com o código a seguir:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cria o endereço do arquivo temporário</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>end_linha_leste <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="st">"linha_leste"</span>, <span class="at">fileext =</span> <span class="st">".zip"</span>)</span>
@@ -615,7 +614,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p>Esses quatro arquivos GTFS serão usados em conjunto para calcular as condições de acessibilidade de Fortaleza antes e depois da implementação da linha Leste. No cenário pré-linha Leste, vamos calcular as matrizes de tempo de viagem com base apenas nos <em>feeds</em> de outubro de 2019 da Metrofor e da ETUFOR, que representam a típica operação de transporte público da cidade antes da implementação do novo corredor. No cenário pós-implementação, consideraremos o <em>feed</em> da ETUFOR, o <em>feed modificado</em> da Metrofor, com as frequências do metrô e do VLT alteradas, e o GTFS da linha Leste, incorporando à análise a operação planejada dessa linha após sua finalização.</p>
 </section><section id="cálculo-das-matrizes-de-tempo-de-viagem" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="cálculo-das-matrizes-de-tempo-de-viagem">
 <span class="header-section-number">6.3</span> Cálculo das matrizes de tempo de viagem</h2>
-<p>Feitas as edições necessárias ao GTFS da Metrofor e definidos os dados GTFS que vamos usar em cada um dos cenários de transporte público, o próximo passo é calcular as matrizes de tempo de viagem, que posteriormente serão utilizadas para estimar os níveis de acessibilidade. Para isso, vamos utilizar a função <code>travel_time_matrix()</code> do pacote <code>{r5r}</code>, como apresentado anteriormente no <a href="./3_calculando_acesso.html#sec-matrix">Capítulo 3</a>..</p>
+<p>Feitas as edições necessárias ao GTFS da Metrofor e definidos os dados GTFS que vamos usar em cada um dos cenários de transporte público, o próximo passo é calcular as matrizes de tempo de viagem, que posteriormente serão utilizadas para estimar os níveis de acessibilidade. Para isso, vamos utilizar a função <code>travel_time_matrix()</code> do pacote <code>{r5r}</code>, como apresentado anteriormente no <a href="./3_calculando_acesso.html#sec-matrix">Capítulo 3</a>.</p>
 <p>Antes de calcular as matrizes, no entanto, precisamos organizar os nossos arquivos na estrutura que o <code>{r5r}</code> requer. Com o código a seguir, criamos uma pasta separada para cada um dos nossos cenários (antes e depois) e salvamos nelas os dados necessários para o roteamento:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cria pasta raiz da análise de dados</span></span>
@@ -712,7 +711,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>con_r5r_depois <span class="ot">&lt;-</span> <span class="fu">setup_r5</span>(pasta_depois, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Criadas as redes de transporte de cada cenário, prosseguimos para o cálculo das matrizes de tempo de viagem. Nesta etapa, vamos utilizar como origens e destinos os centroides de uma grade espacial de hexágonos de Fortaleza, disponibilizada pelo pacote <code>{aopdata}</code><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. Cada hexágono tem uma área de 0,11 km², aproximadamente um quarteirão, o que permite uma análise espacial bem detalhada.</p>
-<p>Para comparar adequadamente os dois cenários, precisamos calcular as duas matrizes considerando os mesmos parâmetros de viagem. Aqui, vamos considerar viagens a pé ou por transporte público, permitir distâncias de caminhada de no máximo 800 metros nas pernas de acesso e egresso das paradas de transporte público e limitar o tempo máximo de viagem em até 60 minutos. Vamos considerar o horário de partida de 7h, durante o horário de pico de uma típica segunda-feira de operação:</p>
+<p>Para comparar adequadamente os dois cenários, precisamos calcular as duas matrizes considerando os mesmos parâmetros de viagem. Aqui, vamos considerar viagens a pé ou por transporte público, permitir caminhadas de até 30 minutos nas pernas de acesso e egresso das paradas de transporte público e limitar o tempo máximo de viagem em até 60 minutos. Vamos considerar o horário de partida de 7h, durante o horário de pico de uma típica segunda-feira de operação:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># baixa os dados da grade espacial</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>grade_fortaleza <span class="ot">&lt;-</span> aopdata<span class="sc">::</span><span class="fu">read_grid</span>(<span class="at">city =</span> <span class="st">"Fortaleza"</span>)</span>
@@ -796,11 +795,11 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
     4: 8980104096fffff 8980104e80fffff                    55
     5: 8980104096fffff 8980104e863ffff                    56
    ---                                                      
-12890: 8980104eecbffff 8980104ea5bffff                    52
-12891: 8980104eecbffff 8980104eac3ffff                    49
-12892: 8980104eecbffff 8980104ead3ffff                    44
-12893: 8980104eecbffff 8980104eadbffff                    49
-12894: 8980104eecbffff 8980104ee6bffff                    41
+12889: 8980104eecbffff 8980104ea5bffff                    52
+12890: 8980104eecbffff 8980104eac3ffff                    49
+12891: 8980104eecbffff 8980104ead3ffff                    44
+12892: 8980104eecbffff 8980104eadbffff                    49
+12893: 8980104eecbffff 8980104ee6bffff                    41
        travel_time_p50_depois
     1:                     50
     2:                     59
@@ -808,11 +807,11 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
     4:                     57
     5:                     57
    ---                       
-12890:                     57
-12891:                     53
-12892:                     47
-12893:                     50
-12894:                     42</code></pre>
+12889:                     57
+12890:                     53
+12891:                     47
+12892:                     50
+12893:                     42</code></pre>
 </div>
 </div>
 </section><section id="cálculo-da-acessibilidade-nos-cenários-antes-e-depois" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="cálculo-da-acessibilidade-nos-cenários-antes-e-depois">

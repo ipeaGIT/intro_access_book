@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.340">
+<meta name="generator" content="quarto-1.3.353">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Introduction to urban accessibility - 6  Comparing accessibility between two transport scenarios</title>
 <style>
@@ -305,11 +305,11 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#case-study-presentation" id="toc-case-study-presentation" class="nav-link active" data-scroll-target="#case-study-presentation"><span class="header-section-number">6.1</span> Case study presentation</a></li>
+<li><a href="#case-study" id="toc-case-study" class="nav-link active" data-scroll-target="#case-study"><span class="header-section-number">6.1</span> Case study</a></li>
   <li><a href="#gtfs-data-used-in-the-analysis" id="toc-gtfs-data-used-in-the-analysis" class="nav-link" data-scroll-target="#gtfs-data-used-in-the-analysis"><span class="header-section-number">6.2</span> GTFS data used in the analysis</a></li>
   <li><a href="#calculating-the-travel-time-matrices" id="toc-calculating-the-travel-time-matrices" class="nav-link" data-scroll-target="#calculating-the-travel-time-matrices"><span class="header-section-number">6.3</span> Calculating the travel time matrices</a></li>
   <li><a href="#calculating-accessibility-levels-in-both-scenarios" id="toc-calculating-accessibility-levels-in-both-scenarios" class="nav-link" data-scroll-target="#calculating-accessibility-levels-in-both-scenarios"><span class="header-section-number">6.4</span> Calculating accessibility levels in both scenarios</a></li>
-  <li><a href="#analyzing-accessibility-levels-before-and-after" id="toc-analyzing-accessibility-levels-before-and-after" class="nav-link" data-scroll-target="#analyzing-accessibility-levels-before-and-after"><span class="header-section-number">6.5</span> Analyzing accessibility levels before and after</a></li>
+  <li><a href="#analyzing-accessibility-levels" id="toc-analyzing-accessibility-levels" class="nav-link" data-scroll-target="#analyzing-accessibility-levels"><span class="header-section-number">6.5</span> Analyzing accessibility levels</a></li>
   <li><a href="#accessibility-inequality" id="toc-accessibility-inequality" class="nav-link" data-scroll-target="#accessibility-inequality"><span class="header-section-number">6.6</span> Accessibility inequality</a></li>
   </ul>
 <div class="toc-actions">
@@ -334,31 +334,31 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </div>
   
 
-</header><p>In this chapter, we will illustrate how to combine the material taught in previous chapters to assess the impact of a transport infrastructure project on urban accessibility. To measure the impact of a transport project, we need to compare the accessibility levels both before and after the project implementation. We need, therefore:</p>
+</header><p>In this chapter, we will illustrate how to combine the material taught in previous chapters to assess the impact of a transport infrastructure project on urban accessibility conditions. To measure the impact of a transport project, we need to compare the accessibility levels both before and after the project implementation. We need, therefore:</p>
 <ol type="1">
 <li>To use different sets of GTFS feeds and to edit them to represent the scenarios before and after the project implementation;</li>
 <li>To calculate two travel time matrices, one before and one after the project;</li>
 <li>To measure the accessibility levels both before and after the project;</li>
-<li>To compare the accessibility conditions in both scenarios, investigating how the impacts are distributed both spatially and between socioeconomic groups.</li>
+<li>To compare the accessibility conditions in both scenarios, looking at how the impacts are distributed both spatially and between socioeconomic groups.</li>
 </ol>
-<p>In this chapter, we will look at each one of these steps in detail. First, a brief presentation of our case study.</p>
-<section id="case-study-presentation" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="case-study-presentation">
-<span class="header-section-number">6.1</span> Case study presentation</h2>
-<p>As a case study, we will assess Fortaleza’s subway East Line project (<a href="#fig-fortaleza_1">Figure <span>6.1</span></a>). The city of Fortaleza is the capital of Ceará state, located in Northeast of Brazil. With an estimated population of 2.7 million inhabitants, Fortaleza is the fifth most populous city in the country.</p>
+<p>In this chapter, we will look at each one of these steps in detail. First, though, a brief presentation of our case study.</p>
+<section id="case-study" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="case-study">
+<span class="header-section-number">6.1</span> Case study</h2>
+<p>As a case study, we will assess Fortaleza’s subway East Line project (<a href="#fig-fortaleza_1">Figure <span>6.1</span></a>). The city of Fortaleza is the capital of Ceará state, located in Northeast Brazil. With an estimated population of 2.7 million inhabitants, Fortaleza is the fifth most populous city in the country.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-fortaleza_1" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="images/fortaleza_1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure 6.1: Fortaleza’s rapid transit network. Source - <span class="citation" data-cites="braga2022impactos">Braga et al. (<a href="references.en.html#ref-braga2022impactos" role="doc-biblioref">2022</a>)</span></figcaption></figure>
+<figcaption class="figure-caption">Figure 6.1: Fortaleza’s rapid transit network. Source: <span class="citation" data-cites="braga2022impactos">Braga et al. (<a href="references.en.html#ref-braga2022impactos" role="doc-biblioref">2022</a>)</span></figcaption></figure>
 </div>
 </div>
 </div>
-<p>The East Line is one of the biggest recent investments in Fortaleza’s transport system. The line extends for 7.3 km and connects the city center to the Papicu neighborhood, connecting the South and West subway lines to the Light Rail and Papicu’s bus terminal (<a href="#fig-fortaleza_2">Figure <span>6.2</span></a>). The East Line is still under construction as of this book’s publication date, so we will be conducting an <em>ex-ante</em> analysis in this chapter - i.e. one in which we assess the future impacts of a project on urban accessibility conditions. This type of analysis differs from <em>ex-post</em> analyses, which are used to assess the impact of projects that have already been implemented.</p>
+<p>The East Line is one of the biggest recent investments in Fortaleza’s transport system. The corridor extends for 7.3 km and connects the city center to the Papicu neighborhood, connecting the South and West subway lines to the Light Rail and Papicu’s bus terminal (<a href="#fig-fortaleza_2">Figure <span>6.2</span></a>). The East Line is still under construction as of the publication of this book, so we will be conducting an <em>ex-ante</em> analysis in this chapter - i.e. one in which we assess the future impacts of a project on urban accessibility conditions. This type of analysis differs from <em>ex-post</em> analyses, which are used to assess the impact of projects that have already been implemented.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-fortaleza_2" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="images/fortaleza_2.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure 6.2: East Line in detail. Source - <span class="citation" data-cites="braga2022impactos">Braga et al. (<a href="references.en.html#ref-braga2022impactos" role="doc-biblioref">2022</a>)</span></figcaption></figure>
+<figcaption class="figure-caption">Figure 6.2: East Line in detail. Source: <span class="citation" data-cites="braga2022impactos">Braga et al. (<a href="references.en.html#ref-braga2022impactos" role="doc-biblioref">2022</a>)</span></figcaption></figure>
 </div>
 </div>
 </div>
@@ -368,7 +368,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>It’s important to note that East Line’s implementation will also be followed by changes to the frequency of subway’s South and West lines and of Parangaba-Mucuripe light rail, in addition to cuts and adjustments on the municipal bus system, as detailed in Fortaleza’s Sustainable Accessibility Plan (Pasfor)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. For didactic purposes, however, the bus system’s changes were not incorporated into our analyses in this book. Therefore, the case study showcased in this chapter looks at simplified scenarios, in which only East Line’s implementation and the changes to other subway and light rail corridors are considered. For a more complete assessment that considers all the changes foreseen in Pasfor, please check <span class="citation" data-cites="braga2022impactos">Braga et al. (<a href="references.en.html#ref-braga2022impactos" role="doc-biblioref">2022</a>)</span> (in Portuguese).</p>
+<p>It’s important to note that East Line’s implementation will also be followed by changes to the frequency of subway’s South and West lines and of Parangaba-Mucuripe light rail, in addition to cuts and adjustments on the municipal bus system, as detailed in Fortaleza’s Sustainable Accessibility Plan (Pasfor)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. For didactic purposes, however, the bus system changes were not incorporated into our analyses in this book. Therefore, the case study showcased in this chapter looks at simplified scenarios, in which only East Line’s implementation and the changes to other subway and light rail corridors are considered<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
 </div>
 </div>
 </div>
@@ -383,7 +383,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </section><section id="gtfs-data-used-in-the-analysis" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="gtfs-data-used-in-the-analysis">
 <span class="header-section-number">6.2</span> GTFS data used in the analysis</h2>
-<p>In this analysis, we will use the GTFS files made available by Fortaleza’s Urban Transport Company (Etufor) and Fortaleza’s Subway Company (Metrofor). These feeds describe the public transport network that operated in Fortaleza in October 2019. To access these data, we will download the feeds with the <code>{httr}</code> package with the code below:</p>
+<p>In this analysis, we will use the GTFS files made available by Fortaleza’s Urban Transport Company (ETUFOR) and Fortaleza’s Subway (Metrofor). These feeds describe the public transport network that operated in Fortaleza in October 2019. To access these data, we use the code below, in which we download the feeds using the <code>{httr}</code> package:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>metrofor_path <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="st">"metrofor"</span>, <span class="at">fileext =</span> <span class="st">".zip"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>etufor_path <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="st">"etufor"</span>, <span class="at">fileext =</span> <span class="st">".zip"</span>)</span>
@@ -396,11 +396,10 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># downloads etufor data</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>httr<span class="sc">::</span><span class="fu">GET</span>(</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://github.com/ipeaGIT/intro_access_book/releases/download/data_1st_edition/gtfs_for_etufor_2019-10.zip"</span>,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  httr<span class="sc">::</span><span class="fu">progress</span>(),</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  httr<span class="sc">::</span><span class="fu">write_disk</span>(etufor_path)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  httr<span class="sc">::</span><span class="fu">write_disk</span>(etufor_path)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>To simulate the implementation of the subway’s East Line, we also need a feed that describes its operation. This feed must contain some key information, such as the shape of the corridor, the stop locations, the travel time between stations and the frequency of trips. In this example, we will use a GTFS file previously created by the Access to Opportunities team for a more detailed assessment of the accessibility impacts caused by this project <span class="citation" data-cites="braga2022impactos">(<a href="references.en.html#ref-braga2022impactos" role="doc-biblioref">Braga et al. 2022</a>)</span>. Just like Etufor’s and Metrofor’s feeds, this feed has been published in the book GitHub repository and can be downloaded with the code below:</p>
+<p>To simulate the implementation of subway’s East Line, we also need a feed that describes its operation. This feed must contain some key information, such as the shape of the corridor, the stop locations, the travel time between stations and the frequency of trips. In this example, we will use a GTFS file previously created by the Access to Opportunities team for a more detailed assessment of the accessibility impacts caused by this project <span class="citation" data-cites="braga2022impactos">(<a href="references.en.html#ref-braga2022impactos" role="doc-biblioref">Braga et al. 2022</a>)</span>. Just like ETUFOR’s and Metrofor’s feeds, this feed has been published in the book GitHub repository and can be downloaded with the code below:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>east_line_path <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="st">"east_line"</span>, <span class="at">fileext =</span> <span class="st">".zip"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -409,8 +408,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  httr<span class="sc">::</span><span class="fu">write_disk</span>(east_line_path)</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Etufor’s and Metrofor’s feeds, however, do not include the changes to the public transport system foreseen in the Pasfor. Therefore, we have to edit these feeds using the <code>{gtfstools}</code> package to take those changes into consideration in the post-implementation scenario.</p>
-<p>In our case study, we will consider the changes to frequencies of the subway and light rail services based on Pasfor: an increase in the South Line subway frequency from four to ten trips per hour, an increase in the West Line subway frequency from two to five trips per hour and an increase in the Parangaba-Mucuripe light rail frequency from two to eight trips per hour. As we are only considering changes to the subway and light rail services, we only need to edit Metrofor’s GTFS. First, we need to read this feed with <code>read_gtfs()</code> and understand how the trips are described. To do so, we are going to look at how the <code>routes</code>, <code>trips</code> and <code>calendar</code> tables are structured.</p>
+<p>ETUFOR’s and Metrofor’s feeds, however, do not include the changes to the public transport system foreseen in Pasfor. Therefore, we have to edit the feeds using the <code>{gtfstools}</code> package to take these changes into consideration in the post-implementation scenario.</p>
+<p>In our case study, we will consider the changes to the frequencies of the subway and light rail services listed in <span class="citation" data-cites="braga2022impactos">Braga et al. (<a href="references.en.html#ref-braga2022impactos" role="doc-biblioref">2022</a>)</span>, based on Pasfor: i) an increase in the South Line subway frequency from four to ten trips per hour; ii) an increase in the West Line subway frequency from two to five trips per hour; and iii) an increase in the Parangaba-Mucuripe light rail frequency from two to eight trips per hour. As we are only considering changes to the subway and light rail services, we only need to edit Metrofor’s GTFS. First, we need to read this feed with <code>read_gtfs()</code> and understand how the trips are described. To do so, we are going to look at how the <code>routes</code>, <code>trips</code> and <code>calendar</code> tables are structured.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtfstools)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -441,14 +440,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 1: 2020-01-01 2021-12-31</code></pre>
 </div>
 </div>
-<p>The feed describes three distinct routes: the two subway corridors and the light rail corridor. Since the feed does not include a <code>frequencies</code> table, each route is described by many trips that depart at different times of the day. There is information for trips in both trip directions, and they are all associated with the same service that operates on business days and saturdays.</p>
+<p>The feed describes three distinct routes: the two subway corridors and the light rail corridor. Since the feed does not include a <code>frequencies</code> table, each route is described by many trips that depart at different times of the day. There is information for trips in both directions, and they are all associated with the same service that operates on business days and saturdays.</p>
 <p>The strategy we are going to adopt to make the necessary changes to the feed include three steps:</p>
 <ol type="1">
 <li>First, we are going to filter the Metrofor feed to keep only one trip per direction for each route. This trip will tell us the travel time each trip takes between its stops.</li>
-<li>Then we are going to add a <code>frequencies</code> table to the GTFS object, in which we are going to describe the frequency of each trip.</li>
-<li>Finally, we are going to “convert” the recently-added <code>frequencies</code> entries to the timetables described in <code>stop_times</code>. This conversion will be used to keep intact the original feed, which describes trips using only the <code>stop_times</code> table.</li>
+<li>Then, we are going to add a <code>frequencies</code> table to the GTFS object, in which we are going to describe the frequency of each trip.</li>
+<li>Finally, we are going to “convert” the recently-added <code>frequencies</code> entries to timetables described in <code>stop_times</code>. This conversion will be used to maintain the original feed’s characteristic of describing trips using only the <code>stop_times</code> table.</li>
 </ol>
-<p><strong>Step 1:</strong> To keep only one trip per direction for each route, we need to filter the feed using <code>filter_by_trip_id()</code>. To do so, we are going to identify the first trip entry per route and per direction and use the function to keep only these trips.</p>
+<p>To keep only one trip per direction for each route, we need to filter the feed using <code>filter_by_trip_id()</code>. To do so, we are going to identify the first trip entry per route and per direction and use the function to keep only these trips in the feed.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># identifies the table index in which the first entries per route and per</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># direction are located at</span></span>
@@ -458,12 +457,9 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>selected_trips <span class="ot">&lt;-</span> metrofor_gtfs<span class="sc">$</span>trips[index]<span class="sc">$</span>trip_id</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># filters the gtfs to keep only the trips above</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>filtered_gtfs <span class="ot">&lt;-</span> <span class="fu">filter_by_trip_id</span>(</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  metrofor_gtfs,</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">trip_id =</span> selected_trips</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>filtered_gtfs<span class="sc">$</span>trips</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>filtered_gtfs <span class="ot">&lt;-</span> <span class="fu">filter_by_trip_id</span>(metrofor_gtfs, <span class="at">trip_id =</span> selected_trips)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>filtered_gtfs<span class="sc">$</span>trips</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   trip_id     trip_headsign direction_id block_id shape_id service_id route_id
 1:       4           Caucaia            0                            4        7
@@ -518,16 +514,16 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 6:        8</code></pre>
 </div>
 </div>
-<p><strong>Step 2:</strong> Now we need to add a <code>frequencies</code> table describing the frequency of each trip. Note however that the GTFS specification requires us to list the <em>headway</em> of each trip, and not its <em>frequency</em>. The headway is the inverse of the frequency, so we need to divide the interval of one hour (3600 seconds) by the frequency of each route (10 trips/hour for the South Line, 5 trips/hours for the West Line and 8 trips/hours for the light rail). As a result, we have that the headway of the South Line, West Line and the light rail will be, respectively, 360, 720 and 450 seconds. With the code below, we create a <code>frequencies</code> table using the <code>{tibble}</code> and <code>{data.table}</code> packages.</p>
+<p>Now we need to add a <code>frequencies</code> table describing the frequency of each trip. Note, however, that the GTFS specification requires us to list the <em>headway</em> of each trip, and not its <em>frequency</em>. The headway is the inverse of the frequency, so we need to divide the interval of one hour (3600 seconds) by the frequency of each route (10 trips/hour for the South Line, 5 trips/hours for the West Line and 8 trips/hours for the light rail). As a result, we have that the headway of the South Line, West Line and the light rail will be, respectively, 360, 720 and 450 seconds. With the code below, we create a <code>frequencies</code> table using the <code>{tibble}</code> and <code>{data.table}</code> packages.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>frequencies <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>trip_id,           <span class="sc">~</span>start_time, <span class="sc">~</span>end_time,  <span class="sc">~</span>headway_secs, <span class="sc">~</span>exact_times,</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"west_subway_0"</span>,  <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 720L,              <span class="dv">1</span>,</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"west_subway_1"</span>,  <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 720L,              <span class="dv">1</span>,</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"south_subway_0"</span>, <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 360L,              <span class="dv">1</span>,</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"south_subway_1"</span>, <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 360L,              <span class="dv">1</span>,</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"light_rail_0"</span>,   <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 450L,              <span class="dv">1</span>,</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"light_rail_1"</span>,   <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 450L,              <span class="dv">1</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>trip_id,         <span class="sc">~</span>start_time, <span class="sc">~</span>end_time,  <span class="sc">~</span>headway_secs, <span class="sc">~</span>exact_times,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"west_subway_0"</span>,  <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 720L,          <span class="dv">1</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"west_subway_1"</span>,  <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 720L,          <span class="dv">1</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"south_subway_0"</span>, <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 360L,          <span class="dv">1</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"south_subway_1"</span>, <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 360L,          <span class="dv">1</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"light_rail_0"</span>,   <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 450L,          <span class="dv">1</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"light_rail_1"</span>,   <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 450L,          <span class="dv">1</span></span>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co"># converts the table to data.table</span></span>
@@ -536,8 +532,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co"># assigns table to gtfs object</span></span>
 <span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>filtered_gtfs<span class="sc">$</span>frequencies <span class="ot">&lt;-</span> frequencies</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>To keep things simple in this case study, we assume that these headways are valid between 06:00h and 09:00h. This assumption works in our case because we are only going to calculate the travel time matrix during the morning peak. If we wanted to calculate travel times in other periods of the day or to use this GTFS to examine operation of these corridors throughout the day, however, we would have to list the headways for the rest of the day as well. The value <code>1</code> in the <code>exact_times</code> column determines that the trips’ timetables during the specified period must follow the headway exactly, not approximately (for more details, please refer to the <code>frequencies</code> table description in <a href="4_dados_gtfs.qmd#frequencies.txt">Chapter 4</a>).</p>
-<p><strong>Step 3:</strong> The GTFS object that results from the modifications done up until this stage can already be used to calculate travel time matrices. However, in order to restore the original feed’s characteristic of not having a <code>frequencies</code> table, we “convert” this table’s entries into timetables described in <code>stop_times</code>. To do so, we use the <code>frequencies_to_stop_times()</code> function. As all trips in the feed are converted, the <code>frequencies</code> table is removed from the GTFS object.</p>
+<p>To keep things simple in this case study, we assume that these headways are valid between 6am and 9am. This assumption works in our case because we are only going to calculate the travel time matrix during the morning peak. If we wanted to calculate travel times in other periods of the day or to use this GTFS to examine operation of these corridors throughout the day, however, we would have to list the headways for the rest of the day as well. The value <code>1</code> in the <code>exact_times</code> column determines that the trips’ timetables during the specified period must follow the headway exactly, not approximately<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
+<p>The GTFS object that results from the modifications done up until this stage can already be used to calculate travel time matrices. However, in order to restore the original feed’s characteristic of not having a <code>frequencies</code> table, we “convert” this table’s entries into timetables described in <code>stop_times</code>. To do so, we use the <code>frequencies_to_stop_times()</code> function. Since all trips in the feed are converted, the <code>frequencies</code> table is removed from the GTFS object.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>filtered_gtfs <span class="ot">&lt;-</span> <span class="fu">frequencies_to_stop_times</span>(filtered_gtfs)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -546,7 +542,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <pre><code>NULL</code></pre>
 </div>
 </div>
-<p>To check if the data manipulation worked as intended, we look at the West Line trips that head towards Caucaia (whose <code>direction_id</code> is <code>0</code>). With a frequency of 5 trips/hour between 06:00h and 09:00h, the <code>trips</code> table must contain exactly 16 entries related to this route (5 trips/hour during 3 hours plus a trip starting at 09:00h).</p>
+<p>To check if the data manipulation worked as intended, we look at the West Line trips that head towards Caucaia (whose <code>direction_id</code> is <code>0</code>). With a frequency of 5 trips/hour between 6am and 9am, the <code>trips</code> table must contain exactly 16 entries related to this route (5 trips/hour during 3 hours plus a trip starting at 09:00h).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>west_line_subway <span class="ot">&lt;-</span> filtered_gtfs<span class="sc">$</span>trips[<span class="fu">grepl</span>(<span class="st">"west_subway_0"</span>, trip_id)]</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -562,11 +558,11 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 [13] "west_subway_0_13" "west_subway_0_14" "west_subway_0_15" "west_subway_0_16"</code></pre>
 </div>
 </div>
-<p>The <code>stop_times</code> table, in turn, must list each one of these trips departing every 12 minutes (equivalent to a 450 seconds headway). Thus, we need to check the first entry of the timetable of each one of the trips listed above.</p>
+<p>The <code>stop_times</code> table, in turn, must list these trips departing every 12 minutes (equivalent to a 450 seconds headway). Thus, we need to check the first entry of the timetable of each one of the trips listed above.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>west_subway_trips <span class="ot">&lt;-</span> west_line_subway<span class="sc">$</span>trip_id</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># identifies the row of the first entries of the trips above</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># identifies above trips' first entries in stop_times</span></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>trip_indices <span class="ot">&lt;-</span> filtered_gtfs<span class="sc">$</span>stop_times[</span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  trip_id <span class="sc">%in%</span> west_subway_trips,</span>
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  .I[<span class="dv">1</span>],</span>
@@ -602,16 +598,16 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 <p>Now, we have four distinct GTFS files:</p>
 <ul>
-<li>Etufor’s feed, describing the bus system that operated in October 2019;</li>
-<li>Metrofor’s feed, describing the operation in October 2019 of the subway (South and West lines) and of the light rail;</li>
-<li>Metrofor’s modified feed, describing the future operation of South and West subway lines and of the light rail, as foreseen in Pasfor;</li>
+<li>ETUFOR’s feed, describing the bus system that operated in October 2019;</li>
+<li>Metrofor’s feed, describing the subway’s (South and West lines) and the light rail’s operation in October 2019;</li>
+<li>Metrofor’s modified feed, describing the South and West subway lines’ and the light rail’s future operation, as foreseen in Pasfor;</li>
 <li>East Line’s feed, describing the future operation of the subway East Line.</li>
 </ul>
-<p>These four GTFS files will be used to calculate the accessibility conditions in Fortaleza before and after the implementation of the East Line. In the pre-implementation scenario, we are going to calculate the travel time matrices using only the October 2019 feeds from Metrofor and Etufor. In the post-implementation scenario, we are going to use Etufor’s feed, Metrofor’s modified feed with updated frequencies and the feed of the new East Line.</p>
+<p>These four GTFS files will be used to calculate the accessibility conditions in Fortaleza before and after the implementation of the East Line. In the pre-implementation scenario, we are going to calculate the travel time matrices using only the October 2019 feeds from Metrofor and ETUFOR. In the post-implementation scenario, we are going to use ETUFOR’s feed, Metrofor’s modified feed with updated frequencies and the feed of the new East Line.</p>
 </section><section id="calculating-the-travel-time-matrices" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="calculating-the-travel-time-matrices">
 <span class="header-section-number">6.3</span> Calculating the travel time matrices</h2>
-<p>After making the necessary changes to the GTFS files and defining which feeds we are going to use in each scenario, we need to calculate the travel time matrices that we are going to use later to estimate the accessibility levels. To do this, we are going to use the <code>travel_time_matrix()</code> function from <code>{r5r}</code>, previously presented in <a href="3_calculando_acesso.qmd#sec-matrix">Chapter 3</a>.</p>
-<p>Before calculating the travel matrices, however, we need to organize our data to use them in `{r5r}. With the code below, we create a separate directory for each scenario (before and after implementation) in which we save the files used in the routing process in each case:</p>
+<p>After making the necessary changes to the GTFS files and defining which feeds we are going to use in each scenario, we need to calculate the travel time matrices that we are going to use to estimate the accessibility levels. To do this, we are going to use the <code>travel_time_matrix()</code> function from <code>{r5r}</code>, previously presented in <a href="./3_calculando_acesso.en.html#sec-matrix">Chapter 3</a>.</p>
+<p>Before calculating the travel matrices, however, we need to organize our data as required by <code>{r5r}</code>. With the code below, we create a separate directory for each scenario (before and after implementation) in which we save the files used in the routing process:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creates root analysis directory</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>analysis_dir <span class="ot">&lt;-</span> <span class="st">"impact_analysis"</span></span>
@@ -654,7 +650,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
     └── metrofor.zip</code></pre>
 </div>
 </div>
-<p>To estimate the travel times in our study area, we also need a file representing the local street network extracted from OpenStreetMap in <code>.pbf</code> format. Optionally, we are also going to use a file representing the local topography, in <code>.tif</code> format. These data sets, just like the GTFS files, can also be downloaded from the book repository. Assuming that the implementation of the East Line will not affect the street network, the pedestrian infrastructure and the topography in the region, we can use the same files to calculate both travel time matrices. With the code below, we download these data sets and copy the files to both scenarios’ directories.</p>
+<p>To estimate the travel times in our study area, we also need a file representing the local street network extracted from OpenStreetMap in <code>.pbf</code> format. Optionally, we are also going to use a file representing the local topography, in <code>.tif</code> format. These data sets, just like the GTFS files, can be downloaded from the book repository. Assuming that the implementation of East Line will not affect the street network, the pedestrian infrastructure and the topography in the region, we can use the same files to calculate both travel time matrices. With the code below, we download these data sets and copy the files to both scenarios’ directories.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># crates temporary files to save data</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>pbf_path <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="st">"street_network"</span>, <span class="at">fileext =</span> <span class="st">".osm.pbf"</span>)</span>
@@ -704,7 +700,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>r5r_core_before <span class="ot">&lt;-</span> <span class="fu">setup_r5</span>(before_dir, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>r5r_core_after <span class="ot">&lt;-</span> <span class="fu">setup_r5</span>(after_dir, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Having built the transport networks, we can now proceed to the actual travel time matrices calculation. In this step, we are going to use the centroids of a hexagonal grid covering Fortaleza as our origins and destinations. We are going to use the hexagonal grid made available by <code>{aopdata}</code> (more details on the package are presented in <a href="./s5_dados_aop.en.html">Section 5</a>). Each grid hexagon covers an area of 0.11 km², similar to a city block, which allows for results at a fine spatial resolution.</p>
+<p>Having built the transport networks, we can now proceed to the actual travel time matrices calculation. In this step, we are going to use the centroids of a hexagonal grid covering Fortaleza as our origins and destinations. We are going to use the hexagonal grid made available by <code>{aopdata}</code><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. Each grid hexagon covers an area of 0.11 km², similar to a city block, which produces results at a fine spatial resolution.</p>
 <p>For a proper comparison between both scenarios, we need to calculate the two travel matrices using the same parameters. We consider trips by foot or by public transport, allow walking trips of at most 30 minutes to access or egress from public transport stops and limit the maximum trip duration to 60 minutes. We also consider a departure time of 7am, during the morning peak of a typical monday:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># downloads spatial grid data</span></span>
@@ -769,7 +765,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 6: 89801040323ffff 89801040337ffff              19</code></pre>
 </div>
 </div>
-<p>On first sight, our matrices look exactly the same: all travel times shown in the samples above are identical. This happens because the subway expansion project is limited to a relatively small area near Fortaleza’s city center, and the changes to the frequencies of the other subway and light rail corridors mainly affect these corridors’ immediate surroundings. Thus, many trips that take place in the city are not affected by those transport interventions. The travel time between many origin-destination pairs, however, are impacted:</p>
+<p>At first sight, our matrices look exactly the same: all travel times shown in the samples above are identical. This happens because the subway expansion project is limited to a relatively small area near Fortaleza’s city center, and the changes to the frequencies of the other subway and light rail corridors mainly affect these corridors’ immediate surroundings. Thus, many trips that take place in the city are not affected by these transport interventions. However, the travel time between many origin-destination pairs are, in fact, impacted:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># joins both scenarios' travel times in the same data set</span></span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">merge</span>(</span>
@@ -789,11 +785,11 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
     4: 8980104096fffff 8980104e80fffff                     55
     5: 8980104096fffff 8980104e863ffff                     56
    ---                                                       
-12890: 8980104eecbffff 8980104ea5bffff                     52
-12891: 8980104eecbffff 8980104eac3ffff                     49
-12892: 8980104eecbffff 8980104ead3ffff                     44
-12893: 8980104eecbffff 8980104eadbffff                     49
-12894: 8980104eecbffff 8980104ee6bffff                     41
+12889: 8980104eecbffff 8980104ea5bffff                     52
+12890: 8980104eecbffff 8980104eac3ffff                     49
+12891: 8980104eecbffff 8980104ead3ffff                     44
+12892: 8980104eecbffff 8980104eadbffff                     49
+12893: 8980104eecbffff 8980104ee6bffff                     41
        travel_time_p50_after
     1:                    50
     2:                    59
@@ -801,16 +797,16 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
     4:                    57
     5:                    57
    ---                      
-12890:                    57
-12891:                    53
-12892:                    47
-12893:                    50
-12894:                    42</code></pre>
+12889:                    57
+12890:                    53
+12891:                    47
+12892:                    50
+12893:                    42</code></pre>
 </div>
 </div>
 </section><section id="calculating-accessibility-levels-in-both-scenarios" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="calculating-accessibility-levels-in-both-scenarios">
 <span class="header-section-number">6.4</span> Calculating accessibility levels in both scenarios</h2>
-<p>Calculating the accessibility levels in both scenarios is really simple, requiring only some basic data processing before we apply one of the functions from the <code>{accessibility}</code> package to estimate accessibility. To facilitate the data manipulation, we merge the travel time matrices of both scenarios into a single table, and identify each scenario with the <code>scenario</code> column:</p>
+<p>Calculating the accessibility levels in both scenarios is really simple, requiring only some basic data processing before we apply one of the functions from the <code>{accessibility}</code> package. To facilitate the data manipulation, we merge the travel time matrices of both scenarios into a single table and identify each scenario with a column named <code>scenario</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>ttm <span class="ot">&lt;-</span> <span class="fu">rbind</span>(ttm_before, ttm_after, <span class="at">idcol =</span> <span class="st">"scenario"</span>)</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>ttm[, scenario <span class="sc">:</span><span class="er">=</span> <span class="fu">factor</span>(scenario, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"before"</span>, <span class="st">"after"</span>))]</span>
@@ -831,14 +827,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 3739275:    after 8980107b6dbffff 8980107b6dbffff               0</code></pre>
 </div>
 </div>
-<p>To calculate the accessibility levels, we need a table with some land used data for Fortaleza. We can download such data using the <code>read_landuse()</code> function from the <code>{aopdata}</code> package, which brings the population and opportunities count in each one of the hexagons that composes the previously downloaded spatial grid.</p>
+<p>To calculate the accessibility levels, we need a table with some land used data for Fortaleza. We can download such data using the <code>read_landuse()</code> function from the <code>{aopdata}</code> package, which returns a table containing the population and opportunities count in each one of the hexagons that compose the previously downloaded spatial grid.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>fortaleza_data <span class="ot">&lt;-</span> aopdata<span class="sc">::</span><span class="fu">read_landuse</span>(</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Fortaleza"</span>,</span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">showProgress =</span> <span class="cn">FALSE</span></span>
 <span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>For demonstration purposes, we calculate the accessibility to jobs and public highschools in our study area. The information on the total number of jobs and public highschools in each hexagon is listed in the columns <code>T001</code> and <code>E004</code>, respectively. We rename them to facilitate their identification. We also keep in the land use data only the few columns that we are going to use latter, including the column <code>P001</code>, which lists the total population in each hexagon, and column <code>R003</code>, which tells the income decile classification of each hexagon:</p>
+<p>For demonstration purposes, we calculate the accessibility to jobs and public highschools in our study area. The information on the total number of jobs and public highschools in each hexagon is listed in the columns <code>T001</code> and <code>E004</code>, respectively. We rename them to facilitate their identification. We also keep in the land use dataset only the columns that we are going to use later, including the columns <code>P001</code>, which lists the total population in each hexagon, and <code>R003</code>, which contains the income decile classification of each hexagon:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>cols_to_keep <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"id"</span>, <span class="st">"jobs"</span>, <span class="st">"schools"</span>, <span class="st">"population"</span>, <span class="st">"decile"</span>)</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">setnames</span>(</span>
@@ -868,8 +864,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 <p>A key decision in any accessibility analysis is which accessibility measure to use. It’s extremely important to weigh the pros and cons of each measure and to comprehend which metrics are more adequate for the type of opportunities we are looking at. In this example, we use two distinct measures:</p>
 <ul>
-<li><p>To calculate accessibility to jobs, we use a cumulative opportunities measure. This metric allows us to understand how many jobs are accessible within a given time frame. Despite its limitations discussed in <a href="./2_indicadores.en.html#cumulative-opportunity-measures">Chapter 2</a>, this measure is one of the most commonly used metrics. This is to a large extent because the results from this accessibility indicator are extremely easy to communicate and interpret. In this example, we set a travel time threshold of 60 minutes, which is close to average commuting time by public transport in Fortaleza (approximately 58 minutes, according to Pasfor).</p></li>
-<li><p>To calculate accessibility to public highschools, we use a minimum travel cost measure. This metric is particularly useful to assess the coverage of essential public services, such as basic health and education facilities. We can use this measure, for example, to identify population groups that are farther from these opportunities than a time/distance limit deemed reasonable.</p></li>
+<li><p>To calculate accessibility to jobs, we use a cumulative opportunities measure. This metric allows us to understand how many jobs are accessible within a given time frame. Despite its limitations discussed in <a href="./2_indicadores.en.html#cumulative-opportunity-measures">Chapter 2</a>, this is one of the most commonly used accessibility metrics. This is to a large extent because the results from this accessibility indicator are extremely easy to communicate and interpret. In this example, we set a travel time threshold of 60 minutes, which is close to average commuting time by public transport in Fortaleza (approximately 58 minutes, according to Pasfor).</p></li>
+<li><p>To calculate accessibility to public highschools, we use a minimum travel cost measure. This metric is particularly useful to assess the coverage of essential public services, such as basic health and education facilities. We can use this measure, for example, to identify population groups that are further from these opportunities than a time/distance limit deemed reasonable.</p></li>
 </ul>
 <p>As previously shown in <a href="3_calculando_accesso.en.qmd#sec-accessibility">Chapter 3</a>, we can calculate this measures using the <code>cumulative_cutoff()</code> and <code>cost_to_closest()</code> functions, respectively, from the <code>{accessibility}</code> package:</p>
 <div class="cell">
@@ -923,7 +919,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 5124: 8980107b6dbffff    after              15</code></pre>
 </div>
 </div>
-<p>Having done that, we can calculate the accessibility difference between the two scenarios. This information is useful to clearly communicate how the accessibility conditions in the city would be impacted by the future implementation of the East subway line and the changes to service frequency foreseen in Pasfor. To do so, we use the code below:</p>
+<p>We can see that the minimum travel cost function output includes some <code>Inf</code> values, which are used to signal origins that cannot reach any opportunities given the trips that compose the travel time matrix. In our case, origins listed with this value cannot reach any public highschools within 60 minutes of travel (which is the travel time limit imposed when calculating the matrix). To simplify the process from this point onward, we consider that these regions are 80 minutes away from their nearest school:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># substitutes Inf values by 80 minutes</span></span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>time_to_schools[</span>
@@ -931,7 +927,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  travel_time_p50 <span class="sc">:</span><span class="er">=</span> <span class="fu">ifelse</span>(<span class="fu">is.infinite</span>(travel_time_p50), <span class="dv">80</span>, travel_time_p50)</span>
 <span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Having done that, we can calculate the accessibility difference between the two scenarios. This information is useful to clearly communicate the effects of the East Line implementation and the frequency changes foreseen in Pasfor on the accessibility conditions in the city. To do so, we use the code below:</p>
+<p>Having done that, we can calculate the accessibility difference between the two scenarios with the code below. This information is useful to clearly communicate how the accessibility conditions in the city would be impacted by the future implementation of the East subway line and the frequency changes foreseen in Pasfor.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>access_to_jobs[</span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  ,</span>
@@ -942,13 +938,13 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>time_to_schools[</span>
 <span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>  ,</span>
 <span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>  difference <span class="sc">:</span><span class="er">=</span> data.table<span class="sc">::</span><span class="fu">shift</span>(travel_time_p50, <span class="at">type =</span> <span class="st">"lead"</span>) <span class="sc">-</span></span>
-<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>    travel_time_p50,</span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>      travel_time_p50,</span>
 <span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>  by <span class="ot">=</span> id</span>
 <span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="analyzing-accessibility-levels-before-and-after" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="analyzing-accessibility-levels-before-and-after">
-<span class="header-section-number">6.5</span> Analyzing accessibility levels before and after</h2>
-<p>Now that we have calculated the accessibility levels in both scenarios and the difference between them, we can examine how the future implementation of the East Line coupled with the changes to the frequencies of the subway and light rail services will impact the accessibility conditions in our study area. As a first exploratory analysis, we can investigate how these changes affect the average accessibility in the city. Looking at the accessibility to jobs first, we calculate the average number of accessible jobs in each scenario. Here, it’s important to weigh the accessibility levels by the population of each grid cell, since hexagons with larger populations contribute more to the city’s average than hexagons with fewer residents.</p>
+</section><section id="analyzing-accessibility-levels" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="analyzing-accessibility-levels">
+<span class="header-section-number">6.5</span> Analyzing accessibility levels</h2>
+<p>Now that we have calculated the accessibility levels in both scenarios and the difference between them, we can examine how the future implementation of the East Line coupled with the changes to the frequencies of the subway and light rail services will impact the accessibility conditions in our study area. As a first exploratory analysis, we can investigate how these changes affect the average accessibility in the city. Looking at the accessibility to jobs first, we calculate the average number of accessible jobs in each scenario. Here, it’s important to weigh the accessibility levels by the population of each grid cell, as hexagons with larger populations contribute more to the city’s average than hexagons with fewer residents.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
@@ -986,11 +982,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb49-34"><a href="#cb49-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Accessible jobs</span><span class="sc">\n</span><span class="st">(thousands)"</span>) <span class="sc">+</span></span>
 <span id="cb49-35"><a href="#cb49-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte.en_files/figure-html/fig_4-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-fig_4" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="6_cenarios_transporte.en_files/figure-html/fig-fig_4-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption class="figure-caption">Figure 6.4: Average accessibility to jobs in Fortaleza by transport scenario</figcaption></figure>
 </div>
 </div>
-<p>The results show that Fortaleza’s population could reach on average 244,137 jobs in up to 60 minutes by public transport before the subway expansion, in 2019. The East Line’s implementation and the changes to the frequencies of subway and light rail services led to an increase of 0.0534126%, to 257,177 jobs, on average.</p>
-<p>When we look at the average time to reach the closest public highschool, we see that the changes to the transport system barely affect the accessibility to these schools. On average, Fortaleza’s population took approximately 13 minutes to reach the nearest public highschool to their home in 2019. After the subway extension and the increase to the subway and light rail frequencies, this value remains virtually unchanged.</p>
+</div>
+<p>The results show that Fortaleza’s population could reach on average 244,137 jobs by public transport in up to 60 minutes before the subway expansion, in 2019. The East Line’s implementation and the changes to the frequencies of subway and light rail services will result in an increase of 5.3%, to 257,177 jobs on average.</p>
+<p>When we look at the average time to reach the closest public highschool, we see that the changes to the transport system barely affect the accessibility to these schools. On average, Fortaleza’s population would take approximately 13 minutes to reach the nearest public highschool to their home in 2019. After the subway extension and the increase to the subway and light rail frequencies, this value will remain virtually unchanged.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># merges time to schools table with land use data</span></span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>time_to_schools <span class="ot">&lt;-</span> <span class="fu">merge</span>(</span>
@@ -1017,11 +1016,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb50-23"><a href="#cb50-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Average time to</span><span class="sc">\n</span><span class="st">closest school (in minutes)"</span>) <span class="sc">+</span></span>
 <span id="cb50-24"><a href="#cb50-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte.en_files/figure-html/fig_5-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-fig_5" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="6_cenarios_transporte.en_files/figure-html/fig-fig_5-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption class="figure-caption">Figure 6.5: Average time to the closest public highschool in Fortaleza by transport scenario</figcaption></figure>
 </div>
 </div>
-<p>In summary, the results show that the planned construction of the East Line and the frequency adjustment of the other rail services in Fortaleza would affect accessibility to jobs much more significantly than the accessibility to public highschools. This is mainly a result of how these two types of opportunities are spatially distributed in Fortaleza: while jobs are much more concentrated in the city center, schools are better distributed throughout the city. The changes to the public transport system, therefore, could help the residents of regions far from the city center to reach the jobs located there. On the other hand, public highschools are much more evenly distributed across the city, which results in relatively good accessibility conditions even before the changes to the public transport network. This helps us explain why those transport interventions would have such a low impact on the travel time necessary to reach the nearest schools.</p>
-<p>These results can be better understood when we observe their spatial distribution. Before doing so, however, we create a spatial object outlining the shape of the public transport corridors in the city, which helps making the impact of the changes to the transport network even clearer.</p>
+</div>
+<p>In summary, the results show that the planned construction of the East Line and the frequency adjustment of the other rail services in Fortaleza will affect accessibility to jobs much more significantly than the accessibility to public highschools. This is mainly a result of how these two types of opportunities are spatially distributed in Fortaleza: while jobs are much more concentrated in the city center, schools are better distributed throughout the city. The changes to the public transport system, therefore, could help the residents of regions far from the city center reach the jobs located there. On the other hand, public highschools are much more evenly distributed across the city, which results in relatively good accessibility conditions even before the changes to the public transport network. This helps us explain why the transport interventions will have such a low impact on the travel time necessary to reach the nearest schools.</p>
+<p>These results can be more deeply understood when we observe their spatial distribution. Before doing so, however, we create a spatial object outlining the shapes of the public transport corridors in the city, which will help making the impact of the changes to the transport network even clearer.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># reads the gtfs files required to create the geometries of each corridor</span></span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>metrofor_gtfs <span class="ot">&lt;-</span> <span class="fu">read_gtfs</span>(metrofor_path)</span>
@@ -1077,7 +1079,10 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb51-52"><a href="#cb51-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> scenario, <span class="at">nrow =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb51-53"><a href="#cb51-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte.en_files/figure-html/fig_6-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-fig_6" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="6_cenarios_transporte.en_files/figure-html/fig-fig_6-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption class="figure-caption">Figure 6.6: Spatial distribution of rapid transit corridors in Fortaleza by transport scenario</figcaption></figure>
+</div>
 </div>
 </div>
 <p>Now we can analyze the spatial distribution of accessibility levels in both scenarios, as well as the accessibility difference between them. To do this, we need to merge the accessibility estimates with the spatial grid of our study area. We first look at access to jobs:</p>
@@ -1138,10 +1143,13 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb52-54"><a href="#cb52-54" aria-hidden="true" tabindex="-1"></a><span class="co"># combines both plots</span></span>
 <span id="cb52-55"><a href="#cb52-55" aria-hidden="true" tabindex="-1"></a>access_dist <span class="sc">/</span> difference_dist <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte.en_files/figure-html/fig_7-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-fig_7" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="6_cenarios_transporte.en_files/figure-html/fig-fig_7-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption class="figure-caption">Figure 6.7: Spatial distribution of accessibility to jobs by transport scenario and of the difference between scenarios</figcaption></figure>
 </div>
 </div>
-<p>The map shows that the regions that benefit the most from the changes to the transport system are those distant from the city center, but which are still close to rapid transit stations. The job accessibility gains concentrate mainly around the South and West subway corridors, and, to a smaller extent, around some of the light rail stations. Even regions close to these corridors, although not immediately adjacent to them, have large accessibility gains, highlighting the importance of the transport network connectivity to guarantee good accessibility conditions. The region around the new East Line, on the other hand, which already concentrated some of the highest accessibility levels in the city even before the implementation of the new corridor, shows only modest accessibility gains.</p>
+</div>
+<p>The map shows that the regions that will benefit the most from the changes to the transport system are those distant from the city center, but which are still close to rapid transit stations. The job accessibility gains concentrate mainly around the South and West subway corridors, and, to a smaller extent, around some of the light rail stations. Even regions close to these corridors, although not immediately adjacent to them, display large accessibility gains, highlighting the importance of the transport network connectivity to guarantee good accessibility conditions. The region around the new East Line, on the other hand, which already concentrated some of the highest accessibility levels in the city even before the implementation of the new corridor, shows only modest accessibility gains.</p>
 <p>The maps of travel time to the nearest school, however, depict a different story:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># merges time to schools data with Fortaleza's spatial grid and converts the result</span></span>
@@ -1178,25 +1186,26 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb53-32"><a href="#cb53-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="cn">NA</span></span>
 <span id="cb53-33"><a href="#cb53-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb53-34"><a href="#cb53-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"viridis"</span>, <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb53-35"><a href="#cb53-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb53-36"><a href="#cb53-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Time to</span><span class="sc">\n</span><span class="st">closest highschool</span><span class="sc">\n</span><span class="st">difference</span><span class="sc">\n</span><span class="st">(in minutes)"</span></span>
-<span id="cb53-37"><a href="#cb53-37" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb53-38"><a href="#cb53-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> corridors_shapes, <span class="fu">aes</span>(<span class="at">color =</span> corridor), <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb53-39"><a href="#cb53-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#F8766D"</span>, <span class="st">"#7CAE00"</span>, <span class="st">"#00BFC4"</span>, <span class="st">"#C77CFF"</span>)) <span class="sc">+</span></span>
-<span id="cb53-40"><a href="#cb53-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
-<span id="cb53-41"><a href="#cb53-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">0.4</span>, <span class="st">"cm"</span>))</span>
-<span id="cb53-42"><a href="#cb53-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-43"><a href="#cb53-43" aria-hidden="true" tabindex="-1"></a><span class="co"># combines both plots</span></span>
-<span id="cb53-44"><a href="#cb53-44" aria-hidden="true" tabindex="-1"></a>time_dist <span class="sc">/</span> time_diff_dist <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb53-35"><a href="#cb53-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Time to</span><span class="sc">\n</span><span class="st">closest highschool</span><span class="sc">\n</span><span class="st">difference</span><span class="sc">\n</span><span class="st">(in minutes)"</span>) <span class="sc">+</span></span>
+<span id="cb53-36"><a href="#cb53-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> corridors_shapes, <span class="fu">aes</span>(<span class="at">color =</span> corridor), <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb53-37"><a href="#cb53-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#F8766D"</span>, <span class="st">"#7CAE00"</span>, <span class="st">"#00BFC4"</span>, <span class="st">"#C77CFF"</span>)) <span class="sc">+</span></span>
+<span id="cb53-38"><a href="#cb53-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb53-39"><a href="#cb53-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">0.4</span>, <span class="st">"cm"</span>))</span>
+<span id="cb53-40"><a href="#cb53-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-41"><a href="#cb53-41" aria-hidden="true" tabindex="-1"></a><span class="co"># combines both plots</span></span>
+<span id="cb53-42"><a href="#cb53-42" aria-hidden="true" tabindex="-1"></a>time_dist <span class="sc">/</span> time_diff_dist <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte.en_files/figure-html/fig_8-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-fig_8" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="6_cenarios_transporte.en_files/figure-html/fig-fig_8-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption class="figure-caption">Figure 6.8: Spatial distribution of travel time to the closest public highschool by transport scenario and of the difference between scenarios</figcaption></figure>
 </div>
 </div>
-<p>The East Line and the changes to the subway and light rail frequencies barely affect the accessibility to public highschools in Fortaleza. Very few hexagons present any accessibility gain between scenarios, with the exception of a small number of grid cells very close to subway stations. As we can see, the spatial distribution of access to schools presents a much more evenly distributed pattern than the job accessibility distribution pattern. Again, this is a consequence of how public highschools are distributed in the city: unlike the jobs distribution, which tends to follow economic criteria, the spatial planning of public schools in Brazil are guided by proximity and equity guidelines aiming to increase the proximity between schools and vulnerable population groups. Nonetheless, the degree of success of education policies in promoting equitable accessibility can greatly vary between cities and for different education levels such as early childhood and primary education <span class="citation" data-cites="saraiva2023transporte">(<a href="references.en.html#ref-saraiva2023transporte" role="doc-biblioref">Saraiva et al. 2023</a>)</span>.</p>
+</div>
+<p>The East Line and the changes to the subway and light rail frequencies barely affect the accessibility to public highschools in Fortaleza. Very few hexagons present any accessibility gain between scenarios, with the exception of a small number of grid cells very close to subway stations. As we can see, the accessibility to schools is much more evenly distributed than the accessibility to jobs. Again, this is a consequence of how public highschools are distributed in the city: unlike the jobs distribution, which tends to follow economic criteria, the spatial planning of public schools in Brazil is guided by equity guidelines, aiming to increase the proximity between schools and vulnerable population groups. Nonetheless, the degree to which education policies successfully promote equitable accessibility greatly varies between cities and education levels <span class="citation" data-cites="saraiva2023transporte">(<a href="references.en.html#ref-saraiva2023transporte" role="doc-biblioref">Saraiva et al. 2023</a>)</span>.</p>
 </section><section id="accessibility-inequality" class="level2" data-number="6.6"><h2 data-number="6.6" class="anchored" data-anchor-id="accessibility-inequality">
 <span class="header-section-number">6.6</span> Accessibility inequality</h2>
-<p>A key dimension to assess transport policies is related to their distributive aspects. Who are the winners and losers? From an equity perspective, we expect public policies to prioritize improvements on the accessibility conditions of those with worse socioeconomic conditions and who depend on public transport the most <span class="citation" data-cites="pereira2017distributive vanwee2022accessibility">(<a href="references.en.html#ref-pereira2017distributive" role="doc-biblioref">Pereira, Schwanen, and Banister 2017</a>; <a href="references.en.html#ref-vanwee2022accessibility" role="doc-biblioref">van Wee 2022</a>)</span>.</p>
-<p>In this section, we look at how the job accessibility gains that result from the East Line implementation coupled with changes to subway and light rail frequencies are distributed between different income groups. To do this, we need to understand how the accessibility levels were distributed among the population in 2019, before the transport intervention, and after the implementation of such changes. With the code below, we use the information of the classification of each hexagon in terms of income decile to investigate the accessibility distribution between income groups, before and after the changes to the transport system.</p>
+<p>A key dimension when assessing transport policies is related to their distributive aspects. Who are the winners and losers? From an equity perspective, we expect public policies to prioritize improvements on the accessibility conditions of those with worse socioeconomic conditions and who depend on public transport the most <span class="citation" data-cites="pereira2017distributive vanwee2022accessibility">(<a href="references.en.html#ref-pereira2017distributive" role="doc-biblioref">Pereira, Schwanen, and Banister 2017</a>; <a href="references.en.html#ref-vanwee2022accessibility" role="doc-biblioref">van Wee 2022</a>)</span>.</p>
+<p>In this section, we look at how the job accessibility gains that result from the East Line implementation coupled with the changes to subway and light rail frequencies are distributed between different income groups. To do this, we need to understand how the accessibility levels were distributed among the population in 2019, before the transport intervention, and how they will be after the implementation of such changes. With the code below, we use the classification of each hexagon in terms of income decile to investigate the accessibility distribution between income groups before and after the changes to the transport system.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> access_to_jobs[population <span class="sc">&gt;</span> <span class="dv">0</span>]) <span class="sc">+</span></span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(</span>
@@ -1213,15 +1222,18 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb54-13"><a href="#cb54-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_brewer</span>(<span class="at">palette =</span> <span class="st">"RdBu"</span>) <span class="sc">+</span></span>
 <span id="cb54-14"><a href="#cb54-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Income decile"</span>, <span class="at">y =</span> <span class="st">"Accessible jobs</span><span class="sc">\n</span><span class="st">(in thousands)"</span>) <span class="sc">+</span></span>
 <span id="cb54-15"><a href="#cb54-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
-<span id="cb54-16"><a href="#cb54-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"D1</span><span class="sc">\n</span><span class="st">poorest"</span>, <span class="fu">paste0</span>(<span class="st">"D"</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>), <span class="st">"D10</span><span class="sc">\n</span><span class="st">wealthiest"</span>)</span>
+<span id="cb54-16"><a href="#cb54-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"D1</span><span class="sc">\n</span><span class="st">poorest"</span>, <span class="fu">paste0</span>(<span class="st">"D"</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>), <span class="st">"D10</span><span class="sc">\n</span><span class="st">wealthiest"</span>)</span>
 <span id="cb54-17"><a href="#cb54-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb54-18"><a href="#cb54-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte.en_files/figure-html/fig_9-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-fig_9" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="6_cenarios_transporte.en_files/figure-html/fig-fig_9-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption class="figure-caption">Figure 6.9: Job accessibility distribution between income deciles by transport scenario</figcaption></figure>
 </div>
 </div>
-<p>This figure clearly shows that the wealthiest people in Fortaleza have higher job accessibility than their poorer counterparts, both before and after the changes to the transport system. In Fortaleza, as in most Brazilian cities, the wealthiest populations tend to live closer to the city center and areas with higher concentration of jobs, whereas the poorest tend to reside in the city’s outskirts <span class="citation" data-cites="pereira2022estimativas">(<a href="references.en.html#ref-pereira2022estimativas" role="doc-biblioref">Pereira et al. 2022</a>)</span>. Consequently, the wealthiest usually have better urban accessibility conditions than the poorest - not only because they tend to live closer to their jobs, but also because these regions tend to be better served by public transport than urban peripheries.</p>
-<p>However, it is difficult to see in this figure the magnitude of the variation in accessibility between the two scenarios. Using the same strategy that we have previously used, we present in the following figure the distribution of accessibility <em>gains</em> between the scenarios for the population in each income decile:</p>
+</div>
+<p>This figure clearly shows that the wealthiest people in Fortaleza have higher job accessibility than their poorer counterparts, both before and after the changes to the transport system. In Fortaleza, as in most Brazilian cities, the wealthiest populations tend to live closer to the city center and areas with higher concentration of jobs, whereas the poorest tend to reside in the city’s outskirts <span class="citation" data-cites="pereira2022estimativas">(<a href="references.en.html#ref-pereira2022estimativas" role="doc-biblioref">Pereira et al. 2022</a>)</span>. Consequently, the wealthiest usually have better urban accessibility conditions than the poorest. Not only because they tend to live closer to their jobs, but also because these regions tend to be better served by public transport than the urban peripheries.</p>
+<p>However, it is difficult to see in this figure the magnitude of the variation in accessibility between the two scenarios. Using the same strategy that we have previously used, we present in the following figure the distribution of accessibility <em>gains</em> between scenarios by income decile:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">subset</span>(access_to_jobs, population <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(difference))) <span class="sc">+</span></span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(</span>
@@ -1240,16 +1252,19 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb55-15"><a href="#cb55-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Job accessibility difference</span><span class="sc">\n</span><span class="st">(in thousands)"</span></span>
 <span id="cb55-16"><a href="#cb55-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb55-17"><a href="#cb55-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
-<span id="cb55-18"><a href="#cb55-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"D1</span><span class="sc">\n</span><span class="st">poorest"</span>, <span class="fu">paste0</span>(<span class="st">"D"</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>), <span class="st">"D10</span><span class="sc">\n</span><span class="st">wealthiest"</span>)</span>
+<span id="cb55-18"><a href="#cb55-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"D1</span><span class="sc">\n</span><span class="st">poorest"</span>, <span class="fu">paste0</span>(<span class="st">"D"</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>), <span class="st">"D10</span><span class="sc">\n</span><span class="st">wealthiest"</span>)</span>
 <span id="cb55-19"><a href="#cb55-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb55-20"><a href="#cb55-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte.en_files/figure-html/fig_10-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-fig_10" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="6_cenarios_transporte.en_files/figure-html/fig-fig_10-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption class="figure-caption">Figure 6.10: Distribution of accessibility gains between transport scenarios by income decile</figcaption></figure>
 </div>
 </div>
-<p>As we can see, the distribution of accessibility gains follows an inverted-U shape. There are relatively higher gains among middle-income groups and smaller gains for the poorest and wealthiest populations. The hexagon that gained the most accessibility falls into the 8th decile category, and it is an outlier that would be able to access almost 200,000 jobs more in comparison to the pre-changes scenario.</p>
-<p>Charts such as the ones shown in the last two figures are not the simplest to communicate, exactly because they contain lots of information. To facilitate this communication, summary measures are frequently used to assess the impact of transport policies on accessibility inequalities. This type of measure tries to summarize the distribution of accessibility levels among population groups (here, income deciles) into a single indicator that facilitates the understanding and interpretation of the results and that can be used, for example, when developing plans and setting goals. In the accessibility literature, two of the most frequently used inequality measures are the Palma Ratio and the Gini Index <span class="citation" data-cites="lucas2016method guzman2018accessibility pritchard2019international">(<a href="references.en.html#ref-lucas2016method" role="doc-biblioref">Lucas, van Wee, and Maat 2016</a>; <a href="references.en.html#ref-guzman2018accessibility" role="doc-biblioref">Guzman and Oviedo 2018</a>; <a href="references.en.html#ref-pritchard2019international" role="doc-biblioref">Pritchard et al. 2019</a>)</span>.</p>
-<p>In this example, we calculate the Palma Ratio before and after the intervention to the transport system. This measure is the result of dividing the average accessibility of the wealthiest 10% by the average accessibility of the poorest 40%:</p>
+</div>
+<p>As we can see, the distribution of accessibility gains follows an inverted-U shape, with middle-income groups concentrating larger gains than the poorest and wealthiest populations. The hexagon that gained the most accessibility appears as an outlier of the 8th decile category, with an accessibility excess between scenarios of almost 200,000 jobs.</p>
+<p>Charts such as the ones shown in the last two figures contain lots of information, and that’s why they are not the simplest to communicate. To facilitate this communication, summary measures are frequently used to assess the impact of transport policies on accessibility inequalities. This type of measure tries to summarize the distribution of accessibility levels among population groups (here, income deciles) into a single indicator that facilitates the understanding and interpretation of the results and is frequently used, for example, when developing plans and setting goals. In the accessibility literature, two of the most frequently used inequality measures are the Palma Ratio and the Gini Index <span class="citation" data-cites="lucas2016method guzman2018accessibility pritchard2019international">(<a href="references.en.html#ref-lucas2016method" role="doc-biblioref">Lucas, van Wee, and Maat 2016</a>; <a href="references.en.html#ref-guzman2018accessibility" role="doc-biblioref">Guzman and Oviedo 2018</a>; <a href="references.en.html#ref-pritchard2019international" role="doc-biblioref">Pritchard et al. 2019</a>)</span>.</p>
+<p>In this example, we calculate the Palma Ratio before and after the interventions to the transport system. This measure is the result of dividing the average accessibility of the wealthiest 10% by the average accessibility of the poorest 40%:</p>
 <p><span class="math display">\[P = \frac{\overline{A_{tp10}}}{\overline{A_{bt40}}}\]</span></p>
 <p>in which <span class="math inline">\(P\)</span> is the Palma Ratio, <span class="math inline">\(\overline{A_{tp10}}\)</span> is the average accessibility of the richest 10% and <span class="math inline">\(\overline{A_{bt40}}\)</span> is the average accessibility of the poorest 40%.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -1264,11 +1279,11 @@ Why use the Palma Ratio?
 </div>
 <div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>One of the main advantages of the Palma Ratio over the Gini Index is how easy it is to communicate and interpret. Values higher than 1 indicate a scenario in which the wealthiest have higher average accessibility levels than the poorest, and values lower than 1 the opposite situation. Another advantage of the Palma Ratio is that it clearly reflects how the inequality varies between two groups of particular interest to us: in this case the wealthy and the poor population. The Gini Index, on the other hand, estimates how much a distribution deviates from a hypothetical situation in which everyone has the exact same access level, but says nothing about the socioeconomic conditions of those with the highest and lowest accessibility levels. If a given policy increases the accessibility levels of wealthy people that live in low-accessibility regions, for example, the Gini Index would point to an inequality decrease, even if not a single vulnerable citizen had benefited from this policy. Such a policy can hardly be assessed as equitable, even if the summary measure (the Gini Index, in this case) suggests otherwise.</p>
+<p>One of the main advantages of the Palma Ratio over the Gini Index is how easy it is to communicate and interpret its results. Values higher than 1 indicate a scenario in which the wealthiest have higher average accessibility levels than the poorest, and values lower than 1 the opposite situation. Another advantage of the Palma Ratio is that it clearly reflects how the inequality varies between two groups of particular interest to us: the most privileged and the most vulnerable in a population. The Gini Index, on the other hand, estimates how much a distribution deviates from a hypothetical situation in which everyone has the exact same access level, but says nothing about the socioeconomic conditions of those with the highest and lowest accessibility levels. If a given policy increases the accessibility levels of wealthy people that live in low-accessibility regions, for example, the Gini Index would point to an inequality decrease, even if not a single vulnerable citizen had benefited from this policy. Such a policy can hardly be assessed as equitable, even if the summary measure (the Gini Index, in this case) suggests otherwise.</p>
 </div>
 </div>
 </div>
-<p>Calculating the Palma Ratio before and after the East Line implementation and the changes to the subway and light rail frequencies allows us to understand how these policies impact the inequality in access to employment opportunities in Fortaleza:</p>
+<p>Calculating the Palma Ratio before and after the East Line implementation and the changes to the subway and light rail frequencies allows us to understand how these policies will impact the job accessibility inequality in Fortaleza:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculates the wealthiest's average accessibility in both scenarios</span></span>
 <span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>wealthiest_access <span class="ot">&lt;-</span> access_to_jobs[</span>
@@ -1299,28 +1314,30 @@ Why use the Palma Ratio?
 <span id="cb56-27"><a href="#cb56-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"#0d6556"</span>) <span class="sc">+</span></span>
 <span id="cb56-28"><a href="#cb56-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
 <span id="cb56-29"><a href="#cb56-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(palma, <span class="at">digits =</span> <span class="dv">2</span>)),</span>
-<span id="cb56-30"><a href="#cb56-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="fl">1.5</span>,</span>
-<span id="cb56-31"><a href="#cb56-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"white"</span>,</span>
-<span id="cb56-32"><a href="#cb56-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">10</span></span>
-<span id="cb56-33"><a href="#cb56-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb56-34"><a href="#cb56-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Palma Ratio"</span>) <span class="sc">+</span></span>
-<span id="cb56-35"><a href="#cb56-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb56-30"><a href="#cb56-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"white"</span>,</span>
+<span id="cb56-31"><a href="#cb56-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">10</span></span>
+<span id="cb56-32"><a href="#cb56-32" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb56-33"><a href="#cb56-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Palma Ratio"</span>) <span class="sc">+</span></span>
+<span id="cb56-34"><a href="#cb56-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="6_cenarios_transporte.en_files/figure-html/fig_11-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-fig_11" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="6_cenarios_transporte.en_files/figure-html/fig-fig_11-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption class="figure-caption">Figure 6.11: Job accessibility Palma Ratio in Fortaleza by transport scenario</figcaption></figure>
 </div>
 </div>
-<p>The figure above shows that, in 2019, the wealthiest groups in Fortaleza could access on average, 2.17 times more jobs than the poorest population by public transport in 60 minutes. The chart also shows that the inequality, as measured by the Palma Ratio, slightly decreased between the pre- and post-intervention scenarios. Thus, we can say that, in this simplified case study, the proposed subway expansion combined with the changes to the subway and light rail frequencies would be slightly progressive. In other words, these interventions would reduce inequality in access to jobs between high- and low-income populations in Fortaleza.</p>
+</div>
+<p>The figure above shows that, in 2019, the wealthiest groups in Fortaleza could access, on average, 2.17 times more jobs by public transport in 60 minutes than the poorest population. The chart also shows that the inequality, as measured by the Palma Ratio, slightly decreased between the pre- and post-intervention scenarios. Thus, we can say that, in this simplified case study, the proposed subway expansion combined with the changes to the subway and light rail frequencies will be slightly progressive. In other words, these interventions will reduce the job accessibility inequality between high- and low-income populations in Fortaleza.</p>
 <div class="callout callout-style-simple callout-important">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>It’s important to emphasize that the transport project assessment presented in this chapter looks at a simplified intervention scenario for didactic purposes. For a more complete assessment of the East Line implementation and the changes foreseen in the Pasfor, which also includes changes to the bus network, please see <span class="citation" data-cites="braga2022impactos">Braga et al. (<a href="references.en.html#ref-braga2022impactos" role="doc-biblioref">2022</a>)</span> (in Portuguese).</p>
+<p>It’s important to emphasize that the project assessment presented in this chapter looks at a simplified intervention scenario for didactic purposes. For a more complete assessment of the East Line implementation and the changes foreseen in Pasfor, which also includes changes to the bus network, please see <span class="citation" data-cites="braga2022impactos">Braga et al. (<a href="references.en.html#ref-braga2022impactos" role="doc-biblioref">2022</a>)</span> (in Portuguese).</p>
 </div>
 </div>
 </div>
-<p>In this chapter, we have focused on assessing the accessibility impact of a transport policy. It’s worth noting, however, that a complete assessment of a public policy must also consider other criteria such as community engagement with the policy development and decision-making process, as well as other environmental, economic and social impacts of the policy. Although an accessibility impact assessment is very important to determine who benefit from the transport policy and how such policy impact the performance of the transport network, this type of analysis only looks at a single impact dimension, and should be complemented by other analyzes.</p>
+<p>In this chapter, we have focused on assessing the accessibility impacts of a transport policy. It’s worth noting, however, that a complete assessment of a public policy must also consider other criteria, such as community engagement with the policy development and decision-making process, as well as other environmental, economic and social impacts of the policy. Although an accessibility impact assessment is very important to determine who benefits from the transport policy and how such policy impacts the performance of the transport network, this type of analysis only looks at a single impact dimension, and should be complemented by other analyses.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
@@ -1352,6 +1369,9 @@ van Wee, Bert. 2022. <span>“Accessibility and Equity: <span>A</span> Conceptua
 </section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1"><p>Available at <a href="https://www.pasfor.com.br/" class="uri">https://www.pasfor.com.br/</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>For a more complete assessment that considers all the changes foreseen in Pasfor, please check <span class="citation" data-cites="braga2022impactos">Braga et al. (<a href="references.en.html#ref-braga2022impactos" role="doc-biblioref">2022</a>)</span> (in Portuguese).<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>For more details, please refer to the <code>frequencies</code> table description in <a href="./4_dados_gtfs.en.html#frequencies.txt">Chapter 4</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>For more details on the package, please refer to <a href="./s5_dados_aop.en.html">Section 5</a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
