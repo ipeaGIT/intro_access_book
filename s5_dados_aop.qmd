@@ -67,7 +67,7 @@ Já a @tbl-tabela_dados_aop apresenta os dados de características socioeconômi
 ```{r}
 #| echo: false
 #| label: tbl-tabela_dados_aop
-#| tbl-cap: Informações socioeconômicas da população e de distribuição espacial de atividades, segundo ano e fonte de dados
+#| tbl-cap: Dados socioeconômicos da população e de distribuição espacial de atividades agregados pelo AOP, segundo ano de referência e fonte de dados
 tabela_dados_pop <- data.table::data.table(
   Dado = c(
     "Características sociodemográficas da população",
@@ -77,7 +77,7 @@ tabela_dados_pop <- data.table::data.table(
     "Estabelecimentos de assistência social"
   ),
   Informações = c(
-    "Quantidade de pessoas segundo sexo, faixa de idade e cor/raça; média da renda domiciliar per capita",
+    "Quantidade de pessoas segundo sexo, faixa de idade e cor/raça; média da renda per capita",
     "Quantidade de creches e escolas públicas segundo nível de ensino (infantil, fundamental e médio)",
     "Quantidade de estabelecimentos de saúde que atendem pelo SUS segundo nível de atenção (baixa, média e alta complexidade)",
     "Quantidade de empregos formais conforme o nível de instrução dos trabalhadores (baixa, média e alta escolaridade)",
