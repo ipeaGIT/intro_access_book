@@ -1,13 +1,12 @@
 # Population and socioeconomic data
 
-The population data used in the Access to Opportunities project comes from the 2010 Census. This data brings aggregate information on the spatial distribution of the population by income per capita, race, sex, and age, , and it can be downloaded with the `aopdata::read_population()` function. To download data for a specific city, the function needs a value to be provided for the `city` parameter. To download the data with the spatial information of each grid cell, the `geometry` parameter must receive the value `TRUE` (by default, this value is `FALSE`, so that the geometry of the cells is not downloaded).
+The sociodemographic data used in AOP, including aggregate information on the spatial distribution of the population and of their characteristics in terms of income per capita, race, sex and age, comes from the 2010 Census. This dataset can be downloaded in R with the `read_population()` function from the `{aopdata}` package. This function takes a `city` parameter, used to indicate the city whose data must be downloaded. To include the spatial information of each grid cell when downloading the data, the `geometry` parameter, which defaults to `FALSE`, must take the value `TRUE`.
 
 In the example below, we show how to download the population and socioeconomic data of Fortaleza:
 
 ```{r}
 #| message: false
 #| warning: false
-# downloads aop sociodemographic data
 data_fortaleza <- aopdata::read_population(
   city = "Fortaleza",
   year = 2010,
@@ -16,57 +15,59 @@ data_fortaleza <- aopdata::read_population(
 )
 ```
  
-The data table includes the reference year of the population census, the ids of hexagons and municipality, and socioeconomic data in multiple columns with encoded names:
+The output includes the Census reference year, columns identifying the grid cells and the municipality and socioeconomic data in multiple columns with encoded names:
 
 ```{r}
 names(data_fortaleza)
 ```
  
-@tbl-population_dictionary presents the data dictionary, with the description of each of the columns in the data, as well as observations about some of its values. This description can also be found in the documentation of the function by running in R the `?read_population`.
+@tbl-population_dictionary presents the data dictionary with the description of each column, as well as observations about some of the values. This description can also be found in the documentation of the function, running the command `?read_population` in an R session.
 
 ```{r}
 #| echo: false
 #| label: tbl-population_dictionary
-#| tbl-cap: Description of the columns in the population and socioeconomic data table
+#| tbl-cap: Description of the columns in the population and socioeconomic dataset
 tbl <- tibble::tribble(
-  ~Coluna,  		~Description,                        			~Observation,
-  "year",   		"Reference year",               			"",
-  "id_hex", 		"Unique hexagon identifier", 			"",
-  "abbrev_muni", "Abbreviation of 3 letters of the municipality",  			"",
-  "name_muni",   "Name of the municipality",               			"",
-  "code_muni",   "7-digit IBGE code of the municipality", "",
-  "P001",   		"Total number of people",     			"",
-  "P002",   		"Number of white people",   			"",
-  "P003",   		"Number of black people",    			"",
-  "P004",   		"Number of indigenous people", 			"",
-  "P005",   		"Number of people of yellow color",    	"",
-  "P006",   		"Number of men",            			"",
-  "P007",   		"Number of women",          			"",
-  "P010",   		"Number of people from 0 to 5 years", 		"",
-  "P011",   		"Number of people from 6 to 14 years",    	"",
-  "P012",   		"Number of people from 15 to 18 years",   	"",
-  "P013",   		"Number of people aged 19 to 24 years",   	"",
-  "P014",   		"Number of people aged 25 to 39 years",   	"",
-  "P015",   		"Number of people aged 40 to 69 years",   	"",
-  "P016",   		"Number of people aged 70 years and over", "",
-  "R001",   		"Average per capita household income", 		"2010 values, in Reais (R$)",
-  "R002",   		"Income quintile",                			"Values from 1 (poorest) to 5 (richest)",
-  "R003",    	"Income decile",                  			"Values from 1 (poorest) to 10 (richest)",
-  "geometry",   	"Spatial geometry",              			""
+  ~Column,       ~Description,                                  ~Observation,
+  "year",        "Reference year",                              "",
+  "id_hex",      "Unique hexagon identifier",                   "",
+  "abbrev_muni", "3-letter abbreviation of municipality name",  "",
+  "name_muni",   "Municipality name",                           "",
+  "code_muni",   "7-digit municipality IBGE code",              "",
+  "P001",        "Total number of people",                      "",
+  "P002",        "Number of white people",                      "",
+  "P003",        "Number of black people",                      "",
+  "P004",        "Number of indigenous people",                 "",
+  "P005",        "Number of people of yellow color",            "",
+  "P006",        "Number of men",                               "",
+  "P007",        "Number of women",                             "",
+  "P010",        "Number of people from 0 to 5 years old",      "",
+  "P011",        "Number of people from 6 to 14 years old",     "",
+  "P012",        "Number of people from 15 to 18 years old",    "",
+  "P013",        "Number of people aged 19 to 24 years old",    "",
+  "P014",        "Number of people aged 25 to 39 years old",    "",
+  "P015",        "Number of people aged 40 to 69 years old",    "",
+  "P016",        "Number of people aged 70 years old and over", "",
+  "R001",        "Average income per capita",                   "Values from 2010, in Brazilian Reais (BRL)",
+  "R002",        "Income quintile",                             "Values range from 1 (poorest) to 5 (richest)",
+  "R003",        "Income decile",                               "Values range from 1 (poorest) to 10 (richest)",
+  "geometry",    "Spatial geometry",                            ""
 )
 
 knitr::kable(tbl)
 ```
 
-The following sections show examples of how to visualize these data in the form of maps.
- 
-## Spatial distribution of population
+The following sections show a few examples illustrating how to create spatial visualizations out of this dataset.
 
-In the code below, we load a couple data visualization libraries and create the map. With a single command, we can visualize the spatial distribution of the population of Fortaleza. The figure shows a choropleth map where the color of each grid cell represents the total size of its resident population (variable `P001`).
+## Population spatial distribution
+
+In the code below, we load a couple data visualization packages and configure the map. With a single command, we can visualize the population spatial distribution in Fortaleza. The figure shows a choropleth map in which the color of each grid cell represents the number of people that reside there (variable `P001`).
 
 ```{r}
 #| message: false
 #| warning: false
+#| label: fig-pop_dist
+#| fig-cap: Population spatial distribution in Fortaleza
 library(patchwork)
 library(ggplot2)
 
@@ -74,61 +75,62 @@ ggplot(subset(data_fortaleza, P001 > 0)) +
   geom_sf(aes(fill = P001), color = NA, alpha = 0.8) +
   scale_fill_distiller(palette = "YlOrRd", direction = 1) +
   labs(
-      title = "Spatial distribution of the population",
-      subtitle = "Fortaleza",
-      fill = "Population count"
+    title = "Population spatial distribution",
+    subtitle = "Fortaleza",
+    fill = "Population count"
   ) +
   theme_void()
 ```
 
-## Map of population by race
+## Population spatial distribution by race
 
-Besides reporting the total population count in each cell, the data also includes information on population count by race (variables `P002` to `P005`), gender (variables `P006`  and `P007`) and age group (variables `P010` to `P016`). The code below illustrates how simple it is to calculate the proportion of black and white people in each hexagon and visualize these proportions on a map.
+Besides reporting the total population count in each cell, the dataset also includes information on population count by race (variables `P002` to `P005`), sex (variables `P006` and `P007`) and age (variables `P010` to `P016`). The code below illustrates how simple it is to calculate the proportion of black and white people in each hexagon and visualize this information on a map.
 
 ```{r}
+#| label: fig-pop_dist_by_color
+#| fig-cap: Proportion of black and white people in Fortaleza
 pop_black <- ggplot(subset(data_fortaleza, P001 > 0)) +
   geom_sf(aes(fill = P003 / P001), color = NA, alpha = 0.8) +
   scale_fill_distiller(
-      palette = "RdPu",
-      direction = 1,
-      labels = scales::percent,
-      limits = c(0, 1)
+    palette = "RdPu",
+    direction = 1,
+    labels = scales::percent,
+    limits = c(0, 1)
   ) +
-  labs(title = "Proportion of black people", fill = "Black pop") +
+  labs(title = "Proportion of black people", fill = "Black pop.") +
   theme_void()
 
 pop_white <- ggplot(subset(data_fortaleza, P001 > 0)) +
   geom_sf(aes(fill = P002 / P001), color = NA, alpha = 0.8) +
   scale_fill_distiller(
-      palette = "YlGnBu",
-      direction = 1,
-      labels = scales::percent,
-      limits = c(0, 1)
+    palette = "YlGnBu",
+    direction = 1,
+    labels = scales::percent,
+    limits = c(0, 1)
   ) +
-  labs(title = "Proportion of white people", fill = "White pop") +
+  labs(title = "Proportion of white people", fill = "White pop.") +
   theme_void()
 
 pop_black + pop_white
 ```
 
-## Map of population by income
+## Income spatial distribution
 
-Finally, the data also provide information about the average income per capita of each hexagon (`R001`) and its classification in terms of quintile (`R002`) and income decile (`R003`). Using this data, we can visualize the spatial distribution of income levels in the city.
+Finally, the dataset also includes information on the average income per capita of each hexagon (`R001`) and their classification in terms of income quintile (`R002`) and decile (`R003`). Using this data, we can visualize the income spatial distribution in the city.
 
 ```{r}
+#| label: fig-income_dist
+#| fig-cap: Income spatial distribution in Fortaleza
 income <- ggplot(subset(data_fortaleza, P001 > 0)) +
   geom_sf(aes(fill = R001), color = NA, alpha = 0.8) +
   scale_fill_distiller(palette = "YlOrRd", direction = 1) +
-  labs(title = "Average income per capita", fill = "Income (R$)") +
+  labs(title = "Average income per capita", fill = "Income (BRL)") +
   theme_void()
 
 deciles <- ggplot(subset(data_fortaleza, !is.na(R002))) +
   geom_sf(aes(fill = factor(R003)), color = NA, alpha = 0.8) +
   scale_fill_brewer(palette = "RdBu") +
-  labs(
-      title = "Deciles of average income per capita",
-      fill = "Income decile"
-  ) +
+  labs(title = "Income deciles", fill = "Income decile") +
   theme_void() +
   theme(legend.key.size = unit(0.3, "cm"))
 
