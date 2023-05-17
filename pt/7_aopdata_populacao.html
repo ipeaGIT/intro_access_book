@@ -312,7 +312,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </div>
   
 
-</header><p>Os dados de distribuição espacial da população e de suas características em termos de renda domiciliar <em>per capita</em>, cor, sexo e idade, provenientes do Censo 2010 e agregadas pelo projeto Acesso a Oportunidades, podem ser baixados com a função <code>read_population()</code>. A função requer que um valor seja passado para o parâmetro <code>city</code>, utilizado para indicar a cidade cujos dados devem ser baixados. Para baixar os dados com as informações espaciais de cada célula da grade, o parâmetro <code>geometry</code> deve receber o valor <code>TRUE</code> (por padrão, esse valor é <code>FALSE</code>, fazendo com que a geometria das células não seja baixada).</p>
+</header><p>Os dados de distribuição espacial da população e de suas características em termos de renda <em>per capita</em>, cor, sexo e idade, provenientes do Censo 2010 e agregadas pelo projeto Acesso a Oportunidades, podem ser baixados com a função <code>read_population()</code>. A função requer que um valor seja passado para o parâmetro <code>city</code>, utilizado para indicar a cidade cujos dados devem ser baixados. Para baixar os dados com as informações espaciais de cada célula da grade, o parâmetro <code>geometry</code> deve receber o valor <code>TRUE</code> (por padrão, esse valor é <code>FALSE</code>, fazendo com que a geometria das células não seja baixada).</p>
 <p>No exemplo a seguir, mostramos como baixar os dados populacionais e socioeconômicos de Fortaleza:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># baixa os dados sociodemográficos do AOP</span></span>
@@ -448,7 +448,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </tr>
 <tr class="even">
 <td style="text-align: left;">R001</td>
-<td style="text-align: left;">Renda domiciliar <em>per capita</em> média</td>
+<td style="text-align: left;">Renda <em>per capita</em> média</td>
 <td style="text-align: left;">Valores de 2010 (em R$)</td>
 </tr>
 <tr class="odd">
@@ -531,19 +531,19 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </section><section id="mapa-de-população-por-renda" class="level2" data-number="7.3"><h2 data-number="7.3" class="anchored" data-anchor-id="mapa-de-população-por-renda">
 <span class="header-section-number">7.3</span> Mapa de população por renda</h2>
-<p>Por fim, os dados também trazem informações sobre a renda domiciliar <em>per capita</em> média de cada hexágono (<code>R001</code>) e sua classificação em termos de quintil (<code>R002</code>) e decil de renda (<code>R003</code>). Com esses dados, podemos visualizar a distribuição espacial dos níveis de renda na cidade.</p>
+<p>Por fim, os dados também trazem informações sobre a renda <em>per capita</em> média de cada hexágono (<code>R001</code>) e sua classificação em termos de quintil (<code>R002</code>) e decil de renda (<code>R003</code>). Com esses dados, podemos visualizar a distribuição espacial dos níveis de renda na cidade.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>renda <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">subset</span>(dados_fortaleza, P001 <span class="sc">&gt;</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> R001), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_distiller</span>(<span class="at">palette =</span> <span class="st">"YlOrRd"</span>, <span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Renda domiciliar per capita média"</span>, <span class="at">fill =</span> <span class="st">"Renda (R$)"</span>) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Renda per capita média"</span>, <span class="at">fill =</span> <span class="st">"Renda (R$)"</span>) <span class="sc">+</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>decis <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">subset</span>(dados_fortaleza, <span class="sc">!</span><span class="fu">is.na</span>(R002))) <span class="sc">+</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">factor</span>(R003)), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"RdBu"</span>) <span class="sc">+</span></span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Decis de renda domiciliar per capita"</span>,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Decis de renda per capita"</span>,</span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Decil de renda"</span></span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>

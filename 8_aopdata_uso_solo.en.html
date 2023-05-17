@@ -89,13 +89,13 @@ gtag('js', new Date());
 gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </script><meta property="og:title" content="Introduction to urban accessibility - 8  Data on the spatial distribution of opportunities">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://ipeagit.github.io/aop_curso/en/8_aopdata_uso_solo.en_files/figure-html/unnamed-chunk-3-1.png">
+<meta property="og:image" content="https://ipeagit.github.io/aop_curso/en/8_aopdata_uso_solo.en_files/figure-html/fig-jobs_dist-1.png">
 <meta property="og:site-name" content="Introduction to urban accessibility">
 <meta property="og:image:height" content="3000">
 <meta property="og:image:width" content="4200">
 <meta name="twitter:title" content="Introduction to urban accessibility - 8  Data on the spatial distribution of opportunities">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://ipeagit.github.io/aop_curso/en/8_aopdata_uso_solo.en_files/figure-html/unnamed-chunk-3-1.png">
+<meta name="twitter:image" content="https://ipeagit.github.io/aop_curso/en/8_aopdata_uso_solo.en_files/figure-html/fig-jobs_dist-1.png">
 <meta name="twitter:image-height" content="3000">
 <meta name="twitter:image-width" content="4200">
 <meta name="twitter:card" content="summary_large_image">
@@ -286,10 +286,10 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#map-of-employment" id="toc-map-of-employment" class="nav-link active" data-scroll-target="#map-of-employment"><span class="header-section-number">8.1</span> Map of employment</a></li>
-  <li><a href="#map-of-schools" id="toc-map-of-schools" class="nav-link" data-scroll-target="#map-of-schools"><span class="header-section-number">8.2</span> Map of schools</a></li>
-  <li><a href="#map-of-health-facilities" id="toc-map-of-health-facilities" class="nav-link" data-scroll-target="#map-of-health-facilities"><span class="header-section-number">8.3</span> Map of health facilities</a></li>
-  <li><a href="#cras-map" id="toc-cras-map" class="nav-link" data-scroll-target="#cras-map"><span class="header-section-number">8.4</span> CRAS map</a></li>
+<li><a href="#spatial-distribution-of-jobs" id="toc-spatial-distribution-of-jobs" class="nav-link active" data-scroll-target="#spatial-distribution-of-jobs"><span class="header-section-number">8.1</span> Spatial distribution of jobs</a></li>
+  <li><a href="#spatial-distribution-of-public-schools" id="toc-spatial-distribution-of-public-schools" class="nav-link" data-scroll-target="#spatial-distribution-of-public-schools"><span class="header-section-number">8.2</span> Spatial distribution of public schools</a></li>
+  <li><a href="#spatial-distribution-of-public-health-facilities" id="toc-spatial-distribution-of-public-health-facilities" class="nav-link" data-scroll-target="#spatial-distribution-of-public-health-facilities"><span class="header-section-number">8.3</span> Spatial distribution of public health facilities</a></li>
+  <li><a href="#spatial-distribution-of-cras" id="toc-spatial-distribution-of-cras" class="nav-link" data-scroll-target="#spatial-distribution-of-cras"><span class="header-section-number">8.4</span> Spatial distribution of CRAS</a></li>
   </ul>
 <div class="toc-actions">
 <div><i class="bi bi-github"></i></div>
@@ -313,9 +313,9 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </div>
   
 
-</header><p>The <code>{aopdata}</code> package also allows you the download data on the spatial distribution of jobs (of low, middle and high education), public health facilities (of low, medium and high complexity), public schools (at early childhood, primary and secondary school levels) and Social Assistance Reference Centers (CRAS). This data is available for all cities included in the project for the years 2017, 2018 and 2019.</p>
-<p>This data can be downloaded with the <code>read_landuse()</code> function, which works similarly to <code>read_population()</code>. To use it, simply indicate the desired city data using the <code>city</code> parameter, along with the reference year (<code>year</code>) and whether or not you would like to include the spatial information of hexagons (<code>geometry</code>).</p>
-<p>In the example below, we show how to download the land use data for the year 2019 for the city of Belo Horizonte. Note that this function results in a table that also automatically includes the sociodemographic data.</p>
+</header><p>The <code>{aopdata}</code> package allows one to download data from 2017, 2018 and 2019 on the spatial distribution of jobs (low, middle and high education), public health facilities (low, medium and high complexity), public schools (early childhood, primary and secondary school levels) and social assistance reference centers (CRAS). This data is available for all cities included in the project.</p>
+<p>These datasets can be downloaded with the <code>read_landuse()</code> function, which works similarly to <code>read_population()</code>. To use it, indicate the city whose data should be downloaded using the <code>city</code> parameter, along with the reference year (<code>year</code>) and whether to include the spatial information of grid cells or not (<code>geometry</code>).</p>
+<p>In the example below, we show how to download land use data from 2019 for the city of Belo Horizonte. Please note that this function outputs a table that also includes sociodemographic data.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data_bh <span class="ot">&lt;-</span> aopdata<span class="sc">::</span><span class="fu">read_landuse</span>(</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">city =</span> <span class="st">"Belo Horizonte"</span>,</span>
@@ -336,18 +336,18 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 [36] "S002"        "S003"        "S004"        "C001"        "geometry"   </code></pre>
 </div>
 </div>
-<p><a href="#tbl-landuse_dictionary">Table <span>8.1</span></a> shows the data dictionary with the description of the columns in the data (excluding those previously included in the sociodemographic data table). This description can also be found in the documentation of the function by running<code>?read_landuse</code> in R.</p>
+<p><a href="#tbl-landuse_dictionary">Table <span>8.1</span></a> presents the data dictionary with the description of the table columns (excluding those previously included in the sociodemographic dataset). This description can also be found in the documentation of the function, running the command <code>?read_landuse</code> in an R session.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-landuse_dictionary" class="anchored">
 <table class="table table-sm table-striped small">
-<caption>Table 8.1: Description of the variables on spatial opportunity distribution data table</caption>
+<caption>Table 8.1: Description of the columns in the land use dataset</caption>
 <colgroup>
 <col style="width: 16%">
 <col style="width: 83%">
 </colgroup>
 <thead><tr class="header">
-<th style="text-align: left;">Coluna</th>
+<th style="text-align: left;">Column</th>
 <th style="text-align: left;">Description</th>
 </tr></thead>
 <tbody>
@@ -361,15 +361,15 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </tr>
 <tr class="odd">
 <td style="text-align: left;">abbrev_muni</td>
-<td style="text-align: left;">Abbreviation of 3 letters of the municipality</td>
+<td style="text-align: left;">3-letter abbreviation of municipality name</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">name_muni</td>
-<td style="text-align: left;">Name of the municipality</td>
+<td style="text-align: left;">Municipality name</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">code_muni</td>
-<td style="text-align: left;">7-digit IBGE code of the municipality</td>
+<td style="text-align: left;">7-digit municipality IBGE code</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">T001</td>
@@ -405,31 +405,31 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </tr>
 <tr class="even">
 <td style="text-align: left;">M001</td>
-<td style="text-align: left;">Total number of enrolled students public teaching enrolments</td>
+<td style="text-align: left;">Total number of students enrolled in public schools</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">M002</td>
-<td style="text-align: left;">Number of enrolled students in public early childhood schools</td>
+<td style="text-align: left;">Number of students enrolled in public early childhood schools</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">M003</td>
-<td style="text-align: left;">Number of enrolled students in public primary schools</td>
+<td style="text-align: left;">Number of students enrolled in public primary schools</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">M004</td>
-<td style="text-align: left;">Number of enrolled students in public secondary schools</td>
+<td style="text-align: left;">Number of students enrolled in public secondary schools</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">S001</td>
-<td style="text-align: left;">Total number of health facilities</td>
+<td style="text-align: left;">Total number of public health facilities</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">S002</td>
-<td style="text-align: left;">Number of low-complexity public health facilities</td>
+<td style="text-align: left;">Number of low complexity public health facilities</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">S003</td>
-<td style="text-align: left;">Number of medium-complexity public health facilities</td>
+<td style="text-align: left;">Number of mid complexity public health facilities</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">S004</td>
@@ -437,7 +437,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </tr>
 <tr class="even">
 <td style="text-align: left;">C001</td>
-<td style="text-align: left;">Total Number of Social Assistance Reference Centers (CRAS)</td>
+<td style="text-align: left;">Total number of CRAS</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">geometry</td>
@@ -448,10 +448,10 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<p>The following sections show examples of how to visualize these data in the form of maps.</p>
-<section id="map-of-employment" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="map-of-employment">
-<span class="header-section-number">8.1</span> Map of employment</h2>
-<p>In the code below, we load a couple data visualization libraries and create the map. The variables starting with the letter <code>T</code> are those that describe the spatial distribution of jobs in each city. The code below shows the spatial distribution of the total number of jobs in each hexagon (variable <code>T001</code>) in Belo Horizonte:</p>
+<p>The following sections show a few examples illustrating how to create spatial visualizations out of this dataset.</p>
+<section id="spatial-distribution-of-jobs" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="spatial-distribution-of-jobs">
+<span class="header-section-number">8.1</span> Spatial distribution of jobs</h2>
+<p>In the code below, we load a couple data visualization libraries and configure the map. Columns starting with the letter <code>T</code> describe the spatial distribution of jobs in each city. The example shows the spatial distribution of the total number of jobs in each grid cell (variable <code>T001</code>) in Belo Horizonte:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -460,43 +460,49 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> T001), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_distiller</span>(<span class="at">palette =</span> <span class="st">"YlGnBu"</span>, <span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Spatial distribution of jobs"</span>,</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">"Belo Horizonte"</span>,</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> <span class="st">"N. of jobs"</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Spatial distribution of jobs"</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Belo Horizonte"</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Jobs"</span></span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="8_aopdata_uso_solo.en_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-jobs_dist" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="8_aopdata_uso_solo.en_files/figure-html/fig-jobs_dist-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption class="figure-caption">Figure 8.1: Spatial distribution of jobs in Belo Horizonte</figcaption></figure>
 </div>
 </div>
-</section><section id="map-of-schools" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="map-of-schools">
-<span class="header-section-number">8.2</span> Map of schools</h2>
-<p>Variables with information about the number of public schools in each cell, in turn, begin with the letter <code>E</code>. In the example below, we present the spatial distribution of all public schools in Belo Horizonte (variable <code>E001</code>).</p>
+</div>
+</section><section id="spatial-distribution-of-public-schools" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="spatial-distribution-of-public-schools">
+<span class="header-section-number">8.2</span> Spatial distribution of public schools</h2>
+<p>The columns with information on the number of public schools in each cell begin with the letter <code>E</code>. In the example below, we present the spatial distribution of all public schools in Belo Horizonte (variable <code>E001</code>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_bh) <span class="sc">+</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">as.factor</span>(E001)), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"YlGnBu"</span>, <span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Spatial distribution of schools"</span>,</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">"Belo Horizonte"</span>,</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> <span class="st">"N. of schools"</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Spatial distribution of public schools"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Belo Horizonte"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Schools"</span></span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="8_aopdata_uso_solo.en_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-schools_dist" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="8_aopdata_uso_solo.en_files/figure-html/fig-schools_dist-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption class="figure-caption">Figure 8.2: Spatial distribution of public schools in Belo Horizonte</figcaption></figure>
 </div>
 </div>
-</section><section id="map-of-health-facilities" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="map-of-health-facilities">
-<span class="header-section-number">8.3</span> Map of health facilities</h2>
-<p>The variables related to the number of public health facilities in each cell begin with the letter <code>S</code>. The visualization below compares the spatial distribution of low complexity (<code>S002</code>) and high complexity (<code>S004</code>) public health facilities.</p>
+</div>
+</section><section id="spatial-distribution-of-public-health-facilities" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="spatial-distribution-of-public-health-facilities">
+<span class="header-section-number">8.3</span> Spatial distribution of public health facilities</h2>
+<p>The columns with information on the number of public health facilities in each cell begin with the letter <code>S</code>. The visualization below compares the spatial distribution of low complexity (<code>S002</code>) and high complexity (<code>S004</code>) public health facilities.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>low_complexity <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data_bh) <span class="sc">+</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">as.factor</span>(S002)), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"YlGnBu"</span>, <span class="at">direction =</span> <span class="dv">1</span>, <span class="at">limits =</span> <span class="fu">factor</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">4</span>)) <span class="sc">+</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Health facilities"</span>,</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">"Low complexity"</span>,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> <span class="st">"N. of facilities"</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Public health facilities"</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Low complexity"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Facilities"</span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
@@ -504,32 +510,38 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">as.factor</span>(S004)), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"YlGnBu"</span>, <span class="at">direction =</span> <span class="dv">1</span>, <span class="at">limits =</span> <span class="fu">factor</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">4</span>)) <span class="sc">+</span></span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Health facilities"</span>,</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">"High complexity"</span>,</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> <span class="st">"N. of facilities"</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Public health facilities"</span>,</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"High complexity"</span>,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Facilities"</span></span>
 <span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
 <span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>low_complexity <span class="sc">+</span> high_complexity <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">guides =</span> <span class="st">"collect"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="8_aopdata_uso_solo.en_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-hospitals_dist" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="8_aopdata_uso_solo.en_files/figure-html/fig-hospitals_dist-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption class="figure-caption">Figure 8.3: Spatial distribution of low complexity and high complexity public health facilities in Belo Horizonte</figcaption></figure>
 </div>
 </div>
-</section><section id="cras-map" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="cras-map">
-<span class="header-section-number">8.4</span> CRAS map</h2>
-<p>Finally, the variable <code>C001</code> describes the spatial distribution of Social Assistance Reference Centers (CRAS) in each city. The map below shows the spatial distribution of these services in Belo Horizonte.</p>
+</div>
+</section><section id="spatial-distribution-of-cras" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="spatial-distribution-of-cras">
+<span class="header-section-number">8.4</span> Spatial distribution of CRAS</h2>
+<p>Finally, the column <code>C001</code> has information on the number of CRAS in each grid cell. The map below shows the spatial distribution of these services in Belo Horizonte.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data_bh) <span class="sc">+</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">as.factor</span>(C001)), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"YlGnBu"</span>, <span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Social Assistance Reference Centers (CRAS)"</span>,</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">"Belo Horizonte"</span>,</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> <span class="st">"N. of CRAS"</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Social assistance reference centers (CRAS)"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Belo Horizonte"</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"CRAS"</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="8_aopdata_uso_solo.en_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="2100"></p>
+<div id="fig-cras_dist" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><img src="8_aopdata_uso_solo.en_files/figure-html/fig-cras_dist-1.png" class="img-fluid figure-img" width="2100"></p>
+<figcaption class="figure-caption">Figure 8.4: Spatial distribution of CRAS in Belo Horizonte</figcaption></figure>
+</div>
 </div>
 </div>
 

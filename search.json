@@ -266,53 +266,53 @@
     "text": "Goiânia’s GTFS covers not only the municipality, but its entire metropolitan region.↩︎"
   },
   {
-    "objectID": "7_aopdata_populacao.en.html#spatial-distribution-of-population",
-    "href": "7_aopdata_populacao.en.html#spatial-distribution-of-population",
+    "objectID": "7_aopdata_populacao.en.html#population-spatial-distribution",
+    "href": "7_aopdata_populacao.en.html#population-spatial-distribution",
     "title": "7  Population and socioeconomic data",
-    "section": "7.1 Spatial distribution of population",
-    "text": "7.1 Spatial distribution of population\nIn the code below, we load a couple data visualization libraries and create the map. With a single command, we can visualize the spatial distribution of the population of Fortaleza. The figure shows a choropleth map where the color of each grid cell represents the total size of its resident population (variable P001).\n\nlibrary(patchwork)\nlibrary(ggplot2)\n\nggplot(subset(data_fortaleza, P001 &gt; 0)) +\n  geom_sf(aes(fill = P001), color = NA, alpha = 0.8) +\n  scale_fill_distiller(palette = \"YlOrRd\", direction = 1) +\n  labs(\n      title = \"Spatial distribution of the population\",\n      subtitle = \"Fortaleza\",\n      fill = \"Population count\"\n  ) +\n  theme_void()"
+    "section": "7.1 Population spatial distribution",
+    "text": "7.1 Population spatial distribution\nIn the code below, we load a couple data visualization packages and configure the map. With a single command, we can visualize the population spatial distribution in Fortaleza. The figure shows a choropleth map in which the color of each grid cell represents the number of people that reside there (variable P001).\n\nlibrary(patchwork)\nlibrary(ggplot2)\n\nggplot(subset(data_fortaleza, P001 &gt; 0)) +\n  geom_sf(aes(fill = P001), color = NA, alpha = 0.8) +\n  scale_fill_distiller(palette = \"YlOrRd\", direction = 1) +\n  labs(\n    title = \"Population spatial distribution\",\n    subtitle = \"Fortaleza\",\n    fill = \"Population count\"\n  ) +\n  theme_void()\n\n\n\n\nFigure 7.1: Population spatial distribution in Fortaleza"
   },
   {
-    "objectID": "7_aopdata_populacao.en.html#map-of-population-by-race",
-    "href": "7_aopdata_populacao.en.html#map-of-population-by-race",
+    "objectID": "7_aopdata_populacao.en.html#population-spatial-distribution-by-race",
+    "href": "7_aopdata_populacao.en.html#population-spatial-distribution-by-race",
     "title": "7  Population and socioeconomic data",
-    "section": "7.2 Map of population by race",
-    "text": "7.2 Map of population by race\nBesides reporting the total population count in each cell, the data also includes information on population count by race (variables P002 to P005), gender (variables P006 and P007) and age group (variables P010 to P016). The code below illustrates how simple it is to calculate the proportion of black and white people in each hexagon and visualize these proportions on a map.\n\npop_black &lt;- ggplot(subset(data_fortaleza, P001 &gt; 0)) +\n  geom_sf(aes(fill = P003 / P001), color = NA, alpha = 0.8) +\n  scale_fill_distiller(\n      palette = \"RdPu\",\n      direction = 1,\n      labels = scales::percent,\n      limits = c(0, 1)\n  ) +\n  labs(title = \"Proportion of black people\", fill = \"Black pop\") +\n  theme_void()\n\npop_white &lt;- ggplot(subset(data_fortaleza, P001 &gt; 0)) +\n  geom_sf(aes(fill = P002 / P001), color = NA, alpha = 0.8) +\n  scale_fill_distiller(\n      palette = \"YlGnBu\",\n      direction = 1,\n      labels = scales::percent,\n      limits = c(0, 1)\n  ) +\n  labs(title = \"Proportion of white people\", fill = \"White pop\") +\n  theme_void()\n\npop_black + pop_white"
+    "section": "7.2 Population spatial distribution by race",
+    "text": "7.2 Population spatial distribution by race\nBesides reporting the total population count in each cell, the dataset also includes information on population count by race (variables P002 to P005), sex (variables P006 and P007) and age (variables P010 to P016). The code below illustrates how simple it is to calculate the proportion of black and white people in each hexagon and visualize this information on a map.\n\npop_black &lt;- ggplot(subset(data_fortaleza, P001 &gt; 0)) +\n  geom_sf(aes(fill = P003 / P001), color = NA, alpha = 0.8) +\n  scale_fill_distiller(\n    palette = \"RdPu\",\n    direction = 1,\n    labels = scales::percent,\n    limits = c(0, 1)\n  ) +\n  labs(title = \"Proportion of black people\", fill = \"Black pop.\") +\n  theme_void()\n\npop_white &lt;- ggplot(subset(data_fortaleza, P001 &gt; 0)) +\n  geom_sf(aes(fill = P002 / P001), color = NA, alpha = 0.8) +\n  scale_fill_distiller(\n    palette = \"YlGnBu\",\n    direction = 1,\n    labels = scales::percent,\n    limits = c(0, 1)\n  ) +\n  labs(title = \"Proportion of white people\", fill = \"White pop.\") +\n  theme_void()\n\npop_black + pop_white\n\n\n\n\nFigure 7.2: Proportion of black and white people in Fortaleza"
   },
   {
-    "objectID": "7_aopdata_populacao.en.html#map-of-population-by-income",
-    "href": "7_aopdata_populacao.en.html#map-of-population-by-income",
+    "objectID": "7_aopdata_populacao.en.html#income-spatial-distribution",
+    "href": "7_aopdata_populacao.en.html#income-spatial-distribution",
     "title": "7  Population and socioeconomic data",
-    "section": "7.3 Map of population by income",
-    "text": "7.3 Map of population by income\nFinally, the data also provide information about the average income per capita of each hexagon (R001) and its classification in terms of quintile (R002) and income decile (R003). Using this data, we can visualize the spatial distribution of income levels in the city.\n\nincome &lt;- ggplot(subset(data_fortaleza, P001 &gt; 0)) +\n  geom_sf(aes(fill = R001), color = NA, alpha = 0.8) +\n  scale_fill_distiller(palette = \"YlOrRd\", direction = 1) +\n  labs(title = \"Average income per capita\", fill = \"Income (R$)\") +\n  theme_void()\n\ndeciles &lt;- ggplot(subset(data_fortaleza, !is.na(R002))) +\n  geom_sf(aes(fill = factor(R003)), color = NA, alpha = 0.8) +\n  scale_fill_brewer(palette = \"RdBu\") +\n  labs(\n      title = \"Deciles of average income per capita\",\n      fill = \"Income decile\"\n  ) +\n  theme_void() +\n  theme(legend.key.size = unit(0.3, \"cm\"))\n\nincome + deciles"
+    "section": "7.3 Income spatial distribution",
+    "text": "7.3 Income spatial distribution\nFinally, the dataset also includes information on the average income per capita of each hexagon (R001) and their classification in terms of income quintile (R002) and decile (R003). Using this data, we can visualize the income spatial distribution in the city.\n\nincome &lt;- ggplot(subset(data_fortaleza, P001 &gt; 0)) +\n  geom_sf(aes(fill = R001), color = NA, alpha = 0.8) +\n  scale_fill_distiller(palette = \"YlOrRd\", direction = 1) +\n  labs(title = \"Average income per capita\", fill = \"Income (BRL)\") +\n  theme_void()\n\ndeciles &lt;- ggplot(subset(data_fortaleza, !is.na(R002))) +\n  geom_sf(aes(fill = factor(R003)), color = NA, alpha = 0.8) +\n  scale_fill_brewer(palette = \"RdBu\") +\n  labs(title = \"Income deciles\", fill = \"Income decile\") +\n  theme_void() +\n  theme(legend.key.size = unit(0.3, \"cm\"))\n\nincome + deciles\n\n\n\n\nFigure 7.3: Income spatial distribution in Fortaleza"
   },
   {
-    "objectID": "8_aopdata_uso_solo.en.html#map-of-employment",
-    "href": "8_aopdata_uso_solo.en.html#map-of-employment",
+    "objectID": "8_aopdata_uso_solo.en.html#spatial-distribution-of-jobs",
+    "href": "8_aopdata_uso_solo.en.html#spatial-distribution-of-jobs",
     "title": "8  Data on the spatial distribution of opportunities",
-    "section": "8.1 Map of employment",
-    "text": "8.1 Map of employment\nIn the code below, we load a couple data visualization libraries and create the map. The variables starting with the letter T are those that describe the spatial distribution of jobs in each city. The code below shows the spatial distribution of the total number of jobs in each hexagon (variable T001) in Belo Horizonte:\n\nlibrary(patchwork)\nlibrary(ggplot2)\n\nggplot(data_bh) +\n  geom_sf(aes(fill = T001), color = NA, alpha = 0.9) +\n  scale_fill_distiller(palette = \"YlGnBu\", direction = 1) +\n  labs(\n      title = \"Spatial distribution of jobs\",\n      subtitle = \"Belo Horizonte\",\n      fill = \"N. of jobs\"\n  ) +\n  theme_void()"
+    "section": "8.1 Spatial distribution of jobs",
+    "text": "8.1 Spatial distribution of jobs\nIn the code below, we load a couple data visualization libraries and configure the map. Columns starting with the letter T describe the spatial distribution of jobs in each city. The example shows the spatial distribution of the total number of jobs in each grid cell (variable T001) in Belo Horizonte:\n\nlibrary(patchwork)\nlibrary(ggplot2)\n\nggplot(data_bh) +\n  geom_sf(aes(fill = T001), color = NA, alpha = 0.9) +\n  scale_fill_distiller(palette = \"YlGnBu\", direction = 1) +\n  labs(\n    title = \"Spatial distribution of jobs\",\n    subtitle = \"Belo Horizonte\",\n    fill = \"Jobs\"\n  ) +\n  theme_void()\n\n\n\n\nFigure 8.1: Spatial distribution of jobs in Belo Horizonte"
   },
   {
-    "objectID": "8_aopdata_uso_solo.en.html#map-of-schools",
-    "href": "8_aopdata_uso_solo.en.html#map-of-schools",
+    "objectID": "8_aopdata_uso_solo.en.html#spatial-distribution-of-public-schools",
+    "href": "8_aopdata_uso_solo.en.html#spatial-distribution-of-public-schools",
     "title": "8  Data on the spatial distribution of opportunities",
-    "section": "8.2 Map of schools",
-    "text": "8.2 Map of schools\nVariables with information about the number of public schools in each cell, in turn, begin with the letter E. In the example below, we present the spatial distribution of all public schools in Belo Horizonte (variable E001).\n\nggplot(data_bh) +\n  geom_sf(aes(fill = as.factor(E001)), color = NA, alpha = 0.9) +\n  scale_fill_brewer(palette = \"YlGnBu\", direction = 1) +\n  labs(\n      title = \"Spatial distribution of schools\",\n      subtitle = \"Belo Horizonte\",\n      fill = \"N. of schools\"\n  ) +\n  theme_void()"
+    "section": "8.2 Spatial distribution of public schools",
+    "text": "8.2 Spatial distribution of public schools\nThe columns with information on the number of public schools in each cell begin with the letter E. In the example below, we present the spatial distribution of all public schools in Belo Horizonte (variable E001).\n\nggplot(data_bh) +\n  geom_sf(aes(fill = as.factor(E001)), color = NA, alpha = 0.9) +\n  scale_fill_brewer(palette = \"YlGnBu\", direction = 1) +\n  labs(\n    title = \"Spatial distribution of public schools\",\n    subtitle = \"Belo Horizonte\",\n    fill = \"Schools\"\n  ) +\n  theme_void()\n\n\n\n\nFigure 8.2: Spatial distribution of public schools in Belo Horizonte"
   },
   {
-    "objectID": "8_aopdata_uso_solo.en.html#map-of-health-facilities",
-    "href": "8_aopdata_uso_solo.en.html#map-of-health-facilities",
+    "objectID": "8_aopdata_uso_solo.en.html#spatial-distribution-of-public-health-facilities",
+    "href": "8_aopdata_uso_solo.en.html#spatial-distribution-of-public-health-facilities",
     "title": "8  Data on the spatial distribution of opportunities",
-    "section": "8.3 Map of health facilities",
-    "text": "8.3 Map of health facilities\nThe variables related to the number of public health facilities in each cell begin with the letter S. The visualization below compares the spatial distribution of low complexity (S002) and high complexity (S004) public health facilities.\n\nlow_complexity &lt;- ggplot(data_bh) +\n  geom_sf(aes(fill = as.factor(S002)), color = NA, alpha = 0.9) +\n  scale_fill_brewer(palette = \"YlGnBu\", direction = 1, limits = factor(0:4)) +\n  labs(\n      title = \"Health facilities\",\n      subtitle = \"Low complexity\",\n      fill = \"N. of facilities\"\n  ) +\n  theme_void()\n\nhigh_complexity &lt;- ggplot(data_bh) +\n  geom_sf(aes(fill = as.factor(S004)), color = NA, alpha = 0.9) +\n  scale_fill_brewer(palette = \"YlGnBu\", direction = 1, limits = factor(0:4)) +\n  labs(\n      title = \"Health facilities\",\n      subtitle = \"High complexity\",\n      fill = \"N. of facilities\"\n  ) +\n  theme_void()\n\nlow_complexity + high_complexity + plot_layout(guides = \"collect\")"
+    "section": "8.3 Spatial distribution of public health facilities",
+    "text": "8.3 Spatial distribution of public health facilities\nThe columns with information on the number of public health facilities in each cell begin with the letter S. The visualization below compares the spatial distribution of low complexity (S002) and high complexity (S004) public health facilities.\n\nlow_complexity &lt;- ggplot(data_bh) +\n  geom_sf(aes(fill = as.factor(S002)), color = NA, alpha = 0.9) +\n  scale_fill_brewer(palette = \"YlGnBu\", direction = 1, limits = factor(0:4)) +\n  labs(\n    title = \"Public health facilities\",\n    subtitle = \"Low complexity\",\n    fill = \"Facilities\"\n  ) +\n  theme_void()\n\nhigh_complexity &lt;- ggplot(data_bh) +\n  geom_sf(aes(fill = as.factor(S004)), color = NA, alpha = 0.9) +\n  scale_fill_brewer(palette = \"YlGnBu\", direction = 1, limits = factor(0:4)) +\n  labs(\n    title = \"Public health facilities\",\n    subtitle = \"High complexity\",\n    fill = \"Facilities\"\n  ) +\n  theme_void()\n\nlow_complexity + high_complexity + plot_layout(guides = \"collect\")\n\n\n\n\nFigure 8.3: Spatial distribution of low complexity and high complexity public health facilities in Belo Horizonte"
   },
   {
-    "objectID": "8_aopdata_uso_solo.en.html#cras-map",
-    "href": "8_aopdata_uso_solo.en.html#cras-map",
+    "objectID": "8_aopdata_uso_solo.en.html#spatial-distribution-of-cras",
+    "href": "8_aopdata_uso_solo.en.html#spatial-distribution-of-cras",
     "title": "8  Data on the spatial distribution of opportunities",
-    "section": "8.4 CRAS map",
-    "text": "8.4 CRAS map\nFinally, the variable C001 describes the spatial distribution of Social Assistance Reference Centers (CRAS) in each city. The map below shows the spatial distribution of these services in Belo Horizonte.\n\nggplot(data_bh) +\n  geom_sf(aes(fill = as.factor(C001)), color = NA, alpha = 0.9) +\n  scale_fill_brewer(palette = \"YlGnBu\", direction = 1) +\n  labs(\n      title = \"Social Assistance Reference Centers (CRAS)\",\n      subtitle = \"Belo Horizonte\",\n      fill = \"N. of CRAS\"\n  ) +\n  theme_void()"
+    "section": "8.4 Spatial distribution of CRAS",
+    "text": "8.4 Spatial distribution of CRAS\nFinally, the column C001 has information on the number of CRAS in each grid cell. The map below shows the spatial distribution of these services in Belo Horizonte.\n\nggplot(data_bh) +\n  geom_sf(aes(fill = as.factor(C001)), color = NA, alpha = 0.9) +\n  scale_fill_brewer(palette = \"YlGnBu\", direction = 1) +\n  labs(\n    title = \"Social assistance reference centers (CRAS)\",\n    subtitle = \"Belo Horizonte\",\n    fill = \"CRAS\"\n  ) +\n  theme_void()\n\n\n\n\nFigure 8.4: Spatial distribution of CRAS in Belo Horizonte"
   },
   {
     "objectID": "9_aopdata_acessibilidade.en.html#map-of-travel-time-to-access-the-nearest-hospital",
