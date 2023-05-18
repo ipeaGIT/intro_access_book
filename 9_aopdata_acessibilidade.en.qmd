@@ -1,69 +1,66 @@
 # Accessibility estimates
 
-Finally, the `{aopdata}` package also allows you to download estimates of access to jobs, health, education and social assistance services for the years 2017, 2018 and 2019 for all cities included in the project.
+Finally, the `{aopdata}` package also allows one to download estimates of accessibility to jobs, public health facilities, public schools and social assistance services. These estimates were calculated using 2017, 2018 and 2019 as reference years.
 
-This data can be downloaded with the `read_access()` function, which works similarly to the `read_population()` and `read_landuse()` functions presented earlier. Besides indicating the city (`city` parameter) and the reference year (`year`), though,  it is also necessary to inform  the mode of transport (`mode`) and the period of the day with th `peak` parameter (peak, between 6am and 8am, or off-peak, between 14h and 16h).
+This data can be downloaded with the `read_access()` function, which works similarly to `read_population()` and `read_landuse()`. Besides indicating the city (`city` parameter) and the reference year (`year`), though, it is also necessary to inform the transport mode (`mode`) and the interval of the day (peak, between 6am and 8am, or off-peak, between 14h and 16h, controlled by `peak`) which identify the accessibility data that should be downloaded.
 
-In the example below, we show how to download accessibility estimates in the peak period in São Paulo for the year 2019. In this example, we downloaded both accessibility estimates by car and public transport and put them together in a single `data.frame`. Note that this function results in a table that also automatically includes sociodemographic and land use data.
+With the code below, we show how to download accessibility estimates that refer to the peak period in São Paulo in 2019. In this example, we downloaded accessibility estimates both by car and by public transport and merged them into a single `data.frame`. Please note that this function results in a table that also includes sociodemographic and land use data.
 
 ```{r}
 #| warning: false
 #| message: false
-# low aop data of accessibility by public transport
 access_pt <- aopdata::read_access(
- city = "São Paulo",
- mode = "public_transport",
- year = 2019,
- peak = TRUE,
- geometry = TRUE,
- showProgress = FALSE
+  city = "São Paulo",
+  mode = "public_transport",
+  year = 2019,
+  peak = TRUE,
+  geometry = TRUE,
+  showProgress = FALSE
 )
 
-# low aop data of accessibility by car
 access_car <- aopdata::read_access(
- city = "São Paulo",
- mode = "car",
- year = 2019,
- peak = TRUE,
- geometry = TRUE,
- showProgress = FALSE
+  city = "São Paulo",
+  mode = "car",
+  year = 2019,
+  peak = TRUE,
+  geometry = TRUE,
+  showProgress = FALSE
 )
 
- # joins the data into a single dataframe
 data_sp <-rbind(access_pt, access_car)
 
 names(data_sp)
 ```
 
-Just like with the sociodemographic and land use variables, the names of the variables related to accessibility estimates are also encoded with column names such as `CMAEF30`, `TMISB` and `CMPPM60`. These codes result from a combination of three components: the type of accessibility indicator; the type of opportunity for which accessibility levels were calculated or to which people the indicator refers to; and the time threshold used in the calculation of the indicator.
+The names of the accessibility estimates columns, such as `CMAEF30`, `TMISB` and `CMPPM60`, result from a combination of three components:
 
-1. The **type of access indicator** is indicated by the first 3 letters of the code. The data includes three types of indicators:
+1. The **type of accessibility measure**, which is indicated by the first 3 letters of the code. The data includes three types of measures:
 
    - `CMA` - Active cumulative accessibility;
-   - `CMP` - Passive cumulative accessibility;
+   - `CMP` - Passive cumulative accessibility; and
    - `TMI` - Minimum travel time to the nearest opportunity.
 
-2. The type of activity to which the accessibility variable refers to is indicated by the following two letters, in the middle of the variable name. The data includes accessibility estimates for various types of activities:
+2. The **type of activity** to which the accessibility levels were calculated, indicated by the following two letters, in the middle of the column name. The data includes accessibility estimates to various types of activities:
 
    - `TT` - All jobs;
-   - `TB` - Jobs of low education;
-   - `TM` - Jobs of middle education;
-   - `TA` - Jobs of high education;
+   - `TB` - Low education jobs;
+   - `TM` - Middle education jobs;
+   - `TA` - High education jobs;
    - `ST` - All public health facilities;
-   - `SB` - Public health facilities of low complexity;
-   - `SM` - Public health facilities of medium complexity;
-   - `SA` - Public health facilities of high complexity;
+   - `SB` - Low complexity public health facilities;
+   - `SM` - Medium complexity public health facilities;
+   - `SA` - High complexity public health facilities;
    - `ET` - All public schools;
-   - `EI` - Public early childhood schools;
-   - `EF` - Public primary schools;
-   - `MS` -Public secondary schools;
-   - `MT` - All enrollment places in all public school;
-   - `MI` - Enrollment places at early childhood schools;
-   - `MF` - Enrollment places at primary schools;
-   - `MM` - Enrollment places at secondary schools;
-   - `CT` - All Social Assistance Reference Census.
+   - `EI` - Early childhood public  schools;
+   - `EF` - Primary public schools;
+   - `MS` - Secondary public schools;
+   - `MT` - Total number of enrollments in public schools;
+   - `MI` - Number of enrollments in early childhood public schools;
+   - `MF` - Number of enrollments in primary public schools;
+   - `MM` - Number of enrollments in secondary public schools; and
+   - `CT` - All CRAS.
  
-In the case of the passive accessibility indicator (`CMP`), the letters in the middle of the variable name indicate which population group the accessibility estimates refer to:
+In the case of the passive cumulative measure, the letters in the middle of the column name indicate **the population group** which the accessibility estimates refer to:
 
    - `PT` - The entire population;
    - `PH` - Male population;
@@ -73,30 +70,32 @@ In the case of the passive accessibility indicator (`CMP`), the letters in the m
    - `PA` - Yellow population;
    - `PI` - Indigenous population;
    - `P0005I` - Population from 0 to 5 years old;
-   - `P0614I` - Population from 6 to 14 years;
-   - `P1518I` - Population from 15 to 18 years;
-   - `P1924I` - Population from 19 to 24 years;
-   - `P2539I` - Population from 25 to 39 years;
-   - `P4069I` - Population from 40 to 69 years;
-   - `P70I` - Population aged 70 and older.
+   - `P0614I` - Population from 6 to 14 years old;
+   - `P1518I` - Population from 15 to 18 years old;
+   - `P1924I` - Population from 19 to 24 years old;
+   - `P2539I` - Population from 25 to 39 years old;
+   - `P4069I` - Population from 40 to 69 years old;
+   - `P70I` - Population aged 70 years old and over.
  
-3. The **travel time threshold** used in the accessibility calculations is indicated by the two numbers at the end of the variable name. This only applies to active cumulative accessibility (`CMA`) and passive accessibility (`CMP`) indicators, and include the limits of 15, 30, 45, 60, 90, and 120 minutes, depending on the mode of transport.
+3. The **travel time threshold** used to estimate the accessibility levels, which is indicated by the two numbers at the end of the column name. This component only applies to the active and passive cumulative measures. The data includes accessibility estimates calculated with cutoffs of 15, 30, 45, 60, 90 and 120 minutes, depending on the transport mode.
 
 **Examples:**
 
-- <span style="color: red;">CMA</span><span style="color: black;">EF</span><span style="color: blue;">30</span>: number of public primary schools accessible within 30 minutes of travel;
-- <span style="color: red;">TMI</span><span style="color: black;">SB</span>: minimum travel time to the closest public health facility with services of lower complexity;
-- <span style="color: red;">CMP</span><span style="color: black;">PM</span><span style="color: blue;">60</span>: number of of women who can access a certain hexagon within 60 minutes of travel time.
+- <span style="color: red;">CMA</span><span style="color: black;">EF</span><span style="color: blue;">30</span>: number of accessible primary public schools within 30 minutes of travel;
+- <span style="color: red;">TMI</span><span style="color: black;">SB</span>: minimum travel time to the closest low complexity public health facility; and
+- <span style="color: red;">CMP</span><span style="color: black;">PM</span><span style="color: blue;">60</span>: number of women that can access a certain grid cell within 60 minutes of travel.
  
-The full description of the variables can also be found in the documentation of function by running the `?read_access `command in R. The following sections show examples of how to visualize these accessibility data in the form of maps and charts.
+The full description of the columns can also be found in the function documentation, running the `?read_access` command in R. The following sections show examples illustrating how to create spatial visualizations and charts out of the accessibility dataset.
 
 ## Map of travel time to access the nearest hospital
 
-In this example, we compared the access time by car and public transport to the nearest hospital for each hexagon. To analyze the minimum travel time (`TMI`) to high complexity hospitals (`SA`), we used the variable `TMISA`. With the code below, we load the data visualization libraries and create the maps showing the spatial distribution of access time for both cars and public transport. Because travel times by public transport are usually much longer than by car, we truncate the distribution of values to 60 minutes or more.
+In this example, we compare the access time from each grid cell to the nearest public hospital by car and by public transport. To analyze the minimum travel time (`TMI`) to high complexity public hospitals (`SA`), we use the `TMISA` column. With the code below, we load the data visualization libraries and configure the maps showing the spatial distribution of access time by both transport modes. Because public transport trips are usually much longer than car trips, we truncate the travel time distribution to 60 minutes.
 
 ```{r}
 #| warning: false
 #| message: false
+#| label: fig-time_to_hospital
+#| fig-cap: Travel time to the closest high complexity public hospital in São Paulo
 library(ggplot2)
 library(patchwork)
 
@@ -106,15 +105,15 @@ data_sp$TMISA <- ifelse(data_sp$TMISA > 60, 60, data_sp$TMISA)
 ggplot(subset(data_sp, !is.na(mode))) +
   geom_sf(aes(fill = TMISA), color = NA, alpha = 0.9) +
   scale_fill_viridis_c(
-      option = "cividis",
-      direction = -1,
-      breaks = seq(0, 60, 10),
-      labels = c(seq(0, 50, 10), "60+")
+    option = "cividis",
+    direction = -1,
+    breaks = seq(0, 60, 10),
+    labels = c(seq(0, 50, 10), "60+")
   ) +
   labs(
-      title = "Travel time to the nearest high complex hospital",
-      subtitle = "São Paulo",
-      fill = "Time in\nminutes"
+    title = "Travel time to the nearest high complexity public hospital",
+    subtitle = "São Paulo",
+    fill = "Time\n(minutes)"
   ) +
   facet_wrap(~ mode) +
   theme_void()
@@ -122,47 +121,48 @@ ggplot(subset(data_sp, !is.na(mode))) +
 
 ## Map of employment accessibility
 
-`{aopdata}` data also makes it very easy to compare the number of opportunities accessible at different travel times. Using the code below, for example, we illustrate how to visualize side-by-side the spatial distribution of employment accessibility in up to 60 and 90 minutes of travel by public transport.
+The accessibility dataset also makes it very easy to compare the number of accessible opportunities when considering different travel time thresholds. Using the code below, for example, we illustrate how to visualize, side-by-side, the spatial distribution of employment accessibility by public transport trips of up to 60 and 90 minutes.
 
 ```{r}
+#| label: fig-accessible_jobs
+#| fig-cap: Job accessibility by public transport in São Paulo 
 # determine min and max values for the legend
 limit_values  <-c(0, max(access_pt $CMATT90, na.rm = TRUE) / 1000)
-
-# create maps
 
 fig60 <- ggplot(subset(access_pt, ! is.na(mode))) +
   geom_sf(aes(fill = CMATT60 / 1000), color = NA, alpha = 0.9) +
   scale_fill_viridis_c(option = "inferno", limits = limit_values) +
-  labs( subtitle = "in up to 60 min." , fill = "Jobs\n(in thousands)") +
+  labs(subtitle = "in up to 60 min." , fill = "Jobs\n(thousands)") +
   theme_void()
 
-fig90 <- ggplot(subset(access_pt, !is.na(mode))) +
+fig90 <- ggplot(subset(access_pt, ! is.na(mode))) +
   geom_sf(aes(fill = CMATT90 / 1000), color = NA, alpha = 0.9) +
   scale_fill_viridis_c(option = "inferno", limits = limit_values) +
-  labs(subtitle = "up to 90 min.", fill = "Jobs\n(in thousands)") +
+  labs(subtitle = "in up to 90 min.", fill = "Jobs\n(thousands)") +
   theme_void()
 
 fig60 +
   fig90 +
   plot_layout(guides = "collect") +
   plot_annotation(
-    title = "Number of jobs accessible by public transport",
+    title = "Spatial distribution of job accessibility by public transport",
     subtitle = "São Paulo"
   )
-
 ```
 
-## Inequalities in access to opportunities
+## Accessibility inequalities
 
-Finally, the data from `{aopdata}` can be used in different ways to analyze the level of inequality in access to opportunities across different cities in Brazil. In this subsection, we present three examples of this type of analysis.
+Finally, `{aopdata}` accessibility dataset can be used to analyze accessibility inequalities across different Brazilian cities in several different ways. In this subsection, we present three examples of this type of analysis.
  
 **Inequality in travel time to access opportunities**
 
-In this first example, we will compare the average travel time to the nearest public hospital for people of different income levels. To do this, we first need to calculate for each income group the average travel time to reach the nearest high complexity health facility weighted by the population of each hexagon. This weighting is necessary because each hexagon has a different population size and thus contributes differently to the average accessibility of the population as a whole.
+In this first example, we compare the average travel time to the nearest high complexity public hospital for people of different income levels. To do this, we calculate, for each income group, the average travel time to reach the nearest high complexity health facility, weighted by the population of each grid cell. Weighting the travel time by population is necessary because each cell has a different population size, thus contributing differently to the average accessibility of the population as a whole.
 
-Before performing the calculation, it should be noted that some hexagons in the city cannot access any hospital within two hours of travel. In these cases, the value of the minimum travel time variables is infinite (`Inf`). To deal with these cases, we will replace all `Inf` values with a travel  time of 120 minutes for this example.
+Before performing the calculation, we should note that some grid cells cannot reach any high complexity hospital within two hours of travel. In these cases, the minimum travel time columns assume an infinite value (`Inf`). To deal with this situation in our example, we replace all `Inf` values by a travel time of 120 minutes.
 
 ```{r}
+#| label: fig-time_to_hospital_by_income
+#| fig-cap: Average travel time by public transport to the nearest high complexity hospital in São Paulo
 # copies access data into a new data.frame
 ineq_pt <-data.table::as.data.table(access_pt)
 
@@ -172,7 +172,7 @@ ineq_pt [, TMISA := ifelse(is.infinite(TMISA), 120, TMISA)]
 # calculates the average travel time by income decile
 ineq_pt <- ineq_pt[
   ,
-  .( avrg = weighted.mean(x = TMISA, w = P001, na.rm = TRUE)),
+  .(avrg = weighted.mean(x = TMISA, w = P001, na.rm = TRUE)),
   by = R003
 ]
 ineq_pt <- subset(ineq_pt, ! is.na(avrg))
@@ -185,37 +185,38 @@ ggplot(ineq_pt) +
   labs(
     title = "Average travel time to the nearest hospital",
     subtitle = "by public transport in São Paulo ",
-    x = "Income Decile",
-    y = "Travel time in min."
+    x = "Income decile",
+    y = "Travel time (minutes)"
   ) +
   theme_minimal()
-
 ```
  
 **Inequality in the number of accessible opportunities**
 
-Another way to examine the inequality of access to opportunities is to compare the number of opportunities accessible by different population groups considering the same modes of transport and travel time limits. In this example, we analyze the active cumulative opportunity accessibility metric, available through the variables starting with `CMA` in the `{aopdata}` database. Using the code below, we compare the number of jobs accessible by people of different income deciles by public transport in up to 60 minutes.
+Another way of examining accessibility inequalities is by comparing the number of opportunities that can be reached by different population groups considering the same transport modes and travel time limits. In this case, we analyze the active cumulative accessibility measure, represented by columns whose names start with `CMA` in the `{aopdata}` dataset. Using the code below, we compare the number of jobs accessible by people of different income deciles by public transport in up to 60 minutes.
 
 ```{r}
+#| label: fig-accessible_jobs_by_income
+#| fig-cap: Distribution of job accessibility by public transport in São Paulo
 ggplot(subset(access_pt, !is.na(R003))) +
   geom_boxplot(
-      aes(x = factor(R003), y = CMATT60 / 1000, color = factor(R003))
+    aes(x = factor(R003), y = CMATT60 / 1000, color = factor(R003))
   ) +
   scale_color_brewer(palette = "RdBu") +
   labs(
-      title = "Distribution of the number of jobs accessible within 60 min.",
-      color = "Income\ndecile",
-      subtitle = "by public transport, São Paulo",
-      x = "Income decile",
-      y = "N. of accessible jobs\n(in thousands)"
+    title = "Distribution of the number of jobs accessible within 60 min.",
+    color = "Income\ndecile",
+    subtitle = "by public transport, São Paulo",
+    x = "Income decile",
+    y = "Accessible jobs (thousands)"
   ) +
   scale_x_discrete(
-      labels = c("D1\npoorest", paste0("D", 2:9), "D10\nwealthiest")
+    labels = c("D1\npoorest", paste0("D", 2:9), "D10\nwealthiest")
   ) +
   theme_minimal()
 ```
 
-Finally, we can also compare how different modes of transport can lead to different levels of accessibility and how this difference varies between cities. In the example below, we compare the number of jobs accessible in up to 30 minutes of walking and driving. To do this, we first need to download accessibility data by both transport modes for all cities in the AOP project.
+Finally, we can also compare how the usage of different transport modes can lead to different accessibility levels and how the discrepancy between modes varies across cities. In the example below, we compare the number of jobs that one can access in up to 30 minutes of walking and driving. To do this, we first download accessibility estimates by both transport modes for all cities covered by AOP.
 
 ```{r}
 #| message: false
@@ -234,20 +235,18 @@ data_walk <- aopdata::read_access(
 )
 ```
  
-Next, we calculate for each city and for each mode of transport the weighted average number of jobs accessible in up to 30 minutes (`CMATT30`). Once this is done, we put these estimates together into a single table and calculate the ratio between accessibility levels by car and walking.
+Next, we calculate, for each city and transport mode, the weighted average number of jobs accessible by trips of up to 30 minutes (`CMATT30`). We then join these estimates together into a single table and calculate the ratio between car and walk accessibility levels.
 
 ```{r}
-# calculates the average of affordable jobs in 30
-
 avg_car <- data_car[
   ,
-  .( access_car = weighted.mean(CMATT30, w = P001, na.rm = TRUE)),
+  .(access_car = weighted.mean(CMATT30, w = P001, na.rm = TRUE)),
   by = name_muni
 ]
 
 avg_walk <- data_walk[
   ,
-  .( access_walk = weighted.mean(CMATT30, w = P001, na.rm = TRUE)),
+  .(access_walk = weighted.mean(CMATT30, w = P001, na.rm = TRUE)),
   by = name_muni
 ]
 
@@ -258,19 +257,21 @@ avg_access[, ratio := access_car / access_walk]
 head(avg_access)
 ```
 
-Finally, we can visualize the results in a chart:
+Finally, we can analyze the results using a chart:
 
 ```{r}
+#| label: fig-car_walk_ratio
+#| fig-cap: Ratio between job accessibility levels by car and by foot considering trips of up to 30 minutes in the 20 biggest Brazilian cities
 ggplot(avg_access, aes(x = ratio, y = reorder(name_muni, ratio))) +
   geom_bar(stat = "identity") +
   geom_text(aes(x = ratio + 4 , label = paste0(round(ratio), "x"))) +
   labs(
-      title = "Difference between the number of jobs accessible by \nautomobile and by foot",
-      subtitle = "in up to 30 min.",
-      y = "",
-      x = "Ratio between accessibility by car and walking"
+    title = "Ratio between job accessibility levels by \nautomobile and by foot",
+    subtitle = "in up to 30 min.",
+    y = "",
+    x = "Ratio between car and walk accessibility"
   ) +
   theme_classic()
 ```
 
-As expected, the figure shows that it is possible to access many more jobs in  30 minutes by car than on walking trips. This difference, however, varies greatly across cities. In São Paulo and Brasília, a 30-minute car trip allows one to access, on average, 54 times more jobs than what it would be possible to access with walking trips. In Belém, the city with the smallest difference, one can access 17 times more jobs by car than walking - still a substantial difference but much smaller than those in the other cities.
+As expected, @fig-car_walk_ratio shows that car trips lead to much higher accessibility levels than equally long walking trips. This difference, however, greatly varies across cities. In São Paulo and Brasília, a 30-minute car trip allows one to access, on average, 54 times more jobs than what it would be possible to access with walking trips. In Belém, the city from our sample with the smallest difference, one can access 17 times more jobs by car than by foot - still a substantial difference, but much smaller than in other cities.
