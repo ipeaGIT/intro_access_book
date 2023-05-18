@@ -27,16 +27,16 @@ google-scholar: true
 
 # Preface {.unnumbered}
 
-Accessibility is the ease with which people can reach places and opportunities such as jobs, health and education services, cultural activities, green areas, etc. The accessibility conditions of a city or neighborhood depend on the efficiency and connectivity of the transport network and on the proximity between people and activities. The topic of accessibility has been receiving increasing attention from transportation agencies, funding institutions, decision makers and researchers in the fields of urban and transport planning [@papa2015accessibility; @boisjoly2017how]. In the last few years, we have seen a growing number of scientific papers [@miller2018accessibility; @vanwee2021transport] and books [@levine2019mobility; @levinson2020transport] that deepen our understanding of urban accessibility issues. However, there are currently no books or articles that serve simultaneously as introductory material to the subject and as a practical manual to teach computational methods to calculate and analyze accessibility data. The lack of this type of material helps to explain, at least in part, why several transportation agencies and analysts still face challenges to incorporate accessibility issues and indicators into the day-to-day planning and research practice [@silva2017accessibility; @buttner2021accessibility].
+Accessibility is the ease with which people can reach places and opportunities such as jobs, health and education services, cultural activities, green areas, etc. The accessibility conditions of a city or neighborhood depend on the efficiency and connectivity of the transport network and on the proximity between people and activities. The topic of accessibility has been receiving increased attention from transportation agencies, funding institutions, decision makers and researchers in the fields of urban and transport planning [@papa2015accessibility; @boisjoly2017how]. In the last few years, we have seen a growing number of scientific papers [@miller2018accessibility; @vanwee2021transport] and books [@levine2019mobility; @levinson2020transport] that deepen our understanding of urban accessibility issues. However, there are currently no books or articles that serve simultaneously as introductory material to the subject and as a practical manual to teach computational methods to calculate and analyze accessibility data. The lack of this type of material helps to explain, at least in part, why several transportation agencies and analysts still face challenges to incorporate accessibility issues and indicators into the day-to-day planning and research practice [@silva2017accessibility; @buttner2021accessibility].
 
-The aim of this book is to equip its readers with the fundamental concepts, the data analysis skills and the processing tools needed to perform urban accessibility analyses and transportation projects impact assessments. The book was written with the problems faced by public managers, policy makers, students and researchers working on urban and transportation planning in mind. Hence, the book is essentially practical. All the material in the book is presented with reproducible examples using open data sets and the R programming language.
+The aim of this book is to equip its readers with the fundamental concepts, the data analysis skills and the processing tools needed to perform urban accessibility analyses and transportation projects impact assessments. The book was written with the problems faced by public managers, policy makers, students and researchers working on urban and transportation planning in mind. Hence, the book is essentially practical. All the material in the book is presented with reproducible examples using open datasets and the R programming language.
 
 ::: {.callout-important appearance="simple"}
 This book assumes the reader has a basic knowledge of the R programming language. If you want to familiarize yourself with it, we recommend the books below:
 
 - [R for Data Science](https://r4ds.had.co.nz/)
 - [Geocomputation with R](https://geocompr.robinlovelace.net/)
-- [Data Science in R](https://livro.curso-r.com/) [Portuguese]
+- [Data Science in R](https://livro.curso-r.com/) [in Portuguese]
 :::
 
 ## Book structure
@@ -47,18 +47,18 @@ This book is divided into 5 sections:
 #| echo: false
 tbl <- data.frame(
   Section = c(
-	"[1: Introduction to urban accessibility](s1_intro.en.qmd)",
-	"[2: How to measure urban accessibility](s2_calculo.en.qmd)",
-	"[3: Public transport data](s3_dados_tp.en.qmd)",
-	"[4: Impact assessment of transportation projects](s4_avaliacao_impacto.en.qmd)",
-	"[5: Data from the Access to Opportunity Project](s5_dados_aop.en.qmd)"
+    "[1: Introduction to urban accessibility](s1_intro.en.qmd)",
+    "[2: How to measure urban accessibility](s2_calculo.en.qmd)",
+    "[3: Public transport data](s3_dados_tp.en.qmd)",
+    "[4: Impact assessment of transportation projects](s4_avaliacao_impacto.en.qmd)",
+    "[5: Data from the Access to Opportunity Project](s5_dados_aop.en.qmd)"
   ),
   Description = c(
-	"The first section presents the concept of urban accessibility, clarifies the differences between accessibility and mobility, and presents the main indicators used in the literature to measure urban accessibility.",
-	"The second section teaches how to calculate urban accessibility estimates in R using open data and the `{r5r}` and `{accessibility}` packages, and how to visualize the results with maps and charts.",
-	"The third section presents the GTFS specification of public transport data, and shows how to work and analyze GTFS data using the `{gtfstools}` package.",
-	"The fourth section brings a case study to illustrate how the combined knowledge of previous chapters can be used to assess the impact of transportation policies on urban accessibility conditions.",
-	"Finally, the fifth section shows how to download, analyze and visualize the data of the Access to Opportunities Project (AOP), which brings detailed data on land-use patterns & accessibility for Brazilian cities."
+    "The first section presents the concept of urban accessibility, clarifies the differences between accessibility and mobility and presents the main indicators used in the literature to measure urban accessibility.",
+    "The second section teaches how to calculate urban accessibility estimates in R using open data and the `{r5r}` and `{accessibility}` packages and how to visualize the results with maps and charts.",
+    "The third section presents the GTFS specification of public transport data and shows how to work and analyze GTFS data using the `{gtfstools}` package.",
+    "The fourth section brings a case study to illustrate how the combined knowledge of previous chapters can be used to assess the impact of transportation policies on urban accessibility conditions.",
+    "Finally, the fifth section shows how to download and visualize the data produced and made available by the Access to Opportunities Project (AOP), which brings detailed information on land use and accessibility patterns in Brazilian cities."
   )
 )
 
@@ -67,32 +67,23 @@ knitr::kable(tbl, align = c("c", "l"))
 
 ## Reproducing the book in your computer
 
-To reproduce the book in your local machine, you must first download its source code. This can be done with [git](https://git-scm.com/) or manually, by clicking on the following link: <https://github.com/ipeaGIT/intro_access_book/archive/refs/heads/main.zip>. If you choose the second approach, you must also unzip the contents of the `.zip` file to a new folder.
+This book has been written with the [Quarto](https://quarto.org/) publishing system. All the code used to prepare and publish it online can be found in [this repository](https://github.com/ipeaGIT/intro_access_book). To reproduce the book in your local machine, you must first download its source code. The easiest way to do this is by cloning the repository with [git](https://git-scm.com/), or, alternatively, by manually downloading it from the following link: <https://github.com/ipeaGIT/intro_access_book/archive/refs/heads/main.zip>. If you choose the second approach, you must also unzip the contents of the `.zip` file to a new folder.
 
-::: {.callout-note appearance="simple"}
-This book was written with the [Quarto](https://quarto.org/) publishing system. All the code used to write and publish it can be found in [this repository](https://github.com/ipeaGIT/intro_access_book).
-:::
+To render the book, you must have Quarto installed in your computer. Reproducing the chapters also requires the [`{renv}`](https://rstudio.github.io/renv/index.html) R package, which manages the book dependencies.
 
-To render the book, you must have Quarto installed on your computer. Reproducing the chapters also requires the [`{renv}`](https://rstudio.github.io/renv/index.html) R package, which manages the book dependencies.
-
-After installing book dependencies, you can render each chapter as you would normally render any Quarto/Rmarkdown file. To run all chapters at once, use one of the following commands:
+After installing book dependencies, you can render each chapter as you would normally render any Quarto/Rmarkdown file. To render the entire book, use the following command *(please note that currently both the Portuguese and the English books are rendered)*:
 
 ```r
-quarto::quarto_preview()
-
-quarto::quarto_render()
+source("bilingual_render.R")
 ```
 
-For more details on how to install the book dependencies and or how to run the book content locally, please see the installation instructions in the [book repository](https://github.com/ipeaGIT/intro_access_book).
+For more details on how to install the book dependencies and on how to run the book content locally, please see the installation instructions on the repository main page.
 
 ## Running the book examples in the cloud with binder
 
-A binder is a tool that allows one to use a browser, such as Chrome and Firefox, to run code in the cloud. The book is set up so that its code can be run using a server published by [mybinder](https://mybinder.org/). To do this, click the icon below: after a few moments, an RStudio Cloud session will start running on your browser. This session includes all the files and data needed to run the code.
+A binder is a tool that allows one to use a browser, such as Chrome and Firefox, to run code in the cloud. The book is set up so that its code can be run using a server published by [mybinder](https://mybinder.org/). To do this, click on [this link](https://mybinder.org/v2/gh/ipeaGIT/intro_access_book/HEAD?urlpath=rstudio). After a few moments, an RStudio Cloud session will start running in your browser. This session includes all the files and data needed to run the code.
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ipeaGIT/intro_access_book/HEAD?urlpath=rstudio) \
-
-Please note that mybinder sessions are limited to 2 GB of RAM. This restriction can prevent Chapter 6 from running properly. If you use binder, we suggest that you do not attempt to render the entire book with the Quarto, as shown above.
-
+Please note that mybinder sessions are limited to 2 GB of RAM. This restriction can prevent Chapter 6 from running properly. If you use binder, we suggest that you do not attempt to render the entire book with Quarto, as shown above.
 
 ## License
 
