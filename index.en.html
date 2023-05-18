@@ -433,8 +433,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 
 </header><section id="preface" class="level1 unnumbered"><h1 class="unnumbered">Preface</h1>
 <p><img src="images/cover.en.png" title="Introduction to urban accessibility" class="quarto-cover-image img-fluid"></p>
-<p>Accessibility is the ease with which people can reach places and opportunities such as jobs, health and education services, cultural activities, green areas, etc. The accessibility conditions of a city or neighborhood depend on the efficiency and connectivity of the transport network and on the proximity between people and activities. The topic of accessibility has been receiving increasing attention from transportation agencies, funding institutions, decision makers and researchers in the fields of urban and transport planning <span class="citation" data-cites="papa2015accessibility boisjoly2017how">(<a href="references.en.html#ref-papa2015accessibility" role="doc-biblioref">Papa et al. 2015</a>; <a href="references.en.html#ref-boisjoly2017how" role="doc-biblioref">Boisjoly and El-Geneidy 2017</a>)</span>. In the last few years, we have seen a growing number of scientific papers <span class="citation" data-cites="miller2018accessibility vanwee2021transport">(<a href="references.en.html#ref-miller2018accessibility" role="doc-biblioref">Miller 2018</a>; <a href="references.en.html#ref-vanwee2021transport" role="doc-biblioref">van Wee 2021</a>)</span> and books <span class="citation" data-cites="levine2019mobility levinson2020transport">(<a href="references.en.html#ref-levine2019mobility" role="doc-biblioref">Levine, Grengs, and Merlin 2019</a>; <a href="references.en.html#ref-levinson2020transport" role="doc-biblioref">Levinson and King 2020</a>)</span> that deepen our understanding of urban accessibility issues. However, there are currently no books or articles that serve simultaneously as introductory material to the subject and as a practical manual to teach computational methods to calculate and analyze accessibility data. The lack of this type of material helps to explain, at least in part, why several transportation agencies and analysts still face challenges to incorporate accessibility issues and indicators into the day-to-day planning and research practice <span class="citation" data-cites="silva2017accessibility buttner2021accessibility">(<a href="references.en.html#ref-silva2017accessibility" role="doc-biblioref">Silva et al. 2017</a>; <a href="references.en.html#ref-buttner2021accessibility" role="doc-biblioref">Büttner 2021</a>)</span>.</p>
-<p>The aim of this book is to equip its readers with the fundamental concepts, the data analysis skills and the processing tools needed to perform urban accessibility analyses and transportation projects impact assessments. The book was written with the problems faced by public managers, policy makers, students and researchers working on urban and transportation planning in mind. Hence, the book is essentially practical. All the material in the book is presented with reproducible examples using open data sets and the R programming language.</p>
+<p>Accessibility is the ease with which people can reach places and opportunities such as jobs, health and education services, cultural activities, green areas, etc. The accessibility conditions of a city or neighborhood depend on the efficiency and connectivity of the transport network and on the proximity between people and activities. The topic of accessibility has been receiving increased attention from transportation agencies, funding institutions, decision makers and researchers in the fields of urban and transport planning <span class="citation" data-cites="papa2015accessibility boisjoly2017how">(<a href="references.en.html#ref-papa2015accessibility" role="doc-biblioref">Papa et al. 2015</a>; <a href="references.en.html#ref-boisjoly2017how" role="doc-biblioref">Boisjoly and El-Geneidy 2017</a>)</span>. In the last few years, we have seen a growing number of scientific papers <span class="citation" data-cites="miller2018accessibility vanwee2021transport">(<a href="references.en.html#ref-miller2018accessibility" role="doc-biblioref">Miller 2018</a>; <a href="references.en.html#ref-vanwee2021transport" role="doc-biblioref">van Wee 2021</a>)</span> and books <span class="citation" data-cites="levine2019mobility levinson2020transport">(<a href="references.en.html#ref-levine2019mobility" role="doc-biblioref">Levine, Grengs, and Merlin 2019</a>; <a href="references.en.html#ref-levinson2020transport" role="doc-biblioref">Levinson and King 2020</a>)</span> that deepen our understanding of urban accessibility issues. However, there are currently no books or articles that serve simultaneously as introductory material to the subject and as a practical manual to teach computational methods to calculate and analyze accessibility data. The lack of this type of material helps to explain, at least in part, why several transportation agencies and analysts still face challenges to incorporate accessibility issues and indicators into the day-to-day planning and research practice <span class="citation" data-cites="silva2017accessibility buttner2021accessibility">(<a href="references.en.html#ref-silva2017accessibility" role="doc-biblioref">Silva et al. 2017</a>; <a href="references.en.html#ref-buttner2021accessibility" role="doc-biblioref">Büttner 2021</a>)</span>.</p>
+<p>The aim of this book is to equip its readers with the fundamental concepts, the data analysis skills and the processing tools needed to perform urban accessibility analyses and transportation projects impact assessments. The book was written with the problems faced by public managers, policy makers, students and researchers working on urban and transportation planning in mind. Hence, the book is essentially practical. All the material in the book is presented with reproducible examples using open datasets and the R programming language.</p>
 <div class="callout callout-style-simple callout-important">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -446,7 +446,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <li><a href="https://r4ds.had.co.nz/">R for Data Science</a></li>
 <li><a href="https://geocompr.robinlovelace.net/">Geocomputation with R</a></li>
 <li>
-<a href="https://livro.curso-r.com/">Data Science in R</a> [Portuguese]</li>
+<a href="https://livro.curso-r.com/">Data Science in R</a> [in Portuguese]</li>
 </ul>
 </div>
 </div>
@@ -463,15 +463,15 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <tbody>
 <tr class="odd">
 <td style="text-align: center;"><a href="./s1_intro.en.html">1: Introduction to urban accessibility</a></td>
-<td style="text-align: left;">The first section presents the concept of urban accessibility, clarifies the differences between accessibility and mobility, and presents the main indicators used in the literature to measure urban accessibility.</td>
+<td style="text-align: left;">The first section presents the concept of urban accessibility, clarifies the differences between accessibility and mobility and presents the main indicators used in the literature to measure urban accessibility.</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><a href="./s2_calculo.en.html">2: How to measure urban accessibility</a></td>
-<td style="text-align: left;">The second section teaches how to calculate urban accessibility estimates in R using open data and the <code>{r5r}</code> and <code>{accessibility}</code> packages, and how to visualize the results with maps and charts.</td>
+<td style="text-align: left;">The second section teaches how to calculate urban accessibility estimates in R using open data and the <code>{r5r}</code> and <code>{accessibility}</code> packages and how to visualize the results with maps and charts.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><a href="./s3_dados_tp.en.html">3: Public transport data</a></td>
-<td style="text-align: left;">The third section presents the GTFS specification of public transport data, and shows how to work and analyze GTFS data using the <code>{gtfstools}</code> package.</td>
+<td style="text-align: left;">The third section presents the GTFS specification of public transport data and shows how to work and analyze GTFS data using the <code>{gtfstools}</code> package.</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><a href="./s4_avaliacao_impacto.en.html">4: Impact assessment of transportation projects</a></td>
@@ -479,34 +479,21 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><a href="./s5_dados_aop.en.html">5: Data from the Access to Opportunity Project</a></td>
-<td style="text-align: left;">Finally, the fifth section shows how to download, analyze and visualize the data of the Access to Opportunities Project (AOP), which brings detailed data on land-use patterns &amp; accessibility for Brazilian cities.</td>
+<td style="text-align: left;">Finally, the fifth section shows how to download and visualize the data produced and made available by the Access to Opportunities Project (AOP), which brings detailed information on land use and accessibility patterns in Brazilian cities.</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </section><section id="reproducing-the-book-in-your-computer" class="level2"><h2 class="anchored" data-anchor-id="reproducing-the-book-in-your-computer">Reproducing the book in your computer</h2>
-<p>To reproduce the book in your local machine, you must first download its source code. This can be done with <a href="https://git-scm.com/">git</a> or manually, by clicking on the following link: <a href="https://github.com/ipeaGIT/intro_access_book/archive/refs/heads/main.zip" class="uri">https://github.com/ipeaGIT/intro_access_book/archive/refs/heads/main.zip</a>. If you choose the second approach, you must also unzip the contents of the <code>.zip</code> file to a new folder.</p>
-<div class="callout callout-style-simple callout-note">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>This book was written with the <a href="https://quarto.org/">Quarto</a> publishing system. All the code used to write and publish it can be found in <a href="https://github.com/ipeaGIT/intro_access_book">this repository</a>.</p>
-</div>
-</div>
-</div>
-<p>To render the book, you must have Quarto installed on your computer. Reproducing the chapters also requires the <a href="https://rstudio.github.io/renv/index.html"><code>{renv}</code></a> R package, which manages the book dependencies.</p>
-<p>After installing book dependencies, you can render each chapter as you would normally render any Quarto/Rmarkdown file. To run all chapters at once, use one of the following commands:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>quarto<span class="sc">::</span><span class="fu">quarto_preview</span>()</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>quarto<span class="sc">::</span><span class="fu">quarto_render</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>For more details on how to install the book dependencies and or how to run the book content locally, please see the installation instructions in the <a href="https://github.com/ipeaGIT/intro_access_book">book repository</a>.</p>
+<p>This book has been written with the <a href="https://quarto.org/">Quarto</a> publishing system. All the code used to prepare and publish it online can be found in <a href="https://github.com/ipeaGIT/intro_access_book">this repository</a>. To reproduce the book in your local machine, you must first download its source code. The easiest way to do this is by cloning the repository with <a href="https://git-scm.com/">git</a>, or, alternatively, by manually downloading it from the following link: <a href="https://github.com/ipeaGIT/intro_access_book/archive/refs/heads/main.zip" class="uri">https://github.com/ipeaGIT/intro_access_book/archive/refs/heads/main.zip</a>. If you choose the second approach, you must also unzip the contents of the <code>.zip</code> file to a new folder.</p>
+<p>To render the book, you must have Quarto installed in your computer. Reproducing the chapters also requires the <a href="https://rstudio.github.io/renv/index.html"><code>{renv}</code></a> R package, which manages the book dependencies.</p>
+<p>After installing book dependencies, you can render each chapter as you would normally render any Quarto/Rmarkdown file. To render the entire book, use the following command <em>(please note that currently both the Portuguese and the English books are rendered)</em>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"bilingual_render.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For more details on how to install the book dependencies and on how to run the book content locally, please see the installation instructions on the repository main page.</p>
 </section><section id="running-the-book-examples-in-the-cloud-with-binder" class="level2"><h2 class="anchored" data-anchor-id="running-the-book-examples-in-the-cloud-with-binder">Running the book examples in the cloud with binder</h2>
-<p>A binder is a tool that allows one to use a browser, such as Chrome and Firefox, to run code in the cloud. The book is set up so that its code can be run using a server published by <a href="https://mybinder.org/">mybinder</a>. To do this, click the icon below: after a few moments, an RStudio Cloud session will start running on your browser. This session includes all the files and data needed to run the code.</p>
-<p><a href="https://mybinder.org/v2/gh/ipeaGIT/intro_access_book/HEAD?urlpath=rstudio"><img src="https://mybinder.org/badge_logo.svg" class="img-fluid" alt="Binder"></a><br></p>
-<p>Please note that mybinder sessions are limited to 2 GB of RAM. This restriction can prevent Chapter 6 from running properly. If you use binder, we suggest that you do not attempt to render the entire book with the Quarto, as shown above.</p>
+<p>A binder is a tool that allows one to use a browser, such as Chrome and Firefox, to run code in the cloud. The book is set up so that its code can be run using a server published by <a href="https://mybinder.org/">mybinder</a>. To do this, click on <a href="https://mybinder.org/v2/gh/ipeaGIT/intro_access_book/HEAD?urlpath=rstudio">this link</a>. After a few moments, an RStudio Cloud session will start running in your browser. This session includes all the files and data needed to run the code.</p>
+<p>Please note that mybinder sessions are limited to 2 GB of RAM. This restriction can prevent Chapter 6 from running properly. If you use binder, we suggest that you do not attempt to render the entire book with Quarto, as shown above.</p>
 </section><section id="license" class="level2"><h2 class="anchored" data-anchor-id="license">License</h2>
 <p><img align="right" src="images/ipea_logo.png" width="240"> The material in this book may be reproduced and displayed for educational or informational purposes, provided credit is given to the original authors and the original work is cited. This book can be shared on websites and free and open online repositories only if it is made clear to users the terms of use of this material and who the copyright holder is, the Institute for Applied Economic Research (Ipea). Any commercial or for-profit use is prohibited. The creation of derivative works is prohibited. This license is based on studies about the Brazilian Copyright Law (Law 9.610/1998).</p>
 </section><section id="how-to-cite-the-book" class="level2"><h2 class="anchored" data-anchor-id="how-to-cite-the-book">How to cite the book</h2>
