@@ -4,9 +4,9 @@
 
 The first step to estimate the accessibility levels in a study area is to calculate the travel cost matrix between the various origins and destinations that make up this area. As previously mentioned, in the scientific literature and in transport planning practice this cost is generally represented by the travel time between two points [@el-geneidy2016cost; @venter2016assessing], although recent studies have also considered other factors, such as trip monetary costs and the comfort of a trip between origins and destinations [@arbex2020estimating; @herszenhut2022impact]. In this book, we will focus on travel time matrices as they are the most widely used in the literature and in practice, and we will cover other types of costs in a future book on advanced accessibility analysis in R.
 
-Currently, the easiest and fastest way to generate a travel time matrix in R is using the `{r5r}` package [@pereira2021r5r], developed by the Access to Opportunities Project team. The package provides a simple and friendly interface to the R5 multimodal transport routing engine, developed by Conveyal[^1].
+Currently, the easiest and fastest way to generate a travel time matrix in R is using the `{r5r}` package [@pereira2021r5r], developed by the Access to Opportunities Project team. The package provides a simple and friendly interface to the R5 multimodal transport routing engine, developed by Conveyal[^conveyal].
 
-[^1]: Available at <https://github.com/conveyal/r5>.
+[^conveyal]: Available at <https://github.com/conveyal/r5>.
 
 ### Installing `{r5r}`
 
@@ -17,9 +17,9 @@ Installing `{r5r}` works the same as installing any other R package (all code sn
 install.packages("r5r")
 ```
 
-In addition to R, `{r5r}` also requires installing Java 11[^2]. Use the command below to check the version of Java installed in your computer.
+In addition to R, `{r5r}` also requires installing Java 11[^java11]. Use the command below to check the version of Java installed in your computer.
 
-[^2]: Java 11 can be downloaded either from <https://www.oracle.com/java/technologies/downloads/#java11> or from <https://jdk.java.net/java-se-ri/11>.
+[^java11]: Java 11 can be downloaded either from <https://www.oracle.com/java/technologies/downloads/#java11> or from <https://jdk.java.net/java-se-ri/11>.
 
 ```{r}
 cat(processx::run("java", args = "-version")$stderr)
@@ -117,9 +117,9 @@ r5r_core <- setup_r5(data_path, verbose = FALSE)
 fs::dir_tree(data_path)
 ```
 
-The second and final step is to actually calculate the travel time matrix with the `travel_time_matrix()` function. As basic inputs, the function receives the connection with R5 created above, origin and destination points as `data.frame`s with columns `id`, `lon` and `lat`, the mode of transport considered, the departure time, the maximum walking time allowed when accessing public transport stations from the origin and when egressing from the last stop to the destination, and the maximum travel time allowed for trips. The function also accepts several other inputs, such as the walking speed and the maximum number of public transport legs allowed, among others[^3].
+The second and final step is to actually calculate the travel time matrix with the `travel_time_matrix()` function. As basic inputs, the function receives the connection with R5 created above, origin and destination points as `data.frame`s with columns `id`, `lon` and `lat`, the mode of transport considered, the departure time, the maximum walking time allowed when accessing public transport stations from the origin and when egressing from the last stop to the destination, and the maximum travel time allowed for trips. The function also accepts several other inputs, such as the walking speed and the maximum number of public transport legs allowed, among others[^ttm_params].
 
-[^3]: For more information on each parameter, please refer to the function documentation in an R session (with the commands `?travel_time_matrix` or `help("travel_time_matrix”)`) or on `{r5r}` [website](https://ipeagit.github.io/r5r/reference/travel_time_matrix.html).
+[^ttm_params]: For more information on each parameter, please refer to the function documentation in an R session (with the commands `?travel_time_matrix` or `help("travel_time_matrix”)`) or on `{r5r}` [website](https://ipeagit.github.io/r5r/reference/travel_time_matrix.html).
 
 ```{r}
 # read data.frame with grid centroids
@@ -151,9 +151,9 @@ The `travel_time_matrix()` function uses an extension of the RAPTOR routing algo
 
 ## Calculating accessibility
 
-Having calculated the travel time matrix between the origins and destinations, we need to use it to calculate accessibility levels in the study area. For this, we will use the `{accessibility}`[^4] package, also developed by the Access to Opportunities Project/Ipea team, which provides several functions to calculate many accessibility measures. As basic inputs, all functions require a pre-calculated cost matrix (in our case, the travel time matrix calculated in the previous section) and some land use data, such as the number of opportunities in each cell that covers the study area.
+Having calculated the travel time matrix between the origins and destinations, we need to use it to calculate accessibility levels in the study area. For this, we will use the `{accessibility}`[^access_package] package, also developed by the Access to Opportunities Project/Ipea team, which provides several functions to calculate many accessibility measures. As basic inputs, all functions require a pre-calculated cost matrix (in our case, the travel time matrix calculated in the previous section) and some land use data, such as the number of opportunities in each cell that covers the study area.
 
-[^4]: Available at <https://github.com/ipeaGIT/accessibility>.
+[^access_package]: Available at <https://github.com/ipeaGIT/accessibility>.
 
 ### Cumulative opportunities measure
 

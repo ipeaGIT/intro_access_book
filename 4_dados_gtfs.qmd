@@ -5,17 +5,17 @@ O formato GTFS é uma especificação aberta e colaborativa que visa a descrever
 - O GTFS *Schedule*, ou GTFS *Static*, que contém o cronograma planejado de linhas de transporte público, informações sobre suas tarifas e informações espaciais sobre os seus itinerários; e
 - O GTFS *Realtime*, que contém informações de localização de veículos em tempo real e alertas de possíveis atrasos, de mudanças de percurso e de eventos que possam interferir no cronograma planejado.
 
-Ao longo desta seção, focaremos no **GTFS _Schedule_**, por ser o formato mais amplamente utilizado por agências de transporte e em análises de acessibilidade[^1].
+Ao longo desta seção, focaremos no **GTFS _Schedule_**, por ser o formato mais amplamente utilizado por agências de transporte e em análises de acessibilidade[^realtime].
 
-[^1]: Para mais informações sobre o GTFS *Realtime*, por favor visite <https://gtfs.org/realtime/>.
+[^realtime]: Para mais informações sobre o GTFS *Realtime*, por favor visite <https://gtfs.org/realtime/>.
 
 Por ser uma especificação aberta e colaborativa, o formato GTFS tenta abarcar em sua definição um grande número de usos distintos que agências de transporte e desenvolvedores de ferramentas possam lhe dar. No entanto, agências e *softwares* podem ainda assim depender de informações que não constem na especificação oficial. Surgem, dessa forma, [extensões](https://gtfs.org/extensions/) da especificação, algumas das quais podem eventualmente se tornar parte da especificação oficial, caso isso seja aceito pela comunidade de usuários do GTFS. Nesta seção, focaremos em um subconjunto de informações presentes no formato GTFS *Schedule* “puro”, e, portanto, não cobriremos suas extensões.
 
 ## Estrutura de arquivos GTFS
 
-Arquivos no formato GTFS *Schedule* (daqui em diante chamado apenas de GTFS) também são conhecidos pela denominação *feed*[^2]. Um *feed* é nada mais do que um arquivo comprimido em formato `.zip` que contém um conjunto de tabelas, salvas em formato `.txt`, com algumas informações sobre a rede de transporte público (localização das paradas, frequências das viagens, traçado das rotas, entre outras). Como em uma base de dados relacional, as tabelas de um *feed* possuem colunas-chaves que permitem vincular os dados de rotas, viagens e tabelas de horários entre si. O esquema geral do GTFS é apresentado na @fig-scheme, que mostra algumas das principais tabelas que compõem a especificação e destaca como elas se relacionam a partir de suas colunas-chaves.
+Arquivos no formato GTFS *Schedule* (daqui em diante chamado apenas de GTFS) também são conhecidos pela denominação *feed*[^synonyms]. Um *feed* é nada mais do que um arquivo comprimido em formato `.zip` que contém um conjunto de tabelas, salvas em formato `.txt`, com algumas informações sobre a rede de transporte público (localização das paradas, frequências das viagens, traçado das rotas, entre outras). Como em uma base de dados relacional, as tabelas de um *feed* possuem colunas-chaves que permitem vincular os dados de rotas, viagens e tabelas de horários entre si. O esquema geral do GTFS é apresentado na @fig-scheme, que mostra algumas das principais tabelas que compõem a especificação e destaca como elas se relacionam a partir de suas colunas-chaves.
 
-[^2]: Neste livro, utilizaremos os termos *feed*, arquivo GTFS e dados GTFS como sinônimos.
+[^synonyms]: Neste livro, utilizaremos os termos *feed*, arquivo GTFS e dados GTFS como sinônimos.
 
 ```{r}
 #| echo: false
@@ -25,20 +25,20 @@ Arquivos no formato GTFS *Schedule* (daqui em diante chamado apenas de GTFS) tam
 knitr::include_graphics("images/gtfs_scheme.png")
 ```
 
-Ao todo, 22 tabelas compõem o formato GTFS[^3]. Nem todas, no entanto, devem estar obrigatoriamente presentes para que um *feed* seja considerado válido, sendo consideradas, portanto, opcionais. A especificação classifica cada tabela conforme sua obrigatoriedade em três possíveis categorias: obrigatórias, opcionais e condicionalmente obrigatórias (quando a obrigatoriedade de uma tabela depende da existência de uma determinada tabela, coluna ou valor). Para fins de simplicidade, neste livro consideraremos apenas as duas primeiras categorias e faremos comentários quanto à obrigatoriedade de cada tabela quando apropriado. Dessa forma, ficam assim classificadas as tabelas:
+Ao todo, 22 tabelas compõem o formato GTFS[^spec_ref]. Nem todas, no entanto, devem estar obrigatoriamente presentes para que um *feed* seja considerado válido, sendo consideradas, portanto, opcionais. A especificação classifica cada tabela conforme sua obrigatoriedade em três possíveis categorias: obrigatórias, opcionais e condicionalmente obrigatórias (quando a obrigatoriedade de uma tabela depende da existência de uma determinada tabela, coluna ou valor). Para fins de simplicidade, neste livro consideraremos apenas as duas primeiras categorias e faremos comentários quanto à obrigatoriedade de cada tabela quando apropriado. Dessa forma, ficam assim classificadas as tabelas:
 
-[^3]: Conforme a [especificação oficial](https://gtfs.org/schedule/reference/), versão da revisão 9 de maio de 2022.
+[^spec_ref]: Conforme a [especificação oficial](https://gtfs.org/schedule/reference/), versão da revisão 9 de maio de 2022.
 
 1. **Obrigatórias**: `agency.txt`; `stops.txt`; `routes.txt`; `trips.txt`; `stop_times.txt`; `calendar.txt`; e
 2. **Opcionais**: `calendar_dates.txt`; `fare_attributes.txt`; `fare_rules.txt`; `fare_products.txt`; `fare_leg_rules.txt`; `fare_transfer_rules.txt`; `areas.txt`; `stop_areas.txt`; `shapes.txt`; `frequencies.txt`; `transfers.txt`; `pathways.txt`; `levels.txt`; `translations.txt`; `feed_info.txt`; `attributions.txt`.
 
-Ao longo desta seção, aprenderemos sobre a estrutura básica de um arquivo GTFS e das tabelas que o compõem. Portanto, vamos olhar apenas para as tabelas obrigatórias e para as tabelas opcionais mais frequentemente utilizadas por produtores e consumidores desses arquivos[^4].
+Ao longo desta seção, aprenderemos sobre a estrutura básica de um arquivo GTFS e das tabelas que o compõem. Portanto, vamos olhar apenas para as tabelas obrigatórias e para as tabelas opcionais mais frequentemente utilizadas por produtores e consumidores desses arquivos[^spec_more_info].
 
-[^4]: Para mais informações sobre as tabelas e as colunas não abordadas nesta seção, por favor verifique a [especificação oficial](https://gtfs.org/schedule/reference/).
+[^spec_more_info]: Para mais informações sobre as tabelas e as colunas não abordadas nesta seção, por favor verifique a [especificação oficial](https://gtfs.org/schedule/reference/).
 
-Na demonstração que será feita aqui, utilizaremos um subconjunto de dados provenientes do *feed* da cidade de São Paulo criado pela São Paulo Transporte (SPTrans)[^5] e baixado em outubro de 2019. O *feed* contém as seis tabelas obrigatórias e mais duas tabelas opcionais bastante utilizadas, a `shapes.txt` e a `frequencies.txt`, o que permite uma boa visão geral sobre o formato GTFS.
+Na demonstração que será feita aqui, utilizaremos um subconjunto de dados provenientes do *feed* da cidade de São Paulo criado pela São Paulo Transporte (SPTrans)[^sptrans] e baixado em outubro de 2019. O *feed* contém as seis tabelas obrigatórias e mais duas tabelas opcionais bastante utilizadas, a `shapes.txt` e a `frequencies.txt`, o que permite uma boa visão geral sobre o formato GTFS.
 
-[^5]: Disponível em <https://www.sptrans.com.br/desenvolvedores/>.
+[^sptrans]: Disponível em <https://www.sptrans.com.br/desenvolvedores/>.
 
 ```{r}
 #| echo: false
@@ -214,9 +214,9 @@ Outro elemento que influencia na forma como o `frequencies.txt` afeta as tabelas
 
 ## Onde encontrar dados GTFS de cidades brasileiras
 
-Os dados de GTFS de diversas cidades do mundo podem ser baixados com o pacote de R [`{tidytransit}`](https://r-transit.github.io/tidytransit/) ou no *site* [Transitland](https://www.transit.land/). No Brasil, diversas cidades usam dados GTFS no planejamento e operação de seus sistemas de transportes. Em muitos casos, no entanto, esses dados são de propriedade de empresas operadoras e concessionárias, e não do poder público. Infelizmente, esses arquivos raramente são disponibilizados aberta e publicamente, contrariando boas práticas de gestão e compartilhamento de dados de interesse público. A @tbl-gtfs_brasil mostra as fontes dos dados GTFS de algumas das poucas cidades do Brasil que disponibilizam seus *feeds* abertamente[^6].
+Os dados de GTFS de diversas cidades do mundo podem ser baixados com o pacote de R [`{tidytransit}`](https://r-transit.github.io/tidytransit/) ou no *site* [Transitland](https://www.transit.land/). No Brasil, diversas cidades usam dados GTFS no planejamento e operação de seus sistemas de transportes. Em muitos casos, no entanto, esses dados são de propriedade de empresas operadoras e concessionárias, e não do poder público. Infelizmente, esses arquivos raramente são disponibilizados aberta e publicamente, contrariando boas práticas de gestão e compartilhamento de dados de interesse público. A @tbl-gtfs_brasil mostra as fontes dos dados GTFS de algumas das poucas cidades do Brasil que disponibilizam seus *feeds* abertamente[^book_publication].
 
-[^6]: Levantamento realizado até o momento da publicação do livro.
+[^book_publication]: Levantamento realizado até o momento da publicação do livro.
 
 ```{r}
 #| echo: false

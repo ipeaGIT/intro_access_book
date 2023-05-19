@@ -5,17 +5,17 @@ The GTFS format is an open and collaborative specification that aims to describe
 - The GTFS Schedule, or GTFS Static, which contains the planned schedule of public transport trips, information about their fares and spatial information about their itineraries; and
 - The GTFS Realtime, which is used to inform, in real-time, vehicle location information, alerts for possible delays, itinerary changes and events that may interfere with the planned schedule.
 
-Throughout this section, we will focus on **GTFS Schedule**, the most widely used GTFS format in accessibility analyses and by transport agencies[^1].
+Throughout this section, we will focus on **GTFS Schedule**, the most widely used GTFS format in accessibility analyses and by transport agencies[^realtime].
 
-[^1]: Please visit <https://gtfs.org/realtime/> for more information on GTFS Realtime.
+[^realtime]: Please visit <https://gtfs.org/realtime/> for more information on GTFS Realtime.
 
 Being an open and collaborative specification, the GTFS format attempts to enable several distinct uses that transport agencies and tool developers might find for it. However, agencies and applications may still depend on information that is not included in the official specification. As a result, different specification [extensions](https://gtfs.org/extensions/) have been created, and some of them may eventually be incorporated into the official specification if this is agreed upon by the GTFS community. In this section, we will focus on a subset of information available in the basic GTFS Schedule format, thus not covering its extensions.
 
 ## GTFS structure
 
-Files in the GTFS Schedule format (from this point onwards referred to as GTFS) are also known as feeds[^2]. A feed is nothing more than a compressed `.zip` file that contains a set of tables, saved in separate `.txt` files, describing some aspects of the public transport network (stops/stations location, trip frequency, itineraries paths, etc). Just like in a relational database, tables in a feed have key columns that allow one to link information described in one table to the data described in another one. An example of the GTFS scheme is presented in @fig-scheme, which shows some of the the most important tables that make up the specification and highlights the key columns that link the tables together.
+Files in the GTFS Schedule format (from this point onwards referred to as GTFS) are also known as feeds[^synonyms]. A feed is nothing more than a compressed `.zip` file that contains a set of tables, saved in separate `.txt` files, describing some aspects of the public transport network (stops/stations location, trip frequency, itineraries paths, etc). Just like in a relational database, tables in a feed have key columns that allow one to link information described in one table to the data described in another one. An example of the GTFS scheme is presented in @fig-scheme, which shows some of the the most important tables that make up the specification and highlights the key columns that link the tables together.
 
-[^2]: In this book, we will use the terms feed, GTFS file and GTFS data as synonyms.
+[^synonyms]: In this book, we will use the terms feed, GTFS file and GTFS data as synonyms.
 
 ```{r}
 #| echo: false
@@ -25,20 +25,20 @@ Files in the GTFS Schedule format (from this point onwards referred to as GTFS) 
 knitr::include_graphics("images/gtfs_scheme.png")
 ```
 
-In total, the GTFS format can be made of up to 22 tables[^3]. Some of them, however, are optional, meaning that they don't need to be present for the feed to be considered valid. The specification classifies the presence of a table into the following categories: required, optional and conditionally required (when the requirement of the table depends on the existence of another particular table, column or value). For simplicity, we will consider only the first two categories in this book and will indicate whether a table is required whenever appropriate. Using our simplified convention, tables are classified as follows:
+In total, the GTFS format can be made of up to 22 tables[^spec_ref]. Some of them, however, are optional, meaning that they don't need to be present for the feed to be considered valid. The specification classifies the presence of a table into the following categories: required, optional and conditionally required (when the requirement of the table depends on the existence of another particular table, column or value). For simplicity, we will consider only the first two categories in this book and will indicate whether a table is required whenever appropriate. Using our simplified convention, tables are classified as follows:
 
-[^3]: According to the [official specification](https://gtfs.org/schedule/reference/) as of May 9th 2022.
+[^spec_ref]: According to the [official specification](https://gtfs.org/schedule/reference/) as of May 9th 2022.
 
 - **Required**: `agency.txt`; `stops.txt`; `routes.txt`; `trips.txt`; `stop_times.txt`; `calendar.txt`; and
 - **Optional**: `calendar_dates.txt`: `fare_attributes.txt`; `fare_rules.txt`; `fare_products.txt`; `fare_leg_rules.txt`; `fare_transfer_rules.txt`; `areas.txt`; `stop_areas.txt`; `shapes.txt`; `frequencies.txt`; `transfers.txt`; `pathways.txt`; `levels.txt`; `translations.txt`; `feed_info.txt`; `attributions.txt`.
 
-Throughout this chapter, we will learn about the basic structure of a GTFS file and its tables. We will focus only on the required tables and the optional tables most often used by producers and consumers of these files[^4].
+Throughout this chapter, we will learn about the basic structure of a GTFS file and its tables. We will focus only on the required tables and the optional tables most often used by producers and consumers of these files[^spec_more_info].
 
-[^4]: For more information on the tables and columns not covered in this section, please check the [official specification](https://gtfs.org/schedule/reference/).
+[^spec_more_info]: For more information on the tables and columns not covered in this section, please check the [official specification](https://gtfs.org/schedule/reference/).
 
-In this demonstration, we use a subset of a feed describing the public transport network of São Paulo, Brazil, produced by São Paulo Transporte (SPTrans)[^5] and downloaded in October 2019. The feed contains the six required tables plus two widely used optional tables, `shapes.txt` and `frequencies.txt`, which gives a good overview of the GTFS format.
+In this demonstration, we use a subset of a feed describing the public transport network of São Paulo, Brazil, produced by São Paulo Transporte (SPTrans)[^sptrans] and downloaded in October 2019. The feed contains the six required tables plus two widely used optional tables, `shapes.txt` and `frequencies.txt`, which gives a good overview of the GTFS format.
 
-[^5]: Available at <https://www.sptrans.com.br/desenvolvedores/>.
+[^sptrans]: Available at <https://www.sptrans.com.br/desenvolvedores/>.
 
 ```{r}
 #| echo: false
@@ -211,9 +211,9 @@ Another variable that changes how `frequencies.txt` affects the timetables in `s
 
 ## Finding GTFS data for Brazilian cities
 
-GTFS data from cities all over the world can be downloaded with the [`{tidytransit}`](https://r-transit.github.io/tidytransit/) R package or on the [Transitland](https://www.transit.land/) website. In Brazil, several cities use GTFS data to plan and operate their transport systems. In many cases, however, the data is owned by private companies and operators and is not publicly available. As a result, GTFS data in Brazil is seldom openly available, which goes against the public interest and against good practices of data management and governance. @tbl-gtfs_brazil lists some of the few Brazilian cities that make their GTFS feeds openly available to the public[^6].
+GTFS data from cities all over the world can be downloaded with the [`{tidytransit}`](https://r-transit.github.io/tidytransit/) R package or on the [Transitland](https://www.transit.land/) website. In Brazil, several cities use GTFS data to plan and operate their transport systems. In many cases, however, the data is owned by private companies and operators and is not publicly available. As a result, GTFS data in Brazil is seldom openly available, which goes against the public interest and against good practices of data management and governance. @tbl-gtfs_brazil lists some of the few Brazilian cities that make their GTFS feeds openly available to the public[^book_publication].
 
-[^6]: As of the publication date of this book.
+[^book_publication]: As of the publication date of this book.
 
 ```{r}
 #| echo: false

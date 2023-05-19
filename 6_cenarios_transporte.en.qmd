@@ -32,12 +32,12 @@ knitr::include_graphics("images/fortaleza_2.png")
 ```
 
 ::: {.callout-important appearance="simple"}
-It's important to note that East Line's implementation will also be followed by changes to the frequency of subway's South and West lines and of Parangaba-Mucuripe light rail, in addition to cuts and adjustments on the municipal bus system, as detailed in Fortaleza's Sustainable Accessibility Plan (Pasfor)[^1]. For didactic purposes, however, the bus system changes were not incorporated into our analyses in this book. Therefore, the case study showcased in this chapter looks at simplified scenarios, in which only East Line's implementation and the changes to other subway and light rail corridors are considered[^2].
+It's important to note that East Line's implementation will also be followed by changes to the frequency of subway's South and West lines and of Parangaba-Mucuripe light rail, in addition to cuts and adjustments on the municipal bus system, as detailed in Fortaleza's Sustainable Accessibility Plan (Pasfor)[^pasfor]. For didactic purposes, however, the bus system changes were not incorporated into our analyses in this book. Therefore, the case study showcased in this chapter looks at simplified scenarios, in which only East Line's implementation and the changes to other subway and light rail corridors are considered[^bragaetal].
 :::
 
-[^1]: Available at <https://www.pasfor.com.br/>.
+[^pasfor]: Available at <https://www.pasfor.com.br/>.
 
-[^2]: For a more complete assessment that considers all the changes foreseen in Pasfor, please check @braga2022impactos (in Portuguese).
+[^bragaetal]: For a more complete assessment that considers all the changes foreseen in Pasfor, please check @braga2022impactos (in Portuguese).
 
 @fig-fortaleza_3 shows that Fortaleza's population is mainly distributed in the central and western parts of the city, although some relatively high density neighborhoods can also be seen in the southeastern region. Generally, wealthier groups (shown in blue in the income decile distribution map) tend to reside in the expanded city center, extending towards the southeast, while low-income groups (in red) are mainly located in the western and southern peripheries. Most of the formal jobs are distributed along key avenues, with higher concentrations in the city center. In contrast, public highschools are more equally distributed throughout the city.
 
@@ -298,9 +298,9 @@ data.table::setDT(frequencies)
 filtered_gtfs$frequencies <- frequencies
 ```
 
-To keep things simple in this case study, we assume that these headways are valid between 6am and 9am. This assumption works in our case because we are only going to calculate the travel time matrix during the morning peak. If we wanted to calculate travel times in other periods of the day or to use this GTFS to examine operation of these corridors throughout the day, however, we would have to list the headways for the rest of the day as well. The value `1` in the `exact_times` column determines that the trips' timetables during the specified period must follow the headway exactly, not approximately[^3].
+To keep things simple in this case study, we assume that these headways are valid between 6am and 9am. This assumption works in our case because we are only going to calculate the travel time matrix during the morning peak. If we wanted to calculate travel times in other periods of the day or to use this GTFS to examine operation of these corridors throughout the day, however, we would have to list the headways for the rest of the day as well. The value `1` in the `exact_times` column determines that the trips' timetables during the specified period must follow the headway exactly, not approximately[^frequencies_chap4].
 
-[^3]: For more details, please refer to the `frequencies` table description in [Chapter 4](4_dados_gtfs.en.qmd#frequencies.txt).
+[^frequencies_chap4]: For more details, please refer to the `frequencies` table description in [Chapter 4](4_dados_gtfs.en.qmd#frequencies.txt).
 
 The GTFS object that results from the modifications done up until this stage can already be used to calculate travel time matrices. However, in order to restore the original feed's characteristic of not having a `frequencies` table, we "convert" this table's entries into timetables described in `stop_times`. To do so, we use the `frequencies_to_stop_times()` function. Since all trips in the feed are converted, the `frequencies` table is removed from the GTFS object.
 
@@ -527,9 +527,9 @@ r5r_core_before <- setup_r5(before_dir, verbose = FALSE)
 r5r_core_after <- setup_r5(after_dir, verbose = FALSE)
 ```
 
-Having built the transport networks, we can now proceed to the actual travel time matrices calculation. In this step, we are going to use the centroids of a hexagonal grid covering Fortaleza as our origins and destinations. We are going to use the hexagonal grid made available by `{aopdata}`[^4]. Each grid hexagon covers an area of 0.11 km², similar to a city block, which produces results at a fine spatial resolution.
+Having built the transport networks, we can now proceed to the actual travel time matrices calculation. In this step, we are going to use the centroids of a hexagonal grid covering Fortaleza as our origins and destinations. We are going to use the hexagonal grid made available by `{aopdata}`[^aopdata_info]. Each grid hexagon covers an area of 0.11 km², similar to a city block, which produces results at a fine spatial resolution.
 
-[^4]:  For more details on the package, please refer to [Section 5](s5_dados_aop.en.qmd).
+[^aopdata_info]:  For more details on the package, please refer to [Section 5](s5_dados_aop.en.qmd).
 
 For a proper comparison between both scenarios, we need to calculate the two travel matrices using the same parameters. We consider trips by foot or by public transport, allow walking trips of at most 30 minutes to access or egress from public transport stops and limit the maximum trip duration to 60 minutes. We also consider a departure time of 7am, during the morning peak of a typical monday:
 

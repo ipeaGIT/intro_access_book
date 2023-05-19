@@ -4,9 +4,9 @@
 
 A primeira etapa necessária para estimar os níveis de acessibilidade de uma área de estudo é calcular a matriz de custo de viagem entre as diversas origens e destinos que a compõem. Como comentado anteriormente, na literatura científica e na prática do planejamento de sistemas de transporte esse custo é mais frequentemente representado pelo tempo de viagem que separa dois pontos [@el-geneidy2016cost; @venter2016assessing], embora trabalhos recentes tenham considerado também outros fatores, como o dinheiro necessário para realizar uma viagem e o nível de conforto da viagem entre um ponto e outro [@arbex2020estimating; @herszenhut2022impact]. Neste livro, iremos nos focar em matrizes de tempo de viagem por serem as mais utilizadas na literatura e na prática, mas iremos cobrir outros tipos de custos num futuro livro sobre análise avançada de acessibilidade em R.
 
-Atualmente, a forma mais fácil e rápida de gerar uma matriz de tempo de viagem em R é utilizando o pacote `{r5r}` [@pereira2021r5r], desenvolvido pela equipe do Projeto Acesso a Oportunidades, do Instituto de Pesquisa Econômica Aplicada (Ipea). O pacote utiliza, por trás dos panos, o *software* de roteamento de transporte multimodal R5, desenvolvido pela Conveyal[^1].
+Atualmente, a forma mais fácil e rápida de gerar uma matriz de tempo de viagem em R é utilizando o pacote `{r5r}` [@pereira2021r5r], desenvolvido pela equipe do Projeto Acesso a Oportunidades, do Instituto de Pesquisa Econômica Aplicada (Ipea). O pacote utiliza, por trás dos panos, o *software* de roteamento de transporte multimodal R5, desenvolvido pela Conveyal[^conveyal].
 
-[^1]: Disponível em <https://github.com/conveyal/r5>.
+[^conveyal]: Disponível em <https://github.com/conveyal/r5>.
 
 ### Instalação do `{r5r}`
 
@@ -17,9 +17,9 @@ A instalação do `{r5r}` funciona como a instalação de qualquer pacote de R (
 install.packages("r5r")
 ```
 
-Além do R, o pacote `{r5r}` requer também a instalação do Java 11[^2]. Use o comando a seguir para checar a versão do Java instalada em seu computador.
+Além do R, o pacote `{r5r}` requer também a instalação do Java 11[^java11]. Use o comando a seguir para checar a versão do Java instalada em seu computador.
 
-[^2]: O Java 11 pode ser baixado em <https://www.oracle.com/java/technologies/downloads/#java11> ou em <https://jdk.java.net/java-se-ri/11>.
+[^java11]: O Java 11 pode ser baixado em <https://www.oracle.com/java/technologies/downloads/#java11> ou em <https://jdk.java.net/java-se-ri/11>.
 
 ```{r}
 cat(processx::run("java", args = "-version")$stderr)
@@ -117,9 +117,9 @@ conexao_r5r <- setup_r5(pasta, verbose = FALSE)
 fs::dir_tree(pasta)
 ```
 
-O passo final consiste em calcular a matriz de tempo de viagem com a função `travel_time_matrix()`. Como *inputs* básicos, a função recebe a conexão com o R5 criada no passo anterior, pontos de origem e destino em formato `data.frame` com as colunas `id`, `lon` e `lat`, o modo de transporte a ser utilizado, o horário de partida, o tempo máximo de caminhada permitido da origem até o embarque no transporte público e do desembarque até o destino e o tempo máximo de viagem a ser considerado. Diversos outros *inputs* também podem ser usados, como a velocidade de caminhada e o número máximo de pernas de transporte público permitido, entre outros[^3].
+O passo final consiste em calcular a matriz de tempo de viagem com a função `travel_time_matrix()`. Como *inputs* básicos, a função recebe a conexão com o R5 criada no passo anterior, pontos de origem e destino em formato `data.frame` com as colunas `id`, `lon` e `lat`, o modo de transporte a ser utilizado, o horário de partida, o tempo máximo de caminhada permitido da origem até o embarque no transporte público e do desembarque até o destino e o tempo máximo de viagem a ser considerado. Diversos outros *inputs* também podem ser usados, como a velocidade de caminhada e o número máximo de pernas de transporte público permitido, entre outros[^ttm_params].
 
-[^3]: Para mais informações sobre cada um dos parâmetros, consulte a documentação da função em uma sessão de R (com os comandos `?travel_time_matrix()` ou `help(“travel_time_matrix”)`) ou no site do `{r5r}`, [neste link](https://ipeagit.github.io/r5r/reference/travel_time_matrix.html).
+[^ttm_params]: Para mais informações sobre cada um dos parâmetros, consulte a documentação da função em uma sessão de R (com os comandos `?travel_time_matrix()` ou `help(“travel_time_matrix”)`) ou no site do `{r5r}`, [neste link](https://ipeagit.github.io/r5r/reference/travel_time_matrix.html).
 
 ```{r}
 pontos <- data.table::fread(file.path(pasta, "poa_hexgrid.csv"))
@@ -150,9 +150,9 @@ A função `travel_time_matrix()` utiliza uma extensão do algoritmo de roteamen
 
 ## Cálculo de acessibilidade {#sec-accessibility}
 
-Calculada a matriz de tempo de viagem entre as origens e os destinos da área de estudo, precisamos utilizá-la para calcular os níveis de acessibilidade do local. Para isso, utilizaremos o pacote `{accessibility}`[^4], também desenvolvido pela equipe do Projeto Acesso a Oportunidades/Ipea, que disponibiliza funções para o cálculo de vários indicadores de acessibilidade. Como *input* básico, todas as funções requerem uma matriz de custo pré-calculada (no nosso caso, a matriz de tempo de viagem calculada na seção anterior) e dados de uso do solo, como o número de determinados tipos de oportunidades em cada célula da grade que cobre a área de estudo.
+Calculada a matriz de tempo de viagem entre as origens e os destinos da área de estudo, precisamos utilizá-la para calcular os níveis de acessibilidade do local. Para isso, utilizaremos o pacote `{accessibility}`[^access_package], também desenvolvido pela equipe do Projeto Acesso a Oportunidades/Ipea, que disponibiliza funções para o cálculo de vários indicadores de acessibilidade. Como *input* básico, todas as funções requerem uma matriz de custo pré-calculada (no nosso caso, a matriz de tempo de viagem calculada na seção anterior) e dados de uso do solo, como o número de determinados tipos de oportunidades em cada célula da grade que cobre a área de estudo.
 
-[^4]: Disponível em <https://github.com/ipeaGIT/accessibility>.
+[^access_package]: Disponível em <https://github.com/ipeaGIT/accessibility>.
 
 ### Medida de oportunidades cumulativas
 

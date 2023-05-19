@@ -28,9 +28,9 @@ We can see that each `data.table` within the GTFS object is named according to t
 head(gtfs$trips)
 ```
 
-Tables within a GTFS object can be easily manipulated using the `{dplyr}` or `{data.table}`  packages, for example. In this book, we opted to use the `{data.table}` syntax. This package offers several useful features, primarily for manipulating tables with a large number of records, such as updating columns by reference, very fast row subsets and efficient data aggregation[^1]. For example, we can use the code below to add 100 seconds to all the headways listed in the `frequencies` table and later reverse this change:
+Tables within a GTFS object can be easily manipulated using the `{dplyr}` or `{data.table}`  packages, for example. In this book, we opted to use the `{data.table}` syntax. This package offers several useful features, primarily for manipulating tables with a large number of records, such as updating columns by reference, very fast row subsets and efficient data aggregation[^datatable_info]. For example, we can use the code below to add 100 seconds to all the headways listed in the `frequencies` table and later reverse this change:
 
-[^1]: For more details on `{data.table}` usage and syntax, please check <https://rdatatable.gitlab.io/data.table/index.html>.
+[^datatable_info]: For more details on `{data.table}` usage and syntax, please check <https://rdatatable.gitlab.io/data.table/index.html>.
 
 ```{r}
 # saves original headways
@@ -337,9 +337,9 @@ ggplot() +
 
 Transport planners and researchers often want to assess the quality of the GTFS data they are producing or using in their analyses. Are feeds structured following the [best practices](https://github.com/MobilityData/GTFS_Schedule_Best-Practices) adopted by the larger GTFS community? Are tables and columns adequately formatted? Is the information described by the feed reasonable (trip speeds, stop locations, etc)? These are some of the questions that may arise when dealing with GTFS data.
 
-To answer these and other questions, `{gtfstools}` includes the `validate_gtfs()` function. This function works as a wrapper to MobilityData's [Canonical GTFS Validator](https://github.com/MobilityData/gtfs-validator), which requires Java version 11 or higher to run[^2].
+To answer these and other questions, `{gtfstools}` includes the `validate_gtfs()` function. This function works as a wrapper to MobilityData's [Canonical GTFS Validator](https://github.com/MobilityData/gtfs-validator), which requires Java version 11 or higher to run[^java11_chap3].
 
-[^2]: For more information on how to check the installed version of Java in your computer and on how to install the required version, please check [Chapter 3](3_calculating_access.en.qmd#r5r-installation).
+[^java11_chap3]: For more information on how to check the installed version of Java in your computer and on how to install the required version, please check [Chapter 3](3_calculating_access.en.qmd#r5r-installation).
 
 Using `validate_gtfs()` is very simple. First, we need to download the validator. To do this, we use the `download_validator()` function, included in the package, which receives the path to the directory where the validator should be saved to and the version of the validator that should be downloaded (defaults to the latest available). The function returns the path to the downloaded validator:
 
@@ -369,9 +369,9 @@ We can see that the validation process generates a few output files:
 - `report.html`, shown in @fig-report, which summarizes the validation result in a nicely formatted HTML page (only available with validator version 3.1.0 or higher);
 - `report.json`, which summarizes the same information, but in JSON format, which can be used to programatically parse and process the results;
 - `system_errors.json`, which summarizes eventual system errors that may have happened during the validation process and may compromise the results;
-- `validation_stderr.txt`, which lists informative messages sent by the validator tool, including a list of the tests conducted, eventual error messages, etc[^3].
+- `validation_stderr.txt`, which lists informative messages sent by the validator tool, including a list of the tests conducted, eventual error messages, etc[^validation_stderr].
 
-[^3]: Informative messages may also be listed in the `validation_stdout.txt` file. Whether messages are listed in this file or in `validation_stderr.txt` depends on the validator version.
+[^validation_stderr]: Informative messages may also be listed in the `validation_stdout.txt` file. Whether messages are listed in this file or in `validation_stderr.txt` depends on the validator version.
 
 ```{r}
 #| echo: false
@@ -383,9 +383,9 @@ knitr::include_graphics("images/validator_report.png")
 
 ## `{gtfstools}` workflow example: spatial visualization of headways
 
-We have shown in previous sections that `{gtfstools}` offers a large toolset to process and analyze GTFS files. The package, however, also includes many other functions that could not be shown in this book due to space constraints[^4].
+We have shown in previous sections that `{gtfstools}` offers a large toolset to process and analyze GTFS files. The package, however, also includes many other functions that could not be shown in this book due to space constraints[^gtfstools_ref].
 
-[^4]: The complete list of functions available in `{gtfstools}` can be checked at the [package website](https://ipeagit.github.io/gtfstools/reference/index.html).
+[^gtfstools_ref]: The complete list of functions available in `{gtfstools}` can be checked at the [package website](https://ipeagit.github.io/gtfstools/reference/index.html).
 
 In this final section of the chapter, we illustrate how to use the package to make more complex analyses. To do this, we present a workflow that combines various functions of `{gtfstools}` together to answer the following question: how are the times between vehicles operating the same route (the headways) spatially distributed in SPTrans' GTFS?
 

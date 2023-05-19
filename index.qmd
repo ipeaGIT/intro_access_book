@@ -68,9 +68,9 @@ knitr::kable(tbl, align = c("c", "l"))
 
 ## Reproduzindo o livro localmente
 
-Este livro foi escrito e publicado com o sistema de publicação [Quarto](https://quarto.org). Todo o código utilizado em seu preparo e na sua publicação pode ser encontrado [neste repositório](https://github.com/ipeaGIT/intro_access_book). Para reproduzir o livro localmente, você deve primeiro baixar o seu código-fonte. Isso pode ser feito com o *software* [git](https://git-scm.com/) ou manualmente[^1]. Caso o segundo método seja utilizado, é necessário também extrair o conteúdo do arquivo `.zip` baixado para uma nova pasta.
+Este livro foi escrito e publicado com o sistema de publicação [Quarto](https://quarto.org). Todo o código utilizado em seu preparo e na sua publicação pode ser encontrado [neste repositório](https://github.com/ipeaGIT/intro_access_book). Para reproduzir o livro localmente, você deve primeiro baixar o seu código-fonte. Isso pode ser feito com o *software* [git](https://git-scm.com/) ou manualmente[^download_link]. Caso o segundo método seja utilizado, é necessário também extrair o conteúdo do arquivo `.zip` baixado para uma nova pasta.
 
-[^1]: Para baixar o código-fonte manualmente, use o *link* a seguir: <https://github.com/ipeaGIT/intro_access_book/archive/refs/heads/main.zip>.
+[^download_link]: Para baixar o código-fonte manualmente, use o *link* a seguir: <https://github.com/ipeaGIT/intro_access_book/archive/refs/heads/main.zip>.
 
 A renderização do livro requer que o programa [Quarto](https://quarto.org/) esteja instalado. A reprodução dos seus capítulos, por sua vez, requer o uso do pacote de R [`{renv}`](https://rstudio.github.io/renv/index.html), que faz a gestão de dependências do livro.
 

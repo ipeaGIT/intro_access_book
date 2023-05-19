@@ -18,9 +18,9 @@ As metodologias utilizadas para gerar esses dados são apresentadas em detalhe e
 knitr::include_graphics("images/aop_data_scope.png")
 ```
 
-Os níveis de acessibilidade por transporte público foram estimados apenas para as cidades que disponibilizaram ao projeto dados GTFS de qualidade considerada aceitável. São elas: Belo Horizonte, Campinas, Curitiba, Fortaleza, Goiânia[^1], Porto Alegre, Recife, Rio de Janeiro e São Paulo. Ainda assim, algumas dessas cidades disponibilizaram *feeds* apenas para determinados anos ou compartilharam arquivos considerados não representativos do sistema de transporte público operado na prática, resultando na exclusão das estimativas dessas cidades para alguns anos. A @fig-geo_scope indica as cidades para as quais foram calculados os níveis de acessibilidade por modo de transporte.
+Os níveis de acessibilidade por transporte público foram estimados apenas para as cidades que disponibilizaram ao projeto dados GTFS de qualidade considerada aceitável. São elas: Belo Horizonte, Campinas, Curitiba, Fortaleza, Goiânia[^goiania], Porto Alegre, Recife, Rio de Janeiro e São Paulo. Ainda assim, algumas dessas cidades disponibilizaram *feeds* apenas para determinados anos ou compartilharam arquivos considerados não representativos do sistema de transporte público operado na prática, resultando na exclusão das estimativas dessas cidades para alguns anos. A @fig-geo_scope indica as cidades para as quais foram calculados os níveis de acessibilidade por modo de transporte.
 
-[^1]: O GTFS de Goiânia descreve a rede de transporte público não apenas do município, mas de toda a sua região metropolitana.
+[^goiania]: O GTFS de Goiânia descreve a rede de transporte público não apenas do município, mas de toda a sua região metropolitana.
 
 ```{r}
 #| echo: false

@@ -28,9 +28,9 @@ Como podemos ver, cada `data.table` dentro do objeto GTFS é nomeado de acordo c
 head(gtfs$trips)
 ```
 
-As tabelas dentro de um objeto GTFS podem ser facilmente manipuladas usando a sintaxe dos pacotes `{dplyr}` ou `{data.table}`. Neste livro, optamos por utilizar a sintaxe do `{data.table}`, pois esse pacote oferece diversas funcionalidades úteis para a manipulação de tabelas com grande quantidade de registros, tal como a edição de colunas por referência, filtros de linhas muito rápidos e agregação de dados eficiente[^1]. Para adicionar 100 segundos a todos os *headways* listados na tabela `frequencies` e reverter essa mudança em seguida, por exemplo, podemos usar o código a seguir:
+As tabelas dentro de um objeto GTFS podem ser facilmente manipuladas usando a sintaxe dos pacotes `{dplyr}` ou `{data.table}`. Neste livro, optamos por utilizar a sintaxe do `{data.table}`, pois esse pacote oferece diversas funcionalidades úteis para a manipulação de tabelas com grande quantidade de registros, tal como a edição de colunas por referência, filtros de linhas muito rápidos e agregação de dados eficiente[^datatable_info]. Para adicionar 100 segundos a todos os *headways* listados na tabela `frequencies` e reverter essa mudança em seguida, por exemplo, podemos usar o código a seguir:
 
-[^1]: Mais detalhes sobre o uso e a sintaxe do `{data.table}` podem ser lidos em <https://rdatatable.gitlab.io/data.table/index.html>.
+[^datatable_info]: Mais detalhes sobre o uso e a sintaxe do `{data.table}` podem ser lidos em <https://rdatatable.gitlab.io/data.table/index.html>.
 
 ```{r}
 # salva o headway original
@@ -339,9 +339,9 @@ ggplot() +
 
 Planejadores e pesquisadores frequentemente querem avaliar a qualidade dos arquivos GTFS que estão utilizando em suas análises ou que estão produzindo. Os *feeds* estão estruturados conforme [boas práticas](https://github.com/MobilityData/GTFS_Schedule_Best-Practices) adotadas pela comunidade que usa a especificação? As tabelas e colunas estão formatadas corretamente? A informação descrita pelo *feed* parece verossímil (velocidade das viagens, localização das paradas etc)? Essas são algumas das perguntas que podem surgir ao lidar com dados no formato GTFS.
 
-Para responder a essas e outras perguntas, o `{gtfstools}` inclui a função `validate_gtfs()`, que serve como interface entre o R e o [Canonical GTFS Validator](https://github.com/MobilityData/gtfs-validator), *software* desenvolvido pela MobilityData. O uso do validador requer que o Java versão 11 ou superior esteja instalado[^2].
+Para responder a essas e outras perguntas, o `{gtfstools}` inclui a função `validate_gtfs()`, que serve como interface entre o R e o [Canonical GTFS Validator](https://github.com/MobilityData/gtfs-validator), *software* desenvolvido pela MobilityData. O uso do validador requer que o Java versão 11 ou superior esteja instalado[^java11_chap3].
 
-[^2]: Para informações de como checar a versão do Java instalado em seu computador e como instalar a versão correta, caso necessário, veja o [Capítulo 3](3_calculando_acesso.qmd#instalação-do-r5r).
+[^java11_chap3]: Para informações de como checar a versão do Java instalado em seu computador e como instalar a versão correta, caso necessário, veja o [Capítulo 3](3_calculando_acesso.qmd#instalação-do-r5r).
 
 Usar a `validate_gtfs()` é muito simples. Primeiro, precisamos baixar o *software* de validação. Para isso, podemos usar a função `download_validator()`, também disponível no pacote, que recebe o endereço de uma pasta na qual o validador deve ser salvo e a versão do validador desejada (por padrão, a mais recente). Como resultado, a função retorna o endereço do arquivo baixado:
 
@@ -371,9 +371,9 @@ Como podemos ver, a validação gera alguns arquivos como resultado:
 - `report.html`, mostrado na @fig-report, que resume os resultados da validação em uma página HTML (apenas disponível quando utilizado o validador v3.1.0 ou superior);
 - `report.json`, que resume a mesma informação apresentada na página HTML, porém em formato JSON, que pode ser usado para processar e interpretar os resultados de forma programática;
 - `system_errors.json`, que apresenta eventuais erros de sistema que tenham ocorrido durante a validação e que podem comprometer os resultados; e
-- `validation_stderr.txt`, que lista mensagens informativas enviadas pelo validador, incluindo uma lista dos testes realizados, eventuais mensagens de erro etc[^3].
+- `validation_stderr.txt`, que lista mensagens informativas enviadas pelo validador, incluindo uma lista dos testes realizados, eventuais mensagens de erro etc[^validation_stderr].
 
-[^3]: Mensagens informativas podem também ser listadas no arquivo `validation_stdout.txt`. As mensagens listadas no `validation_stderr.txt` e no `validation_stdout.txt` dependem da versão do validador utilizada.
+[^validation_stderr]: Mensagens informativas podem também ser listadas no arquivo `validation_stdout.txt`. As mensagens listadas no `validation_stderr.txt` e no `validation_stdout.txt` dependem da versão do validador utilizada.
 
 ```{r}
 #| echo: false
@@ -385,9 +385,9 @@ knitr::include_graphics("images/validator_report.png")
 
 ## Fluxo de trabalho com o `{gtfstools}`: mapeando o *headway* das linhas
 
-Como mostrado nas seções anteriores, o `{gtfstools}` disponibiliza uma grande caixa de ferramentas que podem ser usadas no processamento e na análise de arquivos GTFS. O pacote, no entanto, oferece diversas outras funções que não puderam ser apresentadas neste livro, por limitação de espaço[^4]. 
+Como mostrado nas seções anteriores, o `{gtfstools}` disponibiliza uma grande caixa de ferramentas que podem ser usadas no processamento e na análise de arquivos GTFS. O pacote, no entanto, oferece diversas outras funções que não puderam ser apresentadas neste livro, por limitação de espaço[^gtfstools_ref]. 
 
-[^4]: A lista completa de funções disponíveis pode ser conferida no [site do pacote](https://ipeagit.github.io/gtfstools/reference/index.html).
+[^gtfstools_ref]: A lista completa de funções disponíveis pode ser conferida no [site do pacote](https://ipeagit.github.io/gtfstools/reference/index.html).
 
 A apresentação das funções feita até aqui tem um importante caráter demonstrativo, porém não mostra como elas podem ser usadas de forma conjunta na análise de um arquivo GTFS. A presente seção preenche essa lacuna, mostrando como o pacote pode ser usado, por exemplo, para responder a seguinte pergunta: como se distribuem espacialmente os tempos entre veículos de uma mesma linha (os *headways*) no GTFS da SPTrans?
 

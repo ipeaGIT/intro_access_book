@@ -32,12 +32,12 @@ knitr::include_graphics("images/fortaleza_2.png")
 ```
 
 ::: {.callout-important appearance="simple"}
-É importante notar que a implementação deste projeto também será acompanhada de mudanças nas frequências das linhas Sul e Oeste do metrô e no corredor de VLT Parangaba-Mucuripe, além do racionamento do sistema de ônibus municipais, conforme o Plano de Acessibilidade Sustentável de Fortaleza (Pasfor)[^1]. Para fins didáticos, no entanto, não incorporamos as mudanças relativas ao racionamento do sistema de ônibus aos cenários da nossa análise. Portanto, o estudo de caso que apresentamos aqui representa um cenário simplificado, que considera apenas a implementação da linha Leste e as mudanças nas frequências das demais linhas do metrô e do VLT[^2].
+É importante notar que a implementação deste projeto também será acompanhada de mudanças nas frequências das linhas Sul e Oeste do metrô e no corredor de VLT Parangaba-Mucuripe, além do racionamento do sistema de ônibus municipais, conforme o Plano de Acessibilidade Sustentável de Fortaleza (Pasfor)[^pasfor]. Para fins didáticos, no entanto, não incorporamos as mudanças relativas ao racionamento do sistema de ônibus aos cenários da nossa análise. Portanto, o estudo de caso que apresentamos aqui representa um cenário simplificado, que considera apenas a implementação da linha Leste e as mudanças nas frequências das demais linhas do metrô e do VLT[^bragaetal].
 :::
 
-[^1]: Disponível em <https://www.pasfor.com.br/>.
+[^pasfor]: Disponível em <https://www.pasfor.com.br/>.
 
-[^2]: Uma avaliação mais completa, que leva em consideração todas as mudanças previstas no Pasfor, pode ser encontrada em @braga2022impactos.
+[^bragaetal]: Uma avaliação mais completa, que leva em consideração todas as mudanças previstas no Pasfor, pode ser encontrada em @braga2022impactos.
 
 Como mostra a @fig-fortaleza_3, a população de Fortaleza está majoritariamente distribuída na região central e na porção oeste da cidade, embora haja alguns pontos de alta densidade populacional no sudeste da cidade. Via de regra, a população de mais alta renda (em tons de azul no mapa da distribuição de decis de renda) está localizada na região do centro expandido e no sudeste do município, enquanto as populações de menor renda (em tons de vermelho) estão principalmente localizadas nas regiões periféricas ao sul e a oeste. Os empregos formais na cidade se distribuem principalmente ao longo de grandes avenidas, com maior concentração no centro da cidade. Em contraste, as escolas públicas de nível médio têm uma distribuição espacial mais equilibrada por todo o território.
 
@@ -307,9 +307,9 @@ data.table::setDT(frequencias)
 gtfs_filtrado$frequencies <- frequencias
 ```
 
-A fim de simplificar este estudo de caso, assumimos que os *headways* listados são válidos no período entre 6h e 9h. Essa premissa é válida no nosso caso, pois iremos calcular as matrizes de tempo de viagem apenas durante o pico da manhã. No entanto, caso desejássemos calcular os tempos de viagens em outros períodos do dia, ou mesmo utilizar este GTFS na operação do dia a dia desses corredores, precisaríamos listar os *headways* para os demais períodos do dia, como o fora-pico, a madrugada etc. O valor `1` da coluna `exact_times` estabelece que o cronograma das viagens durante o período especificado deve seguir o *headway* à risca, e não de forma aproximada[^3].
+A fim de simplificar este estudo de caso, assumimos que os *headways* listados são válidos no período entre 6h e 9h. Essa premissa é válida no nosso caso, pois iremos calcular as matrizes de tempo de viagem apenas durante o pico da manhã. No entanto, caso desejássemos calcular os tempos de viagens em outros períodos do dia, ou mesmo utilizar este GTFS na operação do dia a dia desses corredores, precisaríamos listar os *headways* para os demais períodos do dia, como o fora-pico, a madrugada etc. O valor `1` da coluna `exact_times` estabelece que o cronograma das viagens durante o período especificado deve seguir o *headway* à risca, e não de forma aproximada[^frequencies_chap4].
 
-[^3]: Para mais detalhes, ver a descrição da tabela `frequencies` no [Capítulo 4](4_dados_gtfs.qmd#frequencies.txt)).
+[^frequencies_chap4]: Para mais detalhes, ver a descrição da tabela `frequencies` no [Capítulo 4](4_dados_gtfs.qmd#frequencies.txt)).
 
 O objeto GTFS que resulta das modificações feitas até aqui já pode perfeitamente ser utilizado para o cálculo de matrizes de tempo de viagem. Buscando retomar a característica inicial do *feed* de não possuir uma tabela `frequencies`, no entanto, vamos "converter" os registros dessa tabela em cronogramas descritos na tabela `stop_times`. Para isso, usamos a função `frequencies_to_stop_times()`. Como todas as viagens do *feed* são convertidas, a tabela `frequencies` é removida do objeto.
 
@@ -543,9 +543,9 @@ con_r5r_antes <- setup_r5(pasta_antes, verbose = FALSE)
 con_r5r_depois <- setup_r5(pasta_depois, verbose = FALSE)
 ```
 
-Criadas as redes de transporte de cada cenário, prosseguimos para o cálculo das matrizes de tempo de viagem. Nesta etapa, vamos utilizar como origens e destinos os centroides de uma grade espacial de hexágonos de Fortaleza, disponibilizada pelo pacote `{aopdata}`[^4]. Cada hexágono tem uma área de 0,11 km², aproximadamente um quarteirão, o que permite uma análise espacial bem detalhada.
+Criadas as redes de transporte de cada cenário, prosseguimos para o cálculo das matrizes de tempo de viagem. Nesta etapa, vamos utilizar como origens e destinos os centroides de uma grade espacial de hexágonos de Fortaleza, disponibilizada pelo pacote `{aopdata}`[^aopdata_info]. Cada hexágono tem uma área de 0,11 km², aproximadamente um quarteirão, o que permite uma análise espacial bem detalhada.
 
-[^4]: Mais detalhes sobre o pacote são apresentados na [Seção 5](s5_dados_aop.qmd).
+[^aopdata_info]: Mais detalhes sobre o pacote são apresentados na [Seção 5](s5_dados_aop.qmd).
 
 Para comparar adequadamente os dois cenários, precisamos calcular as duas matrizes considerando os mesmos parâmetros de viagem. Aqui, vamos considerar viagens a pé ou por transporte público, permitir caminhadas de até 30 minutos nas pernas de acesso e egresso das paradas de transporte público e limitar o tempo máximo de viagem em até 60 minutos. Vamos considerar o horário de partida de 7h, durante o horário de pico de uma típica segunda-feira de operação:
 

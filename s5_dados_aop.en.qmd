@@ -18,9 +18,9 @@ The methods used to generate these datasets are presented in detail in two separ
 knitr::include_graphics("images/aop_data_scope.en.png")
 ```
 
-Accessibility estimates by public transport were calculated only for cities with good quality GTFS data, which include Belo Horizonte, Campinas, Curitiba, Fortaleza, Goiânia[^1], Porto Alegre, Recife, Rio de Janeiro and São Paulo. Still, in some cases the feeds of some of these cities were either only available for a few years or had quality issues, not being representative of the public transport operations they should be describing. In such cases, accessibility estimates by public transport were not calculated. @fig-geo_scope shows the cities included in the project and the transport modes considered in their accessibility estimates.
+Accessibility estimates by public transport were calculated only for cities with good quality GTFS data, which include Belo Horizonte, Campinas, Curitiba, Fortaleza, Goiânia[^goiania], Porto Alegre, Recife, Rio de Janeiro and São Paulo. Still, in some cases the feeds of some of these cities were either only available for a few years or had quality issues, not being representative of the public transport operations they should be describing. In such cases, accessibility estimates by public transport were not calculated. @fig-geo_scope shows the cities included in the project and the transport modes considered in their accessibility estimates.
 
-[^1]: Goiânia's GTFS covers not only the municipality, but its entire metropolitan region.
+[^goiania]: Goiânia's GTFS covers not only the municipality, but its entire metropolitan region.
 
 ```{r}
 #| echo: false
