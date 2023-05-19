@@ -32,7 +32,7 @@ render_portuguese_pdf <- function() {
     file.path(tmpdir, "_book", "Introdução-à-acessibilidade-urbana.pdf"),
     "pt_book.pdf"
   )
-  fs::dir_delete("pdf_pt_freeze")
+  if (fs::dir_exists("pdf_pt_freeze")) fs::dir_delete("pdf_pt_freeze")
   fs::file_move(file.path(tmpdir, "_freeze"), "pdf_pt_freeze")
 }
 
@@ -94,6 +94,6 @@ render_english_pdf <- function() {
     file.path(tmpdir, "_book", "Introduction-to-urban-accessibility.pdf"),
     "en_book.pdf"
   )
-  fs::dir_delete("pdf_en_freeze")
+  if (fs::dir_exists("pdf_en_freeze")) fs::dir_delete("pdf_en_freeze")
   fs::file_move(file.path(tmpdir, "_freeze"), "pdf_en_freeze")
 }

@@ -15,6 +15,7 @@ if (fs::dir_exists("en_book/en_freeze")) {
 # render pt book
 
 quarto::quarto_render(as_job = FALSE)
+if (fs::dir_exists("pt")) fs::dir_delete("pt")
 fs::file_move("_book", "pt")
 
 # change some yml fields before rendering english book
