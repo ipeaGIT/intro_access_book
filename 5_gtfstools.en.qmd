@@ -229,7 +229,7 @@ filtered_gtfs <- filter_by_weekday(
 filtered_gtfs$calendar[, c("service_id", "sunday", "saturday")]
 ```
 
-`filter_by_time_of_day()`, on the other hand, takes the beginning and the end of a time window and keeps (or drops) the entries related to the trips that run within this window. The behavior of this function depends on whether a `frequencies` table is included in the feed or not: the `stop_times` timetable of trips listed in `frequencies` must not be filtered, because, as [previously mentioned](4_gtfs_data.en.qmd#frequencies.txt), it works as a reference that describes the time between consecutive stops, and the departure and arrival times listed there should not be considered rigorously. If a trip is not listed in `frequencies`, however, its `stop_times` entries are filtered according to the specified time window. Let's see how the function works with some examples:
+`filter_by_time_of_day()`, on the other hand, takes the beginning and the end of a time window and keeps (or drops) the entries related to the trips that run within this window. The behavior of this function depends on whether a `frequencies` table is included in the feed or not: the `stop_times` timetable of trips listed in `frequencies` must not be filtered, because, as [previously mentioned](4_dados_gtfs.en.qmd#frequencies.txt), it works as a reference that describes the time between consecutive stops, and the departure and arrival times listed there should not be considered rigorously. If a trip is not listed in `frequencies`, however, its `stop_times` entries are filtered according to the specified time window. Let's see how the function works with some examples:
 
 ```{r}
 # keeps trips that run within the 5am to 6am window
@@ -339,7 +339,7 @@ Transport planners and researchers often want to assess the quality of the GTFS 
 
 To answer these and other questions, `{gtfstools}` includes the `validate_gtfs()` function. This function works as a wrapper to MobilityData's [Canonical GTFS Validator](https://github.com/MobilityData/gtfs-validator), which requires Java version 11 or higher to run[^java11_chap3].
 
-[^java11_chap3]: For more information on how to check the installed version of Java in your computer and on how to install the required version, please check [Chapter 3](3_calculating_access.en.qmd#r5r-installation).
+[^java11_chap3]: For more information on how to check the installed version of Java in your computer and on how to install the required version, please check [Chapter 3](3_calculando_acesso.en.qmd#installing-r5r).
 
 Using `validate_gtfs()` is very simple. First, we need to download the validator. To do this, we use the `download_validator()` function, included in the package, which receives the path to the directory where the validator should be saved to and the version of the validator that should be downloaded (defaults to the latest available). The function returns the path to the downloaded validator:
 

@@ -652,7 +652,7 @@ A key decision in any accessibility analysis is which accessibility measure to u
 
 - To calculate accessibility to public highschools, we use a minimum travel cost measure. This metric is particularly useful to assess the coverage of essential public services, such as basic health and education facilities. We can use this measure, for example, to identify population groups that are further from these opportunities than a time/distance limit deemed reasonable.
 
-As previously shown in [Chapter 3](3_calculando_accesso.en.qmd#sec-accessibility), we can calculate this measures using the `cumulative_cutoff()` and `cost_to_closest()` functions, respectively, from the `{accessibility}` package:
+As previously shown in [Chapter 3](3_calculando_acesso.en.qmd#sec-accessibility), we can calculate this measures using the `cumulative_cutoff()` and `cost_to_closest()` functions, respectively, from the `{accessibility}` package:
 
 ```{r}
 library(accessibility)

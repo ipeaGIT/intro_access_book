@@ -1,6 +1,6 @@
 # Calculating accessibility estimates in R
 
-## Calculating a travel time matrix
+## Calculating a travel time matrix {#sec-matrix}
 
 The first step to estimate the accessibility levels in a study area is to calculate the travel cost matrix between the various origins and destinations that make up this area. As previously mentioned, in the scientific literature and in transport planning practice this cost is generally represented by the travel time between two points [@el-geneidy2016cost; @venter2016assessing], although recent studies have also considered other factors, such as trip monetary costs and the comfort of a trip between origins and destinations [@arbex2020estimating; @herszenhut2022impact]. In this book, we will focus on travel time matrices as they are the most widely used in the literature and in practice, and we will cover other types of costs in a future book on advanced accessibility analysis in R.
 
@@ -149,7 +149,7 @@ In practice, `travel_time_matrix()` finds the fastest route from each origin to 
 The `travel_time_matrix()` function uses an extension of the RAPTOR routing algorithm [@conway2017evidencebased], making R5 extremely fast. Depending on the number of origin-destination pairs, `{r5r}` can calculate travel time matrices between 6 and 200 times faster than other multimodal routing softwares [@higgins2022calculating].
 :::
 
-## Calculating accessibility
+## Calculating accessibility {#sec-accessibility}
 
 Having calculated the travel time matrix between the origins and destinations, we need to use it to calculate accessibility levels in the study area. For this, we will use the `{accessibility}`[^access_package] package, also developed by the Access to Opportunities Project/Ipea team, which provides several functions to calculate many accessibility measures. As basic inputs, all functions require a pre-calculated cost matrix (in our case, the travel time matrix calculated in the previous section) and some land use data, such as the number of opportunities in each cell that covers the study area.
 
