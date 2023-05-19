@@ -398,14 +398,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>zip<span class="sc">::</span><span class="fu">zip_list</span>(export_path)[, <span class="fu">c</span>(<span class="st">"filename"</span>, <span class="st">"compressed_size"</span>, <span class="st">"timestamp"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         filename compressed_size           timestamp
-1      agency.txt             112 2023-05-10 20:32:24
-2    calendar.txt             129 2023-05-10 20:32:24
-3 frequencies.txt            2381 2023-05-10 20:32:24
-4      routes.txt             659 2023-05-10 20:32:24
-5      shapes.txt          160470 2023-05-10 20:32:24
-6  stop_times.txt            7907 2023-05-10 20:32:24
-7       stops.txt           18797 2023-05-10 20:32:24
-8       trips.txt             717 2023-05-10 20:32:24</code></pre>
+1      agency.txt             112 2023-05-19 15:29:06
+2    calendar.txt             129 2023-05-19 15:29:06
+3 frequencies.txt            2381 2023-05-19 15:29:06
+4      routes.txt             659 2023-05-19 15:29:06
+5      shapes.txt          160470 2023-05-19 15:29:06
+6  stop_times.txt            7907 2023-05-19 15:29:06
+7       stops.txt           18797 2023-05-19 15:29:06
+8       trips.txt             717 2023-05-19 15:29:06</code></pre>
 </div>
 </div>
 </section><section id="calculating-trip-speed" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="calculating-trip-speed">
@@ -729,7 +729,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 5:        _S_      0        1</code></pre>
 </div>
 </div>
-<p><code>filter_by_time_of_day()</code>, on the other hand, takes the beginning and the end of a time window and keeps (or drops) the entries related to the trips that run within this window. The behavior of this function depends on whether a <code>frequencies</code> table is included in the feed or not: the <code>stop_times</code> timetable of trips listed in <code>frequencies</code> must not be filtered, because, as <a href="4_gtfs_data.en.qmd#frequencies.txt">previously mentioned</a>, it works as a reference that describes the time between consecutive stops, and the departure and arrival times listed there should not be considered rigorously. If a trip is not listed in <code>frequencies</code>, however, its <code>stop_times</code> entries are filtered according to the specified time window. Let’s see how the function works with some examples:</p>
+<p><code>filter_by_time_of_day()</code>, on the other hand, takes the beginning and the end of a time window and keeps (or drops) the entries related to the trips that run within this window. The behavior of this function depends on whether a <code>frequencies</code> table is included in the feed or not: the <code>stop_times</code> timetable of trips listed in <code>frequencies</code> must not be filtered, because, as <a href="./4_dados_gtfs.en.html#frequencies.txt">previously mentioned</a>, it works as a reference that describes the time between consecutive stops, and the departure and arrival times listed there should not be considered rigorously. If a trip is not listed in <code>frequencies</code>, however, its <code>stop_times</code> entries are filtered according to the specified time window. Let’s see how the function works with some examples:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># keeps trips that run within the 5am to 6am window</span></span>
 <span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>filtered_gtfs <span class="ot">&lt;-</span> <span class="fu">filter_by_time_of_day</span>(gtfs, <span class="at">from =</span> <span class="st">"05:00:00"</span>, <span class="at">to =</span> <span class="st">"06:00:00"</span>)</span>
@@ -888,7 +888,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>validator_path <span class="ot">&lt;-</span> <span class="fu">download_validator</span>(tmpdir)</span>
 <span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>validator_path</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "/tmp/RtmpaWZtT7/gtfs-validator-v4.0.0.jar"</code></pre>
+<pre><code>[1] "/tmp/RtmpIregy3/gtfs-validator-v4.0.0.jar"</code></pre>
 </div>
 </div>
 <p>The second (and final) step consists in actually validating the GTFS data with <code>validate_gtfs()</code>. This function supports GTFS data in different formats: i) as a GTFS object in an R session; ii) as a path to a local GTFS file in <code>.zip</code> format; iii) as an URL pointing to a feed; or iv) as a directory containing unzipped GTFS tables. The function also takes a path to a directory where the validation result should be saved to and the path to the validator that should be used in the process. In the example below, we validate SPTrans’ feed from its path:</p>
@@ -1045,7 +1045,7 @@ Geodetic CRS:  WGS 84
 </section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
 <li id="fn1"><p>For more details on <code>{data.table}</code> usage and syntax, please check <a href="https://rdatatable.gitlab.io/data.table/index.html" class="uri">https://rdatatable.gitlab.io/data.table/index.html</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>For more information on how to check the installed version of Java in your computer and on how to install the required version, please check <a href="3_calculating_access.en.qmd#r5r-installation">Chapter 3</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>For more information on how to check the installed version of Java in your computer and on how to install the required version, please check <a href="./3_calculando_acesso.en.html#installing-r5r">Chapter 3</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>Informative messages may also be listed in the <code>validation_stdout.txt</code> file. Whether messages are listed in this file or in <code>validation_stderr.txt</code> depends on the validator version.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>The complete list of functions available in <code>{gtfstools}</code> can be checked at the <a href="https://ipeagit.github.io/gtfstools/reference/index.html">package website</a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">

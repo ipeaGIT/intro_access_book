@@ -306,7 +306,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
    
   <ul>
 <li>
-<a href="#calculating-a-travel-time-matrix" id="toc-calculating-a-travel-time-matrix" class="nav-link active" data-scroll-target="#calculating-a-travel-time-matrix"><span class="header-section-number">3.1</span> Calculating a travel time matrix</a>
+<a href="#sec-matrix" id="toc-sec-matrix" class="nav-link active" data-scroll-target="#sec-matrix"><span class="header-section-number">3.1</span> Calculating a travel time matrix</a>
   <ul class="collapse">
 <li><a href="#installing-r5r" id="toc-installing-r5r" class="nav-link" data-scroll-target="#installing-r5r"><span class="header-section-number">3.1.1</span> Installing <code>{r5r}</code></a></li>
   <li><a href="#required-data" id="toc-required-data" class="nav-link" data-scroll-target="#required-data"><span class="header-section-number">3.1.2</span> Required data</a></li>
@@ -314,7 +314,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </ul>
 </li>
   <li>
-<a href="#calculating-accessibility" id="toc-calculating-accessibility" class="nav-link" data-scroll-target="#calculating-accessibility"><span class="header-section-number">3.2</span> Calculating accessibility</a>
+<a href="#sec-accessibility" id="toc-sec-accessibility" class="nav-link" data-scroll-target="#sec-accessibility"><span class="header-section-number">3.2</span> Calculating accessibility</a>
   <ul class="collapse">
 <li><a href="#cumulative-opportunities-measure" id="toc-cumulative-opportunities-measure" class="nav-link" data-scroll-target="#cumulative-opportunities-measure"><span class="header-section-number">3.2.1</span> Cumulative opportunities measure</a></li>
   <li><a href="#minimum-travel-cost" id="toc-minimum-travel-cost" class="nav-link" data-scroll-target="#minimum-travel-cost"><span class="header-section-number">3.2.2</span> Minimum travel cost</a></li>
@@ -353,7 +353,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </div>
   
 
-</header><section id="calculating-a-travel-time-matrix" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="calculating-a-travel-time-matrix">
+</header><section id="sec-matrix" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="sec-matrix">
 <span class="header-section-number">3.1</span> Calculating a travel time matrix</h2>
 <p>The first step to estimate the accessibility levels in a study area is to calculate the travel cost matrix between the various origins and destinations that make up this area. As previously mentioned, in the scientific literature and in transport planning practice this cost is generally represented by the travel time between two points <span class="citation" data-cites="el-geneidy2016cost venter2016assessing">(<a href="references.en.html#ref-el-geneidy2016cost" role="doc-biblioref">El-Geneidy et al. 2016</a>; <a href="references.en.html#ref-venter2016assessing" role="doc-biblioref">Venter 2016</a>)</span>, although recent studies have also considered other factors, such as trip monetary costs and the comfort of a trip between origins and destinations <span class="citation" data-cites="arbex2020estimating herszenhut2022impact">(<a href="references.en.html#ref-arbex2020estimating" role="doc-biblioref">Arbex and Cunha 2020</a>; <a href="references.en.html#ref-herszenhut2022impact" role="doc-biblioref">Herszenhut et al. 2022</a>)</span>. In this book, we will focus on travel time matrices as they are the most widely used in the literature and in practice, and we will cover other types of costs in a future book on advanced accessibility analysis in R.</p>
 <p>Currently, the easiest and fastest way to generate a travel time matrix in R is using the <code>{r5r}</code> package <span class="citation" data-cites="pereira2021r5r">(<a href="references.en.html#ref-pereira2021r5r" role="doc-biblioref">Pereira et al. 2021</a>)</span>, developed by the Access to Opportunities Project team. The package provides a simple and friendly interface to the R5 multimodal transport routing engine, developed by Conveyal<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
@@ -428,7 +428,7 @@ OpenStreetMap data quality
 <p>These data sets should be saved in a single directory, which should preferably not contain any other files. As we will see below, <code>{r5r}</code> combines all the data saved in this directory to create a multimodal transport network that is used for routing trips between origin-destination pairs and, consequently, for calculating travel time matrices. Please note that you can have more than one GTFS file in the same directory, in which case <code>{r5r}</code> considers the public transport networks of all feeds together. The street network and the topography of the study area, however, must be each one described by a single file. Assuming that R scripts are saved in a directory called <code>R</code>, a possible file structure is shown below:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>/tmp/Rtmp0aFSRS/accessibility_project
+<pre><code>/tmp/RtmptlafpL/accessibility_project
 ├── R
 │   ├── script1.R
 │   └── script2.R
@@ -538,7 +538,7 @@ OpenStreetMap data quality
 </div>
 </div>
 </div>
-</section></section><section id="calculating-accessibility" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="calculating-accessibility">
+</section></section><section id="sec-accessibility" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="sec-accessibility">
 <span class="header-section-number">3.2</span> Calculating accessibility</h2>
 <p>Having calculated the travel time matrix between the origins and destinations, we need to use it to calculate accessibility levels in the study area. For this, we will use the <code>{accessibility}</code><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> package, also developed by the Access to Opportunities Project/Ipea team, which provides several functions to calculate many accessibility measures. As basic inputs, all functions require a pre-calculated cost matrix (in our case, the travel time matrix calculated in the previous section) and some land use data, such as the number of opportunities in each cell that covers the study area.</p>
 <section id="cumulative-opportunities-measure" class="level3" data-number="3.2.1"><h3 data-number="3.2.1" class="anchored" data-anchor-id="cumulative-opportunities-measure">
