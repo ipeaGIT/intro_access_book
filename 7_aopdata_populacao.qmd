@@ -1,6 +1,6 @@
 #  Dados de população e socioeconômicos
 
-Os dados de distribuição espacial da população e de suas características em termos de renda *per capita*, cor, sexo e idade, provenientes do Censo 2010 e agregadas pelo projeto Acesso a Oportunidades, podem ser baixados com a função `read_population()`. A função requer que um valor seja passado para o parâmetro `city`, utilizado para indicar a cidade cujos dados devem ser baixados. Para baixar os dados com as informações espaciais de cada célula da grade, o parâmetro `geometry` deve receber o valor `TRUE` (por padrão, esse valor é `FALSE`, fazendo com que a geometria das células não seja baixada).
+Os dados de distribuição espacial da população e de suas características em termos de renda *per capita*, cor, sexo e idade, provenientes do Censo 2010 e agregados pelo projeto AOP, podem ser baixados com a função `read_population()`. A função requer que um valor seja passado para o parâmetro `city`, utilizado para indicar a cidade cujos dados devem ser baixados. Para baixar os dados com as informações espaciais de cada célula da grade, o parâmetro `geometry` deve receber o valor `TRUE` (por padrão, esse valor é `FALSE`, fazendo com que a geometria das células não seja baixada).
 
 No exemplo a seguir, mostramos como baixar os dados populacionais e socioeconômicos de Fortaleza:
 
@@ -29,40 +29,40 @@ A @tbl-population_dictionary apresenta a descrição de cada uma das colunas da 
 #| label: tbl-population_dictionary
 #| tbl-cap: Descrição das colunas da tabela de dados populacionais e socioeconômicos
 tbl <- tibble::tribble(
-  ~Coluna,  		 ~Descrição,                        			      ~Observação,
-  "year",   		 "Ano de referência",               			      "",
-  "id_hex", 		 "Identificador único do hexágono", 			      "",
-  "abbrev_muni", "Sigla de três letras do município",  		    	"",
-  "name_muni",   "Nome do município",               			      "",
+  ~Coluna,       ~Descrição,                                    ~Observação,
+  "year",        "Ano de referência",                           "",
+  "id_hex",      "Identificador único do hexágono",             "",
+  "abbrev_muni", "Sigla de três letras do município",           "",
+  "name_muni",   "Nome do município",                           "",
   "code_muni",   "Código de sete dígitos do IBGE do município", "",
-  "P001",   		 "Quantidade total de pessoas",     			      "",
-  "P002",   		 "Quantidade de pessoas brancas",   			      "",
-  "P003",   		 "Quantidade de pessoas negras",    			      "",
-  "P004",   		 "Quantidade de pessoas indígenas", 			      "",
-  "P005",   		 "Quantidade de pessoas de cor amarela",    	  "",
-  "P006",   		 "Quantidade de homens",            			      "",
-  "P007",   		 "Quantidade de mulheres",          			      "",
-  "P010",   		 "Quantidade de pessoas de 0 a 5 anos", 		    "",
-  "P011",   		 "Quantidade de pessoas de 6 a 14 anos",    	  "",
-  "P012",   		 "Quantidade de pessoas de 15 a 18 anos",   	  "",
-  "P013",   		 "Quantidade de pessoas de 19 a 24 anos",   	  "",
-  "P014",   		 "Quantidade de pessoas de 25 a 39 anos",   	  "",
-  "P015",   		 "Quantidade de pessoas de 40 a 69 anos",   	  "",
-  "P016",   		 "Quantidade de pessoas de 70 anos ou mais",    "",
-  "R001",   		 "Renda *per capita* média",                    "Valores de 2010 (em R$)",
-  "R002",   		 "Quintil de renda",                			      "Valores de 1 (mais pobres) a 5 (mais ricos)",
-  "R003",    	   "Decil de renda",                  			      "Valores de 1 (mais pobres) a 10 (mais ricos)",
-  "geometry",    "Geometria espacial",              			      ""
+  "P001",        "Quantidade total de pessoas",                 "",
+  "P002",        "Quantidade de pessoas brancas",               "",
+  "P003",        "Quantidade de pessoas negras",                "",
+  "P004",        "Quantidade de pessoas indígenas",             "",
+  "P005",        "Quantidade de pessoas de cor amarela",        "",
+  "P006",        "Quantidade de homens",                        "",
+  "P007",        "Quantidade de mulheres",                      "",
+  "P010",        "Quantidade de pessoas de 0 a 5 anos",         "",
+  "P011",        "Quantidade de pessoas de 6 a 14 anos",        "",
+  "P012",        "Quantidade de pessoas de 15 a 18 anos",       "",
+  "P013",        "Quantidade de pessoas de 19 a 24 anos",       "",
+  "P014",        "Quantidade de pessoas de 25 a 39 anos",       "",
+  "P015",        "Quantidade de pessoas de 40 a 69 anos",       "",
+  "P016",        "Quantidade de pessoas de 70 anos ou mais",    "",
+  "R001",        "Renda *per capita* média",                    "Valores de 2010 (em R$)",
+  "R002",        "Quintil de renda",                            "Valores de 1 (mais pobres) a 5 (mais ricos)",
+  "R003",        "Decil de renda",                              "Valores de 1 (mais pobres) a 10 (mais ricos)",
+  "geometry",    "Geometria espacial",                          ""
 )
 
 knitr::kable(tbl)
 ```
 
-As seções a seguir mostram exemplos de visualizações desses dados em forma de mapas.
+As subseções a seguir mostram exemplos de visualizações desses dados em forma de mapas.
 
 ## Mapa de população total
 
-No código a seguir, carregamos bibliotecas de visualização de dados e configuramos o mapa. Com um comando, podemos visualizar a distribuição espacial da população de Fortaleza. A figura mostra um mapa coroplético no qual a cor de cada célula da grade espacial é preenchida com base na quantidade total de pessoas que ali residem (variável `P001`).
+No código a seguir, carregamos bibliotecas de visualização de dados e configuramos o mapa. Com um comando, podemos visualizar a distribuição espacial da população de Fortaleza. A @fig-pop_dist mostra um mapa coroplético no qual a cor de cada célula da grade espacial é preenchida com base na quantidade total de pessoas que ali residem (variável `P001`).
 
 ```{r}
 #| message: false
@@ -75,11 +75,7 @@ library(ggplot2)
 ggplot(subset(dados_fortaleza, P001 > 0)) +
   geom_sf(aes(fill = P001), color = NA, alpha = 0.8) +
   scale_fill_distiller(palette = "YlOrRd", direction = 1) +
-  labs(
-    title = "Distribuição populacional",
-    subtitle = "Fortaleza",
-    fill = "Contagem populacional"
-  ) +
+  labs(fill = "Contagem\npopulacional") +
   theme_void()
 ```
 
@@ -93,23 +89,25 @@ Além da informação sobre a população total em cada célula, os dados també
 pop_negra <- ggplot(subset(dados_fortaleza, P001 > 0)) +
   geom_sf(aes(fill = P003 / P001), color = NA, alpha = 0.8) +
   scale_fill_distiller(
+    name = NULL,
     palette = "RdPu",
     direction = 1,
     labels = scales::percent,
     limits = c(0, 1)
   ) +
-  labs(title = "Proporção de pessoas negras", fill = "Pop. negra") +
+  labs(title = "Proporção de pessoas negras") +
   theme_void()
 
 pop_branca <- ggplot(subset(dados_fortaleza, P001 > 0)) +
   geom_sf(aes(fill = P002 / P001), color = NA, alpha = 0.8) +
   scale_fill_distiller(
+    name = NULL,
     palette = "YlGnBu",
     direction = 1,
     labels = scales::percent,
     limits = c(0, 1)
   ) +
-  labs(title = "Proporção de pessoas brancas", fill = "Pop. branca") +
+  labs(title = "Proporção de pessoas brancas") +
   theme_void()
 
 pop_negra + pop_branca
@@ -124,17 +122,14 @@ Por fim, os dados também trazem informações sobre a renda *per capita* média
 #| fig-cap: Distribuição de renda em Fortaleza
 renda <- ggplot(subset(dados_fortaleza, P001 > 0)) +
   geom_sf(aes(fill = R001), color = NA, alpha = 0.8) +
-  scale_fill_distiller(palette = "YlOrRd", direction = 1) +
-  labs(title = "Renda per capita média", fill = "Renda (R$)") +
+  scale_fill_distiller(name = NULL, palette = "YlOrRd", direction = 1) +
+  labs(title = "Renda per capita média (R$)") +
   theme_void()
 
 decis <- ggplot(subset(dados_fortaleza, !is.na(R002))) +
   geom_sf(aes(fill = factor(R003)), color = NA, alpha = 0.8) +
-  scale_fill_brewer(palette = "RdBu") +
-  labs(
-    title = "Decis de renda per capita",
-    fill = "Decil de renda"
-  ) +
+  scale_fill_brewer(name = NULL, palette = "RdBu") +
+  labs(title = "Decis de renda per capita") +
   theme_void() +
   theme(legend.key.size = unit(0.3, "cm"))
 
