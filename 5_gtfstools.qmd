@@ -1,6 +1,6 @@
 # Manipulação e visualização de dados GTFS
 
-Usualmente, arquivos GTFS provenientes de fontes oficiais são utilizados para desenvolver análises e pesquisas que possuem diversos elementos comuns. Visando a facilitar a leitura, o processamento e a análise desses dados, a equipe do Projeto Acesso a Oportunidades vem desenvolvendo o pacote de R [`{gtfstools}`](https://github.com/ipeaGIT/gtfstools), que disponibiliza diversas funções que facilitam a manipulação e a exploração de *feeds*.
+Usualmente, arquivos GTFS provenientes de fontes oficiais são utilizados para desenvolver análises e pesquisas que possuem diversos elementos comuns. Visando facilitar a leitura, o processamento e a análise desses dados, a equipe do Projeto Acesso a Oportunidades vem desenvolvendo o pacote de R [`{gtfstools}`](https://github.com/ipeaGIT/gtfstools), que disponibiliza diversas funções que facilitam a manipulação e a exploração de *feeds*.
 
 Neste capítulo, passaremos por algumas das funcionalidades mais frequentemente utilizadas do pacote. Para isso, vamos utilizar uma amostra do *feed* da SPTrans apresentado no capítulo anterior, disponível dentro do `{gtfstools}`.
 
@@ -28,9 +28,9 @@ Como podemos ver, cada `data.table` dentro do objeto GTFS é nomeado de acordo c
 head(gtfs$trips)
 ```
 
-As tabelas dentro de um objeto GTFS podem ser facilmente manipuladas usando a sintaxe dos pacotes `{dplyr}` ou `{data.table}`. Neste livro, optamos por utilizar a sintaxe do `{data.table}`, pois esse pacote oferece diversas funcionalidades úteis para a manipulação de tabelas com grande quantidade de registros, tal como a edição de colunas por referência, filtros de linhas muito rápidos e agregação de dados eficiente[^datatable_info]. Para adicionar 100 segundos a todos os *headways* listados na tabela `frequencies` e reverter essa mudança em seguida, por exemplo, podemos usar o código a seguir:
+As tabelas dentro de um objeto GTFS podem ser facilmente manipuladas usando a sintaxe dos pacotes `{dplyr}` ou `{data.table}`. Neste livro, optamos por utilizar a sintaxe do `{data.table}`, pois esse pacote oferece diversas funcionalidades úteis para a manipulação de tabelas com grande quantidade de registros, tal como a edição de colunas por referência, filtros de linhas muito rápidos e agregação de dados eficiente[^datatable_info]. Para adicionar cem segundos a todos os *headways* listados na tabela `frequencies` e reverter essa mudança em seguida, por exemplo, podemos usar o código a seguir:
 
-[^datatable_info]: Mais detalhes sobre o uso e a sintaxe do `{data.table}` podem ser lidos em <https://rdatatable.gitlab.io/data.table/index.html>.
+[^datatable_info]: Mais detalhes sobre o uso e a sintaxe do `{data.table}` estão disponíveis em <https://rdatatable.gitlab.io/data.table/index.html>.
 
 ```{r}
 # salva o headway original
@@ -46,7 +46,7 @@ gtfs$frequencies[, headway_secs := headway_original]
 head(gtfs$frequencies, 3)
 ```
 
-Após editarmos um objeto GTFS no R, frequentemente vamos querer usar o GTFS manipulado para fazer análises de diferentes tipos. Para isso, é comum que precisemos do arquivo GTFS em formato `.zip` novamente, e não como uma lista de tabelas dentro do R. O pacote `{gtfstools}` disponibiliza a função `write_gtfs()` exatamente com a finalidade de transformar objetos GTFS que existem apenas dentro do R em arquivos GTFS armazenados no seu computador. Para usarmos essa função, precisamos apenas listar o objeto e o endereço no qual o arquivo deve ser salvo:
+Após editarmos um objeto GTFS no R, frequentemente vamos querer utilizá-lo para fazer análises de diferentes tipos. Para isso, é comum que precisemos do arquivo GTFS em formato `.zip` novamente, e não como uma lista de tabelas dentro do R. O pacote `{gtfstools}` disponibiliza a função `write_gtfs()` exatamente com a finalidade de transformar objetos GTFS que existem apenas dentro do R em arquivos GTFS armazenados no seu computador. Para usarmos essa função, precisamos apenas listar o objeto e o endereço no qual o arquivo deve ser salvo:
 
 ```{r}
 # aponta para o endereço onde arquivo deve ser salvo
@@ -66,20 +66,20 @@ Arquivos GTFS são frequentemente utilizados em estimativas de roteamento de tra
 O `{gtfstools}` disponibiliza a função `get_trip_speed()` para facilitar o cálculo da velocidade de cada viagem presente no *feed*. Por padrão, a função calcula a velocidade (em km/h) de todas as viagens do GTFS, mas viagens individuais também podem ser especificadas:
 
 ```{r}
-# calcula as velocidade de todas as viagens
+# calcula a velocidade de todas as viagens
 velocidades <- get_trip_speed(gtfs)
 
 head(velocidades)
 
 nrow(velocidades)
 
-# calcula as velocidade de duas viagens específicas
+# calcula a velocidade de duas viagens específicas
 velocidades <- get_trip_speed(gtfs, trip_id = c("CPTM L07-0", "2002-10-0"))
 
 velocidades
 ```
 
-Calcular a velocidade de uma viagem requer que saibamos o seu comprimento e em quanto tempo ela foi realizada. Para isso, a `get_trip_speed()` utiliza duas outras funções do `{gtfstools}` por trás dos panos: a `get_trip_length()` e a `get_trip_duration()`. O funcionamento das duas é muito parecido com o mostrado anteriormente, calculando o comprimento/duração de todas as viagens por padrão, ou de apenas algumas selecionadas, caso desejado. A seguir, mostramos seus comportamentos padrões:
+Calcular a velocidade de uma viagem requer que saibamos o seu comprimento e em quanto tempo ela foi realizada. Para isso, a `get_trip_speed()` utiliza duas outras funções do `{gtfstools}` por trás dos panos: a `get_trip_length()` e a `get_trip_duration()`. O funcionamento das duas é muito parecido com o mostrado anteriormente, calculando o comprimento/duração de todas as viagens por padrão, ou de apenas algumas selecionadas, caso desejado. A seguir, mostramos seus comportamentos padrões.
 
 ```{r}
 # calcula a distância percorrida de todas viagens
@@ -146,7 +146,7 @@ names(gtfs_combinado)
 identical(gtfs_sem_dups$frequencies, gtfs_combinado$frequencies)
 ```
 
-Um outro tipo de operação muito utilizada no tratamento de dados GTFS é o de filtragem desses arquivos. Frequentemente, *feeds* são usados para descrever redes de transporte público de grande escala, o que pode transformar sua edição, sua análise e seu compartilhamento em operações complexas. Por esse motivo, pesquisadores e planejadores muitas vezes precisar trabalhar com um subconjunto de dados descritos nos *feeds*. Por exemplo, caso desejemos estimar a performance da rede de transporte em uma determinada região no horário de pico da manhã, podemos filtrar o nosso arquivo GTFS de modo a manter apenas os registros referentes a viagens que ocorrem nesse intervalo do dia.
+Um outro tipo de operação muito utilizada no tratamento de dados GTFS é o de filtragem desses arquivos. Frequentemente, *feeds* são usados para descrever redes de transporte público de grande escala, o que pode transformar sua edição, sua análise e seu compartilhamento em operações complexas. Por esse motivo, pesquisadores e planejadores muitas vezes precisam trabalhar com um subconjunto de dados descritos nos *feeds*. Por exemplo, caso desejemos estimar a performance da rede de transporte em uma determinada região no horário de pico da manhã, podemos filtrar o nosso arquivo GTFS de modo a manter apenas os registros referentes a viagens que ocorrem nesse intervalo do dia.
 
 O pacote `{gtfstools}` traz diversas funções para facilitar a filtragem de arquivos GTFS. São elas:
 
@@ -230,7 +230,7 @@ gtfs_filtrado <- filter_by_weekday(
 gtfs_filtrado$calendar[, c("service_id", "sunday", "saturday")]
 ```
 
-A `filter_by_time_of_day()`, por sua vez, recebe o começo e o final de uma janela de tempo e mantém os registros relacionados a viagens que rodam dentro dessa janela. O funcionamento da função depende da presença ou não da tabela `frequencies` no GTFS: o cronograma descrito na `stop_times` das viagens descritas na tabela `frequencies` não deve ser filtrado, pois, como comentado no [capítulo anterior](4_dados_gtfs.qmd#frequencies.txt), ele serve como um modelo que dita o tempo de viagem entre uma parada e outra. Caso a `frequencies` esteja ausente, no entanto, a `stop_times` é filtrada segundo o intervalo de tempo especificado. Vamos ver como isso funciona com um exemplo:
+A `filter_by_time_of_day()`, por sua vez, recebe o começo e o final de uma janela de tempo e mantém os registros relacionados a viagens que rodam dentro dessa janela. O funcionamento da função depende da presença ou não da tabela `frequencies` no objeto GTFS: o cronograma descrito na `stop_times` das viagens listadas na tabela `frequencies` não deve ser filtrado, pois, como comentado no [capítulo anterior](4_dados_gtfs.qmd#frequencies.txt), ele serve como um modelo que dita o tempo de viagem entre uma parada e outra. Caso a `frequencies` esteja ausente, no entanto, a `stop_times` é filtrada segundo o intervalo de tempo especificado. Vamos ver como isso funciona com um exemplo:
 
 ```{r}
 # mantém apenas viagens dentro do período de 5 às 6 da manhã
@@ -285,7 +285,7 @@ head(
 
 ### Filtro espacial
 
-Por fim, o `{gtfstools}` também disponibiliza uma função que permite filtrar o objeto GTFS usando um polígono espacial. A `filter_by_sf()` recebe um objeto do tipo `sf`/`sfc` (representação espacial criada pelo pacote [`{sf}`](https://r-spatial.github.io/sf/)), ou sua *bounding box*, e mantém os registros cujas viagens são selecionadas por uma operação espacial que também deve ser especificada. Embora aparentemente complicado, esse processo de filtragem é compreendido com facilidade quando apresentado visualmente. Para isso, vamos filtrar o GTFS da SPTrans pela *bounding box* da trajetória `68962`. Com o código a seguir, apresentamos a distribuição espacial dos dados não filtrados, com a *bounding box* destacada em vermelho (@fig-shapes_distribution):
+Por fim, o `{gtfstools}` também disponibiliza uma função que permite filtrar o objeto GTFS usando um polígono espacial. A `filter_by_sf()` recebe um objeto do tipo `sf`/`sfc` (representação espacial criada pelo pacote [`{sf}`](https://r-spatial.github.io/sf/)), ou sua *bounding box*, e mantém os registros cujas viagens são selecionadas por uma operação espacial que também deve ser especificada. Embora aparentemente complicado, esse processo de filtragem é compreendido com facilidade quando apresentado visualmente. Para isso, vamos filtrar o GTFS da SPTrans pela *bounding box* da trajetória `68962`. Com o código a seguir, apresentamos a distribuição espacial dos dados não filtrados, com a *bounding box* destacada em vermelho na @fig-shapes_distribution.
 
 ```{r}
 #| label: fig-shapes_distribution
@@ -337,11 +337,11 @@ ggplot() +
 
 ## Validação de arquivos GTFS
 
-Planejadores e pesquisadores frequentemente querem avaliar a qualidade dos arquivos GTFS que estão utilizando em suas análises ou que estão produzindo. Os *feeds* estão estruturados conforme [boas práticas](https://github.com/MobilityData/GTFS_Schedule_Best-Practices) adotadas pela comunidade que usa a especificação? As tabelas e colunas estão formatadas corretamente? A informação descrita pelo *feed* parece verossímil (velocidade das viagens, localização das paradas etc)? Essas são algumas das perguntas que podem surgir ao lidar com dados no formato GTFS.
+Planejadores e pesquisadores frequentemente querem avaliar a qualidade dos arquivos GTFS que estão utilizando em suas análises ou que estão produzindo. Os *feeds* estão estruturados conforme [boas práticas](https://github.com/MobilityData/GTFS_Schedule_Best-Practices) adotadas pela comunidade que usa a especificação? As tabelas e colunas estão formatadas corretamente? A informação descrita pelo *feed* parece verossímil (velocidade das viagens, localização das paradas etc.)? Essas são algumas das perguntas que podem surgir ao lidar com dados no formato GTFS.
 
 Para responder a essas e outras perguntas, o `{gtfstools}` inclui a função `validate_gtfs()`, que serve como interface entre o R e o [Canonical GTFS Validator](https://github.com/MobilityData/gtfs-validator), *software* desenvolvido pela MobilityData. O uso do validador requer que o Java versão 11 ou superior esteja instalado[^java11_chap3].
 
-[^java11_chap3]: Para informações de como checar a versão do Java instalado em seu computador e como instalar a versão correta, caso necessário, veja o [Capítulo 3](3_calculando_acesso.qmd#instalação-do-r5r).
+[^java11_chap3]: Para informações sobre como checar a versão do Java instalado em seu computador e como instalar a versão correta, caso necessário, conferir o [Capítulo 3](3_calculando_acesso.qmd#instalação-do-r5r).
 
 Usar a `validate_gtfs()` é muito simples. Primeiro, precisamos baixar o *software* de validação. Para isso, podemos usar a função `download_validator()`, também disponível no pacote, que recebe o endereço de uma pasta na qual o validador deve ser salvo e a versão do validador desejada (por padrão, a mais recente). Como resultado, a função retorna o endereço do arquivo baixado:
 
@@ -352,7 +352,7 @@ endereco_validador <- download_validator(pasta_temporaria)
 endereco_validador
 ```
 
-A segunda (e última) etapa consiste em de fato rodar a função `validate_gtfs()`. Essa função aceita que os dados GTFS a serem validados sejam passados de diferentes formas: i) como um objeto GTFS existente apenas no R; ii) como o endereço de um arquivo GTFS salvo localmente em formato `.zip`; iii) como uma URL apontando para um *feed*; ou iv) como uma pasta que contém os dados GTFS não compactados. A função também recebe o endereço para uma pasta onde o resultado da validação deve ser salvo e o endereço para o validador que deve ser usado. Nesse exemplo, vamos fazer a validação a partir do endereço do GTFS da SPTrans, lido anteriormente:
+A segunda (e última) etapa consiste em de fato rodar a função `validate_gtfs()`. Essa função aceita que os dados GTFS a serem validados sejam passados de diferentes formas: i) como um objeto GTFS existente apenas no R; ii) como o endereço de um arquivo GTFS salvo localmente em formato `.zip`; iii) como uma URL apontando para um *feed*; ou iv) como uma pasta que contém os dados GTFS não compactados. A função também recebe o endereço para uma pasta onde o resultado da validação deve ser salvo e o endereço para o validador que deve ser usado. Nesse exemplo, vamos fazer a validação a partir do endereço do arquivo GTFS da SPTrans, lido anteriormente:
 
 ```{r}
 pasta_resultado <- tempfile("validacao_com_endereco")
@@ -387,9 +387,9 @@ knitr::include_graphics("images/validator_report.png")
 
 Como mostrado nas seções anteriores, o `{gtfstools}` disponibiliza uma grande caixa de ferramentas que podem ser usadas no processamento e na análise de arquivos GTFS. O pacote, no entanto, oferece diversas outras funções que não puderam ser apresentadas neste livro, por limitação de espaço[^gtfstools_ref]. 
 
-[^gtfstools_ref]: A lista completa de funções disponíveis pode ser conferida no [site do pacote](https://ipeagit.github.io/gtfstools/reference/index.html).
+[^gtfstools_ref]: A lista completa de funções disponíveis está disponível em <https://ipeagit.github.io/gtfstools/reference/index.html>.
 
-A apresentação das funções feita até aqui tem um importante caráter demonstrativo, porém não mostra como elas podem ser usadas de forma conjunta na análise de um arquivo GTFS. A presente seção preenche essa lacuna, mostrando como o pacote pode ser usado, por exemplo, para responder a seguinte pergunta: como se distribuem espacialmente os tempos entre veículos de uma mesma linha (os *headways*) no GTFS da SPTrans?
+A apresentação das funções feita até aqui tem um importante caráter demonstrativo, porém não mostra como elas podem ser usadas de forma conjunta na análise de um arquivo GTFS. Esta seção preenche essa lacuna, mostrando como o pacote pode ser usado, por exemplo, para responder à seguinte pergunta: como se distribuem espacialmente os tempos entre veículos de uma mesma linha (os *headways*) no GTFS da SPTrans?
 
 A primeira etapa é definir o escopo da nossa análise. Para exemplificar, vamos considerar o *headway* no pico da manhã, entre 7h e 9h, em uma típica terça-feira de operação. Para isso, precisamos filtrar o nosso *feed*:
 
@@ -411,7 +411,7 @@ gtfs_filtrado$calendar
 
 Em seguida, precisamos calcular o *headway* dentro do período estabelecido. Essa informação pode ser encontrada na tabela `frequencies`, mas há um elemento complicador: cada viagem está associada a mais de um *headway*, como vimos anteriormente (um registro para o período entre 7h e 7h59 e outro para o período entre 8h e 8h59). Para resolver essta questão, portanto, vamos calcular o *headway médio* no intervalo entre 7h e 9h.
 
-Os primeiros registros da tabela `frequencies` do GTFS da SPTrans parecem sugerir que os períodos do dia estão listados sempre de uma em uma hora, porém essa não é uma regra estabelecida na especificação GTFS nem é a prática adotada em outros *feeds*. Por isso, vamos calcular a *média ponderada* do *headway* no período especificado. Para isso, precisamos multiplicar cada *headway* pelo intervalo de tempo em que ele é válido e dividir o total desta soma pelo intervalo de tempo total (duas horas). Para calcular o intervalo de tempo em que cada *headway* é válido, calculamos o começo e o fim do intervalo em segundos com a função `convert_time_to_seconds()` e subtraímos o valor do fim pelo do começo, como mostrado a seguir:
+Os primeiros registros da tabela `frequencies` do GTFS da SPTrans parecem sugerir que os períodos do dia estão listados sempre de uma em uma hora, porém essa não é uma regra estabelecida na especificação nem é a prática adotada em outros *feeds*. Por isso, vamos calcular a *média ponderada* do *headway* no período especificado. Para isso, precisamos multiplicar cada *headway* pelo intervalo de tempo em que ele é válido e dividir o total desta soma pelo intervalo de tempo total (duas horas). Para calcular o intervalo de tempo em que cada *headway* é válido, calculamos o começo e o fim do intervalo em segundos com a função `convert_time_to_seconds()` e subtraímos o valor do fim pelo do começo, como mostrado a seguir:
 
 ```{r}
 gtfs_filtrado <- convert_time_to_seconds(gtfs_filtrado)
@@ -464,6 +464,7 @@ traj_com_headways <- merge(
 ggplot(traj_com_headways) +
   geom_sf(aes(color = headway_medio, size = headway_medio), alpha = 0.8) +
   scale_color_gradient(high = "#132B43", low = "#56B1F7") +
+  labs(color = "Headway médio", size = "Headway médio") +
   theme_minimal()
 ```
 
