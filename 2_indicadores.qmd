@@ -8,7 +8,7 @@ Medidas baseadas em lugares medem a acessibilidade como uma característica de d
 
 As medidas desse tipo são as mais amplamente utilizadas por agências de transporte e pesquisadores [@boisjoly2017how; @papa2015accessibility], porque exigem menor quantidade de dados e tendem a ser consideravelmente mais fáceis de serem calculadas e interpretadas do que as baseadas em pessoas. Por isso, os exemplos e estudos de caso apresentados neste e nos próximos capítulos do livro focam somente nesse grupo de medidas.
 
-Medidas de acessibilidade baseadas em lugares associam a cada deslocamento um custo, usualmente expresso em tempo de viagem [@el-geneidy2016cost; @venter2016assessing]. Ou seja, se um local pode ser alcançado a partir de outro em meia hora, o custo para realizar essa viagem é de 30 minutos. Nada impede, no entanto, que outros tipos de custo, como a distância da viagem, seu custo monetário e a percepção de conforto dos usuários, por exemplo, sejam considerados [@arbex2020estimating; @herszenhut2022impact]. Apresentamos, a seguir, a descrição de algumas das medidas baseadas em lugares mais frequentemente utilizadas na literatura científica e na prática de agências de transporte. Aqui, o termo "custo" é utilizado de maneira ampla e pode se referir a qualquer tipo de unidade utilizada para quantificar a impedância de uma viagem, seja ela tempo de viagem, custo monetário ou demais alternativas.
+Medidas de acessibilidade baseadas em lugares associam a cada deslocamento um custo, usualmente expresso em tempo de viagem [@el-geneidy2016cost; @venter2016assessing]. Ou seja, se um local pode ser alcançado a partir de outro em meia hora, o custo para realizar essa viagem é de trinta minutos. Nada impede, no entanto, que outros tipos de custo, como a distância da viagem, seu custo monetário e a percepção de conforto dos usuários, por exemplo, sejam considerados [@arbex2020estimating; @herszenhut2022impact]. Apresentamos, a seguir, a descrição de algumas das medidas baseadas em lugares mais frequentemente utilizadas na literatura científica e na prática de agências de transporte. Aqui, o termo "custo" é utilizado de maneira ampla e pode se referir a qualquer tipo de unidade utilizada para quantificar a impedância de uma viagem, seja ela tempo de viagem, custo monetário ou demais alternativas.
 
 ### Custo mínimo de viagem
 
@@ -18,25 +18,25 @@ $$A_i = min(c_{i1}, c_{i2}, \dots, c_{ij}, \dots, c_{i(n-1)}, c_{in}) \iff O_j \
 
 em que $A_i$ é a acessibilidade na origem $i$, $c_{ij}$ é o custo de deslocamento entre a origem $i$ e o destino $j$, $n$ é o número total de destinos na área de estudo e $O_j$ é o número de oportunidades no destino $j$.
 
-**Vantagens e desvantagens:** essa medida tem as vantagens de ser fácil de calcular e exigir poucos dados, além de ser fácil de comunicar. Duas desvantagens, no entanto, são que ela não capta a quantidade de oportunidades acessíveis nos destinos para os quais o custo de acesso é o mínimo nem aspectos de competição na demanda pelas oportunidades. Por exemplo, mesmo que uma pessoa more muito perto de um hospital, essa proximidade não necessariamente garante um bom acesso aos serviços de saúde se esse for o único hospital da região e estiver sujeito a picos de demanda que sobrecarregam os serviços além de suas capacidades.
+**Vantagens e desvantagens:** essa medida tem as vantagens de ser fácil de calcular e exigir poucos dados, além de ser fácil de comunicar. Duas desvantagens, no entanto, são que ela não capta a quantidade de oportunidades acessíveis nos destinos para os quais o custo de acesso é o mínimo nem considera aspectos de competição na demanda pelas oportunidades. Por exemplo, mesmo que uma pessoa more muito perto de um hospital, essa proximidade não necessariamente garante um bom acesso aos serviços de saúde se esse for o único hospital da região e estiver sujeito a picos de demanda que sobrecarregam os serviços além de suas capacidades.
 
 ### Medida de oportunidades cumulativas
 
-Mede a quantidade de oportunidades que pode ser alcançada dentro de um determinado limite de custo de viagem. Por exemplo, este indicador pode ser utilizado para medir a quantidade de empregos acessíveis por transporte público em até 60 minutos ou a quantidade de escolas acessíveis em até 30 minutos de viagem a pé. A medida é calculada com a seguinte fórmula:
+Mede a quantidade de oportunidades que pode ser alcançada dentro de um determinado limite de custo de viagem. Por exemplo, este indicador pode ser utilizado para medir a quantidade de empregos acessíveis por transporte público em até sessenta minutos ou a quantidade de escolas acessíveis em até trinta minutos de viagem a pé. A medida é calculada com a seguinte fórmula:
 
 $$A_i = \sum_{j=1}^{n}{O_j \times f(c_{ij})}$$
 
 $$
 f(c_{ij}) =
   \begin{cases}
-	1 & \text{se } c_{ij} \leq C\\
-	0 & \text{caso contrário}
+    1 & \text{se } c_{ij} \leq C\\
+    0 & \text{caso contrário}
   \end{cases}
 $$
 
 em que $A_i$ é a acessibilidade na origem $i$, $O_j$ é o número de oportunidades no destino $j$, $n$ é o número total de destinos na área de estudo, $f(c_{ij})$ é uma função binária que assume os valores 0 ou 1, a depender do custo de deslocamento $c_{ij}$ entre a origem $i$ e o destino $j$, e $C$ é o limite de custo de deslocamento estabelecido.
 
-**Vantagens e desvantagens:**  a medida de oportunidades cumulativas também é calculada com facilidade, exige poucos dados e é fácil de comunicar. Isso contribui para que este indicador seja um dos mais utilizados por agências de transporte e de financiamento em análises de acessibilidade [@papa2015accessibility; @boisjoly2017how]. Entre as suas desvantagens estão o fato de que este indicador não considera a influência da competição sobre oportunidades e exige a escolha de um único ponto de corte como limite de custo de viagem. Além disso, esta medida assume que todas as oportunidades que possam ser alcançadas dentro do limite de custo pré-estabelecido são igualmente desejáveis e alcançáveis pelas pessoas. Por exemplo, se considerarmos um limite de 60 minutos de tempo de viagem, uma oportunidade a 40 minutos de uma origem é considerada tão acessível quanto outra que esteja a 10 minutos dessa mesma origem.
+**Vantagens e desvantagens:**  a medida de oportunidades cumulativas também é calculada com facilidade, exige poucos dados e é fácil de comunicar. Isso contribui para que este indicador seja um dos mais utilizados por agências de transporte e de financiamento em análises de acessibilidade [@papa2015accessibility; @boisjoly2017how]. Entre as suas desvantagens estão o fato de que este indicador não considera a influência da competição sobre oportunidades e exige a escolha de um único ponto de corte como limite de custo de viagem. Além disso, esta medida assume que todas as oportunidades que possam ser alcançadas dentro do limite de custo preestabelecido são igualmente desejáveis e alcançáveis pelas pessoas. Por exemplo, se considerarmos um limite de sessenta minutos de tempo de viagem, uma oportunidade a quarenta minutos de uma origem é considerada tão acessível quanto outra que esteja a dez minutos dessa mesma origem.
 
 ### Medidas gravitacionais
 
@@ -49,8 +49,8 @@ $$A_i = \sum_{j=1}^{n}{O_j \times f(c_{ij})}$$
 $$
 f_{lin}(c_{ij}) =
   \begin{cases}
-	1-c_{ij}/C & \text{se } c_{ij} \leq C\\
-	0 & \text{caso contrário}
+    1-c_{ij}/C & \text{se } c_{ij} \leq C\\
+    0 & \text{caso contrário}
   \end{cases}
 $$
 
@@ -60,17 +60,17 @@ em que $A_i$ é a acessibilidade na origem $i$, $O_j$ é o número de oportunida
 
 Inúmeras funções de decaimento podem ser utilizadas no cálculo de medidas gravitacionais. A medida de oportunidades cumulativas, por exemplo, pode ser pensada simplesmente como um caso especial de medida gravitacional em que o peso de cada oportunidade é ditado por uma função binária, em vez de decair gradualmente. @levinson2020transport [p. 49] apresentam uma lista de funções de decaimento frequentemente utilizadas por agências de transportes e pesquisadores em análises que envolvem medidas gravitacionais.
 
-**Vantagens e desvantagens:**  a principal vantagem de medidas gravitacionais é que o desconto do peso das oportunidades pelo custo da viagem reflete em alguma medida a forma como as pessoas percebem o acesso a oportunidades: serviços e atividades costumam ser mais atrativos quanto mais próximos eles estiverem, tudo mais constante. Este indicador, no entanto, tem ao menos duas desvantagens. A primeira delas é que os níveis de acessibilidade estimados são de difícil interpretação, pela forma como a contagem de oportunidades é descontada pelo custo de viagem. Além disso, para que esses níveis sejam mais representativos do comportamento de viagem das pessoas, o ritmo de decaimento da função de impedância (o parâmetro $\beta$ da função exponencial negativa, por exemplo) precisa ser calibrado. Por isso, esta medida requer a disponibilidade de dados de comportamento de viagens ou de outros dados que possam ser usados no processo de calibração, disponíveis, por exemplo, a partir de pesquisas origem-destino, de coletas feitas por empresas de telefonia celular etc.
+**Vantagens e desvantagens:**  a principal vantagem de medidas gravitacionais é que o desconto do peso das oportunidades pelo custo da viagem reflete em alguma medida a forma como as pessoas percebem o acesso a oportunidades, pois, de forma geral, serviços e atividades costumam ser mais atrativos quanto mais próximos eles estiverem. Este indicador, no entanto, tem ao menos duas desvantagens. A primeira delas é que os níveis de acessibilidade estimados são de difícil interpretação, pela forma como a contagem de oportunidades é descontada pelo custo de viagem. Além disso, para que esses níveis sejam mais representativos do comportamento de viagem das pessoas, o ritmo de decaimento da função de impedância (o parâmetro $\beta$ da função exponencial negativa, por exemplo) precisa ser calibrado. Por isso, esta medida requer a disponibilidade de dados de comportamento de viagens ou de outros dados que possam ser usados no processo de calibração, disponíveis, por exemplo, a partir de pesquisas origem-destino, de coletas feitas por empresas de telefonia celular etc.
 
 ### Medidas de acessibilidade com competição: *floating catchment area*
 
 Em muitos casos, o acesso a oportunidades é afetado não apenas por questões de proximidade geográfica e de custos de transporte, mas também pela competição de diferentes pessoas por uma mesma oportunidade. Isso é muito comum, por exemplo, em casos de acesso a serviços de saúde, escolas e empregos. Uma vaga de emprego só pode ser ocupada por uma pessoa de cada vez, e o mesmo vale para um leito de Unidade de Terapia Intensiva (UTI) ou uma matrícula escolar.
 
-Existe um grande número de medidas que buscam incorporar essa competição na estimativa dos níveis de acessibilidade. Algumas das medidas de competição mais amplamente utilizadas são as do tipo *floating catchment area* (FCA), "área de influência flutuante". A título de exemplo, esses indicadores tentam levar em consideração como uma mesma pessoa pode potencialmente acessar vários leitos de UTI e, simultaneamente, como cada leito de UTI pode potencialmente ser acessado por diversas pessoas. Assim, o acesso de uma pessoa a leitos de UTI é influenciado simultaneamente por questões de custos de transporte e pela disponibilidade de leitos, considerando a potencial concorrência na demanda por aqueles leitos.
+Existe um grande número de medidas que buscam incorporar essa competição na estimativa dos níveis de acessibilidade. Algumas das medidas de competição mais amplamente utilizadas são as do tipo *floating catchment area* (FCA), ou área de influência flutuante, em português. A título de exemplo, esses indicadores tentam levar em consideração como uma mesma pessoa pode potencialmente acessar vários leitos de UTI e, simultaneamente, como cada leito de UTI pode potencialmente ser acessado por diversas pessoas. Assim, o acesso de uma pessoa a leitos de UTI é influenciado simultaneamente por questões de custos de transporte e pela disponibilidade de leitos, considerando a potencial concorrência na demanda por aqueles leitos.
 
 Dentro da família de medidas de FCA, a mais comumente utilizada é a *2-Step Floating Catchment Area* (2SFCA), proposta originalmente por @luo2003measures. Uma limitação da 2SFCA é que ela considera que uma mesma pessoa pode demandar várias oportunidades ao mesmo tempo e que, analogamente, um mesmo serviço pode ser utilizado por várias pessoas ao mesmo tempo. Esses fenômenos são conhecidos como problemas de inflação de demanda e de oferta, respectivamente, e podem gerar estimativas de acessibilidade enviesadas ou pouco precisas [@paez2019demand]. Para lidar com esses problemas, @paez2019demand propuseram a *Balanced Floating Catchment Area* (BFCA), uma das medidas mais novas da família FCA.
 
-**Vantagens e desvantagens:**  diferentes medidas de FCA têm diferentes vantagens e desvantagens, em maior ou menor grau. No entanto, de maneira geral, a principal vantagem de medidas desta família é a sua capacidade de incorporar aspectos de competição em estimativas de acessibilidade. A principal desvantagem, por outro lado, é a difícil interpretação e comunicação dos seus resultados.
+**Vantagens e desvantagens:**  diferentes medidas de FCA têm diferentes vantagens e desvantagens, em maior ou menor grau. No entanto, de maneira geral, a principal vantagem de medidas desta família é a sua capacidade de incorporar aspectos de competição em estimativas de acessibilidade. A principal desvantagem, em contrapartida, é a difícil interpretação e comunicação dos seus resultados.
 
 ## Medidas baseadas em pessoas
 
