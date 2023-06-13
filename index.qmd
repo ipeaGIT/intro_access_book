@@ -48,18 +48,18 @@ Este livro está dividido em 5 seções, descritas a seguir.
 #| echo: false
 tbl <- data.frame(
   Seção = c(
-	"[1: Introdução à acessibilidade urbana](s1_intro.qmd)",
-	"[2: Como calcular acessibilidade urbana](s2_calculo.qmd)",
-	"[3: Dados de transporte público](s3_dados_tp.qmd)",
-	"[4: Avaliação de impacto de projetos de transporte](s4_avaliacao_impacto.qmd)",
-	"[5: Dados do Projeto Acesso a Oportunidades](s5_dados_aop.qmd)"
+    "[1: Introdução à acessibilidade urbana](s1_intro.qmd)",
+    "[2: Como calcular acessibilidade urbana](s2_calculo.qmd)",
+    "[3: Dados de transporte público](s3_dados_tp.qmd)",
+    "[4: Avaliação de impacto de projetos de transporte](s4_avaliacao_impacto.qmd)",
+    "[5: Dados do Projeto Acesso a Oportunidades](s5_dados_aop.qmd)"
   ),
   Descrição = c(
-	"Apresenta o conceito de acessibilidade urbana, esclarece as diferenças entre acessibilidade e mobilidade e apresenta os principais indicadores usados para medir a acessibilidade urbana.",
-	"Ensina como calcular estimativas de acessibilidade urbana em R usando os pacotes `{r5r}` e `{accessibility}` a partir de dados públicos abertos e como visualizar os resultados com mapas e gráficos.",
-	"Apresenta o que é a especificação GTFS de dados de transporte público e mostra como trabalhar e analisar dados de GTFS usando o pacote `{gtfstools}`.",
-	"Traz um estudo de caso para mostrar como o conhecimento dos capítulos anteriores pode ser utilizado para avaliar o impacto de políticas públicas sobre as condições de acessibilidade urbana.",
-	"Mostra como baixar e visualizar os dados produzidos pelo projeto Acesso a Oportunidades, que incluem dados detalhados sobre padrões de uso do solo e acessibilidade nas vinte maiores cidades brasileiras."
+    "Apresenta o conceito de acessibilidade urbana, esclarece as diferenças entre acessibilidade e mobilidade e apresenta os principais indicadores usados para medir a acessibilidade urbana.",
+    "Ensina como calcular estimativas de acessibilidade urbana em R usando os pacotes `{r5r}` e `{accessibility}` a partir de dados públicos abertos e como visualizar os resultados com mapas e gráficos.",
+    "Apresenta a Especificação Geral de Redes de Transporte Público (*General Transit Feed Specification* - GTFS) e mostra como manipular e analisar dados GTFS usando o pacote `{gtfstools}`.",
+    "Traz um estudo de caso para mostrar como o conhecimento dos capítulos anteriores pode ser utilizado para avaliar o impacto de políticas públicas sobre as condições de acessibilidade urbana.",
+    "Mostra como baixar e visualizar os dados produzidos pelo projeto Acesso a Oportunidades (AOP), que incluem dados detalhados sobre padrões de uso do solo e acessibilidade nas vinte maiores cidades brasileiras."
   )
 )
 
@@ -68,11 +68,11 @@ knitr::kable(tbl, align = c("c", "l"))
 
 ## Reproduzindo o livro localmente
 
-Este livro foi escrito e publicado com o sistema de publicação [Quarto](https://quarto.org). Todo o código utilizado em seu preparo e na sua publicação pode ser encontrado [neste repositório](https://github.com/ipeaGIT/intro_access_book). Para reproduzir o livro localmente, você deve primeiro baixar o seu código-fonte. Isso pode ser feito com o *software* [git](https://git-scm.com/) ou manualmente[^download_link]. Caso o segundo método seja utilizado, é necessário também extrair o conteúdo do arquivo `.zip` baixado para uma nova pasta.
+Este livro foi escrito e publicado com o sistema de publicação [Quarto](https://quarto.org). Todo o código utilizado em seu preparo e na sua publicação pode ser encontrado [nesse repositório](https://github.com/ipeaGIT/intro_access_book). Para reproduzir o livro localmente, você deve primeiro baixar o seu código-fonte. Isso pode ser feito com o *software* [git](https://git-scm.com/) ou manualmente[^download_link]. Caso o segundo método seja utilizado, é necessário também extrair o conteúdo do arquivo `.zip` baixado para uma nova pasta.
 
 [^download_link]: Para baixar o código-fonte manualmente, use o *link* a seguir: <https://github.com/ipeaGIT/intro_access_book/archive/refs/heads/main.zip>.
 
-A renderização do livro requer que o programa [Quarto](https://quarto.org/) esteja instalado. A reprodução dos seus capítulos, por sua vez, requer o uso do pacote de R [`{renv}`](https://rstudio.github.io/renv/index.html), que faz a gestão de dependências do livro.
+A renderização do livro requer que o programa Quarto esteja instalado. A reprodução dos seus capítulos, por sua vez, requer o uso do pacote de R [`{renv}`](https://rstudio.github.io/renv/index.html), que faz a gestão de dependências do livro.
 
 Depois de instaladas as dependências do livro, seu código-fonte poderá ser executado normalmente. Os capítulos estão ordenados numericamente em arquivos no formato `.qmd`. Para rodar todos os capítulos de uma vez, utilize um dos seguintes comandos:
 
@@ -82,13 +82,13 @@ quarto::quarto_preview()
 quarto::quarto_render()
 ```
 
-Para mais detalhes de como instalar as dependências do livro e rodar seu conteúdo localmente, veja as instruções completas de instalação no [repositório do livro](https://github.com/ipeaGIT/intro_access_book).
+Para mais detalhes de como instalar as dependências do livro e rodar seu conteúdo localmente, veja as instruções completas de instalação no repositório do livro.
 
 ## Reproduzindo o livro na nuvem com um *binder*
 
-Um *binder* é uma ferramenta que permite rodar códigos na nuvem em um navegador, como o Chrome e o Firefox. O código do livro pode ser rodado usando um servidor publicado pelo [mybinder](https://mybinder.org/). Para isso, acesse [esse *link*](https://mybinder.org/v2/gh/ipeaGIT/intro_access_book/HEAD?urlpath=rstudio). Uma sessão do RStudio Cloud, que inclui todos os arquivos e dados necessários para rodar o código do livro, começará a rodar no seu navegador.
+Um *binder* é uma ferramenta que permite rodar códigos na nuvem em um navegador, como o Chrome e o Firefox. O código do livro pode ser rodado usando um servidor publicado pelo [MyBinder](https://mybinder.org/). Para isso, acesse [esse *link*](https://mybinder.org/v2/gh/ipeaGIT/intro_access_book/HEAD?urlpath=rstudio). Uma sessão do RStudio Cloud, que inclui todos os arquivos e dados necessários para rodar o código do livro, começará a rodar no seu navegador.
 
-Note que as sessões do mybinder estão limitadas a 2 GB de memória RAM. Essa restrição pode impedir que capítulos de processamento um pouco mais pesado, em particular o Capítulo 6, sejam executados adequadamente. Em caso de uso do *binder*, sugerimos que não tente renderizar o livro todo com o Quarto, como mostrado anteriormente.
+Note que as sessões do MyBinder estão limitadas a 2 GB de memória RAM. Essa restrição pode impedir que capítulos de processamento um pouco mais pesado, em particular o Capítulo 6, sejam executados adequadamente. Em caso de uso do *binder*, sugerimos que não tente renderizar o livro todo com o Quarto, como mostrado anteriormente.
 
 ## Licença de uso
 
