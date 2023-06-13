@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.3.361">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Introdução à acessibilidade urbana - SEÇÃO 5: Dados do Projeto Acesso a Oportunidades</title>
 <style>
@@ -64,7 +64,8 @@ div.csl-indent {
     "search-more-matches-text": "mais correspondências neste documento",
     "search-clear-button-title": "Limpar",
     "search-detached-cancel-button-title": "Cancelar",
-    "search-submit-button-title": "Enviar"
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
   }
 }</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YVERJQF9PJ"></script><script type="text/javascript">
 
@@ -94,7 +95,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       </button>
       <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./s5_dados_aop.html">SEÇÃO 5: Dados do Projeto Acesso a Oportunidades</a></li></ol></nav><a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -285,45 +286,35 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 
 </header><p><strong>Os objetivos desta seção</strong> são: i) apresentar os dados de acessibilidade, de uso do solo e socioeconômicos disponibilizados pelo projeto Acesso a Oportunidades (AOP); e ii) ensinar a baixá-los e utilizá-los com o pacote de R <code>{aopdata}</code>.</p>
 <p>Nos capítulos anteriores, aprendemos sobre o conceito de acessibilidade, como traduzi-lo em medidas quantitativas e como calcular essas medidas usando R. No entanto, frequentemente nos deparamos com situações em que não podemos estimar os níveis de acessibilidade por conta própria, por não termos o tempo ou os dados necessários para isso, ou em que não precisamos fazer esse cálculo, porque tais estimativas já foram realizadas por outras pessoas. Ao longo dos próximos capítulos, apresentaremos a base de dados com estimativas de acessibilidade criada e disponibilizada no âmbito do projeto <a href="https://www.ipea.gov.br/acessooportunidades/">Acesso a Oportunidades</a> (AOP).</p>
-<p>O AOP é um projeto de pesquisa liderado pelo Instituto de Pesquisa Econômica Aplicada (Ipea) com o objetivo de compreender as condições de transporte e as desigualdades de acesso a oportunidades nas cidades brasileiras. Todos os resultados dos dados produzidos pela equipe do AOP são disponibilizados publicamente. A base disponibilizada contém não apenas estimativas de acessibilidade urbana, mas também informações sobre distribuição e contagem populacional e de atividades econômicas e serviços públicos. Os dados estão agregados espacialmente em uma grade hexagonal que segue o sistema de gradeamento <a href="https://h3geo.org/">H3</a>, desenvolvido pela Uber <span class="citation" data-cites="brodsky2018h3">(<a href="references.html#ref-brodsky2018h3" role="doc-biblioref">Brodsky 2018</a>)</span>. Cada célula espacial tem cerca de 0,11 km², área similar à coberta por um quarteirão, permitindo análises em alta resolução espacial. Como apresentado na <a href="#fig-data_scope">Figura <span>1</span></a>, as estimativas de acessibilidade estão disponíveis para os anos de 2017, 2018 e 2019 e para as vinte maiores cidades do Brasil, considerando diferentes modos de transporte (caminhada, bicicleta, transporte público e automóvel), horários do dia (pico e fora-pico), grupos populacionais (segundo níveis de renda, cor, sexo e idade) e tipos de atividade (empregos, escolas, serviços de saúde e centros de assistência social).</p>
-<div class="callout callout-style-simple callout-note">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>As metodologias utilizadas para gerar esses dados são apresentadas em detalhe em publicações separadas para os dados populacionais e de uso do solo <span class="citation" data-cites="pereira2022distribuicao">(<a href="references.html#ref-pereira2022distribuicao" role="doc-biblioref">Pereira, Herszenhut, et al. 2022</a>)</span> e para os dados de acessibilidade <span class="citation" data-cites="pereira2022estimativas">(<a href="references.html#ref-pereira2022estimativas" role="doc-biblioref">Pereira, Braga, et al. 2022</a>)</span>.</p>
-</div>
-</div>
-</div>
+<p>O AOP é um projeto de pesquisa liderado pelo Instituto de Pesquisa Econômica Aplicada (Ipea) com o objetivo de compreender as condições de transporte e as desigualdades de acesso a oportunidades nas cidades brasileiras. Todos os resultados dos dados produzidos pela equipe do AOP são disponibilizados publicamente. A base disponibilizada contém não apenas estimativas de acessibilidade urbana, mas também informações sobre distribuição e contagem populacional e de atividades econômicas e serviços públicos<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Os dados estão agregados espacialmente em uma grade hexagonal que segue o sistema de gradeamento <a href="https://h3geo.org/">H3</a>, desenvolvido pela Uber <span class="citation" data-cites="brodsky2018h3">(<a href="references.html#ref-brodsky2018h3" role="doc-biblioref">Brodsky 2018</a>)</span>. Cada célula espacial tem cerca de 0,11 km², área similar à coberta por um quarteirão, permitindo análises em alta resolução espacial. Como apresentado na <a href="#fig-data_scope">Figura <span>1</span></a>, as estimativas de acessibilidade estão disponíveis para 2017, 2018 e 2019 e para as vinte maiores cidades do Brasil, considerando diferentes modos de transporte (caminhada, bicicleta, transporte público e automóvel), horários do dia (pico e fora-pico), grupos populacionais (segundo níveis de renda, cor, sexo e idade) e tipos de atividade (empregos, escolas, serviços de saúde e centros de assistência social).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-data_scope" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="images/aop_data_scope.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figura 1: Escopo dos dados do AOP</figcaption></figure>
+<figcaption class="figure-caption">Figura 1: Escopo dos dados do projeto AOP</figcaption></figure>
 </div>
 </div>
 </div>
-<p>Os níveis de acessibilidade por transporte público foram estimados apenas para as cidades que disponibilizaram ao projeto dados GTFS de qualidade considerada aceitável. São elas: Belo Horizonte, Campinas, Curitiba, Fortaleza, Goiânia<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, Porto Alegre, Recife, Rio de Janeiro e São Paulo. Ainda assim, algumas dessas cidades disponibilizaram <em>feeds</em> apenas para determinados anos ou compartilharam arquivos considerados não representativos do sistema de transporte público operado na prática, resultando na exclusão das estimativas dessas cidades para alguns anos. A <a href="#fig-geo_scope">Figura <span>2</span></a> indica as cidades para as quais foram calculados os níveis de acessibilidade por modo de transporte.</p>
+<p>Os níveis de acessibilidade por transporte público foram estimados apenas para as cidades que disponibilizaram ao projeto dados GTFS de qualidade considerada aceitável. São elas: Belo Horizonte, Campinas, Curitiba, Fortaleza, Goiânia<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, Porto Alegre, Recife, Rio de Janeiro e São Paulo. Ainda assim, algumas dessas cidades disponibilizaram <em>feeds</em> apenas para determinados anos ou compartilharam arquivos considerados não representativos do sistema de transporte público operado na prática, resultando na exclusão das estimativas dessas cidades para alguns anos. A <a href="#fig-geo_scope">Figura <span>2</span></a> indica as cidades para as quais foram calculados os níveis de acessibilidade por modo de transporte.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-geo_scope" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="images/aop_geographical_scope.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figura 2: Escopo geográfico dos dados do AOP (destacadas com um asterisco cidades que não têm estimativas por transporte público para todos os anos)</figcaption></figure>
+<figcaption class="figure-caption">Figura 2: Escopo geográfico dos dados do projeto AOP (cidades destacadas com asterisco não possuem estimativas por transporte público para todos os anos)</figcaption></figure>
 </div>
 </div>
 </div>
-<p>A seguir, duas tabelas resumem os dados disponibilizados pelo projeto. A <a href="#tbl-tabela_dados_access">Tabela <span>1</span></a> apresenta os dados de acessibilidade urbana:</p>
+<p>A seguir, duas tabelas resumem os dados disponibilizados pelo projeto. A <a href="#tbl-tabela_dados_access">Tabela <span>1</span></a> apresenta os dados de acessibilidade urbana.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-tabela_dados_access" class="anchored">
 <table class="table table-sm table-striped small">
-<caption>Tabela 1: Indicadores de acessibilidade calculados pelo AOP</caption>
+<caption>Tabela 1: Indicadores de acessibilidade calculados pelo projeto AOP</caption>
 <colgroup>
 <col style="width: 11%">
-<col style="width: 29%">
+<col style="width: 28%">
 <col style="width: 24%">
-<col style="width: 34%">
+<col style="width: 35%">
 </colgroup>
 <thead><tr class="header">
 <th style="text-align: left;">Indicador (código)</th>
@@ -335,20 +326,20 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <tr class="odd">
 <td style="text-align: left;">Tempo mínimo de viagem (TMI)</td>
 <td style="text-align: left;">Tempo até a oportunidade mais próxima</td>
-<td style="text-align: left;">Saúde, educação, Centros de Referência de Assistência Social (CRAS)</td>
-<td style="text-align: left;">A pé (60 min.); bicicleta, transporte público e carro (120 min.)</td>
+<td style="text-align: left;">Saúde, educação e Centros de Referência de Assistência Social (CRAS)</td>
+<td style="text-align: left;">A pé (60 minutos); bicicleta, transporte público e carro (120 minutos)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Medida cumulativa ativa (CMA)</td>
 <td style="text-align: left;">Quantidade de oportunidades acessíveis em um determinado limite de tempo</td>
-<td style="text-align: left;">Trabalho, saúde, educação, CRAS</td>
-<td style="text-align: left;">A pé e bicicleta (15, 30, 45 e 60 min.); transporte público e carro (15, 30, 60, 90 e 120 min.)</td>
+<td style="text-align: left;">Trabalho, saúde, educação e CRAS</td>
+<td style="text-align: left;">A pé e bicicleta (15, 30, 45 e 60 minutos); transporte público e carro (15, 30, 60, 90 e 120 minutos)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Medida cumulativa passiva (CMP)</td>
 <td style="text-align: left;">Quantidade de pessoas que acessam a localidade em um determinado limite de tempo</td>
 <td style="text-align: left;">-</td>
-<td style="text-align: left;">A pé e bicicleta (15, 30, 45 e 60 min.); transporte público e carro (15, 30, 60, 90 e 120 min.)</td>
+<td style="text-align: left;">A pé e bicicleta (15, 30, 45 e 60 minutos); transporte público e carro (15, 30, 60, 90 e 120 minutos)</td>
 </tr>
 </tbody>
 </table>
@@ -362,10 +353,10 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <table class="table table-sm table-striped small">
 <caption>Tabela 2: Dados socioeconômicos da população e de distribuição espacial de atividades agregados pelo AOP, segundo ano de referência e fonte de dados</caption>
 <colgroup>
-<col style="width: 18%">
-<col style="width: 46%">
-<col style="width: 6%">
-<col style="width: 28%">
+<col style="width: 15%">
+<col style="width: 47%">
+<col style="width: 5%">
+<col style="width: 31%">
 </colgroup>
 <thead><tr class="header">
 <th style="text-align: left;">Dado</th>
@@ -378,38 +369,38 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <td style="text-align: left;">Características sociodemográficas da população</td>
 <td style="text-align: left;">Quantidade de pessoas segundo sexo, faixa de idade e cor/raça; média da renda per capita</td>
 <td style="text-align: left;">2010</td>
-<td style="text-align: left;">Censo Demográfico, Instituto Brasileiro de Geografia e Estatística (IBGE)</td>
+<td style="text-align: left;">Censo Demográfico do Instituto Brasileiro de Geografia e Estatística (IBGE)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Estabelecimentos de educação</td>
 <td style="text-align: left;">Quantidade de creches e escolas públicas segundo nível de ensino (infantil, fundamental e médio)</td>
 <td style="text-align: left;">2017, 2018, 2019</td>
-<td style="text-align: left;">Censo Escolar, Inep</td>
+<td style="text-align: left;">Censo Escolar do Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (Inep)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Estabelecimentos de saúde</td>
-<td style="text-align: left;">Quantidade de estabelecimentos de saúde que atendem pelo SUS segundo nível de atenção (baixa, média e alta complexidade)</td>
+<td style="text-align: left;">Quantidade de estabelecimentos de saúde que atendem pelo Sistema Único de Saúde (SUS) segundo nível de atenção (baixa, média e alta complexidade)</td>
 <td style="text-align: left;">2017, 2018, 2019</td>
-<td style="text-align: left;">Cadastro Nacional de Estabelecimentos de Saúde (CNES), Ministério da Saúde</td>
+<td style="text-align: left;">Cadastro Nacional de Estabelecimentos de Saúde (CNES) do Ministério da Saúde</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Atividade econômica</td>
 <td style="text-align: left;">Quantidade de empregos formais conforme o nível de instrução dos trabalhadores (baixa, média e alta escolaridade)</td>
 <td style="text-align: left;">2017, 2018, 2019</td>
-<td style="text-align: left;">Relação Anual de Informações Sociais (RAIS), Ministério da Economia</td>
+<td style="text-align: left;">Relação Anual de Informações Sociais (RAIS) do Ministério da Economia</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Estabelecimentos de assistência social</td>
 <td style="text-align: left;">Quantidade de CRAS</td>
 <td style="text-align: left;">2017, 2018, 2019</td>
-<td style="text-align: left;">Censo SUAS, Ministério da Cidadania</td>
+<td style="text-align: left;">Censo do Sistema Único de Assistência Social (Censo SUAS) do Ministério da Cidadania</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </div>
-<p>Todas as bases de dados criadas pelo AOP estão disponíveis para <em>download</em> no <a href="https://www.ipea.gov.br/acessooportunidades/dados/"><em>site</em> do projeto</a> ou pelo pacote de R <code>{aopdata}</code>. O dicionário de dados pode ser acessado <a href="https://ipeagit.github.io/aopdata/articles/data_dic_pt.html">neste <em>link</em></a> ou, em uma sessão de R, com o comando <code>aopdata::aopdata_dictionary(lang = "pt")</code>. Os capítulos desta seção apresentam diversos exemplos de como baixar e visualizar esses dados em R.</p>
+<p>Todas as bases de dados criadas pelo projeto AOP estão disponíveis para <em>download</em> em seu <a href="https://www.ipea.gov.br/acessooportunidades/dados/"><em>site</em></a> ou pelo pacote de R <code>{aopdata}</code>. O dicionário de dados pode ser acessado <em>online</em><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> ou, em uma sessão de R, com o comando <code>aopdata::aopdata_dictionary(lang = "pt")</code>. Os capítulos desta seção apresentam diversos exemplos de como baixar e visualizar esses dados em R.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
@@ -425,7 +416,9 @@ Pereira, Rafael H. M., Daniel Herszenhut, Carlos Kauê Vieira Braga, João Pedro
 </div>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
-<li id="fn1"><p>O GTFS de Goiânia descreve a rede de transporte público não apenas do município, mas de toda a sua região metropolitana.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>As metodologias utilizadas para gerar esses dados são apresentadas em detalhe em publicações separadas para os dados populacionais e de uso do solo <span class="citation" data-cites="pereira2022distribuicao">(<a href="references.html#ref-pereira2022distribuicao" role="doc-biblioref">Pereira, Herszenhut, et al. 2022</a>)</span> e para os dados de acessibilidade <span class="citation" data-cites="pereira2022estimativas">(<a href="references.html#ref-pereira2022estimativas" role="doc-biblioref">Pereira, Braga, et al. 2022</a>)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>O GTFS de Goiânia descreve a rede de transporte público não apenas do município, mas de toda a sua região metropolitana.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Disponível em <a href="https://ipeagit.github.io/aopdata/articles/data_dic_pt.html" class="uri">https://ipeagit.github.io/aopdata/articles/data_dic_pt.html</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

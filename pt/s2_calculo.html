@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.3.361">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Introdução à acessibilidade urbana - SEÇÃO 2: Como calcular acessibilidade urbana</title>
 <style>
@@ -45,7 +45,8 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "mais correspondências neste documento",
     "search-clear-button-title": "Limpar",
     "search-detached-cancel-button-title": "Cancelar",
-    "search-submit-button-title": "Enviar"
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
   }
 }</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YVERJQF9PJ"></script><script type="text/javascript">
 
@@ -69,7 +70,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       </button>
       <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./s2_calculo.html">SEÇÃO 2: Como calcular acessibilidade urbana</a></li></ol></nav><a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -259,7 +260,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   
 
 </header><p><strong>O objetivo desta seção</strong> é mostrar como calcular estimativas de acessibilidade urbana em R usando os pacotes <code>{r5r}</code> e <code>{accessibility}</code>.</p>
-<p>O cálculo dos níveis de acessibilidade em uma determinada área de estudo compreende duas etapas principais: primeiro, precisamos calcular uma matriz de custo de transporte, geralmente o tempo de viagem, entre as origens e os destinos que compõem a área de estudo; feito isso, calculamos a acessibilidade nos pontos de origem considerando os custos de transporte entre cada par de origem e destino e o número de oportunidades em cada destino. Nesta seção, aprenderemos como executar essas duas etapas usando a linguagem de programação R. Também aprenderemos sobre os dados que são necessários para executá-las e sobre as vantagens e desvantagens dos diferentes métodos que podem ser usados para isso.</p>
+<p>O cálculo dos níveis de acessibilidade em uma determinada área de estudo compreende duas etapas principais: primeiro, precisamos calcular uma matriz de custo de transporte, geralmente o tempo de viagem, entre as origens e os destinos que compõem a área de estudo; feito isso, calculamos a acessibilidade nos pontos de origem, considerando os custos de transporte entre cada par de origem e destino e o número de oportunidades em cada destino. Nesta seção, aprenderemos como executar essas duas etapas usando a linguagem de programação R. Também aprenderemos sobre os dados que são necessários para executá-las e sobre as vantagens e desvantagens dos diferentes métodos que podem ser usados para isso.</p>
 
 
 

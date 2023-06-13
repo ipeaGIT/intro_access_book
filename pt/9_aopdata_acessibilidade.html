@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.3.361">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Introdução à acessibilidade urbana - 9  Estimativas de acessibilidade</title>
 <style>
@@ -79,7 +79,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-matches-text": "mais correspondências neste documento",
     "search-clear-button-title": "Limpar",
     "search-detached-cancel-button-title": "Cancelar",
-    "search-submit-button-title": "Enviar"
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
   }
 }</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YVERJQF9PJ"></script><script type="text/javascript">
 
@@ -112,7 +113,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <li class="breadcrumb-item"><a href="./9_aopdata_acessibilidade.html"><span class="chapter-number">9</span>  <span class="chapter-title">Estimativas de acessibilidade</span></a></li>
 </ol></nav><a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -318,9 +319,9 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </div>
   
 
-</header><p>Finalmente, o pacote <code>{aopdata}</code> também permite baixar, para todas as cidades incluídas no projeto, estimativas de acesso a empregos e a serviços de saúde, de educação e de assistência social para os anos de 2017, 2018 e 2019.</p>
+</header><p>Finalmente, o pacote <code>{aopdata}</code> também permite baixar, para todas as cidades incluídas no projeto, estimativas de acesso a empregos e a serviços de saúde, de educação e de assistência social para 2017, 2018 e 2019.</p>
 <p>Esses dados podem ser baixados com a função <code>read_access()</code>, que funciona de maneira análoga às funções <code>read_population()</code> e <code>read_landuse()</code>, apresentadas anteriormente. Além de indicar a cidade (parâmetro <code>city</code>) e o ano de referência (<code>year</code>), no entanto, é necessário também informar o modo de transporte (<code>mode</code>) e o intervalo do dia (pico, entre 6h e 8h, ou fora-pico, entre 14h e 16h, controlado pelo parâmetro <code>peak</code>).</p>
-<p>No exemplo a seguir, mostramos como baixar estimativas de acessibilidade no período de pico em São Paulo referentes ao ano de 2019. Nesse exemplo, baixamos as estimativas de acessibilidade tanto por automóvel quanto por transporte público e as unimos em um único <code>data.frame</code>. Note que essa função resulta em uma tabela que traz também, automaticamente, os dados de população e de uso do solo.</p>
+<p>No exemplo a seguir, mostramos como baixar estimativas de acessibilidade no período de pico em São Paulo referentes a 2019. Nesse exemplo, baixamos as estimativas de acessibilidade tanto por automóvel quanto por transporte público e as unimos em um único <code>data.frame</code>. Note que essa função resulta em uma tabela que traz também, automaticamente, os dados de população e de uso do solo.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># baixa dados do AOP de acessibilidade por transporte público</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>acesso_tp <span class="ot">&lt;-</span> aopdata<span class="sc">::</span><span class="fu">read_access</span>(</span>
@@ -391,87 +392,87 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 [206] "geometry"    </code></pre>
 </div>
 </div>
-<p>Como podemos ver, assim como nos casos das tabelas de dados sociodemográficos e de uso do solo, os nomes das variáveis de estimativas de acessibilidade estão organizados em códigos, como <code>CMAEF30</code>, <code>TMISB</code> e <code>CMPPM60</code>. Esses códigos são resultado da combinação de três componentes:</p>
+<p>Como podemos ver, assim como nos casos das tabelas de dados sociodemográficos e de uso do solo, os nomes das variáveis de estimativas de acessibilidade estão organizados em códigos, como <code>CMAEF30</code>, <code>TMISB</code> e <code>CMPPM60</code>. Esses códigos são resultado da combinação de três componentes, conforme descrito a seguir.</p>
 <ol type="1">
 <li>
 <p>O <strong>tipo de indicador</strong> de acessibilidade: é indicado pelas três primeiras letras do código. Os dados incluem três categorias de indicadores:</p>
 <ul>
 <li>
-<code>CMA</code> - Indicador de acessibilidade cumulativa ativa;</li>
+<code>CMA</code> - indicador de acessibilidade cumulativa ativa;</li>
 <li>
-<code>CMP</code> - Indicador de acessibilidade cumulativa passiva; e</li>
+<code>CMP</code> - indicador de acessibilidade cumulativa passiva; e</li>
 <li>
-<code>TMI</code> - Indicador de tempo mínimo até a oportunidade mais próxima.</li>
+<code>TMI</code> - indicador de tempo mínimo até a oportunidade mais próxima.</li>
 </ul>
 </li>
 <li>
 <p>O <strong>tipo de atividade</strong> para a qual os níveis de acessibilidade foram calculados ou a que pessoas o indicador se refere: é descrito pelas letras seguintes, que estão no meio do código. Os dados incluem estimativas de acessibilidade para diversos tipos de atividades:</p>
 <ul>
 <li>
-<code>TT</code> - Todos os empregos;</li>
+<code>TT</code> - todos os empregos;</li>
 <li>
-<code>TB</code> - Empregos de baixa escolaridade;</li>
+<code>TB</code> - empregos de baixa escolaridade;</li>
 <li>
-<code>TM</code> - Empregos de média escolaridade;</li>
+<code>TM</code> - empregos de média escolaridade;</li>
 <li>
-<code>TA</code> - Empregos de alta escolaridade;</li>
+<code>TA</code> - empregos de alta escolaridade;</li>
 <li>
-<code>ST</code> - Todos os estabelecimentos públicos de saúde;</li>
+<code>ST</code> - todos os estabelecimentos públicos de saúde;</li>
 <li>
-<code>SB</code> - Estabelecimentos públicos de saúde de baixa complexidade;</li>
+<code>SB</code> - estabelecimentos públicos de saúde de baixa complexidade;</li>
 <li>
-<code>SM</code> - Estabelecimentos públicos de saúde de média complexidade;</li>
+<code>SM</code> - estabelecimentos públicos de saúde de média complexidade;</li>
 <li>
-<code>SA</code> - Estabelecimentos públicos de saúde de alta complexidade;</li>
+<code>SA</code> - estabelecimentos públicos de saúde de alta complexidade;</li>
 <li>
-<code>ET</code> - Todas as escolas públicas;</li>
+<code>ET</code> - todas as escolas públicas;</li>
 <li>
-<code>EI</code> - Escolas públicas de ensino infantil;</li>
+<code>EI</code> - escolas públicas de ensino infantil;</li>
 <li>
-<code>EF</code> - Escolas públicas de ensino fundamental;</li>
+<code>EF</code> - escolas públicas de ensino fundamental;</li>
 <li>
-<code>EM</code> - Escolas públicas de ensino médio;</li>
+<code>EM</code> - escolas públicas de ensino médio;</li>
 <li>
-<code>MT</code> - Todas as matrículas de escolas públicas;</li>
+<code>MT</code> - todas as matrículas de escolas públicas;</li>
 <li>
-<code>MI</code> - Matrículas de escolas públicas de ensino infantil;</li>
+<code>MI</code> - matrículas de escolas públicas de ensino infantil;</li>
 <li>
-<code>MF</code> - Matrículas de escolas públicas de ensino fundamental;</li>
+<code>MF</code> - matrículas de escolas públicas de ensino fundamental;</li>
 <li>
-<code>MM</code> - Matrículas de escolas públicas de ensino médio; e</li>
+<code>MM</code> - matrículas de escolas públicas de ensino médio; e</li>
 <li>
-<code>CT</code> - Todos os CRAS.</li>
+<code>CT</code> - todos os CRAS.</li>
 </ul>
-<p>No caso do indicador de acessibilidade passiva, as letras do meio do nome da variável indicam <strong>a qual grupo populacional</strong> os níveis de acessibilidade se referem:</p>
+<p>No caso do indicador de acessibilidade passiva, as letras no meio do nome da variável indicam <strong>a qual grupo populacional</strong> os níveis de acessibilidade se referem:</p>
 <ul>
 <li>
-<code>PT</code> - Toda a população;</li>
+<code>PT</code> - toda a população;</li>
 <li>
-<code>PH</code> - População de homens;</li>
+<code>PH</code> - população de homens;</li>
 <li>
-<code>PM</code> - População de mulheres;</li>
+<code>PM</code> - população de mulheres;</li>
 <li>
-<code>PB</code> - População branca;</li>
+<code>PB</code> - população branca;</li>
 <li>
-<code>PN</code> - População negra;</li>
+<code>PN</code> - população negra;</li>
 <li>
-<code>PA</code> - População amarela;</li>
+<code>PA</code> - população amarela;</li>
 <li>
-<code>PI</code> - População indígena;</li>
+<code>PI</code> - população indígena;</li>
 <li>
-<code>P0005I</code> - População de 0 a 5 anos;</li>
+<code>P0005I</code> - população de 0 a 5 anos;</li>
 <li>
-<code>P0614I</code> - População de 6 a 14 anos;</li>
+<code>P0614I</code> - população de 6 a 14 anos;</li>
 <li>
-<code>P1518I</code> - População de 15 a 18 anos;</li>
+<code>P1518I</code> - população de 15 a 18 anos;</li>
 <li>
-<code>P1924I</code> - População de 19 a 24 anos;</li>
+<code>P1924I</code> - população de 19 a 24 anos;</li>
 <li>
-<code>P2539I</code> - População de 25 a 39 anos;</li>
+<code>P2539I</code> - população de 25 a 39 anos;</li>
 <li>
-<code>P4069I</code> - População de 40 a 69 anos; e</li>
+<code>P4069I</code> - população de 40 a 69 anos; e</li>
 <li>
-<code>P70I</code> - População de 70 anos ou mais.</li>
+<code>P70I</code> - população de 70 anos ou mais.</li>
 </ul>
 </li>
 <li><p>O <strong>tempo limite de viagem</strong> utilizado no cálculo do indicador: é descrito pelos números ao final do código. Esses números somente se aplicam aos indicadores de acessibilidade cumulativa ativa e passiva e incluem os limites de 15, 30, 45, 60, 90 e 120 minutos, dependendo do modo de transporte.</p></li>
@@ -485,10 +486,10 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <li>
 <span style="color: red;">CMP</span><span style="color: black;">PM</span><span style="color: blue;">60</span>: quantidade de mulheres que conseguem acessar determinada célula da grade espacial em até 60 minutos de viagem.</li>
 </ul>
-<p>A descrição completa das variáveis também pode ser consultada na documentação da função, rodando em uma sessão de R o comando <code>?read_access</code>. As seções a seguir mostram exemplos de visualizações desses dados em forma de mapas e gráficos.</p>
+<p>A descrição completa das variáveis também pode ser consultada na documentação da função, rodando em uma sessão de R o comando <code>?read_access</code>. As subseções a seguir mostram exemplos de visualizações desses dados em forma de mapas e gráficos.</p>
 <section id="mapa-do-tempo-para-acessar-o-hospital-mais-próximo" class="level2" data-number="9.1"><h2 data-number="9.1" class="anchored" data-anchor-id="mapa-do-tempo-para-acessar-o-hospital-mais-próximo">
 <span class="header-section-number">9.1</span> Mapa do tempo para acessar o hospital mais próximo</h2>
-<p>Neste exemplo, comparamos o tempo de acesso por automóvel e por transporte público até o hospital mais próximo de cada hexágono. Para analisar o tempo mínimo de viagem (<code>TMI</code>) até hospitais de alta complexidade (<code>SA</code>), utilizamos a variável <code>TMISA</code>. Com o código a seguir, carregamos as bibliotecas de visualização de dados e apresentamos a distribuição espacial do tempo de acesso com os dois modos de transporte. Como os tempos de viagem por transporte público costumam ser muito mais longos do que por automóvel, truncamos a distribuição dos valores da variável em 60 minutos.</p>
+<p>Neste exemplo, comparamos o tempo de acesso por automóvel e por transporte público até o hospital mais próximo de cada hexágono. Para analisar o tempo mínimo de viagem (<code>TMI</code>) até hospitais de alta complexidade (<code>SA</code>), utilizamos a variável <code>TMISA</code>. Com o código a seguir, carregamos as bibliotecas de visualização de dados e apresentamos a distribuição espacial do tempo de acesso com os dois modos de transporte. Como os tempos de viagem por transporte público costumam ser muito mais longos do que por automóvel, truncamos a distribuição dos valores da variável em sessenta minutos.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
@@ -504,13 +505,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">60</span>, <span class="dv">10</span>),</span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">50</span>, <span class="dv">10</span>), <span class="st">"60+"</span>)</span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Tempo de viagem até o hospital de alta complex. mais próximo"</span>,</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"São Paulo"</span>,</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Tempo em</span><span class="sc">\n</span><span class="st">minutos"</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> mode) <span class="sc">+</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Tempo (em</span><span class="sc">\n</span><span class="st">minutos)"</span>) <span class="sc">+</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> mode,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">labeller =</span> <span class="fu">as_labeller</span>(</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>      <span class="fu">c</span>(<span class="at">car =</span> <span class="st">"Carro"</span>, <span class="at">public_transport =</span> <span class="st">"Transporte público"</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-time_to_hospital" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="9_aopdata_acessibilidade_files/figure-html/fig-time_to_hospital-1.png" class="img-fluid figure-img" width="2100"></p>
@@ -520,32 +522,32 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </section><section id="mapa-da-quantidade-de-empregos-acessíveis" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="mapa-da-quantidade-de-empregos-acessíveis">
 <span class="header-section-number">9.2</span> Mapa da quantidade de empregos acessíveis</h2>
-<p>Os dados do <code>{aopdata}</code> também tornam muito simples a comparação da quantidade de oportunidades acessíveis em diferentes tempos de viagem. Com o código a seguir, por exemplo, ilustramos como visualizar lado a lado as distribuições espaciais do número de empregos acessíveis em até 60 e 90 minutos de viagem, respectivamente, por transporte público.</p>
+<p>Os dados do <code>{aopdata}</code> também tornam muito simples a comparação da quantidade de oportunidades acessíveis em diferentes tempos de viagem. Com o código a seguir, por exemplo, ilustramos como visualizar lado a lado as distribuições espaciais do número de empregos acessíveis em até sessenta e noventa minutos de viagem, respectivamente, por transporte público.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># estabelece valores usados na legenda do mapa</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>limites_legenda <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">max</span>(acesso_tp<span class="sc">$</span>CMATT90, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="dv">1000</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>limites_legenda <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">max</span>(acesso_tp<span class="sc">$</span>CMATT90, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">/</span> <span class="dv">1000000</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># configura os mapas</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>fig60 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">subset</span>(acesso_tp, <span class="sc">!</span><span class="fu">is.na</span>(mode))) <span class="sc">+</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> CMATT60 <span class="sc">/</span> <span class="dv">1000</span>), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> CMATT60 <span class="sc">/</span> <span class="dv">1000000</span>), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"inferno"</span>, <span class="at">limits =</span> limites_legenda) <span class="sc">+</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"em até 60 min."</span>, <span class="at">fill =</span> <span class="st">"Empregos</span><span class="sc">\n</span><span class="st">em milhares"</span>) <span class="sc">+</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>fig90 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">subset</span>(acesso_tp, <span class="sc">!</span><span class="fu">is.na</span>(mode))) <span class="sc">+</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> CMATT90 <span class="sc">/</span> <span class="dv">1000</span>), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"inferno"</span>, <span class="at">limits =</span> limites_legenda) <span class="sc">+</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"em até 90 min."</span>, <span class="at">fill =</span> <span class="st">"Empregos</span><span class="sc">\n</span><span class="st">em milhares"</span>) <span class="sc">+</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>fig60 <span class="sc">+</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  fig90 <span class="sc">+</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_layout</span>(<span class="at">guides =</span> <span class="st">"collect"</span>) <span class="sc">+</span></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Quantidade de empregos acessíveis por transporte público"</span>,</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"São Paulo"</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Até sessenta minutos de viagem"</span>,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Empregos</span><span class="sc">\n</span><span class="st">(em milhões)"</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>fig90 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">subset</span>(acesso_tp, <span class="sc">!</span><span class="fu">is.na</span>(mode))) <span class="sc">+</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> CMATT90 <span class="sc">/</span> <span class="dv">1000000</span>), <span class="at">color =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"inferno"</span>, <span class="at">limits =</span> limites_legenda) <span class="sc">+</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Até noventa minutos de viagem"</span>,</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Empregos</span><span class="sc">\n</span><span class="st">(em milhões)"</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>fig60 <span class="sc">+</span> fig90 <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">guides =</span> <span class="st">"collect"</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-accessible_jobs" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="9_aopdata_acessibilidade_files/figure-html/fig-accessible_jobs-1.png" class="img-fluid figure-img" width="2100"></p>
@@ -558,7 +560,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p>Existem diversas maneiras de analisar quão desiguais são as condições de acesso a oportunidades nas cidades brasileiras a partir dos dados do <code>{aopdata}</code>. Nesta subseção, apresentamos três exemplos deste tipo de análise.</p>
 <section id="desigualdade-no-tempo-de-acesso-a-oportunidades" class="level3" data-number="9.3.1"><h3 data-number="9.3.1" class="anchored" data-anchor-id="desigualdade-no-tempo-de-acesso-a-oportunidades">
 <span class="header-section-number">9.3.1</span> Desigualdade no tempo de acesso a oportunidades</h3>
-<p>Neste primeiro exemplo, vamos comparar o tempo médio de viagem até o hospital público mais próximo de pessoas de diferentes níveis de renda. Para isso, calculamos o tempo médio de acesso a estabelecimentos de saúde de alta complexidade ponderado pela população de cada célula da nossa grade espacial. Essa ponderação é necessária porque cada célula, por abrigar um número de pessoas diferentes das demais, contribui de forma diferente para a média da população como um todo.</p>
+<p>Neste primeiro exemplo, vamos comparar o tempo médio de viagem até o hospital público mais próximo de pessoas de diferentes níveis de renda. Para isso, calculamos o tempo médio de acesso a estabelecimentos de saúde de alta complexidade ponderado pela população de cada célula da nossa grade espacial. Essa ponderação é necessária porque cada célula, por abrigar um número de pessoas diferente das demais, contribui de forma diferente para a média da população como um todo.</p>
 <p>Antes de realizar o cálculo, cabe observar que algumas células da cidade não conseguem acessar nenhum hospital em até duas horas de viagem. Nesses casos, o valor das variáveis de tempo mínimo de viagem é infinito (<code>Inf</code>). Para lidar com isso, neste exemplo substituímos todos os valores <code>Inf</code> por um tempo de viagem de 120 minutos.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># copia os dados de acesso em um novo dataframe</span></span>
@@ -580,13 +582,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
 <span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"D1</span><span class="sc">\n</span><span class="st">mais</span><span class="sc">\n</span><span class="st">pobres"</span>, <span class="fu">paste0</span>(<span class="st">"D"</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>), <span class="st">"D10</span><span class="sc">\n</span><span class="st">mais</span><span class="sc">\n</span><span class="st">ricos"</span>)</span>
 <span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Média de tempo de viagem até o hospital mais proximo"</span>,</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"por transporte público em São Paulo"</span>,</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Decil de renda"</span>,</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Tempo de viagem</span><span class="sc">\n</span><span class="st">em min."</span></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Decil de renda"</span>, <span class="at">y =</span> <span class="st">"Tempo de viagem (em minutos)"</span>) <span class="sc">+</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-time_to_hospital_by_income" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="9_aopdata_acessibilidade_files/figure-html/fig-time_to_hospital_by_income-1.png" class="img-fluid figure-img" width="2100"></p>
@@ -596,24 +593,22 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </section><section id="desigualdade-no-número-de-oportunidades-acessíveis" class="level3" data-number="9.3.2"><h3 data-number="9.3.2" class="anchored" data-anchor-id="desigualdade-no-número-de-oportunidades-acessíveis">
 <span class="header-section-number">9.3.2</span> Desigualdade no número de oportunidades acessíveis</h3>
-<p>Outra maneira de examinar a desigualdade de acesso a oportunidades é comparar a quantidade de oportunidades acessíveis por diferentes grupos populacionais considerando os mesmos modos de transporte e limites de tempo de viagem. Nesse caso, analisamos o indicador de acessibilidade cumulativa ativa, representado por variáveis cujos códigos começam com <code>CMA</code> na base de dados do <code>{aopdata}</code>. No exemplo a seguir, comparamos a quantidade de empregos acessíveis por pessoas de diferentes decis de renda, considerando viagens de transporte público limitadas em 60 minutos de viagem.</p>
+<p>Outra maneira de examinar a desigualdade de acesso a oportunidades é comparar a quantidade de oportunidades acessíveis por diferentes grupos populacionais considerando os mesmos modos de transporte e limites de tempo de viagem. Nesse caso, analisamos o indicador de acessibilidade cumulativa ativa, representado por variáveis cujos códigos começam com <code>CMA</code> na base de dados do <code>{aopdata}</code>. No exemplo a seguir, comparamos a quantidade de empregos acessíveis por pessoas de diferentes decis de renda, considerando viagens de transporte público limitadas em sessenta minutos de viagem.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">subset</span>(acesso_tp, <span class="sc">!</span><span class="fu">is.na</span>(R003))) <span class="sc">+</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(R003), <span class="at">y =</span> CMATT60 <span class="sc">/</span> <span class="dv">1000</span>, <span class="at">color =</span> <span class="fu">factor</span>(R003))</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(R003), <span class="at">y =</span> CMATT60 <span class="sc">/</span> <span class="dv">1000000</span>, <span class="at">color =</span> <span class="fu">factor</span>(R003))</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"RdBu"</span>) <span class="sc">+</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribução do número de empregos acessíveis em até 60 min."</span>,</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Decil</span><span class="sc">\n</span><span class="st">de renda"</span>,</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"por transporte público, São Paulo"</span>,</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Decil de renda"</span>,</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"N. de empregos acessíveis</span><span class="sc">\n</span><span class="st">(em milhares)"</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"D1</span><span class="sc">\n</span><span class="st">mais</span><span class="sc">\n</span><span class="st">pobres"</span>, <span class="fu">paste0</span>(<span class="st">"D"</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>), <span class="st">"D10</span><span class="sc">\n</span><span class="st">mais</span><span class="sc">\n</span><span class="st">ricos"</span>)</span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Decil</span><span class="sc">\n</span><span class="st">de renda"</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Decil de renda"</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Empregos acessíveis (em milhões)"</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"D1</span><span class="sc">\n</span><span class="st">mais</span><span class="sc">\n</span><span class="st">pobres"</span>, <span class="fu">paste0</span>(<span class="st">"D"</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>), <span class="st">"D10</span><span class="sc">\n</span><span class="st">mais</span><span class="sc">\n</span><span class="st">ricos"</span>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-accessible_jobs_by_income" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="9_aopdata_acessibilidade_files/figure-html/fig-accessible_jobs_by_income-1.png" class="img-fluid figure-img" width="2100"></p>
@@ -621,7 +616,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<p>Por fim, podemos também comparar como o uso de diferentes modos de transporte resulta em diferentes níveis de acessibilidade para a população e como essa diferença varia entre cidades. No exemplo a seguir, comparamos a quantidade de empregos acessíveis em até 30 minutos de viagem a pé e de carro. Para isso, precisamos primeiro baixar os dados de acessibilidade por ambos os modos para todas as cidades do projeto.</p>
+<p>Por fim, podemos também comparar como o uso de diferentes modos de transporte resulta em diferentes níveis de acessibilidade para a população e como essa diferença varia entre cidades. No exemplo a seguir, comparamos a quantidade de empregos acessíveis em até trinta minutos de viagem a pé e de carro. Para isso, precisamos primeiro baixar os dados de acessibilidade por ambos os modos para todas as cidades do projeto.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dados_carro <span class="ot">&lt;-</span> aopdata<span class="sc">::</span><span class="fu">read_access</span>(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">city =</span> <span class="st">"all"</span>,</span>
@@ -637,7 +632,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">showProgress =</span> <span class="cn">FALSE</span></span>
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Em seguida, calculamos para cada cidade e para cada modo de transporte a média ponderada do número de empregos acessíveis em até 30 minutos (<code>CMATT30</code>). Feito isso, juntamos essas estimativas em uma única tabela e calculamos a razão entre os níveis de acessibilidade por carro e os níveis de acessibilidade a pé.</p>
+<p>Em seguida, calculamos para cada cidade e para cada modo de transporte a média ponderada do número de empregos acessíveis em até trinta minutos (<code>CMATT30</code>). Feito isso, juntamos essas estimativas em uma única tabela e calculamos a razão entre os níveis de acessibilidade por carro e os níveis de acessibilidade a pé.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calcula a média de empregos acessíveis em 30 minutos</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -672,22 +667,17 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(media_acesso, <span class="fu">aes</span>(<span class="at">x =</span> razao, <span class="at">y =</span> <span class="fu">reorder</span>(name_muni, razao))) <span class="sc">+</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> razao <span class="sc">+</span> <span class="dv">4</span> , <span class="at">label =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(razao), <span class="st">"x"</span>))) <span class="sc">+</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Diferença entre a quantidade de empregos acessiveis por</span><span class="sc">\n</span><span class="st">automóvel e por caminhada"</span>,</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"em até 30 min. de viagem"</span>,</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">""</span>,</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Razão entre a acessibilidade de carro e a pé"</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> razao <span class="sc">+</span> <span class="dv">3</span> , <span class="at">label =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(razao), <span class="st">"x"</span>))) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">x =</span> <span class="st">"Razão entre a acessibilidade de carro e a pé"</span>) <span class="sc">+</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-car_walk_ratio" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="9_aopdata_acessibilidade_files/figure-html/fig-car_walk_ratio-1.png" class="img-fluid figure-img" width="2100"></p>
-<figcaption class="figure-caption">Figura 9.5: Diferença entre a quantidade de empregos acessíveis por automóvel e por caminhada em até 30 minutos de viagem nas 20 maiores cidades do Brasil</figcaption></figure>
+<figcaption class="figure-caption">Figura 9.5: Diferença entre a quantidade de empregos acessíveis por automóvel e por caminhada em até trinta minutos de viagem nas vinte maiores cidades do Brasil</figcaption></figure>
 </div>
 </div>
 </div>
-<p>Como esperado, a <a href="#fig-car_walk_ratio">Figura <span>9.5</span></a> mostra que é possível acessar muito mais empregos em até 30 minutos com viagens de carro do que com viagens a pé. Essa diferença, porém, varia muito entre cidades. Em São Paulo e em Brasília, viagens de automóvel de até 30 minutos permitem acessar, em média, um número de empregos 54 vezes maior do que viagens a pé de mesma duração. Em Belém, onde observamos a menor diferença, o automóvel permite acessar 17 vezes mais empregos do que a caminhada - razão ainda considerável, porém menor do que a das demais cidades.</p>
+<p>Como esperado, a <a href="#fig-car_walk_ratio">Figura <span>9.5</span></a> mostra que é possível acessar muito mais empregos em até 30 minutos com viagens de carro do que com viagens a pé. Essa diferença, porém, varia muito entre cidades. Em São Paulo e em Brasília, viagens de automóvel de até trinta minutos permitem acessar, em média, um número de empregos 54 vezes maior do que viagens a pé de mesma duração. Em Belém, onde observamos a menor diferença, o automóvel permite acessar 17 vezes mais empregos do que a caminhada - razão ainda considerável, porém menor do que a das demais cidades.</p>
 
 
 </section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">

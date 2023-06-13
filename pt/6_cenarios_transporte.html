@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.3.361">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Introdução à acessibilidade urbana - 6  Comparando a acessibilidade entre dois cenários de transporte</title>
 <style>
@@ -98,7 +98,8 @@ div.csl-indent {
     "search-more-matches-text": "mais correspondências neste documento",
     "search-clear-button-title": "Limpar",
     "search-detached-cancel-button-title": "Cancelar",
-    "search-submit-button-title": "Enviar"
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
   }
 }</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YVERJQF9PJ"></script><script type="text/javascript">
 
@@ -131,7 +132,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <li class="breadcrumb-item"><a href="./6_cenarios_transporte.html"><span class="chapter-number">6</span>  <span class="chapter-title">Comparando a acessibilidade entre dois cenários de transporte</span></a></li>
 </ol></nav><a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -334,10 +335,10 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 
 </header><p>Neste capítulo, vamos ilustrar como usar de forma conjunta o material ensinado nos capítulos anteriores para medir o impacto de um projeto de infraestrutura de transporte sobre a acessibilidade urbana. Para avaliar o impacto de projetos de transporte, precisaremos comparar os níveis de acessibilidade antes e depois da implementação do projeto. Para isso, vamos:</p>
 <ol type="1">
-<li>Utilizar diferentes conjuntos de arquivos GTFS e fazer as edições necessárias para representar os cenários antes e depois da implementação do projeto.</li>
-<li>Calcular duas matrizes de tempo de viagem, uma antes e outra depois do investimento.</li>
-<li>Calcular os níveis de acessibilidade, tanto antes quanto depois do investimento.</li>
-<li>Comparar as condições de acessibilidade em cada cenário, examinando como os impactos se distribuem espacialmente e entre populações de diferentes níveis socioeconômicos.</li>
+<li>utilizar diferentes conjuntos de arquivos GTFS e fazer as edições necessárias para representar os cenários antes e depois da implementação do projeto.</li>
+<li>calcular duas matrizes de tempo de viagem, uma antes e outra depois do investimento.</li>
+<li>calcular os níveis de acessibilidade, tanto antes quanto depois do investimento; e</li>
+<li>comparar as condições de acessibilidade em cada cenário, examinando como os impactos se distribuem espacialmente e entre populações de diferentes níveis socioeconômicos.</li>
 </ol>
 <p>Vamos cobrir esse passo a passo em detalhes, começando por uma breve apresentação do nosso estudo de caso.</p>
 <section id="apresentação-do-estudo-de-caso" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="apresentação-do-estudo-de-caso">
@@ -351,7 +352,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<p>Um dos grandes investimentos recentes no sistema de transporte de Fortaleza é a linha Leste do metrô. O traçado da linha Leste possui 7,3 km de extensão e liga o centro da cidade ao bairro Papicu, permitindo a integração das linhas de metrô Sul e Oeste com corredores de Veículo Leve sobre Trilhos (VLT) e com o terminal de ônibus no Papicu (<a href="#fig-fortaleza_2">Figura <span>6.2</span></a>). Como a linha Leste ainda se encontra em construção até o momento da publicação deste livro, a feita neste capítulo trata de uma avaliação <em>ex-ante</em>, ou seja, em que avaliamos o futuro impacto de um projeto sobre a acessibilidade urbana. Esse tipo de análise se contrapõe a avaliações <em>ex-post</em>, usadas para avaliar o impacto causado por projetos já implementados.</p>
+<p>Um dos grandes investimentos recentes no sistema de transporte de Fortaleza é a linha Leste do metrô. O traçado da linha Leste possui 7,3 km de extensão e liga o centro da cidade ao bairro Papicu, permitindo a integração das linhas de metrô Sul e Oeste com corredores de veículo leve sobre trilhos (VLT) e com o terminal de ônibus no Papicu (<a href="#fig-fortaleza_2">Figura <span>6.2</span></a>). Como a linha Leste ainda se encontrava em construção durante a elaboração deste livro, a análise feita neste capítulo trata de uma avaliação <em>ex-ante</em>, ou seja, em que avaliamos o futuro impacto de um projeto sobre a acessibilidade urbana. Esse tipo de análise se contrapõe a avaliações <em>ex-post</em>, usadas para avaliar o impacto causado por projetos já implementados.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-fortaleza_2" class="quarto-figure quarto-figure-center anchored">
@@ -360,14 +361,17 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<div class="callout callout-style-simple callout-important">
-<div class="callout-body d-flex">
+<div class="callout callout-style-simple callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-body-container">
-<p>É importante notar que a implementação deste projeto também será acompanhada de mudanças nas frequências das linhas Sul e Oeste do metrô e no corredor de VLT Parangaba-Mucuripe, além do racionamento do sistema de ônibus municipais, conforme o Plano de Acessibilidade Sustentável de Fortaleza (Pasfor)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Para fins didáticos, no entanto, não incorporamos as mudanças relativas ao racionamento do sistema de ônibus aos cenários da nossa análise. Portanto, o estudo de caso que apresentamos aqui representa um cenário simplificado, que considera apenas a implementação da linha Leste e as mudanças nas frequências das demais linhas do metrô e do VLT<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<div class="callout-title-container flex-fill">
+O cenário de intervenção analisado
 </div>
+</div>
+<div class="callout-body-container callout-body">
+<p>É importante notar que a implementação deste projeto também será acompanhada de mudanças nas frequências das linhas Sul e Oeste do metrô e no corredor de VLT Parangaba-Mucuripe, além do racionamento do sistema de ônibus municipais, conforme o Plano de Acessibilidade Sustentável de Fortaleza (Pasfor)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Para fins didáticos, no entanto, não incorporamos as mudanças relativas ao racionamento do sistema de ônibus aos cenários da nossa análise. Portanto, o estudo de caso que apresentamos aqui representa um cenário simplificado, que considera apenas a implementação da linha Leste e as mudanças nas frequências das demais linhas do metrô e do VLT<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
 </div>
 </div>
 <p>Como mostra a <a href="#fig-fortaleza_3">Figura <span>6.3</span></a>, a população de Fortaleza está majoritariamente distribuída na região central e na porção oeste da cidade, embora haja alguns pontos de alta densidade populacional no sudeste da cidade. Via de regra, a população de mais alta renda (em tons de azul no mapa da distribuição de decis de renda) está localizada na região do centro expandido e no sudeste do município, enquanto as populações de menor renda (em tons de vermelho) estão principalmente localizadas nas regiões periféricas ao sul e a oeste. Os empregos formais na cidade se distribuem principalmente ao longo de grandes avenidas, com maior concentração no centro da cidade. Em contraste, as escolas públicas de nível médio têm uma distribuição espacial mais equilibrada por todo o território.</p>
@@ -381,7 +385,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </section><section id="dados-gtfs-usados-na-análise" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="dados-gtfs-usados-na-análise">
 <span class="header-section-number">6.2</span> Dados GTFS usados na análise</h2>
-<p>Nesta análise, usaremos os arquivos GTFS disponibilizados pela ETUFOR e pela Metrofor. Esses dados descrevem o sistema de transporte público operante na cidade de Fortaleza em outubro de 2019. Para ter acesso a esses dados, usamos o código a seguir, que baixa os <em>feeds</em> usando o pacote <code>{httr}</code>:</p>
+<p>Nesta análise, usaremos os arquivos GTFS disponibilizados pela Etufor e pelo Metrofor. Esses dados descrevem o sistema de transporte público operante na cidade de Fortaleza em outubro de 2019. Para ter acesso a esses dados, usamos o código a seguir, que baixa os <em>feeds</em> usando o pacote <code>{httr}</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cria o endereço de arquivos temporários</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>end_metrofor <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="st">"metrofor"</span>, <span class="at">fileext =</span> <span class="st">".zip"</span>)</span>
@@ -398,7 +402,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  httr<span class="sc">::</span><span class="fu">write_disk</span>(end_etufor)</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Para simularmos a implementação da nova linha Leste do metrô, precisamos também de um <em>feed</em> que descreva como deverá ser a sua operação. Este <em>feed</em> deve conter algumas informações-chave, como, por exemplo, o traçado da linha, a localização de suas estações, o tempo de viagem entre elas e a frequência planejada dos serviços. Neste exemplo, vamos utilizar o GTFS do projeto da linha Leste criado anteriormente por <span class="citation" data-cites="braga2022impactos">Braga et al. (<a href="references.html#ref-braga2022impactos" role="doc-biblioref">2022</a>)</span>. Assim como os <em>feeds</em> da ETUFOR e da Metrofor, este arquivo GTFS está disponível para <em>download</em> no repositório do livro no GitHub e pode ser baixado com o código a seguir:</p>
+<p>Para simularmos a implementação da nova linha Leste do metrô, precisamos também de um <em>feed</em> que descreva como deverá ser a sua operação. Este <em>feed</em> deve conter algumas informações-chave, como, por exemplo, o traçado da linha, a localização de suas estações, o tempo de viagem entre elas e a frequência planejada dos serviços. Neste exemplo, vamos utilizar o arquivo GTFS do projeto da linha Leste criado anteriormente por <span class="citation" data-cites="braga2022impactos">Braga et al. (<a href="references.html#ref-braga2022impactos" role="doc-biblioref">2022</a>)</span>. Assim como os <em>feeds</em> da Etufor e do Metrofor, este arquivo está disponível para <em>download</em> no repositório do livro no GitHub e pode ser baixado com o código a seguir:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cria o endereço do arquivo temporário</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>end_linha_leste <span class="ot">&lt;-</span> <span class="fu">tempfile</span>(<span class="st">"linha_leste"</span>, <span class="at">fileext =</span> <span class="st">".zip"</span>)</span>
@@ -409,8 +413,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  httr<span class="sc">::</span><span class="fu">write_disk</span>(end_linha_leste)</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Os <em>feeds</em> da ETUFOR e da Metrofor não refletem as mudanças do sistema de transporte público previstas no Pasfor. Para levá-las em consideração no cenário pós-implementação, portanto, precisamos editar esses arquivos usando o pacote <code>{gtfstools}</code>.</p>
-<p>Em nosso cenário simplificado, vamos considerar as mudanças de frequência no metrô e no VLT relatadas em <span class="citation" data-cites="braga2022impactos">Braga et al. (<a href="references.html#ref-braga2022impactos" role="doc-biblioref">2022</a>)</span>, com base no Pasfor: i) aumento da frequência da linha Sul do metrô de quatro para dez viagens por hora; ii) aumento da frequência da linha Oeste do metrô de duas para cinco viagens por hora; e iii) aumento da frequência do VLT Parangaba-Mucuripe de duas para oito viagens por hora. Como estamos considerando apenas mudanças em linhas de metrô e VLT, vamos nos ater a edições no <em>feed</em> da Metrofor. Em primeiro lugar, precisamos ler esse arquivo com a função <code>read_gtfs()</code> e entender como as linhas estão descritas. Para isso, vamos olhar como as tabelas <code>routes</code>, <code>trips</code> e <code>calendar</code> estão estruturadas.</p>
+<p>Os <em>feeds</em> da Etufor e do Metrofor não refletem as mudanças do sistema de transporte público previstas no Pasfor. Para levá-las em consideração no cenário pós-implementação, portanto, precisamos editar esses arquivos usando o pacote <code>{gtfstools}</code>.</p>
+<p>Em nosso cenário simplificado, vamos considerar as mudanças de frequência no metrô e no VLT relatadas em <span class="citation" data-cites="braga2022impactos">Braga et al. (<a href="references.html#ref-braga2022impactos" role="doc-biblioref">2022</a>)</span>, com base no Pasfor: i) aumento da frequência da linha Sul do metrô de quatro para dez viagens por hora; ii) aumento da frequência da linha Oeste do metrô de duas para cinco viagens por hora; e iii) aumento da frequência do VLT Parangaba-Mucuripe de duas para oito viagens por hora. Como estamos considerando apenas mudanças em linhas de metrô e VLT, vamos nos ater a edições no <em>feed</em> do Metrofor. Em primeiro lugar, precisamos ler esse arquivo com a função <code>read_gtfs()</code> e entender como as linhas estão descritas. Para isso, vamos olhar como as tabelas <code>routes</code>, <code>trips</code> e <code>calendar</code> estão estruturadas.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtfstools)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -442,7 +446,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </div>
 <p>O <em>feed</em> descreve três linhas distintas: os dois corredores de metrô e o corredor de VLT. Como o <em>feed</em> não contém uma tabela <code>frequencies</code>, cada rota é descrita por diversas viagens, que partem em diferentes horários do dia. Essas viagens são divididas em viagens de ida e de volta e estão todas associadas a um mesmo serviço, que opera em dias úteis e no sábado.</p>
-<p>A estratégia que vamos usar para fazer as mudanças necessárias no <em>feed</em> é composta pelas seguintes etapas:</p>
+<p>A estratégia que vamos usar para fazer as mudanças necessárias no <em>feed</em> é composta pelas etapas descritas a seguir.</p>
 <ol type="1">
 <li>Filtrar o <em>feed</em> de forma a manter apenas uma viagem por sentido para cada linha, que servirá para nos dizer o tempo que cada viagem leva entre as suas paradas.</li>
 <li>Adicionar uma tabela <code>frequencies</code> ao objeto GTFS, em que descreveremos a frequência de cada viagem.</li>
@@ -518,16 +522,16 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 6:        8</code></pre>
 </div>
 </div>
-<p>Precisamos agora adicionar uma tabela <code>frequencies</code> que descreva a frequência de cada viagem. A especificação requer, no entanto, que listemos o <em>headway</em> de cada linha, e não a sua frequência. Como o <em>headway</em> é o inverso da frequência, precisamos dividir o intervalo de uma hora (3600 segundos) pela frequência de cada linha (10 viagens/hora para a linha Sul, 5 viagens/hora para a linha Oeste e 8 viagens/hora para o VLT). Como resultado, temos que os <em>headways</em> da linha Sul, da linha Oeste e do VLT passarão a ser, respectivamente, 360, 720 e 450 segundos. Com o código abaixo, criamos uma tabela <code>frequencies</code> com os pacotes <code>{tibble}</code> e <code>{data.table}</code>.</p>
+<p>Precisamos agora adicionar uma tabela <code>frequencies</code> que descreva a frequência de cada viagem. A especificação requer, no entanto, que listemos o <em>headway</em> de cada linha, e não a sua frequência. Como o <em>headway</em> é o inverso da frequência, precisamos dividir o intervalo de uma hora (3.600 segundos) pela frequência de cada linha (10 viagens/hora para a linha Sul, 5 viagens/hora para a linha Oeste e 8 viagens/hora para o VLT). Como resultado, temos que os <em>headways</em> da linha Sul, da linha Oeste e do VLT passarão a ser, respectivamente, 360, 720 e 450 segundos. Com o código a seguir, criamos uma tabela <code>frequencies</code> com os pacotes <code>{tibble}</code> e <code>{data.table}</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>frequencias <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>trip_id,        <span class="sc">~</span>start_time, <span class="sc">~</span>end_time,  <span class="sc">~</span>headway_secs, <span class="sc">~</span>exact_times,</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"metro_oeste_0"</span>, <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 720L,            <span class="dv">1</span>,</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"metro_oeste_1"</span>, <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 720L,            <span class="dv">1</span>,</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"metro_sul_0"</span>,   <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 360L,            <span class="dv">1</span>,</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"metro_sul_1"</span>,   <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 360L,            <span class="dv">1</span>,</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"vlt_0"</span>,             <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 450L,            <span class="dv">1</span>,</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"vlt_1"</span>,             <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 450L,            <span class="dv">1</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"metro_oeste_0"</span>, <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 720L,          <span class="dv">1</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"metro_oeste_1"</span>, <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 720L,          <span class="dv">1</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"metro_sul_0"</span>,   <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 360L,          <span class="dv">1</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"metro_sul_1"</span>,   <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 360L,          <span class="dv">1</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"vlt_0"</span>,         <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 450L,          <span class="dv">1</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"vlt_1"</span>,         <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 450L,          <span class="dv">1</span></span>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co"># converte tabela para data.table</span></span>
@@ -536,7 +540,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co"># cria tabela frequencies no objeto gtfs com base na tabela acima</span></span>
 <span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>gtfs_filtrado<span class="sc">$</span>frequencies <span class="ot">&lt;-</span> frequencias</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>A fim de simplificar este estudo de caso, assumimos que os <em>headways</em> listados são válidos no período entre 6h e 9h. Essa premissa é válida no nosso caso, pois iremos calcular as matrizes de tempo de viagem apenas durante o pico da manhã. No entanto, caso desejássemos calcular os tempos de viagens em outros períodos do dia, ou mesmo utilizar este GTFS na operação do dia a dia desses corredores, precisaríamos listar os <em>headways</em> para os demais períodos do dia, como o fora-pico, a madrugada etc. O valor <code>1</code> da coluna <code>exact_times</code> estabelece que o cronograma das viagens durante o período especificado deve seguir o <em>headway</em> à risca, e não de forma aproximada<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
+<p>A fim de simplificar este estudo de caso, assumimos que os <em>headways</em> listados são válidos no período de 6h às 9h. Essa premissa é válida no nosso caso, pois iremos calcular as matrizes de tempo de viagem apenas durante o pico da manhã. No entanto, caso desejássemos calcular os tempos de viagens em outros períodos do dia, ou mesmo utilizar este arquivo GTFS na operação do dia a dia desses corredores, precisaríamos listar os <em>headways</em> para os demais períodos do dia, como fora-pico, madrugada etc. O valor <code>1</code> da coluna <code>exact_times</code> estabelece que o cronograma das viagens durante o período especificado deve seguir o <em>headway</em> à risca, e não de forma aproximada<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
 <p>O objeto GTFS que resulta das modificações feitas até aqui já pode perfeitamente ser utilizado para o cálculo de matrizes de tempo de viagem. Buscando retomar a característica inicial do <em>feed</em> de não possuir uma tabela <code>frequencies</code>, no entanto, vamos “converter” os registros dessa tabela em cronogramas descritos na tabela <code>stop_times</code>. Para isso, usamos a função <code>frequencies_to_stop_times()</code>. Como todas as viagens do <em>feed</em> são convertidas, a tabela <code>frequencies</code> é removida do objeto.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>gtfs_filtrado <span class="ot">&lt;-</span> <span class="fu">frequencies_to_stop_times</span>(gtfs_filtrado)</span>
@@ -546,7 +550,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <pre><code>NULL</code></pre>
 </div>
 </div>
-<p>Para verificar se a operação deu certo, vamos olhar para as viagens da linha Oeste no sentido Caucaia (cujo <code>direction_id</code> é <code>0</code>). Como essa linha deve ter uma frequência de 5 viagens/hora entre 6h e 9h, a tabela <code>trips</code> deve conter exatamente 16 viagens relacionadas a ela (5 viagens/hora durante 3 horas, mais uma viagem começando às 9h).</p>
+<p>Para verificar se a operação deu certo, vamos olhar para as viagens da linha Oeste no sentido Caucaia (cujo <code>direction_id</code> é <code>0</code>). Como essa linha deve ter uma frequência de cinco viagens por hora entre 6h e 9h, a tabela <code>trips</code> deve conter exatamente dezesseis viagens relacionadas a ela (cinco viagens por hora durante três horas, mais uma viagem começando às 9h).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># seleciona apenas as viagens da linha oeste do metrô</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>metro_linha_oeste <span class="ot">&lt;-</span> gtfs_filtrado<span class="sc">$</span>trips[<span class="fu">grepl</span>(<span class="st">"metro_oeste_0"</span>, trip_id)]</span>
@@ -565,7 +569,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 [13] "metro_oeste_0_13" "metro_oeste_0_14" "metro_oeste_0_15" "metro_oeste_0_16"</code></pre>
 </div>
 </div>
-<p>A tabela <code>stop_times</code>, por sua vez, deve listar essas viagens partindo a cada 12 minutos (o equivalente a um <em>headway</em> de 450 segundos). Vamos verificar, portanto, o primeiro registro do cronograma de cada uma das viagens listadas anteriormente.</p>
+<p>A tabela <code>stop_times</code>, por sua vez, deve listar essas viagens partindo a cada doze minutos (o equivalente a um <em>headway</em> de 450 segundos). Vamos verificar, portanto, o primeiro registro do cronograma de cada uma das viagens listadas anteriormente.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>viagens_metro_oeste <span class="ot">&lt;-</span> metro_linha_oeste<span class="sc">$</span>trip_id</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -606,16 +610,16 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 <p>Temos, agora, quatro arquivos de GTFS distintos:</p>
 <ul>
-<li>O <em>feed</em> da ETUFOR, que descreve o sistema de ônibus que operava em outubro de 2019;</li>
-<li>O <em>feed</em> da Metrofor, que descreve a operação em outubro de 2019 das linhas Sul e Oeste do metrô e do VLT Parangaba-Mucuripe;</li>
-<li>O <em>feed modificado</em> da Metrofor, que descreve a futura operação das linhas Sul e Oeste do metrô e do VLT Parangaba-Mucuripe como previsto no Pasfor; e</li>
-<li>O <em>feed</em> da linha Leste, que descreve a futura operação dessa linha.</li>
+<li>o <em>feed</em> da Etufor, que descreve o sistema de ônibus que operava em outubro de 2019;</li>
+<li>o <em>feed</em> do Metrofor, que descreve a operação em outubro de 2019 das linhas Sul e Oeste do metrô e do VLT Parangaba-Mucuripe;</li>
+<li>o <em>feed modificado</em> do Metrofor, que descreve a futura operação das linhas Sul e Oeste do metrô e do VLT Parangaba-Mucuripe como previsto no Pasfor; e</li>
+<li>o <em>feed</em> da linha Leste, que descreve a futura operação dessa linha.</li>
 </ul>
-<p>Esses quatro arquivos GTFS serão usados em conjunto para calcular as condições de acessibilidade de Fortaleza antes e depois da implementação da linha Leste. No cenário pré-linha Leste, vamos calcular as matrizes de tempo de viagem com base apenas nos <em>feeds</em> de outubro de 2019 da Metrofor e da ETUFOR, que representam a típica operação de transporte público da cidade antes da implementação do novo corredor. No cenário pós-implementação, consideraremos o <em>feed</em> da ETUFOR, o <em>feed modificado</em> da Metrofor, com as frequências do metrô e do VLT alteradas, e o GTFS da linha Leste, incorporando à análise a operação planejada dessa linha após sua finalização.</p>
+<p>Esses quatro arquivos GTFS serão usados em conjunto para calcular as condições de acessibilidade de Fortaleza antes e depois da implementação da linha Leste. No cenário pré-linha Leste, vamos calcular as matrizes de tempo de viagem com base apenas nos <em>feeds</em> de outubro de 2019 do Metrofor e da Etufor, que representam a típica operação de transporte público da cidade antes da implementação do novo corredor. No cenário pós-implementação, consideraremos o <em>feed</em> da Etufor, o <em>feed modificado</em> do Metrofor, com as frequências do metrô e do VLT alteradas, e o arquivo GTFS da linha Leste, incorporando à análise a operação planejada dessa linha após sua finalização.</p>
 </section><section id="cálculo-das-matrizes-de-tempo-de-viagem" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="cálculo-das-matrizes-de-tempo-de-viagem">
 <span class="header-section-number">6.3</span> Cálculo das matrizes de tempo de viagem</h2>
-<p>Feitas as edições necessárias ao GTFS da Metrofor e definidos os dados GTFS que vamos usar em cada um dos cenários de transporte público, o próximo passo é calcular as matrizes de tempo de viagem, que posteriormente serão utilizadas para estimar os níveis de acessibilidade. Para isso, vamos utilizar a função <code>travel_time_matrix()</code> do pacote <code>{r5r}</code>, como apresentado anteriormente no <a href="./3_calculando_acesso.html#sec-matrix">Capítulo 3</a>.</p>
-<p>Antes de calcular as matrizes, no entanto, precisamos organizar os nossos arquivos na estrutura que o <code>{r5r}</code> requer. Com o código a seguir, criamos uma pasta separada para cada um dos nossos cenários (antes e depois) e salvamos nelas os dados necessários para o roteamento:</p>
+<p>Feitas as edições necessárias ao <em>feed</em> do Metrofor e definidos os dados GTFS que vamos usar em cada um dos cenários de transporte público, o próximo passo é calcular as matrizes de tempo de viagem, que posteriormente serão utilizadas para estimar os níveis de acessibilidade. Para isso, vamos utilizar a função <code>travel_time_matrix()</code> do pacote <code>{r5r}</code>, como apresentado anteriormente no <a href="./3_calculando_acesso.html#sec-matrix">Capítulo 3</a>.</p>
+<p>Antes de calcular as matrizes, contudo, precisamos organizar os nossos arquivos na estrutura que o <code>{r5r}</code> requer. Com o código a seguir, criamos uma pasta separada para cada um dos nossos cenários (antes e depois) e salvamos nelas os dados necessários para o roteamento:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># cria pasta raiz da análise de dados</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>pasta_analise <span class="ot">&lt;-</span> <span class="st">"analise_de_impacto"</span></span>
@@ -698,7 +702,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
     └── topografia.tif</code></pre>
 </div>
 </div>
-<p>Com os dados organizados nas pastas, podemos começar o cálculo das matrizes de tempo de viagem. A primeira etapa é construir a rede de transporte multimodal usada pelo <code>{r5r}</code> no roteamento a partir dos dados da rede viária, do sistema de transporte público e de topografia. Isso é feito com o comando <code>setup_r5()</code>, que também retorna uma conexão com o R5. Com o código abaixo, criamos duas redes, uma para cada cenário:</p>
+<p>Com os dados organizados nas pastas, podemos começar o cálculo das matrizes de tempo de viagem. A primeira etapa é construir a rede de transporte multimodal usada pelo <code>{r5r}</code> no roteamento a partir dos dados da rede viária, do sistema de transporte público e de topografia. Isso é feito com o comando <code>setup_r5()</code>, que também retorna uma conexão com o R5. Com o código a seguir, criamos duas redes, uma para cada cenário:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># aloca a memória disponível para o Java</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">java.parameters =</span> <span class="st">"-Xmx4G"</span>)</span>
@@ -711,12 +715,12 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>con_r5r_depois <span class="ot">&lt;-</span> <span class="fu">setup_r5</span>(pasta_depois, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Criadas as redes de transporte de cada cenário, prosseguimos para o cálculo das matrizes de tempo de viagem. Nesta etapa, vamos utilizar como origens e destinos os centroides de uma grade espacial de hexágonos de Fortaleza, disponibilizada pelo pacote <code>{aopdata}</code><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. Cada hexágono tem uma área de 0,11 km², aproximadamente um quarteirão, o que permite uma análise espacial bem detalhada.</p>
-<p>Para comparar adequadamente os dois cenários, precisamos calcular as duas matrizes considerando os mesmos parâmetros de viagem. Aqui, vamos considerar viagens a pé ou por transporte público, permitir caminhadas de até 30 minutos nas pernas de acesso e egresso das paradas de transporte público e limitar o tempo máximo de viagem em até 60 minutos. Vamos considerar o horário de partida de 7h, durante o horário de pico de uma típica segunda-feira de operação:</p>
+<p>Para comparar adequadamente os dois cenários, precisamos calcular as duas matrizes considerando os mesmos parâmetros de viagem. Aqui, vamos considerar viagens a pé ou por transporte público, permitir caminhadas de até trinta minutos nas pernas de acesso e egresso das paradas de transporte público e limitar o tempo máximo de viagem em até sessenta minutos. Vamos considerar o horário de partida de 7h, durante o horário de pico de uma típica segunda-feira de operação:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># baixa os dados da grade espacial</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>grade_fortaleza <span class="ot">&lt;-</span> aopdata<span class="sc">::</span><span class="fu">read_grid</span>(<span class="at">city =</span> <span class="st">"Fortaleza"</span>)</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co"># calcula os centróides das células da grade</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co"># calcula os centroides das células da grade</span></span>
 <span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>pontos <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_centroid</span>(grade_fortaleza)</span>
 <span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co"># renomeia o nome da coluna com o id das células</span></span>
@@ -785,7 +789,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">suffixes =</span> <span class="fu">c</span>(<span class="st">"_antes"</span>, <span class="st">"_depois"</span>)</span>
 <span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="co"># mostra apenas os pares OD que cujo tempo que os distanciam diminuiu</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="co"># mostra apenas os pares OD cujo tempo que os distancia diminuiu</span></span>
 <span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>comparacao[travel_time_p50_antes <span class="sc">&lt;</span> travel_time_p50_depois]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>               from_id           to_id travel_time_p50_antes
@@ -846,7 +850,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">showProgress =</span> <span class="cn">FALSE</span></span>
 <span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Para demonstrar, vamos calcular a acessibilidade a postos de trabalho e a escolas públicas de ensino médio na nossa área de estudo. Os dados do total de empregos e de escolas públicas de nível médio em cada hexágono estão listados nas colunas <code>T001</code> e <code>E004</code>, respectivamente. Vamos renomeá-las para facilitar sua identificação e manter apenas as colunas necessárias na tabela de dados de uso do solo. Vamos manter também as colunas <code>P001</code>, de população total em cada hexágono, e <code>R003</code>, do decil de renda em que cada hexágono se encontra, que serão úteis mais à frente:</p>
+<p>A fins de demonstração, vamos calcular a acessibilidade a postos de trabalho e a escolas públicas de ensino médio na nossa área de estudo. Os dados do total de empregos e de escolas públicas de nível médio em cada hexágono estão listados nas colunas <code>T001</code> e <code>E004</code>, respectivamente. Vamos renomeá-las para facilitar sua identificação e manter apenas as colunas necessárias na tabela de dados de uso do solo. Vamos manter também as colunas <code>P001</code>, de população total em cada hexágono, e <code>R003</code>, do decil de renda em que cada hexágono se encontra, que serão úteis mais à frente:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># renomeia colunas</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>colunas_mantidas <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"id"</span>, <span class="st">"empregos"</span>, <span class="st">"escolas"</span>, <span class="st">"populacao"</span>, <span class="st">"decil"</span>)</span>
@@ -877,7 +881,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 <p>Uma decisão-chave no cálculo de acessibilidade é a escolha da medida a ser utilizada. É extremamente importante pesar as vantagens e desvantagens de cada medida e compreender quais indicadores se adequam às oportunidades para as quais desejamos calcular os níveis de acessibilidade. Neste exemplo, utilizaremos duas medidas distintas:</p>
 <ol type="1">
-<li><p>No cálculo da acessibilidade a empregos, vamos usar a medida de oportunidades cumulativas. Essa métrica nos permite entender quantos empregos são acessíveis dentro de um determinado custo de viagem. Apesar das suas limitações discutidas no <a href="./2_indicadores.html#medida-de-oportunidades-cumulativas">Capítulo 2</a>, este é um dos indicadores mais amplamente utilizados. Isso se deve, em grande medida, à facilidade de comunicar e interpretar os resultados desse indicador. Nesse exemplo, vamos estabelecer como limite de custo um tempo de viagem de 60 minutos, valor muito próximo do tempo médio de deslocamento casa-trabalho por transporte público de Fortaleza em 2019 (cerca de 58 minutos, segundo o Pasfor).</p></li>
+<li><p>No cálculo da acessibilidade a empregos, vamos usar a medida de oportunidades cumulativas. Essa métrica nos permite entender quantos empregos são acessíveis dentro de um determinado custo de viagem. Apesar das suas limitações discutidas no <a href="./2_indicadores.html#medida-de-oportunidades-cumulativas">Capítulo 2</a>, este é um dos indicadores mais amplamente utilizados. Isso se deve, em grande medida, à facilidade de comunicar e interpretar seus resultados. Nesse exemplo, vamos estabelecer como limite de custo um tempo de viagem de sessenta minutos, valor muito próximo do tempo médio de deslocamento casa-trabalho por transporte público de Fortaleza em 2019 (cerca de 58 minutos, segundo o Pasfor).</p></li>
 <li><p>No cálculo da acessibilidade a escolas públicas, vamos usar a medida de custo mínimo de viagem. Essa métrica é especialmente útil para avaliar a cobertura de serviços públicos essenciais, como educação e saúde básica. Com ela, podemos, por exemplo, identificar as parcelas da população que estão a uma distância maior do que a considerada razoável para acessar esses serviços essenciais.</p></li>
 </ol>
 <p>Como mostrado anteriormente no <a href="./3_calculando_acesso.html#sec-accessibility">Capítulo 3</a>, o cálculo dessas medidas pode ser feito com as funções <code>cumulative_cutoff()</code> e <code>cost_to_closest()</code>, respectivamente, do pacote <code>{accessibility}</code>:</p>
@@ -935,7 +939,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 5124: 8980107b6dbffff  depois              15</code></pre>
 </div>
 </div>
-<p>O resultado da função de custo mínimo de viagem inclui alguns valores <code>Inf</code> (abreviação de infinito). Esse valor é utilizado para sinalizar origens que não conseguem alcançar nenhuma oportunidade, dadas as viagens que compõem a matriz. Em nosso caso, isso significa que as origens listadas com esse valor não conseguem alcançar nenhuma escola pública de nível médio dentro de 60 minutos (limite de tempo de viagem imposto no cálculo da matriz). Para simplificar os cálculos daqui em diante, vamos considerar que essas regiões estão a 80 minutos de viagem de sua escola mais próxima:</p>
+<p>O resultado da função de custo mínimo de viagem inclui alguns valores <code>Inf</code> (abreviação de infinito). Esse valor é utilizado para sinalizar origens que não conseguem alcançar nenhuma oportunidade, dadas as viagens que compõem a matriz. Em nosso caso, isso significa que as origens listadas com esse valor não conseguem alcançar nenhuma escola pública de nível médio dentro de sessenta minutos (limite de tempo de viagem imposto no cálculo da matriz). Para simplificar os cálculos daqui em diante, vamos considerar que essas regiões estão a oitenta minutos de viagem de sua escola mais próxima:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># substitui valores Inf por tempos de viagem de 80 minutos</span></span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>tempo_a_escolas[</span>
@@ -960,7 +964,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </section><section id="análise-dos-níveis-de-acessibilidade-antes-e-depois" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="análise-dos-níveis-de-acessibilidade-antes-e-depois">
 <span class="header-section-number">6.5</span> Análise dos níveis de acessibilidade antes e depois</h2>
-<p>Agora que calculamos os níveis de acessibilidade em cada cenário e a diferença entre eles, nós conseguimos analisar como a futura implementação da linha Leste em conjunto com o aumento da frequência das linhas de metrô e VLT deverão impactar as condições de acessibilidade em nossa área de estudo. Como primeira análise exploratória, podemos investigar o impacto dessas mudanças sobre a acessibilidade média da cidade. Olhando primeiro para a acessibilidade a oportunidades de emprego, vamos calcular a quantidade média de empregos acessíveis em cada cenário. Aqui, é importante calcular a média de acessibilidade ponderada pela população de cada célula da grade espacial que estamos usando, visto que células com maiores populações contribuem mais para o nível médio da população como um todo do que células com poucas pessoas.</p>
+<p>Agora que calculamos os níveis de acessibilidade em cada cenário e a diferença entre eles, nós conseguimos analisar como a futura implementação da linha Leste em conjunto com o aumento da frequência das linhas de metrô e VLT deverá impactar as condições de acessibilidade em nossa área de estudo. Como primeira análise exploratória, podemos investigar o impacto dessas mudanças sobre a acessibilidade média da cidade. Olhando primeiro para a acessibilidade a oportunidades de emprego, vamos calcular a quantidade média de empregos acessíveis em cada cenário. Aqui, é importante calcular a média de acessibilidade ponderada pela população de cada célula da grade espacial que estamos usando, visto que células com maiores populações contribuem mais para o nível médio da população como um todo do que células com poucas pessoas.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># carrega bibliotecas de visualização de dados</span></span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -991,13 +995,21 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb49-27"><a href="#cb49-27" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> acesso_medio, <span class="fu">aes</span>(<span class="at">x =</span> cenario, <span class="at">y =</span> acesso <span class="sc">/</span> <span class="dv">1000</span>)) <span class="sc">+</span></span>
 <span id="cb49-28"><a href="#cb49-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"#0f3c53"</span>) <span class="sc">+</span></span>
 <span id="cb49-29"><a href="#cb49-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
-<span id="cb49-30"><a href="#cb49-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(acesso <span class="sc">/</span> <span class="dv">1000</span>, <span class="at">digits =</span> <span class="dv">1</span>)),</span>
-<span id="cb49-31"><a href="#cb49-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="fl">1.5</span>,</span>
-<span id="cb49-32"><a href="#cb49-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"white"</span>,</span>
-<span id="cb49-33"><a href="#cb49-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">10</span></span>
-<span id="cb49-34"><a href="#cb49-34" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb49-35"><a href="#cb49-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Empregos acessíveis</span><span class="sc">\n</span><span class="st">(em milhares)"</span>) <span class="sc">+</span></span>
-<span id="cb49-36"><a href="#cb49-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb49-30"><a href="#cb49-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
+<span id="cb49-31"><a href="#cb49-31" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="fu">formatC</span>(</span>
+<span id="cb49-32"><a href="#cb49-32" aria-hidden="true" tabindex="-1"></a>        acesso <span class="sc">/</span> <span class="dv">1000</span>,</span>
+<span id="cb49-33"><a href="#cb49-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">digits =</span> <span class="dv">1</span>,</span>
+<span id="cb49-34"><a href="#cb49-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">decimal.mark =</span> <span class="st">","</span>,</span>
+<span id="cb49-35"><a href="#cb49-35" aria-hidden="true" tabindex="-1"></a>        <span class="at">format =</span> <span class="st">"f"</span></span>
+<span id="cb49-36"><a href="#cb49-36" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb49-37"><a href="#cb49-37" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb49-38"><a href="#cb49-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="fl">1.5</span>,</span>
+<span id="cb49-39"><a href="#cb49-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"white"</span>,</span>
+<span id="cb49-40"><a href="#cb49-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">10</span></span>
+<span id="cb49-41"><a href="#cb49-41" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb49-42"><a href="#cb49-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Empregos acessíveis (em milhares)"</span>) <span class="sc">+</span></span>
+<span id="cb49-43"><a href="#cb49-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Cenário"</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Antes"</span>, <span class="st">"Depois"</span>)) <span class="sc">+</span></span>
+<span id="cb49-44"><a href="#cb49-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-fig_4" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="6_cenarios_transporte_files/figure-html/fig-fig_4-1.png" class="img-fluid figure-img" width="2100"></p>
@@ -1005,8 +1017,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<p>Os resultados mostram que a população de Fortaleza conseguia acessar em média 244.137 empregos em até 60 minutos de viagem por transporte público antes da expansão do metrô, em 2019. A implementação da linha Leste e os aumentos nas frequências do metrô e do VLT aumentam esse valor em 5,3%, para 257.177 empregos em média.</p>
-<p>Analisando o tempo médio de acesso à escola pública de ensino médio mais próxima, notamos que as mudanças no sistema de transportes pouco alteram a acessibilidade a essas escolas. Em média, a população de Fortaleza demorava cerca de 12 minutos e meio para chegar à escola pública de ensino médio mais próxima de sua casa em 2019. Após a conclusão da extensão do metrô e do aumento da frequência das linhas de metrô e VLT, esse resultado permanece praticamente inalterado.</p>
+<p>Os resultados mostram que a população de Fortaleza conseguia acessar em média 244.137 empregos em até sessenta minutos de viagem por transporte público antes da expansão do metrô, em 2019. A implementação da linha Leste e os aumentos nas frequências do metrô e do VLT aumentam esse valor em 5,3%, para 257.177 empregos em média.</p>
+<p>Analisando o tempo médio de acesso à escola pública de ensino médio mais próxima, notamos que as mudanças no sistema de transportes pouco alteram a acessibilidade a essas escolas. Em média, a população de Fortaleza demorava cerca de 12 minutos e meio para chegar à escola pública de ensino médio mais próxima de sua casa em 2019. Após a conclusão da extensão do metrô e o aumento da frequência das linhas de metrô e VLT, esse resultado permanece praticamente inalterado.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># une tabela de tempo a escolas com informações de pessoas residentes nos</span></span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="co"># hexágonos</span></span>
@@ -1026,13 +1038,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb50-16"><a href="#cb50-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> tempo_medio, <span class="fu">aes</span>(<span class="at">x =</span> cenario, <span class="at">y =</span> tempo)) <span class="sc">+</span></span>
 <span id="cb50-17"><a href="#cb50-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"#0d6556"</span>) <span class="sc">+</span></span>
 <span id="cb50-18"><a href="#cb50-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
-<span id="cb50-19"><a href="#cb50-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(tempo, <span class="at">digits =</span> <span class="dv">2</span>)),</span>
+<span id="cb50-19"><a href="#cb50-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">formatC</span>(tempo, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">decimal.mark =</span> <span class="st">","</span>, <span class="at">format =</span> <span class="st">"f"</span>)),</span>
 <span id="cb50-20"><a href="#cb50-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="fl">1.5</span>,</span>
 <span id="cb50-21"><a href="#cb50-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"white"</span>,</span>
 <span id="cb50-22"><a href="#cb50-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">10</span></span>
 <span id="cb50-23"><a href="#cb50-23" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb50-24"><a href="#cb50-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Média do tempo até a escola</span><span class="sc">\n</span><span class="st">mais próxima (em minutos)"</span>) <span class="sc">+</span></span>
-<span id="cb50-25"><a href="#cb50-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb50-24"><a href="#cb50-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Média do tempo até a escola</span><span class="sc">\n</span><span class="st">mais próxima (minutos)"</span>) <span class="sc">+</span></span>
+<span id="cb50-25"><a href="#cb50-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Cenário"</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Antes"</span>, <span class="st">"Depois"</span>)) <span class="sc">+</span></span>
+<span id="cb50-26"><a href="#cb50-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-fig_5" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="6_cenarios_transporte_files/figure-html/fig-fig_5-1.png" class="img-fluid figure-img" width="2100"></p>
@@ -1040,7 +1053,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<p>Em síntese, os resultados mostram que o plano de construção da Linha Leste do metrô e de ajuste das frequências de outros corredores de transporte público da cidade deverão afetar mais significativamente a acessibilidade a oportunidades de emprego do que a acessibilidade a escolas públicas de nível médio. Isso se explica principalmente pela distribuição espacial desses dois tipos de oportunidade na cidade de Fortaleza: enquanto os empregos se distribuem de forma muito mais concentrada no centro da cidade, as escolas estão muito mais bem distribuídas em todo o território. As mudanças no sistema de transporte público, portanto, devem facilitar o acesso de moradores de regiões mais afastadas aos empregos localizados no centro. Por outro lado, a distribuição mais equitativa de escolas públicas resulta em condições relativamente boas de acesso a esses locais mesmo antes das mudanças na rede de transporte, explicando por que tais mudanças deverão ter impacto tão pequeno no tempo médio de acesso a escolas.</p>
+<p>Em síntese, os resultados mostram que o plano de construção da Linha Leste do metrô e de ajuste das frequências de outros corredores de transporte público da cidade deverá afetar mais significativamente a acessibilidade a oportunidades de emprego do que a acessibilidade a escolas públicas de nível médio. Isso se explica principalmente pela distribuição espacial desses dois tipos de oportunidade na cidade de Fortaleza: enquanto os empregos se distribuem de forma muito mais concentrada no centro da cidade, as escolas estão muito mais bem distribuídas em todo o território. As mudanças no sistema de transporte público, portanto, devem facilitar o acesso de moradores de regiões mais afastadas aos empregos localizados no centro. Em contrapartida, a distribuição mais equitativa de escolas públicas resulta em condições relativamente boas de acesso a esses locais mesmo antes das mudanças na rede de transporte, explicando por que tais mudanças deverão ter impacto tão pequeno no tempo médio de acesso a escolas.</p>
 <p>Esses resultados podem ser melhor compreendidos quando observamos a sua distribuição espacial. Antes de fazer isso, no entanto, vamos criar um objeto espacial que descreve o traçado dos corredores de transporte da cidade - o que torna ainda mais evidente o impacto das mudanças no sistema de transportes sobre os níveis de acessibilidade.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lê arquivos gtfs necessários para gerar as geometrias de cada corredor</span></span>
@@ -1093,9 +1106,16 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb51-48"><a href="#cb51-48" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb51-49"><a href="#cb51-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> grade_fortaleza, <span class="at">fill =</span> <span class="st">"gray90"</span>, <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
 <span id="cb51-50"><a href="#cb51-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> traj_corredores, <span class="fu">aes</span>(<span class="at">color =</span> corredor)) <span class="sc">+</span></span>
-<span id="cb51-51"><a href="#cb51-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#F8766D"</span>, <span class="st">"#7CAE00"</span>, <span class="st">"#00BFC4"</span>, <span class="st">"#C77CFF"</span>)) <span class="sc">+</span></span>
-<span id="cb51-52"><a href="#cb51-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> cenario, <span class="at">nrow =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb51-53"><a href="#cb51-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb51-51"><a href="#cb51-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(</span>
+<span id="cb51-52"><a href="#cb51-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Corredor"</span>,</span>
+<span id="cb51-53"><a href="#cb51-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#F8766D"</span>, <span class="st">"#7CAE00"</span>, <span class="st">"#00BFC4"</span>, <span class="st">"#C77CFF"</span>)</span>
+<span id="cb51-54"><a href="#cb51-54" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb51-55"><a href="#cb51-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(</span>
+<span id="cb51-56"><a href="#cb51-56" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> cenario,</span>
+<span id="cb51-57"><a href="#cb51-57" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">1</span>, </span>
+<span id="cb51-58"><a href="#cb51-58" aria-hidden="true" tabindex="-1"></a>    <span class="at">labeller =</span> <span class="fu">as_labeller</span>(<span class="fu">c</span>(<span class="at">antes =</span> <span class="st">"Antes"</span>, <span class="at">depois =</span> <span class="st">"Depois"</span>))</span>
+<span id="cb51-59"><a href="#cb51-59" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb51-60"><a href="#cb51-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-fig_6" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="6_cenarios_transporte_files/figure-html/fig-fig_6-1.png" class="img-fluid figure-img" width="2100"></p>
@@ -1122,44 +1142,48 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> acesso_a_empregos),</span>
 <span id="cb52-16"><a href="#cb52-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="cn">NA</span></span>
 <span id="cb52-17"><a href="#cb52-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb52-18"><a href="#cb52-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> cenario, <span class="at">nrow =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb52-19"><a href="#cb52-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(</span>
-<span id="cb52-20"><a href="#cb52-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">option =</span> <span class="st">"inferno"</span>,</span>
-<span id="cb52-21"><a href="#cb52-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> scales<span class="sc">::</span><span class="fu">label_number</span>(<span class="at">scale =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">1000</span>)</span>
+<span id="cb52-18"><a href="#cb52-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(</span>
+<span id="cb52-19"><a href="#cb52-19" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> cenario,</span>
+<span id="cb52-20"><a href="#cb52-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">1</span>,</span>
+<span id="cb52-21"><a href="#cb52-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">labeller =</span> <span class="fu">as_labeller</span>(<span class="fu">c</span>(<span class="at">antes =</span> <span class="st">"Antes"</span>, <span class="at">depois =</span> <span class="st">"Depois"</span>))</span>
 <span id="cb52-22"><a href="#cb52-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb52-23"><a href="#cb52-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Empregos</span><span class="sc">\n</span><span class="st">acessíveis</span><span class="sc">\n</span><span class="st">(em milhares)"</span>, <span class="at">color =</span> <span class="st">"Corredores"</span>) <span class="sc">+</span></span>
-<span id="cb52-24"><a href="#cb52-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
-<span id="cb52-25"><a href="#cb52-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> traj_corredores,</span>
-<span id="cb52-26"><a href="#cb52-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">color =</span> corredor),</span>
-<span id="cb52-27"><a href="#cb52-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.8</span>,</span>
-<span id="cb52-28"><a href="#cb52-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">show.legend =</span> <span class="cn">FALSE</span></span>
-<span id="cb52-29"><a href="#cb52-29" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb52-30"><a href="#cb52-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#F8766D"</span>, <span class="st">"#7CAE00"</span>, <span class="st">"#00BFC4"</span>, <span class="st">"#C77CFF"</span>)) <span class="sc">+</span></span>
-<span id="cb52-31"><a href="#cb52-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
-<span id="cb52-32"><a href="#cb52-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">0.4</span>, <span class="st">"cm"</span>))</span>
-<span id="cb52-33"><a href="#cb52-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-34"><a href="#cb52-34" aria-hidden="true" tabindex="-1"></a><span class="co"># configura mapa de diferença entre cenários</span></span>
-<span id="cb52-35"><a href="#cb52-35" aria-hidden="true" tabindex="-1"></a>dist_diferenca <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb52-36"><a href="#cb52-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
-<span id="cb52-37"><a href="#cb52-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">subset</span>(acesso_a_empregos_sf, <span class="sc">!</span><span class="fu">is.na</span>(diferenca)),</span>
-<span id="cb52-38"><a href="#cb52-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> diferenca),</span>
-<span id="cb52-39"><a href="#cb52-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="cn">NA</span></span>
-<span id="cb52-40"><a href="#cb52-40" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb52-41"><a href="#cb52-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(</span>
-<span id="cb52-42"><a href="#cb52-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">option =</span> <span class="st">"cividis"</span>,</span>
-<span id="cb52-43"><a href="#cb52-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> scales<span class="sc">::</span><span class="fu">label_number</span>(<span class="at">scale =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">1000</span>)</span>
+<span id="cb52-23"><a href="#cb52-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(</span>
+<span id="cb52-24"><a href="#cb52-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">option =</span> <span class="st">"inferno"</span>,</span>
+<span id="cb52-25"><a href="#cb52-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> scales<span class="sc">::</span><span class="fu">label_number</span>(<span class="at">scale =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">1000</span>)</span>
+<span id="cb52-26"><a href="#cb52-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb52-27"><a href="#cb52-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Empregos</span><span class="sc">\n</span><span class="st">acessíveis</span><span class="sc">\n</span><span class="st">(em milhares)"</span>, <span class="at">color =</span> <span class="st">"Corredores"</span>) <span class="sc">+</span></span>
+<span id="cb52-28"><a href="#cb52-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
+<span id="cb52-29"><a href="#cb52-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> traj_corredores,</span>
+<span id="cb52-30"><a href="#cb52-30" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">color =</span> corredor),</span>
+<span id="cb52-31"><a href="#cb52-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.8</span>,</span>
+<span id="cb52-32"><a href="#cb52-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">show.legend =</span> <span class="cn">FALSE</span></span>
+<span id="cb52-33"><a href="#cb52-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb52-34"><a href="#cb52-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#F8766D"</span>, <span class="st">"#7CAE00"</span>, <span class="st">"#00BFC4"</span>, <span class="st">"#C77CFF"</span>)) <span class="sc">+</span></span>
+<span id="cb52-35"><a href="#cb52-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb52-36"><a href="#cb52-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">0.4</span>, <span class="st">"cm"</span>))</span>
+<span id="cb52-37"><a href="#cb52-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-38"><a href="#cb52-38" aria-hidden="true" tabindex="-1"></a><span class="co"># configura mapa de diferença entre cenários</span></span>
+<span id="cb52-39"><a href="#cb52-39" aria-hidden="true" tabindex="-1"></a>dist_diferenca <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb52-40"><a href="#cb52-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
+<span id="cb52-41"><a href="#cb52-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">subset</span>(acesso_a_empregos_sf, <span class="sc">!</span><span class="fu">is.na</span>(diferenca)),</span>
+<span id="cb52-42"><a href="#cb52-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> diferenca),</span>
+<span id="cb52-43"><a href="#cb52-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="cn">NA</span></span>
 <span id="cb52-44"><a href="#cb52-44" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb52-45"><a href="#cb52-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb52-46"><a href="#cb52-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Diferença de</span><span class="sc">\n</span><span class="st">empregos</span><span class="sc">\n</span><span class="st">acessíveis</span><span class="sc">\n</span><span class="st">(em milhares)"</span>,</span>
-<span id="cb52-47"><a href="#cb52-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">"Corredores"</span></span>
+<span id="cb52-45"><a href="#cb52-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(</span>
+<span id="cb52-46"><a href="#cb52-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">option =</span> <span class="st">"cividis"</span>,</span>
+<span id="cb52-47"><a href="#cb52-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">label =</span> scales<span class="sc">::</span><span class="fu">label_number</span>(<span class="at">scale =</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">1000</span>)</span>
 <span id="cb52-48"><a href="#cb52-48" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb52-49"><a href="#cb52-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> traj_corredores, <span class="fu">aes</span>(<span class="at">color =</span> corredor), <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb52-50"><a href="#cb52-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#F8766D"</span>, <span class="st">"#7CAE00"</span>, <span class="st">"#00BFC4"</span>, <span class="st">"#C77CFF"</span>)) <span class="sc">+</span></span>
-<span id="cb52-51"><a href="#cb52-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
-<span id="cb52-52"><a href="#cb52-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">0.4</span>, <span class="st">"cm"</span>))</span>
-<span id="cb52-53"><a href="#cb52-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-54"><a href="#cb52-54" aria-hidden="true" tabindex="-1"></a><span class="co"># combina as duas figuras</span></span>
-<span id="cb52-55"><a href="#cb52-55" aria-hidden="true" tabindex="-1"></a>dist_acesso <span class="sc">/</span> dist_diferenca <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb52-49"><a href="#cb52-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb52-50"><a href="#cb52-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Diferença de</span><span class="sc">\n</span><span class="st">empregos</span><span class="sc">\n</span><span class="st">acessíveis</span><span class="sc">\n</span><span class="st">(em milhares)"</span>,</span>
+<span id="cb52-51"><a href="#cb52-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">"Corredores"</span></span>
+<span id="cb52-52"><a href="#cb52-52" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb52-53"><a href="#cb52-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> traj_corredores, <span class="fu">aes</span>(<span class="at">color =</span> corredor), <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb52-54"><a href="#cb52-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#F8766D"</span>, <span class="st">"#7CAE00"</span>, <span class="st">"#00BFC4"</span>, <span class="st">"#C77CFF"</span>)) <span class="sc">+</span></span>
+<span id="cb52-55"><a href="#cb52-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb52-56"><a href="#cb52-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">0.4</span>, <span class="st">"cm"</span>))</span>
+<span id="cb52-57"><a href="#cb52-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-58"><a href="#cb52-58" aria-hidden="true" tabindex="-1"></a><span class="co"># combina as duas figuras</span></span>
+<span id="cb52-59"><a href="#cb52-59" aria-hidden="true" tabindex="-1"></a>dist_acesso <span class="sc">/</span> dist_diferenca <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-fig_7" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="6_cenarios_transporte_files/figure-html/fig-fig_7-1.png" class="img-fluid figure-img" width="2100"></p>
@@ -1167,7 +1191,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<p>A figura mostra que as regiões que mais se beneficiam das mudanças no sistema de transportes são aquelas afastadas do centro da cidade, mas que ainda se encontram próximas a estações de média e alta capacidade. Os ganhos de acessibilidade ao emprego se concentram principalmente próximos às estações dos corredores das linhas Sul e Oeste do metrô e, em menor medida, em torno de algumas estações do corredor de VLT Parangaba-Mucuripe. Mesmo regiões próximas a esses corredores, embora não imediatamente adjacentes a eles, mostram grandes ganhos de acessibilidade, ressaltando o papel da conectividade da rede na garantia de boas condições de acessibilidade. Por sua vez, a região no entorno da linha Leste, que já concentrava os maiores níveis de acessibilidade da cidade mesmo antes da implementação do novo corredor, apresenta melhora nas condições de acessibilidade muito menos expressiva.</p>
+<p>A <a href="#fig-fig_7">Figura <span>6.7</span></a> mostra que as regiões que mais se beneficiam das mudanças no sistema de transportes são aquelas afastadas do centro da cidade, mas que ainda se encontram próximas a estações de média e alta capacidade. Os ganhos de acessibilidade ao emprego se concentram principalmente próximos às estações dos corredores das linhas Sul e Oeste do metrô e, em menor medida, em torno de algumas estações do corredor de VLT Parangaba-Mucuripe. Mesmo regiões próximas a esses corredores, embora não imediatamente adjacentes a eles, mostram grandes ganhos de acessibilidade, ressaltando o papel da conectividade da rede na garantia de boas condições de acessibilidade. Por sua vez, a região no entorno da linha Leste, que já concentrava os maiores níveis de acessibilidade da cidade mesmo antes da implementação do novo corredor, apresenta melhora nas condições de acessibilidade muito menos expressiva.</p>
 <p>Os mapas de distribuição do tempo de acesso até a escola de nível médio mais próxima, no entanto, apresentam uma situação diferente, como mostrado a seguir.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># une os dados de tempo de acesso com a grade espacial de fortaleza e os</span></span>
@@ -1183,45 +1207,49 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a><span class="co"># configura mapas da distribuição de tempo a escolas nos cenários antes e depois</span></span>
 <span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a>dist_tempo <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> tempo_a_escolas_sf, <span class="fu">aes</span>(<span class="at">fill =</span> travel_time_p50), <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> cenario, <span class="at">nrow =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"plasma"</span>, <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb53-16"><a href="#cb53-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Tempo até</span><span class="sc">\n</span><span class="st"> a escola</span><span class="sc">\n</span><span class="st">mais próxima</span><span class="sc">\n</span><span class="st">(em minutos)"</span>) <span class="sc">+</span></span>
-<span id="cb53-17"><a href="#cb53-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
-<span id="cb53-18"><a href="#cb53-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> traj_corredores,</span>
-<span id="cb53-19"><a href="#cb53-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">color =</span> corredor),</span>
-<span id="cb53-20"><a href="#cb53-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.8</span>,</span>
-<span id="cb53-21"><a href="#cb53-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">show.legend =</span> <span class="cn">FALSE</span></span>
-<span id="cb53-22"><a href="#cb53-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb53-23"><a href="#cb53-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#F8766D"</span>, <span class="st">"#7CAE00"</span>, <span class="st">"#00BFC4"</span>, <span class="st">"#C77CFF"</span>)) <span class="sc">+</span></span>
-<span id="cb53-24"><a href="#cb53-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
-<span id="cb53-25"><a href="#cb53-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">0.4</span>, <span class="st">"cm"</span>))</span>
-<span id="cb53-26"><a href="#cb53-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-27"><a href="#cb53-27" aria-hidden="true" tabindex="-1"></a><span class="co"># configura mapa de diferença entre cenários</span></span>
-<span id="cb53-28"><a href="#cb53-28" aria-hidden="true" tabindex="-1"></a>dist_dif_tempo <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb53-29"><a href="#cb53-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
-<span id="cb53-30"><a href="#cb53-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">subset</span>(tempo_a_escolas_sf, <span class="sc">!</span><span class="fu">is.na</span>(diferenca)),</span>
-<span id="cb53-31"><a href="#cb53-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> diferenca),</span>
-<span id="cb53-32"><a href="#cb53-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="cn">NA</span></span>
-<span id="cb53-33"><a href="#cb53-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb53-34"><a href="#cb53-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"viridis"</span>, <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb53-35"><a href="#cb53-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb53-36"><a href="#cb53-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Diferença no</span><span class="sc">\n</span><span class="st">tempo até</span><span class="sc">\n</span><span class="st"> a escola</span><span class="sc">\n</span><span class="st">mais próxima</span><span class="sc">\n</span><span class="st">(em minutos)"</span></span>
+<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(</span>
+<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> cenario,</span>
+<span id="cb53-16"><a href="#cb53-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">1</span>,</span>
+<span id="cb53-17"><a href="#cb53-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">labeller =</span> <span class="fu">as_labeller</span>(<span class="fu">c</span>(<span class="at">antes =</span> <span class="st">"Antes"</span>, <span class="at">depois =</span> <span class="st">"Depois"</span>))</span>
+<span id="cb53-18"><a href="#cb53-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb53-19"><a href="#cb53-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"plasma"</span>, <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb53-20"><a href="#cb53-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Tempo até</span><span class="sc">\n</span><span class="st"> a escola</span><span class="sc">\n</span><span class="st">mais próxima</span><span class="sc">\n</span><span class="st">(em minutos)"</span>) <span class="sc">+</span></span>
+<span id="cb53-21"><a href="#cb53-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
+<span id="cb53-22"><a href="#cb53-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> traj_corredores,</span>
+<span id="cb53-23"><a href="#cb53-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">color =</span> corredor),</span>
+<span id="cb53-24"><a href="#cb53-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.8</span>,</span>
+<span id="cb53-25"><a href="#cb53-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">show.legend =</span> <span class="cn">FALSE</span></span>
+<span id="cb53-26"><a href="#cb53-26" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb53-27"><a href="#cb53-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#F8766D"</span>, <span class="st">"#7CAE00"</span>, <span class="st">"#00BFC4"</span>, <span class="st">"#C77CFF"</span>)) <span class="sc">+</span></span>
+<span id="cb53-28"><a href="#cb53-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb53-29"><a href="#cb53-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">0.4</span>, <span class="st">"cm"</span>))</span>
+<span id="cb53-30"><a href="#cb53-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-31"><a href="#cb53-31" aria-hidden="true" tabindex="-1"></a><span class="co"># configura mapa de diferença entre cenários</span></span>
+<span id="cb53-32"><a href="#cb53-32" aria-hidden="true" tabindex="-1"></a>dist_dif_tempo <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb53-33"><a href="#cb53-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(</span>
+<span id="cb53-34"><a href="#cb53-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">subset</span>(tempo_a_escolas_sf, <span class="sc">!</span><span class="fu">is.na</span>(diferenca)),</span>
+<span id="cb53-35"><a href="#cb53-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> diferenca),</span>
+<span id="cb53-36"><a href="#cb53-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="cn">NA</span></span>
 <span id="cb53-37"><a href="#cb53-37" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb53-38"><a href="#cb53-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> traj_corredores, <span class="fu">aes</span>(<span class="at">color =</span> corredor), <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb53-39"><a href="#cb53-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#F8766D"</span>, <span class="st">"#7CAE00"</span>, <span class="st">"#00BFC4"</span>, <span class="st">"#C77CFF"</span>)) <span class="sc">+</span></span>
-<span id="cb53-40"><a href="#cb53-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
-<span id="cb53-41"><a href="#cb53-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">0.4</span>, <span class="st">"cm"</span>))</span>
-<span id="cb53-42"><a href="#cb53-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-43"><a href="#cb53-43" aria-hidden="true" tabindex="-1"></a><span class="co"># combina as duas figuras</span></span>
-<span id="cb53-44"><a href="#cb53-44" aria-hidden="true" tabindex="-1"></a>dist_tempo <span class="sc">/</span> dist_dif_tempo <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb53-38"><a href="#cb53-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">option =</span> <span class="st">"viridis"</span>, <span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb53-39"><a href="#cb53-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb53-40"><a href="#cb53-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Diferença no</span><span class="sc">\n</span><span class="st">tempo até</span><span class="sc">\n</span><span class="st"> a escola</span><span class="sc">\n</span><span class="st">mais próxima</span><span class="sc">\n</span><span class="st">(em minutos)"</span></span>
+<span id="cb53-41"><a href="#cb53-41" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb53-42"><a href="#cb53-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> traj_corredores, <span class="fu">aes</span>(<span class="at">color =</span> corredor), <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb53-43"><a href="#cb53-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#F8766D"</span>, <span class="st">"#7CAE00"</span>, <span class="st">"#00BFC4"</span>, <span class="st">"#C77CFF"</span>)) <span class="sc">+</span></span>
+<span id="cb53-44"><a href="#cb53-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb53-45"><a href="#cb53-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">0.4</span>, <span class="st">"cm"</span>))</span>
+<span id="cb53-46"><a href="#cb53-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-47"><a href="#cb53-47" aria-hidden="true" tabindex="-1"></a><span class="co"># combina as duas figuras</span></span>
+<span id="cb53-48"><a href="#cb53-48" aria-hidden="true" tabindex="-1"></a>dist_tempo <span class="sc">/</span> dist_dif_tempo <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-fig_8" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="6_cenarios_transporte_files/figure-html/fig-fig_8-1.png" class="img-fluid figure-img" width="2100"></p>
-<figcaption class="figure-caption">Figura 6.8: Distribuição espacial do tempo de acesso à escola público de nível médio mais próxima por cenário de transporte e da diferença entre eles</figcaption></figure>
+<figcaption class="figure-caption">Figura 6.8: Distribuição espacial dos tempos de acesso à escola pública de nível médio mais próxima por cenário de transporte e da diferença entre eles</figcaption></figure>
 </div>
 </div>
 </div>
-<p>A linha Leste e as mudanças de frequência nas outras linhas do metrô e do VLT praticamente não alteram o panorama da acessibilidade a escolas de nível médio em Fortaleza, o que faz com que pouquíssimos hexágonos apresentem algum tipo de ganho de acessibilidade entre os dois cenários - apenas alguns poucos nas imediações de estações de metrô apresentam alguma redução no tempo de acesso a escolas. Como podemos ver, a distribuição da acessibilidade a escolas na cidade segue um padrão muito menos concêntrico do que o da distribuição da acessibilidade a empregos. Novamente, isso é uma consequência da distribuição de escolas públicas na cidade: ao contrário da distribuição de empregos, que tende a seguir critérios econômico-financeiros, a distribuição de equipamentos públicos no Brasil tende a seguir critérios equitativos, buscando priorizar regiões periféricas e de maior concentração de grupos populacionais vulneráveis. Mesmo antes da implementação das mudanças no sistema de transportes, áreas com baixíssima acessibilidade ao emprego, como a região no extremo sul da cidade, já possuíam boas condições de acessibilidade a escolas públicas de nível médio. No entanto, o grau de sucesso das políticas de educação em promover um acesso equitativo pode variar muito entre cidades e para diferentes níveis de ensino, como infantil ou fundamental <span class="citation" data-cites="saraiva2023transporte">(<a href="references.html#ref-saraiva2023transporte" role="doc-biblioref">Saraiva et al. 2023</a>)</span>.</p>
+<p>A linha Leste e as mudanças de frequência nas outras linhas do metrô e do VLT praticamente não alteram o panorama da acessibilidade a escolas de nível médio em Fortaleza, o que faz com que pouquíssimos hexágonos apresentem algum tipo de ganho de acessibilidade entre os dois cenários - apenas alguns poucos nas imediações de estações de metrô apresentam alguma redução no tempo de acesso a escolas. Como podemos ver, a distribuição da acessibilidade a escolas na cidade segue um padrão muito menos concêntrico que o da distribuição da acessibilidade a empregos. Novamente, isso é uma consequência da distribuição de escolas públicas na cidade: ao contrário da distribuição de empregos, que tende a seguir critérios econômico-financeiros, a distribuição de equipamentos públicos no Brasil tende a seguir critérios equitativos, buscando priorizar regiões periféricas e de maior concentração de grupos populacionais vulneráveis. Mesmo antes da implementação das mudanças no sistema de transportes, áreas com baixíssima acessibilidade ao emprego, como a região no extremo sul da cidade, já possuíam boas condições de acessibilidade a escolas públicas de nível médio. No entanto, o grau de sucesso das políticas de educação em promover um acesso equitativo pode variar muito entre cidades e para diferentes níveis de ensino, como infantil ou fundamental <span class="citation" data-cites="saraiva2023transporte">(<a href="references.html#ref-saraiva2023transporte" role="doc-biblioref">Saraiva et al. 2023</a>)</span>.</p>
 </section><section id="desigualdade-de-acessibilidade" class="level2" data-number="6.6"><h2 data-number="6.6" class="anchored" data-anchor-id="desigualdade-de-acessibilidade">
 <span class="header-section-number">6.6</span> Desigualdade de acessibilidade</h2>
 <p>Uma dimensão-chave para a avaliação de políticas de transporte está relacionada aos seus aspectos distributivos. Quem são os principais beneficiados e prejudicados por essas políticas? Sob uma perspectiva de equidade, espera-se que políticas governamentais priorizem melhorar as condições de acessibilidade das pessoas em piores condições socioeconômicas e que mais dependem do transporte público <span class="citation" data-cites="pereira2017distributive vanwee2022accessibility">(<a href="references.html#ref-pereira2017distributive" role="doc-biblioref">Pereira, Schwanen, e Banister 2017</a>; <a href="references.html#ref-vanwee2022accessibility" role="doc-biblioref">van Wee 2022</a>)</span>.</p>
@@ -1238,13 +1266,17 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>    ),</span>
 <span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">show.legend =</span> <span class="cn">FALSE</span></span>
 <span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb54-12"><a href="#cb54-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> cenario, <span class="at">nrow =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb54-13"><a href="#cb54-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_brewer</span>(<span class="at">palette =</span> <span class="st">"RdBu"</span>) <span class="sc">+</span></span>
-<span id="cb54-14"><a href="#cb54-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Decil de renda"</span>, <span class="at">y =</span> <span class="st">"Empregos acessíveis</span><span class="sc">\n</span><span class="st">(em milhares)"</span>) <span class="sc">+</span></span>
-<span id="cb54-15"><a href="#cb54-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
-<span id="cb54-16"><a href="#cb54-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"D1</span><span class="sc">\n</span><span class="st">mais</span><span class="sc">\n</span><span class="st">pobres"</span>, <span class="fu">paste0</span>(<span class="st">"D"</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>), <span class="st">"D10</span><span class="sc">\n</span><span class="st">mais</span><span class="sc">\n</span><span class="st">ricos"</span>)</span>
-<span id="cb54-17"><a href="#cb54-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb54-18"><a href="#cb54-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb54-12"><a href="#cb54-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(</span>
+<span id="cb54-13"><a href="#cb54-13" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> cenario,</span>
+<span id="cb54-14"><a href="#cb54-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">1</span>,</span>
+<span id="cb54-15"><a href="#cb54-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">labeller =</span> <span class="fu">as_labeller</span>(<span class="fu">c</span>(<span class="at">antes =</span> <span class="st">"Antes"</span>, <span class="at">depois =</span> <span class="st">"Depois"</span>))</span>
+<span id="cb54-16"><a href="#cb54-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb54-17"><a href="#cb54-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_brewer</span>(<span class="at">palette =</span> <span class="st">"RdBu"</span>) <span class="sc">+</span></span>
+<span id="cb54-18"><a href="#cb54-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Decil de renda"</span>, <span class="at">y =</span> <span class="st">"Empregos acessíveis (em milhares)"</span>) <span class="sc">+</span></span>
+<span id="cb54-19"><a href="#cb54-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>
+<span id="cb54-20"><a href="#cb54-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"D1</span><span class="sc">\n</span><span class="st">mais</span><span class="sc">\n</span><span class="st">pobres"</span>, <span class="fu">paste0</span>(<span class="st">"D"</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">9</span>), <span class="st">"D10</span><span class="sc">\n</span><span class="st">mais</span><span class="sc">\n</span><span class="st">ricos"</span>)</span>
+<span id="cb54-21"><a href="#cb54-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb54-22"><a href="#cb54-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-fig_9" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="6_cenarios_transporte_files/figure-html/fig-fig_9-1.png" class="img-fluid figure-img" width="2100"></p>
@@ -1252,8 +1284,8 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<p>Os dois gráficos mostram claramente que as pessoas mais ricas de Fortaleza possuem maiores níveis de acesso a empregos do que seus pares mais pobres, tanto antes quanto depois das mudanças no sistema de transportes. Em Fortaleza, assim como na maior parte das grandes cidades brasileiras, os mais ricos tendem a morar próximo às grandes concentrações de emprego e do centro da cidade, enquanto os mais pobres tendem a ocupar regiões periféricas <span class="citation" data-cites="pereira2022estimativas">(<a href="references.html#ref-pereira2022estimativas" role="doc-biblioref">Pereira et al. 2022</a>)</span>. Consequentemente, os mais ricos costumam ter melhores condições de acessibilidade urbana do que os mais pobres. Não apenas porque moram mais perto dos empregos, mas também porque, geralmente, moram em regiões centrais mais bem servidas de transporte público do que as periferias.</p>
-<p>No entanto, é difícil enxergar na figura anterior grandes mudanças nas condições de acessibilidade entre os dois cenários. Lançando mão do mesmo recurso que usamos anteriormente, apresentamos na próxima figura como os <em>ganhos</em> de acessibilidade entre os cenários se distribuem por decil de renda.</p>
+<p>A <a href="#fig-fig_9">Figura <span>6.9</span></a> mostra claramente que as pessoas mais ricas de Fortaleza possuem maiores níveis de acesso a empregos do que seus pares mais pobres, tanto antes quanto depois das mudanças no sistema de transportes. Em Fortaleza, assim como na maior parte das grandes cidades brasileiras, os mais ricos tendem a morar próximo às grandes concentrações de emprego e do centro da cidade, enquanto os mais pobres tendem a ocupar regiões periféricas <span class="citation" data-cites="pereira2022estimativas">(<a href="references.html#ref-pereira2022estimativas" role="doc-biblioref">Pereira et al. 2022</a>)</span>. Consequentemente, os mais ricos costumam ter melhores condições de acessibilidade urbana do que os mais pobres. Não apenas porque moram mais perto dos empregos, mas também porque, geralmente, moram em regiões centrais mais bem servidas de transporte público do que as periferias.</p>
+<p>Entretanto, é difícil enxergar na <a href="#fig-fig_9">Figura <span>6.9</span></a> grandes mudanças nas condições de acessibilidade entre os dois cenários. Lançando mão do mesmo recurso que usamos anteriormente, apresentamos na <a href="#fig-fig_10">Figura <span>6.10</span></a> como os <em>ganhos</em> de acessibilidade entre os cenários se distribuem por decil de renda.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">subset</span>(acesso_a_empregos, populacao <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(diferenca))) <span class="sc">+</span></span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(</span>
@@ -1283,12 +1315,12 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </div>
 <p>Como podemos ver, a distribuição de ganhos de acessibilidade segue o formato de U-invertido, com maiores ganhos entre as camadas médias da população e menores entre as camadas mais ricas e mais pobres. A célula na qual houve maior aumento de acessibilidade aparece como <em>outlier</em> do oitavo decil, apresentando um ganho de quase 200.000 empregos em relação ao cenário antes das mudanças.</p>
-<p>Gráficos como os das últimas duas figuras não são os mais simples de comunicar, exatamente por serem ricos em nuances e interpretações. Visando a facilitar essa comunicação, medidas sintéticas de desigualdade são frequentemente utilizadas como uma maneira simples de medir o impacto de políticas de transporte sobre a desigualdade de acessibilidade. Esse tipo de medida busca resumir a distribuição dos níveis de acessibilidade entre grupos populacionais (aqui, decis de renda) em um único indicador que facilite a compreensão dos resultados e que possa ser usado, por exemplo, na elaboração de planos e metas. As medidas de desigualdade mais frequentemente utilizadas na literatura de acessibilidade são a Razão de Palma e o Índice de Gini <span class="citation" data-cites="lucas2016method guzman2018accessibility pritchard2019international">(<a href="references.html#ref-lucas2016method" role="doc-biblioref">Lucas, van Wee, e Maat 2016</a>; <a href="references.html#ref-guzman2018accessibility" role="doc-biblioref">Guzman e Oviedo 2018</a>; <a href="references.html#ref-pritchard2019international" role="doc-biblioref">Pritchard et al. 2019</a>)</span>.</p>
-<p>Nesse exemplo, vamos calcular a Razão de Palma dos cenários antes e depois. Essa medida é o resultado da divisão da acessibilidade média dos 10% mais ricos pela acessibilidade média dos 40% mais pobres:</p>
+<p>Gráficos como os das últimas duas figuras não são os mais simples de comunicar, exatamente por serem ricos em nuances e interpretações. Visando facilitar essa comunicação, medidas sintéticas de desigualdade são frequentemente utilizadas como uma maneira simples de medir o impacto de políticas de transporte sobre a desigualdade de acessibilidade. Esse tipo de medida busca resumir a distribuição dos níveis de acessibilidade entre grupos populacionais (aqui, decis de renda) em um único indicador que facilite a compreensão dos resultados e que possa ser usado, por exemplo, na elaboração de planos e metas. As medidas de desigualdade mais frequentemente utilizadas na literatura de acessibilidade são a Razão de Palma e o Índice de Gini <span class="citation" data-cites="lucas2016method guzman2018accessibility pritchard2019international">(<a href="references.html#ref-lucas2016method" role="doc-biblioref">Lucas, van Wee, e Maat 2016</a>; <a href="references.html#ref-guzman2018accessibility" role="doc-biblioref">Guzman e Oviedo 2018</a>; <a href="references.html#ref-pritchard2019international" role="doc-biblioref">Pritchard et al. 2019</a>)</span>.</p>
+<p>Nesse exemplo, vamos calcular a Razão de Palma dos cenários antes e depois das mudanças. Essa medida é o resultado da divisão da acessibilidade média dos 10% mais ricos pela acessibilidade média dos 40% mais pobres:</p>
 <p><span class="math display">\[P = \frac{\overline{A_{tp10}}}{\overline{A_{bt40}}}\]</span></p>
 <p>em que <span class="math inline">\(P\)</span> é a Razão de Palma, <span class="math inline">\(\overline{A_{tp10}}\)</span> é a acessibilidade média dos 10% mais ricos e <span class="math inline">\(\overline{A_{bt40}}\)</span> é a acessibilidade média dos 40% mais pobres.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1297,7 +1329,7 @@ Por que usar a Razão de Palma?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Uma das vantagens da Razão de Palma frente ao Índice de Gini é a sua facilidade de comunicação e interpretação. Valores maiores do que 1 indicam um cenário em que os ricos possuem níveis médios de acessibilidade maiores do que os dos pobres, e valores menores do que 1, a situação inversa. Outra vantagem da Razão de Palma é que ela reflete claramente como a desigualdade varia entre dois grupos de especial interesse para nós: os mais privilegiados e os mais vulneráveis de uma população. O Índice de Gini, por sua vez, estima o quanto uma distribuição desvia de uma situação hipotética em que todos possuem o mesmo nível de acesso, mas nada diz sobre as condições socioeconômicas daqueles que detêm os maiores e menores níveis de acessibilidade. Se uma determinada política aumenta os níveis de acessibilidades de pessoas de alta renda que moram em locais de baixa acessibilidade, por exemplo, o Índice de Gini indicaria que houve uma diminuição da desigualdade, mesmo que nenhuma população vulnerável tenha se beneficiado dessa política. Dificilmente uma política como essa poderia ser considerada equitativa.</p>
 </div>
@@ -1333,13 +1365,17 @@ Por que usar a Razão de Palma?
 <span id="cb56-26"><a href="#cb56-26" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> razao_de_palma, <span class="fu">aes</span>(<span class="at">x =</span> cenario, <span class="at">y =</span> palma)) <span class="sc">+</span></span>
 <span id="cb56-27"><a href="#cb56-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"#0d6556"</span>) <span class="sc">+</span></span>
 <span id="cb56-28"><a href="#cb56-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
-<span id="cb56-29"><a href="#cb56-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(palma, <span class="at">digits =</span> <span class="dv">2</span>)),</span>
+<span id="cb56-29"><a href="#cb56-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">formatC</span>(palma, <span class="at">digits =</span> <span class="dv">2</span>, <span class="at">decimal.mark =</span> <span class="st">","</span>, <span class="at">format =</span> <span class="st">"f"</span>)),</span>
 <span id="cb56-30"><a href="#cb56-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">vjust =</span> <span class="fl">1.5</span>,</span>
 <span id="cb56-31"><a href="#cb56-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"white"</span>,</span>
 <span id="cb56-32"><a href="#cb56-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="dv">10</span></span>
 <span id="cb56-33"><a href="#cb56-33" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb56-34"><a href="#cb56-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Razão de Palma"</span>) <span class="sc">+</span></span>
-<span id="cb56-35"><a href="#cb56-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb56-34"><a href="#cb56-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb56-35"><a href="#cb56-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Razão de Palma"</span>,</span>
+<span id="cb56-36"><a href="#cb56-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_number</span>(<span class="at">decimal.mark =</span> <span class="st">","</span>)</span>
+<span id="cb56-37"><a href="#cb56-37" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb56-38"><a href="#cb56-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Cenário"</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Antes"</span>, <span class="st">"Depois"</span>)) <span class="sc">+</span></span>
+<span id="cb56-39"><a href="#cb56-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-fig_11" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="6_cenarios_transporte_files/figure-html/fig-fig_11-1.png" class="img-fluid figure-img" width="2100"></p>
@@ -1347,14 +1383,14 @@ Por que usar a Razão de Palma?
 </div>
 </div>
 </div>
-<p>A <a href="#fig-fig_11">Figura <span>6.11</span></a> aponta que em 2019 a população mais rica de Fortaleza conseguia acessar, em média, 2,17 vezes mais empregos do que a população mais pobre em até 60 minutos por transporte público. O gráfico também mostra que a desigualdade medida pela Razão de Palma sofreu uma pequena queda entre os cenários pré e pós-intervenções. Ou seja, podemos concluir que, nesse nosso cenário simplificado de avaliação da linha Leste, a política de expansão do metrô de Fortaleza combinada com o aumento da frequência das linhas Sul e Oeste do metrô e do VLT seria progressiva. Em outras palavras, essas mudanças, quando analisadas sem considerar as demais intervenções previstas no Pasfor, contribuem para a redução da desigualdade de acesso a oportunidades de emprego em Fortaleza.</p>
+<p>A <a href="#fig-fig_11">Figura <span>6.11</span></a> aponta que em 2019 a população mais rica de Fortaleza conseguia acessar, em média, 2,17 vezes mais empregos do que a população mais pobre em até sessenta minutos por transporte público. Ela também mostra que a desigualdade medida pela Razão de Palma sofreu uma pequena queda entre os cenários pré e pós-intervenções. Ou seja, podemos concluir que, nesse nosso cenário simplificado de avaliação da linha Leste, a política de expansão do metrô de Fortaleza combinada com o aumento da frequência das linhas Sul e Oeste do metrô e do VLT seria progressiva. Em outras palavras, essas mudanças, quando analisadas sem considerar as demais intervenções previstas no Pasfor, contribuem para a redução da desigualdade de acesso a oportunidades de emprego em Fortaleza.</p>
 <div class="callout callout-style-simple callout-important">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>É importante lembrar que a avaliação apresentada neste capítulo considera um cenário de intervenção simplificado para fins didáticos. Para uma avaliação mais completa da linha Leste do metrô de Fortaleza e das mudanças previstas no Pasfor, que também considera alterações nas linhas de ônibus da cidade, veja o trabalho de <span class="citation" data-cites="braga2022impactos">Braga et al. (<a href="references.html#ref-braga2022impactos" role="doc-biblioref">2022</a>)</span>.</p>
+<p>É importante lembrar que a avaliação apresentada neste capítulo considera um cenário de intervenção simplificado para fins didáticos. Para uma avaliação mais completa da linha Leste do metrô de Fortaleza e das mudanças previstas no Pasfor, que também considera alterações nas linhas de ônibus da cidade, conferir o trabalho de <span class="citation" data-cites="braga2022impactos">Braga et al. (<a href="references.html#ref-braga2022impactos" role="doc-biblioref">2022</a>)</span>.</p>
 </div>
 </div>
 </div>
@@ -1391,7 +1427,7 @@ van Wee, Bert. 2022. <span>«Accessibility and Equity: <span>A</span> Conceptual
 <ol>
 <li id="fn1"><p>Disponível em <a href="https://www.pasfor.com.br/" class="uri">https://www.pasfor.com.br/</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Uma avaliação mais completa, que leva em consideração todas as mudanças previstas no Pasfor, pode ser encontrada em <span class="citation" data-cites="braga2022impactos">Braga et al. (<a href="references.html#ref-braga2022impactos" role="doc-biblioref">2022</a>)</span>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Para mais detalhes, ver a descrição da tabela <code>frequencies</code> no <a href="./4_dados_gtfs.html#frequencies.txt">Capítulo 4</a>).<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Para mais detalhes, conferir a descrição da tabela <code>frequencies</code> no <a href="./4_dados_gtfs.html#frequencies.txt">Capítulo 4</a>).<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>Mais detalhes sobre o pacote são apresentados na <a href="./s5_dados_aop.html">Seção 5</a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {

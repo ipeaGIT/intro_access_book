@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.3.361">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Introdução à acessibilidade urbana - SEÇÃO 3: Dados de transporte público</title>
 <style>
@@ -45,7 +45,8 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "mais correspondências neste documento",
     "search-clear-button-title": "Limpar",
     "search-detached-cancel-button-title": "Cancelar",
-    "search-submit-button-title": "Enviar"
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
   }
 }</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YVERJQF9PJ"></script><script type="text/javascript">
 
@@ -69,7 +70,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       </button>
       <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./s3_dados_tp.html">SEÇÃO 3: Dados de transporte público</a></li></ol></nav><a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -258,9 +259,9 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </div>
   
 
-</header><p><strong>Os objetivos desta seção</strong> são: i) apresentar a especificação GTFS de dados de transporte público; ii) mostrar onde baixar dados GTFS de cidades brasileiras e do mundo; e iii) apresentar exemplos de como analisar e manipular dados de GTFS usando R.</p>
+</header><p><strong>Os objetivos desta seção</strong> são: i) apresentar o formato GTFS de dados de transporte público; ii) mostrar onde baixar dados GTFS de cidades brasileiras e do mundo; e iii) apresentar exemplos de como analisar e manipular dados de GTFS usando R.</p>
 <p>Dados de transporte público são peças fundamentais no planejamento de transportes em geral e em análises de acessibilidade em particular. Para serem usados de forma que se tenha segurança no resultado das análises, esses dados precisam ser confiáveis e de simples inspeção e interpretação.</p>
-<p>Tentando satisfazer esses critérios, cada vez mais agências de transporte público, tomadores de decisão e pesquisadores têm buscado utilizar dados estruturados conforme especificações abertas e colaborativas. Ou seja, cujo formato seja definido por uma comunidade de atores interessados, incluindo partes que produzem esses dados (agências de transporte público, por exemplo) e que os consomem (pesquisadores, desenvolvedores de ferramentas de planejamento etc). Embora uma especificação aberta não necessariamente resolva o problema da qualidade e da confiabilidade dos dados por ela descritos, seu uso traz várias vantagens que promovem o compartilhamento de conhecimento e a transparência de análises e aplicações que dependem dessa especificação - fatores que, por sua vez, podem levar a substanciais ganhos de qualidade e confiança nos dados.</p>
+<p>Tentando satisfazer esses critérios, cada vez mais agências de transporte público, tomadores de decisão e pesquisadores têm buscado utilizar dados estruturados conforme especificações abertas e colaborativas, ou seja, cujo formato seja definido por uma comunidade de atores interessados, incluindo partes que produzem esses dados (agências de transporte público, por exemplo) e que os consomem (pesquisadores, desenvolvedores de ferramentas de planejamento etc). Embora uma especificação aberta não necessariamente resolva o problema da qualidade e da confiabilidade dos dados por ela descritos, seu uso traz várias vantagens que promovem o compartilhamento de conhecimento e a transparência de análises e aplicações que dependem dessa especificação - fatores que, por sua vez, podem levar a substanciais ganhos de qualidade e confiança nos dados.</p>
 <p>O uso de um formato padrão de dados para transporte público permite o desenvolvimento e o compartilhamento de ferramentas e programas computacionais para análise desses dados, o que cria um campo comum de distribuição e aprendizado entre atores de diferentes cidades e países. Assim, um programa desenvolvido por uma agência de transporte no Brasil pode ser facilmente utilizado por um pesquisador nos Estados Unidos, por um desenvolvedor no Japão ou por outra agência de transporte na África do Sul - desde que, é claro, eles também organizem seus dados no mesmo formato. Além disso, quanto mais amplamente utilizado é esse formato, maior tende a ser tanto a confiabilidade na especificação em si quanto a facilidade de inspeção e interpretação dos seus dados, visto que múltiplos atores detêm o conhecimento necessário para isso.</p>
 <p>A especificação de dados aberta e colaborativa mais amplamente utilizada no contexto do planejamento de transporte público é o formato GTFS, sigla para <em>General Transit Feed Specification</em> (Especificação Geral de Redes de Transporte Público - tradução nossa). Seus usos abrangem tanto o planejamento quanto a operação de sistemas de transporte público. Como visto no <a href="./3_calculando_acesso.html">Capítulo 3</a>, os dados de GTFS também são uma peça fundamental para calcular estimativas de acessibilidade urbana por transporte público. Nesta seção, iremos aprender em mais detalhes o que são os dados GTFS, como eles são estruturados e como trabalhar com esses dados em R.</p>
 

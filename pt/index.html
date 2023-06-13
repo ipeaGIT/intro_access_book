@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.3.361">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <title>Introdução à acessibilidade urbana</title>
 <style>
@@ -97,7 +97,8 @@ div.csl-indent {
     "search-more-matches-text": "mais correspondências neste documento",
     "search-clear-button-title": "Limpar",
     "search-detached-cancel-button-title": "Cancelar",
-    "search-submit-button-title": "Enviar"
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
   }
 }</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-YVERJQF9PJ"></script><script type="text/javascript">
 
@@ -120,7 +121,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <meta name="citation_publication_date" content="2023">
 <meta name="citation_cover_date" content="2023">
 <meta name="citation_year" content="2023">
-<meta name="citation_online_date" content="2023-05-19">
+<meta name="citation_online_date" content="2023-06-13">
 <meta name="citation_fulltext_html_url" content="https://ipeagit.github.io/intro_access_book/">
 <meta name="citation_language" content="pt">
 <meta name="citation_book_title" content="Introdução à acessibilidade urbana: um guia prático em R">
@@ -193,7 +194,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       </button>
       <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Apresentação</a></li></ol></nav><a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -419,7 +420,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">Data de Publicação</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">19 de maio de 2023</p>
+      <p class="date">13 de junho de 2023</p>
     </div>
   </div>
   
@@ -468,7 +469,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><a href="./s3_dados_tp.html">3: Dados de transporte público</a></td>
-<td style="text-align: left;">Apresenta o que é a especificação GTFS de dados de transporte público e mostra como trabalhar e analisar dados de GTFS usando o pacote <code>{gtfstools}</code>.</td>
+<td style="text-align: left;">Apresenta a Especificação Geral de Redes de Transporte Público (<em>General Transit Feed Specification</em> - GTFS) e mostra como manipular e analisar dados GTFS usando o pacote <code>{gtfstools}</code>.</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><a href="./s4_avaliacao_impacto.html">4: Avaliação de impacto de projetos de transporte</a></td>
@@ -476,24 +477,24 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </tr>
 <tr class="odd">
 <td style="text-align: center;"><a href="./s5_dados_aop.html">5: Dados do Projeto Acesso a Oportunidades</a></td>
-<td style="text-align: left;">Mostra como baixar e visualizar os dados produzidos pelo projeto Acesso a Oportunidades, que incluem dados detalhados sobre padrões de uso do solo e acessibilidade nas vinte maiores cidades brasileiras.</td>
+<td style="text-align: left;">Mostra como baixar e visualizar os dados produzidos pelo projeto Acesso a Oportunidades (AOP), que incluem dados detalhados sobre padrões de uso do solo e acessibilidade nas vinte maiores cidades brasileiras.</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </section><section id="reproduzindo-o-livro-localmente" class="level2"><h2 class="anchored" data-anchor-id="reproduzindo-o-livro-localmente">Reproduzindo o livro localmente</h2>
-<p>Este livro foi escrito e publicado com o sistema de publicação <a href="https://quarto.org">Quarto</a>. Todo o código utilizado em seu preparo e na sua publicação pode ser encontrado <a href="https://github.com/ipeaGIT/intro_access_book">neste repositório</a>. Para reproduzir o livro localmente, você deve primeiro baixar o seu código-fonte. Isso pode ser feito com o <em>software</em> <a href="https://git-scm.com/">git</a> ou manualmente<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Caso o segundo método seja utilizado, é necessário também extrair o conteúdo do arquivo <code>.zip</code> baixado para uma nova pasta.</p>
-<p>A renderização do livro requer que o programa <a href="https://quarto.org/">Quarto</a> esteja instalado. A reprodução dos seus capítulos, por sua vez, requer o uso do pacote de R <a href="https://rstudio.github.io/renv/index.html"><code>{renv}</code></a>, que faz a gestão de dependências do livro.</p>
+<p>Este livro foi escrito e publicado com o sistema de publicação <a href="https://quarto.org">Quarto</a>. Todo o código utilizado em seu preparo e na sua publicação pode ser encontrado <a href="https://github.com/ipeaGIT/intro_access_book">nesse repositório</a>. Para reproduzir o livro localmente, você deve primeiro baixar o seu código-fonte. Isso pode ser feito com o <em>software</em> <a href="https://git-scm.com/">git</a> ou manualmente<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Caso o segundo método seja utilizado, é necessário também extrair o conteúdo do arquivo <code>.zip</code> baixado para uma nova pasta.</p>
+<p>A renderização do livro requer que o programa Quarto esteja instalado. A reprodução dos seus capítulos, por sua vez, requer o uso do pacote de R <a href="https://rstudio.github.io/renv/index.html"><code>{renv}</code></a>, que faz a gestão de dependências do livro.</p>
 <p>Depois de instaladas as dependências do livro, seu código-fonte poderá ser executado normalmente. Os capítulos estão ordenados numericamente em arquivos no formato <code>.qmd</code>. Para rodar todos os capítulos de uma vez, utilize um dos seguintes comandos:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>quarto<span class="sc">::</span><span class="fu">quarto_preview</span>()</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>quarto<span class="sc">::</span><span class="fu">quarto_render</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Para mais detalhes de como instalar as dependências do livro e rodar seu conteúdo localmente, veja as instruções completas de instalação no <a href="https://github.com/ipeaGIT/intro_access_book">repositório do livro</a>.</p>
+<p>Para mais detalhes de como instalar as dependências do livro e rodar seu conteúdo localmente, veja as instruções completas de instalação no repositório do livro.</p>
 </section><section id="reproduzindo-o-livro-na-nuvem-com-um-binder" class="level2"><h2 class="anchored" data-anchor-id="reproduzindo-o-livro-na-nuvem-com-um-binder">Reproduzindo o livro na nuvem com um <em>binder</em>
 </h2>
-<p>Um <em>binder</em> é uma ferramenta que permite rodar códigos na nuvem em um navegador, como o Chrome e o Firefox. O código do livro pode ser rodado usando um servidor publicado pelo <a href="https://mybinder.org/">mybinder</a>. Para isso, acesse <a href="https://mybinder.org/v2/gh/ipeaGIT/intro_access_book/HEAD?urlpath=rstudio">esse <em>link</em></a>. Uma sessão do RStudio Cloud, que inclui todos os arquivos e dados necessários para rodar o código do livro, começará a rodar no seu navegador.</p>
-<p>Note que as sessões do mybinder estão limitadas a 2 GB de memória RAM. Essa restrição pode impedir que capítulos de processamento um pouco mais pesado, em particular o Capítulo 6, sejam executados adequadamente. Em caso de uso do <em>binder</em>, sugerimos que não tente renderizar o livro todo com o Quarto, como mostrado anteriormente.</p>
+<p>Um <em>binder</em> é uma ferramenta que permite rodar códigos na nuvem em um navegador, como o Chrome e o Firefox. O código do livro pode ser rodado usando um servidor publicado pelo <a href="https://mybinder.org/">MyBinder</a>. Para isso, acesse <a href="https://mybinder.org/v2/gh/ipeaGIT/intro_access_book/HEAD?urlpath=rstudio">esse <em>link</em></a>. Uma sessão do RStudio Cloud, que inclui todos os arquivos e dados necessários para rodar o código do livro, começará a rodar no seu navegador.</p>
+<p>Note que as sessões do MyBinder estão limitadas a 2 GB de memória RAM. Essa restrição pode impedir que capítulos de processamento um pouco mais pesado, em particular o Capítulo 6, sejam executados adequadamente. Em caso de uso do <em>binder</em>, sugerimos que não tente renderizar o livro todo com o Quarto, como mostrado anteriormente.</p>
 </section><section id="licença-de-uso" class="level2"><h2 class="anchored" data-anchor-id="licença-de-uso">Licença de uso</h2>
 <p><img align="right" src="images/ipea_logo.png" width="240"> É permitida a reprodução e a exibição para uso educacional ou informativo, desde que respeitado o crédito ao autor original e citada a fonte. Permitida a inclusão da obra em Repositórios ou Portais de Acesso Aberto, desde que fique claro para os usuários os termos de uso da obra e quem é o detentor dos direitos autorais, o Instituto de Pesquisa Econômica Aplicada (Ipea). Proibido o uso comercial ou com finalidades lucrativas em qualquer hipótese. Proibida a criação de obras derivadas. Para imagens estáticas e em movimento (vídeos e audiovisuais), ATENÇÃO: os direitos de imagem foram cedidos apenas para a obra original, formato de distribuição e repositório. Esta licença está baseada em estudos sobre a Lei Brasileira de Direitos Autorais (Lei 9.610/1998).</p>
 </section><section id="como-citar-o-livro" class="level2"><h2 class="anchored" data-anchor-id="como-citar-o-livro">Como citar o livro</h2>
