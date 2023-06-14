@@ -146,6 +146,8 @@ head(ttm)
 In practice, `travel_time_matrix()` finds the fastest route from each origin to all possible destinations taking into account the transport mode, the departure time and the other inputs set by the user. For this, `{r5r}` considers door-to-door travel times: in the case of a public transport trip, for example, the total travel time includes: i) the walking time from the origin to the public transport stop; ii) the waiting time at the stop; iii) the in-vehicle time; and iv) the walking time from the last public transport stop to the destination. When more than one public transport route is used, `{r5r}` also considers the time spent on transfers, which consists of walking between stops and waiting for the next vehicle.
 
 ::: {.callout-note appearance="simple"}
+## `travel_time_matrix()` routing speed
+
 The `travel_time_matrix()` function uses an extension of the RAPTOR routing algorithm [@conway2017evidencebased], making R5 extremely fast. Depending on the number of origin-destination pairs, `{r5r}` can calculate travel time matrices between 6 and 200 times faster than other multimodal routing softwares [@higgins2022calculating].
 :::
 
@@ -380,7 +382,7 @@ ggplot(subset(sociodemographic_access, !is.na(decile))) +
   labs(
     color = "Income\ndecile",
     x = "Income decile",
-    y = "Number of schools accessible"
+    y = "Accessible schools"
   ) +
   scale_color_brewer(palette = "RdBu") +
   scale_x_discrete(
