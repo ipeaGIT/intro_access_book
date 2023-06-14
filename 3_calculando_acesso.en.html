@@ -429,7 +429,7 @@ OpenStreetMap data quality
 <p>These data sets should be saved in a single directory, which should preferably not contain any other files. As we will see below, <code>{r5r}</code> combines all the data saved in this directory to create a multimodal transport network that is used for routing trips between origin-destination pairs and, consequently, for calculating travel time matrices. Please note that you can have more than one GTFS file in the same directory, in which case <code>{r5r}</code> considers the public transport networks of all feeds together. The street network and the topography of the study area, however, must be each one described by a single file. Assuming that R scripts are saved in a directory called <code>R</code>, a possible file structure is shown below:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>/tmp/RtmpLl32Yi/accessibility_project
+<pre><code>/tmp/RtmpViiI3n/accessibility_project
 ├── R
 │   ├── script1.R
 │   └── script2.R
@@ -529,14 +529,17 @@ OpenStreetMap data quality
 </div>
 </div>
 <p>In practice, <code>travel_time_matrix()</code> finds the fastest route from each origin to all possible destinations taking into account the transport mode, the departure time and the other inputs set by the user. For this, <code>{r5r}</code> considers door-to-door travel times: in the case of a public transport trip, for example, the total travel time includes: i) the walking time from the origin to the public transport stop; ii) the waiting time at the stop; iii) the in-vehicle time; and iv) the walking time from the last public transport stop to the destination. When more than one public transport route is used, <code>{r5r}</code> also considers the time spent on transfers, which consists of walking between stops and waiting for the next vehicle.</p>
-<div class="callout callout-style-simple callout-note">
-<div class="callout-body d-flex">
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-body-container">
-<p>The <code>travel_time_matrix()</code> function uses an extension of the RAPTOR routing algorithm <span class="citation" data-cites="conway2017evidencebased">(<a href="references.en.html#ref-conway2017evidencebased" role="doc-biblioref">Conway, Byrd, and van der Linden 2017</a>)</span>, making R5 extremely fast. Depending on the number of origin-destination pairs, <code>{r5r}</code> can calculate travel time matrices between 6 and 200 times faster than other multimodal routing softwares <span class="citation" data-cites="higgins2022calculating">(<a href="references.en.html#ref-higgins2022calculating" role="doc-biblioref">Higgins et al. 2022</a>)</span>.</p>
+<div class="callout-title-container flex-fill">
+<code>travel_time_matrix()</code> routing speed
 </div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <code>travel_time_matrix()</code> function uses an extension of the RAPTOR routing algorithm <span class="citation" data-cites="conway2017evidencebased">(<a href="references.en.html#ref-conway2017evidencebased" role="doc-biblioref">Conway, Byrd, and van der Linden 2017</a>)</span>, making R5 extremely fast. Depending on the number of origin-destination pairs, <code>{r5r}</code> can calculate travel time matrices between 6 and 200 times faster than other multimodal routing softwares <span class="citation" data-cites="higgins2022calculating">(<a href="references.en.html#ref-higgins2022calculating" role="doc-biblioref">Higgins et al. 2022</a>)</span>.</p>
 </div>
 </div>
 </section></section><section id="sec-accessibility" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="sec-accessibility">
@@ -821,7 +824,7 @@ Geodetic CRS:  WGS 84
 <span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Income</span><span class="sc">\n</span><span class="st">decile"</span>,</span>
 <span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Income decile"</span>,</span>
-<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of schools accessible"</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Accessible schools"</span></span>
 <span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"RdBu"</span>) <span class="sc">+</span></span>
 <span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(</span>

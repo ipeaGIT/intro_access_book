@@ -399,14 +399,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>zip<span class="sc">::</span><span class="fu">zip_list</span>(export_path)[, <span class="fu">c</span>(<span class="st">"filename"</span>, <span class="st">"compressed_size"</span>, <span class="st">"timestamp"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         filename compressed_size           timestamp
-1      agency.txt             112 2023-06-13 21:17:10
-2    calendar.txt             129 2023-06-13 21:17:10
-3 frequencies.txt            2381 2023-06-13 21:17:10
-4      routes.txt             659 2023-06-13 21:17:10
-5      shapes.txt          160470 2023-06-13 21:17:10
-6  stop_times.txt            7907 2023-06-13 21:17:10
-7       stops.txt           18797 2023-06-13 21:17:10
-8       trips.txt             717 2023-06-13 21:17:10</code></pre>
+1      agency.txt             112 2023-06-14 20:51:22
+2    calendar.txt             129 2023-06-14 20:51:22
+3 frequencies.txt            2381 2023-06-14 20:51:22
+4      routes.txt             659 2023-06-14 20:51:22
+5      shapes.txt          160470 2023-06-14 20:51:22
+6  stop_times.txt            7907 2023-06-14 20:51:22
+7       stops.txt           18797 2023-06-14 20:51:22
+8       trips.txt             717 2023-06-14 20:51:22</code></pre>
 </div>
 </div>
 </section><section id="calculating-trip-speed" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="calculating-trip-speed">
@@ -889,7 +889,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>validator_path <span class="ot">&lt;-</span> <span class="fu">download_validator</span>(tmpdir)</span>
 <span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>validator_path</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "/tmp/RtmpE1gD0Y/gtfs-validator-v4.0.0.jar"</code></pre>
+<pre><code>[1] "/tmp/RtmpSMNKpl/gtfs-validator-v4.0.0.jar"</code></pre>
 </div>
 </div>
 <p>The second (and final) step consists in actually validating the GTFS data with <code>validate_gtfs()</code>. This function supports GTFS data in different formats: i) as a GTFS object in an R session; ii) as a path to a local GTFS file in <code>.zip</code> format; iii) as an URL pointing to a feed; or iv) as a directory containing unzipped GTFS tables. The function also takes a path to a directory where the validation result should be saved to and the path to the validator that should be used in the process. In the example below, we validate SPTrans’ feed from its path:</p>
@@ -1032,7 +1032,8 @@ Geodetic CRS:  WGS 84
 <span id="cb93-7"><a href="#cb93-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(geoms_with_headways) <span class="sc">+</span></span>
 <span id="cb93-8"><a href="#cb93-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">color =</span> average_headway, <span class="at">size =</span> average_headway), <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
 <span id="cb93-9"><a href="#cb93-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradient</span>(<span class="at">high =</span> <span class="st">"#132B43"</span>, <span class="at">low =</span> <span class="st">"#56B1F7"</span>) <span class="sc">+</span></span>
-<span id="cb93-10"><a href="#cb93-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb93-10"><a href="#cb93-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"Average headway"</span>, <span class="at">size =</span> <span class="st">"Average headway"</span>) <span class="sc">+</span></span>
+<span id="cb93-11"><a href="#cb93-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-headways_spatial_dist" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="5_gtfstools.en_files/figure-html/fig-headways_spatial_dist-1.png" class="img-fluid figure-img" width="2100"></p>
