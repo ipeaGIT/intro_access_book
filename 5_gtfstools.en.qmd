@@ -461,6 +461,7 @@ geoms_with_headways <- merge(
 ggplot(geoms_with_headways) +
   geom_sf(aes(color = average_headway, size = average_headway), alpha = 0.8) +
   scale_color_gradient(high = "#132B43", low = "#56B1F7") +
+  labs(color = "Average headway", size = "Average headway") +
   theme_minimal()
 ```
 
