@@ -32,6 +32,8 @@ knitr::include_graphics("images/fortaleza_2.png")
 ```
 
 ::: {.callout-important appearance="simple"}
+## The scenario analyzed
+
 It's important to note that East Line's implementation will also be followed by changes to the frequency of subway's South and West lines and of Parangaba-Mucuripe light rail, in addition to cuts and adjustments on the municipal bus system, as detailed in Fortaleza's Sustainable Accessibility Plan (Pasfor)[^pasfor]. For didactic purposes, however, the bus system changes were not incorporated into our analyses in this book. Therefore, the case study showcased in this chapter looks at simplified scenarios, in which only East Line's implementation and the changes to other subway and light rail corridors are considered[^bragaetal].
 :::
 
@@ -163,6 +165,7 @@ fig_schools <- ggplot(fortaleza_data) +
   	alpha = 0.8
   ) +
   scale_color_manual(values = c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
+  guides(fill = guide_legend(order = 1), color = guide_legend(order = 2)) +
   theme_void() +
   theme(legend.key.size = unit(0.4, "cm"))
 
@@ -746,7 +749,8 @@ ggplot(data = avg_access, aes(x = scenario, y = access / 1000)) +
   	color = "white",
   	size = 10
   ) +
-  ylab("Accessible jobs\n(thousands)") +
+  ylab("Accessible jobs (thousands)") +
+  scale_x_discrete(name = "Scenario", labels = c("Before", "After")) +
   theme_minimal()
 ```
 
@@ -808,7 +812,8 @@ ggplot(data = avg_time, aes(x = scenario, y = time)) +
   	color = "white",
   	size = 10
   ) +
-  ylab("Average time to\nclosest school (in minutes)") +
+  ylab("Average time to\nclosest school (minutes)") +
+  scale_x_discrete(name = "Scenario", labels = c("Before", "After")) +
   theme_minimal()
 ```
 
@@ -869,8 +874,15 @@ corridors_shapes <- subset(
 ggplot() +
   geom_sf(data = fortaleza_grid, fill = "gray90", color = NA) +
   geom_sf(data = corridors_shapes, aes(color = corridor)) +
-  scale_color_manual(values = c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
-  facet_wrap(~ scenario, nrow = 1) +
+  scale_color_manual(
+    name = "Corridor",
+    values = c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")
+  ) +
+  facet_wrap(
+    ~ scenario,
+    nrow = 1,
+    labeller = as_labeller(c(before = "Before", after = "After"))
+  ) +
   theme_void()
 ```
 
@@ -892,21 +904,25 @@ access_to_jobs_sf <- sf::st_sf(access_to_jobs)
 # configures access distribution maps in both scenarios
 access_dist <- ggplot() +
   geom_sf(
-  	data = access_to_jobs_sf,
-  	aes(fill = access_to_jobs),
-  	color = NA
+    data = access_to_jobs_sf,
+    aes(fill = access_to_jobs),
+    color = NA
   ) +
-  facet_wrap(~ scenario, nrow = 1) +
+  facet_wrap(
+    ~ scenario,
+    nrow = 1,
+    labeller = as_labeller(c(before = "Before", after = "After"))
+  ) +
   scale_fill_viridis_c(
-  	option = "inferno",
-  	label = scales::label_number(scale = 1 / 1000)
+    option = "inferno",
+    label = scales::label_number(scale = 1 / 1000)
   ) +
-  labs(fill = "Accessible jobs\n(in thousands)", color = "Corridors") +
+  labs(fill = "Accessible jobs\n(thousands)", color = "Corridor") +
   geom_sf(
-  	data = corridors_shapes,
-  	aes(color = corridor),
-  	alpha = 0.8,
-  	show.legend = FALSE
+    data = corridors_shapes,
+    aes(color = corridor),
+    alpha = 0.8,
+    show.legend = FALSE
   ) +
   scale_color_manual(values = c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
   theme_void() +
@@ -915,17 +931,17 @@ access_dist <- ggplot() +
 # configures difference map
 difference_dist <- ggplot() +
   geom_sf(
-  	data = subset(access_to_jobs_sf, !is.na(difference)),
-  	aes(fill = difference),
-  	color = NA
+    data = subset(access_to_jobs_sf, !is.na(difference)),
+    aes(fill = difference),
+    color = NA
   ) +
   scale_fill_viridis_c(
-  	option = "cividis",
-  	label = scales::label_number(scale = 1 / 1000)
+    option = "cividis",
+    label = scales::label_number(scale = 1 / 1000)
   ) +
   labs(
-  	fill = "Accessibility to\njobs difference\n(in thousands)",
-  	color = "Corridors"
+    fill = "Accessibility to\njobs difference\n(thousands)",
+    color = "Corridor"
   ) +
   geom_sf(data = corridors_shapes, aes(color = corridor), alpha = 0.8) +
   scale_color_manual(values = c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
@@ -956,14 +972,18 @@ time_to_schools_sf <- sf::st_sf(time_to_schools)
 # configures time to schools distribution maps in both scenarios
 time_dist <- ggplot() +
   geom_sf(data = time_to_schools_sf, aes(fill = travel_time_p50), color = NA) +
-  facet_wrap(~ scenario, nrow = 1) +
+  facet_wrap(
+    ~ scenario,
+    nrow = 1,
+    labeller = as_labeller(c(before = "Before", after = "After"))
+  ) +
   scale_fill_viridis_c(option = "plasma", direction = -1) +
-  labs(fill = "Time to\n closest highschool\n\n(in minutes)") +
+  labs(fill = "Time to\nclosest highschool\n(minutes)", color = "Corridor") +
   geom_sf(
-  	data = corridors_shapes,
-  	aes(color = corridor),
-  	alpha = 0.8,
-  	show.legend = FALSE
+    data = corridors_shapes,
+    aes(color = corridor),
+    alpha = 0.8,
+    show.legend = FALSE
   ) +
   scale_color_manual(values = c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
   theme_void() +
@@ -972,12 +992,15 @@ time_dist <- ggplot() +
 # configures difference map
 time_diff_dist <- ggplot() +
   geom_sf(
-  	data = subset(time_to_schools_sf, !is.na(difference)),
-  	aes(fill = difference),
-  	color = NA
+    data = subset(time_to_schools_sf, !is.na(difference)),
+    aes(fill = difference),
+    color = NA
   ) +
   scale_fill_viridis_c(option = "viridis", direction = -1) +
-  labs(fill = "Time to\nclosest highschool\ndifference\n(in minutes)") +
+  labs(
+    fill = "Time to\nclosest highschool\ndifference\n(minutes)",
+    color = "Corridor"
+  ) +
   geom_sf(data = corridors_shapes, aes(color = corridor), alpha = 0.8) +
   scale_color_manual(values = c("#F8766D", "#7CAE00", "#00BFC4", "#C77CFF")) +
   theme_void() +
@@ -1000,20 +1023,24 @@ In this section, we look at how the job accessibility gains that result from the
 #| fig-cap: Job accessibility distribution between income deciles by transport scenario
 ggplot(data = access_to_jobs[population > 0]) +
   geom_boxplot(
-  	aes(
-  	  x = as.factor(decile),
-  	  y = access_to_jobs / 1000,
-  	  color = as.factor(decile),
-  	  weight = population,
-  	  group = decile
-  	),
-  	show.legend = FALSE
+    aes(
+      x = as.factor(decile),
+      y = access_to_jobs / 1000,
+      color = as.factor(decile),
+      weight = population,
+      group = decile
+    ),
+    show.legend = FALSE
   ) +
-  facet_wrap(~ scenario, nrow = 1) +
+  facet_wrap(
+    ~ scenario,
+    nrow = 1,
+    labeller = as_labeller(c(before = "Before", after = "After"))
+  ) +
   scale_colour_brewer(palette = "RdBu") +
-  labs(x = "Income decile", y = "Accessible jobs\n(in thousands)") +
+  labs(x = "Income decile", y = "Accessible jobs\n(thousands)") +
   scale_x_discrete(
-	  labels = c("D1\npoorest", paste0("D", 2:9), "D10\nwealthiest")
+    labels = c("D1\npoorest", paste0("D", 2:9), "D10\nwealthiest")
   ) +
   theme_minimal()
 ```
@@ -1039,7 +1066,7 @@ ggplot(subset(access_to_jobs, population > 0 & !is.na(difference))) +
   scale_colour_brewer(palette = "RdBu") +
   labs(
   	x = "Income decile",
-  	y = "Job accessibility difference\n(in thousands)"
+  	y = "Job accessibility difference\n(thousands)"
   ) +
   scale_x_discrete(
 	  labels = c("D1\npoorest", paste0("D", 2:9), "D10\nwealthiest")
@@ -1097,10 +1124,12 @@ ggplot(data = palma_ratio, aes(x = scenario, y = palma)) +
   geom_col(fill = "#0d6556") +
   geom_text(
     aes(label = round(palma, digits = 2)),
+    vjust = 1.5,
     color = "white",
     size = 10
   ) +
   ylab("Palma Ratio") +
+  scale_x_discrete(name = "Scenario", labels = c("Before", "After")) +
   theme_minimal()
 ```
 
