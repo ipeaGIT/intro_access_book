@@ -29,7 +29,7 @@ $$A_i = \sum_{j=1}^{n}{O_j \times f(c_{ij})}$$
 $$
 f(c_{ij}) =
   \begin{cases}
-	1 & \text{se } c_{ij} \leq C\\
+	1 & \text{if } c_{ij} \leq C\\
 	0 & \text{otherwise}
   \end{cases}
 $$
@@ -49,7 +49,7 @@ $$A_i = \sum_{j=1}^{n}{O_j \times f(c_{ij})}$$
 $$
 f_{lin}(c_{ij}) =
   \begin{cases}
-	1-c_{ij}/C & \text{se } c_{ij} \leq C\\
+	1-c_{ij}/C & \text{if } c_{ij} \leq C\\
 	0 & \text{otherwise}
   \end{cases}
 $$
