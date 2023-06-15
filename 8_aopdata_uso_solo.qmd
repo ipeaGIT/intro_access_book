@@ -100,13 +100,13 @@ As variáveis que contêm os dados dos estabelecimentos públicos de saúde em c
 saude_baixa <- ggplot(dados_bh) +
   geom_sf(aes(fill = as.factor(S002)), color = NA, alpha = 0.9) +
   scale_fill_brewer(palette = "YlGnBu", direction = 1, limits = factor(0:4)) +
-  labs(fill = "Contagem de\nestabelecimentos") +
+  labs(title = "Baixa complexidade", fill = "Contagem de\nestabelecimentos") +
   theme_void()
 
 saude_alta <- ggplot(dados_bh) +
   geom_sf(aes(fill = as.factor(S004)), color = NA, alpha = 0.9) +
   scale_fill_brewer(palette = "YlGnBu", direction = 1, limits = factor(0:4)) +
-  labs(fill = "Contagem de\nestabelecimentos") +
+  labs(title = "Alta complexidade", fill = "Contagem de\nestabelecimentos") +
   theme_void()
 
 saude_baixa + saude_alta + plot_layout(guides = "collect")
