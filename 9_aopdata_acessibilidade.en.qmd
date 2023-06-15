@@ -110,12 +110,13 @@ ggplot(subset(data_sp, !is.na(mode))) +
     breaks = seq(0, 60, 10),
     labels = c(seq(0, 50, 10), "60+")
   ) +
-  labs(
-    title = "Travel time to the nearest high complexity public hospital",
-    subtitle = "São Paulo",
-    fill = "Time\n(minutes)"
+  labs(fill = "Time\n(minutes)") +
+  facet_wrap(
+    ~ mode,
+    labeller = as_labeller(
+      c(car = "Car", public_transport = "Public transport")
+    )
   ) +
-  facet_wrap(~ mode) +
   theme_void()
 ```
 
@@ -127,27 +128,21 @@ The accessibility dataset also makes it very easy to compare the number of acces
 #| label: fig-accessible_jobs
 #| fig-cap: Job accessibility by public transport in São Paulo 
 # determine min and max values for the legend
-limit_values  <-c(0, max(access_pt $CMATT90, na.rm = TRUE) / 1000)
+limit_values  <-c(0, max(access_pt $CMATT90, na.rm = TRUE) / 1000000)
 
 fig60 <- ggplot(subset(access_pt, ! is.na(mode))) +
-  geom_sf(aes(fill = CMATT60 / 1000), color = NA, alpha = 0.9) +
+  geom_sf(aes(fill = CMATT60 / 1000000), color = NA, alpha = 0.9) +
   scale_fill_viridis_c(option = "inferno", limits = limit_values) +
-  labs(subtitle = "in up to 60 min." , fill = "Jobs\n(thousands)") +
+  labs(subtitle = "Up to 60 minutes" , fill = "Jobs\n(millions)") +
   theme_void()
 
 fig90 <- ggplot(subset(access_pt, ! is.na(mode))) +
-  geom_sf(aes(fill = CMATT90 / 1000), color = NA, alpha = 0.9) +
+  geom_sf(aes(fill = CMATT90 / 1000000), color = NA, alpha = 0.9) +
   scale_fill_viridis_c(option = "inferno", limits = limit_values) +
-  labs(subtitle = "in up to 90 min.", fill = "Jobs\n(thousands)") +
+  labs(subtitle = "Up to 90 minutes", fill = "Jobs\n(millions)") +
   theme_void()
 
-fig60 +
-  fig90 +
-  plot_layout(guides = "collect") +
-  plot_annotation(
-    title = "Spatial distribution of job accessibility by public transport",
-    subtitle = "São Paulo"
-  )
+fig60 + fig90 + plot_layout(guides = "collect")
 ```
 
 ## Accessibility inequalities
@@ -200,7 +195,7 @@ Another way of examining accessibility inequalities is by comparing the number o
 #| fig-cap: Distribution of job accessibility by public transport in São Paulo
 ggplot(subset(access_pt, !is.na(R003))) +
   geom_boxplot(
-    aes(x = factor(R003), y = CMATT60 / 1000, color = factor(R003))
+    aes(x = factor(R003), y = CMATT60 / 1000000, color = factor(R003))
   ) +
   scale_color_brewer(palette = "RdBu") +
   labs(
@@ -208,7 +203,7 @@ ggplot(subset(access_pt, !is.na(R003))) +
     color = "Income\ndecile",
     subtitle = "by public transport, São Paulo",
     x = "Income decile",
-    y = "Accessible jobs (thousands)"
+    y = "Accessible jobs (millions)"
   ) +
   scale_x_discrete(
     labels = c("D1\npoorest", paste0("D", 2:9), "D10\nwealthiest")
@@ -264,13 +259,8 @@ Finally, we can analyze the results using a chart:
 #| fig-cap: Ratio between job accessibility levels by car and by foot considering trips of up to 30 minutes in the 20 biggest Brazilian cities
 ggplot(avg_access, aes(x = ratio, y = reorder(name_muni, ratio))) +
   geom_bar(stat = "identity") +
-  geom_text(aes(x = ratio + 4 , label = paste0(round(ratio), "x"))) +
-  labs(
-    title = "Ratio between job accessibility levels by \nautomobile and by foot",
-    subtitle = "in up to 30 min.",
-    y = "",
-    x = "Ratio between car and walk accessibility"
-  ) +
+  geom_text(aes(x = ratio + 3 , label = paste0(round(ratio), "x"))) +
+  labs(y = NULL, x = "Ratio between car and walk accessibility") +
   theme_classic()
 ```
 
