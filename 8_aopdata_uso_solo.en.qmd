@@ -72,11 +72,7 @@ library(ggplot2)
 ggplot(data_bh) +
   geom_sf(aes(fill = T001), color = NA, alpha = 0.9) +
   scale_fill_distiller(palette = "YlGnBu", direction = 1) +
-  labs(
-    title = "Spatial distribution of jobs",
-    subtitle = "Belo Horizonte",
-    fill = "Jobs"
-  ) +
+  labs(fill = "Jobs") +
   theme_void()
 ```
 
@@ -90,11 +86,7 @@ The columns with information on the number of public schools in each cell begin 
 ggplot(data_bh) +
   geom_sf(aes(fill = as.factor(E001)), color = NA, alpha = 0.9) +
   scale_fill_brewer(palette = "YlGnBu", direction = 1) +
-  labs(
-    title = "Spatial distribution of public schools",
-    subtitle = "Belo Horizonte",
-    fill = "Schools"
-  ) +
+  labs(fill = "Schools") +
   theme_void()
 ```
 
@@ -108,21 +100,13 @@ The columns with information on the number of public health facilities in each c
 low_complexity <- ggplot(data_bh) +
   geom_sf(aes(fill = as.factor(S002)), color = NA, alpha = 0.9) +
   scale_fill_brewer(palette = "YlGnBu", direction = 1, limits = factor(0:4)) +
-  labs(
-    title = "Public health facilities",
-    subtitle = "Low complexity",
-    fill = "Facilities"
-  ) +
+  labs(title = "Low complexity", fill = "Facilities") +
   theme_void()
 
 high_complexity <- ggplot(data_bh) +
   geom_sf(aes(fill = as.factor(S004)), color = NA, alpha = 0.9) +
   scale_fill_brewer(palette = "YlGnBu", direction = 1, limits = factor(0:4)) +
-  labs(
-    title = "Public health facilities",
-    subtitle = "High complexity",
-    fill = "Facilities"
-  ) +
+  labs(title = "High complexity", fill = "Facilities") +
   theme_void()
 
 low_complexity + high_complexity + plot_layout(guides = "collect")
@@ -138,10 +122,6 @@ Finally, the column `C001` has information on the number of CRAS in each grid ce
 ggplot(data_bh) +
   geom_sf(aes(fill = as.factor(C001)), color = NA, alpha = 0.9) +
   scale_fill_brewer(palette = "YlGnBu", direction = 1) +
-  labs(
-    title = "Social assistance reference centers (CRAS)",
-    subtitle = "Belo Horizonte",
-    fill = "CRAS"
-  ) +
+  labs(fill = "CRAS") +
   theme_void()
 ```
