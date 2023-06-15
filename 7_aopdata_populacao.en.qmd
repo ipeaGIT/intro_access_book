@@ -74,11 +74,7 @@ library(ggplot2)
 ggplot(subset(data_fortaleza, P001 > 0)) +
   geom_sf(aes(fill = P001), color = NA, alpha = 0.8) +
   scale_fill_distiller(palette = "YlOrRd", direction = 1) +
-  labs(
-    title = "Population spatial distribution",
-    subtitle = "Fortaleza",
-    fill = "Population count"
-  ) +
+  labs(fill = "Population\ncount") +
   theme_void()
 ```
 
@@ -92,23 +88,25 @@ Besides reporting the total population count in each cell, the dataset also incl
 pop_black <- ggplot(subset(data_fortaleza, P001 > 0)) +
   geom_sf(aes(fill = P003 / P001), color = NA, alpha = 0.8) +
   scale_fill_distiller(
+    name = NULL,
     palette = "RdPu",
     direction = 1,
     labels = scales::percent,
     limits = c(0, 1)
   ) +
-  labs(title = "Proportion of black people", fill = "Black pop.") +
+  labs(title = "Proportion of black people") +
   theme_void()
 
 pop_white <- ggplot(subset(data_fortaleza, P001 > 0)) +
   geom_sf(aes(fill = P002 / P001), color = NA, alpha = 0.8) +
   scale_fill_distiller(
+    name = NULL,
     palette = "YlGnBu",
     direction = 1,
     labels = scales::percent,
     limits = c(0, 1)
   ) +
-  labs(title = "Proportion of white people", fill = "White pop.") +
+  labs(title = "Proportion of white people") +
   theme_void()
 
 pop_black + pop_white
@@ -123,14 +121,14 @@ Finally, the dataset also includes information on the average income per capita 
 #| fig-cap: Income spatial distribution in Fortaleza
 income <- ggplot(subset(data_fortaleza, P001 > 0)) +
   geom_sf(aes(fill = R001), color = NA, alpha = 0.8) +
-  scale_fill_distiller(palette = "YlOrRd", direction = 1) +
-  labs(title = "Average income per capita", fill = "Income (BRL)") +
+  scale_fill_distiller(name = NULL, palette = "YlOrRd", direction = 1) +
+  labs(title = "Average income per capita (BRL)") +
   theme_void()
 
 deciles <- ggplot(subset(data_fortaleza, !is.na(R002))) +
   geom_sf(aes(fill = factor(R003)), color = NA, alpha = 0.8) +
-  scale_fill_brewer(palette = "RdBu") +
-  labs(title = "Income deciles", fill = "Income decile") +
+  scale_fill_brewer(name = NULL, palette = "RdBu") +
+  labs(title = "Income deciles") +
   theme_void() +
   theme(legend.key.size = unit(0.3, "cm"))
 
