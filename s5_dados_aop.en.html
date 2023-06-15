@@ -286,17 +286,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 
 </header><p><strong>The purpose of this section</strong> is: i) to present the accessibility, land use and socioeconomic data made available by the Access to Opportunities Project; and ii) to teach how to download and use this data with the <code>{aopdata}</code> R package.</p>
 <p>In the previous chapters, we learned about the concept of accessibility, how this concept is usually translated into quantitative measures and how to estimate accessibility levels using R. However, we often come across situations in which we do not want to calculate accessibility levels ourselves, either because we do not have the resources or data required for this or simply because they have already been calculated by other people. Throughout the next chapters, we will present the accessibility database created and made available by the <a href="https://www.ipea.gov.br/acessooportunidades/en/">Access to Opportunities Project</a> (AOP).</p>
-<p>AOP is a research initiative led by the Institute for Applied Economic Research (Ipea) with the objective of investigating the urban accessibility conditions and the inequalities in access to opportunities in Brazilian cities. All data produced by the project is made publicly available, including not only accessibility estimates, but also information on the spatial distribution of population, economic activities and public services. The data is spatially aggregated into a hexagonal grid indexed by the <a href="https://h3geo.org/">H3</a> geospatial indexing system, originally developed by Uber <span class="citation" data-cites="brodsky2018h3">(<a href="references.en.html#ref-brodsky2018h3" role="doc-biblioref">Brodsky 2018</a>)</span>. Each hexagonal cell covers around 0.11 km², an area similar to that covered by a city block, resulting in high spatial resolution analyses and outputs. As shown in <a href="#fig-data_scope">Figure <span>1</span></a>, accessibility estimates have been produced for the years 2017, 2018 and 2019 and for the 20 largest Brazilian cities, considering different transport modes (walking, cycling, public transport and automobile), times of day (peak and off-peak), population groups (aggregated by income, race, sex and age) and types of activity (jobs, schools, health services and social assistance centers).</p>
-<div class="callout callout-style-simple callout-note">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>The methods used to generate these datasets are presented in detail in two separate publications, one for population and land use data <span class="citation" data-cites="pereira2022distribuicao">(<a href="references.en.html#ref-pereira2022distribuicao" role="doc-biblioref">Pereira, Herszenhut, et al. 2022</a>)</span> and another for accessibility data <span class="citation" data-cites="pereira2022estimativas">(<a href="references.en.html#ref-pereira2022estimativas" role="doc-biblioref">Pereira, Braga, et al. 2022</a>)</span>.</p>
-</div>
-</div>
-</div>
+<p>AOP is a research initiative led by the Institute for Applied Economic Research (Ipea) with the objective of investigating the urban accessibility conditions and the inequalities in access to opportunities in Brazilian cities. All data produced by the project is made publicly available, including not only accessibility estimates, but also information on the spatial distribution of population, economic activities and public services<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. The data is spatially aggregated into a hexagonal grid indexed by the <a href="https://h3geo.org/">H3</a> geospatial indexing system, originally developed by Uber <span class="citation" data-cites="brodsky2018h3">(<a href="references.en.html#ref-brodsky2018h3" role="doc-biblioref">Brodsky 2018</a>)</span>. Each hexagonal cell covers around 0.11 km², an area similar to that covered by a city block, resulting in high spatial resolution analyses and outputs. As shown in <a href="#fig-data_scope">Figure <span>1</span></a>, accessibility estimates have been produced for the years 2017, 2018 and 2019 and for the 20 largest Brazilian cities, considering different transport modes (walking, cycling, public transport and automobile), times of day (peak and off-peak), population groups (aggregated by income, race, sex and age) and types of activity (jobs, schools, health services and social assistance centers).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-data_scope" class="quarto-figure quarto-figure-center anchored">
@@ -305,7 +295,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<p>Accessibility estimates by public transport were calculated only for cities with good quality GTFS data, which include Belo Horizonte, Campinas, Curitiba, Fortaleza, Goiânia<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, Porto Alegre, Recife, Rio de Janeiro and São Paulo. Still, in some cases the feeds of some of these cities were either only available for a few years or had quality issues, not being representative of the public transport operations they should be describing. In such cases, accessibility estimates by public transport were not calculated. <a href="#fig-geo_scope">Figure <span>2</span></a> shows the cities included in the project and the transport modes considered in their accessibility estimates.</p>
+<p>Accessibility estimates by public transport were calculated only for cities with good quality GTFS data, which include Belo Horizonte, Campinas, Curitiba, Fortaleza, Goiânia<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, Porto Alegre, Recife, Rio de Janeiro and São Paulo. Still, in some cases the feeds of some of these cities were either only available for a few years or had quality issues, not being representative of the public transport operations they should be describing. In such cases, accessibility estimates by public transport were not calculated. <a href="#fig-geo_scope">Figure <span>2</span></a> shows the cities included in the project and the transport modes considered in their accessibility estimates.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-geo_scope" class="quarto-figure quarto-figure-center anchored">
@@ -363,10 +353,10 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <table class="table table-sm table-striped small">
 <caption>Table 2: Data on the sociodemographic characteristics of the population and the spatial distribution of activities aggregated by AOP, by year of reference and data source</caption>
 <colgroup>
-<col style="width: 18%">
-<col style="width: 46%">
-<col style="width: 6%">
-<col style="width: 28%">
+<col style="width: 17%">
+<col style="width: 42%">
+<col style="width: 5%">
+<col style="width: 34%">
 </colgroup>
 <thead><tr class="header">
 <th style="text-align: left;">Data</th>
@@ -379,38 +369,38 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <td style="text-align: left;">Sociodemographic characteristics of the population</td>
 <td style="text-align: left;">Number of people by sex, age and race; average income per capita</td>
 <td style="text-align: left;">2010</td>
-<td style="text-align: left;">Demographic Census, Brazilian Institute for Geography and Statistics (IBGE)</td>
+<td style="text-align: left;">Demographic Census from the Brazilian Institute for Geography and Statistics (IBGE)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Education services</td>
 <td style="text-align: left;">Number of public schools by education level (early childhood, primary and secondary education)</td>
 <td style="text-align: left;">2017, 2018, 2019</td>
-<td style="text-align: left;">School Census, Inep</td>
+<td style="text-align: left;">School Census from the Anísio Teixeira National Institute for Educational Studies and Research (Inep)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Health services</td>
 <td style="text-align: left;">Number of health facilities that serve the Unified Health System (SUS) by complexity level (low, medium and high complexity)</td>
 <td style="text-align: left;">2017, 2018, 2019</td>
-<td style="text-align: left;">National Registry of Health Facilities (CNES), Ministry of Health</td>
+<td style="text-align: left;">National Registry of Health Facilities (CNES) from the Ministry of Health</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Economic activity</td>
 <td style="text-align: left;">Number of formal jobs by education level of workers (primary, secondary and tertiary education)</td>
 <td style="text-align: left;">2017, 2018, 2019</td>
-<td style="text-align: left;">Annual Relation of Social Information (RAIS), Ministry of Economy</td>
+<td style="text-align: left;">Annual Relation of Social Information (RAIS) from the Ministry of Economy</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Social welfare services</td>
 <td style="text-align: left;">Number of CRAS</td>
 <td style="text-align: left;">2017, 2018, 2019</td>
-<td style="text-align: left;">Unified Social Assistance System (SUAS) Census, Ministry of Citizenship</td>
+<td style="text-align: left;">Unified Social Assistance System (SUAS) Census from the Ministry of Citizenship</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </div>
-<p>All datasets created by AOP are available for download in the <a href="https://www.ipea.gov.br/acessooportunidades/en/dados/">project website</a> and through the <code>{aopdata}</code> R package. The data dictionary can be accessed at <a href="https://ipeagit.github.io/aopdata/articles/data_dic_en.html">this link</a> or with the command <code>aopdata::aopdata_dictionary(lang = "en")</code> in an R session. The chapters in this section provide several examples illustrating how to download the datasets and create visualizations with them in R.</p>
+<p>All datasets created by AOP are available for download in the <a href="https://www.ipea.gov.br/acessooportunidades/en/dados/">project website</a> and through the <code>{aopdata}</code> R package. The data dictionary can be accessed online<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> or with the command <code>aopdata::aopdata_dictionary(lang = "en")</code> in an R session. The chapters in this section provide several examples illustrating how to download the datasets and create visualizations with them in R.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
@@ -426,7 +416,9 @@ Pereira, Rafael H. M., Daniel Herszenhut, Carlos Kauê Vieira Braga, João Pedro
 </div>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
 <ol>
-<li id="fn1"><p>Goiânia’s GTFS covers not only the municipality, but its entire metropolitan region.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>The methods used to generate these datasets are presented in detail in two separate publications, one for population and land use data <span class="citation" data-cites="pereira2022distribuicao">(<a href="references.en.html#ref-pereira2022distribuicao" role="doc-biblioref">Pereira, Herszenhut, et al. 2022</a>)</span> and another for accessibility data <span class="citation" data-cites="pereira2022estimativas">(<a href="references.en.html#ref-pereira2022estimativas" role="doc-biblioref">Pereira, Braga, et al. 2022</a>)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Goiânia’s GTFS covers not only the municipality, but its entire metropolitan region.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Available at <a href="https://ipeagit.github.io/aopdata/articles/data_dic_en.html" class="uri">https://ipeagit.github.io/aopdata/articles/data_dic_en.html</a>.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

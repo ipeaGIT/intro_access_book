@@ -1077,20 +1077,24 @@ The scenario analyzed
 <span id="cb51-44"><a href="#cb51-44" aria-hidden="true" tabindex="-1"></a>  corridors_shapes,</span>
 <span id="cb51-45"><a href="#cb51-45" aria-hidden="true" tabindex="-1"></a>  corridor <span class="sc">!=</span> <span class="st">"East Line"</span> <span class="sc">|</span> scenario <span class="sc">!=</span> <span class="st">"before"</span></span>
 <span id="cb51-46"><a href="#cb51-46" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb51-47"><a href="#cb51-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-48"><a href="#cb51-48" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb51-49"><a href="#cb51-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> fortaleza_grid, <span class="at">fill =</span> <span class="st">"gray90"</span>, <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb51-50"><a href="#cb51-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> corridors_shapes, <span class="fu">aes</span>(<span class="at">color =</span> corridor)) <span class="sc">+</span></span>
-<span id="cb51-51"><a href="#cb51-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(</span>
-<span id="cb51-52"><a href="#cb51-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Corridor"</span>,</span>
-<span id="cb51-53"><a href="#cb51-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#F8766D"</span>, <span class="st">"#7CAE00"</span>, <span class="st">"#00BFC4"</span>, <span class="st">"#C77CFF"</span>)</span>
-<span id="cb51-54"><a href="#cb51-54" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb51-55"><a href="#cb51-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(</span>
-<span id="cb51-56"><a href="#cb51-56" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> scenario,</span>
-<span id="cb51-57"><a href="#cb51-57" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">1</span>,</span>
-<span id="cb51-58"><a href="#cb51-58" aria-hidden="true" tabindex="-1"></a>    <span class="at">labeller =</span> <span class="fu">as_labeller</span>(<span class="fu">c</span>(<span class="at">before =</span> <span class="st">"Before"</span>, <span class="at">after =</span> <span class="st">"After"</span>))</span>
-<span id="cb51-59"><a href="#cb51-59" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb51-60"><a href="#cb51-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb51-47"><a href="#cb51-47" aria-hidden="true" tabindex="-1"></a>corridors_shapes<span class="sc">$</span>scenario <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<span id="cb51-48"><a href="#cb51-48" aria-hidden="true" tabindex="-1"></a>  corridors_shapes<span class="sc">$</span>scenario,</span>
+<span id="cb51-49"><a href="#cb51-49" aria-hidden="true" tabindex="-1"></a>  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"before"</span>, <span class="st">"after"</span>)</span>
+<span id="cb51-50"><a href="#cb51-50" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb51-51"><a href="#cb51-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-52"><a href="#cb51-52" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb51-53"><a href="#cb51-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> fortaleza_grid, <span class="at">fill =</span> <span class="st">"gray90"</span>, <span class="at">color =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb51-54"><a href="#cb51-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> corridors_shapes, <span class="fu">aes</span>(<span class="at">color =</span> corridor)) <span class="sc">+</span></span>
+<span id="cb51-55"><a href="#cb51-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(</span>
+<span id="cb51-56"><a href="#cb51-56" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Corridor"</span>,</span>
+<span id="cb51-57"><a href="#cb51-57" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#F8766D"</span>, <span class="st">"#7CAE00"</span>, <span class="st">"#00BFC4"</span>, <span class="st">"#C77CFF"</span>)</span>
+<span id="cb51-58"><a href="#cb51-58" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb51-59"><a href="#cb51-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(</span>
+<span id="cb51-60"><a href="#cb51-60" aria-hidden="true" tabindex="-1"></a>    <span class="sc">~</span> scenario,</span>
+<span id="cb51-61"><a href="#cb51-61" aria-hidden="true" tabindex="-1"></a>    <span class="at">nrow =</span> <span class="dv">1</span>,</span>
+<span id="cb51-62"><a href="#cb51-62" aria-hidden="true" tabindex="-1"></a>    <span class="at">labeller =</span> <span class="fu">as_labeller</span>(<span class="fu">c</span>(<span class="at">before =</span> <span class="st">"Before"</span>, <span class="at">after =</span> <span class="st">"After"</span>))</span>
+<span id="cb51-63"><a href="#cb51-63" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb51-64"><a href="#cb51-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-fig_6" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="6_cenarios_transporte.en_files/figure-html/fig-fig_6-1.png" class="img-fluid figure-img" width="2100"></p>
