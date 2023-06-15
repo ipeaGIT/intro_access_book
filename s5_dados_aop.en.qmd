@@ -4,11 +4,9 @@
 
 In the previous chapters, we learned about the concept of accessibility, how this concept is usually translated into quantitative measures and how to estimate accessibility levels using R. However, we often come across situations in which we do not want to calculate accessibility levels ourselves, either because we do not have the resources or data required for this or simply because they have already been calculated by other people. Throughout the next chapters, we will present the accessibility database created and made available by the [Access to Opportunities Project](https://www.ipea.gov.br/acessooportunidades/en/) (AOP).
 
-AOP is a research initiative led by the Institute for Applied Economic Research (Ipea) with the objective of investigating the urban accessibility conditions and the inequalities in access to opportunities in Brazilian cities. All data produced by the project is made publicly available, including not only accessibility estimates, but also information on the spatial distribution of population, economic activities and public services. The data is spatially aggregated into a hexagonal grid indexed by the [H3](https://h3geo.org/) geospatial indexing system, originally developed by Uber [@brodsky2018h3]. Each hexagonal cell covers around 0.11 km², an area similar to that covered by a city block, resulting in high spatial resolution analyses and outputs. As shown in @fig-data_scope, accessibility estimates have been produced for the years 2017, 2018 and 2019 and for the 20 largest Brazilian cities, considering different transport modes (walking, cycling, public transport and automobile), times of day (peak and off-peak), population groups (aggregated by income, race, sex and age) and types of activity (jobs, schools, health services and social assistance centers).
+AOP is a research initiative led by the Institute for Applied Economic Research (Ipea) with the objective of investigating the urban accessibility conditions and the inequalities in access to opportunities in Brazilian cities. All data produced by the project is made publicly available, including not only accessibility estimates, but also information on the spatial distribution of population, economic activities and public services[^aop_papers]. The data is spatially aggregated into a hexagonal grid indexed by the [H3](https://h3geo.org/) geospatial indexing system, originally developed by Uber [@brodsky2018h3]. Each hexagonal cell covers around 0.11 km², an area similar to that covered by a city block, resulting in high spatial resolution analyses and outputs. As shown in @fig-data_scope, accessibility estimates have been produced for the years 2017, 2018 and 2019 and for the 20 largest Brazilian cities, considering different transport modes (walking, cycling, public transport and automobile), times of day (peak and off-peak), population groups (aggregated by income, race, sex and age) and types of activity (jobs, schools, health services and social assistance centers).
 
-::: {.callout-note appearance="simple"}
-The methods used to generate these datasets are presented in detail in two separate publications, one for population and land use data [@pereira2022distribuicao] and another for accessibility data [@pereira2022estimativas].
-:::
+[^aop_papers]: The methods used to generate these datasets are presented in detail in two separate publications, one for population and land use data [@pereira2022distribuicao] and another for accessibility data [@pereira2022estimativas].
 
 ```{r}
 #| echo: false
@@ -91,15 +89,17 @@ tabela_dados_pop <- data.table::data.table(
     "2017, 2018, 2019"
   ),
   Source = c(
-    "Demographic Census, Brazilian Institute for Geography and Statistics (IBGE)",
-    "School Census, Inep",
-    "National Registry of Health Facilities (CNES), Ministry of Health",
-    "Annual Relation of Social Information (RAIS), Ministry of Economy",
-    "Unified Social Assistance System (SUAS) Census, Ministry of Citizenship"
+    "Demographic Census from the Brazilian Institute for Geography and Statistics (IBGE)",
+    "School Census from the Anísio Teixeira National Institute for Educational Studies and Research (Inep)",
+    "National Registry of Health Facilities (CNES) from the Ministry of Health",
+    "Annual Relation of Social Information (RAIS) from the Ministry of Economy",
+    "Unified Social Assistance System (SUAS) Census from the Ministry of Citizenship"
   )
 )
 
 knitr::kable(tabela_dados_pop)
 ```
 
-All datasets created by AOP are available for download in the [project website](https://www.ipea.gov.br/acessooportunidades/en/dados/) and through the `{aopdata}` R package. The data dictionary can be accessed at [this link](https://ipeagit.github.io/aopdata/articles/data_dic_en.html) or with the command `aopdata::aopdata_dictionary(lang = "en")` in an R session. The chapters in this section provide several examples illustrating how to download the datasets and create visualizations with them in R.
+All datasets created by AOP are available for download in the [project website](https://www.ipea.gov.br/acessooportunidades/en/dados/) and through the `{aopdata}` R package. The data dictionary can be accessed online[^aop_data_dictionary] or with the command `aopdata::aopdata_dictionary(lang = "en")` in an R session. The chapters in this section provide several examples illustrating how to download the datasets and create visualizations with them in R.
+
+[^aop_data_dictionary]: Available at <https://ipeagit.github.io/aopdata/articles/data_dic_en.html>.
