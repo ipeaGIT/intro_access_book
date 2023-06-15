@@ -870,6 +870,10 @@ corridors_shapes <- subset(
   corridors_shapes,
   corridor != "East Line" | scenario != "before"
 )
+corridors_shapes$scenario <- factor(
+  corridors_shapes$scenario,
+  labels = c("before", "after")
+)
 
 ggplot() +
   geom_sf(data = fortaleza_grid, fill = "gray90", color = NA) +
