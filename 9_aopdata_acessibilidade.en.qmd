@@ -177,12 +177,7 @@ ggplot(ineq_pt) +
   scale_x_discrete(
 	  labels = c("D1\npoorest", paste0("D", 2:9), "D10\nwealthiest")
   ) +
-  labs(
-    title = "Average travel time to the nearest hospital",
-    subtitle = "by public transport in São Paulo ",
-    x = "Income decile",
-    y = "Travel time (minutes)"
-  ) +
+  labs(x = "Income decile", y = "Travel time (minutes)") +
   theme_minimal()
 ```
  
@@ -199,9 +194,7 @@ ggplot(subset(access_pt, !is.na(R003))) +
   ) +
   scale_color_brewer(palette = "RdBu") +
   labs(
-    title = "Distribution of the number of jobs accessible within 60 min.",
     color = "Income\ndecile",
-    subtitle = "by public transport, São Paulo",
     x = "Income decile",
     y = "Accessible jobs (millions)"
   ) +

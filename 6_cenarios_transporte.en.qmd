@@ -1002,7 +1002,7 @@ time_diff_dist <- ggplot() +
   ) +
   scale_fill_viridis_c(option = "viridis", direction = -1) +
   labs(
-    fill = "Time to\nclosest highschool\ndifference\n(minutes)",
+    fill = "Time to\nclosest highschool\ndifference (minutes)",
     color = "Corridor"
   ) +
   geom_sf(data = corridors_shapes, aes(color = corridor), alpha = 0.8) +
@@ -1042,7 +1042,7 @@ ggplot(data = access_to_jobs[population > 0]) +
     labeller = as_labeller(c(before = "Before", after = "After"))
   ) +
   scale_colour_brewer(palette = "RdBu") +
-  labs(x = "Income decile", y = "Accessible jobs\n(thousands)") +
+  labs(x = "Income decile", y = "Accessible jobs (thousands)") +
   scale_x_discrete(
     labels = c("D1\npoorest", paste0("D", 2:9), "D10\nwealthiest")
   ) +
