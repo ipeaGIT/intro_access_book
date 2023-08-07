@@ -41,6 +41,7 @@ en_yml$book$chapters <- lapply(
     }
   }
 )
+en_yml$book$sidebar <- NULL
 
 yaml::write_yaml(
   en_yml,
