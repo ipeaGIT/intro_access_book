@@ -145,6 +145,8 @@ gtfs$calendar[
   )
 ]
 
+gtfs$calendar[, service_id := gsub("\\_", "\\\\_", service_id)]
+
 knitr::kable(gtfs$calendar)
 ```
 
