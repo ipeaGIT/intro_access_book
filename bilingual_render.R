@@ -42,6 +42,9 @@ en_yml$book$chapters <- lapply(
   }
 )
 en_yml$book$sidebar <- NULL
+en_yml$citation$title <- "Introduction to urban accessibility: a practical guide with R"
+en_yml$citation$publisher <- "Ipea - Institute for Applied Economic Research"
+en_yml$citation$url <- "https://ipeagit.github.io/intro_access_book"
 
 yaml::write_yaml(
   en_yml,
