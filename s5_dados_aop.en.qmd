@@ -1,10 +1,10 @@
 # SECTION 5: Data from the Access to Opportunity Project
 
-**The purpose of this section** is: i) to present the accessibility, land use and socioeconomic data made available by the Access to Opportunities Project; and ii) to teach how to download and use this data with the `{aopdata}` R package.
+**The purpose of this section** is: i) to present the accessibility, land use and socioeconomic data made available by the AOP; and ii) to teach how to download and use this data with the `{aopdata}` R package.
 
-In the previous chapters, we learned about the concept of accessibility, how this concept is usually translated into quantitative measures and how to estimate accessibility levels using R. However, we often come across situations in which we do not want to calculate accessibility levels ourselves, either because we do not have the resources or data required for this or simply because they have already been calculated by other people. Throughout the next chapters, we will present the accessibility database created and made available by the [Access to Opportunities Project](https://www.ipea.gov.br/acessooportunidades/en/) (AOP).
+In the previous chapters, we learned about the concept of accessibility, how this concept is usually translated into quantitative measures and how to estimate accessibility levels using R. However, we often come across situations in which we do not want to calculate accessibility levels ourselves, either because we do not have the resources or data required for this or simply because they have already been calculated by other people. Throughout the next chapters, we will present the accessibility database created and made available by [AOP](https://www.ipea.gov.br/acessooportunidades/en/).
 
-AOP is a research initiative led by the Institute for Applied Economic Research (Ipea) with the objective of investigating the urban accessibility conditions and the inequalities in access to opportunities in Brazilian cities. All data produced by the project is made publicly available, including not only accessibility estimates, but also information on the spatial distribution of population, economic activities and public services[^aop_papers]. The data is spatially aggregated into a hexagonal grid indexed by the [H3](https://h3geo.org/) geospatial indexing system, originally developed by Uber [@brodsky2018h3]. Each hexagonal cell covers around 0.11 km², an area similar to that covered by a city block, resulting in high spatial resolution analyses and outputs. As shown in @fig-data_scope, accessibility estimates have been produced for the years 2017, 2018 and 2019 and for the 20 largest Brazilian cities, considering different transport modes (walking, cycling, public transport and automobile), times of day (peak and off-peak), population groups (aggregated by income, race, sex and age) and types of activity (jobs, schools, health services and social assistance centers).
+AOP is a research initiative led by Ipea with the objective of investigating the urban accessibility conditions and the inequalities in access to opportunities in Brazilian cities. All data produced by the project is made publicly available, including not only accessibility estimates, but also information on the spatial distribution of population, economic activities and public services[^aop_papers]. The data is spatially aggregated into a hexagonal grid indexed by the [H3](https://h3geo.org/) geospatial indexing system, originally developed by Uber [@brodsky2018h3]. Each hexagonal cell covers around 0.11 km², an area similar to that covered by a city block, resulting in high spatial resolution analyses and outputs. As shown in @fig-data_scope, accessibility estimates have been produced for the years 2017, 2018 and 2019 and for the 20 largest Brazilian cities, considering different transport modes (walking, cycling, public transport and automobile), times of day (peak and off-peak), population groups (aggregated by income, race, sex and age) and types of activity (jobs, schools, health services and social assistance centers).
 
 [^aop_papers]: The methods used to generate these datasets are presented in detail in two separate publications, one for population and land use data [@pereira2022distribuicao] and another for accessibility data [@pereira2022estimativas].
 
@@ -28,7 +28,7 @@ Accessibility estimates by public transport were calculated only for cities with
 knitr::include_graphics("images/aop_geographical_scope.en.png")
 ```
 
-The following tables summarize the data made available by the project. @tbl-tabela_dados_access describes the urban accessibility dataset:
+The following tables summarize the data made available by the project. @tbl-tabela_dados_access describes the urban accessibility dataset.
 
 ```{r}
 #| echo: false
@@ -46,21 +46,21 @@ tabela_dados_access <- data.table::data.table(
     "Number of people that can access the grid cell within a given travel time threshold"
   ),
   `Type of opportunities` = c(
-    "Health, education, social assistance reference centers (CRAS)",
-    "Jobs, health, education, CRAS",
+    "Health, education and social assistance reference centers (CRAS)",
+    "Jobs, health, education and CRAS",
     "-"
   ),
   `Travel time thresholds` = c(
-    "Walk (60 min.); bicycle, public transport and car (120 min.)",
-    "Walk and bicycle (15, 30, 45 and 60 min.); public transport and car (15, 30, 60, 90 and 120 min.)",
-    "Walk and bicycle (15, 30, 45 and 60 min.); public transport and car (15, 30, 60, 90 and 120 min.)"
+    "Walk (60 minutes); bicycle, public transport and car (120 minutes)",
+    "Walk and bicycle (15, 30, 45 and 60 minutes); public transport and car (15, 30, 60, 90 and 120 minutes)",
+    "Walk and bicycle (15, 30, 45 and 60 minutes); public transport and car (15, 30, 60, 90 and 120 minutes)"
   )
 )
 
 knitr::kable(tabela_dados_access)
 ```
 
-@tbl-tabela_dados_aop describes the dataset containing the sociodemographic characteristics of the population and the spatial distribution of opportunities:
+@tbl-tabela_dados_aop describes the dataset containing the sociodemographic characteristics of the population and the spatial distribution of opportunities.
 
 ```{r}
 #| echo: false
@@ -100,6 +100,6 @@ tabela_dados_pop <- data.table::data.table(
 knitr::kable(tabela_dados_pop)
 ```
 
-All datasets created by AOP are available for download in the [project website](https://www.ipea.gov.br/acessooportunidades/en/dados/) and through the `{aopdata}` R package. The data dictionary can be accessed online[^aop_data_dictionary] or with the command `aopdata::aopdata_dictionary(lang = "en")` in an R session. The chapters in this section provide several examples illustrating how to download the datasets and create visualizations with them in R.
+All datasets created by AOP are available for download in the project [website](https://www.ipea.gov.br/acessooportunidades/en/dados/) and through the `{aopdata}` R package. The data dictionary can be accessed online[^aop_data_dictionary] or with the command `aopdata::aopdata_dictionary(lang = "en")` in an R session. The chapters in this section provide several examples illustrating how to download the datasets and create visualizations with them in R.
 
 [^aop_data_dictionary]: Available at <https://ipeagit.github.io/aopdata/articles/data_dic_en.html>.
