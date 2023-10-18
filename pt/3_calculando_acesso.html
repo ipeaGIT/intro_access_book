@@ -438,9 +438,9 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(processx<span class="sc">::</span><span class="fu">run</span>(<span class="st">"java"</span>, <span class="at">args =</span> <span class="st">"-version"</span>)<span class="sc">$</span>stderr)</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>openjdk version "11.0.20" 2023-07-18 LTS
-OpenJDK Runtime Environment Zulu11.66+15-CA (build 11.0.20+8-LTS)
-OpenJDK 64-Bit Server VM Zulu11.66+15-CA (build 11.0.20+8-LTS, mixed mode)</code></pre>
+<pre><code>openjdk version "11.0.21" 2023-10-17 LTS
+OpenJDK Runtime Environment Zulu11.68+17-CA (build 11.0.21+9-LTS)
+OpenJDK 64-Bit Server VM Zulu11.68+17-CA (build 11.0.21+9-LTS, mixed mode)</code></pre>
 </div>
 </div>
 <p>Como podemos ver, a versão instalada no livro é compatível com o <code>{r5r}</code>. Caso a versão instalada na sua máquina não o seja (resultado do código mencionando a versão 12 ou 1.8.0, por exemplo), será necessário atualizar o Java para a versão 11.</p>
@@ -499,7 +499,7 @@ Qualidade dos dados do OSM
 <p>Esses dados devem ser salvos em uma mesma pasta que, preferencialmente, não contenha nenhum outro arquivo. Como veremos adiante, o <code>{r5r}</code> combina todos os dados salvos nessa pasta para criar uma rede de transporte multimodal que é utilizada no roteamento de viagens entre pares origem-destino e, consequentemente, no cálculo das matrizes de tempo de viagem. Note que é possível ter mais de um arquivo GTFS na mesma pasta: nesse caso, o <code>{r5r}</code> considera as redes de transporte público de todos os <em>feeds</em> de forma conjunta. No entanto, a rede viária e a topografia da área de estudo devem ser descritas por um único arquivo cada. Assumindo que os <em>scripts</em> de R estejam em uma pasta chamada <code>R</code>, uma possível organização dos arquivos segue o esquema a seguir:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>/tmp/Rtmp3hpNxA/projeto_acessibilidade
+<pre><code>/tmp/RtmpYovog4/projeto_acessibilidade
 ├── R
 │   ├── script1.R
 │   └── script2.R

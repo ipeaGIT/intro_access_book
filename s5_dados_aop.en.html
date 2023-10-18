@@ -354,9 +354,9 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </div>
   
 
-</header><p><strong>The purpose of this section</strong> is: i) to present the accessibility, land use and socioeconomic data made available by the Access to Opportunities Project; and ii) to teach how to download and use this data with the <code>{aopdata}</code> R package.</p>
-<p>In the previous chapters, we learned about the concept of accessibility, how this concept is usually translated into quantitative measures and how to estimate accessibility levels using R. However, we often come across situations in which we do not want to calculate accessibility levels ourselves, either because we do not have the resources or data required for this or simply because they have already been calculated by other people. Throughout the next chapters, we will present the accessibility database created and made available by the <a href="https://www.ipea.gov.br/acessooportunidades/en/">Access to Opportunities Project</a> (AOP).</p>
-<p>AOP is a research initiative led by the Institute for Applied Economic Research (Ipea) with the objective of investigating the urban accessibility conditions and the inequalities in access to opportunities in Brazilian cities. All data produced by the project is made publicly available, including not only accessibility estimates, but also information on the spatial distribution of population, economic activities and public services<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. The data is spatially aggregated into a hexagonal grid indexed by the <a href="https://h3geo.org/">H3</a> geospatial indexing system, originally developed by Uber <span class="citation" data-cites="brodsky2018h3">(<a href="references.en.html#ref-brodsky2018h3" role="doc-biblioref">Brodsky 2018</a>)</span>. Each hexagonal cell covers around 0.11 km², an area similar to that covered by a city block, resulting in high spatial resolution analyses and outputs. As shown in <a href="#fig-data_scope">Figure <span>1</span></a>, accessibility estimates have been produced for the years 2017, 2018 and 2019 and for the 20 largest Brazilian cities, considering different transport modes (walking, cycling, public transport and automobile), times of day (peak and off-peak), population groups (aggregated by income, race, sex and age) and types of activity (jobs, schools, health services and social assistance centers).</p>
+</header><p><strong>The purpose of this section</strong> is: i) to present the accessibility, land use and socioeconomic data made available by the AOP; and ii) to teach how to download and use this data with the <code>{aopdata}</code> R package.</p>
+<p>In the previous chapters, we learned about the concept of accessibility, how this concept is usually translated into quantitative measures and how to estimate accessibility levels using R. However, we often come across situations in which we do not want to calculate accessibility levels ourselves, either because we do not have the resources or data required for this or simply because they have already been calculated by other people. Throughout the next chapters, we will present the accessibility database created and made available by <a href="https://www.ipea.gov.br/acessooportunidades/en/">AOP</a>.</p>
+<p>AOP is a research initiative led by Ipea with the objective of investigating the urban accessibility conditions and the inequalities in access to opportunities in Brazilian cities. All data produced by the project is made publicly available, including not only accessibility estimates, but also information on the spatial distribution of population, economic activities and public services<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. The data is spatially aggregated into a hexagonal grid indexed by the <a href="https://h3geo.org/">H3</a> geospatial indexing system, originally developed by Uber <span class="citation" data-cites="brodsky2018h3">(<a href="references.en.html#ref-brodsky2018h3" role="doc-biblioref">Brodsky 2018</a>)</span>. Each hexagonal cell covers around 0.11 km², an area similar to that covered by a city block, resulting in high spatial resolution analyses and outputs. As shown in <a href="#fig-data_scope">Figure <span>1</span></a>, accessibility estimates have been produced for the years 2017, 2018 and 2019 and for the 20 largest Brazilian cities, considering different transport modes (walking, cycling, public transport and automobile), times of day (peak and off-peak), population groups (aggregated by income, race, sex and age) and types of activity (jobs, schools, health services and social assistance centers).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-data_scope" class="quarto-figure quarto-figure-center anchored">
@@ -374,17 +374,17 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<p>The following tables summarize the data made available by the project. <a href="#tbl-tabela_dados_access">Table <span>1</span></a> describes the urban accessibility dataset:</p>
+<p>The following tables summarize the data made available by the project. <a href="#tbl-tabela_dados_access">Table <span>1</span></a> describes the urban accessibility dataset.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-tabela_dados_access" class="anchored">
 <table class="table table-sm table-striped small">
 <caption>Table 1: Accessibility indicators calculated in AOP</caption>
 <colgroup>
-<col style="width: 16%">
+<col style="width: 15%">
 <col style="width: 28%">
 <col style="width: 21%">
-<col style="width: 33%">
+<col style="width: 34%">
 </colgroup>
 <thead><tr class="header">
 <th style="text-align: left;">Indicator (code)</th>
@@ -396,27 +396,27 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <tr class="odd">
 <td style="text-align: left;">Minimum travel time (TMI)</td>
 <td style="text-align: left;">Time to the nearest opportunity</td>
-<td style="text-align: left;">Health, education, social assistance reference centers (CRAS)</td>
-<td style="text-align: left;">Walk (60 min.); bicycle, public transport and car (120 min.)</td>
+<td style="text-align: left;">Health, education and social assistance reference centers (CRAS)</td>
+<td style="text-align: left;">Walk (60 minutes); bicycle, public transport and car (120 minutes)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Active cumulative accessibility measure (CMA)</td>
 <td style="text-align: left;">Number of accessible opportunities within a given travel time threshold</td>
-<td style="text-align: left;">Jobs, health, education, CRAS</td>
-<td style="text-align: left;">Walk and bicycle (15, 30, 45 and 60 min.); public transport and car (15, 30, 60, 90 and 120 min.)</td>
+<td style="text-align: left;">Jobs, health, education and CRAS</td>
+<td style="text-align: left;">Walk and bicycle (15, 30, 45 and 60 minutes); public transport and car (15, 30, 60, 90 and 120 minutes)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Passive cumulative accessibility measure (CMP)</td>
 <td style="text-align: left;">Number of people that can access the grid cell within a given travel time threshold</td>
 <td style="text-align: left;">-</td>
-<td style="text-align: left;">Walk and bicycle (15, 30, 45 and 60 min.); public transport and car (15, 30, 60, 90 and 120 min.)</td>
+<td style="text-align: left;">Walk and bicycle (15, 30, 45 and 60 minutes); public transport and car (15, 30, 60, 90 and 120 minutes)</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </div>
-<p><a href="#tbl-tabela_dados_aop">Table <span>2</span></a> describes the dataset containing the sociodemographic characteristics of the population and the spatial distribution of opportunities:</p>
+<p><a href="#tbl-tabela_dados_aop">Table <span>2</span></a> describes the dataset containing the sociodemographic characteristics of the population and the spatial distribution of opportunities.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="tbl-tabela_dados_aop" class="anchored">
@@ -470,7 +470,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<p>All datasets created by AOP are available for download in the <a href="https://www.ipea.gov.br/acessooportunidades/en/dados/">project website</a> and through the <code>{aopdata}</code> R package. The data dictionary can be accessed online<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> or with the command <code>aopdata::aopdata_dictionary(lang = "en")</code> in an R session. The chapters in this section provide several examples illustrating how to download the datasets and create visualizations with them in R.</p>
+<p>All datasets created by AOP are available for download in the project <a href="https://www.ipea.gov.br/acessooportunidades/en/dados/">website</a> and through the <code>{aopdata}</code> R package. The data dictionary can be accessed online<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> or with the command <code>aopdata::aopdata_dictionary(lang = "en")</code> in an R session. The chapters in this section provide several examples illustrating how to download the datasets and create visualizations with them in R.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">

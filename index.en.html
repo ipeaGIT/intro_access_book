@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.450">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<meta name="dcterms.date" content="2023-08-09">
+<meta name="dcterms.date" content="2023-10-18">
 <title>Introduction to urban accessibility</title>
 <style>
 code{white-space: pre-wrap;}
@@ -125,7 +125,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <meta name="citation_publication_date" content="2023">
 <meta name="citation_cover_date" content="2023">
 <meta name="citation_year" content="2023">
-<meta name="citation_online_date" content="2023-08-09">
+<meta name="citation_online_date" content="2023-10-18">
 <meta name="citation_fulltext_html_url" content="https://ipeagit.github.io/intro_access_book">
 <meta name="citation_pdf_url" content="https://repositorio.ipea.gov.br/bitstream/11058/12264/1/Introducao_a_acessibilidade_urbana.pdf">
 <meta name="citation_doi" content="http://dx.doi.org/10.38116/9786556350547">
@@ -426,7 +426,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 9, 2023</p>
+      <p class="date">October 18, 2023</p>
     </div>
   </div>
   
@@ -437,7 +437,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </header><section id="preface" class="level1 unnumbered"><h1 class="unnumbered">Preface</h1>
 <p><img src="images/cover.en.png" title="Introduction to urban accessibility" class="quarto-cover-image img-fluid"></p>
 <p>Accessibility is the ease with which people can reach places and opportunities such as jobs, health and education services, cultural activities, green areas, etc. The accessibility conditions of a city or neighborhood depend on the efficiency and connectivity of the transport network and on the proximity between people and activities. The topic of accessibility has been receiving increased attention from transportation agencies, funding institutions, decision makers and researchers in the fields of urban and transport planning <span class="citation" data-cites="papa2015accessibility boisjoly2017how">(<a href="references.en.html#ref-papa2015accessibility" role="doc-biblioref">Papa et al. 2015</a>; <a href="references.en.html#ref-boisjoly2017how" role="doc-biblioref">Boisjoly and El-Geneidy 2017</a>)</span>. In the last few years, we have seen a growing number of scientific papers <span class="citation" data-cites="miller2018accessibility vanwee2021transport">(<a href="references.en.html#ref-miller2018accessibility" role="doc-biblioref">Miller 2018</a>; <a href="references.en.html#ref-vanwee2021transport" role="doc-biblioref">van Wee 2021</a>)</span> and books <span class="citation" data-cites="levine2019mobility levinson2020transport">(<a href="references.en.html#ref-levine2019mobility" role="doc-biblioref">Levine, Grengs, and Merlin 2019</a>; <a href="references.en.html#ref-levinson2020transport" role="doc-biblioref">Levinson and King 2020</a>)</span> that deepen our understanding of urban accessibility issues. However, there are currently no books or articles that serve simultaneously as introductory material to the subject and as a practical manual to teach computational methods to calculate and analyze accessibility data. The lack of this type of material helps to explain, at least in part, why several transportation agencies and analysts still face challenges to incorporate accessibility issues and indicators into the day-to-day planning and research practice <span class="citation" data-cites="silva2017accessibility buttner2021accessibility">(<a href="references.en.html#ref-silva2017accessibility" role="doc-biblioref">Silva et al. 2017</a>; <a href="references.en.html#ref-buttner2021accessibility" role="doc-biblioref">Büttner 2021</a>)</span>.</p>
-<p>The aim of this book is to equip its readers with the fundamental concepts, the data analysis skills and the processing tools needed to perform urban accessibility analyses and transportation projects impact assessments. The book was written with the problems faced by public managers, policy makers, students and researchers working on urban and transportation planning in mind. Hence, the book is essentially practical. All the material in the book is presented with reproducible examples using open datasets and the R programming language.</p>
+<p>The aim of this book is to equip its readers with the fundamental concepts, the data analysis skills and the processing tools needed to perform urban accessibility analyses and transportation projects impact assessments. The book was written with the problems faced by public managers, policy makers, students and researchers working on urban and transportation planning in mind. Hence, the book is essentially practical. All the material in the book is presented with reproducible examples using open datasets and the <a href="https://www.r-project.org/">R</a> programming language.</p>
 <div class="callout callout-style-simple callout-important">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -449,13 +449,13 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <li><a href="https://r4ds.had.co.nz/">R for Data Science</a></li>
 <li><a href="https://geocompr.robinlovelace.net/">Geocomputation with R</a></li>
 <li>
-<a href="https://livro.curso-r.com/">Data Science in R</a> [in Portuguese]</li>
+<a href="https://livro.curso-r.com/">Data Science in R</a> (in Portuguese)</li>
 </ul>
 </div>
 </div>
 </div>
 <section id="book-structure" class="level2"><h2 class="anchored" data-anchor-id="book-structure">Book structure</h2>
-<p>This book is divided into 5 sections:</p>
+<p>This book is divided into 5 sections, as follows.</p>
 <div class="cell">
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -489,7 +489,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </div>
 </div>
 </section><section id="reproducing-the-book-in-your-computer" class="level2"><h2 class="anchored" data-anchor-id="reproducing-the-book-in-your-computer">Reproducing the book in your computer</h2>
-<p>This book has been written with the <a href="https://quarto.org/">Quarto</a> publishing system. All the code used to prepare and publish it online can be found in <a href="https://github.com/ipeaGIT/intro_access_book">this repository</a>. To reproduce the book in your local machine, you must first download its source code. The easiest way to do this is by cloning the repository with <a href="https://git-scm.com/">git</a>, or, alternatively, by manually downloading it from the following link: <a href="https://github.com/ipeaGIT/intro_access_book/archive/refs/heads/main.zip" class="uri">https://github.com/ipeaGIT/intro_access_book/archive/refs/heads/main.zip</a>. If you choose the second approach, you must also unzip the contents of the <code>.zip</code> file to a new folder.</p>
+<p>This book has been written with the <a href="https://quarto.org/">Quarto</a> publishing system. All the code used to prepare and publish it online can be found in <a href="https://github.com/ipeaGIT/intro_access_book">this repository</a>. To reproduce the book in your local machine, you must first download its source code. The easiest way to do this is by cloning the repository with <a href="https://git-scm.com/">Git</a>, or, alternatively, by manually downloading it<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. If you choose the second approach, you must also unzip the contents of the <code>.zip</code> file to a new folder.</p>
 <p>To render the book, you must have Quarto installed in your computer. Reproducing the chapters also requires the <a href="https://rstudio.github.io/renv/index.html"><code>{renv}</code></a> R package, which manages the book dependencies.</p>
 <p>After installing book dependencies, you can render each chapter as you would normally render any Quarto/Rmarkdown file. To render the entire book, use the following command <em>(please note that currently both the Portuguese and the English books are rendered)</em>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"bilingual_render.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -504,7 +504,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <ul>
 <li>Pereira, Rafael H. M. &amp; Herszenhut, Daniel. (2023) Introduction to urban accessibility: a practical guide with R. Ipea - Institute of Applied Economic Research.</li>
 </ul></section><section id="acknowledgements" class="level2"><h2 class="anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
-<p>This book was written under a partnership between the Institute for Applied Economic Research (Ipea) and the Secretariat of Mobility and Regional and Urban Development (SMDRU) of the Ministry of Regional Development (MDR) of the Brazilian federal government. The authors are grateful for the comments and suggestions from Lucas Mation. The authors would also like to thank the contributions of Anna Grigolon, Benjamin Büttner and Aaron Nichols for proofreading the English version of the book. Any remaining errors are the sole responsibility of the authors.</p>
+<p>This book was written under a partnership between the Institute for Applied Economic Research (Instituto de Pesquisa Econômica Aplicada - Ipea) and the Secretariat of Mobility and Regional and Urban Development (SMDRU) of the Ministry of Regional Development (MDR) of the Brazilian federal government. The authors are grateful for the comments and suggestions from Lucas Mation. The authors would also like to thank the contributions of Anna Grigolon, Benjamin Büttner and Aaron Nichols for proofreading the English version of the book. Any remaining errors are the sole responsibility of the authors.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
@@ -533,7 +533,10 @@ Silva, Cecília, Luca Bertolini, Marco te Brömmelstroet, Dimitris Milakis, and 
 van Wee, Bert. 2021. <span>“Transport <span>Modes</span> and <span>Accessibility</span>.”</span> In <em>International <span>Encyclopedia</span> of <span>Transportation</span></em>, edited by Roger Vickerman, 32–37. <span>Oxford</span>: <span>Elsevier</span>. <a href="https://doi.org/10.1016/B978-0-08-102671-7.10402-6">https://doi.org/10.1016/B978-0-08-102671-7.10402-6</a>.
 </div>
 </div>
-</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><hr>
+<ol>
+<li id="fn1"><p>To manually download the source code, please use the following link: <a href="https://github.com/ipeaGIT/intro_access_book/archive/refs/heads/main.zip" class="uri">https://github.com/ipeaGIT/intro_access_book/archive/refs/heads/main.zip</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");

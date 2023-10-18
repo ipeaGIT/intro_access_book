@@ -384,7 +384,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   
 
 </header><p>Finally, the <code>{aopdata}</code> package also allows one to download estimates of accessibility to jobs, public health facilities, public schools and social assistance services. These estimates were calculated using 2017, 2018 and 2019 as reference years.</p>
-<p>This data can be downloaded with the <code>read_access()</code> function, which works similarly to <code>read_population()</code> and <code>read_landuse()</code>. Besides indicating the city (<code>city</code> parameter) and the reference year (<code>year</code>), though, it is also necessary to inform the transport mode (<code>mode</code>) and the interval of the day (peak, between 6am and 8am, or off-peak, between 14h and 16h, controlled by <code>peak</code>) which identify the accessibility data that should be downloaded.</p>
+<p>This data can be downloaded with the <code>read_access()</code> function, which works similarly to <code>read_population()</code> and <code>read_landuse()</code>. Besides indicating the city (<code>city</code> parameter) and the reference year (<code>year</code>), though, it is also necessary to inform the transport mode (<code>mode</code>) and the interval of the day (peak, between 6 am and 8 am, or off-peak, between 2 pm and 4 pm, controlled by <code>peak</code>) which identify the accessibility data that should be downloaded.</p>
 <p>With the code below, we show how to download accessibility estimates that refer to the peak period in São Paulo in 2019. In this example, we downloaded accessibility estimates both by car and by public transport and merged them into a single <code>data.frame</code>. Please note that this function results in a table that also includes sociodemographic and land use data.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>access_pt <span class="ot">&lt;-</span> aopdata<span class="sc">::</span><span class="fu">read_access</span>(</span>
@@ -453,89 +453,89 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 [206] "geometry"    </code></pre>
 </div>
 </div>
-<p>The names of the accessibility estimates columns, such as <code>CMAEF30</code>, <code>TMISB</code> and <code>CMPPM60</code>, result from a combination of three components:</p>
+<p>The names of the accessibility estimates columns, such as <code>CMAEF30</code>, <code>TMISB</code> and <code>CMPPM60</code>, result from a combination of three components, as follows.</p>
 <ol type="1">
 <li>
 <p>The <strong>type of accessibility measure</strong>, which is indicated by the first 3 letters of the code. The data includes three types of measures:</p>
 <ul>
 <li>
-<code>CMA</code> - Active cumulative accessibility;</li>
+<code>CMA</code> - active cumulative accessibility;</li>
 <li>
-<code>CMP</code> - Passive cumulative accessibility; and</li>
+<code>CMP</code> - passive cumulative accessibility; and</li>
 <li>
-<code>TMI</code> - Minimum travel time to the nearest opportunity.</li>
+<code>TMI</code> - minimum travel time to the nearest opportunity.</li>
 </ul>
 </li>
 <li>
 <p>The <strong>type of activity</strong> to which the accessibility levels were calculated, indicated by the following two letters, in the middle of the column name. The data includes accessibility estimates to various types of activities:</p>
 <ul>
 <li>
-<code>TT</code> - All jobs;</li>
+<code>TT</code> - all jobs;</li>
 <li>
-<code>TB</code> - Low education jobs;</li>
+<code>TB</code> - low education jobs;</li>
 <li>
-<code>TM</code> - Middle education jobs;</li>
+<code>TM</code> - middle education jobs;</li>
 <li>
-<code>TA</code> - High education jobs;</li>
+<code>TA</code> - high education jobs;</li>
 <li>
-<code>ST</code> - All public health facilities;</li>
+<code>ST</code> - all public health facilities;</li>
 <li>
-<code>SB</code> - Low complexity public health facilities;</li>
+<code>SB</code> - low complexity public health facilities;</li>
 <li>
-<code>SM</code> - Medium complexity public health facilities;</li>
+<code>SM</code> - medium complexity public health facilities;</li>
 <li>
-<code>SA</code> - High complexity public health facilities;</li>
+<code>SA</code> - high complexity public health facilities;</li>
 <li>
-<code>ET</code> - All public schools;</li>
+<code>ET</code> - all public schools;</li>
 <li>
-<code>EI</code> - Early childhood public schools;</li>
+<code>EI</code> - early childhood public schools;</li>
 <li>
-<code>EF</code> - Primary public schools;</li>
+<code>EF</code> - primary public schools;</li>
 <li>
-<code>MS</code> - Secondary public schools;</li>
+<code>MS</code> - secondary public schools;</li>
 <li>
-<code>MT</code> - Total number of enrollments in public schools;</li>
+<code>MT</code> - total number of enrollments in public schools;</li>
 <li>
-<code>MI</code> - Number of enrollments in early childhood public schools;</li>
+<code>MI</code> - number of enrollments in early childhood public schools;</li>
 <li>
-<code>MF</code> - Number of enrollments in primary public schools;</li>
+<code>MF</code> - number of enrollments in primary public schools;</li>
 <li>
-<code>MM</code> - Number of enrollments in secondary public schools; and</li>
+<code>MM</code> - number of enrollments in secondary public schools; and</li>
 <li>
-<code>CT</code> - All CRAS.</li>
+<code>CT</code> - all CRAS.</li>
 </ul>
 </li>
 </ol>
 <p>In the case of the passive cumulative measure, the letters in the middle of the column name indicate <strong>the population group</strong> which the accessibility estimates refer to:</p>
 <ul>
 <li>
-<code>PT</code> - The entire population;</li>
+<code>PT</code> - the entire population;</li>
 <li>
-<code>PH</code> - Male population;</li>
+<code>PH</code> - male population;</li>
 <li>
-<code>PM</code> - Female population;</li>
+<code>PM</code> - female population;</li>
 <li>
-<code>PB</code> - White population;</li>
+<code>PB</code> - white population;</li>
 <li>
-<code>PN</code> - Black population;</li>
+<code>PN</code> - black population;</li>
 <li>
-<code>PA</code> - Yellow population;</li>
+<code>PA</code> - yellow population;</li>
 <li>
-<code>PI</code> - Indigenous population;</li>
+<code>PI</code> - indigenous population;</li>
 <li>
-<code>P0005I</code> - Population from 0 to 5 years old;</li>
+<code>P0005I</code> - population from 0 to 5 years old;</li>
 <li>
-<code>P0614I</code> - Population from 6 to 14 years old;</li>
+<code>P0614I</code> - population from 6 to 14 years old;</li>
 <li>
-<code>P1518I</code> - Population from 15 to 18 years old;</li>
+<code>P1518I</code> - population from 15 to 18 years old;</li>
 <li>
-<code>P1924I</code> - Population from 19 to 24 years old;</li>
+<code>P1924I</code> - population from 19 to 24 years old;</li>
 <li>
-<code>P2539I</code> - Population from 25 to 39 years old;</li>
+<code>P2539I</code> - population from 25 to 39 years old;</li>
 <li>
-<code>P4069I</code> - Population from 40 to 69 years old;</li>
+<code>P4069I</code> - population from 40 to 69 years old; and</li>
 <li>
-<code>P70I</code> - Population aged 70 years old and over.</li>
+<code>P70I</code> - population aged 70 years old and over.</li>
 </ul>
 <ol start="3" type="1">
 <li>The <strong>travel time threshold</strong> used to estimate the accessibility levels, which is indicated by the two numbers at the end of the column name. This component only applies to the active and passive cumulative measures. The data includes accessibility estimates calculated with cutoffs of 15, 30, 45, 60, 90 and 120 minutes, depending on the transport mode.</li>
@@ -665,7 +665,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <div class="cell-output-display">
 <div id="fig-accessible_jobs_by_income" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="9_aopdata_acessibilidade.en_files/figure-html/fig-accessible_jobs_by_income-1.png" class="img-fluid figure-img" width="2100"></p>
-<figcaption class="figure-caption">Figure 9.4: Distribution of job accessibility by public transport in São Paulo</figcaption></figure>
+<figcaption class="figure-caption">Figure 9.4: Distribution of job accessibility by public transport in up to 60 minutes of travel in São Paulo</figcaption></figure>
 </div>
 </div>
 </div>

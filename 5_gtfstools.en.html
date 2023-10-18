@@ -392,11 +392,11 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </div>
   
 
-</header><p>GTFS data is frequently used in various types of analyses that involve a few common elements. The Access to Opportunities Project team has developed the <a href="https://github.com/ipeaGIT/gtfstools"><code>{gtfstools}</code></a> R package, which provides several functions that help tackling repetitive tasks and operations and facilitate feed manipulation and exploration.</p>
+</header><p>GTFS data is frequently used in various types of analyses that involve a few common elements. The AOP team has developed the <a href="https://github.com/ipeaGIT/gtfstools"><code>{gtfstools}</code></a> R package, which provides several functions that help tackling repetitive tasks and operations and facilitate feed manipulation and exploration.</p>
 <p>In this chapter, we’ll go through some of the most frequently used package features. To do this, we will use a sample of the SPTrans feed presented in the previous chapter, and which is included in the package installation.</p>
 <section id="reading-and-manipulating-gtfs-files" class="level2" data-number="5.1"><h2 data-number="5.1" class="anchored" data-anchor-id="reading-and-manipulating-gtfs-files">
 <span class="header-section-number">5.1</span> Reading and manipulating GTFS files</h2>
-<p>Reading GTFS files with <code>{gtfstools}</code> is done with the <code>read_gtfs()</code> function, which receives a string with the file path. The package represents a feed as a list of <code>data.table</code>s, a high-performance version of <code>data.frame</code>s. Throughout this chapter, we will refer to this list of tables as a <strong>GTFS object</strong>. By default, the function reads all <code>.txt</code> tables in the feed:</p>
+<p>Reading GTFS files with <code>{gtfstools}</code> is done with the <code>read_gtfs()</code> function, which receives a string with the file path. The package represents a feed as a list of <code>data.table</code>s, a high-performance version of <code>data.frame</code>s. Throughout this chapter, we will refer to this list of tables as a <em>GTFS object</em>. By default, the function reads all <code>.txt</code> tables in the feed:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># loads the package</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtfstools)</span>
@@ -469,14 +469,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>zip<span class="sc">::</span><span class="fu">zip_list</span>(export_path)[, <span class="fu">c</span>(<span class="st">"filename"</span>, <span class="st">"compressed_size"</span>, <span class="st">"timestamp"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         filename compressed_size           timestamp
-1      agency.txt             112 2023-08-07 15:35:00
-2    calendar.txt             129 2023-08-07 15:35:00
-3 frequencies.txt            2381 2023-08-07 15:35:00
-4      routes.txt             659 2023-08-07 15:35:00
-5      shapes.txt          160470 2023-08-07 15:35:00
-6  stop_times.txt            7907 2023-08-07 15:35:00
-7       stops.txt           18797 2023-08-07 15:35:00
-8       trips.txt             717 2023-08-07 15:35:00</code></pre>
+1      agency.txt             112 2023-10-18 19:43:40
+2    calendar.txt             129 2023-10-18 19:43:40
+3 frequencies.txt            2381 2023-10-18 19:43:40
+4      routes.txt             659 2023-10-18 19:43:40
+5      shapes.txt          160470 2023-10-18 19:43:40
+6  stop_times.txt            7907 2023-10-18 19:43:40
+7       stops.txt           18797 2023-10-18 19:43:40
+8       trips.txt             717 2023-10-18 19:43:40</code></pre>
 </div>
 </div>
 </section><section id="calculating-trip-speed" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="calculating-trip-speed">
@@ -694,7 +694,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <li>
 <code>filter_by_weekday()</code>;</li>
 <li>
-<code>filter_by_time_of_day()</code>;</li>
+<code>filter_by_time_of_day()</code>; and</li>
 <li>
 <code>filter_by_sf()</code>.</li>
 </ul>
@@ -959,7 +959,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>validator_path <span class="ot">&lt;-</span> <span class="fu">download_validator</span>(tmpdir)</span>
 <span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>validator_path</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "/tmp/RtmpuLvvhF/gtfs-validator-v4.0.0.jar"</code></pre>
+<pre><code>[1] "/tmp/Rtmp3AAaV5/gtfs-validator-v4.0.0.jar"</code></pre>
 </div>
 </div>
 <p>The second (and final) step consists in actually validating the GTFS data with <code>validate_gtfs()</code>. This function supports GTFS data in different formats: i) as a GTFS object in an R session; ii) as a path to a local GTFS file in <code>.zip</code> format; iii) as an URL pointing to a feed; or iv) as a directory containing unzipped GTFS tables. The function also takes a path to a directory where the validation result should be saved to and the path to the validator that should be used in the process. In the example below, we validate SPTrans’ feed from its path:</p>
@@ -985,7 +985,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <li>
 <code>report.json</code>, which summarizes the same information, but in JSON format, which can be used to programatically parse and process the results;</li>
 <li>
-<code>system_errors.json</code>, which summarizes eventual system errors that may have happened during the validation process and may compromise the results;</li>
+<code>system_errors.json</code>, which summarizes eventual system errors that may have happened during the validation process and may compromise the results; and</li>
 <li>
 <code>validation_stderr.txt</code>, which lists informative messages sent by the validator tool, including a list of the tests conducted, eventual error messages, etc<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</li>
 </ul>
@@ -1119,7 +1119,7 @@ Geodetic CRS:  WGS 84
 <li id="fn1"><p>For more details on <code>{data.table}</code> usage and syntax, please check <a href="https://rdatatable.gitlab.io/data.table/index.html" class="uri">https://rdatatable.gitlab.io/data.table/index.html</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>For more information on how to check the installed version of Java in your computer and on how to install the required version, please check <a href="./3_calculando_acesso.en.html#installing-r5r">Chapter 3</a>.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>Informative messages may also be listed in the <code>validation_stdout.txt</code> file. Whether messages are listed in this file or in <code>validation_stderr.txt</code> depends on the validator version.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>The complete list of functions available in <code>{gtfstools}</code> can be checked at the <a href="https://ipeagit.github.io/gtfstools/reference/index.html">package website</a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>The complete list of functions available in <code>{gtfstools}</code> can be checked at <a href="https://ipeagit.github.io/gtfstools/reference/index.html" class="uri">https://ipeagit.github.io/gtfstools/reference/index.html</a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

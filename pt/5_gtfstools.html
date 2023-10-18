@@ -470,14 +470,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>zip<span class="sc">::</span><span class="fu">zip_list</span>(endereco_destino)[, <span class="fu">c</span>(<span class="st">"filename"</span>, <span class="st">"compressed_size"</span>, <span class="st">"timestamp"</span>)]</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         filename compressed_size           timestamp
-1      agency.txt             112 2023-08-07 15:23:26
-2    calendar.txt             129 2023-08-07 15:23:26
-3 frequencies.txt            2381 2023-08-07 15:23:26
-4      routes.txt             659 2023-08-07 15:23:26
-5      shapes.txt          160470 2023-08-07 15:23:26
-6  stop_times.txt            7907 2023-08-07 15:23:26
-7       stops.txt           18797 2023-08-07 15:23:26
-8       trips.txt             717 2023-08-07 15:23:26</code></pre>
+1      agency.txt             112 2023-10-18 19:34:04
+2    calendar.txt             129 2023-10-18 19:34:04
+3 frequencies.txt            2381 2023-10-18 19:34:04
+4      routes.txt             659 2023-10-18 19:34:04
+5      shapes.txt          160470 2023-10-18 19:34:04
+6  stop_times.txt            7907 2023-10-18 19:34:04
+7       stops.txt           18797 2023-10-18 19:34:04
+8       trips.txt             717 2023-10-18 19:34:04</code></pre>
 </div>
 </div>
 </section><section id="cálculo-de-velocidade-das-linhas" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="cálculo-de-velocidade-das-linhas">
@@ -963,7 +963,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>endereco_validador <span class="ot">&lt;-</span> <span class="fu">download_validator</span>(pasta_temporaria)</span>
 <span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>endereco_validador</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "/tmp/RtmpHQ91rU/gtfs-validator-v4.0.0.jar"</code></pre>
+<pre><code>[1] "/tmp/RtmpwUYFyK/gtfs-validator-v4.0.0.jar"</code></pre>
 </div>
 </div>
 <p>A segunda (e última) etapa consiste em de fato rodar a função <code>validate_gtfs()</code>. Essa função aceita que os dados GTFS a serem validados sejam passados de diferentes formas: i) como um objeto GTFS existente apenas no R; ii) como o endereço de um arquivo GTFS salvo localmente em formato <code>.zip</code>; iii) como uma URL apontando para um <em>feed</em>; ou iv) como uma pasta que contém os dados GTFS não compactados. A função também recebe o endereço para uma pasta onde o resultado da validação deve ser salvo e o endereço para o validador que deve ser usado. Nesse exemplo, vamos fazer a validação a partir do endereço do arquivo GTFS da SPTrans, lido anteriormente:</p>
