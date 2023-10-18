@@ -2,7 +2,7 @@
 
 Finally, the `{aopdata}` package also allows one to download estimates of accessibility to jobs, public health facilities, public schools and social assistance services. These estimates were calculated using 2017, 2018 and 2019 as reference years.
 
-This data can be downloaded with the `read_access()` function, which works similarly to `read_population()` and `read_landuse()`. Besides indicating the city (`city` parameter) and the reference year (`year`), though, it is also necessary to inform the transport mode (`mode`) and the interval of the day (peak, between 6am and 8am, or off-peak, between 14h and 16h, controlled by `peak`) which identify the accessibility data that should be downloaded.
+This data can be downloaded with the `read_access()` function, which works similarly to `read_population()` and `read_landuse()`. Besides indicating the city (`city` parameter) and the reference year (`year`), though, it is also necessary to inform the transport mode (`mode`) and the interval of the day (peak, between 6 am and 8 am, or off-peak, between 2 pm and 4 pm, controlled by `peak`) which identify the accessibility data that should be downloaded.
 
 With the code below, we show how to download accessibility estimates that refer to the peak period in São Paulo in 2019. In this example, we downloaded accessibility estimates both by car and by public transport and merged them into a single `data.frame`. Please note that this function results in a table that also includes sociodemographic and land use data.
 
@@ -32,50 +32,50 @@ data_sp <-rbind(access_pt, access_car)
 names(data_sp)
 ```
 
-The names of the accessibility estimates columns, such as `CMAEF30`, `TMISB` and `CMPPM60`, result from a combination of three components:
+The names of the accessibility estimates columns, such as `CMAEF30`, `TMISB` and `CMPPM60`, result from a combination of three components, as follows.
 
 1. The **type of accessibility measure**, which is indicated by the first 3 letters of the code. The data includes three types of measures:
 
-   - `CMA` - Active cumulative accessibility;
-   - `CMP` - Passive cumulative accessibility; and
-   - `TMI` - Minimum travel time to the nearest opportunity.
+   - `CMA` - active cumulative accessibility;
+   - `CMP` - passive cumulative accessibility; and
+   - `TMI` - minimum travel time to the nearest opportunity.
 
 2. The **type of activity** to which the accessibility levels were calculated, indicated by the following two letters, in the middle of the column name. The data includes accessibility estimates to various types of activities:
 
-   - `TT` - All jobs;
-   - `TB` - Low education jobs;
-   - `TM` - Middle education jobs;
-   - `TA` - High education jobs;
-   - `ST` - All public health facilities;
-   - `SB` - Low complexity public health facilities;
-   - `SM` - Medium complexity public health facilities;
-   - `SA` - High complexity public health facilities;
-   - `ET` - All public schools;
-   - `EI` - Early childhood public  schools;
-   - `EF` - Primary public schools;
-   - `MS` - Secondary public schools;
-   - `MT` - Total number of enrollments in public schools;
-   - `MI` - Number of enrollments in early childhood public schools;
-   - `MF` - Number of enrollments in primary public schools;
-   - `MM` - Number of enrollments in secondary public schools; and
-   - `CT` - All CRAS.
+   - `TT` - all jobs;
+   - `TB` - low education jobs;
+   - `TM` - middle education jobs;
+   - `TA` - high education jobs;
+   - `ST` - all public health facilities;
+   - `SB` - low complexity public health facilities;
+   - `SM` - medium complexity public health facilities;
+   - `SA` - high complexity public health facilities;
+   - `ET` - all public schools;
+   - `EI` - early childhood public  schools;
+   - `EF` - primary public schools;
+   - `MS` - secondary public schools;
+   - `MT` - total number of enrollments in public schools;
+   - `MI` - number of enrollments in early childhood public schools;
+   - `MF` - number of enrollments in primary public schools;
+   - `MM` - number of enrollments in secondary public schools; and
+   - `CT` - all CRAS.
  
 In the case of the passive cumulative measure, the letters in the middle of the column name indicate **the population group** which the accessibility estimates refer to:
 
-   - `PT` - The entire population;
-   - `PH` - Male population;
-   - `PM` - Female population;
-   - `PB` - White population;
-   - `PN` - Black population;
-   - `PA` - Yellow population;
-   - `PI` - Indigenous population;
-   - `P0005I` - Population from 0 to 5 years old;
-   - `P0614I` - Population from 6 to 14 years old;
-   - `P1518I` - Population from 15 to 18 years old;
-   - `P1924I` - Population from 19 to 24 years old;
-   - `P2539I` - Population from 25 to 39 years old;
-   - `P4069I` - Population from 40 to 69 years old;
-   - `P70I` - Population aged 70 years old and over.
+   - `PT` - the entire population;
+   - `PH` - male population;
+   - `PM` - female population;
+   - `PB` - white population;
+   - `PN` - black population;
+   - `PA` - yellow population;
+   - `PI` - indigenous population;
+   - `P0005I` - population from 0 to 5 years old;
+   - `P0614I` - population from 6 to 14 years old;
+   - `P1518I` - population from 15 to 18 years old;
+   - `P1924I` - population from 19 to 24 years old;
+   - `P2539I` - population from 25 to 39 years old;
+   - `P4069I` - population from 40 to 69 years old; and
+   - `P70I` - population aged 70 years old and over.
  
 3. The **travel time threshold** used to estimate the accessibility levels, which is indicated by the two numbers at the end of the column name. This component only applies to the active and passive cumulative measures. The data includes accessibility estimates calculated with cutoffs of 15, 30, 45, 60, 90 and 120 minutes, depending on the transport mode.
 
@@ -187,7 +187,7 @@ Another way of examining accessibility inequalities is by comparing the number o
 
 ```{r}
 #| label: fig-accessible_jobs_by_income
-#| fig-cap: Distribution of job accessibility by public transport in São Paulo
+#| fig-cap: Distribution of job accessibility by public transport in up to 60 minutes of travel in São Paulo
 ggplot(subset(access_pt, !is.na(R003))) +
   geom_boxplot(
     aes(x = factor(R003), y = CMATT60 / 1000000, color = factor(R003))
