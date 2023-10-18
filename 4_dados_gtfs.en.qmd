@@ -29,7 +29,7 @@ In total, the GTFS format can be made of up to 22 tables[^spec_ref]. Some of the
 
 [^spec_ref]: According to the [official specification](https://gtfs.org/schedule/reference/) as of May 9th 2022.
 
-- **Required**: `agency.txt`; `stops.txt`; `routes.txt`; `trips.txt`; `stop_times.txt`; `calendar.txt`; and
+- **Required**: `agency.txt`; `stops.txt`; `routes.txt`; `trips.txt`; `stop_times.txt`; `calendar.txt`.
 - **Optional**: `calendar_dates.txt`: `fare_attributes.txt`; `fare_rules.txt`; `fare_products.txt`; `fare_leg_rules.txt`; `fare_transfer_rules.txt`; `areas.txt`; `stop_areas.txt`; `shapes.txt`; `frequencies.txt`; `transfers.txt`; `pathways.txt`; `levels.txt`; `translations.txt`; `feed_info.txt`; `attributions.txt`.
 
 Throughout this chapter, we will learn about the basic structure of a GTFS file and its tables. We will focus only on the required tables and the optional tables most often used by producers and consumers of these files[^spec_more_info].
@@ -223,7 +223,7 @@ GTFS data from cities all over the world can be downloaded with the [`{tidytrans
 #| tbl-cap: Openly available GTFS data in Brazil
 gtfs_brazil_df <- tibble::tribble(
   ~City,            ~Source,                                                      ~Info,
-  "Belo Horizonte", "Belo Horizonte's Transport and Traffic Company (BHTrans)",   "Open data: [conventional transport network](https://dados.pbh.gov.br/dataset/gtfs-estatico-do-sistema-convencional); [supplementary network](https://dados.pbh.gov.br/dataset/feed-gtfs-estatico-do-sistema-suplementar).",
+  "Belo Horizonte", "Belo Horizonte's Transport and Traffic Company (BHTrans)",   "Open data: [conventional transport network](https://dados.pbh.gov.br/dataset/gtfs-estatico-do-sistema-convencional) and [supplementary network](https://dados.pbh.gov.br/dataset/feed-gtfs-estatico-do-sistema-suplementar).",
   "Fortaleza",      "Fortaleza's Urban Transport Company (Etufor)",               "[Open data](https://dados.fortaleza.ce.gov.br/dataset/gtfs).",
   "Fortaleza",      "Fortaleza's Subway (Metrofor)",                              "[Open data](https://www.metrofor.ce.gov.br/gtfs/).",
   "Porto Alegre",   "Porto Alegre's Transport and Traffic Public Company (EPTC)", "[Open data](https://dados.portoalegre.rs.gov.br/dataset/gtfs).",
