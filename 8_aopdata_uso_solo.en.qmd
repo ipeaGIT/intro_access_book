@@ -1,6 +1,6 @@
 # Data on the spatial distribution of opportunities
 
-The `{aopdata}` package allows one to download data from 2017, 2018 and 2019 on the spatial distribution of jobs (low, middle and high education), public health facilities (low, medium and high complexity), public schools (early childhood, primary and secondary school levels) and social assistance reference centers (CRAS). This data is available for all cities included in the project.
+The `{aopdata}` package allows one to download data from 2017, 2018 and 2019 on the spatial distribution of jobs (low, middle and high education), public health facilities (low, medium and high complexity), public schools (early childhood, primary and secondary school levels) and CRAS. This data is available for all cities included in the project.
 
 These datasets can be downloaded with the `read_landuse()` function, which works similarly to `read_population()`. To use it, indicate the city whose data should be downloaded using the `city` parameter, along with the reference year (`year`) and whether to include the spatial information of grid cells or not (`geometry`).
 
