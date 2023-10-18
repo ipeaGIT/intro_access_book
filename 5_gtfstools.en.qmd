@@ -1,12 +1,12 @@
 # GTFS data manipulation and visualization
 
-GTFS data is frequently used in various types of analyses that involve a few common elements. The Access to Opportunities Project team has developed the [`{gtfstools}`](https://github.com/ipeaGIT/gtfstools) R package, which provides several functions that help tackling repetitive tasks and operations and facilitate feed manipulation and exploration.
+GTFS data is frequently used in various types of analyses that involve a few common elements. The AOP team has developed the [`{gtfstools}`](https://github.com/ipeaGIT/gtfstools) R package, which provides several functions that help tackling repetitive tasks and operations and facilitate feed manipulation and exploration.
 
 In this chapter, we'll go through some of the most frequently used package features. To do this, we will use a sample of the SPTrans feed presented in the previous chapter, and which is included in the package installation.
 
 ## Reading and manipulating GTFS files
 
-Reading GTFS files with `{gtfstools}` is done with the `read_gtfs()` function, which receives a string with the file path. The package represents a feed as a list of `data.table`s, a high-performance version of `data.frame`s. Throughout this chapter, we will refer to this list of tables as a **GTFS object**. By default, the function reads all `.txt` tables in the feed:
+Reading GTFS files with `{gtfstools}` is done with the `read_gtfs()` function, which receives a string with the file path. The package represents a feed as a list of `data.table`s, a high-performance version of `data.frame`s. Throughout this chapter, we will refer to this list of tables as a *GTFS object*. By default, the function reads all `.txt` tables in the feed:
 
 ```{r}
 # loads the package
@@ -157,7 +157,7 @@ Filtering feeds to keep only a few entries within each table is another operatio
 - `filter_by_trip_id()`;
 - `filter_by_route_type()`;
 - `filter_by_weekday()`;
-- `filter_by_time_of_day()`;
+- `filter_by_time_of_day()`; and
 - `filter_by_sf()`.
 
 ### Filtering by identifiers
@@ -368,7 +368,7 @@ We can see that the validation process generates a few output files:
 
 - `report.html`, shown in @fig-report, which summarizes the validation result in a nicely formatted HTML page (only available with validator version 3.1.0 or higher);
 - `report.json`, which summarizes the same information, but in JSON format, which can be used to programatically parse and process the results;
-- `system_errors.json`, which summarizes eventual system errors that may have happened during the validation process and may compromise the results;
+- `system_errors.json`, which summarizes eventual system errors that may have happened during the validation process and may compromise the results; and
 - `validation_stderr.txt`, which lists informative messages sent by the validator tool, including a list of the tests conducted, eventual error messages, etc[^validation_stderr].
 
 [^validation_stderr]: Informative messages may also be listed in the `validation_stdout.txt` file. Whether messages are listed in this file or in `validation_stderr.txt` depends on the validator version.
@@ -385,7 +385,7 @@ knitr::include_graphics("images/validator_report.png")
 
 We have shown in previous sections that `{gtfstools}` offers a large toolset to process and analyze GTFS files. The package, however, also includes many other functions that could not be shown in this book due to space constraints[^gtfstools_ref].
 
-[^gtfstools_ref]: The complete list of functions available in `{gtfstools}` can be checked at the [package website](https://ipeagit.github.io/gtfstools/reference/index.html).
+[^gtfstools_ref]: The complete list of functions available in `{gtfstools}` can be checked at <https://ipeagit.github.io/gtfstools/reference/index.html>.
 
 In this final section of the chapter, we illustrate how to use the package to make more complex analyses. To do this, we present a workflow that combines various functions of `{gtfstools}` together to answer the following question: how are the times between vehicles operating the same route (the headways) spatially distributed in SPTrans' GTFS?
 
