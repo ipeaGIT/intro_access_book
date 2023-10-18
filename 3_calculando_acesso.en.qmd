@@ -4,7 +4,7 @@
 
 The first step to estimate the accessibility levels in a study area is to calculate the travel cost matrix between the various origins and destinations that make up this area. As previously mentioned, in the scientific literature and in transport planning practice this cost is generally represented by the travel time between two points [@el-geneidy2016cost; @venter2016assessing], although recent studies have also considered other factors, such as trip monetary costs and the comfort of a trip between origins and destinations [@arbex2020estimating; @herszenhut2022impact]. In this book, we will focus on travel time matrices as they are the most widely used in the literature and in practice, and we will cover other types of costs in a future book on advanced accessibility analysis in R.
 
-Currently, the easiest and fastest way to generate a travel time matrix in R is using the `{r5r}` package [@pereira2021r5r], developed by the Access to Opportunities Project team. The package provides a simple and friendly interface to the R5 multimodal transport routing engine, developed by Conveyal[^conveyal].
+Currently, the easiest and fastest way to generate a travel time matrix in R is using the `{r5r}` package [@pereira2021r5r], developed by the AOP team. The package provides a simple and friendly interface to the R5 multimodal transport routing engine, developed by Conveyal[^conveyal].
 
 [^conveyal]: Available at <https://github.com/conveyal/r5>.
 
@@ -19,7 +19,7 @@ install.packages("r5r")
 
 In addition to R, `{r5r}` also requires installing Java 11[^java11]. Use the command below to check the version of Java installed in your computer.
 
-[^java11]: Java 11 can be downloaded either from <https://www.oracle.com/java/technologies/downloads/#java11> or from <https://jdk.java.net/java-se-ri/11>.
+[^java11]: Java 11 is available at <https://www.oracle.com/java/technologies/downloads/#java11>; or at <https://jdk.java.net/java-se-ri/11>.
 
 ```{r}
 cat(processx::run("java", args = "-version")$stderr)
@@ -73,7 +73,7 @@ invisible({
 fs::dir_tree(tmp)
 ```
 
-To illustrate the features of `{r5r}`, we will use a small data sample from the city of Porto Alegre, Brazil. This data is available within `{r5r}` itself, and its path can be accessed with the following command:
+To illustrate the features of `{r5r}`, we will use a small data sample from the city of Porto Alegre (Brazil). This data is available within `{r5r}` itself, and its path can be accessed with the following command:
 
 ```{r}
 data_path <- system.file("extdata/poa", package = "r5r")
@@ -90,12 +90,12 @@ fs::dir_tree(data_path)
 fs::dir_tree(data_path, regexp = "\\.zip$|\\.csv$|\\.pbf$|\\.tif$")
 ```
 
-This directory contains five files that we will use throughout this chapter:
+This directory contains five files that we will use throughout this chapter and are listed below.
 
-- An OSM street network: `poa_osm.pbf`;
-- A GTFS feed describing some of the city's bus routes: `poa_eptc.zip`;
-- A GTFS feed describing some of the city's train routes: `poa_trensurb.zip`;
-- The digital elevation model of the city: `poa_elevation.tif`; and
+- An OSM street network: `poa_osm.pbf`.
+- A GTFS feed describing some of the city's bus routes: `poa_eptc.zip`.
+- A GTFS feed describing some of the city's train routes: `poa_trensurb.zip`.
+- The digital elevation model of the city: `poa_elevation.tif`.
 - The `poa_hexgrid.csv` file, containing the geographic coordinates of the centroids of a regular hexagonal grid covering the entire study area and information about the number of residents, jobs, hospitals and schools in each grid cell. These points will be used as the origins and destinations when calculating the travel time matrix.
 
 ### Computing the travel time matrix
@@ -119,7 +119,7 @@ fs::dir_tree(data_path)
 
 The second and final step is to actually calculate the travel time matrix with the `travel_time_matrix()` function. As basic inputs, the function receives the connection with R5 created above, origin and destination points as `data.frame`s with columns `id`, `lon` and `lat`, the mode of transport considered, the departure time, the maximum walking time allowed when accessing public transport stations from the origin and when egressing from the last stop to the destination, and the maximum travel time allowed for trips. The function also accepts several other inputs, such as the walking speed and the maximum number of public transport legs allowed, among others[^ttm_params].
 
-[^ttm_params]: For more information on each parameter, please refer to the function documentation in an R session (with the commands `?travel_time_matrix` or `help("travel_time_matrix”)`) or on `{r5r}` [website](https://ipeagit.github.io/r5r/reference/travel_time_matrix.html).
+[^ttm_params]: For more information on each parameter, please refer to the function documentation in an R session (with the commands `?travel_time_matrix` or `help("travel_time_matrix”)`) or on `{r5r}` website, available at <https://ipeagit.github.io/r5r/reference/travel_time_matrix.html>.
 
 ```{r}
 # read data.frame with grid centroids
@@ -153,7 +153,7 @@ The `travel_time_matrix()` function uses an extension of the RAPTOR routing algo
 
 ## Calculating accessibility {#sec-accessibility}
 
-Having calculated the travel time matrix between the origins and destinations, we need to use it to calculate accessibility levels in the study area. For this, we will use the `{accessibility}`[^access_package] package, also developed by the Access to Opportunities Project/Ipea team, which provides several functions to calculate many accessibility measures. As basic inputs, all functions require a pre-calculated cost matrix (in our case, the travel time matrix calculated in the previous section) and some land use data, such as the number of opportunities in each cell that covers the study area.
+Having calculated the travel time matrix between the origins and destinations, we need to use it to calculate accessibility levels in the study area. For this, we will use the `{accessibility}`[^access_package] package, also developed by the AOP/Ipea team, which provides several functions to calculate many accessibility measures. As basic inputs, all functions require a pre-calculated cost matrix (in our case, the travel time matrix calculated in the previous section) and some land use data, such as the number of opportunities in each cell that covers the study area.
 
 [^access_package]: Available at <https://github.com/ipeaGIT/accessibility>.
 
@@ -211,7 +211,7 @@ head(negative_exp_grav)
 
 ### Competitive measures
 
-Finally, the `floating_catchment_area()` function calculates accessibility levels considering the competition for opportunities using different floating catchment area (FCA) methods. Because several FCA methods can be used, the function requires users to indicate which method to use. In addition, just like the `gravity()` function, the decay function must also be defined by the user. The following code shows an example of how to calculate accessibility to schools using the Balanced Floating Catchment Area (BFCA) method [@paez2019demand] and an exponential decay function with a decay parameter of 0.05.
+Finally, the `floating_catchment_area()` function calculates accessibility levels considering the competition for opportunities using different FCA methods. Because several FCA methods can be used, the function requires users to indicate which method to use. In addition, just like the `gravity()` function, the decay function must also be defined by the user. The following code shows an example of how to calculate accessibility to schools using the BFCA method [@paez2019demand] and an exponential decay function with a decay parameter of 0.05.
 
 ```{r}
 bfca_competition <- floating_catchment_area(
@@ -297,7 +297,7 @@ Having calculated accessibility levels, we can now analyze them. There is a wide
 
 ### The spatial distribution of urban accessibility
 
-To understand how urban accessibility is spatially distributed in a given city or region, we first need to obtain the spatial information of the points we have used as origins and destinations in our travel cost matrix. The points we used in the previous examples correspond to the centroids of a hexagonal grid based on the [H3](https://h3geo.org/) index, developed by Uber [@brodsky2018h3]. The grid of Porto Alegre, as well as some sociodemographic and land use data aggregated to it, is made available by the Access to Opportunities Project team through the `{aopdata}` R package [@pereira2022aopdata]. The package and its functions are presented in detail in [Section 5](s5_dados_aop.en.qmd). With the code below, we load the data visualization package, download the grid and present it in a map.
+To understand how urban accessibility is spatially distributed in a given city or region, we first need to obtain the spatial information of the points we have used as origins and destinations in our travel cost matrix. The points we used in the previous examples correspond to the centroids of a hexagonal grid based on the [H3](https://h3geo.org/) index, developed by Uber [@brodsky2018h3]. The grid of Porto Alegre, as well as some sociodemographic and land use data aggregated to it, is made available by the AOP team through the `{aopdata}` R package. The package and its functions are presented in detail in [Section 5](s5_dados_aop.en.qmd). With the code below, we load the data visualization package, download the grid and present it in a map.
 
 ```{r}
 #| message: false
