@@ -193,6 +193,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Introduction to urban accessibility</a> 
         <div class="sidebar-tools-main tools-wide">
+    <a href="https://repositorio.ipea.gov.br/bitstream/11058/12689/1/Introduction_urban_accessibility_Book.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-download"></i></a>
     <a href="https://github.com/ipeaGIT/intro_access_book" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
       <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
@@ -469,14 +470,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>zip<span class="sc">::</span><span class="fu">zip_list</span>(export_path)[, <span class="fu">c</span>(<span class="st">"filename"</span>, <span class="st">"compressed_size"</span>, <span class="st">"timestamp"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         filename compressed_size           timestamp
-1      agency.txt             112 2023-10-18 19:43:40
-2    calendar.txt             129 2023-10-18 19:43:40
-3 frequencies.txt            2381 2023-10-18 19:43:40
-4      routes.txt             659 2023-10-18 19:43:40
-5      shapes.txt          160470 2023-10-18 19:43:40
-6  stop_times.txt            7907 2023-10-18 19:43:40
-7       stops.txt           18797 2023-10-18 19:43:40
-8       trips.txt             717 2023-10-18 19:43:40</code></pre>
+1      agency.txt             112 2023-12-21 15:36:54
+2    calendar.txt             129 2023-12-21 15:36:54
+3 frequencies.txt            2381 2023-12-21 15:36:54
+4      routes.txt             659 2023-12-21 15:36:54
+5      shapes.txt          160470 2023-12-21 15:36:54
+6  stop_times.txt            7907 2023-12-21 15:36:54
+7       stops.txt           18797 2023-12-21 15:36:54
+8       trips.txt             717 2023-12-21 15:36:54</code></pre>
 </div>
 </div>
 </section><section id="calculating-trip-speed" class="level2" data-number="5.2"><h2 data-number="5.2" class="anchored" data-anchor-id="calculating-trip-speed">
@@ -959,7 +960,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>validator_path <span class="ot">&lt;-</span> <span class="fu">download_validator</span>(tmpdir)</span>
 <span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>validator_path</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "/tmp/Rtmp3AAaV5/gtfs-validator-v4.0.0.jar"</code></pre>
+<pre><code>[1] "/tmp/Rtmp862Ol1/gtfs-validator-v4.0.0.jar"</code></pre>
 </div>
 </div>
 <p>The second (and final) step consists in actually validating the GTFS data with <code>validate_gtfs()</code>. This function supports GTFS data in different formats: i) as a GTFS object in an R session; ii) as a path to a local GTFS file in <code>.zip</code> format; iii) as an URL pointing to a feed; or iv) as a directory containing unzipped GTFS tables. The function also takes a path to a directory where the validation result should be saved to and the path to the validator that should be used in the process. In the example below, we validate SPTrans’ feed from its path:</p>
