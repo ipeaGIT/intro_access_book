@@ -41,7 +41,7 @@ en_yml$book$chapters <- lapply(
     }
   }
 )
-en_yml$book$sidebar$tools[[1]]$href <- "https://repositorio.ipea.gov.br/bitstream/11058/12689/1/Introduction_urban_accessibility_Book.pdf"
+en_yml$book$sidebar$tools[[1]]$href <- "https://repositorio.ipea.gov.br/bitstream/11058/12689/52/Introduction_urban_accessibility_Book.pdf"
 en_yml$citation$title <- "Introduction to urban accessibility: a practical guide with R"
 en_yml$citation$publisher <- "Ipea - Institute for Applied Economic Research"
 en_yml$citation$url <- "https://ipeagit.github.io/intro_access_book"
