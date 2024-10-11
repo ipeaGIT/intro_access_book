@@ -842,19 +842,28 @@
     },
     "patchwork": {
       "Package": "patchwork",
-      "Version": "1.1.2",
+      "Version": "1.3.0",
       "Source": "Repository",
       "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "patchwork",
+      "RemoteRef": "patchwork",
+      "RemoteRepos": "https://cloud.r-project.org",
+      "RemotePkgPlatform": "i386+x86_64-w64-mingw32",
+      "RemoteSha": "1.3.0",
       "Requirements": [
+        "cli",
+        "farver",
         "ggplot2",
         "grDevices",
         "graphics",
         "grid",
         "gtable",
+        "rlang",
         "stats",
         "utils"
       ],
-      "Hash": "63b611e9d909a9ed057639d9c3b77152"
+      "Hash": "e23fb9ecb1258207bcb763d78d513439"
     },
     "pillar": {
       "Package": "pillar",
