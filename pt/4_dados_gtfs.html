@@ -3,9 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.57">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Introdução à acessibilidade urbana - 4  Dados GTFS</title>
+<title>4  Dados GTFS – Introdução à acessibilidade urbana</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,6 +22,7 @@ ul.task-list li input[type="checkbox"] {
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -54,7 +55,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "Nenhum resultado",
     "search-matching-documents-text": "documentos correspondentes",
@@ -63,6 +70,7 @@ div.csl-indent {
     "search-more-match-text": "mais correspondência neste documento",
     "search-more-matches-text": "mais correspondências neste documento",
     "search-clear-button-title": "Limpar",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancelar",
     "search-submit-button-title": "Enviar",
     "search-label": "Procurar"
@@ -73,18 +81,12 @@ window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
-</script><meta property="og:title" content="Introdução à acessibilidade urbana - 4  Dados GTFS">
+</script><meta property="og:title" content="4  Dados GTFS – Introdução à acessibilidade urbana">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://ipeagit.github.io/intro_access_book/pt/images/gtfs_scheme.png">
-<meta property="og:site-name" content="Introdução à acessibilidade urbana">
-<meta property="og:image:height" content="1950">
-<meta property="og:image:width" content="2475">
-<meta name="twitter:title" content="Introdução à acessibilidade urbana - 4  Dados GTFS">
+<meta property="og:site_name" content="Introdução à acessibilidade urbana">
+<meta name="twitter:title" content="4  Dados GTFS – Introdução à acessibilidade urbana">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://ipeagit.github.io/intro_access_book/pt/images/gtfs_scheme.png">
-<meta name="twitter:image-height" content="1950">
-<meta name="twitter:image-width" content="2475">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 <meta name="citation_title" content="Introdução à acessibilidade urbana: um guia prático em R">
 <meta name="citation_author" content="Rafael H. M. Pereira">
 <meta name="citation_author" content="Daniel Herszenhut">
@@ -92,7 +94,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <meta name="citation_cover_date" content="2023">
 <meta name="citation_year" content="2023">
 <meta name="citation_fulltext_html_url" content="https://ipeagit.github.io/intro_access_book/pt">
-<meta name="citation_pdf_url" content="https://repositorio.ipea.gov.br/bitstream/11058/12264/1/Introducao_a_acessibilidade_urbana.pdf">
+<meta name="citation_pdf_url" content="https://repositorio.ipea.gov.br/bitstream/11058/12264/51/Introducao_a_acessibilidade_urbana_selo.pdf">
 <meta name="citation_doi" content="http://dx.doi.org/10.38116/9786556350547">
 <meta name="citation_isbn" content="978-65-5635-054-7">
 <meta name="citation_language" content="pt">
@@ -100,7 +102,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <meta name="citation_reference" content="citation_title=Estimating the influence of crowding and travel time variability on accessibility to jobs in a large public transport network using smart card big data;,citation_author=Renato Arbex;,citation_author=Claudio B. Cunha;,citation_publication_date=2020-05;,citation_cover_date=2020-05;,citation_year=2020;,citation_doi=10.1016/j.jtrangeo.2020.102671;,citation_issn=09666923;,citation_volume=85;,citation_language=en-US;,citation_journal_title=Journal of Transport Geography;">
 <meta name="citation_reference" content="citation_title=The sustainable mobility paradigm;,citation_author=David Banister;,citation_publication_date=2008-03;,citation_cover_date=2008-03;,citation_year=2008;,citation_issue=2;,citation_doi=10.1016/j.tranpol.2007.10.005;,citation_issn=0967070X;,citation_volume=15;,citation_language=en-US;,citation_journal_title=Transport Policy;">
 <meta name="citation_reference" content="citation_title=The trilogy of distance, speed and time;,citation_author=David Banister;,citation_publication_date=2011-07;,citation_cover_date=2011-07;,citation_year=2011;,citation_issue=4;,citation_doi=10.1016/j.jtrangeo.2010.12.004;,citation_issn=09666923;,citation_volume=19;,citation_language=en-US;,citation_journal_title=Journal of Transport Geography;">
-<meta name="citation_reference" content="citation_title=The world’s user-generated road map is more than 80% complete;,citation_abstract=OpenStreetMap, a crowdsourced geographic database, provides the only global-level, openly licensed source of geospatial road data, and the only national-level source in many countries. However, researchers, policy makers, and citizens who want to make use of OpenStreetMap (OSM) have little information about whether it can be relied upon in a particular geographic setting. In this paper, we use two complementary, independent methods to assess the completeness of OSM road data in each country in the world. First, we undertake a visual assessment of OSM data against satellite imagery, which provides the input for estimates based on a multilevel regression and poststratification model. Second, we fit sigmoid curves to the cumulative length of contributions, and use them to estimate the saturation level for each country. Both techniques may have more general use for assessing the development and saturation of crowd-sourced data. Our results show that in many places, researchers and policymakers can rely on the completeness of OSM, or will soon be able to do so. We find (i) that globally, OSM is \sim83% complete, and more than 40% of countriesincluding several in the developing worldhave a fully mapped street network; (ii) that well-governed countries with good Internet access tend to be more complete, and that completeness has a U-shaped relationship with population densityboth sparsely populated areas and dense cities are the best mapped; and (iii) that existing global datasets used by the World Bank undercount roads by more than 30%.;,citation_author=Christopher Barrington-Leigh;,citation_author=Adam Millard-Ball;,citation_publication_date=2017-08;,citation_cover_date=2017-08;,citation_year=2017;,citation_issue=8;,citation_doi=10.1371/journal.pone.0180698;,citation_issn=1932-6203;,citation_volume=12;,citation_language=en-US;,citation_journal_title=PLOS ONE;,citation_publisher=Public Library of Science;">
+<meta name="citation_reference" content="citation_title=The world’s user-generated road map is more than 80% complete;,citation_abstract=OpenStreetMap, a crowdsourced geographic database, provides the only global-level, openly licensed source of geospatial road data, and the only national-level source in many countries. However, researchers, policy makers, and citizens who want to make use of OpenStreetMap (OSM) have little information about whether it can be relied upon in a particular geographic setting. In this paper, we use two complementary, independent methods to assess the completeness of OSM road data in each country in the world. First, we undertake a visual assessment of OSM data against satellite imagery, which provides the input for estimates based on a multilevel regression and poststratification model. Second, we fit sigmoid curves to the cumulative length of contributions, and use them to estimate the saturation level for each country. Both techniques may have more general use for assessing the development and saturation of crowd-sourced data. Our results show that in many places, researchers and policymakers can rely on the completeness of OSM, or will soon be able to do so. We find (i) that globally, OSM is $\sim$83% complete, and more than 40% of countriesincluding several in the developing worldhave a fully mapped street network; (ii) that well-governed countries with good Internet access tend to be more complete, and that completeness has a U-shaped relationship with population densityboth sparsely populated areas and dense cities are the best mapped; and (iii) that existing global datasets used by the World Bank undercount roads by more than 30%.;,citation_author=Christopher Barrington-Leigh;,citation_author=Adam Millard-Ball;,citation_publication_date=2017-08;,citation_cover_date=2017-08;,citation_year=2017;,citation_issue=8;,citation_doi=10.1371/journal.pone.0180698;,citation_issn=1932-6203;,citation_volume=12;,citation_language=en-US;,citation_journal_title=PLOS ONE;,citation_publisher=Public Library of Science;">
 <meta name="citation_reference" content="citation_title=Sustainable accessibility: A conceptual framework to integrate transport and land use plan-making. Two test-applications in the Netherlands and a reflection on the way forward;,citation_author=L. Bertolini;,citation_author=F. Clercq;,citation_author=L. Kapoen;,citation_publication_date=2005-05;,citation_cover_date=2005-05;,citation_year=2005;,citation_issue=3;,citation_doi=10.1016/j.tranpol.2005.01.006;,citation_issn=0967070X;,citation_volume=12;,citation_language=en-US;,citation_journal_title=Transport Policy;">
 <meta name="citation_reference" content="citation_title=How to get there? A critical assessment of accessibility objectives and indicators in metropolitan transportation plans;,citation_author=Geneviève Boisjoly;,citation_author=Ahmed M. El-Geneidy;,citation_publication_date=2017-04;,citation_cover_date=2017-04;,citation_year=2017;,citation_doi=10.1016/j.tranpol.2016.12.011;,citation_issn=0967070X;,citation_volume=55;,citation_language=en-US;,citation_journal_title=Transport Policy;">
 <meta name="citation_reference" content="citation_title=Impactos da expansão do metrô de Fortaleza sobre o acesso a oportunidades de emprego, saúde e educação;,citation_author=Carlos Kaue Vieira Braga;,citation_author=Diego Bogado Tomasiello;,citation_author=Daniel Herszenhut;,citation_author=João Lucas Albuquerque Oliveira;,citation_author=Rafael H. M. Pereira;,citation_publication_date=2022-05;,citation_cover_date=2022-05;,citation_year=2022;,citation_language=pt-BR;,citation_technical_report_institution=Instituto de Pesquisa Econômica Aplicada (Ipea);,citation_technical_report_number=2767;">
@@ -160,44 +162,44 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="./s3_dados_tp.html">SEÇÃO 3: Dados de transporte público</a></li>
 <li class="breadcrumb-item"><a href="./4_dados_gtfs.html"><span class="chapter-number">4</span>  <span class="chapter-title">Dados GTFS</span></a></li>
-</ol></nav><a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+</ol></nav><a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Introdução à acessibilidade urbana</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://repositorio.ipea.gov.br/bitstream/11058/12264/1/Introducao_a_acessibilidade_urbana.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-download"></i></a>
-    <a href="https://github.com/ipeaGIT/intro_access_book" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://repositorio.ipea.gov.br/bitstream/11058/12264/51/Introducao_a_acessibilidade_urbana_selo.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-download"></i></a>
+    <a href="https://github.com/ipeaGIT/intro_access_book" title="Código fonte" class="quarto-navigation-tool px-1" aria-label="Código fonte"><i class="bi bi-github"></i></a>
     <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
 <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
-              <i class="bi bi-bi-twitter pe-1"></i>
+              <i class="bi bi-twitter pe-1"></i>
             Twitter
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
-              <i class="bi bi-bi-facebook pe-1"></i>
+              <i class="bi bi-facebook pe-1"></i>
             Facebook
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
-              <i class="bi bi-bi-linkedin pe-1"></i>
+              <i class="bi bi-linkedin pe-1"></i>
             LinkedIn
             </a>
           </li>
@@ -224,7 +226,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       <div class="sidebar-item-container"> 
             <a href="./s1_intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SEÇÃO 1: Introdução à acessibilidade urbana</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Alternar seção">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar seção">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -247,7 +249,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       <div class="sidebar-item-container"> 
             <a href="./s2_calculo.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SEÇÃO 2: Como calcular acessibilidade urbana</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Alternar seção">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar seção">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -264,7 +266,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       <div class="sidebar-item-container"> 
             <a href="./s3_dados_tp.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SEÇÃO 3: Dados de transporte público</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Alternar seção">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Alternar seção">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -287,7 +289,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       <div class="sidebar-item-container"> 
             <a href="./s4_avaliacao_impacto.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SEÇÃO 4: Avaliação de impacto de projetos de transporte</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Alternar seção">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Alternar seção">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -304,7 +306,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       <div class="sidebar-item-container"> 
             <a href="./s5_dados_aop.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SEÇÃO 5: Dados do Projeto Acesso a Oportunidades</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Alternar seção">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Alternar seção">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -337,7 +339,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </li>
     </ul>
 </div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Índice</h2>
@@ -358,13 +360,13 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </li>
   <li><a href="#onde-encontrar-dados-gtfs-de-cidades-brasileiras" id="toc-onde-encontrar-dados-gtfs-de-cidades-brasileiras" class="nav-link" data-scroll-target="#onde-encontrar-dados-gtfs-de-cidades-brasileiras"><span class="header-section-number">4.2</span> Onde encontrar dados GTFS de cidades brasileiras</a></li>
   </ul>
-<div class="toc-actions">
-<div><i class="bi bi-github"></i></div>
-<div class="action-links"><p><a href="https://github.com/ipeaGIT/intro_access_book/edit/main/4_dados_gtfs.qmd" class="toc-action">Editar essa página</a></p></div>
-</div></nav><a href="../4_dados_gtfs.en.html">Read in English</a>
+<div class="toc-actions"><ul><li><a href="https://github.com/ipeaGIT/intro_access_book/edit/main/4_dados_gtfs.qmd" class="toc-action"><i class="bi bi-github"></i>Editar essa página</a></li></ul></div></nav><a href="../4_dados_gtfs.en.html">Read in English</a>
 </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="./s3_dados_tp.html">SEÇÃO 3: Dados de transporte público</a></li>
+<li class="breadcrumb-item"><a href="./4_dados_gtfs.html"><span class="chapter-number">4</span>  <span class="chapter-title">Dados GTFS</span></a></li>
+</ol></nav><div class="quarto-title">
 <h1 class="title"><span id="sec-4_dados_gtfs" class="quarto-section-identifier"><span class="chapter-number">4</span>  <span class="chapter-title">Dados GTFS</span></span></h1>
 </div>
 
@@ -378,6 +380,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </div>
   
 
+
 </header><p>O formato GTFS é uma especificação aberta e colaborativa que visa descrever os principais componentes de uma rede de transporte público. Originalmente criada em meados dos anos 2000 por uma parceria entre Google e TriMet, a agência de transporte de Portland, em Oregon, nos Estados Unidos, a especificação hoje é utilizada por agências de transporte em milhares de cidades, espalhadas por todos os continentes do globo <span class="citation" data-cites="mchugh2013pioneering">(<a href="references.html#ref-mchugh2013pioneering" role="doc-biblioref">McHugh 2013</a>)</span>. Atualmente, essa especificação é dividida em dois componentes distintos:</p>
 <ul>
 <li>GTFS <em>Schedule</em>, ou GTFS <em>Static</em>, que contém o cronograma planejado de linhas de transporte público, informações sobre suas tarifas e informações espaciais sobre os seus itinerários; e</li>
@@ -387,12 +390,16 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p>Por ser uma especificação aberta e colaborativa, o formato GTFS tenta abarcar em sua definição um grande número de usos distintos que agências de transporte e desenvolvedores de ferramentas possam lhe dar. No entanto, agências e <em>softwares</em> podem ainda assim depender de informações que não constem na especificação oficial. Surgem, dessa forma, <a href="https://gtfs.org/extensions/">extensões</a> da especificação, algumas das quais podem eventualmente se tornar parte da especificação oficial, caso isso seja aceito pela comunidade. Nesta seção, focaremos em um subconjunto de informações presentes no formato GTFS <em>Schedule</em> “puro”, e, portanto, não cobriremos suas extensões.</p>
 <section id="estrutura-de-arquivos-gtfs" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="estrutura-de-arquivos-gtfs">
 <span class="header-section-number">4.1</span> Estrutura de arquivos GTFS</h2>
-<p>Arquivos no formato GTFS <em>Schedule</em> (daqui em diante chamado apenas de GTFS) também são conhecidos pela denominação <em>feed</em><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Um <em>feed</em> é nada mais do que um arquivo comprimido em formato <code>.zip</code> que contém um conjunto de tabelas, salvas em formato <code>.txt</code>, com algumas informações sobre a rede de transporte público (localização das paradas, frequências das viagens, traçado das rotas, entre outras). Como em uma base de dados relacional, as tabelas de um <em>feed</em> possuem colunas-chaves que permitem vincular os dados de rotas, viagens e tabelas de horários entre si. O esquema geral do formato GTFS é apresentado na <a href="#fig-scheme">Figura <span>4.1</span></a>, que mostra algumas das principais tabelas que compõem a especificação e destaca como elas se relacionam a partir de suas colunas-chaves.</p>
+<p>Arquivos no formato GTFS <em>Schedule</em> (daqui em diante chamado apenas de GTFS) também são conhecidos pela denominação <em>feed</em><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. Um <em>feed</em> é nada mais do que um arquivo comprimido em formato <code>.zip</code> que contém um conjunto de tabelas, salvas em formato <code>.txt</code>, com algumas informações sobre a rede de transporte público (localização das paradas, frequências das viagens, traçado das rotas, entre outras). Como em uma base de dados relacional, as tabelas de um <em>feed</em> possuem colunas-chaves que permitem vincular os dados de rotas, viagens e tabelas de horários entre si. O esquema geral do formato GTFS é apresentado na <a href="#fig-scheme" class="quarto-xref">Figura <span>4.1</span></a>, que mostra algumas das principais tabelas que compõem a especificação e destaca como elas se relacionam a partir de suas colunas-chaves.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-scheme" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/gtfs_scheme.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figura 4.1: Esquema do formato GTFS. Fonte: <span class="citation" data-cites="pereira2022exploringa">Pereira, Andrade, e Vieira (<a href="references.html#ref-pereira2022exploringa" role="doc-biblioref">2022</a>)</span></figcaption></figure>
+<div id="fig-scheme" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-scheme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/gtfs_scheme.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scheme-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura 4.1: Esquema do formato GTFS. Fonte: <span class="citation" data-cites="pereira2022exploringa">Pereira, Andrade, e Vieira (<a href="references.html#ref-pereira2022exploringa" role="doc-biblioref">2022</a>)</span>
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -410,12 +417,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p>Arquivo utilizado para descrever as operadoras de transporte que atuam no sistema descrito pelo arquivo GTFS. Embora o termo <em>agency</em> (agência) seja usado em lugar de <em>operators</em> (operadoras), por exemplo, fica a cargo do produtor do <em>feed</em> definir quais instituições serão listadas na tabela.</p>
 <p>Por exemplo: múltiplas concessionárias de ônibus atuam em um determinado local, mas todo o planejamento de cronograma e de tarifa é realizado por uma única instituição, em geral uma secretaria de transporte ou empresa pública específica. Essa instituição é também entendida pelos usuários do sistema como a operadora, de fato. Nesse caso, devemos listar a instituição responsável pelo planejamento na tabela.</p>
 <p>Agora, imagine um sistema em que a agência de transporte público local transfere a responsabilidade da operação de um sistema multimodal a diversas empresas, por meio de concessões. Cada uma dessas empresas é responsável pelo planejamento de cronogramas e tarifas dos modos que operam, desde que sejam seguidos determinados parâmetros preestabelecidos em contrato. Sendo assim, devemos listar as operadoras (concessionárias) na tabela, e não a agência de transporte público em si.</p>
-<p>A <a href="#tbl-agency">Tabela <span>4.1</span></a> mostra o arquivo <code>agency.txt</code> do <em>feed</em> da SPTrans. Como podemos ver, os responsáveis pelo <em>feed</em> optaram por listar a própria empresa no arquivo, e não as concessionárias que operam os ônibus e o metrô da cidade.</p>
+<p>A <a href="#tbl-agency" class="quarto-xref">Tabela <span>4.1</span></a> mostra o arquivo <code>agency.txt</code> do <em>feed</em> da SPTrans. Como podemos ver, os responsáveis pelo <em>feed</em> optaram por listar a própria empresa no arquivo, e não as concessionárias que operam os ônibus e o metrô da cidade.</p>
 <div class="cell">
+<div id="tbl-agency" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-agency-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela 4.1: Exemplo de arquivo <code>agency.txt</code>. Fonte: SPTrans
+</figcaption><div aria-describedby="tbl-agency-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="tbl-agency" class="anchored">
-<table class="table table-sm table-striped small">
-<caption>Tabela 4.1: Exemplo de arquivo <code>agency.txt</code>. Fonte: SPTrans</caption>
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 10%">
 <col style="width: 12%">
@@ -440,8 +449,10 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </table>
 </div>
 </div>
+</figure>
 </div>
-<p>É necessário notar que, embora estejamos apresentando o <code>agency.txt</code> em formato de tabela, o arquivo deve ser formatado como se fosse salvo em formato <code>.csv</code>. Ou seja, os valores de cada célula da tabela devem ser separados por vírgulas, e cada linha da tabela deve constar em uma linha no arquivo. A <a href="#tbl-agency">Tabela <span>4.1</span></a>, por exemplo, é definida da seguinte forma:</p>
+</div>
+<p>É necessário notar que, embora estejamos apresentando o <code>agency.txt</code> em formato de tabela, o arquivo deve ser formatado como se fosse salvo em formato <code>.csv</code>. Ou seja, os valores de cada célula da tabela devem ser separados por vírgulas, e cada linha da tabela deve constar em uma linha no arquivo. A <a href="#tbl-agency" class="quarto-xref">Tabela <span>4.1</span></a>, por exemplo, é definida da seguinte forma:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>agency_id,agency_name,agency_url,agency_timezone,agency_lang
@@ -451,12 +462,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p>Por uma questão de comunicação e interpretação dos dados, apresentaremos os exemplos em formato de tabela. É importante ter em mente, porém, que essas tabelas são organizadas como mostrado anteriormente.</p>
 </section><section id="stops.txt" class="level3" data-number="4.1.2"><h3 data-number="4.1.2" class="anchored" data-anchor-id="stops.txt">
 <span class="header-section-number">4.1.2</span> stops.txt</h3>
-<p>Arquivo usado para descrever as paradas de transporte público que compõem o sistema. Os pontos listados neste arquivo podem fazer menção a paradas mais simples (como pontos de ônibus), estações, plataformas, entradas e saídas de estações etc. A <a href="#tbl-stops">Tabela <span>4.2</span></a> mostra o <code>stops.txt</code> do <em>feed</em> da SPTrans.</p>
+<p>Arquivo usado para descrever as paradas de transporte público que compõem o sistema. Os pontos listados neste arquivo podem fazer menção a paradas mais simples (como pontos de ônibus), estações, plataformas, entradas e saídas de estações etc. A <a href="#tbl-stops" class="quarto-xref">Tabela <span>4.2</span></a> mostra o <code>stops.txt</code> do <em>feed</em> da SPTrans.</p>
 <div class="cell">
+<div id="tbl-stops" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-stops-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela 4.2: Exemplo de arquivo <code>stops.txt</code>. Fonte: SPTrans
+</figcaption><div aria-describedby="tbl-stops-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="tbl-stops" class="anchored">
-<table class="table table-sm table-striped small">
-<caption>Tabela 4.2: Exemplo de arquivo <code>stops.txt</code>. Fonte: SPTrans</caption>
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 6%">
 <col style="width: 16%">
@@ -518,18 +531,22 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </table>
 </div>
 </div>
+</figure>
+</div>
 </div>
 <p>As colunas <code>stop_id</code> e <code>stop_name</code> servem como identificadores de cada parada, porém cumprem papéis distintos. O principal propósito da <code>stop_id</code> é identificar relações entre esta tabela e outras que compõem a especificação (como veremos mais à frente no arquivo <code>stop_times.txt</code>, por exemplo). Já a coluna <code>stop_name</code> cumpre o papel de um identificador facilmente reconhecido pelo passageiro. Seus valores, portanto, costumam ser nomes de estações, nomes de pontos de interesse da cidade ou endereços (como no caso do <em>feed</em> da SPTrans).</p>
 <p>A coluna <code>stop_desc</code>, presente no <em>feed</em> da SPTrans, é opcional e permite à agência de transporte adicionar uma descrição de cada parada e de seu entorno. As colunas <code>stop_lat</code> e <code>stop_lon</code>, por fim, são as responsáveis por associar cada parada a uma posição espacial, por meio de suas coordenadas geográficas de latitude e longitude.</p>
 <p>Entre as colunas opcionais não presentes no <code>stops.txt</code> deste <em>feed</em> estão a <code>location_type</code> e a <code>parent_station</code>. A <code>location_type</code> é utilizada para denotar o tipo de localização a que cada ponto se refere. Quando ausente, todos os pontos são interpretados como paradas de transporte público, mas valores distintos podem ser usados para distinguir uma parada (<code>location_type = 0</code>) de uma estação (<code>location_type = 1</code>) ou uma área de embarque (<code>location_type = 2</code>), por exemplo. A coluna <code>parent_station</code>, por sua vez, é utilizada para descrever relações de hierarquia entre dois pontos. Por exemplo, uma área de desembarque deve dizer a qual parada/plataforma ela pertence, assim como uma parada/plataforma pode também, opcionalmente, listar a qual estação ela pertence.</p>
 </section><section id="routes.txt" class="level3" data-number="4.1.3"><h3 data-number="4.1.3" class="anchored" data-anchor-id="routes.txt">
 <span class="header-section-number">4.1.3</span> routes.txt</h3>
-<p>Arquivo usado para descrever as linhas de transporte público que rodam no sistema, incluindo os modos de transporte utilizados em cada uma. A <a href="#tbl-routes">Tabela <span>4.3</span></a> mostra o <code>routes.txt</code> do <em>feed</em> da SPTrans.</p>
+<p>Arquivo usado para descrever as linhas de transporte público que rodam no sistema, incluindo os modos de transporte utilizados em cada uma. A <a href="#tbl-routes" class="quarto-xref">Tabela <span>4.3</span></a> mostra o <code>routes.txt</code> do <em>feed</em> da SPTrans.</p>
 <div class="cell">
+<div id="tbl-routes" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-routes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela 4.3: Exemplo de arquivo <code>routes.txt</code>. Fonte: SPTrans
+</figcaption><div aria-describedby="tbl-routes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="tbl-routes" class="anchored">
-<table class="table table-sm table-striped small">
-<caption>Tabela 4.3: Exemplo de arquivo <code>routes.txt</code>. Fonte: SPTrans</caption>
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 11%">
 <col style="width: 13%">
@@ -591,18 +608,22 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </table>
 </div>
 </div>
+</figure>
+</div>
 </div>
 <p>Assim como no caso do arquivo <code>stops.txt</code>, a tabela do <code>routes.txt</code> também possui diferentes colunas que apontam o identificador de cada linha (<code>route_id</code>) e o seu nome. Nesse caso, no entanto, existem duas colunas de nome: a <code>route_short_name</code> e a <code>route_long_name</code>. A primeira diz respeito ao nome da linha, usualmente utilizado por passageiros no dia-a-dia, enquanto o segundo tende a ser um nome mais descritivo. A SPTrans, por exemplo, optou por destacar os pontos finais de cada linha nessa coluna. Podemos notar também que os mesmos valores se repetem nas colunas <code>route_id</code> e <code>route_short_name</code>, o que não é obrigatório nem proibido - nesse caso, o produtor do <em>feed</em> julgou que os nomes das linhas poderiam funcionar satisfatoriamente como identificadores por serem razoavelmente curtos e não se repetirem.</p>
 <p>A coluna <code>agency_id</code> é a chave que permite relacionar a tabela das rotas com a tabela descrita no <code>agency.txt</code>. Ela faz menção a uma agência descrita naquele arquivo, a agência de id <code>1</code> (a própria SPTrans). Essa coluna é opcional no caso de <em>feeds</em> em que existe apenas uma agência, porém é obrigatória nos casos em que existe mais de uma. Imaginemos, por exemplo, um <em>feed</em> que descreve um sistema multimodal que conta com um corredor de metrô e diversas linhas de ônibus: uma configuração possível de <code>routes.txt</code> descreveria as linhas de metrô como de responsabilidade da operadora do metrô, e as de ônibus como de responsabilidade da empresa responsável pelo planejamento das linhas de ônibus, por exemplo.</p>
 <p>A coluna <code>route_type</code> é utilizada para descrever o modo de transporte utilizado em cada linha. Essa coluna aceita diferentes números, cada um representando um determinado modo. Esse exemplo descreve linhas de trem, cujo valor numérico correspondente é <code>2</code>. Os valores correspondentes para outros modos de transporte são listados na <a href="https://gtfs.org/schedule/reference/#routestxt">especificação</a>.</p>
 </section><section id="trips.txt" class="level3" data-number="4.1.4"><h3 data-number="4.1.4" class="anchored" data-anchor-id="trips.txt">
 <span class="header-section-number">4.1.4</span> trips.txt</h3>
-<p>Arquivo usado para descrever as viagens realizadas no sistema. A viagem é a unidade básica de movimento do formato GTFS: cada viagem é associada a uma linha de transporte público (<code>route_id</code>), a um serviço que opera em determinados dias da semana (como veremos mais à frente, no arquivo <code>calendar.txt</code>) e a uma trajetória espacial (como será mostrado no arquivo <code>shapes.txt</code>). A <a href="#tbl-trips">Tabela <span>4.4</span></a> mostra o <code>trips.txt</code> do <em>feed</em> da SPTrans.</p>
+<p>Arquivo usado para descrever as viagens realizadas no sistema. A viagem é a unidade básica de movimento do formato GTFS: cada viagem é associada a uma linha de transporte público (<code>route_id</code>), a um serviço que opera em determinados dias da semana (como veremos mais à frente, no arquivo <code>calendar.txt</code>) e a uma trajetória espacial (como será mostrado no arquivo <code>shapes.txt</code>). A <a href="#tbl-trips" class="quarto-xref">Tabela <span>4.4</span></a> mostra o <code>trips.txt</code> do <em>feed</em> da SPTrans.</p>
 <div class="cell">
+<div id="tbl-trips" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-trips-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela 4.4: Exemplo de arquivo <code>trips.txt</code>. Fonte: SPTrans
+</figcaption><div aria-describedby="tbl-trips-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="tbl-trips" class="anchored">
-<table class="table table-sm table-striped small">
-<caption>Tabela 4.4: Exemplo de arquivo <code>trips.txt</code>. Fonte: SPTrans</caption>
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 16%">
 <col style="width: 13%">
@@ -672,17 +693,21 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </table>
 </div>
 </div>
+</figure>
 </div>
-<p>A coluna <code>trip_id</code> identifica cada uma das viagens descritas na tabela, assim como a <code>route_id</code> faz referência a uma linha de transporte público identificada no arquivo <code>routes.txt</code>. A coluna <code>service_id</code> identifica serviços que determinam os dias da semana em que cada uma das viagens opera (dias úteis, finais de semana, uma mistura dos dois etc.), descritos detalhadamente no arquivo <code>calendar.txt</code>. A última coluna à direita na <a href="#tbl-trips">Tabela <span>4.4</span></a> é a <code>shape_id</code>, que identifica a trajetória espacial de cada uma das viagens, descrita em detalhes no arquivo <code>shapes.txt</code>.</p>
+</div>
+<p>A coluna <code>trip_id</code> identifica cada uma das viagens descritas na tabela, assim como a <code>route_id</code> faz referência a uma linha de transporte público identificada no arquivo <code>routes.txt</code>. A coluna <code>service_id</code> identifica serviços que determinam os dias da semana em que cada uma das viagens opera (dias úteis, finais de semana, uma mistura dos dois etc.), descritos detalhadamente no arquivo <code>calendar.txt</code>. A última coluna à direita na <a href="#tbl-trips" class="quarto-xref">Tabela <span>4.4</span></a> é a <code>shape_id</code>, que identifica a trajetória espacial de cada uma das viagens, descrita em detalhes no arquivo <code>shapes.txt</code>.</p>
 <p>As duas colunas restantes, <code>trip_headsign</code> e <code>direction_id</code>, são opcionais e devem ser utilizadas para descrever o sentido/destino da viagem. A primeira, <code>trip_headsign</code>, é utilizada para ditar o texto que aparece no letreiro de veículos (no caso de um ônibus, por exemplo) ou em painéis informativos (como em metrôs e trens) destacando o destino da viagem. Já a coluna <code>direction_id</code> é frequentemente utilizada em conjunto com a primeira para dar uma conotação de ida ou volta para cada viagem, em que <code>0</code> representa ida e <code>1</code>, volta, ou vice-versa (assim como ida e volta são conceitos que mudam conforme o referencial, os valores <code>0</code> e <code>1</code> podem ser usados como desejado, desde que um represente um sentido e o outro, o contrário). No exemplo, as duas primeiras linhas são viagens que fazem menção à mesma rota de transporte público (<code>CPTM L07</code>), porém em sentidos opostos: uma corre em direção a Jundiaí e a outra, à Luz.</p>
 </section><section id="calendar.txt" class="level3" data-number="4.1.5"><h3 data-number="4.1.5" class="anchored" data-anchor-id="calendar.txt">
 <span class="header-section-number">4.1.5</span> calendar.txt</h3>
-<p>Arquivo usado para descrever os diferentes tipos de serviço existentes no sistema. Um serviço, nesse contexto, denota um conjunto de dias da semana em que viagens são realizadas. Cada serviço também é definido pela data em que começa a valer e pela data a partir da qual ele não é mais válido. A <a href="#tbl-calendar">Tabela <span>4.5</span></a> mostra o <code>calendar.txt</code> do <em>feed</em> da SPTrans.</p>
+<p>Arquivo usado para descrever os diferentes tipos de serviço existentes no sistema. Um serviço, nesse contexto, denota um conjunto de dias da semana em que viagens são realizadas. Cada serviço também é definido pela data em que começa a valer e pela data a partir da qual ele não é mais válido. A <a href="#tbl-calendar" class="quarto-xref">Tabela <span>4.5</span></a> mostra o <code>calendar.txt</code> do <em>feed</em> da SPTrans.</p>
 <div class="cell">
+<div id="tbl-calendar" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-calendar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela 4.5: Exemplo de arquivo <code>calendar.txt</code>. Fonte: SPTrans
+</figcaption><div aria-describedby="tbl-calendar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="tbl-calendar" class="anchored">
-<table class="table table-sm table-striped small">
-<caption>Tabela 4.5: Exemplo de arquivo <code>calendar.txt</code>. Fonte: SPTrans</caption>
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 12%">
 <col style="width: 7%">
@@ -784,18 +809,22 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </table>
 </div>
 </div>
+</figure>
+</div>
 </div>
 <p>A coluna <code>service_id</code> identifica cada um dos serviços descritos na tabela. Como mostrado anteriormente, este identificador é usado também no arquivo <code>trips.txt</code> e é o responsável por associar cada viagem a um determinado serviço.</p>
-<p>As colunas <code>monday</code>, <code>tuesday</code>, <code>wednesday</code>, <code>thursday</code>, <code>friday</code>, <code>saturday</code> e <code>sunday</code> (segunda-feira a domingo, em inglês) são utilizadas para delimitar os dias em que cada serviço funciona. O valor <code>1</code> significa que o serviço opera naquele dia, enquanto o valor <code>0</code> significa que ele não opera. Como podemos ver na <a href="#tbl-calendar">Tabela <span>4.5</span></a>, o serviço <code>USD</code> opera em todos os dias da semana. Já o serviço <code>U__</code> opera apenas em dias úteis.</p>
+<p>As colunas <code>monday</code>, <code>tuesday</code>, <code>wednesday</code>, <code>thursday</code>, <code>friday</code>, <code>saturday</code> e <code>sunday</code> (segunda-feira a domingo, em inglês) são utilizadas para delimitar os dias em que cada serviço funciona. O valor <code>1</code> significa que o serviço opera naquele dia, enquanto o valor <code>0</code> significa que ele não opera. Como podemos ver na <a href="#tbl-calendar" class="quarto-xref">Tabela <span>4.5</span></a>, o serviço <code>USD</code> opera em todos os dias da semana. Já o serviço <code>U__</code> opera apenas em dias úteis.</p>
 <p>Por fim, as colunas <code>start_date</code> e <code>end_date</code> delimitam o intervalo em que cada serviço é válido. As datas do formato GTFS são sempre formatadas segundo a regra <code>YYYYMMDD</code>, em que os primeiros quatro números definem o ano, os dois subsequentes definem o mês e os últimos dois, o dia. O valor <code>20220428</code>, por exemplo, representa o dia 28 de abril de 2022.</p>
 </section><section id="shapes.txt" class="level3" data-number="4.1.6"><h3 data-number="4.1.6" class="anchored" data-anchor-id="shapes.txt">
 <span class="header-section-number">4.1.6</span> shapes.txt</h3>
-<p>Arquivo usado para descrever a trajetória espacial de cada viagem listada no <em>feed</em>. Esse arquivo é opcional, mas é fortemente recomendado que agências de transporte o incluam em seus arquivos GTFS. A <a href="#tbl-shapes">Tabela <span>4.6</span></a> mostra o <code>shapes.txt</code> do <em>feed</em> da SPTrans.</p>
+<p>Arquivo usado para descrever a trajetória espacial de cada viagem listada no <em>feed</em>. Esse arquivo é opcional, mas é fortemente recomendado que agências de transporte o incluam em seus arquivos GTFS. A <a href="#tbl-shapes" class="quarto-xref">Tabela <span>4.6</span></a> mostra o <code>shapes.txt</code> do <em>feed</em> da SPTrans.</p>
 <div class="cell">
+<div id="tbl-shapes" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-shapes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela 4.6: Exemplo de arquivo <code>shapes.txt</code>. Fonte: SPTrans
+</figcaption><div aria-describedby="tbl-shapes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="tbl-shapes" class="anchored">
-<table class="table table-sm table-striped small">
-<caption>Tabela 4.6: Exemplo de arquivo <code>shapes.txt</code>. Fonte: SPTrans</caption>
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: left;">shape_id</th>
 <th style="text-align: right;">shape_pt_lat</th>
@@ -843,16 +872,20 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </table>
 </div>
 </div>
+</figure>
+</div>
 </div>
 <p>A coluna <code>shape_id</code> identifica cada uma das trajetórias descritas na tabela. Como mostrado anteriormente, esse identificador é usado também no arquivo <code>trips.txt</code> e é o responsável por associar cada viagem à sua trajetória espacial. Diferentemente de todos os outros identificadores que vimos até então, no entanto, o identificador <code>shape_id</code> se repete em diversas observações da tabela. Isso porque o arquivo associa cada <code>shape_id</code> a uma série de pontos espaciais, cujas coordenadas geográficas são descritas nas colunas <code>shape_pt_lat</code> e <code>shape_pt_lon</code>. A coluna <code>shape_pt_sequence</code> lista a sequência na qual os pontos se conectam para formar a trajetória de cada <code>shape_id</code>. Os valores listados nessa coluna devem ser ordenados de forma crescente.</p>
 </section><section id="stop_times.txt" class="level3" data-number="4.1.7"><h3 data-number="4.1.7" class="anchored" data-anchor-id="stop_times.txt">
 <span class="header-section-number">4.1.7</span> stop_times.txt</h3>
-<p>Arquivo usado para descrever a tabela de horários de cada viagem, incluindo o horário de chegada e partida em cada uma das paradas. A formatação desse arquivo depende da existência ou não de um arquivo <code>frequencies.txt</code>, detalhe que cobriremos mais adiante. Por enquanto, olharemos para o <code>stop_times.txt</code> do <em>feed</em> da SPTrans, que também conta com um <code>frequencies.txt</code>, na <a href="#tbl-stop_times">Tabela <span>4.7</span></a>.</p>
+<p>Arquivo usado para descrever a tabela de horários de cada viagem, incluindo o horário de chegada e partida em cada uma das paradas. A formatação desse arquivo depende da existência ou não de um arquivo <code>frequencies.txt</code>, detalhe que cobriremos mais adiante. Por enquanto, olharemos para o <code>stop_times.txt</code> do <em>feed</em> da SPTrans, que também conta com um <code>frequencies.txt</code>, na <a href="#tbl-stop_times" class="quarto-xref">Tabela <span>4.7</span></a>.</p>
 <div class="cell">
+<div id="tbl-stop_times" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-stop_times-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela 4.7: Exemplo de arquivo <code>stop_times.txt</code>. Fonte: SPTrans
+</figcaption><div aria-describedby="tbl-stop_times-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="tbl-stop_times" class="anchored">
-<table class="table table-sm table-striped small">
-<caption>Tabela 4.7: Exemplo de arquivo <code>stop_times.txt</code>. Fonte: SPTrans</caption>
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: left;">trip_id</th>
 <th style="text-align: left;">arrival_time</th>
@@ -907,18 +940,22 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </table>
 </div>
 </div>
+</figure>
+</div>
 </div>
 <p>A viagem cuja tabela de horários está sendo descrita é identificada pela coluna <code>trip_id</code>. De forma análoga ao que acontece na tabela de trajetórias, um mesmo <code>trip_id</code> se repete em muitas observações da tabela. Isso porque, assim como a trajetória é composta por uma sequência de pontos espaciais, a tabela de horários é composta por uma sequência de diversos horários de partida/chegada em diversas paradas de transporte público.</p>
 <p>As colunas seguintes, <code>arrival_time</code>, <code>departure_time</code> e <code>stop_id</code>, são as responsáveis por descrever o cronograma de cada viagem, associando um horário de chegada e um horário de partida a cada uma das paradas da viagem. As colunas de horário são formatadas segundo a regra <code>HH:MM:SS</code>, em que os dois primeiros números definem a hora, os dois seguintes, os minutos e os últimos dois, os segundos. Essa formatação aceita valores de hora maiores que <code>24</code>: por exemplo, se uma viagem parte às 23h, mas só chega a uma determinada estação 1h da manhã do dia seguinte, seu horário de chegada deve ser registrado como <code>25:00:00</code>, e não <code>01:00:00</code>. A coluna <code>stop_id</code>, por sua vez, associa os horários de chegada e partida a uma parada descrita no arquivo <code>stops.txt</code>. Por fim, a coluna <code>stop_sequence</code> lista a sequência na qual cada parada se conecta às demais para formar o cronograma da viagem. Seus valores devem ser sempre ordenados de forma crescente.</p>
 <p>Vale destacar aqui a diferença entre os arquivos <code>shapes.txt</code> e <code>stop_times.txt</code>. Embora os dois descrevam uma viagem espacialmente, eles o fazem de forma diferente. O <code>stop_times.txt</code> descreve a sequência de paradas e horários que compõem um cronograma, mas nada diz sobre o trajeto percorrido pelo veículo entre cada uma das paradas. Já o <code>shapes.txt</code> traz a trajetória detalhada da viagem como um todo, mas não descreve em que ponto do espaço estão as paradas da viagem. Quando usamos os dois arquivos em conjunto, portanto, sabemos tanto o cronograma de cada viagem quanto a trajetória espacial da viagem entre paradas.</p>
 </section><section id="frequencies.txt" class="level3" data-number="4.1.8"><h3 data-number="4.1.8" class="anchored" data-anchor-id="frequencies.txt">
 <span class="header-section-number">4.1.8</span> frequencies.txt</h3>
-<p>Arquivo opcional usado para descrever a frequência de cada viagem dentro de um determinado período do dia. A <a href="#tbl-frequencies">Tabela <span>4.8</span></a> mostra o <code>frequencies.txt</code> do <em>feed</em> da SPTrans.</p>
+<p>Arquivo opcional usado para descrever a frequência de cada viagem dentro de um determinado período do dia. A <a href="#tbl-frequencies" class="quarto-xref">Tabela <span>4.8</span></a> mostra o <code>frequencies.txt</code> do <em>feed</em> da SPTrans.</p>
 <div class="cell">
+<div id="tbl-frequencies" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-frequencies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela 4.8: Exemplo de arquivo <code>frequencies.txt</code>. Fonte: SPTrans
+</figcaption><div aria-describedby="tbl-frequencies-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="tbl-frequencies" class="anchored">
-<table class="table table-sm table-striped small">
-<caption>Tabela 4.8: Exemplo de arquivo <code>frequencies.txt</code>. Fonte: SPTrans</caption>
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: left;">trip_id</th>
 <th style="text-align: left;">start_time</th>
@@ -966,22 +1003,26 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </table>
 </div>
 </div>
+</figure>
+</div>
 </div>
 <p>A viagem cuja frequência está sendo descrita é identificada pela coluna <code>trip_id</code>. Novamente, um mesmo identificador pode aparecer em várias observações da tabela, pois a especificação prevê que uma mesma viagem pode ter frequências diferentes ao longo do dia (como em horários de pico e fora-pico, por exemplo). Assim, cada linha da tabela se refere à frequência de uma determinada viagem dentro de um intervalo de tempo especificado pelas colunas <code>start_time</code> e <code>end_time</code>.</p>
 <p>Dentro do período especificado por essas duas colunas, a viagem possui um <em>headway</em> detalhado na coluna <code>headway_secs</code>. O <em>headway</em> é o tempo que separa a passagem de dois veículos que operam a mesma linha de transporte público. No caso desse arquivo, esse tempo deve ser especificado em segundos. Um valor de <code>720</code> entre 4h e 5h, portanto, significa que a viagem <code>CPTM L07-0</code> ocorre de doze em doze minutos dentro desse período.</p>
 <p><strong>Usando as tabelas <code>frequencies.txt</code> e <code>stop_times.txt</code> conjuntamente</strong></p>
-<p>É importante entender, agora, como a presença da tabela <code>frequencies.txt</code> altera a especificação da tabela <code>stop_times.txt</code>. Como podemos ver no exemplo da tabela <code>stop_times.txt</code> (<a href="#tbl-stop_times">Tabela <span>4.7</span></a>), a viagem <code>CPTM L07-0</code> parte da primeira parada às 4h e chega na segunda às 4h08. O cronograma de chegada e saída de uma mesma parada de uma viagem, no entanto, não pode ser definido mais de uma vez na tabela. Como então definir o cronograma das viagens que partem às 4h12, 4h24, 4h36 etc. (lembrando que o <em>headway</em> dessa viagem é de doze minutos)?</p>
+<p>É importante entender, agora, como a presença da tabela <code>frequencies.txt</code> altera a especificação da tabela <code>stop_times.txt</code>. Como podemos ver no exemplo da tabela <code>stop_times.txt</code> (<a href="#tbl-stop_times" class="quarto-xref">Tabela <span>4.7</span></a>), a viagem <code>CPTM L07-0</code> parte da primeira parada às 4h e chega na segunda às 4h08. O cronograma de chegada e saída de uma mesma parada de uma viagem, no entanto, não pode ser definido mais de uma vez na tabela. Como então definir o cronograma das viagens que partem às 4h12, 4h24, 4h36 etc. (lembrando que o <em>headway</em> dessa viagem é de doze minutos)?</p>
 <p>No caso em que a frequência de uma viagem é especificada no <code>frequencies.txt</code>, o cronograma (a tabela de horários) de uma viagem definido no <code>stop_times.txt</code> deve ser entendido como uma referência que descreve o tempo entre paradas. Isto é, os horários ali definidos não devem ser interpretados à risca. Por exemplo, o cronograma listado estabelece que o tempo de viagem entre a primeira e a segunda parada é de oito minutos, e o tempo entre a segunda e a terceira também. Ou seja, a viagem que parte da primeira parada às 4h00 chega na segunda às 4h08, e na terceira às 4h16. A próxima viagem, que parte da primeira parada às 4h12, por sua vez, chega na segunda parada às 4h20, e na terceira às 4h28.</p>
 <p>Entretanto, poderíamos descrever as mesmas viagens no <code>stop_times.txt</code> sem fazer uso do arquivo <code>frequencies.txt</code>. Para isso, poderíamos adicionar um sufixo que identificasse cada uma das viagens referentes à linha <code>CPTM L07</code> no sentido <code>0</code> ao longo do dia. A viagem (<code>trip_id</code>) com identificador <code>CPTM L07-0_1</code>, por exemplo, seria a primeira viagem no sentido <code>0</code> do dia e partiria da primeira parada às 4h e chegaria na segunda às 4h08. A viagem <code>CPTM L07-0_2</code>, por sua vez, seria a segunda viagem e partiria da primeira parada às 4h12 e chegaria na segunda às 4h20, e assim por diante. Cada uma dessas viagens deveria ser também adicionada ao arquivo <code>trips.txt</code> e a quaisquer outros que possuam a coluna <code>trip_id</code> como identificador.</p>
 <p>Outro elemento que influencia na forma como o <code>frequencies.txt</code> afeta as tabelas de horários na tabela <code>stop_times.txt</code> é a coluna opcional <code>exact_times</code>. Um valor de <code>0</code> nesta coluna (ou quando ela está ausente do <em>feed</em>, como no caso do arquivo GTFS da SPTrans) indica que a viagem não necessariamente segue um cronograma fixo ao longo do período. Em vez disso, operadores tentam se ater a um determinado <em>headway</em> durante o período. Usando o mesmo exemplo de uma viagem cujo <em>headway</em> é de doze minutos entre 4h e 5h, isso significa que não necessariamente a primeira partida sairá exatamente às 4h, a segunda às 4h12 e por aí em diante. A primeira pode, por exemplo, sair às 4h02. A segunda, às 4h14 ou 4h13 etc. Caso desejemos definir um cronograma que é seguido à risca, obtendo o mesmo resultado que seria obtido se definíssemos diversas viagens semelhantes partindo em diferentes horários no <code>stop_times.txt</code> (como mostrado no parágrafo anterior), devemos utilizar o valor <code>1</code> na coluna <code>exact_times</code>.</p>
 </section></section><section id="onde-encontrar-dados-gtfs-de-cidades-brasileiras" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="onde-encontrar-dados-gtfs-de-cidades-brasileiras">
 <span class="header-section-number">4.2</span> Onde encontrar dados GTFS de cidades brasileiras</h2>
-<p>Os dados de GTFS de diversas cidades do mundo podem ser baixados com o pacote de R <a href="https://r-transit.github.io/tidytransit/"><code>{tidytransit}</code></a> ou no <em>site</em> <a href="https://www.transit.land/">Transitland</a>. No Brasil, diversas cidades usam dados GTFS no planejamento e operação de seus sistemas de transportes. Em muitos casos, no entanto, esses dados são de propriedade de empresas operadoras e concessionárias, e não do poder público. Infelizmente, esses arquivos raramente são disponibilizados aberta e publicamente, contrariando boas práticas de gestão e compartilhamento de dados de interesse público. A <a href="#tbl-gtfs_brasil">Tabela <span>4.9</span></a> mostra as fontes dos dados GTFS de algumas das poucas cidades do Brasil que disponibilizam seus <em>feeds</em> abertamente<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>.</p>
+<p>Os dados de GTFS de diversas cidades do mundo podem ser baixados com o pacote de R <a href="https://r-transit.github.io/tidytransit/"><code>{tidytransit}</code></a> ou no <em>site</em> <a href="https://www.transit.land/">Transitland</a>. No Brasil, diversas cidades usam dados GTFS no planejamento e operação de seus sistemas de transportes. Em muitos casos, no entanto, esses dados são de propriedade de empresas operadoras e concessionárias, e não do poder público. Infelizmente, esses arquivos raramente são disponibilizados aberta e publicamente, contrariando boas práticas de gestão e compartilhamento de dados de interesse público. A <a href="#tbl-gtfs_brasil" class="quarto-xref">Tabela <span>4.9</span></a> mostra as fontes dos dados GTFS de algumas das poucas cidades do Brasil que disponibilizam seus <em>feeds</em> abertamente<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>.</p>
 <div class="cell">
+<div id="tbl-gtfs_brasil" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-gtfs_brasil-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela 4.9: Fontes de dados GTFS publicamente disponíveis no Brasil
+</figcaption><div aria-describedby="tbl-gtfs_brasil-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="tbl-gtfs_brasil" class="anchored">
-<table class="table table-sm table-striped small">
-<caption>Tabela 4.9: Fontes de dados GTFS publicamente disponíveis no Brasil</caption>
+<table class="cell caption-top table table-sm table-striped small">
 <thead><tr class="header">
 <th style="text-align: left;">Cidade</th>
 <th style="text-align: left;">Fonte</th>
@@ -1031,11 +1072,13 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </table>
 </div>
 </div>
+</figure>
+</div>
 </div>
 <p>Obs.: Os dados de GTFS disponibilizados pela SMTR não incluem os dados dos sistemas de trem e de metrô.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-mchugh2013pioneering" class="csl-entry" role="listitem">
 McHugh, Bibiana. 2013. <span>«Pioneering <span>Open Data Standards</span>: <span>The GTFS Story</span>»</span>. Em <em>Beyond <span>Transparency</span>: <span>Open Data</span> and the <span>Future</span> of <span>Civic Innovation</span></em>, editado por Brett Goldstein e Lauren Dyson, First, 125–35. <span>San Francisco, CA</span>: <span>Code for America Press</span>.
 </div>
@@ -1092,6 +1135,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -1160,13 +1230,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1201,18 +1273,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1244,11 +1305,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/ipeagit\.github\.io\/intro_access_book\/pt");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1258,8 +1358,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1271,7 +1380,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1315,6 +1547,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1340,6 +1573,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1399,22 +1658,25 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./s3_dados_tp.html" class="pagination-link">
+      <a href="./s3_dados_tp.html" class="pagination-link" aria-label="SEÇÃO 3: Dados de transporte público">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">SEÇÃO 3: Dados de transporte público</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./5_gtfstools.html" class="pagination-link">
+      <a href="./5_gtfstools.html" class="pagination-link" aria-label="Manipulação e visualização de dados GTFS">
         <span class="nav-page-text"><span class="chapter-number">5</span>  <span class="chapter-title">Manipulação e visualização de dados GTFS</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
-    <div class="nav-footer-left">Copyright 2023, Ipea - Instituto de Pesquisa Econômica Aplicada</div>   
+    <div class="nav-footer-left">
+<p>Copyright 2023, Ipea - Instituto de Pesquisa Econômica Aplicada</p>
+</div>   
     <div class="nav-footer-center">
        
-    </div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ipeaGIT/intro_access_book/edit/main/4_dados_gtfs.qmd" class="toc-action"><i class="bi bi-github"></i>Editar essa página</a></li></ul></div>
+</div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
 <li class="nav-item compact">

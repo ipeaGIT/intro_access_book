@@ -3,9 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.57">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Introduction to urban accessibility - 6  Comparing accessibility between two transport scenarios</title>
+<title>6  Comparing accessibility between two transport scenarios – Introduction to urban accessibility</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -31,7 +31,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -56,6 +56,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -88,7 +89,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -97,6 +104,7 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -107,18 +115,37 @@ window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
-</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><meta property="og:title" content="Introduction to urban accessibility - 6  Comparing accessibility between two transport scenarios">
+</script><script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script><meta property="og:title" content="6  Comparing accessibility between two transport scenarios – Introduction to urban accessibility">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://ipeagit.github.io/intro_access_book/images/fortaleza_1.png">
-<meta property="og:site-name" content="Introduction to urban accessibility">
-<meta property="og:image:height" content="2481">
-<meta property="og:image:width" content="3509">
-<meta name="twitter:title" content="Introduction to urban accessibility - 6  Comparing accessibility between two transport scenarios">
+<meta property="og:site_name" content="Introduction to urban accessibility">
+<meta name="twitter:title" content="6  Comparing accessibility between two transport scenarios – Introduction to urban accessibility">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://ipeagit.github.io/intro_access_book/images/fortaleza_1.png">
-<meta name="twitter:image-height" content="2481">
-<meta name="twitter:image-width" content="3509">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 <meta name="citation_title" content="Introduction to urban accessibility: a practical guide with R">
 <meta name="citation_author" content="Rafael H. M. Pereira">
 <meta name="citation_author" content="Daniel Herszenhut">
@@ -126,7 +153,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <meta name="citation_cover_date" content="2023">
 <meta name="citation_year" content="2023">
 <meta name="citation_fulltext_html_url" content="https://ipeagit.github.io/intro_access_book">
-<meta name="citation_pdf_url" content="https://repositorio.ipea.gov.br/bitstream/11058/12264/1/Introducao_a_acessibilidade_urbana.pdf">
+<meta name="citation_pdf_url" content="https://repositorio.ipea.gov.br/bitstream/11058/12264/51/Introducao_a_acessibilidade_urbana_selo.pdf">
 <meta name="citation_doi" content="http://dx.doi.org/10.38116/9786556350547">
 <meta name="citation_isbn" content="978-65-5635-054-7">
 <meta name="citation_language" content="en">
@@ -134,7 +161,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <meta name="citation_reference" content="citation_title=Estimating the influence of crowding and travel time variability on accessibility to jobs in a large public transport network using smart card big data;,citation_author=Renato Arbex;,citation_author=Claudio B. Cunha;,citation_publication_date=2020-05;,citation_cover_date=2020-05;,citation_year=2020;,citation_doi=10.1016/j.jtrangeo.2020.102671;,citation_issn=09666923;,citation_volume=85;,citation_language=en-US;,citation_journal_title=Journal of Transport Geography;">
 <meta name="citation_reference" content="citation_title=The sustainable mobility paradigm;,citation_author=David Banister;,citation_publication_date=2008-03;,citation_cover_date=2008-03;,citation_year=2008;,citation_issue=2;,citation_doi=10.1016/j.tranpol.2007.10.005;,citation_issn=0967070X;,citation_volume=15;,citation_language=en-US;,citation_journal_title=Transport Policy;">
 <meta name="citation_reference" content="citation_title=The trilogy of distance, speed and time;,citation_author=David Banister;,citation_publication_date=2011-07;,citation_cover_date=2011-07;,citation_year=2011;,citation_issue=4;,citation_doi=10.1016/j.jtrangeo.2010.12.004;,citation_issn=09666923;,citation_volume=19;,citation_language=en-US;,citation_journal_title=Journal of Transport Geography;">
-<meta name="citation_reference" content="citation_title=The world’s user-generated road map is more than 80% complete;,citation_abstract=OpenStreetMap, a crowdsourced geographic database, provides the only global-level, openly licensed source of geospatial road data, and the only national-level source in many countries. However, researchers, policy makers, and citizens who want to make use of OpenStreetMap (OSM) have little information about whether it can be relied upon in a particular geographic setting. In this paper, we use two complementary, independent methods to assess the completeness of OSM road data in each country in the world. First, we undertake a visual assessment of OSM data against satellite imagery, which provides the input for estimates based on a multilevel regression and poststratification model. Second, we fit sigmoid curves to the cumulative length of contributions, and use them to estimate the saturation level for each country. Both techniques may have more general use for assessing the development and saturation of crowd-sourced data. Our results show that in many places, researchers and policymakers can rely on the completeness of OSM, or will soon be able to do so. We find (i) that globally, OSM is \sim83% complete, and more than 40% of countriesincluding several in the developing worldhave a fully mapped street network; (ii) that well-governed countries with good Internet access tend to be more complete, and that completeness has a U-shaped relationship with population densityboth sparsely populated areas and dense cities are the best mapped; and (iii) that existing global datasets used by the World Bank undercount roads by more than 30%.;,citation_author=Christopher Barrington-Leigh;,citation_author=Adam Millard-Ball;,citation_publication_date=2017-08;,citation_cover_date=2017-08;,citation_year=2017;,citation_issue=8;,citation_doi=10.1371/journal.pone.0180698;,citation_issn=1932-6203;,citation_volume=12;,citation_language=en-US;,citation_journal_title=PLOS ONE;,citation_publisher=Public Library of Science;">
+<meta name="citation_reference" content="citation_title=The world’s user-generated road map is more than 80% complete;,citation_abstract=OpenStreetMap, a crowdsourced geographic database, provides the only global-level, openly licensed source of geospatial road data, and the only national-level source in many countries. However, researchers, policy makers, and citizens who want to make use of OpenStreetMap (OSM) have little information about whether it can be relied upon in a particular geographic setting. In this paper, we use two complementary, independent methods to assess the completeness of OSM road data in each country in the world. First, we undertake a visual assessment of OSM data against satellite imagery, which provides the input for estimates based on a multilevel regression and poststratification model. Second, we fit sigmoid curves to the cumulative length of contributions, and use them to estimate the saturation level for each country. Both techniques may have more general use for assessing the development and saturation of crowd-sourced data. Our results show that in many places, researchers and policymakers can rely on the completeness of OSM, or will soon be able to do so. We find (i) that globally, OSM is $\sim$83% complete, and more than 40% of countriesincluding several in the developing worldhave a fully mapped street network; (ii) that well-governed countries with good Internet access tend to be more complete, and that completeness has a U-shaped relationship with population densityboth sparsely populated areas and dense cities are the best mapped; and (iii) that existing global datasets used by the World Bank undercount roads by more than 30%.;,citation_author=Christopher Barrington-Leigh;,citation_author=Adam Millard-Ball;,citation_publication_date=2017-08;,citation_cover_date=2017-08;,citation_year=2017;,citation_issue=8;,citation_doi=10.1371/journal.pone.0180698;,citation_issn=1932-6203;,citation_volume=12;,citation_language=en-US;,citation_journal_title=PLOS ONE;,citation_publisher=Public Library of Science;">
 <meta name="citation_reference" content="citation_title=Sustainable accessibility: A conceptual framework to integrate transport and land use plan-making. Two test-applications in the Netherlands and a reflection on the way forward;,citation_author=L. Bertolini;,citation_author=F. Clercq;,citation_author=L. Kapoen;,citation_publication_date=2005-05;,citation_cover_date=2005-05;,citation_year=2005;,citation_issue=3;,citation_doi=10.1016/j.tranpol.2005.01.006;,citation_issn=0967070X;,citation_volume=12;,citation_language=en-US;,citation_journal_title=Transport Policy;">
 <meta name="citation_reference" content="citation_title=How to get there? A critical assessment of accessibility objectives and indicators in metropolitan transportation plans;,citation_author=Geneviève Boisjoly;,citation_author=Ahmed M. El-Geneidy;,citation_publication_date=2017-04;,citation_cover_date=2017-04;,citation_year=2017;,citation_doi=10.1016/j.tranpol.2016.12.011;,citation_issn=0967070X;,citation_volume=55;,citation_language=en-US;,citation_journal_title=Transport Policy;">
 <meta name="citation_reference" content="citation_title=Impactos da expansão do metrô de Fortaleza sobre o acesso a oportunidades de emprego, saúde e educação;,citation_author=Carlos Kaue Vieira Braga;,citation_author=Diego Bogado Tomasiello;,citation_author=Daniel Herszenhut;,citation_author=João Lucas Albuquerque Oliveira;,citation_author=Rafael H. M. Pereira;,citation_publication_date=2022-05;,citation_cover_date=2022-05;,citation_year=2022;,citation_language=pt-BR;,citation_technical_report_institution=Instituto de Pesquisa Econômica Aplicada (Ipea);,citation_technical_report_number=2767;">
@@ -194,44 +221,44 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="./s4_avaliacao_impacto.en.html">SECTION 4: Impact assessment of transportation projects</a></li>
 <li class="breadcrumb-item"><a href="./6_cenarios_transporte.en.html"><span class="chapter-number">6</span>  <span class="chapter-title">Comparing accessibility between two transport scenarios</span></a></li>
-</ol></nav><a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+</ol></nav><a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Introduction to urban accessibility</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://repositorio.ipea.gov.br/bitstream/11058/12689/1/Introduction_urban_accessibility_Book.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-download"></i></a>
-    <a href="https://github.com/ipeaGIT/intro_access_book" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://repositorio.ipea.gov.br/bitstream/11058/12689/52/Introduction_urban_accessibility_Book.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-download"></i></a>
+    <a href="https://github.com/ipeaGIT/intro_access_book" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
     <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
 <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
-              <i class="bi bi-bi-twitter pe-1"></i>
+              <i class="bi bi-twitter pe-1"></i>
             Twitter
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
-              <i class="bi bi-bi-facebook pe-1"></i>
+              <i class="bi bi-facebook pe-1"></i>
             Facebook
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
-              <i class="bi bi-bi-linkedin pe-1"></i>
+              <i class="bi bi-linkedin pe-1"></i>
             LinkedIn
             </a>
           </li>
@@ -258,7 +285,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       <div class="sidebar-item-container"> 
             <a href="./s1_intro.en.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SECTION 1: Introduction to urban accessibility</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -281,7 +308,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       <div class="sidebar-item-container"> 
             <a href="./s2_calculo.en.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SECTION 2: How to measure urban accessibility</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -298,7 +325,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       <div class="sidebar-item-container"> 
             <a href="./s3_dados_tp.en.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SECTION 3: Public transport data</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -321,7 +348,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       <div class="sidebar-item-container"> 
             <a href="./s4_avaliacao_impacto.en.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SECTION 4: Impact assessment of transportation projects</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -338,7 +365,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       <div class="sidebar-item-container"> 
             <a href="./s5_dados_aop.en.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SECTION 5: Data from the Access to Opportunity Project</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -371,7 +398,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </li>
     </ul>
 </div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
@@ -384,13 +411,13 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   <li><a href="#analyzing-accessibility-levels" id="toc-analyzing-accessibility-levels" class="nav-link" data-scroll-target="#analyzing-accessibility-levels"><span class="header-section-number">6.5</span> Analyzing accessibility levels</a></li>
   <li><a href="#accessibility-inequality" id="toc-accessibility-inequality" class="nav-link" data-scroll-target="#accessibility-inequality"><span class="header-section-number">6.6</span> Accessibility inequality</a></li>
   </ul>
-<div class="toc-actions">
-<div><i class="bi bi-github"></i></div>
-<div class="action-links"><p><a href="https://github.com/ipeaGIT/intro_access_book/edit/main/6_cenarios_transporte.en.qmd" class="toc-action">Edit this page</a></p></div>
-</div></nav><a href="pt/6_cenarios_transporte.html">Leia em português</a>
+<div class="toc-actions"><ul><li><a href="https://github.com/ipeaGIT/intro_access_book/edit/main/6_cenarios_transporte.en.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav><a href="pt/6_cenarios_transporte.html">Leia em português</a>
 </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="./s4_avaliacao_impacto.en.html">SECTION 4: Impact assessment of transportation projects</a></li>
+<li class="breadcrumb-item"><a href="./6_cenarios_transporte.en.html"><span class="chapter-number">6</span>  <span class="chapter-title">Comparing accessibility between two transport scenarios</span></a></li>
+</ol></nav><div class="quarto-title">
 <h1 class="title">
 <span class="chapter-number">6</span>  <span class="chapter-title">Comparing accessibility between two transport scenarios</span>
 </h1>
@@ -406,6 +433,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   </div>
   
 
+
 </header><p>In this chapter, we will illustrate how to combine the material taught in previous chapters to assess the impact of a transport infrastructure project on urban accessibility conditions. To measure the impact of a transport project, we need to compare the accessibility levels both before and after the project implementation. We need, therefore:</p>
 <ol type="1">
 <li>to use different sets of GTFS feeds and to edit them to represent the scenarios before and after the project implementation;</li>
@@ -416,21 +444,29 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <p>In this chapter, we will look at each one of these steps in detail. First, though, a brief presentation of our case study.</p>
 <section id="case-study" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="case-study">
 <span class="header-section-number">6.1</span> Case study</h2>
-<p>As a case study, we will assess Fortaleza’s subway East line project (<a href="#fig-fortaleza_1">Figure <span>6.1</span></a>). The city of Fortaleza is the capital of Ceará state, located in Northeast Brazil. With an estimated population of 2.7 million inhabitants, Fortaleza is the fifth most populous city in the country.</p>
+<p>As a case study, we will assess Fortaleza’s subway East line project (<a href="#fig-fortaleza_1" class="quarto-xref">Figure <span>6.1</span></a>). The city of Fortaleza is the capital of Ceará state, located in Northeast Brazil. With an estimated population of 2.7 million inhabitants, Fortaleza is the fifth most populous city in the country.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-fortaleza_1" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/fortaleza_1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure 6.1: Fortaleza’s rapid transit network. Source: <span class="citation" data-cites="braga2022impactos">Braga et al. (<a href="references.en.html#ref-braga2022impactos" role="doc-biblioref">2022</a>)</span></figcaption></figure>
+<div id="fig-fortaleza_1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-fortaleza_1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fortaleza_1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fortaleza_1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 6.1: Fortaleza’s rapid transit network. Source: <span class="citation" data-cites="braga2022impactos">Braga et al. (<a href="references.en.html#ref-braga2022impactos" role="doc-biblioref">2022</a>)</span>
+</figcaption></figure>
 </div>
 </div>
 </div>
-<p>The East line is one of the biggest recent investments in Fortaleza’s transport system. The corridor extends for 7.3 km and connects the city center to the Papicu neighborhood, connecting the South and West subway lines to the light rail (in portuguese, <em>veículo leve sobre trilhos</em> - VLT) corridor and Papicu’s bus terminal (<a href="#fig-fortaleza_2">Figure <span>6.2</span></a>). The East line is still under construction as of the publication of this book, so we will be conducting an <em>ex-ante</em> analysis in this chapter - i.e. one in which we assess the future impacts of a project on urban accessibility conditions. This type of analysis differs from <em>ex-post</em> analyses, which are used to assess the impact of projects that have already been implemented.</p>
+<p>The East line is one of the biggest recent investments in Fortaleza’s transport system. The corridor extends for 7.3 km and connects the city center to the Papicu neighborhood, connecting the South and West subway lines to the light rail (in portuguese, <em>veículo leve sobre trilhos</em> - VLT) corridor and Papicu’s bus terminal (<a href="#fig-fortaleza_2" class="quarto-xref">Figure <span>6.2</span></a>). The East line is still under construction as of the publication of this book, so we will be conducting an <em>ex-ante</em> analysis in this chapter - i.e. one in which we assess the future impacts of a project on urban accessibility conditions. This type of analysis differs from <em>ex-post</em> analyses, which are used to assess the impact of projects that have already been implemented.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-fortaleza_2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="images/fortaleza_2.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure 6.2: East Line in detail. Source: <span class="citation" data-cites="braga2022impactos">Braga et al. (<a href="references.en.html#ref-braga2022impactos" role="doc-biblioref">2022</a>)</span></figcaption></figure>
+<div id="fig-fortaleza_2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-fortaleza_2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/fortaleza_2.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fortaleza_2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 6.2: East Line in detail. Source: <span class="citation" data-cites="braga2022impactos">Braga et al. (<a href="references.en.html#ref-braga2022impactos" role="doc-biblioref">2022</a>)</span>
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -447,12 +483,16 @@ The scenario analyzed
 <p>It’s important to note that East Line’s implementation will also be followed by changes to the frequency of subway’s South and West lines and of Parangaba-Mucuripe light rail, in addition to cuts and adjustments on the municipal bus system, as detailed in Fortaleza’s Sustainable Accessibility Plan (Pasfor)<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. For didactic purposes, however, the bus system changes were not incorporated into our analyses in this book. Therefore, the case study showcased in this chapter looks at simplified scenarios, in which only East line’s implementation and the changes to other subway and light rail corridors are considered<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
 </div>
 </div>
-<p><a href="#fig-fortaleza_3">Figure <span>6.3</span></a> shows that Fortaleza’s population is mainly distributed in the central and western parts of the city, although some relatively high density neighborhoods can also be seen in the southeastern region. Generally, wealthier groups (shown in blue in the income decile distribution map) tend to reside in the expanded city center, extending towards the southeast, while low-income groups (in red) are mainly located in the western and southern peripheries. Most of the formal jobs are distributed along key avenues, with higher concentrations in the city center. In contrast, public highschools are more equally distributed throughout the city.</p>
+<p><a href="#fig-fortaleza_3" class="quarto-xref">Figure <span>6.3</span></a> shows that Fortaleza’s population is mainly distributed in the central and western parts of the city, although some relatively high density neighborhoods can also be seen in the southeastern region. Generally, wealthier groups (shown in blue in the income decile distribution map) tend to reside in the expanded city center, extending towards the southeast, while low-income groups (in red) are mainly located in the western and southern peripheries. Most of the formal jobs are distributed along key avenues, with higher concentrations in the city center. In contrast, public highschools are more equally distributed throughout the city.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-fortaleza_3" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="6_cenarios_transporte.en_files/figure-html/fig-fortaleza_3-1.png" class="img-fluid figure-img" width="2100"></p>
-<figcaption class="figure-caption">Figure 6.3: Distribution of population, formal jobs, schools and rapid transit corridors in Fortaleza</figcaption></figure>
+<div id="fig-fortaleza_3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-fortaleza_3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="6_cenarios_transporte.en_files/figure-html/fig-fortaleza_3-1.png" class="img-fluid figure-img" width="2100">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fortaleza_3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 6.3: Distribution of population, formal jobs, schools and rapid transit corridors in Fortaleza
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -593,12 +633,12 @@ The scenario analyzed
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>frequencies <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>trip_id,         <span class="sc">~</span>start_time, <span class="sc">~</span>end_time,  <span class="sc">~</span>headway_secs, <span class="sc">~</span>exact_times,</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"west_subway_0"</span>,  <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 720L,          <span class="dv">1</span>,</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"west_subway_1"</span>,  <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 720L,          <span class="dv">1</span>,</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"south_subway_0"</span>, <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 360L,          <span class="dv">1</span>,</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"south_subway_1"</span>, <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 360L,          <span class="dv">1</span>,</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"light_rail_0"</span>,   <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 450L,          <span class="dv">1</span>,</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"light_rail_1"</span>,   <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, 450L,          <span class="dv">1</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"west_subway_0"</span>,  <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, <span class="dv">720</span>L,          <span class="dv">1</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"west_subway_1"</span>,  <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, <span class="dv">720</span>L,          <span class="dv">1</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"south_subway_0"</span>, <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, <span class="dv">360</span>L,          <span class="dv">1</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"south_subway_1"</span>, <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, <span class="dv">360</span>L,          <span class="dv">1</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"light_rail_0"</span>,   <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, <span class="dv">450</span>L,          <span class="dv">1</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"light_rail_1"</span>,   <span class="st">"06:00:00"</span>,  <span class="st">"09:00:00"</span>, <span class="dv">450</span>L,          <span class="dv">1</span></span>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co"># converts the table to data.table</span></span>
@@ -860,11 +900,11 @@ The scenario analyzed
     4: 8980104096fffff 8980104e80fffff                     55
     5: 8980104096fffff 8980104e863ffff                     56
    ---                                                       
-12974: 8980104eecbffff 8980104ea5bffff                     52
-12975: 8980104eecbffff 8980104eac3ffff                     49
-12976: 8980104eecbffff 8980104ead3ffff                     44
-12977: 8980104eecbffff 8980104eadbffff                     49
-12978: 8980104eecbffff 8980104ee6bffff                     41
+12890: 8980104eecbffff 8980104ea5bffff                     52
+12891: 8980104eecbffff 8980104eac3ffff                     49
+12892: 8980104eecbffff 8980104ead3ffff                     44
+12893: 8980104eecbffff 8980104eadbffff                     49
+12894: 8980104eecbffff 8980104ee6bffff                     41
        travel_time_p50_after
     1:                    50
     2:                    59
@@ -872,11 +912,11 @@ The scenario analyzed
     4:                    57
     5:                    57
    ---                      
-12974:                    57
-12975:                    53
-12976:                    47
-12977:                    50
-12978:                    42</code></pre>
+12890:                    57
+12891:                    53
+12892:                    47
+12893:                    50
+12894:                    42</code></pre>
 </div>
 </div>
 </section><section id="calculating-accessibility-levels-in-both-scenarios" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="calculating-accessibility-levels-in-both-scenarios">
@@ -1058,9 +1098,13 @@ The scenario analyzed
 <span id="cb49-35"><a href="#cb49-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Scenario"</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Before"</span>, <span class="st">"After"</span>)) <span class="sc">+</span></span>
 <span id="cb49-36"><a href="#cb49-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-fig_4" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="6_cenarios_transporte.en_files/figure-html/fig-fig_4-1.png" class="img-fluid figure-img" width="2100"></p>
-<figcaption class="figure-caption">Figure 6.4: Average accessibility to jobs in Fortaleza by transport scenario</figcaption></figure>
+<div id="fig-fig_4" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-fig_4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="6_cenarios_transporte.en_files/figure-html/fig-fig_4-1.png" class="img-fluid figure-img" width="2100">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig_4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 6.4: Average accessibility to jobs in Fortaleza by transport scenario
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -1093,9 +1137,13 @@ The scenario analyzed
 <span id="cb50-24"><a href="#cb50-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Scenario"</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Before"</span>, <span class="st">"After"</span>)) <span class="sc">+</span></span>
 <span id="cb50-25"><a href="#cb50-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-fig_5" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="6_cenarios_transporte.en_files/figure-html/fig-fig_5-1.png" class="img-fluid figure-img" width="2100"></p>
-<figcaption class="figure-caption">Figure 6.5: Average time to the closest public highschool in Fortaleza by transport scenario</figcaption></figure>
+<div id="fig-fig_5" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-fig_5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="6_cenarios_transporte.en_files/figure-html/fig-fig_5-1.png" class="img-fluid figure-img" width="2100">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig_5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 6.5: Average time to the closest public highschool in Fortaleza by transport scenario
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -1167,9 +1215,13 @@ The scenario analyzed
 <span id="cb51-63"><a href="#cb51-63" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb51-64"><a href="#cb51-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-fig_6" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="6_cenarios_transporte.en_files/figure-html/fig-fig_6-1.png" class="img-fluid figure-img" width="2100"></p>
-<figcaption class="figure-caption">Figure 6.6: Spatial distribution of rapid transit corridors in Fortaleza by transport scenario</figcaption></figure>
+<div id="fig-fig_6" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-fig_6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="6_cenarios_transporte.en_files/figure-html/fig-fig_6-1.png" class="img-fluid figure-img" width="2100">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig_6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 6.6: Spatial distribution of rapid transit corridors in Fortaleza by transport scenario
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -1235,9 +1287,13 @@ The scenario analyzed
 <span id="cb52-58"><a href="#cb52-58" aria-hidden="true" tabindex="-1"></a><span class="co"># combines both plots</span></span>
 <span id="cb52-59"><a href="#cb52-59" aria-hidden="true" tabindex="-1"></a>access_dist <span class="sc">/</span> difference_dist <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-fig_7" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="6_cenarios_transporte.en_files/figure-html/fig-fig_7-1.png" class="img-fluid figure-img" width="2100"></p>
-<figcaption class="figure-caption">Figure 6.7: Spatial distribution of accessibility to jobs by transport scenario and of the difference between scenarios</figcaption></figure>
+<div id="fig-fig_7" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-fig_7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="6_cenarios_transporte.en_files/figure-html/fig-fig_7-1.png" class="img-fluid figure-img" width="2100">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig_7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 6.7: Spatial distribution of accessibility to jobs by transport scenario and of the difference between scenarios
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -1294,9 +1350,13 @@ The scenario analyzed
 <span id="cb53-48"><a href="#cb53-48" aria-hidden="true" tabindex="-1"></a><span class="co"># combines both plots</span></span>
 <span id="cb53-49"><a href="#cb53-49" aria-hidden="true" tabindex="-1"></a>time_dist <span class="sc">/</span> time_diff_dist <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">ncol =</span> <span class="dv">1</span>, <span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-fig_8" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="6_cenarios_transporte.en_files/figure-html/fig-fig_8-1.png" class="img-fluid figure-img" width="2100"></p>
-<figcaption class="figure-caption">Figure 6.8: Spatial distribution of travel time to the closest public highschool by transport scenario and of the difference between scenarios</figcaption></figure>
+<div id="fig-fig_8" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-fig_8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="6_cenarios_transporte.en_files/figure-html/fig-fig_8-1.png" class="img-fluid figure-img" width="2100">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig_8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 6.8: Spatial distribution of travel time to the closest public highschool by transport scenario and of the difference between scenarios
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -1329,9 +1389,13 @@ The scenario analyzed
 <span id="cb54-21"><a href="#cb54-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb54-22"><a href="#cb54-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-fig_9" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="6_cenarios_transporte.en_files/figure-html/fig-fig_9-1.png" class="img-fluid figure-img" width="2100"></p>
-<figcaption class="figure-caption">Figure 6.9: Job accessibility distribution between income deciles by transport scenario</figcaption></figure>
+<div id="fig-fig_9" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-fig_9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="6_cenarios_transporte.en_files/figure-html/fig-fig_9-1.png" class="img-fluid figure-img" width="2100">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig_9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 6.9: Job accessibility distribution between income deciles by transport scenario
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -1359,9 +1423,13 @@ The scenario analyzed
 <span id="cb55-19"><a href="#cb55-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb55-20"><a href="#cb55-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-fig_10" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="6_cenarios_transporte.en_files/figure-html/fig-fig_10-1.png" class="img-fluid figure-img" width="2100"></p>
-<figcaption class="figure-caption">Figure 6.10: Distribution of accessibility gains between transport scenarios by income decile</figcaption></figure>
+<div id="fig-fig_10" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-fig_10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="6_cenarios_transporte.en_files/figure-html/fig-fig_10-1.png" class="img-fluid figure-img" width="2100">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig_10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 6.10: Distribution of accessibility gains between transport scenarios by income decile
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -1425,9 +1493,13 @@ Why use the Palma Ratio?
 <span id="cb56-35"><a href="#cb56-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">name =</span> <span class="st">"Scenario"</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Before"</span>, <span class="st">"After"</span>)) <span class="sc">+</span></span>
 <span id="cb56-36"><a href="#cb56-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-fig_11" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="6_cenarios_transporte.en_files/figure-html/fig-fig_11-1.png" class="img-fluid figure-img" width="2100"></p>
-<figcaption class="figure-caption">Figure 6.11: Job accessibility Palma Ratio in Fortaleza by transport scenario</figcaption></figure>
+<div id="fig-fig_11" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-fig_11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="6_cenarios_transporte.en_files/figure-html/fig-fig_11-1.png" class="img-fluid figure-img" width="2100">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig_11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 6.11: Job accessibility Palma Ratio in Fortaleza by transport scenario
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -1445,7 +1517,7 @@ Why use the Palma Ratio?
 <p>In this chapter, we have focused on assessing the accessibility impacts of a transport policy. It’s worth noting, however, that a complete assessment of a public policy must also consider other criteria, such as community engagement with the policy development and decision-making process, as well as other environmental, economic and social impacts of the policy. Although an accessibility impact assessment is very important to determine who benefits from the transport policy and how such policy impacts the performance of the transport network, this type of analysis only looks at a single impact dimension, and should be complemented by other analyses.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
 <div id="ref-braga2022impactos" class="csl-entry" role="listitem">
 Braga, Carlos Kaue Vieira, Diego Bogado Tomasiello, Daniel Herszenhut, João Lucas Albuquerque Oliveira, and Rafael H. M. Pereira. 2022. <span>“<span>Impactos da expansão do metrô de Fortaleza sobre o acesso a oportunidades de emprego, saúde e educação</span>.”</span> {Texto para Discuss\~ao} 2767. <span>Instituto de Pesquisa Econômica Aplicada (Ipea)</span>.
 </div>
@@ -1520,6 +1592,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
   }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
   const toggleColorMode = (alternate) => {
     // Switch the stylesheets
     const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
@@ -1586,13 +1685,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1627,18 +1728,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1670,11 +1760,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/ipeagit\.github\.io\/intro_access_book");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1684,8 +1813,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1697,7 +1835,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1741,6 +2002,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1766,6 +2028,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1825,22 +2113,25 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./s4_avaliacao_impacto.en.html" class="pagination-link">
+      <a href="./s4_avaliacao_impacto.en.html" class="pagination-link" aria-label="SECTION 4: Impact assessment of transportation projects">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">SECTION 4: Impact assessment of transportation projects</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./s5_dados_aop.en.html" class="pagination-link">
+      <a href="./s5_dados_aop.en.html" class="pagination-link" aria-label="SECTION 5: Data from the Access to Opportunity Project">
         <span class="nav-page-text">SECTION 5: Data from the Access to Opportunity Project</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
-    <div class="nav-footer-left">Copyright 2023, Ipea - Instituto de Pesquisa Econômica Aplicada</div>   
+    <div class="nav-footer-left">
+<p>Copyright 2023, Ipea - Instituto de Pesquisa Econômica Aplicada</p>
+</div>   
     <div class="nav-footer-center">
        
-    </div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ipeaGIT/intro_access_book/edit/main/6_cenarios_transporte.en.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div>
+</div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
 <li class="nav-item compact">

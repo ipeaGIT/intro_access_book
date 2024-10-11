@@ -3,9 +3,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.57">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>Introdução à acessibilidade urbana - 7  Dados de população e socioeconômicos</title>
+<title>7  Dados de população e socioeconômicos – Introdução à acessibilidade urbana</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -31,7 +31,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -69,7 +69,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "Nenhum resultado",
     "search-matching-documents-text": "documentos correspondentes",
@@ -78,6 +84,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "mais correspondência neste documento",
     "search-more-matches-text": "mais correspondências neste documento",
     "search-clear-button-title": "Limpar",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancelar",
     "search-submit-button-title": "Enviar",
     "search-label": "Procurar"
@@ -88,18 +95,12 @@ window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
-</script><meta property="og:title" content="Introdução à acessibilidade urbana - 7  Dados de população e socioeconômicos">
+</script><meta property="og:title" content="7  Dados de população e socioeconômicos – Introdução à acessibilidade urbana">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://ipeagit.github.io/intro_access_book/pt/7_aopdata_populacao_files/figure-html/fig-pop_dist-1.png">
-<meta property="og:site-name" content="Introdução à acessibilidade urbana">
-<meta property="og:image:height" content="3000">
-<meta property="og:image:width" content="4200">
-<meta name="twitter:title" content="Introdução à acessibilidade urbana - 7  Dados de população e socioeconômicos">
+<meta property="og:site_name" content="Introdução à acessibilidade urbana">
+<meta name="twitter:title" content="7  Dados de população e socioeconômicos – Introdução à acessibilidade urbana">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://ipeagit.github.io/intro_access_book/pt/7_aopdata_populacao_files/figure-html/fig-pop_dist-1.png">
-<meta name="twitter:image-height" content="3000">
-<meta name="twitter:image-width" content="4200">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 <meta name="citation_title" content="Introdução à acessibilidade urbana: um guia prático em R">
 <meta name="citation_author" content="Rafael H. M. Pereira">
 <meta name="citation_author" content="Daniel Herszenhut">
@@ -107,7 +108,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <meta name="citation_cover_date" content="2023">
 <meta name="citation_year" content="2023">
 <meta name="citation_fulltext_html_url" content="https://ipeagit.github.io/intro_access_book/pt">
-<meta name="citation_pdf_url" content="https://repositorio.ipea.gov.br/bitstream/11058/12264/1/Introducao_a_acessibilidade_urbana.pdf">
+<meta name="citation_pdf_url" content="https://repositorio.ipea.gov.br/bitstream/11058/12264/51/Introducao_a_acessibilidade_urbana_selo.pdf">
 <meta name="citation_doi" content="http://dx.doi.org/10.38116/9786556350547">
 <meta name="citation_isbn" content="978-65-5635-054-7">
 <meta name="citation_language" content="pt">
@@ -115,7 +116,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <meta name="citation_reference" content="citation_title=Estimating the influence of crowding and travel time variability on accessibility to jobs in a large public transport network using smart card big data;,citation_author=Renato Arbex;,citation_author=Claudio B. Cunha;,citation_publication_date=2020-05;,citation_cover_date=2020-05;,citation_year=2020;,citation_doi=10.1016/j.jtrangeo.2020.102671;,citation_issn=09666923;,citation_volume=85;,citation_language=en-US;,citation_journal_title=Journal of Transport Geography;">
 <meta name="citation_reference" content="citation_title=The sustainable mobility paradigm;,citation_author=David Banister;,citation_publication_date=2008-03;,citation_cover_date=2008-03;,citation_year=2008;,citation_issue=2;,citation_doi=10.1016/j.tranpol.2007.10.005;,citation_issn=0967070X;,citation_volume=15;,citation_language=en-US;,citation_journal_title=Transport Policy;">
 <meta name="citation_reference" content="citation_title=The trilogy of distance, speed and time;,citation_author=David Banister;,citation_publication_date=2011-07;,citation_cover_date=2011-07;,citation_year=2011;,citation_issue=4;,citation_doi=10.1016/j.jtrangeo.2010.12.004;,citation_issn=09666923;,citation_volume=19;,citation_language=en-US;,citation_journal_title=Journal of Transport Geography;">
-<meta name="citation_reference" content="citation_title=The world’s user-generated road map is more than 80% complete;,citation_abstract=OpenStreetMap, a crowdsourced geographic database, provides the only global-level, openly licensed source of geospatial road data, and the only national-level source in many countries. However, researchers, policy makers, and citizens who want to make use of OpenStreetMap (OSM) have little information about whether it can be relied upon in a particular geographic setting. In this paper, we use two complementary, independent methods to assess the completeness of OSM road data in each country in the world. First, we undertake a visual assessment of OSM data against satellite imagery, which provides the input for estimates based on a multilevel regression and poststratification model. Second, we fit sigmoid curves to the cumulative length of contributions, and use them to estimate the saturation level for each country. Both techniques may have more general use for assessing the development and saturation of crowd-sourced data. Our results show that in many places, researchers and policymakers can rely on the completeness of OSM, or will soon be able to do so. We find (i) that globally, OSM is \sim83% complete, and more than 40% of countriesincluding several in the developing worldhave a fully mapped street network; (ii) that well-governed countries with good Internet access tend to be more complete, and that completeness has a U-shaped relationship with population densityboth sparsely populated areas and dense cities are the best mapped; and (iii) that existing global datasets used by the World Bank undercount roads by more than 30%.;,citation_author=Christopher Barrington-Leigh;,citation_author=Adam Millard-Ball;,citation_publication_date=2017-08;,citation_cover_date=2017-08;,citation_year=2017;,citation_issue=8;,citation_doi=10.1371/journal.pone.0180698;,citation_issn=1932-6203;,citation_volume=12;,citation_language=en-US;,citation_journal_title=PLOS ONE;,citation_publisher=Public Library of Science;">
+<meta name="citation_reference" content="citation_title=The world’s user-generated road map is more than 80% complete;,citation_abstract=OpenStreetMap, a crowdsourced geographic database, provides the only global-level, openly licensed source of geospatial road data, and the only national-level source in many countries. However, researchers, policy makers, and citizens who want to make use of OpenStreetMap (OSM) have little information about whether it can be relied upon in a particular geographic setting. In this paper, we use two complementary, independent methods to assess the completeness of OSM road data in each country in the world. First, we undertake a visual assessment of OSM data against satellite imagery, which provides the input for estimates based on a multilevel regression and poststratification model. Second, we fit sigmoid curves to the cumulative length of contributions, and use them to estimate the saturation level for each country. Both techniques may have more general use for assessing the development and saturation of crowd-sourced data. Our results show that in many places, researchers and policymakers can rely on the completeness of OSM, or will soon be able to do so. We find (i) that globally, OSM is $\sim$83% complete, and more than 40% of countriesincluding several in the developing worldhave a fully mapped street network; (ii) that well-governed countries with good Internet access tend to be more complete, and that completeness has a U-shaped relationship with population densityboth sparsely populated areas and dense cities are the best mapped; and (iii) that existing global datasets used by the World Bank undercount roads by more than 30%.;,citation_author=Christopher Barrington-Leigh;,citation_author=Adam Millard-Ball;,citation_publication_date=2017-08;,citation_cover_date=2017-08;,citation_year=2017;,citation_issue=8;,citation_doi=10.1371/journal.pone.0180698;,citation_issn=1932-6203;,citation_volume=12;,citation_language=en-US;,citation_journal_title=PLOS ONE;,citation_publisher=Public Library of Science;">
 <meta name="citation_reference" content="citation_title=Sustainable accessibility: A conceptual framework to integrate transport and land use plan-making. Two test-applications in the Netherlands and a reflection on the way forward;,citation_author=L. Bertolini;,citation_author=F. Clercq;,citation_author=L. Kapoen;,citation_publication_date=2005-05;,citation_cover_date=2005-05;,citation_year=2005;,citation_issue=3;,citation_doi=10.1016/j.tranpol.2005.01.006;,citation_issn=0967070X;,citation_volume=12;,citation_language=en-US;,citation_journal_title=Transport Policy;">
 <meta name="citation_reference" content="citation_title=How to get there? A critical assessment of accessibility objectives and indicators in metropolitan transportation plans;,citation_author=Geneviève Boisjoly;,citation_author=Ahmed M. El-Geneidy;,citation_publication_date=2017-04;,citation_cover_date=2017-04;,citation_year=2017;,citation_doi=10.1016/j.tranpol.2016.12.011;,citation_issn=0967070X;,citation_volume=55;,citation_language=en-US;,citation_journal_title=Transport Policy;">
 <meta name="citation_reference" content="citation_title=Impactos da expansão do metrô de Fortaleza sobre o acesso a oportunidades de emprego, saúde e educação;,citation_author=Carlos Kaue Vieira Braga;,citation_author=Diego Bogado Tomasiello;,citation_author=Daniel Herszenhut;,citation_author=João Lucas Albuquerque Oliveira;,citation_author=Rafael H. M. Pereira;,citation_publication_date=2022-05;,citation_cover_date=2022-05;,citation_year=2022;,citation_language=pt-BR;,citation_technical_report_institution=Instituto de Pesquisa Econômica Aplicada (Ipea);,citation_technical_report_number=2767;">
@@ -175,44 +176,44 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="./s5_dados_aop.html">SEÇÃO 5: Dados do Projeto Acesso a Oportunidades</a></li>
 <li class="breadcrumb-item"><a href="./7_aopdata_populacao.html"><span class="chapter-number">7</span>  <span class="chapter-title">Dados de população e socioeconômicos</span></a></li>
-</ol></nav><a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+</ol></nav><a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Introdução à acessibilidade urbana</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://repositorio.ipea.gov.br/bitstream/11058/12264/1/Introducao_a_acessibilidade_urbana.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-download"></i></a>
-    <a href="https://github.com/ipeaGIT/intro_access_book" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://repositorio.ipea.gov.br/bitstream/11058/12264/51/Introducao_a_acessibilidade_urbana_selo.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-download"></i></a>
+    <a href="https://github.com/ipeaGIT/intro_access_book" title="Código fonte" class="quarto-navigation-tool px-1" aria-label="Código fonte"><i class="bi bi-github"></i></a>
     <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
 <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=%7Curl%7C">
-              <i class="bi bi-bi-twitter pe-1"></i>
+              <i class="bi bi-twitter pe-1"></i>
             Twitter
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=%7Curl%7C">
-              <i class="bi bi-bi-facebook pe-1"></i>
+              <i class="bi bi-facebook pe-1"></i>
             Facebook
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=%7Curl%7C">
-              <i class="bi bi-bi-linkedin pe-1"></i>
+              <i class="bi bi-linkedin pe-1"></i>
             LinkedIn
             </a>
           </li>
@@ -239,7 +240,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       <div class="sidebar-item-container"> 
             <a href="./s1_intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SEÇÃO 1: Introdução à acessibilidade urbana</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Alternar seção">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar seção">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -262,7 +263,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       <div class="sidebar-item-container"> 
             <a href="./s2_calculo.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SEÇÃO 2: Como calcular acessibilidade urbana</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Alternar seção">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar seção">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -279,7 +280,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       <div class="sidebar-item-container"> 
             <a href="./s3_dados_tp.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SEÇÃO 3: Dados de transporte público</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Alternar seção">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Alternar seção">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -302,7 +303,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       <div class="sidebar-item-container"> 
             <a href="./s4_avaliacao_impacto.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SEÇÃO 4: Avaliação de impacto de projetos de transporte</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Alternar seção">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Alternar seção">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -319,7 +320,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
       <div class="sidebar-item-container"> 
             <a href="./s5_dados_aop.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SEÇÃO 5: Dados do Projeto Acesso a Oportunidades</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Alternar seção">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Alternar seção">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -352,7 +353,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </li>
     </ul>
 </div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Índice</h2>
@@ -362,13 +363,13 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
   <li><a href="#mapa-de-popula%C3%A7%C3%A3o-por-cor" id="toc-mapa-de-população-por-cor" class="nav-link" data-scroll-target="#mapa-de-população-por-cor"><span class="header-section-number">7.2</span> Mapa de população por cor</a></li>
   <li><a href="#mapa-de-popula%C3%A7%C3%A3o-por-renda" id="toc-mapa-de-população-por-renda" class="nav-link" data-scroll-target="#mapa-de-população-por-renda"><span class="header-section-number">7.3</span> Mapa de população por renda</a></li>
   </ul>
-<div class="toc-actions">
-<div><i class="bi bi-github"></i></div>
-<div class="action-links"><p><a href="https://github.com/ipeaGIT/intro_access_book/edit/main/7_aopdata_populacao.qmd" class="toc-action">Editar essa página</a></p></div>
-</div></nav><a href="../7_aopdata_populacao.en.html">Read in English</a>
+<div class="toc-actions"><ul><li><a href="https://github.com/ipeaGIT/intro_access_book/edit/main/7_aopdata_populacao.qmd" class="toc-action"><i class="bi bi-github"></i>Editar essa página</a></li></ul></div></nav><a href="../7_aopdata_populacao.en.html">Read in English</a>
 </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="./s5_dados_aop.html">SEÇÃO 5: Dados do Projeto Acesso a Oportunidades</a></li>
+<li class="breadcrumb-item"><a href="./7_aopdata_populacao.html"><span class="chapter-number">7</span>  <span class="chapter-title">Dados de população e socioeconômicos</span></a></li>
+</ol></nav><div class="quarto-title">
 <h1 class="title">
 <span class="chapter-number">7</span>  <span class="chapter-title">Dados de população e socioeconômicos</span>
 </h1>
@@ -383,6 +384,7 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
     
   </div>
   
+
 
 </header><p>Os dados de distribuição espacial da população e de suas características em termos de renda <em>per capita</em>, cor, sexo e idade, provenientes do Censo 2010 e agregados pelo projeto AOP, podem ser baixados com a função <code>read_population()</code>. A função requer que um valor seja passado para o parâmetro <code>city</code>, utilizado para indicar a cidade cujos dados devem ser baixados. Para baixar os dados com as informações espaciais de cada célula da grade, o parâmetro <code>geometry</code> deve receber o valor <code>TRUE</code> (por padrão, esse valor é <code>FALSE</code>, fazendo com que a geometria das células não seja baixada).</p>
 <p>No exemplo a seguir, mostramos como baixar os dados populacionais e socioeconômicos de Fortaleza:</p>
@@ -406,12 +408,14 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 [21] "R002"        "R003"        "geometry"   </code></pre>
 </div>
 </div>
-<p>A <a href="#tbl-population_dictionary">Tabela <span>7.1</span></a> apresenta a descrição de cada uma das colunas da tabela, bem como observações sobre alguns de seus valores. Essa descrição também pode ser consultada na documentação da função, rodando em uma sessão do R o comando <code>?read_population</code>.</p>
+<p>A <a href="#tbl-population_dictionary" class="quarto-xref">Tabela <span>7.1</span></a> apresenta a descrição de cada uma das colunas da tabela, bem como observações sobre alguns de seus valores. Essa descrição também pode ser consultada na documentação da função, rodando em uma sessão do R o comando <code>?read_population</code>.</p>
 <div class="cell">
+<div id="tbl-population_dictionary" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure"><figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-population_dictionary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela 7.1: Descrição das colunas da tabela de dados populacionais e socioeconômicos
+</figcaption><div aria-describedby="tbl-population_dictionary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="tbl-population_dictionary" class="anchored">
-<table class="table table-sm table-striped small">
-<caption>Tabela 7.1: Descrição das colunas da tabela de dados populacionais e socioeconômicos</caption>
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 11%">
 <col style="width: 43%">
@@ -542,11 +546,13 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 </table>
 </div>
 </div>
+</figure>
+</div>
 </div>
 <p>As subseções a seguir mostram exemplos de visualizações desses dados em forma de mapas.</p>
 <section id="mapa-de-população-total" class="level2" data-number="7.1"><h2 data-number="7.1" class="anchored" data-anchor-id="mapa-de-população-total">
 <span class="header-section-number">7.1</span> Mapa de população total</h2>
-<p>No código a seguir, carregamos bibliotecas de visualização de dados e configuramos o mapa. Com um comando, podemos visualizar a distribuição espacial da população de Fortaleza. A <a href="#fig-pop_dist">Figura <span>7.1</span></a> mostra um mapa coroplético no qual a cor de cada célula da grade espacial é preenchida com base na quantidade total de pessoas que ali residem (variável <code>P001</code>).</p>
+<p>No código a seguir, carregamos bibliotecas de visualização de dados e configuramos o mapa. Com um comando, podemos visualizar a distribuição espacial da população de Fortaleza. A <a href="#fig-pop_dist" class="quarto-xref">Figura <span>7.1</span></a> mostra um mapa coroplético no qual a cor de cada célula da grade espacial é preenchida com base na quantidade total de pessoas que ali residem (variável <code>P001</code>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -557,9 +563,13 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">fill =</span> <span class="st">"Contagem</span><span class="sc">\n</span><span class="st">populacional"</span>) <span class="sc">+</span></span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-pop_dist" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="7_aopdata_populacao_files/figure-html/fig-pop_dist-1.png" class="img-fluid figure-img" width="2100"></p>
-<figcaption class="figure-caption">Figura 7.1: Distribuição populacional em Fortaleza</figcaption></figure>
+<div id="fig-pop_dist" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-pop_dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="7_aopdata_populacao_files/figure-html/fig-pop_dist-1.png" class="img-fluid figure-img" width="2100">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pop_dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura 7.1: Distribuição populacional em Fortaleza
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -593,9 +603,13 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>pop_negra <span class="sc">+</span> pop_branca</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-pop_dist_by_color" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="7_aopdata_populacao_files/figure-html/fig-pop_dist_by_color-1.png" class="img-fluid figure-img" width="2100"></p>
-<figcaption class="figure-caption">Figura 7.2: Proporção de pessoas negras e brancas em Fortaleza</figcaption></figure>
+<div id="fig-pop_dist_by_color" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-pop_dist_by_color-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="7_aopdata_populacao_files/figure-html/fig-pop_dist_by_color-1.png" class="img-fluid figure-img" width="2100">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pop_dist_by_color-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura 7.2: Proporção de pessoas negras e brancas em Fortaleza
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -618,9 +632,13 @@ gtag('config', 'G-YVERJQF9PJ', { 'anonymize_ip': true});
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>renda <span class="sc">+</span> decis</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-income_dist" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><img src="7_aopdata_populacao_files/figure-html/fig-income_dist-1.png" class="img-fluid figure-img" width="2100"></p>
-<figcaption class="figure-caption">Figura 7.3: Distribuição de renda em Fortaleza</figcaption></figure>
+<div id="fig-income_dist" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-income_dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="7_aopdata_populacao_files/figure-html/fig-income_dist-1.png" class="img-fluid figure-img" width="2100">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-income_dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura 7.3: Distribuição de renda em Fortaleza
+</figcaption></figure>
 </div>
 </div>
 </div>
@@ -667,6 +685,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -735,13 +780,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -776,18 +823,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -819,11 +855,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/ipeagit\.github\.io\/intro_access_book\/pt");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -833,8 +908,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -846,7 +930,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -890,6 +1097,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -915,6 +1123,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -974,22 +1208,25 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./s5_dados_aop.html" class="pagination-link">
+      <a href="./s5_dados_aop.html" class="pagination-link" aria-label="SEÇÃO 5: Dados do Projeto Acesso a Oportunidades">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">SEÇÃO 5: Dados do Projeto Acesso a Oportunidades</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./8_aopdata_uso_solo.html" class="pagination-link">
+      <a href="./8_aopdata_uso_solo.html" class="pagination-link" aria-label="Dados de distribuição espacial de oportunidades">
         <span class="nav-page-text"><span class="chapter-number">8</span>  <span class="chapter-title">Dados de distribuição espacial de oportunidades</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
-    <div class="nav-footer-left">Copyright 2023, Ipea - Instituto de Pesquisa Econômica Aplicada</div>   
+    <div class="nav-footer-left">
+<p>Copyright 2023, Ipea - Instituto de Pesquisa Econômica Aplicada</p>
+</div>   
     <div class="nav-footer-center">
        
-    </div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/ipeaGIT/intro_access_book/edit/main/7_aopdata_populacao.qmd" class="toc-action"><i class="bi bi-github"></i>Editar essa página</a></li></ul></div>
+</div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
 <li class="nav-item compact">
