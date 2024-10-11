@@ -361,24 +361,36 @@
     },
     "curl": {
       "Package": "curl",
-      "Version": "4.3.3",
+      "Version": "5.2.3",
       "Source": "Repository",
       "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "curl",
+      "RemoteRef": "curl",
+      "RemoteRepos": "https://cloud.r-project.org",
+      "RemotePkgPlatform": "x86_64-w64-mingw32",
+      "RemoteSha": "5.2.3",
       "Requirements": [
         "R"
       ],
-      "Hash": "0eb86baa62f06e8855258fa5a8048667"
+      "Hash": "d91263322a58af798f6cf3b13fd56dde"
     },
     "data.table": {
       "Package": "data.table",
-      "Version": "1.14.4",
+      "Version": "1.16.0",
       "Source": "Repository",
       "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "data.table",
+      "RemoteRef": "data.table",
+      "RemoteRepos": "https://cloud.r-project.org",
+      "RemotePkgPlatform": "x86_64-w64-mingw32",
+      "RemoteSha": "1.16.0",
       "Requirements": [
         "R",
         "methods"
       ],
-      "Hash": "b9b912b41064aaa79270f24d123c887d"
+      "Hash": "fb24e05d4a91d8b1c7ff8e284bde834a"
     },
     "desc": {
       "Package": "desc",
@@ -442,9 +454,15 @@
     },
     "e1071": {
       "Package": "e1071",
-      "Version": "1.7-11",
+      "Version": "1.7-16",
       "Source": "Repository",
       "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "e1071",
+      "RemoteRef": "e1071",
+      "RemoteRepos": "https://cloud.r-project.org",
+      "RemotePkgPlatform": "x86_64-w64-mingw32",
+      "RemoteSha": "1.7-16",
       "Requirements": [
         "class",
         "grDevices",
@@ -454,7 +472,7 @@
         "stats",
         "utils"
       ],
-      "Hash": "fc02aa712f8600f7da17f44989646a21"
+      "Hash": "27a09ca40266a1066d62ef5402dd51d6"
     },
     "ellipsis": {
       "Package": "ellipsis",
@@ -714,14 +732,20 @@
     },
     "later": {
       "Package": "later",
-      "Version": "1.3.0",
+      "Version": "1.3.2",
       "Source": "Repository",
       "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "later",
+      "RemoteRef": "later",
+      "RemoteRepos": "https://cloud.r-project.org",
+      "RemotePkgPlatform": "x86_64-w64-mingw32",
+      "RemoteSha": "1.3.2",
       "Requirements": [
         "Rcpp",
         "rlang"
       ],
-      "Hash": "7e7b457d7766bc47f2a5f21cc2984f8e"
+      "Hash": "a3e051d405326b8b0012377434c62b37"
     },
     "lattice": {
       "Package": "lattice",
@@ -1041,14 +1065,20 @@
     },
     "rJava": {
       "Package": "rJava",
-      "Version": "1.0-6",
+      "Version": "1.0-11",
       "Source": "Repository",
       "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "rJava",
+      "RemoteRef": "rJava",
+      "RemoteRepos": "https://cloud.r-project.org",
+      "RemotePkgPlatform": "x86_64-w64-mingw32",
+      "RemoteSha": "1.0-11",
       "Requirements": [
         "R",
         "methods"
       ],
-      "Hash": "0415819f6baa75d86d52483f7292b623"
+      "Hash": "524167e771b81342f8dd7a891ed3afa8"
     },
     "rappdirs": {
       "Package": "rappdirs",
@@ -1094,22 +1124,20 @@
     },
     "rlang": {
       "Package": "rlang",
-      "Version": "1.1.1",
+      "Version": "1.1.4",
       "Source": "Repository",
       "Repository": "CRAN",
-      "RemotePkgRef": "rlang@1.1.1",
       "RemoteType": "standard",
-      "RemoteEtag": "\"ba2a5-5fa6d042addcf\"",
-      "RemotePackaged": "TRUE",
+      "RemotePkgRef": "rlang",
       "RemoteRef": "rlang",
       "RemoteRepos": "https://cloud.r-project.org",
-      "RemotePkgPlatform": "source",
-      "RemoteSha": "1.1.1",
+      "RemotePkgPlatform": "x86_64-w64-mingw32",
+      "RemoteSha": "1.1.4",
       "Requirements": [
         "R",
         "utils"
       ],
-      "Hash": "a85c767b55f0bf9b7ad16c6d7baee5bb"
+      "Hash": "3eec01f8b1dee337674b2e34ab1f9bc1"
     },
     "rmarkdown": {
       "Package": "rmarkdown",
@@ -1183,15 +1211,15 @@
     },
     "sass": {
       "Package": "sass",
-      "Version": "0.4.2",
+      "Version": "0.4.9",
       "Source": "Repository",
       "Repository": "CRAN",
       "RemoteType": "standard",
       "RemotePkgRef": "sass",
       "RemoteRef": "sass",
       "RemoteRepos": "https://cloud.r-project.org",
-      "RemotePkgPlatform": "source",
-      "RemoteSha": "0.4.2",
+      "RemotePkgPlatform": "x86_64-w64-mingw32",
+      "RemoteSha": "0.4.9",
       "Requirements": [
         "R6",
         "fs",
@@ -1199,7 +1227,7 @@
         "rappdirs",
         "rlang"
       ],
-      "Hash": "1b191143d7d3444d504277843f3a95fe"
+      "Hash": "d53dbfddf695303ea4ad66f86e99b95d"
     },
     "scales": {
       "Package": "scales",
@@ -1371,14 +1399,20 @@
     },
     "units": {
       "Package": "units",
-      "Version": "0.8-0",
+      "Version": "0.8-5",
       "Source": "Repository",
       "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "units",
+      "RemoteRef": "units",
+      "RemoteRepos": "https://cloud.r-project.org",
+      "RemotePkgPlatform": "x86_64-w64-mingw32",
+      "RemoteSha": "0.8-5",
       "Requirements": [
         "R",
         "Rcpp"
       ],
-      "Hash": "6c374b265ba437f8d384ec7a313edd96"
+      "Hash": "119d19da480e873f72241ff6962ffd83"
     },
     "utf8": {
       "Package": "utf8",
@@ -1446,13 +1480,19 @@
     },
     "wk": {
       "Package": "wk",
-      "Version": "0.7.0",
+      "Version": "0.9.3",
       "Source": "Repository",
       "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "wk",
+      "RemoteRef": "wk",
+      "RemoteRepos": "https://cloud.r-project.org",
+      "RemotePkgPlatform": "x86_64-w64-mingw32",
+      "RemoteSha": "0.9.3",
       "Requirements": [
         "R"
       ],
-      "Hash": "4801d436beeacde30e87f3485a042326"
+      "Hash": "9ca478d7cb1450b42dcb8af2ea5681cc"
     },
     "xfun": {
       "Package": "xfun",
@@ -1467,29 +1507,35 @@
     },
     "xml2": {
       "Package": "xml2",
-      "Version": "1.3.3",
+      "Version": "1.3.6",
       "Source": "Repository",
       "Repository": "CRAN",
+      "RemoteType": "standard",
+      "RemotePkgRef": "xml2",
+      "RemoteRef": "xml2",
+      "RemoteRepos": "https://cloud.r-project.org",
+      "RemotePkgPlatform": "x86_64-w64-mingw32",
+      "RemoteSha": "1.3.6",
       "Requirements": [
         "R",
-        "methods"
+        "cli",
+        "methods",
+        "rlang"
       ],
-      "Hash": "40682ed6a969ea5abfd351eb67833adc"
+      "Hash": "1d0336142f4cd25d8d23cd3ba7a8fb61"
     },
     "yaml": {
       "Package": "yaml",
-      "Version": "2.3.6",
+      "Version": "2.3.10",
       "Source": "Repository",
       "Repository": "CRAN",
-      "RemotePkgRef": "yaml@2.3.6",
       "RemoteType": "standard",
-      "RemoteEtag": "\"17060-5eb4ae6145fc8\"",
-      "RemotePackaged": "TRUE",
+      "RemotePkgRef": "yaml",
       "RemoteRef": "yaml",
       "RemoteRepos": "https://cloud.r-project.org",
-      "RemotePkgPlatform": "source",
-      "RemoteSha": "2.3.6",
-      "Hash": "9b570515751dcbae610f29885e025b41"
+      "RemotePkgPlatform": "x86_64-w64-mingw32",
+      "RemoteSha": "2.3.10",
+      "Hash": "51dab85c6c98e50a18d7551e9d49f76c"
     },
     "zip": {
       "Package": "zip",
