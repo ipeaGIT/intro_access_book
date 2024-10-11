@@ -45,6 +45,8 @@ en_yml$book$sidebar$tools[[1]]$href <- "https://repositorio.ipea.gov.br/bitstrea
 en_yml$citation$title <- "Introduction to urban accessibility: a practical guide with R"
 en_yml$citation$publisher <- "Ipea - Institute for Applied Economic Research"
 en_yml$citation$url <- "https://ipeagit.github.io/intro_access_book"
+en_yml$citation$isbn <- "978-65-5635-065-3"
+en_yml$citation$doi <- "http://dx.doi.org/10.38116/9786556350653"
 
 yaml::write_yaml(
   en_yml,
